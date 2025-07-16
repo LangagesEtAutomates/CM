@@ -16,48 +16,64 @@ PDFS    := $(addsuffix .pdf,$(TEXS))
 # Cibles principales
 # -------------------------------
 
-# par défaut, tout compiler
-all: $(addprefix $(DOCSDIR)/,$(PDFS))
+.PHONY: all slides handout init-sty update-sty clean cleanall help
 
-# cible pour chaque PDF
+# Par défaut : tout compiler
+all: slides handout
+
+# Alias pour compiler chaque PDF
+slides: $(DOCSDIR)/slides.pdf
+handout: $(DOCSDIR)/handout.pdf
+
+# Règle générique pour sortir docs/%.pdf à partir de src/drivers/%.tex
 $(DOCSDIR)/%.pdf: $(SRCDIR)/%.tex | $(BUILDDIR) $(DOCSDIR)
-	@echo ">>> Compilation de $<"
+	@echo ">>> Compiling $<"
 	$(PDFLATEX) $<
-	$(PDFLATEX) $<     # on lance deux fois pour résoudre les références
+	$(PDFLATEX) $<     # deux passes pour références
 	mv $(BUILDDIR)/$*.pdf $@
 
-# alias pour un seul PDF
-slides:   $(DOCSDIR)/slides.pdf
-handout:  $(DOCSDIR)/handout.pdf
+# -------------------------------
+# Submodule styles
+# -------------------------------
+
+init-sty:
+	@git submodule update --init src/sty
+
+update-sty:
+	@cd src/sty && git pull origin main
+	@git add src/sty
+	@git commit -m "Update styles from latex-libs"
 
 # -------------------------------
 # Création des répertoires
 # -------------------------------
 
 $(BUILDDIR) :
-	mkdir -p $@
+	@mkdir -p $@
 
-$(DOCSDIR)  :
-	mkdir -p $@
+$(DOCSDIR) :
+	@mkdir -p $@
 
 # -------------------------------
 # Nettoyage
 # -------------------------------
 
 clean:
-	rm -rf $(BUILDDIR)/*
+	@rm -rf $(BUILDDIR)/*
 
 cleanall: clean
-	rm -f $(DOCSDIR)/*.pdf
+	@rm -f $(DOCSDIR)/*.pdf
 
 # -------------------------------
 # Aide
 # -------------------------------
 
 help:
-	@echo "Commandes disponibles :"
-	@echo "  make           – Compile slides et handout vers $(DOCSDIR)/"
-	@echo "  make slides    – Compile uniquement slides.pdf"
-	@echo "  make handout   – Compile uniquement handout.pdf"
-	@echo "  make clean     – Supprime les fichiers temporaires ($(BUILDDIR)/)"
-	@echo "  make cleanall  – Supprime aussi les PDF finaux ($(DOCSDIR)/)"
+	@echo "Usage:"
+	@echo "  make            – Build both slides and handout"
+	@echo "  make slides     – Build docs/slides.pdf"
+	@echo "  make handout    – Build docs/handout.pdf"
+	@echo "  make init-sty   – Initialize LaTeX styles submodule"
+	@echo "  make update-sty – Pull latest styles and commit update"
+	@echo "  make clean      – Remove build artifacts"
+	@echo "  make cleanall   – Also remove generated PDFs"
