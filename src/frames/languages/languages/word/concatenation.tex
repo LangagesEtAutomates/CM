@@ -1,0 +1,56 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Concaténation}
+  \small
+  \vspace{-2mm}
+  \begin{block}{Définition -- Concaténation de deux mots}
+    Soient $\Sigma$ un alphabet, $u, v \in \Sigma^\star$, et $n\in \mathbb{N}$.
+
+    \begin{itemize}
+    \item La \structure{concaténation} de $u$ et $v$, notée \structure{$u \cdot v$} (ou \structure{$uv$}), est le mot
+      de longueur $|u| + |v| $ dont les premiers symboles forment $u$ et les derniers sont $v$ :
+
+      \vspace{-2mm}
+      $$\begin{array}{ccl}
+        \alert{u \cdot v} &\alert{\eqdef}& \alert{\left\{\begin{array}{ccl}
+          \llbracket |u| + |v| \rrbracket& \rightarrow & \Sigma\\
+          i & \mapsto & \left\{\begin{array}{ll}
+          u[i] & \text{si } i \in \llbracket |u| \rrbracket \\
+          v[i-|u|] & \text{sinon}
+          \end{array}\right.
+          \end{array}\right.}
+        \\
+        %    &=& u[1] \cdot ... \cdot u_{|u|} \cdot v_1 \cdot ... \cdot v_{|v|}
+      \end{array}
+      $$
+    \item La \structure{puissance} $n$ du mot $x$, notée \alert{$x^n$}, est le mot $v=x\cdots x$ (répété $n$ fois) :
+
+      \vspace{-3mm}
+      $$\alert{u^0 = \varepsilon} \hspace{5mm} \text{ et } \hspace{5mm} \alert{u^{n+1}=u \cdot u^n}$$
+    \end{itemize}
+  \end{block}
+  
+  \vspace{-2mm}
+  \begin{exampleblock}{Exemple}
+    \vspace{-9mm}
+    $$\text{``bon''} \cdot \text{``jour''} = \left\{\begin{array}{cclcc}
+    \llbracket 3 + 4 \rrbracket & \rightarrow & \Sigma\\
+    1 & \mapsto & \text{``bon''}[1] & = &\text{`b'}\\
+    2 & \mapsto & \text{``bon''}[2] & = &\text{`o'}\\
+    3 & \mapsto & \text{``bon''}[3] & = &\text{`n'}\\
+    4 & \mapsto & \text{``jour''}[4-3]& = &\text{`j'}\\
+    5 & \mapsto & \text{``jour''}[5-3]& = &\text{`o'}\\
+    6 & \mapsto & \text{``jour''}[6-3] & = &\text{`u'}\\
+    7 & \mapsto & \text{``jour''}[7-3] & = &\text{`r'}\\
+    \end{array}\right. = \text{``bonjour''}$$
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

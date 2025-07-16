@@ -1,0 +1,31 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+\begin{frame}{Modélisation mathématique}
+  \begin{block}{Définition -- Grammaire algébrique (ou hors-contexte)}
+    \vspace{2mm}
+    Une \structure{grammaire algébrique} est un quadruplet \alert{$\langle \Sigma, \Gamma, S, R \rangle$} tel que :
+    \begin{description}
+    \item[\alert{$\Sigma$}] alphabet : \structure{l'ensemble des terminaux}
+    \item[\alert{$\Gamma$}] alphabet tel que $\Sigma \cap \Gamma = \emptyset$ : \structure{l'ensemble des non-terminaux}
+    \item[\alert{$S$}] $\in \Gamma$ : \structure{l'axiome} (ou symbole initial)
+    \item[\alert{$R$}] $\subseteq \Gamma \times (\Sigma \cup \Gamma)^\star$ : \structure{l'ensemble des règles de production}
+    \end{description}
+
+    \vspace{3mm}
+    Une \structure{règle de production} est un couple \alert{$\langle A, \alpha \rangle \in R$}, noté $\alert{A \rightarrow \alpha}$ tel que :
+    \begin{description}
+    \item[\alert{$A$}] $\in \Gamma$ : \structure{membre gauche} \footnote[frame]{Techniquement, un mot formé d'un seul non-terminal.\\
+      La distinction entre $\Gamma$ et $\Gamma^1$ ne jouera un rôle que dans la dernière partie du cours.}
+    \item[\alert{$\alpha$}] $\in (\Sigma \cup \Gamma)^\star$ : \structure{membre droit}
+    \end{description}
+  \end{block}
+
+\end{frame}
+
+\endgroup

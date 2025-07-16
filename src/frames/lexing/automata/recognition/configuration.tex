@@ -1,0 +1,37 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Configurations et actions d'un AFN}
+  Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN. 
+  
+  \begin{block}{Définition -- configuration d'un AFN}
+    Une \structure{configuration} de $A$ est un couple \alert{$\langle u, q \rangle$} tel que :
+    \begin{description}
+    \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{mot restant à reconnaître}
+    \item[\alert{$q$}] $\in Q$ : \structure{l'état courant dans la simulation}
+    \end{description}
+  \end{block}
+
+  \begin{block}{Définition -- action (ou \structure{calcul}, ou \structure{déplacement})}
+    Les \structure{actions}  de $A$ sont définies par une
+    relation binaire \alert{$\leadsto_A$} sur les configurations.
+    On a \alert{$\langle u, q\rangle \leadsto_A \langle v, q'\rangle$} ssi :
+    \begin{enumerate}
+    \item il existe \alert{$a \in \Sigma\cup\{\varepsilon\}$} tel que
+    \item \alert{$u=a v$} et
+    \item \alert{$\langle q, a, q' \rangle \in \mu$}.
+    \end{enumerate}
+    On note \alert{$\leadsto_A^\star$} \structure{la fermeture transitive et réflexive de $\leadsto_A$}.
+    
+    \vspace{1mm}On notera \alert{$C \leadsto C'$} et \alert{$C \leadsto^\star C'$} si $A$ est clair d'après le contexte.
+  \end{block}
+\end{frame}
+
+\endgroup

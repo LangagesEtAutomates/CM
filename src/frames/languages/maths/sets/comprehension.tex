@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+
+\begin{frame}{Définition par compréhension}
+  \begin{block}{Définition -- sous-ensemble défini en intension}
+    Soient $A$ un ensemble et $P$ un prédicat.
+    Il existe un ensemble \structure{$\{x \in A \,|\, P(x)\}$} qui contient les éléments de $A$ qui vérifient $P$
+
+    \vspace{-2mm}
+    $$\forall y, \left(\alert{y\in \{x \in A \,|\, P(x)\}}\right) \alert{\Leftrightarrow} \left(\alert{y\in A \land P(y)}\right)$$
+  \end{block}
+  %  \vspace{-3mm}
+  \begin{exampleblock}{Exemple -- prédicat ``être pair''}
+    \begin{itemize}
+    \item $\mathit{estPair}(x) \eqdef \exists k\in \mathbb{Z} : x = 2\times k$  \hspace{\fill} $\mathit{pair} \eqdef \{n\in \mathbb{Z} \,|\, \mathit{estPair}(n)\}$
+    \item \example{$\mathit{estPair}(6)$} car \example{$3\in \mathbb{Z} \land 6 = 2\times 3$} \hspace{\fill}  \example{$6 \in \mathit{pair}$} car \example{$6 \in \mathbb{Z}$} et \example{$\mathit{estPair}(6)$}
+    \item \example{$5 \notin \mathit{pair}$} car \example{$\lnot \mathit{estPair}(5)$ \hspace{\fill} \example{$\pi \notin \mathit{pair}$} car \example{$\pi \notin \mathbb{Z}$}}
+    \end{itemize}
+  \end{exampleblock}
+
+  \begin{block}{Cas particulier -- sous-ensemble défini par extension}
+    Soient $A$ un ensemble et $a_1, a_2, ..., a_n \in A$. On note :
+    
+    \vspace{-2mm}
+    $$\alert{\{a_1, a_2, ..., a_n\} \eqdef \{x\in A | x=a_1 \lor x=a_2 \lor ... \lor x=a_n\}}$$
+  \end{block}
+
+\end{frame}
+
+\endgroup

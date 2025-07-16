@@ -1,0 +1,84 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Exemple}
+  \begin{tikzpicture}
+    \draw (0,0) node{
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \node[state,initial, initial text=] (a) {$0$};
+          \node[state, example, fill=example!20] (b) [above right =of a] {$1$};
+          \node[state, example, fill=example!20] (c) [below right=of a] {$2$};
+          \node[state, accepting] (d) [above right=of c] {$3$};
+
+          \path[->]  (a) edge[bend left ] node[below right] {$a$} (b);
+          \path[->]  (a) edge[bend right] node[above right] {$b$} (c);
+          \path[->]  (b) edge[bend left ] node[below left ] {$b$} (d);
+          \path[->]  (c) edge[bend right] node[above left ] {$b$} (d);
+
+          \path[->]  (b) edge[loop below, looseness=5] node[below] {$a$} (b);
+          \path[->]  (c) edge[loop above, looseness=5] node[above] {$a$} (c);
+          \path[->]  (d) edge[loop right, looseness=5] node[right] {$a, b$} (d);
+      \end{tikzpicture}}
+    };
+    \draw (5.5,0) node{
+      $\left\{
+      \begin{array}{lcl}
+        \mathcal{LD}(0) & = & (a|b) a^\star b (a|b)^\star\\
+        \example{\mathcal{LD}(1)} & = & \example{a^\star b (a|b)^\star}\\
+        \example{\mathcal{LD}(2)} & = & \example{a^\star b (a|b)^\star}\\
+        \mathcal{LD}(3) & = & (a|b)^\star\\
+      \end{array}
+      \right.$
+    };
+  \end{tikzpicture}
+
+  \begin{itemize}
+  \item Les états $1$ et $2$ ont le même langage droit, on peut les fusionner
+  \end{itemize}
+
+  \vspace{2mm}
+  \begin{tikzpicture}
+    \draw (0,0) node{
+      \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \node[state,initial, initial text=] (a) {$0$};
+          \node[state, example, fill=example!20] (b) [right=of a] {$1, 2$};
+          \node[state, accepting] (d) [right=of b] {$3$};
+
+          \path[->]  (a) edge node[above] {$a, b$} (b);
+          \path[->]  (b) edge node[above] {$b$} (d);
+
+          \path[->]  (b) edge[loop below, looseness=5] node[below] {$a$} (b);
+          \path[->]  (d) edge[loop right, looseness=5] node[right] {$a, b$} (d);
+      \end{tikzpicture}}
+    };
+    \draw (5.5,0) node{
+      $\left\{
+      \begin{array}{lcl}
+        \mathcal{LD}(\{0\}) & = & (a|b) a^\star b (a|b)^\star\\
+        \example{\mathcal{LD}(\{1, 2\})} & \example{=} & \example{a^\star b (a|b)^\star}\\
+        \mathcal{LD}(\{3\}) & = & (a|b)^\star\\
+      \end{array}
+      \right.$
+    };
+  \end{tikzpicture}
+
+    \vspace{1mm}
+  \begin{alertblock}{Algorithme de minimisation}
+    \vspace{-1mm}
+  \begin{itemize}
+  \item Deux états sont \structure{équivalents} s'ils ont le même langage droit
+  \item Les états de l'automate minimal sont les classes d'équivalence
+  \end{itemize}
+  \begin{description}
+  \item [Question :] comment calculer les classes d'équivalence ?
+  \end{description}
+  \end{alertblock}  
+\end{frame}
+\endgroup

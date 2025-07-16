@@ -1,0 +1,210 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple d'utilisation du lemme de l'étoile}
+  \small
+  \vspace{-3mm}
+  \begin{tikzpicture}
+    \draw (0,10) node[below]{\begin{minipage}{\textwidth}
+        \begin{block}{Montrer que $\{a^nb^n : n\in \mathbb{N}\}$ n'est pas rationnel}
+
+          Soient $\Sigma = \{a, b\}$ et $L = \{a^nb^n : n\in \mathbb{N}\}$.
+
+          \uncover<2->{
+            Supposons (par l'absurde) que $L$ est rationnel.
+          }
+          \uncover<3->{
+            $L$ vérifie le lemme de l'étoile :
+
+            \vspace{-2mm}
+            $$
+            \begin{array}{c}
+              \structure<4->{\exists N\in \mathbb{N}}, \alert<5->{\forall u\in L}, |u| \ge N \Rightarrow (\structure<6->{\exists x, y, z\in \Sigma^\star}, \\
+              u = x\cdot y \cdot z \land y\neq \varepsilon \land |xy| \le N \land \alert<7->{\forall i \in \mathbb{N}}, x\cdot y^i \cdot z \in L)
+            \end{array}
+            $$
+          }
+
+          \uncover<4->{%
+            \structure{Soit $N$ donné par le lemme de l'étoile}. \\
+          }\uncover<5->{%
+            \alert{Posons $u = a^N b^N$}. 
+          }\uncover<6->{%
+            On a bien $u\in L$ et $|u| = 2N \ge N$. \\
+          }\uncover<7->{%
+            \structure{Soit $x\cdot y \cdot z$ la décomposition de $u$ donnée par le lemme de l'étoile}. 
+          }
+
+          \uncover<12->{
+            \vspace{1mm}
+            \begin{itemize}
+            \item $xy$ : un préfixe de $a^N b^N$, de longueur au plus $N$, ne contient que des $a$.
+            \end{itemize}
+            
+            On a: \hspace\fill $\structure{x = a^{|x|}}$, \hspace\fill $\structure{y = a^{|y|}}$ avec $|y| \neq 0$, \hspace\fill et $\structure{z = a^{N - |x| - |y|} b^N}$.\hspace\fill~ 
+
+            
+            \vspace{2mm}
+            \alert{Posons $i = 2$}, on a : $\begin{array}[t]{rcl}
+              x\cdot y^i \cdot z & = & x\cdot y \cdot y \cdot z\\
+              & = & a^{|x|} \cdot a^{|y|} \cdot a^{|y|} \cdot a^{N - |x| - |y|} b^N\\
+              %      & = & a^{|x| + |y| + |y| + N - |x| - |y|} b^N\\
+              & = & a^{N + |y|} b^N\\
+              %      & \in & L\\
+            \end{array}$
+
+            \begin{itemize}
+            \item\vspace{-1mm} $\structure{x\cdot y^2 \cdot z \in L}$ d'après le lemme de l'étoile 
+            \item\vspace{-1mm} $\structure{x\cdot y^2 \cdot z \notin L}$ car $|x\cdot y^2 \cdot z|_a = N+|y| \neq N = |x\cdot y^2 \cdot z|_b$
+            \end{itemize}
+            
+            Absurde ! Donc $L$ n'est pas rationnel. 
+          }    
+        \end{block}
+    \end{minipage}};
+
+    \mode<beamer>{
+    \draw<-11> (0,5.5) node[below]{\begin{minipage}{\textwidth}
+        \begin{center}
+          \tikz\draw[example] (0,0) -- (5,0);\\
+        \end{center}
+        \vspace{-5mm}
+        \begin{exampleblock}{Brouillon}
+          \example{On veut démontrer :} 
+          \only<1>{ $L \notin \textsc{rat}_\Sigma$}
+          \only<2-4,6->{ Contradiction}
+          \only<5>{ $u\in L \land |u| \ge N$}
+
+          \example{On sait :} 
+          \begin{itemize}
+          \item 
+            \only<-2>{\hspace{-1.5mm}$\begin{array}[t]{l}
+                \alert{\forall L \in \textsc{rat}_\Sigma}, \exists N\in \mathbb{N}, \forall u\in L, |u| \ge N \Rightarrow (\exists x, y, z\in \Sigma^\star, \\
+                u = x y  z \land y\neq \varepsilon \land |xy| \le N \land \forall i \in \mathbb{N}, x y^i  z \in L)
+              \end{array}$}
+            \only<3>{$\hspace{-1.5mm}\begin{array}[t]{l}
+                \structure{\exists N\in \mathbb{N}}, \forall u\in L, |u| \ge N \Rightarrow (\exists x, y, z\in \Sigma^\star, \\
+                u = x y  z \land y\neq \varepsilon \land |xy| \le N \land \forall i \in \mathbb{N}, x y^i  z \in L)
+              \end{array}$}
+            \only<4>{$\hspace{-1.5mm}\begin{array}[t]{l}
+                \alert{\forall u\in L, |u| \ge N \Rightarrow} (\exists x, y, z\in \Sigma^\star, \\
+                u = x y  z \land y\neq \varepsilon \land |xy| \le N \land \forall i \in \mathbb{N}, x y^i  z \in L)
+              \end{array}$}
+            \only<5>{$\hspace{-1.5mm}\begin{array}[t]{l}
+                \alert{(u\in L \land |u| \ge N) \Rightarrow} (\exists x, y, z\in \Sigma^\star, \\
+                u = x y  z \land y\neq \varepsilon \land |xy| \le N \land \forall i \in \mathbb{N}, x y^i  z \in L)
+              \end{array}$}
+            \only<6>{$\structure{\exists x, y, z\in \Sigma^\star}, u = x y  z \land y\neq \varepsilon \land |xy| \le N \land \forall i \in \mathbb{N}, x y^i z \in L$}
+            \only<7->{\alert<11>{$\forall i \in \mathbb{N}, x y^i  z \in L$}}
+          \end{itemize}
+
+          \vspace{-1mm}
+          \begin{minipage}{2.5cm}
+            \begin{itemize}
+            \item<2-> $L \in \textsc{rat}_\Sigma$
+            \item<4-> $N \in \mathbb{N}$
+            \item<7-> \alert<9>{$y\neq \varepsilon$}
+            \end{itemize}
+          \end{minipage}
+          \begin{minipage}{2.5cm}
+            \begin{itemize}
+            \item<7-> $x, y, z\in \Sigma^\star$
+            \item<7-> $u = x y z$
+            \item<7-> $\alert<10>{|xy| \le N}$
+            \end{itemize}
+          \end{minipage}
+        \end{exampleblock}
+    \end{minipage}};
+
+    \draw<8-11> (3,5) node{\example{Exemple : si $N=2$, $u=aabb$. $x\cdot y \cdot z = $?}};
+
+    \draw<8-11> (3,3.6) node{\begin{tikzpicture}
+
+        \fill<9,10>[alert!20]   (-0.6,1.4) rectangle (0.6,1.8);
+        \fill<10>  [alert!20](0.6, 1.4) rectangle (1.85,1.8);
+
+        \fill<10>  [alert!20] (1.85,1.4) rectangle (3.1 ,1.8);
+        \fill<10>  [alert!20] (3.1 ,1.4) rectangle (4.35,1.8);
+        \fill<10>  [alert!20] (4.35,1.4) rectangle (5.6 ,1.8);
+        \fill<9,10>[alert!20] (-.6 ,1.0) rectangle (0.6 ,1.4);
+        \fill<10>  [alert!20] (0.6 ,1.0) rectangle (1.85,1.4);
+        \fill<10>  [alert!20] (1.85,1.0) rectangle (3.1 ,1.4);
+        \fill<10>  [alert!20] (3.1 ,1.0) rectangle (4.35,1.4);
+        \fill<9>   [alert!20] (-.6 ,0.6) rectangle (0.6 ,1.0);
+        \fill<11>  [alert!20] (0.6 ,0.6) rectangle (1.85,1.0);
+        \fill<11>  [alert!20] (1.85,0.6) rectangle (3.1 ,1.0);
+        \fill<9>   [alert!20] (-.6 ,0.2) rectangle (0.6 ,0.6);
+        \fill<11>  [alert!20] (0.6 ,0.2) rectangle (1.85,0.6);
+        \fill<9>   [alert!20] (-.6 ,-.2) rectangle (0.6 ,0.2);
+
+        \draw[structure!30] (-.6 ,-.2) -- (-.6 ,1.8);
+        \draw[structure!30] (0.6 ,-.2) -- (0.6 ,1.8);
+        \draw[structure!30] (1.85,0.2) -- (1.85,1.8);
+        \draw[structure!30] (3.1 ,0.6) -- (3.1 ,1.8);
+        \draw[structure!30] (4.35,1.0) -- (4.35,1.8);
+        \draw[structure!30] (5.6 ,1.4) -- (5.6 ,1.8);
+
+        \draw[structure!30] (-.6,1.8) -- (5.6 ,1.8);
+        \draw[structure!30] (-.6,1.4) -- (5.6 ,1.4);
+        \draw[structure!30] (-.6,1.0) -- (4.35,1.0);
+        \draw[structure!30] (-.6,0.6) -- (3.1 ,0.6);
+        \draw[structure!30] (-.6,0.2) -- (1.85,0.2);
+        \draw[structure!30] (-.6,-.2) -- (0.6 ,-.2);
+
+
+        \draw<-10> (0.00,1.6) node{\scriptsize $aabb        \cdot \varepsilon \cdot \varepsilon$};
+
+        \draw<-10> (1.25,1.6) node{\scriptsize $aab         \cdot b           \cdot \varepsilon$};
+        
+        \draw<-10> (2.50,1.6) node{\scriptsize $aa          \cdot bb          \cdot \varepsilon$};
+        
+        \draw<-10> (3.75,1.6) node{\scriptsize $a           \cdot abb         \cdot \varepsilon$};
+        
+        \draw<-10> (5.00,1.6) node{\scriptsize $\varepsilon \cdot aabb        \cdot \varepsilon$};
+        
+        \draw<-10> (0.00,1.2) node{\scriptsize $aab         \cdot \varepsilon \cdot b$};
+
+        \draw<-10> (1.25,1.2) node{\scriptsize $aa          \cdot b           \cdot b$};
+        
+        \draw<-10> (2.50,1.2) node{\scriptsize $a           \cdot ab          \cdot b$};
+        
+        \draw<-10> (3.75,1.2) node{\scriptsize $\varepsilon \cdot aab         \cdot b$};
+        
+        \draw<-9> (0.00,0.8) node{\scriptsize $aa          \cdot \varepsilon \cdot bb$};
+
+        \draw (1.25,0.8) node{\scriptsize $a           \cdot a           \cdot bb$};
+        
+        \draw (2.50,0.8) node{\scriptsize $\varepsilon \cdot aa          \cdot bb$};
+        
+        \draw<-9> (0.00,0.4) node{\scriptsize $a           \cdot \varepsilon \cdot abb$};
+
+        \draw (1.25,0.4) node{\scriptsize $\varepsilon \cdot a           \cdot abb$};
+        
+        \draw<-9> (0.00,0.0) node{\scriptsize $\varepsilon \cdot \varepsilon \cdot abbb$};
+
+    \end{tikzpicture}};
+
+    \draw<10> (4,2.6) node{\scalebox{1}{\begin{tikzpicture}
+          \draw [alert] (5,5) node{$u = a \cdot ...  \cdot a  \cdot b  \cdot ...  \cdot b$};
+          
+          \draw [decorate, decoration={brace, amplitude=5pt}] (4.15,5.15) -- (5.25,5.15) node[midway,yshift=4mm]{$N$};
+          \draw [decorate, decoration={brace, amplitude=5pt}] (5.4,5.15) -- (6.55,5.15) node[midway,yshift=4mm]{$N$};
+          
+          \draw [decorate, decoration={brace, amplitude=5pt, mirror}] (4.15,4.85) -- (4.8,4.85) node[midway,yshift=-4mm]{$|xy|\le N$};
+          \draw [decorate, decoration={brace, amplitude=5pt, mirror}] (4.9,4.85)  -- (6.55,4.85) node[midway,yshift=-4mm]{$z$};
+    \end{tikzpicture}}};
+
+    \draw<11> (4,2.6) node{\alert{$x \cdot y^2 \cdot z \notin L$}};
+    }
+    
+  \end{tikzpicture}
+\end{frame}
+
+
+\endgroup

@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Implémentation d'un automate déterministe complet}
+  \SetKwFunction{Decider}{decider}
+  \SetKwFunction{Afficher}{Ecrire}
+  \SetKwData{Mot}{u}
+  \SetKwData{Init}{initial\_state}
+  \SetKwData{Final}{final\_state}
+  \SetKwData{Transition}{transitions}
+  \vspace{-7mm}
+  \begin{block}{Modélisation de l'automate par une structure de données}
+  \vspace{-2mm}
+    \begin{description}
+    \item[$\Init$] : entier (l'état au début de la reconnaissance)
+    \item[{$\Final$}] : tableau de booléens
+    \begin{itemize}
+    \item $\Final[q] = \True$ si le mot est accepté dans l'état $q$
+    \end{itemize}
+    \item[{$\Transition$}] : tableau d'entiers à deux dimensions
+    \begin{itemize}
+    \item $\Transition[c, q]$ : état obtenu quand $c$ est lu dans $q$
+    \end{itemize}
+    \end{description}
+\end{block}
+
+  \vspace{-2mm}
+  \begin{exampleblock}{Exemple}
+  \vspace{-2mm}
+  \begin{tikzpicture}
+    \draw (5.4,5.3) node{\begin{minipage}{\textwidth}\scalebox{.85}{\begin{algorithm}[H]
+            \Algo{exemple}{
+              $A \leftarrow \left\{\begin{array}{lcl}
+              \Init &\leftarrow& 0 \\
+              \Final &\leftarrow& \left[\True, \True, \False \right]\\
+              \Transition &\leftarrow& \left[ \begin{array}{ll} a :& \left[0, 2, 2 \right] \\b :& \left[1, 1, 2 \right] \end{array}\right]\\
+              \end{array}
+              \right\}
+              $\;
+              $\Afficher(\Decider(\text{``aabb''}, A))$\;
+            }
+
+            \vspace{1mm}
+            \Fn{\Decider($u$ : mot, $A$ : automate) : booléen}{
+              $q \leftarrow A.\Init$\;
+              \lPour{$i$ de $1$ à $|u|$}{
+                $q \leftarrow A.\Transition[u[i], q]$%\;
+              }
+              \Retourner $A.\Final[q]$\;
+            }
+    \end{algorithm}}\end{minipage}};
+    \draw (9.8,6.5) node{\begin{minipage}{6cm}
+        \scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+            \node[state, initial, initial text=,accepting] (s0)              {0}; 
+            \node[state,accepting] (s1)[right=of s0] {1}; 
+            \node[state] (s2)[right=of s1] {2}; 
+            
+            \path[->] (s0) edge[loop above, looseness=5] node{$a$} (s0);
+            \path[->] (s0) edge node{$b$} (s1);
+            \path[->] (s1) edge node{$a$} (s2);
+            \path[->] (s1) edge[loop above, looseness=5] node{$b$} (s1);
+            \path[->] (s2) edge[loop above, looseness=5] node{$a, b$} (s2);
+        \end{tikzpicture}}
+    \end{minipage}};
+  \end{tikzpicture}
+  \end{exampleblock}
+\end{frame}
+
+
+\endgroup

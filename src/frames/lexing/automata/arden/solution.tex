@@ -1,0 +1,64 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Résolution de système d'équations rationnelles}
+  \vspace{-2mm}
+  \begin{minipage}{.3\textwidth}
+    \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \node [state,initial, initial text=] (q0)   {$q_0$};
+        \node [state] (q1) [right=of q0]  {$q_1$};
+        \node [state,accepting] (q2) [below=of q1]  {$q_2$}; 
+        \node [state] (q3) [right=of q1]  {$q_3$}; 
+
+        \path [->]    (q0) edge[structure] node[above] {$a$} (q1);
+        \path [->]    (q1) edge node[left] {$b$} (q2);
+        \path [->]    (q2) edge node[swap] {$\varepsilon$} (q3);
+        \path [->]    (q3) edge node[above] {$b$} (q1);
+
+        \path [->]    (q0) edge[loop above, looseness=5,example] node {$b$} (q0);
+        \path [->]    (q1) edge[loop above, looseness=5] node {$b$} (q1);
+        \path [->]    (q3) edge[loop above, looseness=5] node {$a$} (q3);
+    \end{tikzpicture}}
+  \end{minipage}
+  \begin{minipage}{.55\textwidth}
+    $$\text{Système : }
+    \left\{
+    \begin{array}{rcl}
+      L_0 &=& bL_0 | a L_1 \\
+      L_1 &=& b L_1 | b L_2 \\
+      L_2 &=& L_3 | \varepsilon \\
+      L_3 &=& a L_3 | b L_1 \\
+    \end{array}
+    \right.
+    $$
+  \end{minipage}
+  \vspace{2mm}
+
+  \begin{enumerate}
+  \item \structure{$L_1 = b L_1 | b L_2$}. $\varepsilon \notin \{b\}$, donc d'après Arden, $L_1 = b^\star b L_2 = b^+ L_2$. 
+  \item \structure{$L_0 = b L_0 | a L_1$}. $\varepsilon \notin \{b\}$, donc d'après Arden, $L_0 = b^\star a L_1 = b^\star a b^+ L_2$. 
+  \item \structure{$L_3 = a L_3 | b L_1$}. $\varepsilon \notin \{a\}$, donc d'après Arden, $L_3 = a^\star b L_1 = a^\star b b^+ L_2$. 
+  \item $\structure{L_2 = L_3 | \varepsilon} = a^\star b b^+ L_2 | \varepsilon$. $\varepsilon \notin a^\star b b^+$, donc $L_2 = (a^\star b.b^+)^\star$. 
+  \end{enumerate}
+
+  $$
+  \text{Solution : }
+  \left\{
+  \begin{array}{rclclcl}
+    L_0 &=& b^\star a b^+ (a^\star bb^+)^\star\\
+    L_1 &=& b^+ (a^\star bb^+)^\star \\
+    L_2 &=& (a^\star bb^+)^\star \\
+    L_3 &=& (a^\star bb^+)^+\\
+  \end{array}
+  \right.
+  $$
+
+  \alert{L'automate reconnaît le langage $\mathcal{L}(A) = b^\star a b^+ (a^\star bb^+)^\star$.}
+\end{frame}
+\endgroup

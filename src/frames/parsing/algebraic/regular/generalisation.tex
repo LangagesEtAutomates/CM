@@ -1,0 +1,35 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Généralisation : degré d'une grammaire}
+  
+  Soit $G = \langle \Sigma, \Gamma, S, R \rangle$ une grammaire algébrique.\\
+  \begin{block}{Définition -- Degré d'une grammaire}
+    Le \structure{degré} de $G$, noté $\alert{d(G)}$,
+    est le nombre maximal de non-terminaux dans le membre droit d'une règle de $R$. 
+  \end{block}
+
+  \begin{exampleblock}{Exemples}
+    \begin{enumerate}
+    \item Les grammaires de \alert{degré 1} sont appelées \structure{linéaires}
+      \begin{description}
+      \item[Attention] \alert{$S \rightarrow aSb \mid \varepsilon$} est linéaire, mais ni à droite ni à gauche
+      \end{description}
+    \item Les grammaires de \alert{degré 2} sont appelées \structure{quadratiques}
+      \begin{description}
+      \item[Théorème] Toute grammaire algébrique peut être transformée en une grammaire quadratique équivalente 
+        %      \item[Idée] Remplacer \structure{$N \rightarrow A B C$} par \structure{$N \rightarrow A X$} et \structure{$X \rightarrow B C$}
+      \item[Preuve] La forme normale de Chomsky en est un exemple
+      \end{description}
+    \end{enumerate}
+  \end{exampleblock}
+\end{frame}
+
+
+\endgroup

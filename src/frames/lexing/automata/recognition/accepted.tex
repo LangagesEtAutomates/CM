@@ -1,0 +1,61 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage reconnu par un AFN}
+  \small
+  
+  Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- langage reconnu (ou accepté)}
+
+    Un mot d'un langage entre un état initial et un état final est dit \structure{reconnu} par $A$.
+
+    Le langage \structure{reconnu} par $A$ est l'ensemble $\alert{\mathcal{L}(A)}$ des mots reconnus par $A$.
+
+    \alert{$$\begin{array}{lll}
+        \mathcal{L}(A) &\eqdef& \displaystyle \bigcup_{i\in I} \bigcup_{f\in F} \mathcal{L}_A(i,f)\\
+        &=& \{u \in \Sigma^\star \mid \exists i\in I, \exists f\in F,  \langle u, i \rangle \leadsto_A^\star \langle \varepsilon, f\rangle\}
+      \end{array}$$}
+  \end{block}
+
+  \begin{exampleblock}{Exemple}
+    \noindent\begin{minipage}{.4\textwidth}%
+    \scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \node [state,initial, initial text=] (s1)   {$s_1$}; 
+        \node [state,accepting] (s2) [right=of s1]  {$s_2$}; 
+
+        \node [state,initial, initial text=] (s4) [below=of s1]  {$s_3$}; 
+        \node [state=] (s5) [right=of s4]  {$s_4$}; 
+
+        \path [->]    (s1) edge node[above] {a} (s2);
+        \path [->]    (s1) edge[loop above, looseness=5] node {a} (s1);
+
+        \path [->]    (s4) edge node[above] {b} (s5);
+        \path [->]    (s4) edge[loop below, looseness=5] node {b} (s4);
+        \path [->]    (s5) edge[loop below, looseness=5] node {b} (s5);
+
+        \path [->]    (s2) edge[loop right, looseness=5] node {c} (s2);
+
+        \path [->]    (s5) edge node {$\varepsilon$} (s2);
+    \end{tikzpicture}}\end{minipage}%
+    \begin{minipage}{.6\textwidth}
+      Pour \example{$i=s_1$}, \example{$f=s_2$} et \example{$u=aac$}, on a : 
+      \begin{enumerate}
+      \item $s_1 \in I$
+      \item $s_2 \in F$
+      \item $aac \in \mathcal{L}_A(s_1, s_2)$
+      \end{enumerate}
+      Donc \example{$aac \in \mathcal{L}(A)$}
+    \end{minipage}
+  \end{exampleblock}
+\end{frame}
+
+
+\endgroup

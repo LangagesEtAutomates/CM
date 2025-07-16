@@ -1,0 +1,33 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple introductif}
+  \begin{exampleblock}{Quelques adresses email valides}
+    \begin{itemize}
+    \item matthieu.perrin@univ-nantes.fr
+    \item e12345@etu.univ-nantes.fr
+    \item mmemichu@gmail.com
+    \end{itemize}
+  \end{exampleblock}
+
+  \pause
+  \begin{block}{Spécifier les adresses email valides}
+    \begin{itemize}
+    \item En général : un nom d'utilisateur, une arobase, un nom de domaine
+      \vspace{-3mm}\uncover<5->{\alert{$$(a\mid b\mid ...\mid z\mid \text{-}\mid .)^+ \text{@} (a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^+ $$}}
+    \item\vspace{-6mm} Le nom de domaine est une suite de labels, séparés par des points
+      \vspace{-3mm}\uncover<4->{\alert{$$(a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^+ $$}}
+    \item\vspace{-6mm} Un label est une suite non-vide de symboles (lettres et tirets)
+      \vspace{-3mm}\uncover<3->{\alert{$$\mathit{symbole} = a\mid b\mid ...\mid z\mid \text{-} \hspace{10mm}  \mathit{label} = (a\mid b\mid ...\mid z\mid \text{-})^+ $$}}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\endgroup

@@ -1,0 +1,54 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Mot}
+  \small
+  Soit $\Sigma$ un alphabet et $n\in \mathbb{N}$.
+  \begin{itemize}
+  \item Un \structure{mot} de longueur $n$ sur $\Sigma$ est une \alert{fonction de $\llbracket n\rrbracket$ dans $\Sigma$}.
+  \item L'ensemble des mots de longueur $n$ sur $\Sigma$ est \alert{$\Sigma^n = \mathscr{F}(\llbracket n\rrbracket, \Sigma)$}.
+  \item L'ensemble des mots sur $\Sigma$, noté \structure{$\Sigma^\star$}, est :
+    $$\alert{\displaystyle \Sigma^\star \eqdef \bigcup_{n\in \mathbb{N}} \Sigma^n = \Sigma^0 \cup \Sigma^1 \cup \Sigma^2 \cup ...}$$
+  \item L'ensemble des mots \structure{non-vides} sur $\Sigma$ est
+    $\alert{\Sigma^+ \eqdef \bigcup_{n \neq 0 } \Sigma^n}$
+  \end{itemize}
+
+  \begin{exampleblock}{Exemples}
+    Soit $\Sigma = \{a, b, ..., z\}$
+
+    \begin{minipage}[t]{.5\textwidth}
+      \begin{itemize}
+      \item $\varepsilon = \left\{\begin{array}{ccc}
+        \llbracket 0\rrbracket & \rightarrow & \Sigma\\
+        x & \mapsto & \_
+      \end{array}\right. \in \Sigma^0$
+      \item $\text{``a''} = \left\{\begin{array}{ccc}
+        \llbracket 1\rrbracket & \rightarrow & \Sigma\\
+        x & \mapsto & \text{`a'}
+      \end{array}\right. \in \Sigma^1$
+      \end{itemize}
+    \end{minipage}%
+    \begin{minipage}[t]{.5\textwidth}
+      \begin{itemize}
+      \item $\text{``bon''} = \left\{\begin{array}{ccc}
+        \llbracket 3\rrbracket& \rightarrow & \Sigma\\
+        1 & \mapsto & \text{`b'}\\
+        2 & \mapsto & \text{`o'}\\
+        3 & \mapsto & \text{`n'}\\
+      \end{array}\right. \in \Sigma^3$
+      \end{itemize}
+    \end{minipage}%
+    \begin{itemize}
+    \item Par abus de notation, on fera l'amalgame entre $\Sigma$ et $\Sigma^1$. 
+    \end{itemize}
+    
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

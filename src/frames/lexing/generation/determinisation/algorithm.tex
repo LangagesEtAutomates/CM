@@ -1,0 +1,185 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}[fragile]{Méthode des sous-ensembles de Rabin et Scott}
+  \begingroup
+  \renewcommand{\emph}[1]{\structure{#1}} 
+  \vspace{-3mm}
+  
+  ~\hspace{-8mm}
+  \begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+    \draw[white] (-2.8,-1) rectangle (9,7.3);
+
+    \mode<beamer>{
+      \fill<2-4>[rounded corners, example!20] (-2.2,6.5) rectangle (0.5,6.8);
+      \fill<2-4>[rounded corners, structure!20]    (-1.9,3.35) rectangle (1.45,3.65);
+
+      \fill<5-6>[rounded corners, alert!20]    (-1.2,5.6) rectangle (3.25,5.9);
+      \fill<6>[rounded corners, structure!20]    (-1.15,5.3) rectangle (.3,5.6);
+
+      \fill<7>[rounded corners, alert!20]    (-2.2,4.3) rectangle (.9,4.6);
+    }
+    \draw (5,4.85) node{\begin{minipage}{15cm}\scalebox{.7}{\begin{algorithm}[H]
+            \SetKwFunction{RabinScott}{rabin\_scott}
+            \SetKwFunction{Fermeture}{$\varepsilon$-fermeture}
+            \Fn{\RabinScott($A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate) : automate}{
+              $i' \leftarrow \Fermeture (A, I)$\;
+              $Q' \leftarrow \{i'\}$\;
+              $\mu' \leftarrow \emptyset$\;
+              \Tantque{$\exists S\in Q', \exists a\in \Sigma, \forall S'\in Q', \langle S, a, S' \rangle \notin \mu'$}{
+                $S' \leftarrow \Fermeture (A, \{q'\in Q | \exists q\in S, \langle q, a, q' \rangle \in \mu \})$\;
+                $Q' \leftarrow Q \cup \{S\}$\;
+                $\mu' \leftarrow \mu' \cup \{\langle S, a, S' \rangle\}$\;
+              }
+              
+              $F' \leftarrow \{S \in Q' | S\cap F \neq \emptyset\}$\;
+              \Retourner $\langle \Sigma, Q', \{i'\}, F', \mu' \rangle$\;
+            }
+            \Fn{\Fermeture($A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate, $S$ : ensemble) : ensemble}{
+              \uSi{$\exists \langle q, \varepsilon, q' \rangle \in \mu : q\in S \land q' \notin S$}{
+                \Retourner $\Fermeture(A, S \cup \{q'\})$\;
+              }\lSinon{\Retourner $S$}
+            }
+        \end{algorithm}}\end{minipage}};
+
+    \draw (5.3,5.5) node[right]{\begin{minipage}{3cm}\begin{exampleblock}{Exemple}
+          \scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \node (aa)               {}; \node [right=of aa] (ab) {}; \node [right=of ab] (ac) {};
+          \node (ba) [below=of aa] {}; \node [right=of ba] (bb) {}; \node [right=of bb] (bc) {};
+
+          \node [state,initial, initial text=] (a0) at (aa) {$0$};
+          \node<2-6> [state,initial, initial text=, example, fill=example!20] (a0) at (aa) {$0$};
+          \node [state,accepting]              (a1) at (ab) {$1$};
+          \node [state]                        (a2) at (ac) {$2$};
+          \node [state,initial, initial text=] (a3) at (ba) {$3$};
+          \node<2-6> [state,initial, initial text=, example, fill=example!20] (a3) at (ba) {$3$};
+          \node [state]                        (a4) at (bb) {$4$};
+          \node<2> [state, structure, fill=structure!20]                        (a4) at (bb) {$4$};
+          \node<3-6> [state, example, fill=example!20]                        (a4) at (bb) {$4$};
+          \node [state]                        (a5) at (bc) {$5$};
+          \node<3> [state, structure, fill=structure!20]                        (a5) at (bc) {$5$};
+          \node<4-6> [state, example, fill=example!20]                        (a5) at (bc) {$5$};
+
+          \path<-1,3-> [->] (a3) edge node[below] {$\varepsilon$} (a4);
+          \path<2> [structure,->] (a3) edge node[below] {$\varepsilon$} (a4);
+          \path<-2,4,5,7-> [->] (a4) edge node[below] {$\varepsilon$} (a5);
+          \path<3,6> [structure,->] (a4) edge node[below] {$\varepsilon$} (a5);
+          \path [->] (a2) edge node[above] {$b$} (a1);
+          \path<-4,6-> [->] (a5) edge[bend right] node[right] {$a$} (a2);
+          \path<5>[alert, ->] (a5) edge[bend right] node[right] {$a$} (a2);
+          \path [->] (a2) edge[bend right] node[left]  {$a$} (a5);
+          \path<-5,7->[->] (a4) edge[bend right] node[right] {$b$} (a1);
+          \path<6>[alert,->] (a4) edge[bend right] node[right] {$b$} (a1);
+          \path [->] (a1) edge[bend right] node[left]  {$b$} (a4);
+
+          \path [->] (a1) edge[loop above, looseness=5] node  {$a$} (a1);
+          \path [->] (a2) edge[loop above, looseness=5] node  {$b$} (a2);
+          \path<-5,7-> [->] (a4) edge[loop below, looseness=5] node  {$b$} (a4);
+          \path<6> [alert,->] (a4) edge[loop below, looseness=5] node  {$b$} (a4);
+          \path<-4,6-> [->] (a5) edge[loop below, looseness=5] node  {$a$} (a5);
+          \path<5>[alert, ->] (a5) edge[loop below, looseness=5] node  {$a$} (a5);
+    \end{tikzpicture}}\end{exampleblock}\end{minipage}};
+
+    \draw<5-|handout:2> (-2,1) node[right]{\scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \draw[white] (-.5,-2.3) rectangle (7.5,2.3);
+          
+          \node (a)                    {}; 
+          \node (b) [above right=of a] {}; 
+          \node (c) [below right=of a] {}; 
+          \node (d) [below right=of b] {}; 
+          \node (e) [right=of d]       {}; 
+          \node (f) [above right=of e] {}; 
+          \node (g) [below right=of e] {}; 
+          \node (h) [below right=of f] {}; 
+
+          \node [state,initial, initial text=] (a0) at (a) {};
+          \node at (a) {\scriptsize$\hspace{-1mm}\begin{array}{c}0,3,\\4,5\end{array}$};
+
+          \node<6-> [state] (b0) at (b) {\scriptsize$5,2$};
+
+          \node<7> [state,accepting, alert, fill=alert!20] (c0) at (c) {};
+          \node<7> [alert] at (c) {\scriptsize$\hspace{-.5mm}\begin{array}{c}1,\\4,5\end{array}$};
+          \node<8-> [state,accepting] (c0) at (c) {};
+          \node<8-> at (c) {\scriptsize$\hspace{-.5mm}\begin{array}{c}1,\\4,5\end{array}$};
+
+          \node<12-> [state] (d0) at (d) {\scriptsize$4, 5$};
+
+          \node<10-> [state,accepting] (e0) at (e) {\scriptsize$1,5$};
+
+          \node<8-> [state,accepting] (f0) at (f) {\scriptsize$1,2$};
+
+          \node<9-> [state,accepting] (g0) at (g) {};
+          \node<9-> at (g) {\scriptsize$\hspace{-.5mm}\begin{array}{c}1,\\2,5\end{array}$};
+
+          \node<10-> [state,accepting] (h0) at (h) {};
+          \node<10-> at (h) {\scriptsize$\hspace{-1mm}\begin{array}{c}1,2,\\4,5\end{array}$};
+          
+          \node<5-6> [alert] at (d) {?};
+          \path<5>  [alert,->] (a0) edge node[above]  {$a$} (d);
+          \path<6>  [alert,->] (a0) edge node[below]  {$b$} (d);
+          
+          \path<6->  [->] (a0) edge node[above left]  {$a$} (b0);
+          \path<7->  [->] (a0) edge node[below left]  {$b$} (c0);
+          \path<14-> [->] (d0) edge node[above right] {$a$} (b0);
+          \path<14-> [->] (d0) edge node[below right] {$b$} (c0);
+                 
+          \path<12-> [->] (e0) edge node[above]  {$b$} (d0);
+          \path<8-> [->] (b0) edge node[above]  {$b$} (f0);
+          \path<9-> [->] (c0) edge node[below]  {$a$} (g0);
+                 
+          \path<10-> [->] (f0) edge node[above left]  {$a$} (e0);
+          \path<12-> [->] (e0) edge node[below left]  {$a$} (g0);
+          \path<10-> [->] (f0) edge node[above right] {$b$} (h0);
+          \path<13-> [->] (h0) edge[bend right] node[above left]  {$a$} (g0);
+          \path<11-> [->] (g0) edge[bend right] node[below right] {$b$} (h0);
+                 
+          \path<8-> [->] (b0) edge[loop above, looseness=5] node  {$a$} (b0);
+          \path<9-> [->] (c0) edge[loop below, looseness=5] node  {$b$} (c0);
+          \path<11-> [->] (g0) edge[loop below, looseness=5] node  {$a$} (g0);
+          \path<13-> [->] (h0) edge[loop right, looseness=5] node  {$b$} (h0);
+    \end{tikzpicture}}};
+
+    \draw<5-|handout:2> (4,1) node[right]{\scalebox{.8}{
+        \begin{tabular}{|l|c|c|}
+          \hline
+          & \multicolumn{2}{c|}{\structure{\textbf{Entrée}}}\\
+          \hline
+          \structure{\textbf{\'Etat}} & $\structure{a}$ & $\structure{b}$ \\
+          \hline
+                       $\{0,3,4,5\}$ \hspace\fill \structure{i}   & \only<5> {\alert{?}}\only<6-> {$\{5, 2\}$}  & \only<6> {\alert{?}}\only<7-> {$\{1,4,5\}$}   \\
+          \uncover<6->{$\{5, 2\}$}       & \uncover<8-> {$\{5, 2\}$}  & \uncover<8-> {$\{1, 2\}$}    \\
+          \uncover<7->{$\{1,4,5\}$ \hspace\fill \structure{f}}    & \uncover<9-> {$\{1,2,5\}$} & \uncover<9-> {$\{1,4,5\}$}   \\
+          \uncover<8->{$\{1,2\}$ \hspace\fill \structure{f}}      & \uncover<10->{$\{1,5\}$}   & \uncover<10->{$\{1,2,4,5\}$} \\
+          \uncover<9->{$\{1,2,5\}$ \hspace\fill \structure{f}}    & \uncover<11->{$\{1,2,5\}$} & \uncover<11->{$\{1,2,4,5\}$} \\
+          \uncover<10->{$\{1,5\}$ \hspace\fill \structure{f}}     & \uncover<12->{$\{1,2,5\}$} & \uncover<12->{$\{4,5\}$}     \\
+          \uncover<10->{$\{1,2,4,5\}$ \hspace\fill \structure{f}} & \uncover<13->{$\{1,2,5\}$} & \uncover<13->{$\{1,2,4,5\}$} \\
+          \uncover<12->{$\{4,5\}$}       & \uncover<14->{$\{5,2\}$}   & \uncover<14->{$\{1,4,5\}$}   \\
+          \hline
+        \end{tabular}
+    }};
+    
+    \draw<2-4|handout:1> (3,1) node{\begin{minipage}{\textwidth}
+        \begin{exampleblock}{Calcul de l' $\varepsilon$-fermeture de $I$}
+          \vspace{-3mm}
+          $$\begin{array}{rcl}
+            i' &=& \Fermeture(A, I)\\
+            &=& \Fermeture(A, \{0, 3\})\\
+            &\uncover<3->{=}& \uncover<3->{\Fermeture(A, \{0, 3, 4\})}\\
+            &\uncover<4->{=}& \uncover<4->{\Fermeture(A, \{0, 3, 4, 5\})}\\
+            &\uncover<4->{=}& \uncover<4->{\{0, 3, 4, 5\}}\\
+          \end{array}$$
+        \end{exampleblock}
+    \end{minipage}};
+
+    
+  \end{tikzpicture}
+  \endgroup
+\end{frame}
+
+\endgroup

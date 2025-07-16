@@ -1,0 +1,37 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Lien entre langages rationnels et algébriques}
+  
+  \begin{block}{Théorème -- Lien entre langages rationnels et algébriques}
+    Tout langage rationnel sur un alphabet $\Sigma$ est algébrique sur $\Sigma$ :
+    $$\alert{\textsc{rat}_\Sigma \subsetneq \textsc{alg}_\Sigma}$$
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Démonstration}
+    \begin{itemize}
+    \item Introduction des grammaires linéaires/rationnelles droites/gauches
+      \begin{itemize}
+      \item Preuve de l'équivalence avec les automates finis
+      \end{itemize}
+    \item L'inclusion est stricte, car $\{a^n b^n | n\in \mathbb{N} \} \in \textsc{alg}_\Sigma \setminus \textsc{rat}_\Sigma$
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{Exemple}
+    Le langage \example{$a^\star b^\star$} est engendré par
+    $$\example{\left\langle \{a, b\}, \{S, A\}, S, \left\{ \begin{array}{rcl}
+        S &\rightarrow& aS | A\\
+        A &\rightarrow& bA | \varepsilon
+      \end{array}\right\}\right\rangle}$$
+
+  \end{exampleblock}
+  
+\end{frame}
+\endgroup

@@ -1,0 +1,33 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Sous-ensembles}
+  \begin{block}{Définition -- inclusion}
+    Soient $A$ et $B$ deux ensembles.
+    \begin{itemize}
+    \item $A$ est \structure{inclus} dans $B$, noté \structure{$A \subseteq B$}, si tout élément de $A$ appartient à $B$
+      $$\alert{\forall x, x \in A \Rightarrow x\in B}  \hspace{1cm}\text{noté} \hspace{1cm} \alert{\forall x \in A, x\in B}$$
+    \item $A$ est \structure{strictement inclus} dans $B$, noté \structure{$A \varsubsetneq B$}, si \alert{$A \subseteq B$ et $A \neq B$}
+    \item Si $A\subseteq B$, on dit que A est un \structure{sous-ensemble}, ou une \structure{partie} de $B$
+    \item On note \structure{$\mathscr{P}(B)$} l'ensemble des parties de $B$ :
+      $$\forall A\forall B, \alert{A \in \mathscr{P}(B) \Leftrightarrow A\subseteq B}$$
+    \end{itemize}
+  \end{block}
+
+  \vspace{-3mm}
+  \begin{exampleblock}{Exemple}
+    \begin{itemize}
+    \item $\mathscr{P}(\{1, 2\}) = \{ \emptyset, \{1\}, \{2\}, \{1, 2\}\}$
+    \item $\emptyset \subseteq \{1\}$ et $\{1\} \subseteq \{1, 2\}$
+    \item $\{1\} \nsubseteq \{2\}$ et $\{2\} \nsubseteq \{1\}$
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

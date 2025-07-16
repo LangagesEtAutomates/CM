@@ -1,0 +1,28 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+\begin{frame}{Retour sur les adresses email}
+\begin{block}{Spécifier les adresses email valides}
+\begin{itemize}
+\item Par une expression rationnelle $$\alert{(a| b| ...| z| \text{-})^+ (. (a| b| ...| z| \text{-})^+)^\star \text{@} (a| b| ...| z| \text{-})^+ (. (a| b| ...| z| \text{-})^+)^+} $$
+\item Problème : peu lisible, on voudrait nommer des sous-expressions
+\end{itemize}
+\end{block}
+\pause
+\begin{block}{Formalisme des définitions rationnelles}
+    $$\alert{\left\{\begin{array}{rcl}
+    \mathit{symbole} &\rightarrow & a\mid b\mid ...\mid z\mid \text{-}\\
+    \mathit{label} &\rightarrow & \mathit{symbole}^+ \\
+    \mathit{domaine} &\rightarrow & \mathit{label} (.\mathit{label}) ^+ \\
+    \mathit{utilisateur} &\rightarrow & \mathit{label} (.\mathit{label}) ^\star \\
+    \mathit{email} &\rightarrow & \mathit{utilisateur} \text{@} \mathit{domaine} \\
+    \end{array}\right.}$$
+\end{block}
+\end{frame}
+
+\endgroup

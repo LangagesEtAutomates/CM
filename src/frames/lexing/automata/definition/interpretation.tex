@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Interprétation du non-déterministes}
+  \begin{description}
+  \item[Aléatoire :] assigner \structure{une probabilité} à chaque transition possible
+    \begin{itemize}
+    \item Arrivée dans un état final \structure{avec grande probabilité}
+    \item \example{Exemples :} 
+      \begin{itemize}
+      \item algorithmes probabilistes
+      \item chaînes de Markov
+      \end{itemize}
+    \end{itemize}
+  \item[Adversaire :] la transition à emprunter est décidée par \structure{l'environnement}
+    \begin{itemize}
+    \item Arrivée dans un état final \structure{quel que soit le chemin}
+    \item \example{Exemples :} 
+      \begin{itemize}
+      \item programmation déclarative
+      \item programmation concurrente
+      \end{itemize}
+    \end{itemize}
+  \item[Ubiquitaire :] la transition à emprunter est décidée par \structure{un oracle}
+    \begin{itemize}
+    \item Arrivée dans un état final \structure{pour au moins un chemin}
+    \item \example{Exemples :} 
+      \begin{itemize}
+      \item algorithmes d'optimisation à heuristiques
+      \item mécanique quantique
+      \item \alert{Théorie des langages formels}
+      \end{itemize}
+    \end{itemize}
+  \end{description}
+\end{frame}
+
+\endgroup

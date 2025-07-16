@@ -1,0 +1,105 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Démonstration du lemme d'Arden}
+  \small 
+  \begin{tikzpicture}
+
+    \draw (10,10) node[below]{\begin{minipage}{\textwidth}
+        Soient $\Sigma$ un alphabet, et $A, B, \mathcal{X} \in \mathscr{P}(\Sigma^\star)$ tels que $\mathcal{X} = A\mathcal{X} \cup B$.
+        \begin{enumerate}
+        \item \structure{$A^\star B$ est solution de $X = AX | B$} \hspace\fill \alert{$A^\star B = A (A^\star B) \cup B$}
+        \item<1,3-> \structure{$A^\star B$ est la plus petite solution de $X = AX | B$} \hspace\fill \alert{$A^\star B \subseteq \mathcal{X}$}
+        \item<1,7-> \structure{Si $\varepsilon \notin A$, $A^\star B$ est la seule solution de $X = AX | B$} \hspace\fill \alert{$\varepsilon \notin A \Rightarrow A^\star B = \mathcal{X}$}
+        \end{enumerate}
+    \end{minipage}};
+
+    \draw<2|handout:1> (10,7.9) node[below]{\begin{minipage}{\textwidth}
+        \begin{itemize}
+        \item $\begin{array}[t]{rcll}
+          \structure{A} (\example{A^\star B}) \structure{\cup B}
+          & = & (A A^\star) B \cup B & \text{Par associativité}\\
+          & = & (A A^\star \cup \varepsilon) B  & \text{Par factorisation de $B$}\\
+          & = & \example{A^\star B}  & \text{Par définition de $A^\star$}\\
+        \end{array}$
+        \end{itemize}
+    \end{minipage}};
+
+    \draw<3-6|handout:2> (10,7.9) node[below]{\begin{minipage}{\textwidth}
+        \begin{itemize}
+        \item Montrons que \alert{$\forall n\in \mathbb{N}, A^n B \subseteq \mathcal{X}$}\only<4->{ par récurrence sur $n$}.\\
+          \uncover<4->{
+            \structure{Initialisation :} Montrons \alert{$A^0 B \subseteq \mathcal{X}$}.
+          }
+          \uncover<5->{
+            \begin{itemize}
+            \item $\begin{array}[t]{rcll}
+              A^0 B\hspace{1.5mm}~
+              & = & B & \text{par définition de $A^0$}\\
+              & \subseteq & A\mathcal{X} \cup B & \text{par croissance de l'union}\\
+              & \subseteq & \mathcal{X} & \text{par définition de $\mathcal{X}$}\\
+            \end{array}$
+            \end{itemize}
+          }
+          \uncover<4->{
+            \structure{Hérédité :} Supposons \example{$A^n B \subseteq \mathcal{X}$} pour un $n \in \mathbb{N}$, montrons \alert{$A^{n+1} B \subseteq \mathcal{X}$}.
+          }
+          \uncover<6->{
+            \begin{itemize}
+            \item \hspace{-2mm}$\begin{array}[t]{rcll}
+              A^{n+1} B
+              & = & A (A^{n} B) & \text{par associativité}\\
+              & \subseteq & A\mathcal{X} & \text{par l'hypothèse de récurrence}\\
+              & \subseteq & A\mathcal{X} \cup B & \text{par croissance de l'union}\\
+              & \subseteq & \mathcal{X} & \text{par définition de $\mathcal{X}$}\\
+            \end{array}$
+            \end{itemize}
+          }
+        \item Finalement, $\displaystyle A^\star B = \bigcup_{n\in \mathbb{N}} A^n B \subseteq \bigcup_{n\in \mathbb{N}} \mathcal{X} = \mathcal{X}$
+        \end{itemize}
+    \end{minipage}};
+
+    \uncover<7-|handout:3>{
+      \draw (10,7.9) node[below]{\begin{minipage}{\textwidth}
+          \begin{itemize}
+          \item Supposons que \example{$\varepsilon \notin A$}. 
+          \item<8-> \vspace{-1mm}Montrons que $\alert{\forall n\in \mathbb{N}, \mathcal{X} \cap \Sigma^n \subseteq A^\star B}$\only<9->{ par récurrence forte sur $n$}.\\
+            \uncover<9->{
+              Soit $n \in \mathbb{N}$. Supposons $\example{\forall m < n, \mathcal{X} \cap \Sigma^m \subseteq A^\star B}$. Montrons \alert{$\mathcal{X} \cap \Sigma^n \subseteq A^\star B$}.%
+              \begin{itemize}
+              \item Soit \example{$u \in \mathcal{X} \cap \Sigma^n$}. Montrons \alert{$u\in A^\star B$}.
+              \item<10-> $u \in \mathcal{X} = A\mathcal{X} | B$. Deux cas possibles \\
+                \structure{Cas $u \in A\mathcal{X}$ :}
+                \uncover<11->{
+                  \begin{itemize}
+                  \item Il existe une décomposition $u=ax$, avec $a \in A$ et $x \in \mathcal{X}$.
+                  \item Comme $\varepsilon \notin A$, $|x| = |u| - |a| < |u| = n$.
+                  \item Par l'hypothèse de récurrence forte, $\mathcal{X} \cap \Sigma^{|x|} \subseteq A^\star B$, donc $x \in A^\star B$.
+                  \item $u = ax \in A\cdot A^\star B \subseteq A^\star B$.
+                  \end{itemize}
+                }
+                \structure{Cas $u \in B$ :} 
+                \uncover<12->{
+                  \begin{itemize}
+                  \item $u \in A^0 B \subseteq A^\star B$
+                  \end{itemize}
+                }
+              \end{itemize}
+            }
+          \item Montrons que \alert{$\mathcal{X} \subseteq A^\star B$}. \only<8->{Soit $u \in \mathcal{X}$. On a $u\in \mathcal{X} \cap \Sigma^{|u|} \subseteq A^\star B$.}
+          \item \vspace{-1mm}Par double inclusion, $\mathcal{X} = A^\star B$
+          \end{itemize}
+      \end{minipage}};
+    }
+    
+  \end{tikzpicture}
+\end{frame}
+
+
+\endgroup

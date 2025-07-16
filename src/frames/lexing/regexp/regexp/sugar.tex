@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Abus de notation}
+  \begin{block}{Simplifications}
+    \begin{itemize}
+    \item L'opérateur \alert{$\cdot$} est le plus souvent \structure{omis}
+    \item On utilise les règles de \alert{préséance} pour éviter les parenthèses inutiles
+      \begin{center}
+        \structure{1.} \alert{${}^\star$} \hspace{1cm}
+        \structure{2.} \alert{$\cdot$} \hspace{1cm}
+        \structure{3.} \alert{$|$}
+      \end{center}
+      \item Par exemple, \example{$ab^\star|cd^\star$} représente \example{$((a \cdot b^\star) | (c \cdot d^\star))$}
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Sucre syntaxique}
+    \begin{itemize}
+    \item Ajout de  l'opérateur $\alert{+}$ : $u^+ \eqdef (u \cdot u^\star)$
+    \item Ajout de  l'opérateur $\alert{?}$ : $u^? \eqdef ( u | \varepsilon)$
+    \item Beaucoup d'autres, selon les outils
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Définition -- Expression rationnelle standard}
+    Une expression rationnelle est dite \structure{standard}
+    si, et seulement si, les seuls opérateurs utilisés sont les opérateurs $.$, $|$ et ${}^\star$
+  \end{block}
+\end{frame}
+
+
+\endgroup

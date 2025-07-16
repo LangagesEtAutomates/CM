@@ -1,0 +1,104 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Architecture d'un compilateur}
+  \centering
+  \begin{tikzpicture}
+    %    \draw (0,0) rectangle (9.5,5);
+    
+    \draw[rounded corners, fill=example!15] (0.7,0.4) rectangle (3.1,4.0);
+    \draw[rounded corners, fill=example!15] (3.6,0.4) rectangle (5.4,4.0);
+    \draw[rounded corners, fill=example!15] (5.9,0.4) rectangle (8.3,4.0);
+    \draw (1.9,3.75) node{Front end};
+    \draw (4.5,3.75) node{Optimiseur};
+    \draw (7.1,3.75) node{Back end};
+    
+    \draw[rounded corners, fill=structure!20] (1.0,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Analyse lexicale};
+    \draw[rounded corners, fill=structure!20] (1.6,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Analyse syntaxique};
+    \draw[rounded corners, fill=structure!00] (2.2,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Analyse contextuelle};
+    \draw[rounded corners, fill=structure!00] (2.8,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Élaboration};
+    \draw[rounded corners, fill=structure!00] (3.9,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Optimisation $1$};
+    \draw[rounded corners, fill=structure!00] (5.1,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Optimisation $n$};
+    \draw[rounded corners, fill=structure!00] (6.2,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Sélection d'instructions};
+    \draw[rounded corners, fill=structure!00] (6.8,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Ordonnancement};
+    \draw[rounded corners, fill=structure!00] (7.4,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Allocation de registres};
+    \draw[rounded corners, fill=structure!00] (8.0,2) +(-.2,-1.5) rectangle +(.2,1.5) +(0,0) node[rotate=90]{\footnotesize Génération};
+    
+    \draw[rounded corners, fill=structure!00] (4.5,2) +(0,.1) node{...};
+    
+    \draw[-latex] (-.2,2) -- (.8,2);
+    \draw[-latex] (1.2,2) -- (1.4,2);
+    \draw[-latex] (1.8,2) -- (2.0,2);
+    \draw[-latex] (2.4,2) -- (2.6,2);
+    \draw[-latex] (3.0,2) -- (3.7,2);
+    \draw[-latex] (4.1,2) -- (4.9,2);
+    \draw[-latex] (5.3,2) -- (6.0,2);
+    \draw[-latex] (6.4,2) -- (6.6,2);
+    \draw[-latex] (6.9,2) -- (7.2,2);
+    \draw[-latex] (7.6,2) -- (7.8,2);
+    \draw[-latex] (8.2,2) -- (9.2,2);
+    
+    \draw (.2,2.15) node {\scriptsize Langage};
+    \draw (.2,1.85) node {\scriptsize source};
+    
+    \draw (8.8,2.15) node {\scriptsize Langage};
+    \draw (8.8,1.85) node {\scriptsize cible};
+    
+  \end{tikzpicture}
+  
+  \begin{block}{Objectifs du cours}
+    \begin{itemize}
+    \item \vspace{-2mm} Comprendre comment un compilateur ``lit'' le code source
+    \item Concevoir son propre \structure{DSL (Domain Specific Language)}
+    \end{itemize}
+  \end{block}
+  
+  \vspace{1mm}
+  \begin{tikzpicture}
+    
+    \draw[rounded corners, fill=structure!20] (1,1.3) rectangle (3,2.6);
+    \draw (2,2.3) node{Analyseur};
+    \draw (2,2) node{lexical};
+    \draw (2,1.6) node{\textit{Lexer}};
+    
+    
+    \draw[rounded corners, fill=structure!20] (5.5,1.3) rectangle (7.5,2.6);
+    \draw (6.5,2.3) node{Analyseur};
+    \draw (6.5,2) node{syntaxique};
+    \draw (6.5,1.6) node{\textit{Parser}};
+    
+    \draw[-latex] (0,2) -- (1,2);
+    \draw[-latex] (3,2) -- (5.5,2);
+    \draw[-latex] (7.5,2) -- (8.5,2);
+    
+    \draw (.4,2.45) node {\scriptsize Langage};
+    \draw (.4,2.2) node {\scriptsize  source};
+    \draw (.4,1.8) node {\scriptsize \example{$15+2 * x$}};
+    
+    \draw (4.25,2.2) node {\scriptsize Chaîne de \textit{tokens}};
+    \draw (4.25,1.8) node {\scriptsize \example{$\textsc{int}~\textsc{plus}~\textsc{int}~\textsc{times}~\textsc{var}$}};
+    
+    \draw (8.6,2.45) node {\scriptsize Arbre de la syntaxe};
+    \draw (8.6,2.2) node {\scriptsize abstraite (AST)};
+    
+    \draw[example] (8.2,1.4) node {\scriptsize $15$};
+    \draw[example] (8.6,1.8) node {\scriptsize $+$};
+    \draw[example] (8.6,1.0) node {\scriptsize $2$};
+    \draw[example] (9.0,1.4) node {\scriptsize $*$};
+    \draw[example] (9.4,1.0) node {\scriptsize $x$};
+    \draw[->, example] (8.5,1.7) -- (8.3,1.5);
+    \draw[->, example] (8.7,1.7) -- (8.9,1.5);
+    \draw[->, example] (8.9,1.3) -- (8.7,1.1);
+    \draw[->, example] (9.1,1.3) -- (9.3,1.1);
+    
+  \end{tikzpicture}
+\end{frame}
+
+\endgroup

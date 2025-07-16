@@ -1,0 +1,54 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage des expressions rationnelles}
+  
+  Soit $\Sigma$ un alphabet. \\
+  Les \structure{expressions rationnelles} sur $\Sigma$
+  sont des \textit{expressions}, donc des mots, sur l'alphabet
+  $\tilde{\Sigma} = \Sigma \sqcup \{
+  \text{`\example{\underline{$\emptyset$}}'},
+  \text{`\example{\underline{$\varepsilon$}}'},
+  \text{`\example{\underline{$($}}'},
+  \text{`\example{\underline{$)$}}'},
+  \text{`\example{\underline{$|$}}'},
+  \text{`\example{\underline{$\cdot$}}'},
+  \text{`\example{\underline{${}^\star$}}'}
+  \}$ \footnote[frame, 1]{$\sqcup$ désigne l'union disjointe. Parfois, on note $0$, $1$, $+$ et $\times$ au lieu de $\emptyset$, $\varepsilon$, $|$ et $\cdot$}.
+
+  L'ensemble des expressions rationnelles sur $\Sigma$ forme le langage $\alert{\textsc{regex}_\Sigma}$ définie
+  récursivement de la façon suivante.
+
+  \begin{block}{Définition --- Expression rationnelle}
+    \alert{$\textsc{regex}_\Sigma$} est le \alert{plus petit sous-ensemble}\footnote[frame,2]{Au sens de l'inclusion} de $\tilde{\Sigma}^\star$ tel que
+
+    \vspace{1mm}
+    \begin{tabular}{rlrl}
+      \vspace{.5mm}\structure{\myRec}& &$\text{``\example{\underline{$\emptyset$}}''} \alert{\in \textsc{regex}_\Sigma}$\\
+      \vspace{.5mm}\structure{\myRec} & &$\text{``\example{\underline{$\varepsilon$}}''} \alert{\in \textsc{regex}_\Sigma}$\\
+      \vspace{.5mm}\structure{\myRec} & $\forall \structure{a}\in \Sigma$&\alert{$\structure{a} \in \textsc{regex}_\Sigma$}\\
+      \vspace{.5mm}\structure{\myRec}& $\forall \structure{u}, \structure{v} \in \textsc{regex}_\Sigma$&
+      $\text{``\example{\underline{$($}}''} \cdot \structure{u} \cdot \text{``\example{\underline{$|$}}''} \cdot \structure{v} \cdot \text{``\example{\underline{$)$}}''}
+      \alert{\in \textsc{regex}_\Sigma}$
+      & \example{par ex. $(a|b)$}\\
+      \vspace{.5mm}\structure{\myRec}& $\forall \structure{u}, \structure{v} \in \textsc{regex}_\Sigma$&
+      $\text{``\example{\underline{$($}}''} \cdot \structure{u} \cdot \text{``\example{\underline{$\cdot$}}''} \cdot \structure{v} \cdot \text{``\example{\underline{$)$}}''}
+      \alert{\in \textsc{regex}_\Sigma}$
+      & \example{par ex. $(a\cdot (b | a))$}\\
+      \vspace{.5mm}\structure{\myRec}& $\forall \structure{u} \in \textsc{regex}_\Sigma$&
+      $\structure{u} \cdot \text{``\example{\underline{${}^\star$}}''} \alert{\in \textsc{regex}_\Sigma}$
+      & \example{par ex. $(a|b)^\star$}\\
+    \end{tabular}
+  \end{block}
+
+  On donnera une définition plus propre dans le chapitre suivant (page \ref{slide:grammaireRegex}). 
+\end{frame}
+
+
+\endgroup

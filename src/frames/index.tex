@@ -1,0 +1,236 @@
+
+\part{Introduction}
+ 
+ 
+\section{Présentation du module}
+ 
+\subsection{Généralités} 
+\input{languages/introduction/generalities/objectives}
+\input{languages/introduction/generalities/bibliography}
+\input{languages/introduction/generalities/definitions}
+ 
+\subsection{Exemples de langages}
+ 
+\input{languages/introduction/examples/natural_language}
+\input{languages/introduction/examples/programming_language}
+\input{languages/introduction/examples/compiler}
+\input{languages/introduction/examples/primality}
+\input{languages/introduction/examples/problem}
+\input{languages/introduction/examples/real_numbers}
+\input{languages/introduction/examples/hierarchy}
+ 
+\subsection{Objectifs du cours}
+\input{languages/introduction/summary/summary}
+ 
+\section{Rappels logiques et mathématiques}
+ 
+\subsection{Logique du premier ordre}
+\input{languages/maths/logics/predicates}
+\input{languages/maths/logics/operators}
+ 
+\subsection{Notion d'ensembles}
+\input{languages/maths/sets/sets}
+\input{languages/maths/sets/subsets}
+\input{languages/maths/sets/comprehension}
+\input{languages/maths/sets/extensionality}
+\input{languages/maths/sets/operations_1}
+\input{languages/maths/sets/operations_2}
+ 
+\subsection{Relations}
+\input{languages/maths/relations/pairs}
+\input{languages/maths/relations/relations}
+\input{languages/maths/relations/homogeneity}
+\input{languages/maths/relations/order}
+\input{languages/maths/relations/equivalence}
+\input{languages/maths/relations/congruence}
+ 
+\subsection{Fonctions}
+\input{languages/maths/functions/functions}
+\input{languages/maths/functions/bijections}
+ 
+\subsection{Récurrence}
+\input{languages/maths/induction/weak}
+\input{languages/maths/induction/strong}
+ 
+\section{Mots et langages formels}
+ 
+\subsection{Notion d'alphabet}
+\input{languages/languages/alphabet/alphabet}
+ 
+\subsection{Notion de mot}
+\input{languages/languages/word/word}
+\input{languages/languages/word/length}
+\input{languages/languages/word/concatenation}
+\input{languages/languages/word/monoid}
+\input{languages/languages/word/decomposition}
+\input{languages/languages/word/order}
+ 
+\subsection{Notion de langage}
+\input{languages/languages/language/language}
+\input{languages/languages/language/operations}
+\input{languages/languages/language/algebra}
+ 
+ 
+\part{Analyse Lexicale}
+ 
+ 
+\section{Langages et expressions rationnels}
+ 
+\subsection{Introduction}
+\input{lexing/regexp/introduction/introduction}
+\input{lexing/regexp/introduction/example}
+\input{lexing/regexp/introduction/regexp}
+ 
+\subsection{Expressions rationnelles}
+\input{lexing/regexp/regexp/syntax}
+\input{lexing/regexp/regexp/semantics}
+\input{lexing/regexp/regexp/sugar}
+ 
+\subsection{Langages rationnels}
+\input{lexing/regexp/languages/definition}
+\input{lexing/regexp/languages/example}
+\input{lexing/regexp/languages/equivalence1}
+\input{lexing/regexp/languages/equivalence2}
+ 
+\subsection{Définitions rationnelles}
+\input{lexing/regexp/definitions/example}
+\input{lexing/regexp/definitions/definition}
+ 
+\section{Automates finis}
+ 
+\subsection{Reconnaissance d'un langage rationnel}
+\input{lexing/automata/introduction/plan}
+\input{lexing/automata/introduction/lexer}
+\input{lexing/automata/introduction/datastructure}
+\input{lexing/automata/introduction/goal}
+ 
+\subsection{Définition des automates finis}
+\input{lexing/automata/definition/non_determinism}
+\input{lexing/automata/definition/interpretation}
+\input{lexing/automata/definition/modelisation}
+\input{lexing/automata/definition/example}
+\input{lexing/automata/definition/deterministic_complete}
+ 
+\subsection{Langage reconnu par un automate}
+\input{lexing/automata/recognition/configuration}
+\input{lexing/automata/recognition/between_language}
+\input{lexing/automata/recognition/accepted}
+\input{lexing/automata/recognition/equivalence}
+\input{lexing/automata/recognition/right_language}
+\input{lexing/automata/recognition/left_language}
+\input{lexing/automata/recognition/pruned}
+\input{lexing/automata/recognition/pruning}
+ 
+\subsection{Des automates aux expressions rationnelles}
+\input{lexing/automata/arden/language}
+\input{lexing/automata/arden/equations}
+\input{lexing/automata/arden/arden}
+\input{lexing/automata/arden/proof}
+\input{lexing/automata/arden/solution}
+\input{lexing/automata/arden/application}
+ 
+\section{Des expressions rationnelles aux automates}
+ 
+\subsection{Génération d'un automate fini non-déterministe}
+\input{lexing/generation/thompson/plan}
+\input{lexing/generation/thompson/generation}
+\input{lexing/generation/thompson/normalised}
+\input{lexing/generation/thompson/normalisation}
+\input{lexing/generation/thompson/thompson}
+\input{lexing/generation/thompson/example}
+ 
+\subsection{Déterminisation d'un automate fini}
+\input{lexing/generation/determinisation/plan}
+\input{lexing/generation/determinisation/equivalence}
+\input{lexing/generation/determinisation/interpretation}
+\input{lexing/generation/determinisation/algorithm}
+ 
+\subsection{Minimisation d'un automate fini déterministe}
+\input{lexing/generation/minimisation/plan}
+\input{lexing/generation/minimisation/minimality}
+\input{lexing/generation/minimisation/example}
+\input{lexing/generation/minimisation/ideas}
+\input{lexing/generation/minimisation/moore}
+\input{lexing/generation/minimisation/example2}
+\input{lexing/generation/minimisation/equivalence}
+\input{lexing/generation/minimisation/conclusion}
+ 
+\section{Expressivité des langages rationnels}
+ 
+\subsection{Stabilité du formalisme}
+\input{lexing/limits/stability/complement}
+\input{lexing/limits/stability/intersection}
+\input{lexing/limits/stability/mirror}
+ 
+\subsection{Lemme de l'étoile}
+\input{lexing/limits/pumping/pumping}
+\input{lexing/limits/pumping/proof}
+\input{lexing/limits/pumping/example}
+\input{lexing/limits/pumping/example2}
+ 
+ 
+\part{Analyse Syntaxique}
+ 
+ 
+\section{Langages algébriques}
+ 
+\subsection{Introduction}
+\input{parsing/algebraic/introduction/french}
+\input{parsing/algebraic/introduction/regexp}
+ 
+\subsection{Grammaires algébriques}
+\input{parsing/algebraic/grammars/model}
+\input{parsing/algebraic/grammars/example}
+\input{parsing/algebraic/grammars/derivation}
+\input{parsing/algebraic/grammars/language}
+\input{parsing/algebraic/grammars/examples}
+ 
+\subsection{Structure arborescente des langages algébriques}
+\input{parsing/algebraic/tree/cst}
+\input{parsing/algebraic/tree/ast}
+\input{parsing/algebraic/tree/ambiguity}
+\input{parsing/algebraic/tree/rational}
+ 
+\subsection{Algorithmes de décision}
+\input{parsing/algebraic/decision/strategy}
+\input{parsing/algebraic/decision/CNF}
+\input{parsing/algebraic/decision/CNF_transform}
+\input{parsing/algebraic/decision/CYK}
+ 
+\subsection{Grammaires rationnelles}
+\input{parsing/algebraic/regular/theorem}
+\input{parsing/algebraic/regular/right_linear}
+\input{parsing/algebraic/regular/transformation}
+\input{parsing/algebraic/regular/equivalence}
+\input{parsing/algebraic/regular/left_linear}
+\input{parsing/algebraic/regular/formalisms}
+\input{parsing/algebraic/regular/generalisation}
+ 
+\subsection{Limites des langages algébriques}
+\input{parsing/algebraic/limits/pumping}
+\input{parsing/algebraic/limits/proof}
+\input{parsing/algebraic/limits/example}
+ 
+\section{Hiérarchie de Chomsky}
+ 
+\subsection{Grammaires non-restreintes}
+\input{parsing/chomsky/grammars/introduction}
+\input{parsing/chomsky/grammars/general}
+\input{parsing/chomsky/grammars/language}
+\input{parsing/chomsky/grammars/graph}
+ 
+\subsection{Langages contextuels}
+\input{parsing/chomsky/contextual/definition}
+\input{parsing/chomsky/contextual/example}
+\input{parsing/chomsky/contextual/inclusion}
+ 
+\subsection{Décision d'un langage contextuel}
+\input{parsing/chomsky/decision/introduction}
+\input{parsing/chomsky/decision/brute_force}
+\input{parsing/chomsky/decision/termination}
+ 
+\subsection{Hiérarchie de Chomsky}
+\input{parsing/chomsky/hierarchy/grammars}
+\input{parsing/chomsky/hierarchy/languages}
+\input{parsing/chomsky/hierarchy/decidability}
+\input{parsing/chomsky/hierarchy/hierarchy}

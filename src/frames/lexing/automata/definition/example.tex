@@ -1,0 +1,82 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple : $(a^+ | b^+) c^\star$}
+  \vspace{-3mm}
+  \begin{block}{Représentation mathématique}
+    \vspace{-7mm}
+    $$\begin{array}{lccl}
+      \text{\structure{alphabet}} & \Sigma & = & \{a, b, c\}\\
+      \text{\structure{états}} & Q & = & \{s_1, s_2, s_3, s_4, s_5\}\\
+      \text{\structure{états initiaux}} & I & = & \{s_1, s_4\}\\
+      \text{\structure{états finaux}} & F & = & \{s_3\}\\
+      \text{\structure{transitions}} & \mu & = & \left\{ \begin{array}{lll}
+        
+        \langle s_1, a, s_1 \rangle,&
+        \langle s_1, a, s_2 \rangle,&
+        \langle s_2, a, s_2 \rangle,\\
+
+        \langle s_4, b, s_5 \rangle,&
+        \langle s_4, b, s_4 \rangle,&
+        \langle s_5, b, s_5 \rangle,\\
+
+        \langle s_2, \varepsilon, s_3 \rangle,&
+        \langle s_5, \varepsilon, s_3 \rangle,&
+        \langle s_3, c, s_3 \rangle
+      \end{array}\right\}\\
+    \end{array}$$
+  \end{block}
+  \vspace{-3mm}
+
+  \noindent\begin{minipage}{.49\textwidth}
+  \begin{block}{Représentation graphique}
+    %    \centering
+    \scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \node [state,initial, initial text=] (s1)   {$s_1$}; 
+        \node [state] (s2) [right=of s1]  {$s_2$}; 
+
+        \node [state,initial, initial text=] (s4) [below=of s1]  {$s_4$}; 
+        \node [state=] (s5) [right=of s4]  {$s_5$}; 
+
+        \node [state,accepting] (s3) [right=of s2]  {$s_3$}; 
+
+        \path [->]    (s1) edge node[above] {a} (s2);
+        \path [->]    (s1) edge[loop above, looseness=5] node {a} (s1);
+        \path [->]    (s2) edge[loop above, looseness=5] node {a} (s2);
+
+        \path [->]    (s4) edge node[above] {b} (s5);
+        \path [->]    (s4) edge[loop below, looseness=5] node {b} (s4);
+        \path [->]    (s5) edge[loop below, looseness=5] node {b} (s5);
+
+        \path [->]    (s3) edge[loop right, looseness=5] node {c} (s3);
+
+        \path [->]    (s2) edge node {$\varepsilon$} (s3);
+        \path [->]    (s5) edge node {$\varepsilon$} (s3);
+    \end{tikzpicture}}
+  \end{block}
+  \end{minipage}\begin{minipage}{.49\textwidth}
+    \begin{block}{Représentation matricielle}
+      \begin{tabular}{|l|c|c|c|c|}
+        \hline
+        & \multicolumn{4}{c|}{\textbf{Entrée}}\\
+        \hline
+        \textbf{\'Etat} & $a$ & $b$ & $c$ & $\varepsilon$ \\
+        \hline
+        $s_1$ i& $s_1$, $s_2$ &  & & \\
+        $s_2$ & $s_2$ &  &  & $s_3$ \\
+        $s_3$ f&  &  & $s_3$ & \\
+        $s_4$ i& &$s_4$, $s_5$  & & \\
+        $s_5$ &  & $s_5$ & &$s_3$ \\
+        \hline
+      \end{tabular}
+    \end{block}
+  \end{minipage}
+\end{frame}
+
+\endgroup

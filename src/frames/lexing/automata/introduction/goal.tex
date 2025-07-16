@@ -1,0 +1,78 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Génération d'analyseur lexical}
+    \vspace{-2mm}
+  \begin{block}{Problème}
+    \vspace{-2mm}
+    \begin{description}
+    \item[Entrée :] une expression rationnelle $r$
+    \item[Sortie :] un \alert{analyseur lexical} pour le langage $\mathcal{S}(r)$
+      \begin{itemize}
+      \item Programme qui décide si son entrée appartient à $\mathcal{S}(r)$
+      \end{itemize}
+    \end{description}
+  \end{block}
+  
+  \centering
+  \scalebox{.9}{\begin{tikzpicture}
+
+      \draw[white] (-1.8,2.5) rectangle (9.8,6.2);
+      
+      \draw[rounded corners, structure,fill=structure!20] (0,5) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Expression\\ rationnelle \end{tabular}};
+      \draw[rounded corners, structure,fill=structure!20] (8,5) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Analyseur\\ lexical \end{tabular}};
+      \draw<2>[rounded corners, structure,fill=structure!20] (0,3) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Automate fini\\ non-déterministe \end{tabular}};
+      \draw[rounded corners, alert,fill=alert!20] (4,3) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Automate fini\\ déterministe \end{tabular}};
+      \draw<2>[rounded corners, structure,fill=structure!20] (8,3) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Automate fini\\ minimal \end{tabular}};
+      
+      \draw[dashed, -latex] (1.2,5) -- (6.8,5);
+      \draw<2>[-latex] (0,4.5) -- (0,3.5);
+      \draw<2>[-latex] (1.2,3) -- (2.8,3);
+      \draw<2>[-latex] (5.2,3) -- (6.8,3);
+      \draw<2>[-latex, alert] (8,3.5) -- (8,4.5);
+
+      \mode<beamer>{
+        \draw<1>[-latex, alert, rounded corners] (0,4.5) -- (0,3) -- (2.8,3);
+        \draw<1>[-latex, structure, rounded corners] (5.2,3) -- (8,3) -- (8,4.5);
+        
+        \draw<1>[alert] (1.5,3) node[above]{??};
+        \draw<1>[structure] (6.5,3) node[above]{Transcription};
+      }
+      
+      \draw[example] (0,5.5) node[above]{$a (b|c)^\star$};
+      \draw[example] (8,5.5) node[above]{$abc \rightarrow \cmark$, $bac \rightarrow \xmark$ };
+
+      \draw<2> (0,4.1) node[right]{\tiny Algorithme de};
+      \draw<2> (0,3.9) node[right]{\tiny Thompson};
+
+      \draw<2> (2,3.15) node{\tiny Sous-ensembles de};
+      \draw<2> (2,2.85) node{\tiny Rabin \& Scott};
+
+      \draw<2> (6,3.15) node{\tiny Méthode de};
+      \draw<2> (6,2.85) node{\tiny Moore};
+
+      \draw<2>[alert] (8,4) node[left]{\tiny Transcription};
+  \end{tikzpicture}}
+
+  \pause
+  \vspace{2mm}
+  \begin{block}{Nécessité de monter en abstraction}
+    \begin{itemize}
+    \item Notion d'automate non-déterministe
+    \end{itemize}
+  \end{block}
+
+  
+\end{frame}
+
+
+
+
+\endgroup

@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Stabilité par miroir}
+  \small
+  \vspace{-1mm}
+  Soient $\Sigma$ un alphabet, $u \in \Sigma^\star$ un mot, et $L \in \mathscr{P}(\Sigma^\star)$ un langage.
+
+  \begin{block}{Définition -- Miroir}
+    \begin{itemize}
+    \item \vspace{-1mm}Le miroir d'un mot $u$ est $u^{\textsc{r}} = u[|u|]\cdots u[1]$.
+    \item \vspace{-1mm}Le miroir d'un langage $L$ est $(L)^{\textsc{r}} = \{u^{\textsc{r}} | u \in L\}$.
+    \end{itemize}
+  \end{block}
+  
+  \vspace{-2mm}
+  \begin{alertblock}{Théorème -- Stabilité par miroir}
+    Les langages rationnels sont stables par miroir : $\alert{\forall L \in \textsc{rat}_\Sigma, L^{\textsc{r}} \in \textsc{rat}_\Sigma}.$
+  \end{alertblock}
+
+  \begin{minipage}[t]{.5\textwidth}
+    \structure{Preuve : Expressions rationnelles}
+
+    \vspace{3mm}
+    $m \eqdef \left\{\begin{array}{rcl}
+      \textsc{reg}_\Sigma & \rightarrow & \textsc{reg}_\Sigma\\
+      a & \mapsto & a\\
+      u | v & \mapsto & m(u) | m(v)\\
+      u \cdot v & \mapsto & m(v) \cdot m(u)\\
+      u^\star & \mapsto & m(u)^\star\\
+      \end{array}\right.$
+
+    $\forall u \in \textsc{reg}_\Sigma, \mathcal{L}(m(u)) = (\mathcal{L}(u))^{\textsc{r}}$
+    
+    \vspace{3mm}\example{Exemple :}\\ $(ab^\star | ba^\star)^{\textsc{r}} = b^\star a | a^\star b$
+      
+  \end{minipage}%
+  \begin{minipage}[t]{.5\textwidth}
+    \structure{Preuve : Automates}
+
+        \vspace{3mm}
+Soit $A = \langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
+
+      Posons $\mu' = \{\langle q', a, q  \rangle | \langle q, a, q'  \rangle \in \mu\}$.
+
+      On a $\mathcal{L}(\langle \Sigma, Q, F, I, \mu' \rangle) = (\mathcal{L}(A))^{\textsc{r}}.$
+
+
+      \vspace{3mm}\example{Exemple :}
+      
+      \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \node [state, initial above, initial text=] (S)                     {$S$}; 
+          \node [state, accepting]              (A) [left=of S]  {$A$}; 
+          \node [state, accepting]              (B) [right=of S]  {$B$}; 
+          \path [->]    (S) edge node [above] {$a$} (A);
+          \path [->]    (S) edge node [above] {$b$} (B);
+          \path [->]    (A) edge[loop below, looseness=5] node {$a$} (A);
+          \path [->]    (B) edge[loop below, looseness=5] node {$b$} (B);
+
+          \node [state, initial above, initial text=]              (A2) [right=of B]  {$A$}; 
+          \node [state, accepting]                                 (S2) [right=of A2] {$S$}; 
+          \node [state, initial above, initial text=]              (B2) [right=of S2] {$B$}; 
+          \path [->]    (A2) edge node [above] {$a$} (S2);
+          \path [->]    (B2) edge node [above] {$b$} (S2);
+          \path [->]    (A2) edge[loop below, looseness=5] node {$a$} (A2);
+          \path [->]    (B2) edge[loop below, looseness=5] node {$b$} (B2);
+      \end{tikzpicture}}
+  \end{minipage}
+\end{frame}
+\endgroup

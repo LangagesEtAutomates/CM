@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Retour sur les expressions rationnelles}
+  \begin{block}{Rappel -- Définition des expressions rationnelles}
+    Soit $\Sigma$ un alphabet, et $\tilde{\Sigma} = \Sigma \sqcup \{ \emptyset, \varepsilon, (, ), |, \cdot, {}^\star \}.$
+
+    \alert{$\textsc{reg}_\Sigma$} est le plus petit sous-ensemble de $\tilde{\Sigma}^\star$ tel que, \\
+
+    \vspace{5mm}
+    \begin{minipage}{.5\textwidth}
+      $\forall a\in \Sigma, \forall u, v \in \textsc{reg}_\Sigma$,
+
+      \vspace{2mm}
+      $\begin{array}{lll}
+        \vspace{1mm}\structure{\myRec} & \emptyset     & \in \textsc{reg}_\Sigma\\
+        \vspace{1mm}\structure{\myRec} & \varepsilon   & \in \textsc{reg}_\Sigma\\
+        \vspace{1mm}\structure{\myRec} & a             & \in \textsc{reg}_\Sigma\\
+        \vspace{1mm}\structure{\myRec} & ( u | v )     & \in \textsc{reg}_\Sigma\\
+        \vspace{1mm}\structure{\myRec} & ( u \cdot v ) & \in \textsc{reg}_\Sigma\\
+        \vspace{1mm}\structure{\myRec} & u^\star        & \in \textsc{reg}_\Sigma\\
+      \end{array}$
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+      \structure{Présentation comme une grammaire :}
+      
+      \vspace{2mm}
+      $\left\{\begin{array}{llll}
+      \vspace{1mm}\text{Reg} &\rightarrow& \emptyset \\
+      \vspace{1mm}\text{Reg} &\rightarrow& \varepsilon \\
+      \vspace{1mm}\text{Reg} &\rightarrow& a & \forall a\in \Sigma \\
+      \vspace{1mm}\text{Reg} &\rightarrow& (\text{Reg} | \text{Reg}) \\
+      \vspace{1mm}\text{Reg} &\rightarrow& (\text{Reg} \cdot \text{Reg}) \\
+      \vspace{1mm}\text{Reg} &\rightarrow& \text{Reg}^\star \\
+      \end{array}\right.$
+    \end{minipage}%
+  \end{block}
+\end{frame}
+
+\endgroup

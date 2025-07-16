@@ -1,0 +1,33 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+\begin{frame}{Langage}
+  Soit $\Sigma$ un alphabet.
+
+  \begin{block}{Langage}
+    \begin{itemize}
+    \item Un \structure{langage} sur $\Sigma$ est un sous-ensemble de $\Sigma^\star$.
+    \item Ainsi, \structure{l'ensemble des langages} sur $\Sigma$ est \alert{$\mathscr{P}(\Sigma^\star)$}.
+    \item Par compréhension, un langage représente un prédicat.
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Exemples de langages}
+    \begin{itemize}
+    \item \example{Langage vide :} $\emptyset \in \mathscr{P}(\Sigma^\star)$
+    \item \example{Langage neutre :} $\{\varepsilon\} \in \mathscr{P}(\Sigma^\star)$
+    \item Un \example{langage fini} est un ensemble fini de mots (\example{ex :} lexique français)
+    \item Un \example{langage infini} est un langage qui n'est pas fini
+\item $\forall n\in \mathbb{N}, \Sigma^n \in \mathscr{P}(\Sigma^\star)$
+    \item $\{ u \in \Sigma^\star | u[1] = a\} \in \mathscr{P}(\Sigma^\star)$, ...
+    \end{itemize}
+
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

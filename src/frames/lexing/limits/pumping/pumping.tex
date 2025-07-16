@@ -1,0 +1,51 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Lemme de l'étoile}
+
+  \vspace{-2mm}
+  \begin{block}{Question -- Expressivité des expressions rationnelles}
+    \vspace{-2mm}
+    \begin{itemize}
+    \item On sait que $\structure{\textsc{rat}_\Sigma = \textsc{req}_\Sigma \varsubsetneq \mathscr{P}(\Sigma^\star)}$
+    \item Exemple de langage qui n'est pas rationnel ? 
+    \item Comment montrer qu'un langage $L$ n'est pas rationnel ? 
+      \begin{enumerate}
+      \item Si $L$ était rationnel, il vérifierait le \structure{lemme de l'étoile} 
+      \item Or, $L$ ne vérifie pas le \structure{lemme de l'étoile} 
+      \item Donc, par l'absurde, $L$ ne peut pas être rationnel
+      \end{enumerate}
+    \end{itemize}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{alertblock}{Lemme -- Lemme de l'étoile (ou de pompage, ou d'itération)\footnote[frame, 1]{\scriptsize Y. Bar-Hillel, M. Perles, E. Shamir. \textit{On formal properties of simple phrase structure grammars.} 1961}}
+    \vspace{-1mm}
+    Soit $\Sigma$ un alphabet, et $L\in \textsc{rat}_\Sigma$ un langage rationnel sur $\Sigma$.
+
+    \vspace{-5mm}
+    $$
+    \begin{array}{c}
+      \exists N\in \mathbb{N}, \forall u\in L, |u| \ge N \Rightarrow
+      \begin{array}[t]{rl}
+        \exists x, y, z\in \Sigma^\star, &u = x\cdot y \cdot z \\
+        \land& y\neq \varepsilon \\
+        \land& |xy| \le N\\
+        \land& \forall i \in \mathbb{N}, x\cdot y^i \cdot z \in L
+      \end{array}
+    \end{array}
+    $$
+
+    \vspace{-2mm}
+    $$\alert{\textsc{rat}_\Sigma \varsubsetneq \mathit{Etoile}_\Sigma \varsubsetneq \mathscr{P}(\Sigma^\star)}$$
+  \end{alertblock}
+\end{frame}
+
+
+\endgroup

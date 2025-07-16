@@ -1,0 +1,68 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Équivalence entre automates}
+  Soient $A = \langle \Sigma, Q, I, F, \mu \rangle$ et $B = \langle \Sigma, Q', I', F', \mu' \rangle$ deux automates. 
+  
+  \begin{block}{Définition -- Automates équivalents}
+    $A$ et $B$ sont \structure{équivalents}, noté $\alert{A \equiv B}$, s'ils acceptent le même langage :
+    $$\alert{A_1 \equiv A_2  \eqdef \mathcal{L}(A_1) = \mathcal{L}(A_2)}.$$
+  \end{block}
+  
+  \begin{block}{Définition -- Automates isomorphisme}
+    $A$ et $B$ sont \structure{isomorphes}, noté $\alert{A \simeq B}$, s'ils ne diffèrent que par le nom de leurs états, \textit{c.-à-d.}
+    s'il existe une fonction bijective $f : Q \rightarrow Q'$ telle que :
+
+    \vspace{2mm}
+    \hspace{5mm}$\structure{\begin{array}[t]{rcl}
+        \Sigma' &=& \Sigma\\
+        Q' &=& \{ f(q) | q\in Q\}\\
+        I' &=& \{f(q) | q\in I\}\\
+        F' &=& \{f(q) | q\in F\}\\
+        \mu' &=& \{ \langle f(q), a, f(q') \rangle | \langle q, a, q' \rangle \in \mu\}
+      \end{array}
+    }$
+
+    \vspace{2mm}
+    Deux automates isomorphes sont équivalents. 
+
+    \vspace{-30mm}\hspace\fill
+    \scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \draw[white] (-1,1) rectangle (4.5,-4);
+        
+        \node (0)              {};
+        \node (1) [right=of 0] {};
+        \node (2) [right=of 1] {};
+        \node (3) [below=of 0] {};
+        \node (4) [right=of 3] {$\simeq$};
+        \node (5) [right=of 4] {};
+        \node (6) [below=of 3] {};
+        \node (7) [right=of 6] {};
+        \node (8) [right=of 7] {};
+
+        \node[structure, fill=structure!20, state, initial, initial text=]       (a0) at (0) {$A$};
+        \node[structure, fill=structure!20, state, accepting]                    (a1) at (6) {$B$};
+
+        \node[example, fill=example!20, state, initial, initial text=] (b0) at (2) {$0$};
+        \node[example, fill=example!20, state, accepting]              (b1) at (8) {$1$};
+        
+        \path[structure, ->]     (a0) edge[bend right]              node[left]  {$a$} (a1);
+        \path[structure, ->]     (a1) edge[bend right]              node[right] {$a$} (a0);
+        \path[structure, ->]     (a1) edge[loop right, looseness=5] node        {$b$} (a1);
+        \path[structure, ->]     (a0) edge[loop right, looseness=5] node        {$b$} (a0);
+
+        \path[example, ->]  (b0) edge[bend right]              node[left]  {$a$} (b1);
+        \path[example, ->]  (b1) edge[bend right]              node[right] {$a$} (b0);
+        \path[example, ->]  (b1) edge[loop right, looseness=5] node        {$b$} (b1);
+        \path[example, ->]  (b0) edge[loop right, looseness=5] node        {$b$} (b0);
+    \end{tikzpicture}}
+  \end{block}
+\end{frame}
+
+\endgroup

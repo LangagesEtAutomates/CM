@@ -1,0 +1,32 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Statégie d'analyse syntaxique}
+  \begin{alertblock}{Question}
+    Étant donnés un mot $u$ et une grammaire $G$, est-ce que $u \in \mathcal{L}(G)$ ?
+  \end{alertblock}
+
+  \pause
+
+  \begin{block}{Algorithme Cocke-Younger-Kasami (CYK)}
+
+    \begin{description}
+    \item [Entrées]
+      \begin{itemize}
+      \item Une grammaire algébrique $G = \langle \Sigma, \Gamma, S, R \rangle$ \\ sous \structure{forme normale de Chomsky}
+      \item Un mot $u$
+      \end{itemize}
+
+    \item [Sortie :] Une réponse booléenne sur \structure{$u \in \mathcal{L}(G)$}
+
+    \item [Complexité :] $\mathcal{O}\left(|R| \times |u|^3 \right)$
+    \end{description}
+  \end{block}
+\end{frame}
+\endgroup

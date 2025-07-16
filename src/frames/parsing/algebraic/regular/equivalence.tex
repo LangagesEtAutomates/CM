@@ -1,0 +1,80 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Équivalence grammaires rationnelles / automates}
+  
+  \begin{block}{Théorème -- Générations des grammaires rationnelles}
+    Soit $\Sigma$ un alphabet et $L \in \mathscr{P}(\Sigma^\star)$ un langage. \\
+    $L$ est généré par une grammaire rationnelle droite ssi L est rationnel. 
+  \end{block}
+  
+  \uncover<2->{\structure{Démonstration :}}
+  
+  \begin{enumerate}
+  \item<2-> Supposons que \structure{$L$ rationnel}. $L$ est reconnu par un AFD $A = \langle \Sigma, Q, \{i\}, F, \mu \rangle$. 
+ 
+    Soit $R = \begin{array}[t]{rclcll}
+      & \{ & A \rightarrow aB &|& \langle A, a, B\rangle \in \mu & \}\\
+      \cup & \{ & A \rightarrow a\phantom{B} &|& \exists f\in F, \langle A, a, f\rangle \in \mu & \}.
+    \end{array}$\\
+    Alors \alert{$L$ est généré par la grammaire rationnelle droite $\langle \Sigma, Q, i, R \rangle$.}
+  \item<3-> Supposons que \structure{$L$ est généré par $G = \langle \Sigma, \Gamma, S, R \rangle$ rationnelle droite.}\\
+    Soient $F \notin \Gamma$ et $\mu = \begin{array}[t]{rclcll}
+      & \{ & \langle A, a, B\rangle &|& A \rightarrow aB \in R &\}\\
+      \cup & \{ & \langle A, a, F\rangle &|& A \rightarrow a\phantom{B} \in R &\}.
+    \end{array}$\\
+    Alors l'AFN $\langle \Sigma, \Gamma \cup \{F\}, \{S\}, \{F\}, \mu \rangle$ reconnaît $L$, donc \alert{$L$ rationnel}.
+  \end{enumerate}
+
+  
+ 
+  \uncover<2->{\example{Exemple :}}
+ 
+  \uncover<2->{%
+    \begin{minipage}{.2\textwidth}
+      \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \node [state, initial, initial text=] (S)                     {$S$}; 
+          \node [state, accepting]              (A) [above right=of S]  {$A$}; 
+          \node [state, accepting]              (B) [below right=of S]  {$B$}; 
+          \path [->]    (S) edge node {$a$} (A);
+          \path [->]    (S) edge node {$b$} (B);
+          \path [->]    (A) edge[loop right, looseness=5] node {$a$} (A);
+          \path [->]    (B) edge[loop right, looseness=5] node {$b$} (B);
+      \end{tikzpicture}}
+    \end{minipage}%
+    \begin{minipage}{.55\textwidth}
+      $$
+      \Rightarrow \hspace{3mm}
+      \left\{\begin{array}{rcl}
+      S & \rightarrow & aA | bB | a | b\\
+      A & \rightarrow & aA | a\\
+      B & \rightarrow & bB | b\\
+      \end{array}\right.
+      \hspace{3mm} \uncover<3->{\Rightarrow}
+      $$
+  \end{minipage}}%
+  \uncover<3->{%
+    \begin{minipage}{.25\textwidth}
+      \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+          \node [state, initial, initial text=] (S)                     {$S$}; 
+          \node [state]                         (A) [above right=of S]  {$A$}; 
+          \node [state]                         (B) [below right=of S]  {$B$}; 
+          \node [state, accepting]              (F) [below right=of A]  {$F$}; 
+          \path [->]    (S) edge node {$a$} (A);
+          \path [->]    (S) edge node {$b$} (B);
+          \path [->]    (A) edge node {$a$} (F);
+          \path [->]    (B) edge node {$b$} (F);
+          \path [->]    (S) edge node {$a, b$} (F);
+          \path [->]    (A) edge[loop right, looseness=5] node {$a$} (A);
+          \path [->]    (B) edge[loop right, looseness=5] node {$b$} (B);
+      \end{tikzpicture}}
+  \end{minipage}}
+
+\end{frame}
+\endgroup

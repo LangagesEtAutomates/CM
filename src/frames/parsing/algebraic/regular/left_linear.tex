@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaires linéaires et rationnelles gauches}
+  Soit \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique. 
+
+  \begin{block}{Définition -- Grammaire linéaire gauche}
+    On dit que $G$ est \structure{linéaire gauche} si tous les membres droits de ses règles
+    contiennent au plus un non-terminal, situé à gauche de tous les terminaux :
+    {\small $$
+      \structure{\forall r\in R, \exists a_1, ..., a_n \in \Sigma, \exists A, B \in \Gamma, r = \alert{A \rightarrow B a_1 ... a_n} \lor r = \alert{A \rightarrow a_1 ... a_n}}.
+      $$}
+  \end{block}
+  
+  \vspace{-2mm}
+  \begin{block}{Définition -- Grammaire rationnelle gauche}
+    On dit que $G$ est \structure{rationnelle gauche} si $G$ est linéaire gauche et tous les membres droits de ses règles
+    contiennent un unique terminal, ou sont $\varepsilon$ :
+    {\small $$
+      \structure{\forall r\in R, \exists a \in \Sigma, \exists A, B \in \Gamma, r = \alert{A \rightarrow B a} \lor r = \alert{A \rightarrow a} \lor r = \alert{A \rightarrow \varepsilon}}.
+      $$}
+  \end{block}
+  
+  \vspace{-2mm}
+  \begin{block}{Théorème}
+    Les grammaires rationnelles gauche génèrent les langages rationnels.
+    
+    \structure{preuve :} $\mathcal{L}(\langle \Sigma, \Gamma, S, \{ g \rightarrow d^{\textsc{r}} | g \rightarrow d \in R\} \rangle) = (\mathcal{L}(G))^{\textsc{r}}$.
+  \end{block}
+\end{frame}
+
+\endgroup

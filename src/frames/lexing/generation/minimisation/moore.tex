@@ -1,0 +1,47 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}[fragile]{Algorithme de Moore}
+  \begin{block}{Relation d'équivalence}
+      \vspace{-2mm}
+    Soit $\langle \Sigma, Q, I, F, \mu \rangle$ un automate, $P$ une partition de $Q$, $a\in \Sigma$ et $q, q' \in Q$. 
+    \begin{itemize}
+    \item On dit que $q$ et $q'$ sont \structure{équivalents}, noté $\alert{q \sim_S q'}$, si toutes leurs transitions sortantes mènent dans la même partie $E$ de $P$ : 
+      \vspace{-2mm}
+      $$\alert{q \sim_S q' \;  \eqdef \; \forall a \in \Sigma, \exists E \in P, \mu(q, a) \in E \land \mu (q', a) \in E}$$
+    \end{itemize}
+  \end{block}
+  
+  \begingroup
+  \renewcommand{\emph}[1]{\structure{#1}} 
+  \scalebox{1}{\begin{algorithm}[H]
+      \SetKwFunction{Moore}{moore}
+      \SetKwData{Input}{motif}
+      \SetKwFor{Pour}{pour}{faire}{fin pour}
+
+      \Fn{\Moore( $A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate ) : automate}{
+        $P \leftarrow \alert{\{F, Q\setminus F\}}$\;
+        \lTantque{$P \neq Q/_{\sim_{P}}$}{
+          $P \leftarrow Q/_{\sim_{P}}$%
+          \footnote[frame, 1]{
+            \structure{Rappels :} $[q]_{\sim_P}$ est la classe d'équivalence de $q$, et $Q/_{\sim_P}$ l'ensemble quotient de $Q$.\\
+            ~\hspace\fill
+            $[q]_{\sim_P} \eqdef \{q' \in Q \,|\, q \sim_P q' \} \hspace\fill Q/_{\sim_P} \eqdef \{[q]_{\sim_P} | q\in Q\}$
+            \hspace\fill~
+          }%
+        }
+        $I'\hspace{1.2mm} \leftarrow \{ E \in P | I \subseteq E\}$\;
+        $F' \leftarrow \{ E \in P | E \cap F \neq \emptyset \}$\;
+        $\mu' \leftarrow \{ \langle E , a, E' \rangle \in P \times \Sigma \times P | \exists q\in E, \exists q'\in E', \langle q, a, q' \rangle \in \mu\}$\;
+        \Retourner $\langle \Sigma, P, I', F', \mu' \rangle$\;
+      }
+    \end{algorithm}}
+    \endgroup
+\end{frame}
+\endgroup

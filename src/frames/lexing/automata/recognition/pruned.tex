@@ -1,0 +1,28 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automate émondé}
+  \begin{block}{Définition -- Propriétés des états}
+    Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN. Un état $q \in Q$ est dit
+    \begin{description}
+    \item[accessible] s'il peut être atteint à partir d'un état initial : \alert{$\mathcal{LG}_A(q) \neq \emptyset$}
+    \item[inaccessible] s'il n'est pas accessible
+    \item[co-accessible] si on peut atteindre un état final à partir de $q$ : \alert{$\mathcal{LD}_A(q) \neq \emptyset$}
+    \item[stérile] s'il n'est pas co-accessible
+    \item[utile] s'il est accessible et co-accessible
+    \item[inutile] s'il n'est pas utile
+    \end{description}
+  \end{block}
+  \begin{block}{Définition -- Automate émondé}
+    Un AFN est dit \structure{émondé} si tous ses états sont utiles. 
+  \end{block}
+\end{frame}
+
+
+\endgroup

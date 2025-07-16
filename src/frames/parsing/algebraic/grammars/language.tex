@@ -1,0 +1,31 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages algébriques}
+  Soit \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique. 
+
+  \begin{block}{Définitions -- Génération et langage engendré}
+    \begin{itemize}
+    \item On dit qu'un mot $u \in \Sigma^\star$ est \structure{généré} par $G$ s'il existe une dérivation $S \vdash^\star u$, appelée \structure{génération} de $u$. 
+    \item Le langage $\alert{\mathcal{L}(G)}$ des mots générés par $G$ est appelé le \structure{langage engendré} par $G$ :
+      $\alert{\mathcal{L}(G) = \{u\in\Sigma^\star | S \vdash^\star u \}}.$
+    \item Un langage est dit \structure{algébrique} s'il existe une grammaire algébrique qui l'engendre.
+    \item L'ensemble des langages algébriques sur $\Sigma$ est noté $\alert{\textsc{alg}_\Sigma}$.
+    \end{itemize}
+  \end{block}
+  \begin{exampleblock}{Exemple}
+    Soit \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{rcl} S &\rightarrow & aSb \,|\, B \\ B &\rightarrow & cB \,|\, \varepsilon \end{array}\right\} \right\rangle$}. On a :
+    \begin{itemize}
+    \item $aacbb \in \mathcal{L}(G)$, car $S \vdash aSb \vdash aaSbb \vdash aaBbb \vdash aacBbb \vdash aacbb$.
+    \item $\mathcal{L}(G) = \{a^n c^m b^n | n, m \in \mathbb{N}\}$ est algébrique. 
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

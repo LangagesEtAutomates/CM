@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automate normalisé}
+\small 
+  Soit $A = \langle \Sigma, Q, I, F, \mu\rangle$ un automate fini. 
+
+  \begin{block}{Définition -- Automate unitaire}
+    $A$ est dit \structure{unitaire} s'il ne possède qu'un seul état initial :
+    $\alert{\exists i \in Q, I = \{i\}}.$
+  \end{block}
+
+  \begin{block}{Définition -- Automate standard}
+    $A$ est dit \structure{standard} si :
+    \begin{enumerate}
+    \item il est \alert{unitaire}
+    \item aucune transition n'arrive sur l'état initial :
+    $\alert{\forall q\in Q, \forall a\in \Sigma, \langle q, a, i\rangle \notin \mu}.$
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{Définition -- Automate normalisé}
+    $A$ est dit \structure{normalisé} si :
+    \begin{enumerate}
+    \item il est \alert{standard}
+    \item il ne possède qu'un seul état final : $\alert{\exists f \in Q, F = \{f\}}.$
+    \item aucune transition n'a pour origine l'état final :
+    $\alert{\forall q\in Q, \forall a\in \Sigma, \langle f, a, q\rangle \notin \mu}.$
+    \end{enumerate}
+  \end{block}
+\end{frame}
+\endgroup

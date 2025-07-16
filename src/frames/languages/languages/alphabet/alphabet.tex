@@ -1,0 +1,36 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Alphabet}
+  Soit $n\in \mathbb{N}$. On note $\alert{\llbracket n\rrbracket \eqdef \{x\in \mathbb{N} \,|\, 1 \le x \le n\} = \{1, ..., n\}}$.
+  
+  \begin{block}{Définition -- alphabet}
+    Soit $E$ un ensemble.
+    \begin{itemize}
+    \item On dit que $E$ est \structure{fini} s'il existe $n\in \mathbb{N}$ et une bijection de $\llbracket n\rrbracket$ dans $E$. 
+    \item Si un tel $n$ existe, il est unique. 
+    \item $n$ est appelé le \structure{cardinal} de $E$, noté \alert{$|E|$}.
+    \item Un \alert{ensemble fini non-vide} est appelé un \structure{alphabet}. 
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Exemple}
+    $\{a, b, c\}$ est un alphabet de cardinal 3, d'après la bijection suivante :
+
+    $$
+    \left\{\begin{array}{ccl}
+    \llbracket 3\rrbracket &\rightarrow& \{a, b, c\}\\
+    1 &\mapsto& a\\ 
+    2 &\mapsto& b\\ 
+    3 &\mapsto& c\\ 
+    \end{array}\right.
+    $$
+  \end{exampleblock}
+\end{frame}
+\endgroup

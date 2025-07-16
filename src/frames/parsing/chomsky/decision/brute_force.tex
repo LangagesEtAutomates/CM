@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}[fragile]{Recherche ascendante par force brute}
+  
+  \small
+  \begin{tikzpicture}
+    
+    \fill<1>[rounded corners, alert!20] (-4.9,10.52) rectangle (-3.1,10.92);
+    \fill<2,3>[rounded corners, alert!20] (-4.4,9.75) rectangle (2.1,10.15);
+    \fill<4>[rounded corners, alert!20] (-1.9,10.15) rectangle (-0.5,10.55);
+    \fill<5>[rounded corners, alert!20] (-3.7,10.15) rectangle (-2.2,10.55);
+    \fill<4,5>[rounded corners, alert!20] (-3.5,8.85) rectangle (-2,9.25);
+    
+    \draw (0,10) node{\begin{minipage}{\textwidth}\begin{algorithm}[H]
+          \SetKwFunction{Forcebrute}{force\_brute}
+          \SetKwData{Old}{old}
+          \SetKwData{New}{etape}
+          \SetKwData{Vu}{union}
+          \Fn{\Forcebrute($G = \langle \Sigma, \Gamma, S, R \rangle$ : grammaire, $u$ : mot) : booléen}{
+            $\New \leftarrow \{u\}$;
+            $\Vu \leftarrow \New$\;
+            \Tantque{$\New \neq \emptyset \land S\notin \New$}{
+              $\New \leftarrow \{ v\in \Sigma^\star \,|\, \exists w \in \New, v \vdash w \} \setminus \Vu$\;
+              $\Vu \leftarrow \Vu \cup \New$\;
+            }
+            \Retourner $S \in \New$\;
+          }
+    \end{algorithm}\end{minipage}};
+
+    \draw<-5> (0,7.8) node{\begin{minipage}{\textwidth}\begin{exampleblock}{$abc \in L$}
+          {\footnotesize
+            $\begin{array}{lllllll}
+              \alert<1>{\{\alert<2>{ab}\structure<2>{c}\}} \uncover<2->{&\leftarrow & \{\alert<2>{aB}\structure<3>{c}, \alert<3>{ab}\structure<2>{C}\}}\uncover<3->{&\leftarrow& \{\alert<3>{aB}\structure<3>{C}\}} \\
+              \uncover<4->{& \leftarrow & \{aBX\} & \leftarrow & \{aCX\} & \leftarrow & \{aCB\} \\
+                & \leftarrow & \{\alert<4>{S}\} \\}
+            \end{array}$
+          }
+    \end{exampleblock}\end{minipage}};
+
+    \uncover<5>{
+      \draw (0,5.1) node{\begin{minipage}{\textwidth}\begin{exampleblock}{$abbc \notin L$}
+            {\footnotesize
+              $\begin{array}{lclcl}
+                \{abbc\} & \leftarrow & \{aBbc, abBc, abbC\} & \leftarrow & \{aBBc, aBbC, abBC\} \\
+                & \leftarrow & \{aBBC, abBX\} & \leftarrow & \{aBBX, abCX\} \\
+                & \leftarrow & \{aBCX, abCB\} & \leftarrow & \{aBXX, aBCB\} \\
+                & \leftarrow & \{aCXX, aBXB\} & \leftarrow & \{aCBX, aCXB\} \\
+                & \leftarrow & \{aCCX, aCBB\} & \leftarrow & \{aCCB, aCBB\} \\
+                & \leftarrow & \alert{\emptyset} \\
+              \end{array}$
+            }
+      \end{exampleblock}\end{minipage}};
+    }
+    \draw<-5>[example] (4,7.5) node{\begin{minipage}{3cm}
+        $\left\{\begin{array}{rcl}
+        S   & \rightarrow & aCB  \\
+        C B & \rightarrow & C X  \\
+        C X & \rightarrow & B X  \\
+        B X & \rightarrow & B C  \\
+        \alert<2,3>{a B} & \alert<2,3>{\rightarrow} & \alert<2,3>{a b}  \\
+        b B & \rightarrow & b b  \\
+        \structure<2,3>{C}   & \structure<2,3>{\rightarrow} & \structure<2,3>{c}
+        \end{array}\right.$
+    \end{minipage}};
+  \end{tikzpicture}
+\end{frame}
+
+\endgroup

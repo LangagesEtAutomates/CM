@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Stabilité par complémentaire}
+  Soit $\Sigma$ un alphabet.
+
+  \begin{block}{Théorème -- Stabilité par complémentaire}
+    Soit $L \in \textsc{rat}_\Sigma$. Alors $\overline{L} = \Sigma^\star \setminus L \in \textsc{rat}_\Sigma$. 
+  \end{block}
+
+  \pause
+  \begin{block}{Preuve}
+    \begin{itemize}
+    \item Il existe $A = \langle \Sigma, Q, I, F, \mu \rangle$ déterministe complet qui reconnaît $L$.
+    \item<3-> $\overline{A} = \langle \Sigma, Q, I, Q \setminus F, \mu \rangle$ reconnaît $\overline{L}$.
+    \end{itemize}
+  \end{block}
+  
+  \begin{exampleblock}{Exemple}
+
+    \centering
+    \begin{tabular}[t]{ccc}
+      $\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 1 [2] \}$ &&
+      \uncover<3->{$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 0 [2] \}$}\\
+      \scalebox{.75}{\begin{tikzpicture}
+          \node[state,initial, initial text=] (a) {$0$};
+          \node[state,accepting] (b) [right=of a] {$1$};
+          
+          \path[->]  (a) edge[bend right] node[below] {$a$} (b);
+          \path[->]  (b) edge[bend right] node[above] {$a$} (a);
+          \path[->]  (a) edge[loop above, looseness=5] node {$b$} (a);
+          \path[->]  (b) edge[loop above, looseness=5] node {$b$} (b);
+      \end{tikzpicture}} &&
+      \uncover<3->{\scalebox{.75}{\begin{tikzpicture}
+            \node[state,initial, initial text=,accepting] (a) {$0$};
+            \node[state] (b) [right=of a] {$1$};
+            
+            \path[->]  (a) edge[bend right] node[below] {$a$} (b);
+            \path[->]  (b) edge[bend right] node[above] {$a$} (a);
+            \path[->]  (a) edge[loop above, looseness=5] node {$b$} (a);
+            \path[->]  (b) edge[loop above, looseness=5] node {$b$} (b);
+      \end{tikzpicture}}}
+    \end{tabular}
+    
+  \end{exampleblock}
+\end{frame}
+\endgroup

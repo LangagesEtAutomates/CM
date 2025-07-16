@@ -1,0 +1,47 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Construction des expressions rationnelles}
+
+  Les expressions rationnelles sont construites par induction en utilisant :
+  \begin{description}
+  \item[$\emptyset$]
+    \begin{itemize}
+    \item Représente le langage vide $\emptyset$
+    \end{itemize}
+  \item[$\varepsilon$]
+    \begin{itemize}
+    \item Représente le langage neutre $\{\varepsilon\}$
+    \end{itemize}
+  \item[$a$] pour $a\in \Sigma$
+    \begin{itemize}
+    \item Représente le langage $\{a\}$
+    \end{itemize}
+  \item[$reg_1 \cdot reg_2$] pour $reg_1, reg_2$ des expressions rationnelles
+    \begin{itemize}
+    \item Représente le langage $L_1 \cdot L_2$, tel que $reg_1$ représente $L_1$ et $reg_2$ représente $L_2$ 
+    \end{itemize}
+  \item[$reg_1 | reg_2$] pour $reg_1, reg_2$ des expressions rationnelles
+    \begin{itemize}
+    \item Représente le langage $L_1 \cup L_2$, tel que $reg_1$ représente $L_1$ et $reg_2$ représente $L_2$ 
+    \end{itemize}
+  \item[$reg_1^\star$] pour $reg_1$ une expression rationnelle
+    \begin{itemize}
+    \item Représente le langage $L_1^\star$, tel que $reg_1$ représente $L_1$
+    \end{itemize}
+  \end{description}
+    \begin{itemize}
+    \item D'autres constructions peuvent être ajoutées ($reg_1^?$, $reg_1^+$...)
+    \end{itemize}
+
+\end{frame}
+
+
+\endgroup

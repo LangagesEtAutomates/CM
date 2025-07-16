@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Définitions rationnelles}
+  Soit $\Sigma$ un alphabet.
+  
+  \begin{block}{Définition -- Définition rationnelle}
+    Une \structure{définition rationnelle} est \alert{une suite de $n$ définitions} ($n \in \mathbb{N}$) de la forme \\
+    \hspace*{1cm} \alert{$d_i \rightarrow r_i$} \hspace{5mm} pour $i \in \llbracket n \rrbracket$, où :\\
+    \begin{itemize}
+    \item chaque \alert{$d_i$ est un nom distinct}, n'appartenant pas à $\tilde{\Sigma}^\star$
+    \item chaque \alert{$r_i$ est une expression rationnelle} sur $\Sigma \cup \{d_1, \ldots, d_{i-1}\}$
+    \end{itemize}
+  \end{block}
+
+  \textbf{Attention :} les definitions ne sont pas récursives
+
+  \begin{exampleblock}{Exemple de définition rationnelle}
+    \vspace{-1mm}
+    Le langage dont les mots sont les nombres décimaux
+
+    \vspace{3mm}
+    \begin{tabular}{rl}
+        \vspace{1mm}\example{Alphabet :} & $\{0,1,2,3,4,5,6,7,8,9,$`$,$'$\}$\\
+        \example{Définitions rationnelles :} &
+          $\left\{\begin{array}{lll}
+          DNZ&\rightarrow& 1|2|3|4|5|6|7|8|9\\
+          D  &\rightarrow& 0|DNZ\\
+          E  &\rightarrow& 0|DNZ\cdot D^\star\\
+          N  &\rightarrow& E|E,D^+
+          \end{array}\right.$
+      \end{tabular}
+  \end{exampleblock}
+
+\end{frame}
+
+
+
+\endgroup

@@ -1,0 +1,251 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Démonstration du lemme de pompage}
+  \small
+  \vspace{-3mm}
+  \begin{tikzpicture}
+    \draw (0,10) node[below]{\begin{minipage}{\textwidth}
+        \uncover<2->{
+          \structure{Soient $\Sigma$ un alphabet et $L\in \textsc{alg}_\Sigma$}.
+        }
+        
+        \uncover<6-|handout:2>{
+          $L$ est reconnu par une grammaire $\langle \Sigma, \Gamma, S, R \rangle$ en forme normale de Chomsky.
+          
+          \alert{Posons $N = 2^\Gamma + 1$}. \structure{Soit $u \in L$ tel que $|u| \ge N$}.
+
+          L'arbre de dérivation de $u$ est de hauteur $ \ge |\Gamma| + 1$, sans compter les feuilles.
+
+          Une branche passe deux fois par $T \in \Gamma$ dans les $|\Gamma| + 1$ derniers étages.
+
+          \alert{Posons $v, w, x, y, z$} tels que la dérivation de $u$ est $S \rightarrow^\star v T z \rightarrow^\star v w T y z \rightarrow^\star v w x y z$.
+
+          On a
+          \begin{enumerate}
+          \item \structure{$u = v\cdot w\cdot x \cdot y \cdot z$ :} par définition de $v, w, x, y, z$
+          \item \structure{$w\cdot y \neq \varepsilon$ :} $T \rightarrow^\star \varepsilon T \varepsilon$ est impossible en forme normale de Chomsky
+          \item \structure{$| w\cdot x \cdot y| \le N$ :} l'arbre de dérivation $T \rightarrow^\star w x y$ est de hauteur au plus $\Gamma$
+          \item \structure{$\forall i \in \mathbb{N}, v\cdot w^i \cdot x \cdot y^i \cdot z \in L$ :} il suffit d'appliquer $i$ fois $T \rightarrow^\star w T y$.
+          \end{enumerate}
+        }
+    \end{minipage}};
+
+    \mode<beamer>{
+      \draw<-5> (0,9.5) node[below]{\begin{minipage}{\textwidth}
+          \begin{center}
+            \tikz\draw[example] (0,0) -- (5,0);\\
+          \end{center}
+          \vspace{-5mm}
+          \begin{exampleblock}{Brouillon}
+            \example{On veut démontrer :}\\
+            $\uncover<1>{\structure{\forall\Sigma, \forall L\in \textsc{alg}_\Sigma,}} \alert<2>{\exists N\in \mathbb{N},} \forall u\in L, |u| \ge N \Rightarrow \exists v, w, x, y, z\in \Sigma^\star,$
+            $u = v\cdot w\cdot x \cdot y \cdot z \land w\cdot y \neq \varepsilon \land | w\cdot x \cdot y| \le N \land \forall i \in \mathbb{N}, v\cdot w^i \cdot x \cdot y^i \cdot z \in L$
+
+            \example{On sait :} \only<2->{$L\in \textsc{alg}_\Sigma$}
+
+            \only<2->{
+              \structure{Rappel :} Pour le lemme de l'étoile, $N$ venait du nombre d'états \alert{fini} dans l'automate.
+            }
+
+            \only<3>{
+              \structure{Idée 1 :}
+              \begin{itemize}
+              \item\vspace{-1mm} $L$ est reconnu par une grammaire $\langle \Sigma, \Gamma, S, R \rangle$, avec \alert{$|\Gamma|$ fini}.\\
+              \item\vspace{-1mm} Soit un arbre de dérivation avec \structure{au moins $|\Gamma|+1$ n\oe uds internes}.\\
+              \item\vspace{-1mm} Un non-terminal $T$ est utilisé au moins deux fois.
+              \end{itemize}
+            }
+            \only<4,5>{
+              \structure{Idée 2 :}
+              \begin{itemize}
+              \item\vspace{-1mm} $L$ est reconnu par une grammaire $\langle \Sigma, \Gamma, S, R \rangle$, avec \alert{$|\Gamma|$ fini}.\\
+              \item\vspace{-1mm} Soit un arbre de dérivation \structure{de hauteur au moins $|\Gamma|$} (plus 1 feuille).\\
+              \item\vspace{-1mm} Un non-terminal $T$ est utilisé au moins deux fois \alert{dans la même branche}.
+              \end{itemize}
+            }
+          \end{exampleblock}
+      \end{minipage}};
+
+      \uncover<3>{
+        \draw (-2.5,3.5) node{\begin{tikzpicture}
+            \fill[structure!20]  (10.0,10) -- ( 8.0,8) -- (12.0,8);
+            \fill[alert!20] ( 9.5, 9) -- ( 8.8,8) -- ( 9.6,8);
+            \fill[alert!20] (10.5, 9) -- (11.2,8) -- (10.4,8);
+
+            \draw (10,10) node{$S$};
+            \draw (9.5,9) node{$T$};
+            \draw (10.5,9) node{$T$};
+
+            \draw[dashed] ( 9.8,9.8) -- ( 8.0,8);
+            \draw[dashed] ( 9.9,9.8) -- ( 9.6,9.2);
+            \draw[dashed] (10.1,9.8) -- (10.4,9.2);
+            \draw[dashed] (10.2,9.8) -- (12.0,8);
+
+            \draw[dashed] ( 9.37,8.8) -- ( 8.8,8);
+            \draw[dashed] ( 9.52,8.8) -- ( 9.6,8);
+
+            \draw[dashed] (10.48,8.8) -- (10.4,8);
+            \draw[dashed] (10.63,8.8) -- (11.2,8);
+
+            \draw ( 8.5,8.1) node{$v$};
+            \draw ( 9.25,8.1) node{$w$};
+            \draw (10.0,8.1) node{$x$};
+            \draw (10.75,8.1) node{$y$};
+            \draw (11.5,8.1) node{$z$};
+
+            \draw (10,7.5) node{$v y x w z \in L$...};
+        \end{tikzpicture}};
+      }
+
+      \uncover<3>{
+        \draw (2.5,3.5) node{\begin{tikzpicture}
+
+            \fill[structure!20]  (10.0,10.00) -- ( 8.0,8.00) -- (12.0,8.00);
+            \fill[alert!20] (10.0, 9.33) -- ( 8.8,8.00) -- (11.2,8.00);
+            \fill[structure!20]  (10.0, 8.66) -- ( 9.6,8.00) -- (10.4,8.00);
+
+            \draw (10,10) node{$S$};
+            \draw (10,9.33) node{$T$};
+            \draw (10,8.66) node{$T$};
+
+            \draw[dashed] (10.0,9.8 ) -- (10.0,9.53);
+            \draw[dashed] (10.0,9.13) -- (10.0,8.86);
+            
+            \draw[dashed] ( 9.800,9.80) -- ( 8.0,8);
+            \draw[dashed] ( 9.800,9.13) -- ( 8.8,8);
+            \draw[dashed] ( 9.875,8.46) -- ( 9.6,8);
+            \draw[dashed] (10.125,8.46) -- (10.4,8);
+            \draw[dashed] (10.200,9.13) -- (11.2,8);
+            \draw[dashed] (10.200,9.80) -- (12.0,8);
+
+            \draw ( 8.5,8.1) node{$v$};
+            \draw ( 9.25,8.1) node{$w$};
+            \draw (10.0,8.1) node{$x$};
+            \draw (10.75,8.1) node{$y$};
+            \draw (11.5,8.1) node{$z$};
+
+            \draw (10,7.5) node{$\forall i\in \mathbb{N}, S \rightarrow v T z \rightarrow v w^i x y^i z$};
+            
+        \end{tikzpicture}};
+      }    
+
+      \uncover<4,5>{
+        \draw (-2.7,3.5) node{\begin{tikzpicture}
+
+            \fill[structure!20]  (10.0,10.00) -- ( 8.0,8.00) -- (12.0,8.00);
+            \fill[alert!20] (10.0, 9.33) -- ( 8.8,8.00) -- (11.2,8.00);
+            \fill[structure!20]  (10.0, 8.66) -- ( 9.6,8.00) -- (10.4,8.00);
+
+            \draw (10,10) node{$S$};
+            \draw (10,9.33) node{$T$};
+            \draw (10,8.66) node{$T$};
+
+            \draw[dashed] (10.0,9.8 ) -- (10.0,9.53);
+            \draw[dashed] (10.0,9.13) -- (10.0,8.86);
+            
+            \draw[dashed] ( 9.800,9.80) -- ( 8.0,8);
+            \draw[dashed] ( 9.800,9.13) -- ( 8.8,8);
+            \draw[dashed] ( 9.875,8.46) -- ( 9.6,8);
+            \draw[dashed] (10.125,8.46) -- (10.4,8);
+            \draw[dashed] (10.200,9.13) -- (11.2,8);
+            \draw[dashed] (10.200,9.80) -- (12.0,8);
+
+            \draw ( 8.5,8.1) node{$v$};
+            \draw ( 9.25,8.1) node{$w$};
+            \draw (10.0,8.1) node{$x$};
+            \draw (10.75,8.1) node{$y$};
+            \draw (11.5,8.1) node{$z$};
+
+            \draw [decorate, decoration={brace, amplitude=5pt}] (12.2,10) -- (12.2,8) node[midway,xshift=7mm]{$|\Gamma|+1$};
+            \draw [decorate, decoration={brace, amplitude=5pt}] (12,7.9) -- (8,7.9) node[midway,yshift=-4mm]{$N = ?$};
+        \end{tikzpicture}};
+      }    
+
+      \uncover<5>{
+        \draw (3.2,3.7) node{\begin{minipage}{.6\textwidth}
+            \begin{itemize}
+            \item Supposons $G$ en FN Chomsky.\\
+            \item L'arbre de dérivation est binaire.\\
+            \item Pour une hauteur $h$, au plus $2^h$ feuilles.\\
+            \item Donc si $N > 2^K$, la hauteur est $> K$.\\
+            \item Il suffit de prendre $N = 2^{|\Gamma|} +1$.
+            \end{itemize}
+            
+            
+        \end{minipage}};
+      }
+    }
+
+    \mode<handout>{
+    \only<handout:1>{
+      \draw (0,9.5) node[below]{\begin{minipage}{\textwidth}
+          \begin{center}
+            \tikz\draw[example] (0,0) -- (5,0);\\
+          \end{center}
+          \vspace{-5mm}
+          \begin{exampleblock}{Brouillon}
+            \example{On veut démontrer :}\\
+            $\structure{\forall\Sigma, \forall L\in \textsc{alg}_\Sigma,} \exists N\in \mathbb{N}, \forall u\in L, |u| \ge N \Rightarrow \exists v, w, x, y, z\in \Sigma^\star,$
+            $u = v\cdot w\cdot x \cdot y \cdot z \land w\cdot y \neq \varepsilon \land | w\cdot x \cdot y| \le N \land \forall i \in \mathbb{N}, v\cdot w^i \cdot x \cdot y^i \cdot z \in L$
+
+            \example{On sait :} $L\in \textsc{alg}_\Sigma$
+
+              \begin{itemize}
+              \item\vspace{-1mm} $L$ est reconnu par une grammaire $\langle \Sigma, \Gamma, S, R \rangle$, avec \alert{$|\Gamma|$ fini}.\\
+              \item\vspace{-1mm} Soit un arbre de dérivation \structure{de hauteur au moins $|\Gamma|$} (plus 1 feuille).\\
+              \item\vspace{-1mm} Un non-terminal $T$ est utilisé au moins deux fois \alert{dans la même branche}.
+              \end{itemize}
+          \end{exampleblock}
+      \end{minipage}};
+        \draw (-2.7,3.5) node{\begin{tikzpicture}
+
+            \fill[structure!20]  (10.0,10.00) -- ( 8.0,8.00) -- (12.0,8.00);
+            \fill[alert!20] (10.0, 9.33) -- ( 8.8,8.00) -- (11.2,8.00);
+            \fill[structure!20]  (10.0, 8.66) -- ( 9.6,8.00) -- (10.4,8.00);
+
+            \draw (10,10) node{$S$};
+            \draw (10,9.33) node{$T$};
+            \draw (10,8.66) node{$T$};
+
+            \draw[dashed] (10.0,9.8 ) -- (10.0,9.53);
+            \draw[dashed] (10.0,9.13) -- (10.0,8.86);
+            
+            \draw[dashed] ( 9.800,9.80) -- ( 8.0,8);
+            \draw[dashed] ( 9.800,9.13) -- ( 8.8,8);
+            \draw[dashed] ( 9.875,8.46) -- ( 9.6,8);
+            \draw[dashed] (10.125,8.46) -- (10.4,8);
+            \draw[dashed] (10.200,9.13) -- (11.2,8);
+            \draw[dashed] (10.200,9.80) -- (12.0,8);
+
+            \draw ( 8.5,8.1) node{$v$};
+            \draw ( 9.25,8.1) node{$w$};
+            \draw (10.0,8.1) node{$x$};
+            \draw (10.75,8.1) node{$y$};
+            \draw (11.5,8.1) node{$z$};
+
+            \draw [decorate, decoration={brace, amplitude=5pt}] (12.2,10) -- (12.2,8) node[midway,xshift=7mm]{$|\Gamma|+1$};
+            \draw [decorate, decoration={brace, amplitude=5pt}] (12,7.9) -- (8,7.9) node[midway,yshift=-4mm]{$N = ?$};
+        \end{tikzpicture}};
+
+        \draw (3.2,3.7) node{\begin{minipage}{.6\textwidth}
+            \begin{itemize}
+            \item Supposons $G$ en FN Chomsky.\\
+            \item L'arbre de dérivation est binaire.\\
+            \item Pour une hauteur $h$, au plus $2^h$ feuilles.\\
+            \item Donc si $N > 2^K$, la hauteur est $> K$.\\
+            \item Il suffit de prendre $N = 2^{|\Gamma|} +1$.
+            \end{itemize}
+        \end{minipage}};
+    }
+}
+  \end{tikzpicture}
+\end{frame}
+
+\endgroup

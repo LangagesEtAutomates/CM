@@ -1,0 +1,34 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Forme normale de Chomsky}
+  
+  \begin{block}{Forme normale de Chomsky}
+    Soit $G = \langle \Sigma, \Gamma, S, R \rangle$ une grammaire algébrique.
+
+    $G$ est en \structure{forme normale de Chomsky} si les règles de $R$ sont de la forme :
+    \begin{enumerate}
+    \item $N \rightarrow XY$ \hspace{5mm} avec $N\in \Gamma$ et $X, Y \in \Gamma$
+    \item $N \rightarrow a$  \hspace{8mm} avec $N \in \Gamma$ et $a\in \Sigma$
+    \end{enumerate}
+    ou bien toutes ses règles sont de la forme :
+    \begin{enumerate}
+    \item $N \rightarrow XY$ \hspace{5mm} avec $N\in \Gamma$ et $X, Y \in \Gamma \setminus \{S\}$
+    \item $N \rightarrow a$  \hspace{8mm} avec $N \in \Gamma$ et $a\in \Sigma$
+    \item $S \rightarrow \varepsilon$
+    \end{enumerate}
+  \end{block}
+
+  \begin{block}{Théorème}
+    Toute grammaire algébrique peut être transformée en une
+    grammaire en \structure{forme normale de Chomsky} reconnaissant le même langage. 
+  \end{block}
+\end{frame}
+
+\endgroup

@@ -1,0 +1,34 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemples de grammaires et de langages algébriques}
+  \begin{enumerate}
+  \item \structure{Langage des parenthèses imbriquées}\\
+    \begin{itemize}
+    \item $\mathcal{L}(\langle\{\alert{a}, \alert{b}\},\{S\},S,\{S \rightarrow \alert{a}S\alert{b} \;|\; \varepsilon\}\rangle) = \{\alert{a}^n\alert{b}^n, n\geq 0\}$\\
+    \item $\mathcal{L}(\langle\{\alert{(}, \, \alert{)}\},\{S\},S,\{S \rightarrow \alert{(}S\alert{)}\, \;|\;\varepsilon \}\rangle) = \{\alert{(}^n\, \alert{)}^n, n\geq 0\}$
+    \end{itemize}
+  \item \structure{Langage de Dyck}\\
+    chaque parenthèse ouvrante correspond à une parenthèse fermante
+    \begin{itemize}
+    \item sur un couple de parenthèses, $\Sigma = \{\alert{(}, \alert{)}\}$\\
+      $\mathcal{L}(\langle \Sigma ,\{S\},S,\{S \rightarrow S\alert{(}S\alert{)} \;|\; \varepsilon \}\rangle)$
+    \item sur $n$ couples de parenthèses, $\Sigma_n = \{\alert{(_1}, \alert{)_1}, \ldots, \alert{(_n}, \alert{)_n}\}$\\
+      $\mathcal{L}(\langle \Sigma ,\{S\},S,\{S \rightarrow S\alert{(_1}S\alert{)_1} \;|\; \ldots \;|\;S\alert{(_n}S\alert{)_n} \;|\; \varepsilon \}\rangle)$
+    \end{itemize}
+  \item \structure{Expressions bien parenthésées}\\
+    \begin{itemize}
+    \item $\mathcal{L}(\langle \{\alert{(}, \alert{)}, \alert{a}\} ,\{S\},S,\{S \rightarrow \alert{(}S\alert{)} \;|\; SS \;|\; a\}\rangle)$
+    \end{itemize}
+  \item Syntaxe des langages de programmation : C, C++, Java...
+  \item Formats de données : HTML, XML, CSV...
+  \item Formules logiques, mathématiques...
+  \end{enumerate}
+\end{frame}
+\endgroup

@@ -1,0 +1,143 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}[fragile]{Algorithme de Thompson}
+  \begingroup
+  \renewcommand{\emph}[1]{\structure{#1}} 
+  \vspace{-1mm}
+  
+  ~\hspace{-5mm}
+  \begin{tikzpicture}
+    
+    \draw[white] (0,-.5) rectangle (11.3,7.5);
+    \draw (5,4.85) node{\begin{minipage}{15cm}\scalebox{.7}{\begin{algorithm}[H]
+            \SetKwProg{Fn}{Fonction}{}{fin}
+            \SetKw{Let}{soit}
+            \SetKw{Lets}{soient}
+            \SetKw{Retourner}{retourner}
+            \SetKwFunction{Thompson}{thompson}
+            \SetKwData{Input}{motif}
+            \SetKwIF{Si}{SinonSi}{Sinon}{si}{}{sinon si}{sinon}{fin si}
+            
+            \Fn{\Thompson(\Input : \textsc{regex}, $\Sigma$ : alphabet) : automate}{
+              \Lets \alert{$q_0$}, \alert{$q_f$} deux nouveaux états\;
+                \uSi{$\Input = \emptyset$}{\uncover<2->{
+                    $Q \,\leftarrow \{\alert{q_0}, \alert{q_f}\}$\;
+                    $\mu \,\,\leftarrow \emptyset$\;
+                }}\uSinonSi{$\Input = a\in \Sigma \cup \{\varepsilon\}$}{\uncover<3->{
+                    $Q \,\leftarrow \{\alert{q_0}, \alert{q_f}\}$\;
+                    $\mu \,\,\leftarrow \{ \alert{\langle q_0, a, q_f \rangle} \}$\;
+                }}\uSinonSi{$\Input = u | v$}{\uncover<4->{
+                    $\langle \structure{\Sigma}, \structure{Q_u}, \{\structure{u_0}\}, \{\structure{u_f}\}, \structure{\lambda} \rangle \leftarrow \structure{\Thompson(u, \Sigma)}$\;
+                    $\langle \example{\Sigma}, \example{Q_v}, \{\example{v_0}\}, \{\example{v_f}\}, \example{\tau}\, \rangle \leftarrow \example{\Thompson(v, \Sigma)}$\;
+
+                    $Q \,\leftarrow \structure{Q_u} \cup \example{Q_v} \cup \{\alert{q_0}, \alert{q_f}\}$\;
+                    $\mu \,\,\leftarrow \structure{\lambda} \cup \example{\tau} \cup \left\{\begin{array}{l}
+                    \alert{\langle q_0, \varepsilon, u_0 \rangle}, \alert{\langle q_0, \varepsilon, v_0 \rangle}, \\
+                    \alert{\langle u_f, \varepsilon, q_f \rangle}, \alert{\langle v_f, \varepsilon, q_f \rangle}
+                    \end{array}\right\} $\;
+                }}\uSinonSi{$\Input = u \cdot v$}{\uncover<5->{
+                    $\langle \structure{\Sigma}, \structure{Q_u}, \{\structure{u_0}\}, \{\structure{u_f}\}, \structure{\lambda} \rangle \leftarrow \structure{\Thompson(u, \Sigma)}$\;
+                    $\langle \example{\Sigma}, \example{Q_v}, \{\example{v_0}\}, \{\example{v_f}\}, \example{\tau}\, \rangle \leftarrow \example{\Thompson(v, \Sigma)}$\;
+
+                    $Q \,\leftarrow \structure{Q_u} \cup \example{Q_v}$\;
+                    $q_0 \leftarrow \structure{u_0}$;~
+                    $q_f \leftarrow \example{v_f}$\;
+                    $\mu \,\,\leftarrow \structure{\lambda} \cup \example{\tau} \cup \{\alert{\langle u_f, \varepsilon, v_0 \rangle}\} $\;
+                }}\SinonSi{$\Input = u^\star$}{\uncover<6->{
+                    $\langle \structure{\Sigma}, \structure{Q_u}, \{\structure{u_0}\}, \{\structure{u_f}\}, \structure{\lambda} \rangle \leftarrow \structure{\Thompson(u, \Sigma)}$\;
+
+                    $Q \,\leftarrow \structure{Q_u} \cup \{\alert{q_0}, \alert{q_f}\}$\;
+                    $\mu \,\,\leftarrow \structure{\lambda} \cup \{\alert{\langle q_0, \varepsilon, u_0 \rangle}, \alert{\langle u_f, \varepsilon, u_0 \rangle}, \alert{\langle u_f, \varepsilon, q_f \rangle}\}$\;
+                }}
+              
+              \Retourner $\langle \Sigma, Q, \{q_0\}, \{q_f\}, \mu \rangle$\;
+            }
+    \end{algorithm}}\end{minipage}};
+
+
+    \draw<2-> (3.2,7.5) node[right]{\scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+      \node [state,initial, initial text=, alert, fill=alert!20] (a1)   {$q_0$}; 
+      \node [state,accepting, alert, fill=alert!20] (a2) [right=of a1]  {$q_f$}; 
+    \end{tikzpicture}}};
+
+    \draw<3-> (6.2,7.5) node[right]{\scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+      \node [state,initial, initial text=, alert, fill=alert!20] (b1)   {$q_0$}; 
+      \node [state,accepting, alert, fill=alert!20] (b2) [right=of a1]  {$q_f$}; 
+      \path [alert,->]    (b1) edge node{$a$} (b2);
+    \end{tikzpicture}}};
+
+
+    \draw<4-> (3.2,5.75) node[right]{\scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+      \node [state,initial, initial text=, alert, fill=alert!20] (c1)   {$q_0$};
+
+      \node [state, structure, fill=structure!20] (c2) [above right=of c1]  {$u_0$};
+      \node (c3) [right=of c2, cloud, cloud puffs=11 ,cloud puff arc=120, aspect=2, inner ysep=1em, fill=structure!20] {};
+      \node [state, structure, fill=structure!20] (c4) [right=of c3]  {$u_f$};
+      
+      \node [state, example, fill=example!20] (c5) [below right= of c1]  {$v_0$};
+      \node (c6) [right=of c5, cloud, cloud puffs=10,cloud puff arc=100, aspect=2, inner ysep=1em, fill=example!20] {};
+      \node [state, example, fill=example!20] (c7) [right= of c6]  {$v_f$};
+
+      \node [state,accepting, alert, fill=alert!20] (c8) [above right= of c7]  {$q_f$};
+
+      \path [->, alert]    (c1) edge node[below] {$\varepsilon$} (c2);
+      \path [->, alert]    (c1) edge node[above] {$\varepsilon$} (c5);
+      \path [->, alert]    (c4) edge node[below] {$\varepsilon$} (c8);
+      \path [->, alert]    (c7) edge node[above] {$\varepsilon$} (c8);
+
+      \path [dashed,->, structure]    (c2) edge[bend left=5mm]  (c4);
+      \path [dashed,->, structure]    (c2) edge  (c4);
+      \path [dashed,->, structure]    (c2) edge[bend right=5mm] (c4);
+      \path [dashed,->, example]    (c5) edge[bend left=5mm]  (c7);
+      \path [dashed,->, example]    (c5) edge  (c7);
+      \path [dashed,->, example]    (c5) edge[bend right=5mm] (c7);
+    \end{tikzpicture}}};
+
+    \draw<5-> (3.2,3.75) node[right]{\scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+      \node [state,initial, initial text=, structure, fill=structure!20] (d2)  {$u_0$};
+      \node (d3) [right=of d2, cloud, cloud puffs=11 ,cloud puff arc=120, aspect=2, inner ysep=1em, fill=structure!20] {};
+      \node [state, structure, fill=structure!20] (d4) [right=of d3]  {$u_f$};
+      
+      \node [state, example, fill=example!20] (d5) [right= of d4]  {$v_0$};
+      \node (d6) [right=of d5, cloud, cloud puffs=10,cloud puff arc=100, aspect=2, inner ysep=1em, fill=example!20] {};
+      \node [state,accepting, example, fill=example!20] (d7) [right= of d6]  {$v_f$};
+
+      \path [->, alert]  (d4) edge node[above] {$\varepsilon$} (d5);
+
+      \path [dashed,->, structure]    (d2) edge[bend left=5mm]  (d4);
+      \path [dashed,->, structure]    (d2) edge  (d4);
+      \path [dashed,->, structure]    (d2) edge[bend right=5mm] (d4);
+      \path [dashed,->, example]    (d5) edge[bend left=5mm]  (d7);
+      \path [dashed,->, example]    (d5) edge  (d7);
+      \path [dashed,->, example]    (d5) edge[bend right=5mm] (d7);
+    \end{tikzpicture}}};
+    
+    \draw<6-> (3.2,2) node[right]{\scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+      \node [state,initial, initial text=, alert, fill=alert!20] (e1)   {$q_0$};
+      \node [state, structure, fill=structure!20] (e2) [right=of e1] {$u_0$};
+      \node (e3) [right=of e2, cloud, cloud puffs=11 ,cloud puff arc=120, aspect=2, inner ysep=1em, fill=structure!20] {};
+      \node [state, structure, fill=structure!20] (e4) [right=of e3]  {$u_f$};
+      \node [state,accepting, alert, fill=alert!20] (e5) [below= of e2]  {$q_f$};
+      
+      \path [->, alert]  (e1) edge node[above] {$\varepsilon$} (e2);
+      \path [->, alert]  (e2) edge node[left] {$\varepsilon$} (e5);
+      \path [->, alert]  (e4) edge[bend left=2cm] node[below] {$\varepsilon$} (e2);
+
+      \path [dashed,->, structure]    (e2) edge[bend left=5mm]  (e4);
+      \path [dashed,->, structure]    (e2) edge  (e4);
+      \path [dashed,->, structure]    (e2) edge[bend right=5mm] (e4);
+    \end{tikzpicture}}};
+
+  \end{tikzpicture}
+  \endgroup
+\end{frame}
+
+
+\endgroup

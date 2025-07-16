@@ -1,0 +1,31 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Définition des langages rationnels}
+  Soient $\Sigma$ un alphabet, et $L \in \mathscr{P}(\Sigma^\star)$ un langage sur $\Sigma$.
+
+  \begin{block}{Définition --- Langage rationnel}
+    $L$ est \structure{rationnel}, noté $\alert{L\in \textsc{rat}_\Sigma}$ s'il est décrit par une expression rationnelle :
+    $$\alert{\textsc{rat}_\Sigma = \{\mathcal{S}(u) \mid u \in \textsc{regex}_\Sigma\}}$$
+  \end{block}
+
+  \begin{exampleblock}{Conséquences}
+    \vspace{2mm}
+    \begin{tabular}{rlr}
+      \vspace{1mm}\example{Langage vide}& &\alert{$\emptyset \in \textsc{rat}_\Sigma$}\\
+      \vspace{1mm}\example{Mot vide}& &\alert{$\{ \varepsilon \} \in \textsc{rat}_\Sigma$}\\
+      \vspace{1mm}\example{Caractères}& $\forall a\in \Sigma$&\alert{$ \{ a \} \in \textsc{rat}_\Sigma$}\\
+      \vspace{1mm}\example{Union}& $\forall L_1, L_2 \in \textsc{rat}_\Sigma$&\alert{$ L_1 \cup L_2 \in \textsc{rat}_\Sigma$}\\
+      \vspace{1mm}\example{Produit}& $\forall L_1, L_2 \in \textsc{rat}_\Sigma$&\alert{$ L_1 \cdot L_2 \in \textsc{rat}_\Sigma$}\\
+      \vspace{1mm}\example{Fermeture}& $\forall L_1 \in \textsc{rat}_\Sigma$&\alert{$ L_1^\star \in \textsc{rat}_\Sigma$}\\
+    \end{tabular}
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

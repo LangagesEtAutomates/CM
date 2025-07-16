@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Sémantique des expressions rationnelles}
+  Soit $\Sigma$ un alphabet.\\
+  Toute expression rationnelle \alert{$r$} sur $\Sigma$ \alert{décrit} un langage \alert{$\mathcal{S}(r) \in \mathscr{P}(\Sigma^\star)$}.
+
+  \begin{block}{Définition -- Sémantique d'une expression rationnelle}
+    
+    La fonction \alert{$\mathcal{S} : \textsc{regex}_\Sigma \rightarrow \mathscr{P}(\Sigma^\star)$}, appelée \structure{la fonction sémantique} des expressions rationnelle,
+    est définie inductivement de la façon suivante.
+
+    $$\structure{
+      \mathcal{S} \eqdef \left\{\begin{array}{rcll}
+      \textsc{regex}_\Sigma &\rightarrow& \mathscr{P}(\Sigma^\star)\\
+      \example{\emptyset} &\mapsto& \alert{\emptyset}\\
+      \example{\varepsilon} &\mapsto& \alert{\{\varepsilon\}}\\
+      \example{a} &\mapsto& \alert{\{a\}} & \text{si } a \in \Sigma \\
+      \example{(u | v)} &\mapsto& \alert{\mathcal{S}(u) \cup \mathcal{S}(v)}  & \text{si } u, v \in \textsc{regex}_\Sigma\\
+      \example{(u \cdot v)} &\mapsto& \alert{\mathcal{S}(u) \cdot \mathcal{S}(v)}  & \text{si } u, v \in \textsc{regex}_\Sigma \\
+      \example{u^\star} &\mapsto& \alert{\mathcal{S}(u)^\star}  & \text{si } u \in \textsc{regex}_\Sigma\\
+      \end{array}\right.}
+    $$
+  \end{block}
+
+  
+  \vspace{-3mm}
+  \begin{exampleblock}{Exemples}
+  \vspace{-2mm}
+  \footnotesize
+  \begin{itemize}
+    \item $\mathcal{S}(\mathstring{\example{a | b}}) = \mathcal{S}(\mathstring{\example{a}}) \alert{\cup} \mathcal{S}(\mathstring{\example{b}}) = \alert{\{a\} \cup \{b\}}  = \alert{\{a, b\}}$
+    \item\vspace{-1mm} $\mathcal{S}(\mathstring{\example{a \cdot (a | b) \cdot b}}) = \mathcal{S}(\example{\mathstring{a}}) \alert{\cdot} \mathcal{S}(\example{\mathstring{a | b}}) \alert{\cdot} \mathcal{S}(\mathstring{\example{b}}) = \alert{\{a\} \cdot \{a, b\} \cdot \{b\}}  = \alert{\{aab, abb\}}$
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Transformation en grammaire rationnelle}
+  \begin{block}{Théorème}
+    Toute grammaire \structure{linéaire droite} peut être transformée en une
+    grammaire \structure{rationnelle droite} reconnaissant le même langage. 
+  \end{block}
+  
+  \begin{block}{Démonstration}
+    Appliquer successivement les règles suivantes :
+    \begin{enumerate}
+    \item Eliminer les règles \structure{$A \rightarrow B$} : remplacer $B$ par sa définition
+    \item Remplacer les règles \structure{$A \rightarrow a_1 a_2 ... a_n B$} par \structure{$A \rightarrow a_1 C$} et \structure{$C \rightarrow a_2 ... a_n B$}
+    \end{enumerate}
+  \end{block}
+  
+  \begin{exampleblock}{Exemple}
+    \vspace{-5mm}
+    $$
+    \left\{\begin{array}{lll}
+    S &\rightarrow& abA \;|\; A \\
+    A &\rightarrow& c\\
+    \end{array}\right.
+    \hspace{2mm}\Rightarrow\hspace{2mm}
+    \left\{\begin{array}{lll}
+    S &\rightarrow& abA \;|\; c \\
+    A &\rightarrow& c\\
+    \end{array}\right.
+    \hspace{2mm}\Rightarrow\hspace{2mm}
+    \left\{\begin{array}{lll}
+    S &\rightarrow& aB \;|\; c \\
+    A &\rightarrow& c\\
+    B &\rightarrow& bA\\
+    \end{array}\right.$$
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

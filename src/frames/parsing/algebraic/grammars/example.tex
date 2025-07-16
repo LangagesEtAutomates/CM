@@ -1,0 +1,36 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple}
+  \begin{exampleblock}{Représentation mathématique}
+    \vspace{-2mm}
+    $$\left\langle \{a, b, c\}, \{S, B\}, S, \left\{ \begin{array}{c}\langle S, aSb \rangle, \langle S, B \rangle,\\ \langle B, cB \rangle, \langle B, \varepsilon \rangle \end{array} \right\} \right\rangle$$
+  \end{exampleblock}
+
+  \begin{exampleblock}{Représentation informelle}
+    \vspace{-2mm}
+    $$\left\{\begin{array}{rcl} S &\rightarrow & aSb | B \\ B &\rightarrow & cB | \varepsilon \end{array}\right.$$
+  \end{exampleblock}
+
+
+  \begin{exampleblock}{Notation en Forme Normale de Backus-Naur (BNF)}
+    \vspace{-2mm}
+    \begin{itemize}
+    \item Tout non-terminal $\structure{A \in \Gamma}$ se note \alert{\textless$A$\textgreater}
+    \item Tout mot de terminaux $\structure{u \in \Sigma^\star}$ se note \alert{``$u$''}
+    \item Le symbole de séparation entre parties gauche et droite se note \alert{$\Coloneqq$}
+    \end{itemize}
+
+    \vspace{-2mm}
+    $$\left\{\begin{array}{lll} \text{\textless$S$\textgreater} & \Coloneqq & \text{``$a$" \textless$S$\textgreater{} ``$b$"} \,|\, \textless$B$\textgreater\\
+    \text{\textless$B$\textgreater} & \Coloneqq & \text{``$c$" \textless$B$\textgreater} \,|\, \text{`` "}
+    \end{array}\right.$$
+  \end{exampleblock}
+\end{frame}
+\endgroup

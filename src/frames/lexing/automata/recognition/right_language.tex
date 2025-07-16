@@ -1,0 +1,55 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage droit d'un état}
+  Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
+  \begin{block}{Définition -- Langage droit}
+    Le \structure{langage droit} d'un état $q \in Q$, noté \alert{$\mathcal{LD}_A(q)$},
+    est l'ensemble des mots reconnus par un chemin d'actions menant de $q$ à un état final de $A$. 
+    
+    $$\alert{\mathcal{LD}_A(q) \eqdef \bigcup_{f\in F} \mathcal{L}_A(q, f)}$$
+
+    \begin{description}
+    \item[Remarques :] $\displaystyle\mathcal{L}(A) = \bigcup_{i\in I} \mathcal{LD}_A(i)$ \hspace\fill $\displaystyle\mathcal{LD}_A(q) = \mathcal{L}\left(\langle \Sigma, Q, \{q\}, F, \mu \rangle\right)$
+    \end{description}
+  \end{block}
+
+  \vspace{-3.65mm}
+  \begin{exampleblock}{Exemple}
+    \noindent\begin{minipage}{.35\textwidth}%
+    \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \node [state,initial, initial text=] (s1)   {$q_1$}; 
+        \node [state,accepting] (s2) [right=of s1]  {$q_2$}; 
+
+        \node [state,initial, initial text=] (s4) [below=of s1]  {$q_3$}; 
+        \node [state, example, fill=example!20] (s5) [right=of s4]  {$q_4$}; 
+
+        \path [->]    (s1) edge node[above] {a} (s2);
+        \path [->]    (s1) edge[loop above, looseness=5] node {a} (s1);
+
+        \path [->]    (s4) edge node[above] {b} (s5);
+        \path [->]    (s4) edge[loop below, looseness=5] node {b} (s4);
+        \path [->]    (s5) edge[loop below, looseness=5] node {b} (s5);
+
+        \path [->]    (s2) edge[loop right, looseness=5] node {c} (s2);
+
+        \path [->]    (s5) edge node {$\varepsilon$} (s2);
+    \end{tikzpicture}}\end{minipage}%
+    \begin{minipage}{.65\textwidth}
+      \vspace{-3mm}
+      \example{$\begin{array}{rcl}%
+          \mathcal{LD}_A(q_4) &=& \mathcal{L}_A\left(q_4, q_3\right)\\
+          &=& b^\star c^\star\\
+        \end{array}$}
+    \end{minipage}
+  \end{exampleblock}
+\end{frame}
+
+
+\endgroup

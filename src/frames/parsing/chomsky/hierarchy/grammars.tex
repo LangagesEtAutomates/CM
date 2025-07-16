@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Classification des grammaires}
+  On dit qu'une grammaire $G = \langle \Sigma, \Gamma, S, R \rangle$ \structure{est de type} $i \in \{0, 1, 2, 3\}$ si :
+  \begin{description}
+  \item[Type 0 :] $G$ est grammaire \structure{non-containte}\\
+    \begin{itemize}
+    \item $R \subset (\Sigma\cup \Gamma)^\star \cdot \Gamma \cdot (\Sigma\cup \Gamma)^\star) \times (\Sigma \cup \Gamma)^\star$ 
+    \item[\example{Exemple :}] $a B c \rightarrow c B a$
+    \end{itemize}
+  \item[Type 1 :] $G$ est grammaire \structure{contextuelle}\\
+    \begin{itemize}
+    \item $\forall r\in R, r =  S \rightarrow \varepsilon \lor \exists g, d, \gamma \in (\Sigma \cup \Gamma \setminus \{S\})^\star,$ \\ $\exists A\in \Gamma, \gamma\neq \varepsilon \land r = g A d \rightarrow g \gamma d$
+    \item[\example{Exemple :}] $a B c \rightarrow ac B ac | acac$ 
+    \end{itemize}
+  \item[Type 2 :] $G$ est grammaire \structure{algébrique}\\
+    \begin{itemize}
+    \item $R \subset \Gamma \times (\Sigma \cup \Gamma)^\star$ 
+    \item[\example{Exemple :}] $S \rightarrow a S b | \varepsilon$ 
+    \end{itemize}
+
+  \item[Type 3 :] $G$ est grammaire \structure{rationnelle droite}
+    \begin{itemize}
+    \item $R \subset \Gamma \times (\Sigma \cdot \Gamma^?)^?$ 
+    \item[\example{Exemple :}] $S \rightarrow aS | b | \varepsilon$ 
+    \end{itemize}
+
+    ou $G$ est grammaire \structure{rationnelle gauche}
+    \begin{itemize}
+    \item $R \subset \Gamma \times (\Gamma^? \cdot \Sigma)^?$ 
+    \item[\example{Exemple :}] $S \rightarrow Sa | b | \varepsilon$ 
+    \end{itemize}
+  \end{description}
+\end{frame}
+
+\endgroup

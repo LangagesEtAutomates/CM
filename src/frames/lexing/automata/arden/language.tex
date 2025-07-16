@@ -1,0 +1,41 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages reconnaissables par un AFN}
+  Soit $\Sigma$ un alphabet.
+  \begin{block}{Définition -- Langage reconnaissable}
+    Un langage $L$ sur $\Sigma$ est \structure{reconnaissable} s'il est reconnu par un AFN. 
+
+    L'ensemble des langages reconnaissables sur $\Sigma$ est noté \alert{$\textsc{rec}_\Sigma$} :
+
+    \vspace{-2mm}
+    $$\alert{\textsc{rec}_\Sigma \eqdef \{ L \in \mathscr{P}(\Sigma^\star) | \exists A, L = \mathcal{L}(A)\}} $$
+
+  \end{block}
+  
+  \vspace{-3mm}
+  \begin{alertblock}{Théorème}
+    Tout langage reconnaissable est rationnel : $\alert{\textsc{rec}_\Sigma \subseteq \textsc{rat}_\Sigma}$.
+  \end{alertblock}
+
+  \begin{center}
+    \structure{Étant donné un AFN $A$, comment déterminer une expression rationnelle décrivant $\mathcal{L}(A)$ ?}
+  \end{center}
+  
+  \vspace{-3mm}
+  \begin{block}{Étapes}
+    \begin{itemize}
+    \item \vspace{-3mm} Langage droit d'un état
+    \item Système d'équations rationnelles
+    \item Lemme d'Arden
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\endgroup

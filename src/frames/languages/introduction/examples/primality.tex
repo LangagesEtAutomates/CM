@@ -1,0 +1,42 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple : test de primalité}
+  \begin{block}{Représentation décimale des nombres}
+    Soit $\Sigma = \{\text{`0'}, \text{`1'}, \text{`2'}, ..., \text{`9'}\}$ l'ensemble des chiffres.
+    
+    Pour un entier $n \in \mathbb{N}$, on note \structure{$(n)_{10}$} sa représentation décimale. 
+    
+    \begin{description}
+    \item[\alert{Attention :}] `3' (chiffre) $\neq$ ``3'' (représentation décimale) $\neq$ 3 (nombre)
+    \end{description}
+    
+    \begin{itemize}
+    \item $\mathcal{L}_{\mathbb{N}} = \{(n)_{10} | n \in \mathbb{N}\} = \{\text{``0''},\text{``1''},\text{``2''},\text{``3''}, \text{``4''}, \text{``5''}, ...\}$
+    \item<2-> $\mathcal{L}_{\mathbb{P}} = \{(n)_{10} | n \in \mathbb{N} \land n \text{ est premier}\} = \{\text{``2''},\text{``3''},\text{``5''}, \text{``7''}, \text{``11''}, ...\}$
+    \end{itemize}
+  \end{block}
+  
+  \vspace{3mm} 
+  
+  \begin{exampleblock}{Exercice}
+    \begin{description}
+    \item[Question :] $\text{``1547''} \in \mathcal{L}_{\mathbb{N}}$ ?
+    \item<2->[Question :] $\text{``1547''} \in \mathcal{L}_{\mathbb{P}}$ ?
+    \item<3->[Indication :] $1547 = 7 \times 13 \times 17$ 
+    \end{description}
+  \end{exampleblock}
+  
+  \uncover<3->{
+    \centering
+    \alert{Pour savoir si $(n)_{10}\in \mathcal{L}_{\mathbb{P}}$, il faut et il suffit de savoir si $n$ est premier }
+  }  
+\end{frame}
+
+\endgroup

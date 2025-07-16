@@ -1,0 +1,95 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Stabilité par intersection}
+  Soit $\Sigma$ un alphabet.
+
+  \begin{block}{Théorème -- Stabilité par intersection}
+    Soient $L_1, L_2 \in \textsc{rat}_\Sigma$. Alors $L_1 \cap L_2 \in \textsc{rat}_\Sigma$. 
+  \end{block}
+
+  \begin{block}{Preuve \only<1|handout:1>{directe}\only<2-|handout:2>{par produit d'automates}}
+    \only<1|handout:1>{
+      \begin{itemize}
+      \item $L_1 \cap L_2 = \overline{\overline{L_1} \cup \overline{L_2}}$
+      \item Remarque : stabilité par différence car $L_1 \setminus L_2 = L_1 \cap \overline{L_2}$
+      \end{itemize}
+    }
+    \only<2|handout:2>{
+      \begin{itemize}
+      \item Il existe $\structure{A_1 = \langle \Sigma, Q_1, I_1, F_1, \mu_1 \rangle}$ $\varepsilon$-libre qui reconnaît $L_1$.
+      \item Il existe $\example{A_2 = \langle \Sigma, Q_2, I_2, F_2, \mu_2 \rangle}$ $\varepsilon$-libre qui reconnaît $L_2$.
+      \item<3-> Soit \alert{$\mu' = \left\{\langle \langle q_1, q_2 \rangle, a, \langle q'_1, q'_2 \rangle \rangle | \langle q_1, a, q'_1 \rangle \in \mu_1 \land \langle q_2, a, q'_2 \rangle \in \mu_2 \right\}$}
+        \alert{$A_1 \times A_2 = \langle \Sigma, Q_1 \times Q_2, I_1 \times I_2, F_1 \times F_2, \mu \rangle$} reconnaît $L_1 \cap L_2$.
+      \end{itemize}
+    }
+  \end{block}
+
+    \only<handout:2>{
+  \begin{exampleblock}{Exemple}
+    \small
+    \begin{itemize}
+    \item $\structure{L_1 = \{u \in (a|b)^\star \;|\; |u|_a \equiv 0 [2]\}}$
+    \item $\example{L_2 = \{u \in (a|b)^\star \;|\; |u|_b \equiv 1 [2]\}}$
+    \item<3-> $\alert{L_1 \cap L_2 = \left\{\!\begin{array}{lrl}
+      \!u \in (a|b)^\star \hspace{-2mm}\!&\!|\!&\!|u|_a \equiv 0 [2]\!\\
+      &\!\land\!&\!|u|_b \equiv 1 [2]\!\end{array}\!\right\}}$
+    \end{itemize}
+    
+    \vspace{-32mm}\hspace\fill
+    \scalebox{.65}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \draw[white] (-1,1) rectangle (4.5,-4);
+        
+        \node (0)              {};
+        \node (1) [right=of 0] {};
+        \node (2) [right=of 1] {};
+        \node (3) [below=of 0] {};
+        \node (4) [right=of 3] {};
+        \node (5) [right=of 4] {};
+        \node (6) [below=of 3] {};
+        \node (7) [right=of 6] {};
+        \node (8) [right=of 7] {};
+
+        \node[structure, fill=structure!20, state, accepting]                    (a1) at (1) {$a_1$};
+        \node[structure, fill=structure!20, state, initial right, initial text=] (a0) at (2) {$a_0$};
+
+        \node[example, fill=example!20, state, initial above, initial text=, accepting] (b0) at (3) {$b_0$};
+        \node[example, fill=example!20, state]                                          (b1) at (6) {$b_1$};
+
+        \node<3->[alert, fill=alert!20, state, accepting]                               (a1b0) at (4) {\scriptsize $a_1, b_0$};
+        \node<3->[alert, fill=alert!20, state, initial right, initial text=]            (a0b0) at (5) {\scriptsize $a_0, b_0$};
+        \node<3->[alert, fill=alert!20, state]                                          (a1b1) at (7) {\scriptsize $a_1, b_1$};
+        \node<3->[alert, fill=alert!20, state]                                          (a0b1) at (8) {\scriptsize $a_0, b_1$};
+
+        
+        \path[structure, ->]  (a0) edge[bend right]              node[above] {$a$} (a1);
+        \path[structure, ->]  (a1) edge[bend right]              node[below] {$a$} (a0);
+        \path[structure, ->]  (a1) edge[loop above, looseness=5] node        {$b$} (a1);
+        \path[structure, ->]  (a0) edge[loop above, looseness=5] node        {$b$} (a0);
+
+        \path[example, ->]  (b0) edge[bend right]              node[left] {$b$} (b1);
+        \path[example, ->]  (b1) edge[bend right]              node[right] {$b$} (b0);
+        \path[example, ->]  (b1) edge[loop left, looseness=5] node        {$a$} (b1);
+        \path[example, ->]  (b0) edge[loop left, looseness=5] node        {$a$} (b0);
+
+        \path<3->[alert, ->]  (a0b0) edge[bend right]              node[above] {$a$} (a1b0);
+        \path<3->[alert, ->]  (a1b0) edge[bend right]              node[below] {$a$} (a0b0);
+        \path<3->[alert, ->]  (a0b1) edge[bend right]              node[above] {$a$} (a1b1);
+        \path<3->[alert, ->]  (a1b1) edge[bend right]              node[below] {$a$} (a0b1);
+
+        \path<3->[alert, ->]  (a0b0) edge[bend right]              node[left]  {$b$} (a0b1);
+        \path<3->[alert, ->]  (a0b1) edge[bend right]              node[right] {$b$} (a0b0);
+        \path<3->[alert, ->]  (a1b0) edge[bend right]              node[left]  {$b$} (a1b1);
+        \path<3->[alert, ->]  (a1b1) edge[bend right]              node[right] {$b$} (a1b0);
+    \end{tikzpicture}}
+  \end{exampleblock}
+  }
+\end{frame}
+
+\endgroup

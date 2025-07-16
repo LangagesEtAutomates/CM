@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Structure d'algèbre de Kleene}
+  Soient $\Sigma$ un alphabet et $L, L_1, L_2, L_3 \in \mathscr{P}(\Sigma)$ des langages. 
+ 
+  \begin{itemize}
+  \item \textbf{Union} \hspace{\fill} $\langle \mathscr{P}(\Sigma), \cup, \emptyset \rangle$ est un monoïde commutatif
+    \begin{description}
+    \item[neutralité :] $\emptyset \cup L = L = L \cup \emptyset$ 
+    \item[associativité :] $L_1 \cup (L_2 \cup L_3) = (L_1 \cup L_2) \cup L_3$
+    \item[commutativité :] $L_1 \cup L_2 = L_2 \cup L_1$
+    \item[idempotence :] $L \cup L = L$
+    \end{description}
+  \item \textbf{Concaténation} \hspace{\fill} $\langle \mathscr{P}(\Sigma), \cdot, \{\varepsilon\} \rangle$ est un monoïde
+    \begin{description}
+    \item[neutralité :] $\{\varepsilon\} \cdot L = L = L \cdot \{\varepsilon\}$
+    \item[associativité :] $L_1 \cdot (L_2 \cdot L_3) = (L_1 \cdot L_2) \cdot L_3$
+    \item[absorption :] $L \cdot \emptyset = \emptyset = \emptyset \cdot L$
+    \end{description}
+  \item \textbf{Mise à l'étoile} 
+    \begin{description}
+    \item[neutralité :] $\emptyset^\star = \{\varepsilon\}$
+    \item[idempotence :] $L^{\star^\star} = L^\star$
+    \end{description}
+  \item \textbf{Intéraction entre opérateurs} 
+    \begin{description}
+    \item[distributivité :] $L_1 \cdot (L_2 \cup L_3) = (L_1\cdot L_2) \cup (L_1 \cdot L_3)$\\
+      $(L_2 \cup L_3) \cdot L_1 = (L_2\cdot L_1) \cup (L_3 \cdot L_1)$
+    \item[absorption :] $L \cup L^\star = L^\star = L^\star \cup L$
+    \item[fermetures :] $L^\star = \{ \varepsilon \} \cup L^+$
+    \end{description}
+  \end{itemize}
+\end{frame}
+
+
+\endgroup

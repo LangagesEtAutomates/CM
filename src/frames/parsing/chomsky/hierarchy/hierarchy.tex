@@ -1,0 +1,79 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Hiérarchie de chomsky}
+  \small
+
+  \centering
+  \scalebox{.95}{
+    \begin{tabular}{|c|c|c|c|c|}
+      \hline
+      Type
+      &
+      Grammaire
+      &
+      Langage
+      &
+      Automate
+      &
+      Déterminisable
+      \\
+      \hline
+      \hline
+      0 
+      &
+      \tabularcell[1.7cm]{Non-restreinte\\ $\alpha A \beta \rightarrow \gamma$}
+      &
+      \tabularcell[2cm]{Récursivement énumérable}
+      &
+      \tabularcell[2cm]{Machine de Turing}
+      &
+      \tabularcell[2cm]{Oui, mais complexité inconnue\\ \footnotesize $\textsc{p} \stackrel{?}{=} \textsc{np}$}
+      \\
+      \hline
+      1
+      &
+      \tabularcell[1.7cm]{Contextuelle\\ $\alpha A \beta \rightarrow \alpha \gamma \beta$ \\ $\gamma\neq\varepsilon$}
+      &
+      \tabularcell[2cm]{Contextuel}
+      &
+      \tabularcell[2cm]{Automate \\linéairement borné}
+      &
+      \tabularcell[2cm]{Inconnu\\ \footnotesize $\textsc{nspace}(\mathcal{O}(n))$ \\ $\stackrel{?}{=}$\\
+        $\textsc{dspace}(\mathcal{O}(n))$}
+      \\
+      \hline
+      2
+      &
+      \tabularcell[1.7cm]{Algébrique\\ $A \rightarrow \beta$}
+      &
+      \tabularcell[2cm]{Algébrique}
+      &
+      \tabularcell[2cm]{Automate à pile non-déterministe}
+      &
+      \tabularcell[2cm]{Impossible}
+      \\
+      \hline
+      3
+      &
+      \tabularcell[1.7cm]{Rationnelle\\ $A \rightarrow a B | b$}
+      &
+      \tabularcell[2cm]{Rationnel}
+      &
+      \tabularcell[2cm]{Automate fini}
+      &
+      \tabularcell[2cm]{Oui, exponentiel en nombre d'états}
+      \\
+      \hline
+    \end{tabular}
+  }
+\end{frame}
+
+\endgroup

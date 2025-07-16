@@ -1,0 +1,35 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Opérations sur les langages}
+  Soit $\Sigma$ un alphabet, et $L, M \in \mathscr{P}(\Sigma^\star)$ deux langages. 
+  
+  \begin{block}{Rappel -- Opérations ensemblistes}
+    \begin{itemize}
+    \item\vspace{-1mm} \structure{Union : } $\alert{L \cup M} \eqdef \{ x \in \Sigma^\star \,|\, x \in L \lor x \in M\}$
+    \item\vspace{-1mm} \structure{Intersection : } $\alert{L \cap M} \eqdef \{ x \in \Sigma^\star \,|\, x \in L \land x \in M\}$
+    \item\vspace{-1mm} \structure{Différence : } $\alert{L \setminus M} \eqdef \{ x \in \Sigma^\star \,|\, x \in L \land x \notin M\}$
+    \item\vspace{-1mm} \structure{Complémentaire : } $\alert{\overline{L}} \eqdef \{ x \in \Sigma^\star \,|\, x \notin L\} = \Sigma^\star \setminus L$
+    \end{itemize}
+  \end{block}
+  \begin{block}{Définition -- Concaténation des langages}
+    \begin{itemize}
+    \item\vspace{-.5mm} \structure{Concaténation : } $\alert{L \cdot M} \eqdef \{ x \cdot y \,|\, x \in L \land y \in M\}$ (parfois noté $LM$)
+    \item \structure{Puissance : } $L^n = L\cdot L \cdots L$ ($L$ est répété $n$ fois) :
+      \begin{itemize}
+      \item\vspace{-.5mm} $\alert{L^0} \eqdef \{\varepsilon\}$
+      \item\vspace{-.5mm} $\alert{L^{n+1}} \eqdef L^n \cdot L$
+      \end{itemize}
+    \item\vspace{-.5mm} \structure{Fermeture de Kleene : } $\alert{L^\star} \eqdef \bigcup_{i\in \mathbb{N}} L^i$
+    \item\vspace{-.5mm} \structure{Fermeture positive : } $\alert{L^+} \eqdef \bigcup_{i>0} L^i = L^\star \cdot L = L \cdot L^\star$
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\endgroup

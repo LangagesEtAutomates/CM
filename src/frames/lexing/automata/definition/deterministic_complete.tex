@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automates déterministes et complets}
+
+  \vspace{-1mm}
+  \small 
+  Soit $A = \langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
+
+  \vspace{-1mm}
+  \begin{block}{Définition -- AFN complet}
+    On dit que $A$ est \structure{complet} si pour chaque état $q$ et chaque symbole $a$, il existe au moins une transition sortant de $q$ étiquetée $a$ :
+
+    \vspace{-3mm}
+    $$\alert{\forall q\in Q,  \forall a\in \Sigma, \exists q' \in Q : \langle q,a, q' \rangle \in \mu}$$
+  \end{block}
+  
+  \vspace{-3mm}
+  \begin{block}{Définition -- Automate fini déterministe (AFD)}
+    On dit que $A$ est \structure{déterministe} si toutes les conditions sont vérifiées : 
+    \begin{description}
+    \item[$\varepsilon$-libre] $A$ ne possède pas d'$\varepsilon$-transition : \alert{$\mu \subseteq Q \times \Sigma \times Q$}
+    \item[unitaire] $A$ ne possède pas qu'un seul état initial : \alert{$|I| = 1$}
+    \item[fonction partielle]  pour chaque état $q$ et chaque symbole $a$, il existe au plus une transition sortant de $q$ étiquetée $a$ : 
+    \end{description}
+    $$\alert{\forall q\in Q,  \forall a\in \Sigma, \unique q' \in Q : \langle q, a, q' \rangle \in \mu}$$
+  \end{block}
+
+
+  \vspace{-2mm}
+  \begin{alertblock}{Remarque}
+    \begin{itemize}
+    \item \vspace{-3mm} Si $A$ est déterministe et complet, $\mu$ est une fonction.
+    \item \vspace{-1mm} Dans ce cas, on note $q' = \mu(q, a)$ pour $\langle q, a, q' \rangle \in \mu$
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\endgroup

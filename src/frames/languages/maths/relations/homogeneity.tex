@@ -1,0 +1,36 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Propriétés des relations homogènes}
+  Soit $\bowtie$ une relation binaire homogène sur un ensemble $E$.
+  \begin{block}{Définitions -- Propriétés usuelles}
+    \vspace{-1mm}
+    \begin{description}
+    \item[Reflexivité]  $\forall x\in E, \alert{x\bowtie x}$
+    \item[Symétrie]     $\forall x\in E, \forall y\in E, \alert{x \bowtie y \Rightarrow y \bowtie x}$
+    \item[Asymétrie]    $\forall x\in E, \forall y\in E, \alert{x \bowtie y \Rightarrow \lnot(y \bowtie x)}$
+    \item[Antisymétrie] $\forall x\in E, \forall y\in E, \alert{x \bowtie y \land y \bowtie x \Rightarrow x=y}$
+    \item[Transitivité] $\forall x\in E, \forall y\in E, \forall z\in E, \alert{x \bowtie y \land y \bowtie z \Rightarrow x \bowtie z}$
+    \item[Totalité]     $\forall x\in E, \forall y\in E, \alert{x \bowtie y \lor y \bowtie x}$
+    \end{description}
+  \end{block}
+
+  \vspace{-1mm}
+  \begin{block}{Définition -- Fermeture réflexive et transitive}
+    La \structure{fermeture réflexive et transitive} de $\bowtie$, notée $\bowtie^\star$, est la plus petite relation réflexive et transitive contenant $\bowtie$. 
+
+    \vspace{-2mm}
+    $$\alert{\bowtie^\star = \bigcap \{ \mathrel{R} \in\mathscr{P}(E\times E) | \bowtie \subseteq \mathrel{R} \land \mathrel{R} \text{ réflexive } \land \mathrel{R} \text{ transitive}\}}$$
+
+    Informellement, \example{$x  \bowtie^\star y$} si \example{$x = y$} ou \example{$x = a_1 \bowtie a_2 \bowtie ... \bowtie a_n = y$}.
+  \end{block}
+\end{frame}
+
+\endgroup

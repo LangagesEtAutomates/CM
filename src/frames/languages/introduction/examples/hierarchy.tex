@@ -1,0 +1,41 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Hiérarchie des langages}
+  \begin{block}{Formalismes de description d'un langage}
+    \begin{itemize}
+    \item Comment représenter un langage \structure{infini} de façon \structure{finie} ?
+    \item Il doit avoir une \alert{structure} interne
+    \item La ``\structure{complexité}'' de sa structure entraine la ``\structure{difficulté}'' à le décider
+    \end{itemize}
+  \end{block}
+  
+  \vspace{5mm}
+  \centering\scalebox{.6}{\begin{tikzpicture}
+      \draw[structure, fill=structure!20] (3.0,1.50) ellipse(7.0cm and 3.5cm);
+      \draw[structure, fill=structure!10] (2.5,1.25) ellipse(6.0cm and 3.0cm);
+      \draw[structure, fill=structure!20] (2.0,1.00) ellipse(5.0cm and 2.5cm);
+      \draw[structure, fill=structure!10] (1.5,0.75) ellipse(4.0cm and 2.0cm);
+      \draw[structure, fill=structure!20] (1.0,0.50) ellipse(3.0cm and 1.5cm);
+      \draw[structure, fill=structure!10] (0.5,0.25) ellipse(2.0cm and 1.0cm);
+      \draw[structure, fill=structure!20] (0.0,0.00) ellipse(1.0cm and 0.5cm);
+      
+      \draw (0.0,0.0) node{fini};
+      \draw (0.5,0.75) node{rationnel};
+      \draw (1.0,1.5) node{algébrique};
+      \draw (1.5,2.25) node{contextuel};
+      \draw (2.0,3.0) node{decidable};
+      \draw (2.5,3.75) node{récursivement énumérable};
+      \draw (3.0,4.5) node{définissable};
+  \end{tikzpicture}}
+\end{frame}
+
+
+\endgroup

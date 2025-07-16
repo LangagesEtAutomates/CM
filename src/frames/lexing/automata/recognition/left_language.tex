@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage gauche d'un état}
+  Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
+  \begin{block}{Définition -- Langage gauche}
+    Le \structure{langage gauche} d'un état $q \in Q$, noté \alert{$\mathcal{LG}_A(q)$},
+    est l'ensemble des mots reconnus par un chemin d'actions menant d'un état initial de $A$ à $q$. 
+    
+    $$\alert{\mathcal{LG}_A(q) \eqdef \bigcup_{i\in I} \mathcal{L}_A(i, q)}$$
+
+    \begin{description}
+    \item[Remarques :] $\displaystyle\mathcal{L}(A) = \bigcup_{f\in F} \mathcal{LG}_A(f)$ \hspace\fill $\displaystyle\mathcal{LG}_A(q) = \mathcal{L}\left(\langle \Sigma, Q, I, \{q\}, \mu \rangle\right)$
+      \\\hspace\fill $\displaystyle\mathcal{L}(A) = \bigcup_{q\in Q} \mathcal{LG}_A(q) \cdot \mathcal{LD}_A(q)$
+    \end{description}
+  \end{block}
+
+  \vspace{-13mm}
+  \noindent\begin{minipage}{.35\textwidth}%
+  \begin{exampleblock}{Exemple}
+    \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \node [state,initial, initial text=] (s1)   {$q_1$}; 
+        \node [state,accepting] (s2) [right=of s1]  {$q_2$}; 
+
+        \node [state,initial, initial text=] (s4) [below=of s1]  {$q_3$}; 
+        \node [state, example, fill=example!20] (s5) [right=of s4]  {$q_4$}; 
+
+        \path [->]    (s1) edge node[above] {a} (s2);
+        \path [->]    (s1) edge[loop above, looseness=5] node {a} (s1);
+
+        \path [->]    (s4) edge node[above] {b} (s5);
+        \path [->]    (s4) edge[loop below, looseness=5] node {b} (s4);
+        \path [->]    (s5) edge[loop below, looseness=5] node {b} (s5);
+
+        \path [->]    (s2) edge[loop right, looseness=5] node {c} (s2);
+
+        \path [->]    (s5) edge node {$\varepsilon$} (s2);
+    \end{tikzpicture}}
+  \end{exampleblock}
+  \end{minipage}%
+  \begin{minipage}{.65\textwidth}%
+    \vspace{10mm}%
+    \example{$\begin{array}{rclll}%
+        \mathcal{LG}_A(q_4) &=& \mathcal{L}_A(q_1, q_4) &\cup& \mathcal{L}_A(q_3, q_4)\\
+        &=& \emptyset &\cup& b^+\\
+        &=& b^+\\
+      \end{array}$}
+  \end{minipage}
+\end{frame}
+
+\endgroup

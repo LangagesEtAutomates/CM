@@ -1,0 +1,42 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Grammaire et langage contextuels}
+  \begin{block}{Définition -- Grammaire contextuelle}
+    Une grammaire \alert{$\langle \Sigma, \Gamma, S, R \rangle$} est dite \structure{contextuelle} si toutes ses règles sont :
+    
+    \begin{itemize}
+    \item soit de la forme $\alert{g \cdot N \cdot d \rightarrow g \cdot \alpha \cdot d}$, avec
+
+      \begin{center}
+      \begin{tabular}{ccll}
+      \alert{$g$}      & $\in$ & $(\Sigma \cup \Gamma)^\star$ & \structure{le contexte gauche}, \\
+      \alert{$d$}      & $\in$ & $(\Sigma \cup \Gamma)^\star$ & \structure{le contexte droit}, \\
+      \alert{$N$}      & $\in$ & $\Gamma$                    & un non-terminal, \\
+      \alert{$\alpha$} & $\in$ & $(\Sigma \cup \Gamma)^+$    & un mot \alert{non-vide}. \\
+      \end{tabular}
+      \end{center}
+      
+%      \begin{description}
+%      \item[\alert{$g$}] $\in (\Sigma \cup \Gamma)^\star$ : \structure{le contexte gauche},
+%      \item[\alert{$d$}] $\in (\Sigma \cup \Gamma)^\star$ : \structure{le contexte droit},
+%      \item[\alert{$N$}] $\in \Gamma$ : un non-terminal,
+%      \item[\alert{$\alpha$}] $\in (\Sigma \cup \Gamma)^+$ : un mot \alert{non-vide}.
+%      \end{description}
+    Lire : \og{} $N$ peut se réécrire en $\alpha$, à condition d'être entre $g$ et $d$ \fg.
+    \item soit la règle $S \rightarrow \varepsilon$, si $S$ n'apparaît jamais à droite d'une règle
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Définition -- Langage contextuel}
+    Un langage est dit \structure{contextuel} s'il existe une grammaire contextuelle qui l'engendre.
+  \end{block}
+\end{frame}
+\endgroup

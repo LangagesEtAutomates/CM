@@ -1,0 +1,89 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple}
+
+  \begin{center}
+    Trouver un automate qui reconnaît
+    $$\structure{a} \cdot \alert{(\structure{b} \example{|} \structure{c})^\star}$$
+
+    \vspace{3mm}
+    
+    \scalebox{1}{\begin{tikzpicture}
+        \draw[white] (-1.5,-2) rectangle (8.5,2);
+        
+        \draw<5-> [rounded corners, draw=black!30, fill=black!10] (-1,-1.8)   rectangle (7.9,1.8);
+
+        \mode<beamer>{
+          \draw<2-4>[rounded corners, draw=black!30, fill=black!10] (-1,-.6)     rectangle (1.8,.6);
+          \draw<2>  [rounded corners, draw=black!30, fill=black!10] (3.9,0.65)  rectangle (6.7,1.8);
+          \draw<2>  [rounded corners, draw=black!30, fill=black!10] (3.9,-1.8)  rectangle (6.7,-.65);
+          \draw<3>  [rounded corners, draw=black!30, fill=black!10] (2.7,-1.8)  rectangle (7.9,1.8);
+          \draw<4>  [rounded corners, draw=black!30, fill=black!10] (1.95,-1.8) rectangle (7.9,1.8);
+          \node<2-4> [state, accepting, structure, fill=structure!20] (b1) at (b) {$2$};
+          \node<2>   [state,initial, initial text=, structure, fill=structure!20] (e1) at (e) {$3$};
+          \node<2>   [state, accepting, structure, fill=structure!20] (f1) at (f) {$4$};
+          \node<2>   [state,initial, initial text=, structure, fill=structure!20] (g1) at (g) {$5$};
+          \node<2>   [state, accepting, structure, fill=structure!20] (h1) at (h) {$6$};
+          \node<3>   [state,initial, initial text=, example, fill=example!20] (d1) at (d) {$7$};
+          \node<3>   [state, accepting, example, fill=example!20] (i1) at (i) {$8$};
+          \node<4>   [state, initial above, initial text=, alert, fill=alert!20] (c1) at (c) {$9$};
+          \draw<2-4>[structure]    (-1,.6)    node[below right]{\footnotesize $a$};
+          \draw<2>  [structure]    (3.9,1.8)  node[below right]{\footnotesize $b$};
+          \draw<2>  [structure]    (3.9,-.65) node[below right]{\footnotesize $c$};
+          \draw<3>  [example] (2.7 ,1.8) node[below right]{\footnotesize $b|c$};
+          \draw<4>  [alert]   (1.95,1.8) node[below right]{\footnotesize $(b|c)^\star$};
+          \draw<5->                (-1,1.8)   node[below right]{\footnotesize $a \cdot (b|c)^\star$};
+        }
+        
+        
+        \node (a) {};
+        \node (b) [right=of a] {};
+        \node (c) [right=of b] {};
+        \node (d) [right=of c] {};
+        \node (e) [above right=of d] {};
+        \node (f) [right=of e] {};
+        \node (g) [below right=of d] {};
+        \node (h) [right=of g] {};
+        \node (i) [below right=of f] {};
+        \node (j) [below=of d] {};
+
+        \node<2-> [state,initial, initial text=, structure, fill=structure!20] (a1) at (a) {$1$};
+        \node<5-> [state, structure, fill=structure!20] (b1) at (b) {$2$};
+        \node<3-> [state, structure, fill=structure!20] (e1) at (e) {$3$};
+        \node<3-> [state, structure, fill=structure!20] (f1) at (f) {$4$};
+        \node<3-> [state, structure, fill=structure!20] (g1) at (g) {$5$};
+        \node<3-> [state, structure, fill=structure!20] (h1) at (h) {$6$};
+        \node<4-> [state, example, fill=example!20] (d1) at (d) {$7$};
+        \node<4-> [state, example, fill=example!20] (i1) at (i) {$8$};
+        \node<5-> [state, alert, fill=alert!20] (c1) at (c) {$9$};
+        \node<4-> [state, accepting, alert, fill=alert!20] (j1) at (j) {$10$};
+
+        \path<2-> [->, structure]  (a1) edge node[above] {$a$} (b1);
+        \path<2-> [->, structure]  (e1) edge node[below] {$b$} (f1);
+        \path<2-> [->, structure]  (g1) edge node[above] {$c$} (h1);
+        
+        \path<3-> [->, example]  (d1) edge node[right] {$\varepsilon$} (e1);
+        \path<3-> [->, example]  (d1) edge node[right] {$\varepsilon$} (g1);
+        
+        \path<3-> [->, example]  (f1) edge node[left ] {$\varepsilon$} (i1);
+        \path<3-> [->, example]  (h1) edge node[left ] {$\varepsilon$} (i1);
+        
+        \path<4-> [->, alert]  (i1) edge node[above] {$\varepsilon$} (d1);
+        \path<4-> [->, alert]  (c1) edge node[above] {$\varepsilon$} (d1);
+        \path<4-> [->, alert]  (d1) edge node[left ] {$\varepsilon$} (j1);
+
+        \path<5-> [->]  (b1) edge node[above] {$\varepsilon$} (c1);
+
+
+    \end{tikzpicture}}
+  \end{center}  
+\end{frame}
+
+\endgroup

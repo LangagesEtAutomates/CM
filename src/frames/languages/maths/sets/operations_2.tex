@@ -1,0 +1,31 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+\begin{frame}{Opérations ensemblistes (2)}
+  Soit $E$ un ensemble. Soient $A, B \in \mathscr{P}(E)$
+  \begin{block}{Définition -- différence ensembliste et complément}
+    \begin{description}
+    \item[Différence :] $A \setminus B \eqdef \{x \in A \,|\, x \notin B\}$
+    \item[Complément :] $\overline{A} \eqdef E \setminus A$
+    \end{description}
+  \end{block}
+  \begin{block}{Propriétés}
+    \begin{description}
+    \item[Involution :] \alert{$\overline{\overline{A}} = A$}
+    \item[Lois de De Morgan :] \alert{$\overline{(A \cup B)} = \overline{A} \cap \overline{B}$} et \alert{$\overline{(A \cap B)} = \overline{A} \cup \overline{B}$}
+    \end{description}
+  \end{block}
+  \begin{alertblock}{Attention}
+    La définition du complément de $A$ dépend de l'univers $E$ !
+    \begin{itemize}
+    \item $\pi \notin \overline{\mathit{pair}}$ si $E = \mathbb{Z}$
+    \item $\pi \in \overline{\mathit{pair}}$ si $E = \mathbb{R}$
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+\endgroup

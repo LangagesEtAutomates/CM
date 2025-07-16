@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Généralisation : automates finis non-déterministes}
+  Pour un mot donné, il peut exister plusieurs chemins dans l'automate
+  \begin{enumerate}
+  \item \structure{Plusieurs états initiaux} : l'automate \textit{décide} dans lequel il commence.
+  \item \alert{Plusieurs transitions avec même origine et étiquette} : l'automate \textit{décide} laquelle il tire.
+  \item {\color{example} $\varepsilon$-transition} : transition qui n'utilise aucune entrée.
+    C'est une transition \textit{spontanée} : l'automate \textit{décide} de changer d'état sans lire de symbole.
+  \end{enumerate}
+  
+  \begin{exampleblock}{Exemple}% : $(a^+ | b^+) c^\star$}
+    \centering  
+    \scalebox{1}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
+        \node [state,initial, initial text=, structure, fill=structure!20] (s1)   {$s_1$}; 
+        \node [state] (s2) [right=of s1]  {$s_2$}; 
+
+        \node [state,initial, initial text=, structure, fill=structure!20] (s4) [below=of s1]  {$s_4$}; 
+        \node [state=] (s5) [right=of s4]  {$s_5$}; 
+
+        \node [state,accepting] (s3) [right=of s2]  {$s_3$}; 
+
+        \path [->, alert]    (s1) edge node[above] {a} (s2);
+        \path [->, alert]    (s1) edge[loop above, looseness=5] node {a} (s1);
+        \path [->]    (s2) edge[loop above, looseness=5] node {a} (s2);
+
+        \path [->, alert]    (s4) edge node[above] {b} (s5);
+        \path [->, alert]    (s4) edge[loop below, looseness=5] node {b} (s4);
+        \path [->]    (s5) edge[loop below, looseness=5] node {b} (s5);
+
+        \path [->]    (s3) edge[loop right, looseness=5] node {c} (s3);
+
+        \path [->,example]    (s2) edge node {$\varepsilon$} (s3);
+        \path [->,example]    (s5) edge node {$\varepsilon$} (s3);
+    \end{tikzpicture}}
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

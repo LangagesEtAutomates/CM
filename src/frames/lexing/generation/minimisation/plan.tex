@@ -1,0 +1,115 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Génération d'analyseur lexical}
+  \begin{block}{Problème}
+    \vspace{-2mm}
+    \begin{description}
+    \item[Entrée :] une expression rationnelle $r$
+    \item[Sortie :] un \alert{analyseur lexical} pour le langage $\mathcal{S}(r)$
+      \begin{itemize}
+      \item Programme qui décide si son entrée appartient à $\mathcal{S}(r)$
+      \end{itemize}
+    \end{description}
+  \end{block}
+  
+  \centering
+  \scalebox{.9}{\begin{tikzpicture}
+
+      \draw[white] (-1.8,0) rectangle (9.8,6.2);
+      
+      \draw[rounded corners, structure,fill=structure!20] (0,5) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Expression\\ rationnelle \end{tabular}};
+      \draw[rounded corners, structure,fill=structure!20] (8,5) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Analyseur\\ lexical \end{tabular}};
+      \draw[rounded corners, structure,fill=structure!20] (0,3) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Automate fini\\ non-déterministe \end{tabular}};
+      \draw[rounded corners, structure,fill=structure!20] (4,3) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Automate fini\\ déterministe \end{tabular}};
+      \draw[rounded corners, alert,fill=alert!20] (8,3) +(-1.2,-.5) rectangle +(1.2,.5) +(0,0) node{\small \begin{tabular}{c}Automate fini\\ minimal \end{tabular}};
+      
+      \draw[dashed, -latex] (1.2,5) -- (6.8,5);
+      \draw[-latex, structure] (0,4.5) -- (0,3.5);
+      \draw[-latex, structure] (1.2,3) -- (2.8,3);
+      \draw[-latex,alert] (5.2,3) -- (6.8,3);
+      \draw[-latex, structure] (8,3.5) -- (8,4.5);
+
+      \draw[example] (0,5.5) node[above]{$a (b|c)^\star$};
+      \draw[example] (8,5.5) node[above]{$abc \rightarrow \cmark$, $bac \rightarrow \xmark$ };
+
+      \draw[structure] (0,4.1) node[right]{\tiny Algorithme de};
+      \draw[structure] (0,3.9) node[right]{\tiny Thompson};
+
+      \draw[structure] (2,3.15) node{\tiny Sous-ensembles de};
+      \draw[structure] (2,2.85) node{\tiny Rabin \& Scott};
+
+      \draw[alert] (6,3.15) node{\tiny Méthode de};
+      \draw[alert] (6,2.85) node{\tiny Moore};
+
+      \draw[structure] (8,4) node[left]{\tiny Transcription};
+
+      \draw[example] (0,2.5) node[below]{\scalebox{.5}{\begin{tikzpicture}
+            \node (a) {};
+            \node (b) [above=of a] {};
+            \node (c) [right=of b] {};
+            \node (d) [below=of c] {};
+            \node (e) [above right=of d] {};
+            \node (f) [right=of e] {};
+            \node (g) [below right=of d] {};
+            \node (h) [right=of g] {};
+            \node (i) [below right=of f] {};
+            \node (j) [below=of d] {};
+
+            \node[fill=example!10,state,initial, initial text=] (a1) at (a) {$1$};
+            \node[fill=example!10,state] (b1) at (b) {$2$};
+            \node[fill=example!10,state] (e1) at (e) {$3$};
+            \node[fill=example!10,state] (f1) at (f) {$4$};
+            \node[fill=example!10,state] (g1) at (g) {$5$};
+            \node[fill=example!10,state] (h1) at (h) {$6$};
+            \node[fill=example!10,state] (d1) at (d) {$7$};
+            \node[fill=example!10,state] (i1) at (i) {$8$};
+            \node[fill=example!10,state] (c1) at (c) {$9$};
+            \node[fill=example!10,state, accepting] (j1) at (j) {$10$};
+
+            \path[->]  (a1) edge node[left] {$a$} (b1);
+            \path[->]  (e1) edge node[below] {$b$} (f1);
+            \path[->]  (g1) edge node[above] {$c$} (h1);
+            \path[->]  (d1) edge node[right] {$\varepsilon$} (e1);
+            \path[->]  (d1) edge node[right] {$\varepsilon$} (g1);
+            \path[->]  (f1) edge node[left ] {$\varepsilon$} (i1);
+            \path[->]  (h1) edge node[left ] {$\varepsilon$} (i1);
+            \path[->]  (i1) edge node[above] {$\varepsilon$} (d1);
+            \path[->]  (c1) edge node[left] {$\varepsilon$} (d1);
+            \path[->]  (d1) edge node[left ] {$\varepsilon$} (j1);
+            \path[->]  (b1) edge node[above] {$\varepsilon$} (c1);
+      \end{tikzpicture}}};
+
+      \draw[example] (4,2.5) node[below]{\scalebox{.5}{\begin{tikzpicture}
+            \node[fill=example!10,state,initial, initial text=] (a) {$1$};
+            \node[fill=example!10,state, accepting] (b) [below=of a] {$2$};
+            \node[fill=example!10,state, accepting] (c) [above right=of b] {$3$};
+            \node[fill=example!10,state, accepting] (d) [below right=of b] {$4$};
+
+            \path[->]  (a) edge node[left] {$a$} (b);
+            \path[->]  (b) edge node[above] {$b$} (c);
+            \path[->]  (b) edge node[below] {$c$} (d);
+            \path[->]  (c) edge[bend right=5mm] node[left] {$c$} (d);
+            \path[->]  (d) edge[bend right=5mm] node[right] {$b$} (c);
+            \path[->]  (c) edge[loop right, looseness=5] node {$b$} (c);
+            \path[->]  (d) edge[loop right, looseness=5] node {$c$} (d);
+      \end{tikzpicture}}};
+      \draw[example] (8,2.5) node[below]{\scalebox{.5}{\begin{tikzpicture}
+            \node[fill=example!10,state,initial, initial text=] (a) {$1$};
+            \node[fill=example!10,state, accepting] (b) [below=of a] {$2$};
+
+            \path[->]  (a) edge node[left] {$a$} (b);
+            \path[->]  (b) edge[loop left, looseness=5] node {$b$} (b);
+            \path[->]  (b) edge[loop right, looseness=5] node {$c$} (b);
+      \end{tikzpicture}}};
+  \end{tikzpicture}}
+\end{frame}
+
+
+\endgroup
