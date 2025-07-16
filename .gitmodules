@@ -1,0 +1,3 @@
+[submodule "src/sty"]
+	path = src/sty
+	url = git@github.com:MatthieuPerrin/Latex-libs.git
