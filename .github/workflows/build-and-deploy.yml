@@ -12,7 +12,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
-	token: ${{ secrets.GITHUB_TOKEN }}
 	submodules: recursive      # <— charge tous les submodules
         persist-credentials: true  # permet au workflow de pousser
 
