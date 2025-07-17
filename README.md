@@ -4,15 +4,15 @@ This repository contains modular and reusable teaching materials for a universit
 
 ## Structure
 
-├── LICENSE.md            # License CC-BY-SA 4.0
-├── Makefile              # Automatic compilation
-├── README.md             # This file
-├── build/                # Temporary files used during compilation
-├── docs/                 # Final PDF files (i.e. compiled course)
-├── src/                  # LaTeX source files
-│   ├── drivers/          # Main document files for the course 
-│   ├── sty/              # LaTeX style files and custom macros
-│   ├── frame/            # Individual slides organized by topic (one file per slide)
+├── LICENSE.md            # License CC-BY-SA 4.0  
+├── Makefile              # Automatic compilation  
+├── README.md             # This file  
+├── build/                # Temporary files used during compilation  
+├── docs/                 # Final PDF files (i.e. compiled course)  
+├── src/                  # LaTeX source files  
+│   ├── drivers/          # Main document files for the course  
+│   ├── sty/              # LaTeX style files and custom macros  
+│   ├── frame/            # Individual slides organized by topic (one file per slide)  
 │   └── img/              # (shareable) images used in the slides
 
 > **Note:** `src/sty/` is managed via a Git subtree from the [latex-libs](https://github.com/MathieuPerrin/latex-libs) repository.  
@@ -36,10 +36,7 @@ You can also build a single deck:
 ```bash
 make slides     # Builds docs/slides.pdf
 make handout    # Builds docs/handout.pdf
-```
 
-## Compilation
-```bash
 make clean      # Remove temporary files in build/
 make cleanall   # Also remove PDFs in docs/
 ```
