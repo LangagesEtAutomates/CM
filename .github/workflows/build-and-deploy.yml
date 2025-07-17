@@ -5,28 +5,39 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    # 1) Récupère le code + submodules (styles)
+    - name: Checkout code + submodules
       uses: actions/checkout@v3
       with:
-	submodules: recursive      # <— charge tous les submodules
-        persist-credentials: true  # permet au workflow de pousser
+        token: ${{ secrets.GITHUB_TOKEN }}
+        submodules: recursive
+        persist-credentials: true
 
-    - name: Install TeX Live
+    # 2) Installe TeX Live et make
+    - name: Install TeX Live and make
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-latex-recommended texlive-latex-extra latexmk make
+        sudo apt-get install -y texlive-latex-recommended \
+          texlive-latex-extra latexmk make
 
-    - name: Build PDFs with Make
+    # 3) Compile les PDFs avec make
+    - name: Build PDFs
       run: make
 
+    # 4) Déploie le dossier docs/ sur la branche gh-pages
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./docs
-        publish_branch: main       # on pousse sur main/docs/
-        keep_files: true           # on conserve les autres fichiers de main
+        publish_dir: ./docs       # ce qui est dans docs/ est copié à la racine de gh-pages
+        publish_branch: gh-pages  # on pousse tout dans gh-pages à la racine
+        keep_files: false         # on remplace entièrement le contenu de gh-pages
+        nojekyll: true            # crée automatiquement .nojekyll
+  
+    # (Optionnel) un message de succès
+    - name: Success message
+      run: echo "▶️ PDF built and deployed to gh-pages branch!"
