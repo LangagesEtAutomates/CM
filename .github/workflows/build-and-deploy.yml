@@ -1,0 +1,31 @@
+name: Build and deploy PDFs
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: true  # permet au workflow de pousser
+
+    - name: Install TeX Live
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-latex-recommended texlive-latex-extra latexmk make
+
+    - name: Build PDFs with Make
+      run: make
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+        publish_branch: main       # on pousse sur main/docs/
+        keep_files: true           # on conserve les autres fichiers de main

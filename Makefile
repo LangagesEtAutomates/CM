@@ -44,6 +44,17 @@ update-sty:
 	@git add src/sty
 	@git commit -m "Update styles from latex-libs"
 
+push-sty:
+	@if [ -z "$(m)" ]; then \
+	  echo "Error: You must provide a commit message. e.g."; \
+	  echo "  make push-sty m=\"Update header style\""; \
+	  exit 1; \
+	fi
+	@cd src/sty && git add . && git commit -m "$(m)" && git push origin main
+	@git add src/sty
+	@git commit -m "Update styles: $(m)"
+	@git push
+
 # -------------------------------
 # Création des répertoires
 # -------------------------------
