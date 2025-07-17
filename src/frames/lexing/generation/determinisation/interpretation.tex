@@ -8,81 +8,81 @@
 \begingroup
 
 \begin{frame}{Interprétation ubiquitaire du non-déterminisme}
-\begin{block}{Interprétations du non-déterminisme comme de l'ubiquité}
-  \begin{itemize}
-  \item L'automate se trouve dans un sous-ensemble des états
-  \item Le mot est reconnu si l'un des états du sous-ensemble est final
-  \item Ces sous-ensembles forment un nouvel automate, qui est déterministe
-  \end{itemize}
-\end{block}
+  \begin{block}{Interprétations du non-déterminisme comme de l'ubiquité}
+    \begin{itemize}
+    \item L'automate se trouve dans un sous-ensemble des états
+    \item Le mot est reconnu si l'un des états du sous-ensemble est final
+    \item Ces sous-ensembles forment un nouvel automate, qui est déterministe
+    \end{itemize}
+  \end{block}
   
-\begin{exampleblock}{Exemple : reconnaissance de $\alert{abc}$ par l'automate suivant}
-  \begin{center}
-    \scalebox{.75}{\begin{tikzpicture}
-        \node (a) {};
-        \node (b) [right=of a] {};
-        \node (c) [right=of b] {};
-        \node (d) [right=of c] {};
-        \node (e) [above right=of d] {};
-        \node (f) [right=of e] {};
-        \node (g) [below right=of d] {};
-        \node (h) [right=of g] {};
-        \node (i) [below right=of f] {};
-        \node (j) [below=of d] {};
+  \begin{exampleblock}{Exemple : reconnaissance de $\alert{abc}$ par l'automate suivant}
+    \begin{center}
+      \scalebox{.75}{\begin{tikzpicture}
+          \node (a) {};
+          \node (b) [right=of a] {};
+          \node (c) [right=of b] {};
+          \node (d) [right=of c] {};
+          \node (e) [above right=of d] {};
+          \node (f) [right=of e] {};
+          \node (g) [below right=of d] {};
+          \node (h) [right=of g] {};
+          \node (i) [below right=of f] {};
+          \node (j) [below=of d] {};
 
-        \node<2->[state,initial, initial text=] (a1) at (a) {$1$};
-        \node<1>[state,initial, initial text=, alert, fill=alert!20] (a1) at (a) {$1$};
+          \node<2->[state,initial, initial text=] (a1) at (a) {$1$};
+          \node<1>[state,initial, initial text=, alert, fill=alert!20] (a1) at (a) {$1$};
 
-        \node<1,3->  [state] (b1) at (b) {$2$};
-        \node<2>  [state,alert, fill=alert!20] (b1) at (b) {$2$};
+          \node<1,3->  [state] (b1) at (b) {$2$};
+          \node<2>  [state,alert, fill=alert!20] (b1) at (b) {$2$};
 
-        \node<1>  [state] (e1) at (e) {$3$};
-        \node<2->  [state,alert, fill=alert!20] (e1) at (e) {$3$};
+          \node<1>  [state] (e1) at (e) {$3$};
+          \node<2->  [state,alert, fill=alert!20] (e1) at (e) {$3$};
 
-        \node<-2,4->  [state] (f1) at (f) {$4$};
-        \node<3>  [state, alert, fill=alert!20] (f1) at (f) {$4$};
+          \node<-2,4->  [state] (f1) at (f) {$4$};
+          \node<3>  [state, alert, fill=alert!20] (f1) at (f) {$4$};
 
-        \node<1>  [state] (g1) at (g) {$5$};
-        \node<2->  [state,alert, fill=alert!20] (g1) at (g) {$5$};
+          \node<1>  [state] (g1) at (g) {$5$};
+          \node<2->  [state,alert, fill=alert!20] (g1) at (g) {$5$};
 
-        \node<-3>  [state] (h1) at (h) {$6$};
-        \node<4->  [state,alert, fill=alert!20] (h1) at (h) {$6$};
-
-
-        \node<1>  [state] (d1) at (d) {$7$};
-        \node<2->  [state,alert, fill=alert!20] (d1) at (d) {$7$};
-
-        \node<-2>  [state] (i1) at (i) {$8$};
-        \node<3->  [state,alert, fill=alert!20] (i1) at (i) {$8$};
-
-        \node<1,3-> [state] (c1) at (c) {$9$};
-        \node<2>  [state,alert, fill=alert!20] (c1) at (c) {$9$};
-
-        \node<1>  [state, accepting] (j1) at (j) {$10$};
-        \node<2->  [state,accepting, alert, fill=alert!20]  (j1) at (j) {$10$};
+          \node<-3>  [state] (h1) at (h) {$6$};
+          \node<4->  [state,alert, fill=alert!20] (h1) at (h) {$6$};
 
 
-        \path [->](a1) edge node[above] {$a$} (b1);
-        \path [->](e1) edge node[below] {$b$} (f1);
-        \path [->](g1) edge node[above] {$c$} (h1);
-        
-        \path [->](d1) edge node[right] {$\varepsilon$} (e1);
-        \path [->](d1) edge node[right] {$\varepsilon$} (g1);
-        
-        \path [->](f1) edge node[left ] {$\varepsilon$} (i1);
-        \path [->](h1) edge node[left ] {$\varepsilon$} (i1);
-        
-        \path [->](i1) edge node[above] {$\varepsilon$} (d1);
-        \path [->](c1) edge node[above] {$\varepsilon$} (d1);
-        \path [->](d1) edge node[left ] {$\varepsilon$} (j1);
+          \node<1>  [state] (d1) at (d) {$7$};
+          \node<2->  [state,alert, fill=alert!20] (d1) at (d) {$7$};
 
-        \path [->](b1) edge node[above] {$\varepsilon$} (c1);
-    \end{tikzpicture}}
-  \end{center}
-  $$
-  \{1\} \uncover<2->{\xrightarrow{a} \{ 2, 3, 5, 7, 9, 10\}} \uncover<3->{\xrightarrow{b} \{3, 4, 5, 7, 8, 10\}} \uncover<4->{\xrightarrow{c} \{3, 5, 6, 7, 8, 10\}}
-  $$
-\end{exampleblock}
+          \node<-2>  [state] (i1) at (i) {$8$};
+          \node<3->  [state,alert, fill=alert!20] (i1) at (i) {$8$};
+
+          \node<1,3-> [state] (c1) at (c) {$9$};
+          \node<2>  [state,alert, fill=alert!20] (c1) at (c) {$9$};
+
+          \node<1>  [state, accepting] (j1) at (j) {$10$};
+          \node<2->  [state,accepting, alert, fill=alert!20]  (j1) at (j) {$10$};
+
+
+          \path [->](a1) edge node[above] {$a$} (b1);
+          \path [->](e1) edge node[below] {$b$} (f1);
+          \path [->](g1) edge node[above] {$c$} (h1);
+          
+          \path [->](d1) edge node[right] {$\varepsilon$} (e1);
+          \path [->](d1) edge node[right] {$\varepsilon$} (g1);
+          
+          \path [->](f1) edge node[left ] {$\varepsilon$} (i1);
+          \path [->](h1) edge node[left ] {$\varepsilon$} (i1);
+          
+          \path [->](i1) edge node[above] {$\varepsilon$} (d1);
+          \path [->](c1) edge node[above] {$\varepsilon$} (d1);
+          \path [->](d1) edge node[left ] {$\varepsilon$} (j1);
+
+          \path [->](b1) edge node[above] {$\varepsilon$} (c1);
+      \end{tikzpicture}}
+    \end{center}
+    $$
+    \{1\} \uncover<2->{\xrightarrow{a} \{ 2, 3, 5, 7, 9, 10\}} \uncover<3->{\xrightarrow{b} \{3, 4, 5, 7, 8, 10\}} \uncover<4->{\xrightarrow{c} \{3, 5, 6, 7, 8, 10\}}
+    $$
+  \end{exampleblock}
 \end{frame}
 
 \endgroup
