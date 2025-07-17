@@ -12,6 +12,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
       with:
+        submodules: recursive      # <— charge tous les submodules
         persist-credentials: true  # permet au workflow de pousser
 
     - name: Install TeX Live
