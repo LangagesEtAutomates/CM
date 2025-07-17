@@ -1,0 +1,27 @@
+f% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage engendré par une grammaire non-restreinte}
+  Soient \alert{$\langle \Sigma, \Gamma, S, R \rangle$} une grammaire non-restreinte, et $u, v \in (\Sigma \cup \Gamma)^\star$. 
+  \begin{itemize}
+  \item On dit que \structure{$u$ se dérive directement en $v$}, noté $\alert{u \vdash v}$, si :
+    $$\alert{\exists \structure{x}, \structure{y} \in (\Sigma \cup \Gamma)^\star, \exists \example{\alpha \rightarrow \beta} \in R,
+    u = \structure{x} \cdot \example{\alpha} \cdot \structure{y} \land v = \structure{x} \cdot \example{\beta} \cdot \structure{y}}$$
+
+  \item On note parfois \structure{$x \alpha y \vdash_{\alpha \rightarrow \beta} x \beta y$} pour indiquer la règle utilisée.
+
+  \item On dit que \structure{$u$ se dérive en $v$} si \alert{$u \vdash^\star v$},\\
+    où \alert{$\vdash^\star$ est la fermeture transitive et réflexive de $\vdash$}.
+
+  \item On dit qu'un mot $u \in \Sigma^\star$ est \structure{généré} par $G$ s'il existe une dérivation $S \vdash^\star u$, appelée \structure{génération} de $u$. 
+  \item Le langage $\alert{\mathcal{L}(G)}$ des mots générés par $G$ est appelé le \structure{langage engendré} par $G$ :
+  \end{itemize}
+  $$\alert{\mathcal{L}(G) = \{u\in\Sigma^\star | S \vdash^\star u \}}.$$
+\end{frame}
+\endgroup

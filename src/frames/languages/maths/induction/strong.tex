@@ -9,33 +9,37 @@
 
 \begin{frame}{Récurrence forte}
 
-  \structure{Principe de la récurrence forte.}\\
-  Soit $P$ un prédicat s'appliquant sur tous les nombres entiers. On a : 
+  \begin{block}{Principe de la récurrence forte.}
+    Soit $P$ un prédicat s'appliquant sur tous les nombres entiers. On a : 
 
-  $$\structure{(\alert{\forall k\in \mathbb{N}, (\forall i < k,  P(i)) \Rightarrow P(k)}) \Rightarrow \alert{\forall n\in \mathbb{N}, P(n)}}$$
-
+    $$\structure{(\alert{\forall k\in \mathbb{N}, (\forall i < k,  P(i)) \Rightarrow P(k)}) \Rightarrow \alert{\forall n\in \mathbb{N}, P(n)}}$$
+  \end{block}
+  
   \pause
-  \vspace{3mm}
-  \example{Exemple :} \example{$\displaystyle P(n) \eqdef n\ge 2 \Rightarrow n$ est un produit de nombres premiers}.\\
 
-  \vspace{2mm}
-  \example{Récurrence :} Montrons \alert{$\alert{\forall k\in \mathbb{N}, (\forall i < k,  P(i)) \Rightarrow P(k)}$}.\\
-  \uncover<3->{
-    Soit \structure{$k\in \mathbb{N}$}. Supposons \structure{$\forall i < k,  P(i)$}. Montrons \alert{$P(k)$}.
-    \begin{itemize}
-    \item[\example{\myRec}] Cas 1 : $k$ est premier. (\example{Couvre le cas $k=2$}.)
+  \begin{exampleblock}{Exemple :}
+
+    \example{$\displaystyle P(n) \eqdef n\ge 2 \Rightarrow n$ est un produit de nombres premiers}.\\
+
+    \example{Récurrence :} Montrons \alert{$\alert{\forall k\in \mathbb{N}, (\forall i < k,  P(i)) \Rightarrow P(k)}$}.\\
+    \uncover<3-|handout>{
+      Soit \structure{$k\in \mathbb{N}$}. Supposons \structure{$\forall i < k,  P(i)$}. Montrons \alert{$P(k)$}.
       \begin{itemize}
-      \item[\example{\myRec}] Donc $k = k$, donc $P(k)$.
+      \item[\example{\myRec}] Cas 1 : $k$ est premier. (\example{Couvre le cas $k=2$}.)
+        \begin{itemize}
+        \item[\example{\myRec}] Donc $k = k$, donc $P(k)$.
+        \end{itemize}
+      \item[\example{\myRec}] Cas 2 : $k$ n'est pas premier. 
+        \begin{itemize}
+        \item[\example{\myRec}] Il existe $a, b < k$ tels que $k=ab$. 
+        \item[\example{\myRec}] Par l'hypothèse de récurrence,  $a = a_1 a_2 ... a_{x}$ et $b = b_1 b_2 ... b_{y}$.
+        \item[\example{\myRec}] Donc $k = a b = a_1 a_2 ... a_{x} b_1 b_2 ... b_{y}$, donc $P(k)$.
+        \end{itemize}
       \end{itemize}
-    \item[\example{\myRec}] Cas 2 : $k$ n'est pas premier. 
-      \begin{itemize}
-      \item[\example{\myRec}] Il existe $a, b < k$ tels que $k=ab$. 
-      \item[\example{\myRec}] Par l'hypothèse de récurrence,  $a = a_1 a_2 ... a_{x}$ et $b = b_1 b_2 ... b_{y}$.
-      \item[\example{\myRec}] Donc $k = a b = a_1 a_2 ... a_{x} b_1 b_2 ... b_{y}$, donc $P(k)$.
-      \end{itemize}
-    \end{itemize}
-  }
-  \example{Conclusion :} Donc par récurrence forte, on a bien $\alert{\forall n\in \mathbb{N}, P(n)}$
+    }
+    \example{Conclusion :} Donc par récurrence forte, on a bien $\alert{\forall n\in \mathbb{N}, P(n)}$
+
+  \end{exampleblock}
 \end{frame}
 
 \endgroup
