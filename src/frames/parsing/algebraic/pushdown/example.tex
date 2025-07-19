@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple : le langage $\{a^n b^n | n\in \mathbb{N}\}$}
+
+  \tf[top]{\small
+    $\left\langle \{a, b\}, \{A, \diamond\}, \{0, 1, 2\}, \{0\}, \{2\},  \diamond, \left\{
+    \begin{array}{cccccccc}
+      \langle \langle &0, & a          , & \varepsilon & \rangle, \langle & 0, & A           & \rangle \rangle \\ 
+      \langle \langle &0, & b          , & A           & \rangle, \langle & 1, & \varepsilon & \rangle \rangle \\        
+      \langle \langle &0, & \varepsilon, & \diamond    & \rangle, \langle & 2, & \varepsilon & \rangle \rangle \\        
+      \langle \langle &1, & b          , & A           & \rangle, \langle & 1, & \varepsilon & \rangle \rangle \\        
+      \langle \langle &1, & \varepsilon, & \diamond    & \rangle, \langle & 2, & \varepsilon & \rangle \rangle \\        
+    \end{array}
+    \right\} \right\rangle$
+  }
+
+  \tf[y=-20mm, x=-40mm]{
+    \begin{smStack}[size=1cm]
+        \smCell{\only<1-5>{$\diamond$}}  
+        \smCell{\only<2-4>{$A$}}        
+        \smCell{\only<3>{$A$}}          
+    \end{smStack}
+  }
+
+  \tf[y=0mm, x=15mm]{
+    \begin{smArray}[size=1cm]
+        \smCell{$a$} \smHead<1|handout>[structure]
+        \smCell{$a$} \smHead<2>[structure]
+        \smCell{$b$} \smHead<3>[structure]
+        \smCell{$b$} \smHead<4>[structure]
+    \end{smArray}
+  }
+
+  \tf[y=-25mm, x=15mm]{
+    \begin{tikzpicture}[smAutomaton, node distance=2.5cm, initial text=$\diamond$]
+      \smState[\smInitialBelow   \smStructure<-3> ] (a) at (0.0,0.0) {$0$}; 
+      \smState[             \smStructure<4-5>] (b) at (2.5,0.0) {$1$}; 
+      \smState[\smAccepting \smStructure<6>  ] (c) at (5.0,0.0) {$2$}; 
+
+      \smPath                    (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+      \smPath[\smStructure<1,2>] (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
+      \smPath[\smStructure<3>]   (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \smPath[\smStructure<4>]   (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \smPath[\smStructure<5>]   (b) edge             node[above] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+    \end{tikzpicture}
+  }
+  
+  
+\end{frame}
+
+\endgroup

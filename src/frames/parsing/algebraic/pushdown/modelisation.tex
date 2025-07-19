@@ -1,0 +1,44 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Modélisation mathématique}
+  \vspace{-2mm}
+  \begin{block}{Définition -- Automate à pile non-déterministe}
+    Un \structure{automate à pile} est un septuplet \alert{$\langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$\Sigma$}] ensemble fini non vide : \structure{l'alphabet d'entrée}
+    \item[\alert{$\Pi$}] ensemble fini non vide : \structure{l'alphabet de pile}
+    \item[\alert{$Q$}] ensemble fini non vide : \structure{les états possibles}
+    \item[\alert{$I$}] $\subseteq Q$ : \structure{les états initiaux}
+    \item[\alert{$F$}] $\subseteq Q$ : \structure{les états finaux (ou accepteurs)}
+    \item[\alert{$\diamond$}] $\in \Pi$ : \structure{le symbole de fond de pile}
+    \item[\alert{$\mu$}] $\subseteq  (Q \times \Sigma^\star \times \Pi^\star) \times (Q \times \Pi^\star)$ : \structure{la relation de transition}
+    \end{description}
+
+    \vspace{2mm}
+    Une \structure{transition} est un tuple \alert{$\langle \langle q, u, p \rangle, \langle q', p' \rangle \rangle \in \mu$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
+    \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{le mot reconnu}
+    \item[\alert{$p$}] $\in \Pi^\star$ : \structure{le mot dépilé}
+    \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
+    \item[\alert{$p'$}] $\in \Pi^\star$ : \structure{le mot empilé}
+    \end{description}
+  \end{block}
+
+  \tf[x=3cm, y=-3cm]{
+    \begin{tikzpicture}[smAutomaton]
+      \smState (q)  at (0.0,0) {$q$}; 
+      \smState (q1) at (2.5,0) {$q'$};
+      \smPath  (q) edge node {\smPAtrans{u}{p}{p'}} (q1);
+    \end{tikzpicture}
+  }
+\end{frame}
+
+\endgroup

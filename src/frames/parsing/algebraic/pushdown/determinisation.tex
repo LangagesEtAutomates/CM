@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Déterminisation d'automate à pile}
+  \begin{block}{Définition -- Langage algébrique déterministe}
+    Un langage algébrique $L$ sur un alphabet $\Sigma$ est dit \structure{déterministe} s'il est reconnu par un automate à pile déterministe.
+    L'ensemble des langages algébriques déterministes sur $\Sigma$ est noté $\textsc{det}_\Sigma$.
+  \end{block}
+  
+  \begin{block}{Théorème}
+    
+    \vspace{-4mm}
+    $$\alert{\textsc{det}_\Sigma \subsetneq \textsc{alg}_\Sigma}$$
+
+    \vspace{-1mm}
+    \structure{Démonstration :}
+    \begin{enumerate}
+    \item Un automate à pile déterministe est un automate à pile, donc $\alert{\textsc{det}_\Sigma \subseteq \textsc{alg}_\Sigma}$.
+    \item $\textsc{det}_\Sigma$ est stable par complémentation
+      \begin{enumerate}
+      \item Il suffit d'inverser les états finaux et non-finaux
+      \end{enumerate}
+    \item $\textsc{alg}_\Sigma$ n'est pas stable par complémentation
+      \begin{enumerate}
+      \item Sinon, $\textsc{alg}_\Sigma$ serait stable par intersection, car $L_1 \cap L_2 = \overline{\overline{L_1} \cup \overline{L_2}}$
+      \item Or $\textsc{alg}_\Sigma$ n'est pas stable par intersection, car $\{a^n b^n c^n | n\in \mathbb{N}\} = \{a^n b^m c^n | m, n\in \mathbb{N}\} \cap \{a^n b^n c^m | m, n\in \mathbb{N}\}$
+      \end{enumerate}
+    \item Donc $\alert{\textsc{det}_\Sigma \neq \textsc{alg}_\Sigma}$.
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\endgroup

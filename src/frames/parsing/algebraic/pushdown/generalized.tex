@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Dick}{decide}
+
+\begin{frame}{Automates finis généralisés}
+
+  \tfBlock[top=-3mm]{Automate fini généralisé}{
+    Si un automate fini n'est pas suffisant, ajouter une structure de données
+    \begin{itemize}
+    \item Pile : \structure{automate à pile}
+    \item Tableau de taille $|u|$ : \structure{machine linéairement bornée}
+    \item Ruban infini : \structure{machine de Turing}
+    \end{itemize}
+  }
+
+  \tfExampleBlock[bottom]{Exemple : le langage $\{a^n b^n | n>0\}$}{
+    \begin{algorithm}[H]
+      \Fn{$\Dick(u : \text{mot}) : \text{booléen}$}{
+        $q\leftarrow 0$; $c \leftarrow 0$\;
+        \Pour{$i$ allant de $1$ à $|u|$}{
+          \uSi{$q = 0 \land u[i] = \text{`$a$'}$}{
+            $c \leftarrow c + 1$
+          }
+          \uSinonSi{$c > 0 \land u[i] = \text{`$b$'}$}{
+            $q\leftarrow 1$;
+            $c \leftarrow c - 1$\;
+          }
+          \lSinon{\Retourner \False}
+        }
+        \Retourner $q=1 \land c=0$\;
+      }
+    \end{algorithm}
+  }
+
+  \tfBlock[right=.4\textwidth,y=1mm]{Grammaire :}{
+    $S \rightarrow a S b \,|\, ab $
+  }
+  
+  \tfBlock[right=.4\textwidth, bottom=3mm]{Automate à compteur :}{
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smInitial]   (a) at (0,0) {0};
+      \smState[\smAccepting] (b) at (2,0) {1};
+      \smPath (a) edge[loop above] node {$a / c\text{++}$}   (a);
+      \smPath (a) edge             node {$b / c\text{-\,-}$} (b);
+      \smPath (b) edge[loop above] node {$b / c\text{-\,-}$} (b);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

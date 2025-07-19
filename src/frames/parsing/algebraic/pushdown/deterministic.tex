@@ -1,0 +1,41 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automates à pile déterministes}
+
+  Soit $A = \langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$ un automate à pile.
+
+  \vspace{-1mm}
+  \begin{block}{Définition -- Automate à pile déterministe}
+    On dit que $A$ est \structure{déterministe} si toutes les conditions sont vérifiées : 
+    \begin{enumerate}
+    \item $A$ ne possède pas qu'un seul état initial : \alert{$|I| = 1$}
+    \item Pour tout état $q \in Q$ et tout symbole de pile $p \in \Pi$, on a : 
+      \begin{itemize}
+      \item soit chaque lettre est consommée par au plus une transition \\
+        et il n'existe pas d'$\varepsilon$-transition \\
+      \end{itemize}
+      $$\alert{\forall a, \unique q', p' : \langle \langle q, a, p\rangle, \langle q', p'\rangle \rangle \in \mu \land \forall q', p' : \langle \langle q, \varepsilon, p\rangle, \langle q', p'\rangle \rangle \notin \mu}$$
+      \begin{itemize}
+      \item \vspace{-5mm}soit il existe une unique $\varepsilon$-transition\\
+        et aucune transition consommant des lettres :
+      \end{itemize}
+      $$\alert{\existsunique q', p' : \langle \langle q, \varepsilon, p\rangle, \langle q', p'\rangle \rangle \in \mu \land \forall u\in \Sigma^+, q', p' : \langle \langle q, u, p\rangle, \langle q', p'\rangle \rangle \notin \mu}$$
+    \end{enumerate}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{alertblock}{Remarque}
+    \begin{itemize}
+    \item \vspace{-1mm} On note $\mu(q, a, p) \eqdef \langle q', p'\rangle$ tel que $\langle \langle q, a, p\rangle, \langle q', p'\rangle \rangle \in \mu$
+    \end{itemize}
+  \end{alertblock}
+\end{frame}
+
+\endgroup

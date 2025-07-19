@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Actions d'un automate à pile}
+  \tf[top, text]{
+    Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$ un automate à pile. 
+    \begin{block}{Définition -- action et chemin d'actions}
+      Les \structure{actions} de $A$ sont définies par une
+      relation binaire \alert{$\leadsto_A$} sur les configurations.
+      Pour tous $u, v \in \Sigma^\star$, $\pi, p, p' \in \Pi^\star$, $q, q'\in Q$, on a 
+      \alert{$$\langle v \cdot u, q, p \pi \rangle \leadsto_A \langle u, q', p' \pi \rangle \hspace{3mm} \Leftrightarrow \hspace{3mm} q\xrightarrow{\smPAtrans{p}{v}{p'}}q' \in \mu$$}
+      On note \alert{$\leadsto_A^\star$} la fermeture transitive et réflexive de $\leadsto_A$.
+    \end{block}
+  }
+
+  \tfExampleBlock[y=-7mm]{Exemple -- Action $\langle bb, 0, AA\diamond \rangle \leadsto_A \langle b, 1, A\diamond \rangle$}{}
+
+  \tf[y=-25mm, x=-45mm]{
+    \begin{smArray}
+        \smCell            {$a$}  
+        \smCell            {$a$} 
+        \smCell[\smExample]{$b$} \smHead[example]
+        \smCell[\smAlert]  {$b$} 
+    \end{smArray}
+  }
+
+  \tf[y=-25mm,x=5mm]{
+    \begin{tikzpicture}[smAutomaton, node distance=2.5cm, initial text=$\diamond$]
+      \smState[\smInitial\smExample] (a) at (0.0,0.0) {$0$}; 
+      \smState[\smAlert            ] (b) at (2.5,0.0) {$1$}; 
+      \smState[\smAccepting        ] (c) at (5.0,0.0) {$2$}; 
+
+      \smPath           (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+      \smPath           (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
+      \smPath[\smAlert] (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \smPath           (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \smPath           (b) edge             node[above] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+    \end{tikzpicture}
+  }
+
+  \tf[y=-25mm, x=5cm]{
+    \begin{smStack}[width=7.5mm]
+        \smCell[\smAlert]{$\diamond$}  
+        \smCell[\smAlert]{$A$}        
+        \smCell[\smExample]{$A$}          
+    \end{smStack}
+  }
+  
+\end{frame}
+
+\endgroup

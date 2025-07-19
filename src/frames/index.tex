@@ -26,36 +26,6 @@
 \subsection{Objectifs du cours}
 \input{languages/introduction/summary/summary}
  
-\section{Rappels logiques et mathématiques}
- 
-\subsection{Logique du premier ordre}
-\input{languages/maths/logics/predicates}
-\input{languages/maths/logics/operators}
- 
-\subsection{Notion d'ensembles}
-\input{languages/maths/sets/sets}
-\input{languages/maths/sets/subsets}
-\input{languages/maths/sets/comprehension}
-\input{languages/maths/sets/extensionality}
-\input{languages/maths/sets/operations_1}
-\input{languages/maths/sets/operations_2}
- 
-\subsection{Relations}
-\input{languages/maths/relations/pairs}
-\input{languages/maths/relations/relations}
-\input{languages/maths/relations/homogeneity}
-\input{languages/maths/relations/order}
-\input{languages/maths/relations/equivalence}
-\input{languages/maths/relations/congruence}
- 
-\subsection{Fonctions}
-\input{languages/maths/functions/functions}
-\input{languages/maths/functions/bijections}
- 
-\subsection{Récurrence}
-\input{languages/maths/induction/weak}
-\input{languages/maths/induction/strong}
- 
 \section{Mots et langages formels}
  
 \subsection{Notion d'alphabet}
@@ -114,7 +84,7 @@
 \input{lexing/automata/definition/modelisation}
 \input{lexing/automata/definition/example}
 \input{lexing/automata/definition/deterministic_complete}
-
+ 
 \subsection{Langage reconnu par un automate}
 \input{lexing/automata/recognition/configuration}
 \input{lexing/automata/recognition/between_language}
@@ -124,7 +94,7 @@
 \input{lexing/automata/recognition/left_language}
 \input{lexing/automata/recognition/pruned}
 \input{lexing/automata/recognition/pruning}
-
+ 
 \subsection{Des automates aux expressions rationnelles}
 \input{lexing/automata/arden/language}
 \input{lexing/automata/arden/equations}
@@ -132,9 +102,9 @@
 \input{lexing/automata/arden/proof}
 \input{lexing/automata/arden/solution}
 \input{lexing/automata/arden/application}
-
+ 
 \section{Des expressions rationnelles aux automates}
-
+ 
 \subsection{Génération d'un automate fini non-déterministe}
 \input{lexing/generation/thompson/plan}
 \input{lexing/generation/thompson/generation}
@@ -142,13 +112,13 @@
 \input{lexing/generation/thompson/normalisation}
 \input{lexing/generation/thompson/thompson}
 \input{lexing/generation/thompson/example}
-
+ 
 \subsection{Déterminisation d'un automate fini}
 \input{lexing/generation/determinisation/plan}
 \input{lexing/generation/determinisation/equivalence}
 \input{lexing/generation/determinisation/interpretation}
 \input{lexing/generation/determinisation/algorithm}
-
+ 
 \subsection{Minimisation d'un automate fini déterministe}
 \input{lexing/generation/minimisation/plan}
 \input{lexing/generation/minimisation/minimality}
@@ -171,8 +141,8 @@
 \input{lexing/limits/pumping/proof}
 \input{lexing/limits/pumping/example}
 \input{lexing/limits/pumping/example2}
-
-
+ 
+ 
 \part{Analyse Syntaxique}
  
  
@@ -201,6 +171,22 @@
 \input{parsing/algebraic/decision/CNF_transform}
 \input{parsing/algebraic/decision/CYK}
  
+\subsection{Automates à pile}
+\input{parsing/algebraic/pushdown/generalized}
+\input{parsing/algebraic/pushdown/recursion}
+\input{parsing/algebraic/pushdown/modelisation}
+\input{parsing/algebraic/pushdown/example}
+\input{parsing/algebraic/pushdown/configurations}
+\input{parsing/algebraic/pushdown/actions}
+\input{parsing/algebraic/pushdown/accepted}
+\input{parsing/algebraic/pushdown/equivalence}
+\input{parsing/algebraic/pushdown/deterministic}
+\input{parsing/algebraic/pushdown/determinisation}
+\input{parsing/algebraic/pushdown/nondeterministic}
+
+%\subsection{Parsers LR}
+%\input{parsing/algebraic/LRparser/strategies}
+
 \subsection{Grammaires rationnelles}
 \input{parsing/algebraic/regular/theorem}
 \input{parsing/algebraic/regular/right_linear}
@@ -215,29 +201,64 @@
 \input{parsing/algebraic/limits/proof}
 \input{parsing/algebraic/limits/example}
  
-\section{Hiérarchie de Chomsky}
- 
-\subsection{Grammaires non-restreintes}
-\input{parsing/chomsky/grammars/introduction}
-\input{parsing/chomsky/grammars/general}
-\input{parsing/chomsky/grammars/language}
-\input{parsing/chomsky/grammars/graph}
- 
-\subsection{Langages contextuels}
-\input{parsing/chomsky/contextual/definition}
-\input{parsing/chomsky/contextual/example}
-\input{parsing/chomsky/contextual/inclusion}
- 
-\subsection{Décision d'un langage contextuel}
-\input{parsing/chomsky/decision/introduction}
-\input{parsing/chomsky/decision/brute_force}
-\input{parsing/chomsky/decision/termination}
- 
-\subsection{Hiérarchie de Chomsky}
-\input{parsing/chomsky/hierarchy/grammars}
-\input{parsing/chomsky/hierarchy/languages}
-\input{parsing/chomsky/hierarchy/decidability}
-\input{parsing/chomsky/hierarchy/hierarchy}
-
 \endgroup
 \endinput
+
+
+
+%\section{Rappels logiques et mathématiques}
+% 
+%\subsection{Logique du premier ordre}
+%\input{languages/maths/logics/predicates}
+%\input{languages/maths/logics/operators}
+% 
+%\subsection{Notion d'ensembles}
+%\input{languages/maths/sets/sets}
+%\input{languages/maths/sets/subsets}
+%\input{languages/maths/sets/comprehension}
+%\input{languages/maths/sets/extensionality}
+%\input{languages/maths/sets/operations_1}
+%\input{languages/maths/sets/operations_2}
+% 
+%\subsection{Relations}
+%\input{languages/maths/relations/pairs}
+%\input{languages/maths/relations/relations}
+%\input{languages/maths/relations/homogeneity}
+%\input{languages/maths/relations/order}
+%\input{languages/maths/relations/equivalence}
+%\input{languages/maths/relations/congruence}
+% 
+%\subsection{Fonctions}
+%\input{languages/maths/functions/functions}
+%\input{languages/maths/functions/bijections}
+% 
+%\subsection{Récurrence}
+%\input{languages/maths/induction/weak}
+%\input{languages/maths/induction/strong}
+
+
+
+
+%\section{Hiérarchie de Chomsky}
+% 
+%\subsection{Grammaires non-restreintes}
+%\input{parsing/chomsky/grammars/introduction}
+%\input{parsing/chomsky/grammars/general}
+%\input{parsing/chomsky/grammars/language}
+%\input{parsing/chomsky/grammars/graph}
+% 
+%\subsection{Langages contextuels}
+%\input{parsing/chomsky/contextual/definition}
+%\input{parsing/chomsky/contextual/example}
+%\input{parsing/chomsky/contextual/inclusion}
+% 
+%\subsection{Décision d'un langage contextuel}
+%\input{parsing/chomsky/decision/introduction}
+%\input{parsing/chomsky/decision/brute_force}
+%\input{parsing/chomsky/decision/termination}
+% 
+%\subsection{Hiérarchie de Chomsky}
+%\input{parsing/chomsky/hierarchy/grammars}
+%\input{parsing/chomsky/hierarchy/languages}
+%\input{parsing/chomsky/hierarchy/decidability}
+%\input{parsing/chomsky/hierarchy/hierarchy}

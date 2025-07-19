@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Équivalence entre automates à pile et grammaires}
+  \begin{block}{Théorème -- Équivalence entre formalismes}
+    Tout langage peut être reconnu par un automate à pile ssi il est algébrique. 
+  \end{block}
+  
+  \begin{block}{Preuve}
+    \begin{enumerate}
+    \item \structure{Des grammaires algébriques aux automates à pile}\\
+      
+      Soit $G = \langle \Sigma, \Gamma, S, R\rangle$ une grammaire en forme normale de Chomsky.
+      
+      Alors $\mathcal{L}(G) = \mathcal{L}(\langle \Sigma, \Gamma, \{q\}, \{q\}, \{q\}, S, \mu \rangle)$, avec
+      $$\mu = \left\{ q \xrightarrow{\smPAtrans{a}{A}{\varepsilon}} q \,\middle\mid\, A \rightarrow a \in R \right\} \cup
+      \left\{q\xrightarrow{\smPAtrans{\varepsilon}{A}{BC}}q \,\middle\mid\,  A \rightarrow BC\in R \right\}$$
+
+      \begin{center}
+        \scalebox{1}{\begin{tikzpicture}[smAutomaton, initial text=$S$]
+            \smState[\smInitial\smAccepting] (q) {$q$};
+            \smPath (q) edge [loop right] node {
+              $\begin{array}{ll}
+                \smPAtrans{a}{A}{\varepsilon}  & \text{ pour } A\rightarrow a \\
+                \smPAtrans{\varepsilon}{A}{BC} & \text{ pour } A\rightarrow BC \\
+              \end{array}$
+            } (q);
+        \end{tikzpicture}}
+      \end{center}
+
+      
+    \item \structure{Des automates à pile aux grammaires algébriques}
+      \begin{itemize}
+      \item Admis, car un peu technique
+      \end{itemize}
+    \end{enumerate}
+  \end{block}
+\end{frame}
+
+\endgroup

@@ -1,0 +1,37 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages algébriques non-déterministes}
+  Soit $\Sigma = \{a, b\}$.
+  
+  \begin{exampleblock}{Exemples et contre-exemples}
+    \begin{itemize}
+    \item Les langages $\example{\{ a^n b^n | n\in \mathbb{N}\}}$ et $\example{\{ a^n b^{2n} | n\in \mathbb{N}\}}$ sont déterministes.
+    \item Leur union $\example{\{ a^n b^n | n\in \mathbb{N}\} \cup \{ a^n b^{2n} | n\in \mathbb{N}\}}$ est non-déterministe.
+      \begin{itemize}
+      \item Faut-il dépiler à chaque fois ou une fois sur deux ? 
+      \end{itemize}
+    \item Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$ est déterministe.
+      \begin{center}
+        \structure{\scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=2.5cm,on grid,auto]
+              \node [state,initial above, initial text=$\diamond$] (b)  {$1$}; 
+              \node [state, accepting] (c) [right=of b]  {$2$}; 
+              \path [->]    (b) edge node[above] {$c/\varepsilon/\varepsilon$} (c);
+              \path [->]    (b) edge[loop left, looseness=5] node {$\begin{array}{c}a/\varepsilon/A\\b/\varepsilon/B\end{array}$} (b);
+              \path [->]    (c) edge[loop right, looseness=5] node {$\begin{array}{c}a/A/\varepsilon\\b/B/\varepsilon\end{array}$} (c);
+        \end{tikzpicture}}}\\
+        (Arrêt sur état final)
+      \end{center}
+    \item Par contre, le langage des palindromes est non-déterministe :
+      $$\example{\{ w \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$$
+    \end{itemize}
+  \end{exampleblock}
+\end{frame}
+
+\endgroup

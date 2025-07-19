@@ -1,0 +1,83 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Decider}{decider}
+\SetKwFunction{Trouver}{S}
+
+\begin{frame}[fragile]{Algorithme de reconnaissance récursif}
+
+  \tf[top, text]{
+    \begin{algorithm}[H]
+      \Fn{$\Decider(u : \text{mot}) : \text{booléen}$}{
+        \Retourner $\Trouver( u \cdot \text{`$\diamond$'}, \text{`$\diamond$'} )$\;
+      }
+      \Fn{$\Trouver(\textbf{\color{black}m } u : \text{mot}, \omega : \text{caractère}) : \text{booléen}$}{
+        \lSi{$u = \varepsilon$}{\Retourner \False}
+        $c \leftarrow u[1]$; 
+        $u \leftarrow u[2]...u[|u|]$\;
+        \lSi{$c = \omega\,$}{\Retourner \True}
+        \lSi{$c = \alert{\text{`$\{$'}}$}{\Retourner $\Trouver(u, \alert{\text{`$\}$'}}) \land \Trouver(u, c)$}
+        \lSi{$c = \hspace{.3mm}\alert{\text{`$\langle$'}}$}{\Retourner $\Trouver(u, \alert{\text{`$\rangle$'}}) \land \Trouver(u, c)$}
+        \Retourner \False\;
+      }
+    \end{algorithm}
+  }
+
+  \tfBlock[top=-2mm, right=37mm]{Grammaire}{
+    $\left\{\begin{array}{l}
+    S \rightarrow \varepsilon\\
+    S \rightarrow \alert{\{}S\alert{\}}S\\
+    S \rightarrow \hspace{.2mm}\alert{\langle}\hspace{.2mm}S\hspace{.2mm}\alert{\rangle}\hspace{.2mm}S\\
+    \end{array}\right.$
+  }
+
+  \tfExampleBlock<2-|handout>[y=5mm,right=37mm]{Exemple : $u = \{\{\}\langle\rangle\}$}{
+    \begin{smArray}
+      \smCell{$\{$}       \smHead<2>
+      \smCell{$\{$}       \smHead<3>
+      \smCell{$\}$}       \smHead<4>
+      \smCell{$\langle$}  \smHead<5>
+      \smCell{$\rangle$}  \smHead<6>
+      \smCell{$\}$}       \smHead<7>
+      \smCell{$\diamond$} \smHead<8>
+    \end{smArray}
+  }
+
+  \tf<2-|handout>[y=-25mm, x=-.25\textwidth]{
+    \begin{tikzpicture}[smAutomaton, initial text=$\text{empile}(\diamond)$]
+      \smState[\smInitialAbove] (a) at (0,1.5) {0};
+      
+      \smPath (a) edge [loop right] node {
+        $\begin{array}{@{}r@{\,}c@{\,}l@{}}
+          \uncover<5-|handout>{\langle &:& \text{empile}(\langle)}\\
+          \uncover<2-|handout>{\{ &:& \text{empile}(\})}\\
+          \uncover<4-|handout>{\} &:& \text{dépile}(\})}\\
+          \uncover<6-|handout>{\rangle &:& \text{dépile}(\rangle)}\\
+        \end{array}$
+      } (a);
+
+      \uncover<8-|handout>{
+        \smState[\smAccepting] (b) at (0,0) {1};
+        \smPath (a) edge node[left] {$\diamond : \text{dépile}(\diamond)$} (b);
+      }
+    \end{tikzpicture}
+  }
+
+  \tf<2-|handout>[y=-25mm, x=.25\textwidth]{
+    \begin{smStack}[width=2cm]
+      \smCell{\only<2-|handout>{$\Decider(u)$}}
+      \smCell{\only<2-8|handout>{$\Trouver(u, \diamond)$}}
+      \smCell{\only<3-7>{$\Trouver(u, \})$}}
+      \smCell{\only<4>{$\Trouver(u, \})$}\only<6>{$\Trouver(u, \rangle)$}}
+    \end{smStack}
+  }
+
+\end{frame}
+
+\endgroup
