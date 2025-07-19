@@ -7,127 +7,60 @@
 
 \begingroup
 
+\SetKwFunction{Emondage}{emondage}
+\SetKwFunction{Accessible}{accessible}
+\SetKwFunction{Coaccessible}{co-accessible}
+
 \begin{frame}[fragile]{Algorithme de l'émondage}
 
-  \vspace{-3mm}
-  \begin{block}{Théorème -- Émondage}
+  \tfBlock[top=-5mm]{Théorème -- Émondage}{
     Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN. Il existe un automate émondé $B \equiv A$.
-  \end{block}
-  
-  \vspace{2mm}
-  \begin{tikzpicture}
-    
-    \fill<2>[rounded corners, structure!20]      (-7.8,1.1)   rectangle (-5.6,1.45);
-    \fill<3-5>[rounded corners, structure!20]    (-7.8,.4)    rectangle (-0.2,1.1);
-    \fill<6>[rounded corners, example!20]   (-7.8,.05)   rectangle (-5.1,.4);
-    \fill<7-9>[rounded corners, example!20] (-7.8,-.65)  rectangle (0.6,.05);
-    \fill<10>[rounded corners, alert!20]    (-7.8,-1.35) rectangle (-3.2,-.65);
-    
-    \draw (0,0) node{\begin{minipage}{1.5\textwidth}\scalebox{.75}{\begin{algorithm}[H]
-            \SetKwFunction{Emondage}{emondage}
-            \SetKwFunction{Accessible}{accessible}
-            \SetKwFunction{Coaccessible}{co-accessible}
-            \SetKwData{Adresse}{u}
-            \SetKwData{HasAt}{vu@}
-            \SetKwData{isEmpty}{vu$\beta$}
-            \SetKwData{HasDot}{vu$\bullet$}
+  }
 
-            \Fn{\Emondage($A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate) : automate}{
-              $\Accessible \leftarrow I$\;
-              \Tantque{$\exists \langle q, a, q' \rangle \in \mu, q\in \Accessible \land q'\notin\Accessible$}{
-                $\Accessible \leftarrow \Accessible \cup \{q'\}$\;
-              }
-              $\Coaccessible \leftarrow F$\;
-              \Tantque{$\exists \langle q, a, q' \rangle \in \mu, q\not\in \Coaccessible \land q'\in\Coaccessible$}{
-                $\Coaccessible \leftarrow \Coaccessible \cup \{q\}$\;
-              }
-              $Q' \leftarrow \Accessible \cap \Coaccessible$\;
-              $\mu' \leftarrow \{\langle q, a, q' \rangle \in \mu | q\in Q' \land q'\in Q' \}$\;
-              \Retourner $\langle \Sigma, Q', I \cap Q', F \cap Q', \mu'\rangle$\;
-            }
-        \end{algorithm}}
-    \end{minipage}};
+  \tf[text, y=2mm]{\small
+    \begin{algorithm}[H]
+      \Fn{\Emondage($A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate) : automate}{
+        \tfStructure<2|handout>{$\Accessible \leftarrow I$}\;
+        \Tantque{\tfStructure<3-5|handout>{$\exists q \xrightarrow{a} q' \in \mu :  q\in \Accessible \land q'\notin\Accessible$}}{
+          \tfStructure<3-5|handout>{$\Accessible \leftarrow \Accessible \cup \{q'\}$}\;
+        }
+        \tfExample<6|handout>{$\Coaccessible \leftarrow F$}\;
+        \Tantque{\tfExample<7-9|handout>{$\exists q \xrightarrow{a} q' \in \mu, q\not\in \Coaccessible \land q'\in\Coaccessible$}}{
+          \tfExample<7-9|handout>{$\Coaccessible \leftarrow \Coaccessible \cup \{q\}$}\;
+        }
+        \tfAlert<10|handout>{$Q' \leftarrow \Accessible \cap \Coaccessible$}\;
+        \Retourner $\displaystyle\left\langle \Sigma, Q', I \cap Q', F \cap Q', \mu \cap (Q' \times \Sigma \times Q')\right\rangle$\;
+      }
+    \end{algorithm}
+  }
 
-    \draw (0.5,-2.7) node{\scalebox{.85}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-          \node (s0) {}; 
-          \node (s1) [right=of s0] {}; 
-          \node (s2) [below=of s0] {}; 
-          \node (s3) [right=of s2] {}; 
-          \node (s4) [below=of s2] {}; 
-          \node (s5) [right=of s4] {}; 
-          \node (s6) [right=of s3] {}; 
+  \tfExampleBlock[bottom]{Exemple}{
+    \begin{itemize}
+    \item<2-|handout>  \structure{$\Accessible = \{2, 4\only<3-|handout>{, 3}\only<4-|handout>{, 5}\only<5-|handout>{, 6}\}$}
+    \item<6-|handout>  \example{$\Coaccessible = \{0, 6\only<7-|handout>{, 3}\only<8-|handout>{, 1}\only<9-|handout>{, 2}\}$}
+    \item<10-|handout> \alert{$Q' = \{2, 3, 6\}$}
+    \end{itemize}
+  }
 
-          \node<-5>[state, accepting]              (0) at (s0) {0}; 
-          \node<-7>[state]                         (1) at (s1) {1}; 
-          \node<-1,5-8>[state, initial, initial text=] (2) at (s2) {2}; 
-          \node<-2,5-6>[state]                         (3) at (s3) {3}; 
-          \node<-1,5-9>[state, initial, initial text=] (4) at (s4) {4}; 
-          \node<-3,5-9>[state]                         (5) at (s5) {5}; 
-          \node<-4,5>[state, accepting]              (6) at (s6) {6}; 
+  \tf[bottom, x=.35\textwidth]{\footnotesize
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smAccepting                           \smExample<6-9|handout>                      \smColor<10>{black!30}] (0) at (0.0,2.4) {$0$}; 
+      \smState[                                       \smExample<8-9|handout>                      \smColor<10>{black!30}] (1) at (1.2,2.4) {$1$}; 
+      \smState[\smInitial   \smStructure<2-5>         \smExample<9>           \smAlert<10|handout>                       ] (2) at (0.0,1.2) {$2$}; 
+      \smState[             \smStructure<3-5>         \smExample<7-9>         \smAlert<10|handout>                       ] (3) at (1.2,1.2) {$3$}; 
+      \smState[\smInitial   \smStructure<2-5|handout>                                              \smColor<10>{black!30}] (4) at (0.0,0.0) {$4$}; 
+      \smState[             \smStructure<4-5|handout>                                              \smColor<10>{black!30}] (5) at (1.2,0.0) {$5$}; 
+      \smState[\smAccepting \smStructure<5>           \smExample<6-9>         \smAlert<10|handout>                       ] (6) at (2.4,1.2) {$6$}; 
 
-          \node<2-5>[state, initial, initial text=, structure, fill=structure!20] (2) at (s2) {2}; 
-          \node<3-5>[state, structure, fill=structure!20] (3) at (s3) {3}; 
-          \node<2-5>[state, initial, initial text=, structure, fill=structure!20] (4) at (s4) {4}; 
-          \node<4-5>[state, structure, fill=structure!20] (5) at (s5) {5}; 
-          \node<5>  [state, accepting, structure, fill=structure!20] (6) at (s6) {6}; 
-
-          \node<6-9>[state, accepting, example, fill=example!20] (6) at (s6) {6}; 
-          \node<6-9>[state, accepting, example, fill=example!20] (0) at (s0) {0}; 
-          \node<7-9>[state, example, fill=example!20] (3) at (s3) {3}; 
-          \node<8-9>[state, example, fill=example!20] (1) at (s1) {1}; 
-          \node<9>  [state, initial, initial text=, example, fill=example!20] (2) at (s2) {2}; 
-
-          \node<10>[state, initial, initial text=, alert, fill=alert!20] (2) at (s2) {2}; 
-          \node<10>[state, alert, fill=alert!20]                         (3) at (s3) {3}; 
-          \node<10>[state, accepting, alert, fill=alert!20]              (6) at (s6) {6}; 
-          \node<10>[state, accepting, black!30]              (0) at (s0) {0}; 
-          \node<10>[state, black!30]                         (1) at (s1) {1}; 
-          \node<10>[state, initial, initial text=, black!30] (4) at (s4) {4}; 
-          \node<10>[state, black!30]                         (5) at (s5) {5}; 
-
-          \node<11>[state, initial, initial text=] (2) at (s2) {2}; 
-          \node<11>[state]                         (3) at (s3) {3}; 
-          \node<11>[state, accepting]              (6) at (s6) {6}; 
-
-          \path<-9>      [->]              (0) edge node{$a$} (1);
-          \path<-7,9>    [->]              (1) edge node{$b$} (3);
-          \path<8>       [example,->] (1) edge node{$b$} (3);
-          \path<-2,4-8>  [->]              (2) edge node{$a$} (3);
-          \path<3>       [structure, ->]   (2) edge node{$a$} (3);
-          \path<9>       [example,->] (2) edge node{$a$} (3);
-          \path<-3,5-9>  [->]              (3) edge node{$b$} (5);
-          \path<4>       [structure, ->]   (3) edge node{$b$} (5);
-          \path<-3,5-9>  [->]              (4) edge node{$a$} (5);
-          \path<4>       [structure, ->]   (4) edge node{$a$} (5);
-          \path<-4,6,8,9>[->]              (3) edge node{$b$} (6);
-          \path<5>       [structure, ->]   (3) edge node{$b$} (6);
-          \path<7>       [example,->] (3) edge node{$b$} (6);
-          
-          \path<10>[->, black!30]   (0) edge node{$a$} (1);
-          \path<10>[->, black!30]   (1) edge node{$b$} (3);
-          \path<10>[->, alert] (2) edge node{$a$} (3);
-          \path<10>[->, black!30]   (3) edge node{$b$} (5);
-          \path<10>[->, black!30]   (4) edge node{$a$} (5);
-          \path<10>[->, alert] (3) edge node{$b$} (6);
-
-          \path<11>[->] (2) edge node{$a$} (3);
-          \path<11>[->] (3) edge node{$b$} (6);
-
-    \end{tikzpicture}}};
-
-    \draw (-5,-1.75) node[below]{\begin{minipage}{.55\textwidth}
-        \begin{exampleblock}{Exemple}
-          \begin{itemize}
-          \item<2->  \structure{$\Accessible = \{2, 4\only<3->{, 3}\only<4->{, 5}\only<5->{, 6}\}$}
-          \item<6->  \example{$\Coaccessible = \{0, 6\only<7->{, 3}\only<8->{, 1}\only<9->{, 2}\}$}
-          \item<10-> \alert{$Q' = \{2, 3, 6\}$}
-          \end{itemize}
-        \end{exampleblock}
-    \end{minipage}};
-
-  \end{tikzpicture}
+      \smPath[                                                                                     \smColor<10>{black!30}] (0) edge node{$a$} (1);
+      \smPath[                                        \smExample<8>                                \smColor<10>{black!30}] (1) edge node{$b$} (3);
+      \smPath[              \smStructure<3>           \smExample<9>           \smAlert<10|handout>                       ] (2) edge node{$a$} (3);
+      \smPath[              \smStructure<4>                                                        \smColor<10>{black!30}] (3) edge node{$b$} (5);
+      \smPath[              \smStructure<4>                                                        \smColor<10>{black!30}] (4) edge node{$a$} (5);
+      \smPath[              \smStructure<5>           \smExample<7>           \smAlert<10|handout>                       ] (3) edge node{$b$} (6);
+    \end{tikzpicture}
+  }
 
 \end{frame}
-
 
 \endgroup

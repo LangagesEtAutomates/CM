@@ -9,81 +9,62 @@
 
 \begin{frame}{Exemple}
 
-  \begin{center}
-    Trouver un automate qui reconnaît
-    $$\structure{a} \cdot \alert{(\structure{b} \example{|} \structure{c})^\star}$$
+  \tf[y=27mm]{Trouver un automate qui reconnaît}
+  \tf[y=20mm]{\Large $\structure{a} \cdot \alert{(\structure{b} \example{|} \structure{c})^\star}$}
 
-    \vspace{3mm}
-    
-    \scalebox{1}{\begin{tikzpicture}
-        \draw[white] (-1.5,-2) rectangle (8.5,2);
+  \tf[y=-5mm]{
+    \begin{tikzpicture}[smAutomaton]
+
+      \only<2-4>{
+        \draw[rounded corners, draw=black!30, fill=black!10] (-1.1, 1.3) rectangle (2.2,2.7);
+        \draw[structure]                                     (-1.1, 1.3) node[above right]{$a$};
+      }
+      \only<2>{
+        \draw[rounded corners, draw=black!30, fill=black!10] ( 3.9, 1.3) rectangle (7.2,2.7);
+        \draw[structure]                                     ( 3.9, 1.3) node[above right]{$b$};
+      }
+      \only<2>{
+        \draw[rounded corners, draw=black!30, fill=black!10] ( 3.9,-0.7) rectangle (7.2,0.7);
+        \draw[structure]                                     ( 3.9,-0.7) node[above right]{$c$};
+      }
+      \only<3>{
+        \draw[rounded corners, draw=black!30, fill=black!10] ( 2.9,-0.7) rectangle (8.2,2.7);
+        \draw[example]                                       ( 2.9,-0.7) node[above right]{$b|c$};
+      }
+      \only<4>{
+        \draw[rounded corners, draw=black!30, fill=black!10] ( 2.4,-0.7) rectangle (8.2,2.7);
+        \draw[alert]                                         ( 8.2, 2.7) node[below left]{$(b|c)^\star$};
+      }
+      \uncover<5-|handout> {
+        \draw[rounded corners, draw=black!30, fill=black!10] (-1.1,-0.7) rectangle (8.2,2.7);
+        \draw                                                (-1.1,-0.7) node[above right]{$a \cdot (b|c)^\star$};
+      }
         
-        \draw<5-> [rounded corners, draw=black!30, fill=black!10] (-1,-1.8)   rectangle (7.9,1.8);
+      \smState<2-|handout>[\smInitial         \smStructure] (1)  at (0.0, 2.0) {$1$};
+      \smState<2-|handout>[\smAccepting<-4>   \smStructure] (2)  at (1.5, 2.0) {$2$};
+      \smState<2-|handout>[\smInitial<2>      \smStructure] (3)  at (5.0, 2.0) {$3$};
+      \smState<2-|handout>[\smAccepting<2>    \smStructure] (4)  at (6.5, 2.0) {$4$};
+      \smState<2-|handout>[\smInitial<2>      \smStructure] (5)  at (5.0, 0.0) {$5$};
+      \smState<2-|handout>[\smAccepting<2>    \smStructure] (6)  at (6.5, 0.0) {$6$};
+      \smState<3-|handout>[\smInitial<3>      \smExample  ] (7)  at (4.0, 1.0) {$7$};
+      \smState<3-|handout>[\smAccepting<3>    \smExample  ] (8)  at (7.5, 1.0) {$8$};
+      \smState<4-|handout>[\smInitialRight<4> \smAlert    ] (9)  at (3.0, 2.0) {$9$};
+      \smState<4-|handout>[\smAccepting       \smAlert    ] (10) at (3.0, 0.0) {$10$};
+      
+      \smPath<2-|handout>[\smStructure] (1) edge node {$a$}           (2);
+      \smPath<2-|handout>[\smStructure] (3) edge node {$b$}           (4);
+      \smPath<2-|handout>[\smStructure] (5) edge node {$c$}           (6);
+      \smPath<3-|handout>[\smExample]   (7) edge node {$\varepsilon$} (3);
+      \smPath<3-|handout>[\smExample]   (7) edge node {$\varepsilon$} (5);
+      \smPath<3-|handout>[\smExample]   (4) edge node {$\varepsilon$} (8);
+      \smPath<3-|handout>[\smExample]   (6) edge node {$\varepsilon$} (8);
+      \smPath<4-|handout>[\smAlert]     (9) edge node {$\varepsilon$} (7);
+      \smPath<4-|handout>[\smAlert]     (8) edge node {$\varepsilon$} (7);
+      \smPath<4-|handout>[\smAlert]     (7) edge node {$\varepsilon$} (10);
+      \smPath<5-|handout>               (2) edge node {$\varepsilon$} (9);
+    \end{tikzpicture}
+  }
 
-        \mode<beamer>{
-          \draw<2-4>[rounded corners, draw=black!30, fill=black!10] (-1,-.6)     rectangle (1.8,.6);
-          \draw<2>  [rounded corners, draw=black!30, fill=black!10] (3.9,0.65)  rectangle (6.7,1.8);
-          \draw<2>  [rounded corners, draw=black!30, fill=black!10] (3.9,-1.8)  rectangle (6.7,-.65);
-          \draw<3>  [rounded corners, draw=black!30, fill=black!10] (2.7,-1.8)  rectangle (7.9,1.8);
-          \draw<4>  [rounded corners, draw=black!30, fill=black!10] (1.95,-1.8) rectangle (7.9,1.8);
-          \node<2-4> [state, accepting, structure, fill=structure!20] (b1) at (b) {$2$};
-          \node<2>   [state,initial, initial text=, structure, fill=structure!20] (e1) at (e) {$3$};
-          \node<2>   [state, accepting, structure, fill=structure!20] (f1) at (f) {$4$};
-          \node<2>   [state,initial, initial text=, structure, fill=structure!20] (g1) at (g) {$5$};
-          \node<2>   [state, accepting, structure, fill=structure!20] (h1) at (h) {$6$};
-          \node<3>   [state,initial, initial text=, example, fill=example!20] (d1) at (d) {$7$};
-          \node<3>   [state, accepting, example, fill=example!20] (i1) at (i) {$8$};
-          \node<4>   [state, initial above, initial text=, alert, fill=alert!20] (c1) at (c) {$9$};
-          \draw<2-4>[structure]    (-1,.6)    node[below right]{\footnotesize $a$};
-          \draw<2>  [structure]    (3.9,1.8)  node[below right]{\footnotesize $b$};
-          \draw<2>  [structure]    (3.9,-.65) node[below right]{\footnotesize $c$};
-          \draw<3>  [example] (2.7 ,1.8) node[below right]{\footnotesize $b|c$};
-          \draw<4>  [alert]   (1.95,1.8) node[below right]{\footnotesize $(b|c)^\star$};
-          \draw<5->                (-1,1.8)   node[below right]{\footnotesize $a \cdot (b|c)^\star$};
-        }
-        
-        
-        \node (a) {};
-        \node (b) [right=of a] {};
-        \node (c) [right=of b] {};
-        \node (d) [right=of c] {};
-        \node (e) [above right=of d] {};
-        \node (f) [right=of e] {};
-        \node (g) [below right=of d] {};
-        \node (h) [right=of g] {};
-        \node (i) [below right=of f] {};
-        \node (j) [below=of d] {};
-
-        \node<2-> [state,initial, initial text=, structure, fill=structure!20] (a1) at (a) {$1$};
-        \node<5-> [state, structure, fill=structure!20] (b1) at (b) {$2$};
-        \node<3-> [state, structure, fill=structure!20] (e1) at (e) {$3$};
-        \node<3-> [state, structure, fill=structure!20] (f1) at (f) {$4$};
-        \node<3-> [state, structure, fill=structure!20] (g1) at (g) {$5$};
-        \node<3-> [state, structure, fill=structure!20] (h1) at (h) {$6$};
-        \node<4-> [state, example, fill=example!20] (d1) at (d) {$7$};
-        \node<4-> [state, example, fill=example!20] (i1) at (i) {$8$};
-        \node<5-> [state, alert, fill=alert!20] (c1) at (c) {$9$};
-        \node<4-> [state, accepting, alert, fill=alert!20] (j1) at (j) {$10$};
-
-        \path<2-> [->, structure]  (a1) edge node[above] {$a$} (b1);
-        \path<2-> [->, structure]  (e1) edge node[below] {$b$} (f1);
-        \path<2-> [->, structure]  (g1) edge node[above] {$c$} (h1);
-        
-        \path<3-> [->, example]  (d1) edge node[right] {$\varepsilon$} (e1);
-        \path<3-> [->, example]  (d1) edge node[right] {$\varepsilon$} (g1);
-        
-        \path<3-> [->, example]  (f1) edge node[left ] {$\varepsilon$} (i1);
-        \path<3-> [->, example]  (h1) edge node[left ] {$\varepsilon$} (i1);
-        
-        \path<4-> [->, alert]  (i1) edge node[above] {$\varepsilon$} (d1);
-        \path<4-> [->, alert]  (c1) edge node[above] {$\varepsilon$} (d1);
-        \path<4-> [->, alert]  (d1) edge node[left ] {$\varepsilon$} (j1);
-
-        \path<5-> [->]  (b1) edge node[above] {$\varepsilon$} (c1);
-
-
-    \end{tikzpicture}}
-  \end{center}  
 \end{frame}
 
 \endgroup

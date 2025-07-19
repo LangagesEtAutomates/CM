@@ -9,6 +9,8 @@
 
 \begin{frame}{Langage entre états}
 
+  \tfExampleBlock[y=-10mm]{Exemple}{}
+
   \tf[text, top]{
     Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
     \begin{block}{Définition -- Langage entre états}
@@ -27,12 +29,11 @@
     \end{block}
   }
 
-  \tfExampleBlock{Exemple}{}
 
-  \tf[bot, x=-.25\textwidth]{
+  \tf[bottom, x=.4\textwidth]{
     \begin{tikzpicture}[smAutomaton]
-      \smState[\smInitial]   (s1) at (0.0,1.5) {$s_1$}; 
-      \smState[\smAccepting] (s2) at (1.5,1.5) {$s_2$}; 
+      \smState[\smInitial]   (s1) at (0.0,1.2) {$s_1$}; 
+      \smState[\smAccepting] (s2) at (1.5,1.2) {$s_2$}; 
       \smState[\smInitial]   (s3) at (0.0,0,0) {$s_3$}; 
       \smState               (s4) at (1.5,0,0) {$s_4$}; 
 
@@ -46,48 +47,28 @@
     \end{tikzpicture}
   }
 
-  
-    \begin{exampleblock}{Exemple}
-    \noindent\begin{minipage}{.3\textwidth}%
-    \scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-        \node [state,initial, initial text=] (s1)   {$s_1$}; 
-        \node [state,accepting] (s2) [right=of s1]  {$s_2$}; 
+  \tf[bottom, text=.4\textwidth, x=2mm]{
+    $$\begin{array}{rcl}
+      \langle aac, s_1 \rangle &\leadsto & \langle ac, s_1 \rangle\\
+      \langle ac, s_1 \rangle &\leadsto & \langle c, s_2 \rangle\\
+      \langle c, s_2 \rangle &\leadsto & \langle \varepsilon, s_2 \rangle\\
+      \\
+      \example{\langle aac, s_1 \rangle} & \example{\leadsto^\star} & \example{\langle \varepsilon, s_2 \rangle}
+    \end{array}$$
+    $$\example{aac \in \mathcal{L}_A(s_1, s_2)}$$
+  }
 
-        \node [state,initial, initial text=] (s4) [below=of s1]  {$s_3$}; 
-        \node [state=] (s5) [right=of s4]  {$s_4$}; 
+  \tf[bottom, left=.3\textwidth]{
+    $$\begin{array}{rcl}
+      \langle bbb, s_3 \rangle &\leadsto & \langle bb, s_3 \rangle\\
+      \langle bb, s_3 \rangle &\leadsto & \langle b, s_4 \rangle\\
+      \langle b, s_4 \rangle &\leadsto & \langle \varepsilon, s_4 \rangle\\
+      \\
+      \example{\langle bbb, s_3 \rangle} & \example{\leadsto^\star} & \example{\langle \varepsilon, s_4 \rangle}
+    \end{array}$$
+    $$\example{bbb \in \mathcal{L}_A(s_3, s_4)}$$
+  }
 
-        \path [->]    (s1) edge node[above] {a} (s2);
-        \path [->]    (s1) edge[loop above, looseness=5] node {a} (s1);
-
-        \path [->]    (s4) edge node[above] {b} (s5);
-        \path [->]    (s4) edge[loop below, looseness=5] node {b} (s4);
-        \path [->]    (s5) edge[loop below, looseness=5] node {b} (s5);
-
-        \path [->]    (s2) edge[loop right, looseness=5] node {c} (s2);
-
-        \path [->]    (s5) edge node {$\varepsilon$} (s2);
-    \end{tikzpicture}}\end{minipage}%
-    \begin{minipage}{.4\textwidth}
-      $$\begin{array}{rcl}
-        \langle aac, s_1 \rangle &\leadsto & \langle ac, s_1 \rangle\\
-        \langle ac, s_1 \rangle &\leadsto & \langle c, s_2 \rangle\\
-        \langle c, s_2 \rangle &\leadsto & \langle \varepsilon, s_2 \rangle\\
-        \\
-        \example{\langle aac, s_1 \rangle} & \example{\leadsto^\star} & \example{\langle \varepsilon, s_2 \rangle}
-      \end{array}$$
-      $$\example{aac \in \mathcal{L}_A(s_1, s_2)}$$
-    \end{minipage}%
-    \begin{minipage}{.3\textwidth}
-      $$\begin{array}{rcl}
-        \langle bbb, s_3 \rangle &\leadsto & \langle bb, s_3 \rangle\\
-        \langle bb, s_3 \rangle &\leadsto & \langle b, s_4 \rangle\\
-        \langle b, s_4 \rangle &\leadsto & \langle \varepsilon, s_4 \rangle\\
-        \\
-        \example{\langle bbb, s_3 \rangle} & \example{\leadsto^\star} & \example{\langle \varepsilon, s_4 \rangle}
-      \end{array}$$
-      $$\example{bbb \in \mathcal{L}_A(s_3, s_4)}$$
-    \end{minipage}
-  \end{exampleblock}
 \end{frame}
 
 
