@@ -144,8 +144,8 @@
  
  
 \part{Analyse Syntaxique}
- 
- 
+
+
 \section{Langages algébriques}
  
 \subsection{Introduction}
@@ -158,19 +158,23 @@
 \input{parsing/algebraic/grammars/derivation}
 \input{parsing/algebraic/grammars/language}
 \input{parsing/algebraic/grammars/examples}
- 
+
 \subsection{Structure arborescente des langages algébriques}
 \input{parsing/algebraic/tree/cst}
 \input{parsing/algebraic/tree/ast}
 \input{parsing/algebraic/tree/ambiguity}
+\input{parsing/algebraic/tree/associativity}
+\input{parsing/algebraic/tree/priority}
 \input{parsing/algebraic/tree/rational}
+
+\section{Algorithmes de décision}
  
-\subsection{Algorithmes de décision}
+\subsection{Algorithme Cocke-Younger-Kasami}
 \input{parsing/decision/CYK/strategy}
 \input{parsing/decision/CYK/CNF}
 \input{parsing/decision/CYK/CNF_transform}
 \input{parsing/decision/CYK/CYK}
- 
+
 \subsection{Automates à pile}
 \input{parsing/decision/pushdown/generalized}
 \input{parsing/decision/pushdown/recursion}
@@ -183,10 +187,12 @@
 \input{parsing/decision/pushdown/deterministic}
 \input{parsing/decision/pushdown/determinisation}
 \input{parsing/decision/pushdown/nondeterministic}
-
+ 
 \subsection{Parsers LR}
 \input{parsing/decision/LRparser/strategies}
-
+ 
+\section{Frontières des langages algébriques}
+ 
 \subsection{Grammaires rationnelles}
 \input{parsing/theory/regular/theorem}
 \input{parsing/theory/regular/right_linear}

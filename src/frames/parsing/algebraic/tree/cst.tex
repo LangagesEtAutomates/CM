@@ -9,66 +9,72 @@
 
 \begin{frame}{Arbre de dérivation }
 
-  Soit \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique.
-
-  \begin{block}{Arbre de dérivation (ou arbre de la syntaxe concrète, CST)}
-
-    Chaque génération de $G$ peut être représentée par un arbre.
-
-    \begin{description}
-    \item[Racine :] l'axiome $S$\\
+  \tfBlock[top=-3mm]{Arbre de dérivation (ou CST : \emph{Concrete Syntax Tree})}{
+    Soit \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique.\\
+    Chaque génération de $G$ peut être représentée par un \structure{arbre de dérivation}.
+    \begin{description}[N\oe ud interne :]
+    \item[Racine :] l'axiome $S$
     \item[N\oe ud interne :] Symbole non-terminal de $\Gamma$
     \item[Feuille :] Symbole terminal de $\Sigma$, ou $\varepsilon$ ($\varepsilon$ ne peut pas avoir de frère)
     \item[Filiation :] Si les fils de $A$ sont $a_1$, ..., $a_n$, alors $A \rightarrow a_1...a_n \in R$
     \end{description}
     Le mot généré est alors la concaténation des feuilles de l'arbre.
-  \end{block}
+  }
 
+  \tfExampleBlock[bottom]{Exemple}{
+    \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{rcl} S &\rightarrow & aSb \,|\, B \\ B &\rightarrow & cB \,|\, \varepsilon \end{array}\right\} \right\rangle$}.
+    \begin{itemize}
+    \item Génération de $aacbb$ :
+    \begin{itemize}
+    \item $\structure{S}
+      \uncover<2-|handout>{\vdash \alert{a}\structure{S}\alert{b}}
+      \uncover<3-|handout>{\vdash \alert{aa}\structure{S}\alert{bb}}
+      \uncover<4-|handout>{\vdash \alert{aa}\structure{B}\alert{bb}}
+      \uncover<5-|handout>{\vdash \alert{aac}\structure{B}\alert{bb}}
+      \uncover<6-|handout>{\vdash \alert{aacbb}}$
+    \end{itemize}
+    \item Dérivation de $aacbb$ (à droite) :
+    \end{itemize}
+  }
 
+  \tf[bottom, x=40mm] {\small
+    \begin{tikzpicture}
 
-  \begin{exampleblock}{Exemple}
+      \node[anchor=base,structure] (a) at (5.00,3.5) {$S$};
+      \uncover<2-|handout>{
+        \node[anchor=base,alert]     (b) at (4.00,2.8) {$a$};
+        \node[anchor=base,structure] (c) at (5.00,2.8) {$S$};
+        \node[anchor=base,alert]     (d) at (6.00,2.8) {$b$};
+        \path[-latex] (a) edge (b);
+        \path[-latex] (a) edge (c);
+        \path[-latex] (a) edge (d);
+      }
+      \uncover<3-|handout>{
+        \node[anchor=base,alert]     (e) at (4.00,2.1) {$a$};
+        \node[anchor=base,structure] (f) at (5.00,2.1) {$S$};
+        \node[anchor=base,alert]     (g) at (6.00,2.1) {$b$};
+        \path[-latex] (c) edge (e);
+        \path[-latex] (c) edge (f);
+        \path[-latex] (c) edge (g);
+      }      
+      \uncover<4-|handout>{
+        \node[anchor=base,structure] (h) at (5.00,1.4) {$B$};
+        \path[-latex] (f) edge (h);
+      }      
+      \uncover<5-|handout>{
+        \node[anchor=base,alert]     (i) at (4.00,0.7) {$c$};
+        \node[anchor=base,structure] (j) at (5.00,0.7) {$B$};
+        \path[-latex] (h) edge (i);
+        \path[-latex] (h) edge (j);
+      }      
+      \uncover<6-|handout>{
+        \node[anchor=base,example]   (k) at (6.00,0.7) {$\varepsilon$};
+        \path[-latex] (j) edge (k);
+      }      
 
-    \vspace{-5mm}
-    \begin{minipage}{.8\textwidth}
-      \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{rcl} S &\rightarrow & aSb \,|\, B \\ B &\rightarrow & cB \,|\, \varepsilon \end{array}\right\} \right\rangle$}.\\
+    \end{tikzpicture}
+  }
 
-      \vspace{2mm}
-      Arbre de la syntaxe concrète de $aacbb$ :
-    \end{minipage}%
-    \begin{minipage}{.2\textwidth}
-      \vspace{-2mm}
-      \scalebox{.9}{\begin{tikzpicture}
-          \draw(5.00,5.0) node{$S$};
-          \draw(4.00,4.3) node{$a$};
-          \draw(5.00,4.3) node{$S$};
-          \draw(6.00,4.3) node{$b$};
-          \draw(4.25,3.6) node{$a$};
-          \draw(5.00,3.6) node{$S$};
-          \draw(5.75,3.6) node{$b$};
-          \draw(5.00,2.9) node{$B$};
-          \draw(4.50,2.2) node{$c$};
-          \draw(5.50,2.2) node{$B$};
-          \draw(5.50,1.5) node{$\varepsilon$};
-
-          \draw[-latex] (4.80,4.8) -- (4.20,4.5);
-          \draw[-latex] (5.00,4.8) -- (5.00,4.5);
-          \draw[-latex] (5.20,4.8) -- (5.80,4.5);
-
-          \draw[-latex] (4.80,4.1) -- (4.45,3.8);
-          \draw[-latex] (5.00,4.1) -- (5.00,3.8);
-          \draw[-latex] (5.20,4.1) -- (5.55,3.8);
-
-          \draw[-latex] (5.00,3.4) -- (5.00,3.1);
-
-          \draw[-latex] (4.90,2.7) -- (4.60,2.4);
-          \draw[-latex] (5.10,2.7) -- (5.40,2.4);
-
-          \draw[-latex] (5.50,2.0) -- (5.50,1.7);
-
-      \end{tikzpicture}}
-    \end{minipage}%
-
-  \end{exampleblock}
 \end{frame}
 
 \endgroup

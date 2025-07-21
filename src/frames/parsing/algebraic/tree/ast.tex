@@ -9,87 +9,67 @@
 
 \begin{frame}{Arbre de la syntaxe abstraite}
 
-  \vspace{-2mm}  \begin{block}{Arbre de la syntaxe abstraite (AST)}
+  \tfBlock[top=-5mm]{Arbre de la syntaxe abstraite (AST)}{\vspace{-1mm}
     \begin{itemize}
-    \item\vspace{-2mm} Les arbres de dérivation peuvent être simplifiés en un AST
-      \begin{description}
-      \item[N\oe uds :] Constructions du langage (souvent des opérateurs)
+    \item Les arbres de dérivation peuvent être simplifiés en un AST
+      \begin{description}[Feuilles :]
+      \item[N\oe uds :] Constructions du langage (par exemple opérateurs)
       \item[Feuilles :] Constantes ou variables
       \end{description}
-    \item\vspace{-1mm} La suite de la compilation utilise un AST. Par exemple, en Bison
-
-      \texttt{S:    `(' S `+' S `)'    \{\$\$ = new Sum(\$2, \$4);\}}
+    \item La suite de la compilation utilise un AST. Par exemple, en CUP\\
+      \texttt{S::=    S:g PLUS S:d    \{: RESULT = new Sum(g, d); :\}}
     \end{itemize}
-  \end{block}
+  }
 
-  \vspace{-2mm}\begin{exampleblock}{Exemple}
-    Génération du mot $u=\example{((1+1)\times (1+1))}$ par la grammaire $G = \langle \{\example{1}, \example{+}, \example{\times}, \example{(}, \example{)}\}, \{S\}, S, \{S \rightarrow \example{(}S \example{+} S\example{)} | \example{(}S \example{\times} S\example{)} | \example{1} \} \rangle$.
+  \tfExampleBlock[y=-2mm]{Exemple -- Dérivation de $u$ par $G$}{\vspace{-1mm}
+    \begin{itemize}
+    \item $u=\example{((1+1)\times (1+1))}$
+    \item $G = \langle \{\example{1}, \example{+}, \example{\times}, \example{(}, \example{)}\}, \{S\}, S, \{S \rightarrow \example{(}S \example{+} S\example{)} | \example{(}S \example{\times} S\example{)} | \example{1} \} \rangle$
+    \end{itemize}
+  }
 
-    \begin{minipage}[t]{.5\textwidth}
-      \example{Arbre de la syntaxe concrète}\\
-      \scalebox{.75}{\begin{tikzpicture}
-          \draw (3.5,3.0) node{$S$};
-          \draw (1.5,2.0) node{$($};
-          \draw (2.0,2.0) node{$S$};
-          \draw (3.5,2.0) node{$\times$};
-          \draw (5.0,2.0) node{$S$};
-          \draw (5.5,2.0) node{$)$};
-          \draw (1.0,1.0) node{$($};
-          \draw (1.5,1.0) node{$S$};
-          \draw (2.0,1.0) node{$+$};
-          \draw (2.5,1.0) node{$S$};
-          \draw (3.0,1.0) node{$)$};
-          \draw (4.0,1.0) node{$($};
-          \draw (4.5,1.0) node{$S$};
-          \draw (5.0,1.0) node{$+$};
-          \draw (5.5,1.0) node{$S$};
-          \draw (6.0,1.0) node{$)$};
-          \draw (1.5,0.0) node{$1$};
-          \draw (2.5,0.0) node{$1$};
-          \draw (4.5,0.0) node{$1$};
-          \draw (5.5,0.0) node{$1$};
+  \tf[bottom=-1mm, x=-.25\textwidth] {
+    \begin{tikzpicture}
+      \node[example] at (3.25,2.5) {Arbre de la syntaxe concrète};
 
-          \draw[-latex] (3.3,2.8) -- (1.7,2.2) ; 
-          \draw[-latex] (3.4,2.8) -- (2.1,2.2) ; 
-          \draw[-latex] (3.5,2.8) -- (3.5,2.2) ; 
-          \draw[-latex] (3.6,2.8) -- (4.8,2.2) ; 
-          \draw[-latex] (3.7,2.8) -- (5.4,2.2) ; 
-          \draw[-latex] (1.8,1.8) -- (1.1,1.2) ; 
-          \draw[-latex] (1.9,1.8) -- (1.6,1.2) ; 
-          \draw[-latex] (2.0,1.8) -- (2.0,1.2) ; 
-          \draw[-latex] (2.1,1.8) -- (2.4,1.2) ; 
-          \draw[-latex] (2.2,1.8) -- (2.9,1.2) ; 
-          \draw[-latex] (4.8,1.8) -- (4.1,1.2) ; 
-          \draw[-latex] (4.9,1.8) -- (4.6,1.2) ; 
-          \draw[-latex] (5.0,1.8) -- (5.0,1.2) ; 
-          \draw[-latex] (5.1,1.8) -- (5.4,1.2) ; 
-          \draw[-latex] (5.2,1.8) -- (5.9,1.2) ; 
-          \draw[-latex] (1.5,0.8) -- (1.5,0.2) ; 
-          \draw[-latex] (2.5,0.8) -- (2.5,0.2) ; 
-          \draw[-latex] (4.5,0.8) -- (4.5,0.2) ; 
-          \draw[-latex] (5.5,0.8) -- (5.5,0.2) ; 
-      \end{tikzpicture}}
-    \end{minipage}%
-    \begin{minipage}[t]{.5\textwidth}
-      \example{Arbre de la syntaxe abstraite}\\
-      \scalebox{.75}{\begin{tikzpicture}
-          \draw (3.0,2.0) node{$\times$};
-          \draw (1.0,1.0) node{$+$};
-          \draw (5.0,1.0) node{$+$};
-          \draw (0.0,0.0) node{$1$};
-          \draw (2.0,0.0) node{$1$};
-          \draw (4.0,0.0) node{$1$};
-          \draw (6.0,0.0) node{$1$};
+      \node[structure] (a) at (3.25,2.1) {$S$};
+      \node[alert]     (b) at (1.0,1.4)  {$($};      \path[-latex] (a) edge (b);  
+      \node[structure] (c) at (2.0,1.4)  {$S$};      \path[-latex] (a) edge (c);  
+      \node[alert]     (d) at (3.25,1.4) {$\times$}; \path[-latex] (a) edge (d);  
+      \node[structure] (e) at (4.5,1.4)  {$S$};      \path[-latex] (a) edge (e);  
+      \node[alert]     (f) at (5.5,1.4)  {$)$};      \path[-latex] (a) edge (f);  
+      \node[alert]     (g) at (1.0,0.7)  {$($};      \path[-latex] (c) edge (g);  
+      \node[structure] (h) at (1.5,0.7)  {$S$};      \path[-latex] (c) edge (h);  
+      \node[alert]     (i) at (2.0,0.7)  {$+$};      \path[-latex] (c) edge (i);  
+      \node[structure] (j) at (2.5,0.7)  {$S$};      \path[-latex] (c) edge (j);  
+      \node[alert]     (k) at (3.0,0.7)  {$)$};      \path[-latex] (c) edge (k);  
+      \node[alert]     (l) at (3.5,0.7)  {$($};      \path[-latex] (e) edge (l);  
+      \node[structure] (m) at (4.0,0.7)  {$S$};      \path[-latex] (e) edge (m);  
+      \node[alert]     (n) at (4.5,0.7)  {$+$};      \path[-latex] (e) edge (n);  
+      \node[structure] (o) at (5.0,0.7)  {$S$};      \path[-latex] (e) edge (o);  
+      \node[alert]     (p) at (5.5,0.7)  {$)$};      \path[-latex] (e) edge (p);  
+      \node[alert]     (q) at (1.5,0.0)  {$1$};      \path[-latex] (h) edge (q);  
+      \node[alert]     (r) at (2.5,0.0)  {$1$};      \path[-latex] (j) edge (r);  
+      \node[alert]     (s) at (4.0,0.0)  {$1$};      \path[-latex] (m) edge (s);  
+      \node[alert]     (t) at (5.0,0.0)  {$1$};      \path[-latex] (o) edge (t);  
+    \end{tikzpicture}
+  }
+  \tf[bottom=-1mm, x=.25\textwidth] {
+    \begin{tikzpicture}
+      \node[example] at (1.5,2.5) {Arbre de la syntaxe abstraite};
 
-          \draw[-latex] (2.6,1.8) -- (1.4,1.2); 
-          \draw[-latex] (3.4,1.8) -- (4.6,1.2); 
-          \draw[-latex] (0.8,0.8) -- (0.2,0.2); 
-          \draw[-latex] (1.2,0.8) -- (1.8,0.2); 
-          \draw[-latex] (4.8,0.8) -- (4.2,0.2); 
-          \draw[-latex] (5.2,0.8) -- (5.8,0.2); 
-      \end{tikzpicture}}
-    \end{minipage}
-  \end{exampleblock}
+      \node[structure] (a) at (1.5,2.0) {$\times$};
+      \node[structure] (b) at (0.5,1.0) {$+$};            \smPath (a) edge (b);  
+      \node[structure] (c) at (2.5,1.0) {$+$};            \smPath (a) edge (c);  
+      \node[alert]     (d) at (0.0,0.0) {$1$};            \smPath (b) edge (d);  
+      \node[alert]     (e) at (1.0,0.0) {$1$};            \smPath (b) edge (e);  
+      \node[alert]     (f) at (2.0,0.0) {$1$};            \smPath (c) edge (f);  
+      \node[alert]     (g) at (3.0,0.0) {$1$};            \smPath (c) edge (g);  
+
+    \end{tikzpicture}
+  }
+
+  
 \end{frame}
 
 \endgroup

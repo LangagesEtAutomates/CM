@@ -9,42 +9,42 @@
 
 \begin{frame}{Grammaire française}
 
-  Une grammaire est une collection de règles grammaticales du type : 
   \begin{itemize}
-  \item \og Une phrase est formée d'un sujet, et d'un groupe verbal \fg
-    $$ \mathit{Phrase} \rightarrow \mathit{Sujet}~\mathit{GV}$$
+  \item Une grammaire est une collection de règles grammaticales du type :\vspace{1mm}
+    \begin{center}
+      \example{\og Une phrase est formée d'un sujet, et d'un groupe verbal \fg}\vspace{-2mm}
+      $$\example{\mathit{Phrase} \rightarrow \mathit{Sujet}~\mathit{GV}}$$
+
+      \begin{tikzpicture}
+        \node[anchor=base, structure] (a) at (3.75,4) {$\mathit{Phrase}$};
+        \node[anchor=base, structure] (b) at (2.00,3) {$\mathit{Sujet}$};
+        \node[anchor=base, structure] (c) at (5.50,3) {$\mathit{Groupe~verbal}$};
+        \node[anchor=base, structure] (d) at (2.00,2) {$\mathit{Groupe~nominal}$};
+        \node[anchor=base, structure] (e) at (4.00,2) {$\mathit{Verbe}$};
+        \node[anchor=base, structure] (f) at (7.00,2) {$\mathit{Groupe~nominal}$};
+        \node[anchor=base, structure] (i) at (6.00,1) {$\mathit{Determinant}$};
+        \node[anchor=base, structure] (j) at (8.00,1) {$\mathit{Nom~commun}$};
+        \node[anchor=base, alert]     (g) at (2.00,0) {Jean};
+        \node[anchor=base, alert]     (h) at (4.00,0) {mange};
+        \node[anchor=base, alert]     (k) at (6.00,0) {une};
+        \node[anchor=base, alert]     (l) at (8.00,0) {pomme};
+
+        \path[-latex] (a) edge (b);
+        \path[-latex] (a) edge (c);
+        \path[-latex] (b) edge (d);
+        \path[-latex] (d) edge (g);
+        \path[-latex] (c) edge (e);
+        \path[-latex] (c) edge (f);
+        \path[-latex] (e) edge (h);
+        \path[-latex] (f) edge (i);
+        \path[-latex] (f) edge (j);
+        \path[-latex] (i) edge (k);
+        \path[-latex] (j) edge (l);
+      \end{tikzpicture}
+      
+    \end{center}
+  \item Les grammaires décrivent des mots et des langages par \structure{réécriture}.
+  \item À la différence des définitions rationnelles, elles autorisent la \structure{récursivité}.
   \end{itemize}
-
-  \begin{center}
-    \begin{tikzpicture}
-      \draw (5.0,10) node {$\mathit{Phrase}$};
-      \draw (4.0,9 ) node {$\mathit{Sujet}$};
-      \draw (6.0,9 ) node {$\mathit{GV}$};
-      \draw (3.5,8 ) node {$\mathit{GN}$};
-      \draw (5.0,8 ) node {$\mathit{V}$};
-      \draw (7.0,8 ) node {$\mathit{GN}$};
-      \draw (3.5,7 ) node {Jean};
-      \draw (5.0,7 ) node {mange};
-      \draw (6.5,7 ) node {$\mathit{Det}$};
-      \draw (7.5,7 ) node {$\mathit{NC}$};
-      \draw (6.5,6 ) node {une};
-      \draw (7.5,6 ) node {pomme};
-
-      \draw[-latex] (4.8,9.8) -- (4.2,9.2);
-      \draw[-latex] (5.2,9.8) -- (5.8,9.2);
-      \draw[-latex] (3.9,8.8) -- (3.6,8.2);
-      \draw[-latex] (5.8,8.8) -- (5.2,8.2);
-      \draw[-latex] (6.2,8.8) -- (6.8,8.2);
-      \draw[-latex] (3.5,7.8) -- (3.5,7.2);
-      \draw[-latex] (5.0,7.8) -- (5.0,7.2);
-      \draw[-latex] (6.9,7.8) -- (6.6,7.2);
-      \draw[-latex] (7.1,7.8) -- (7.4,7.2);
-      \draw[-latex] (6.5,6.8) -- (6.5,6.2);
-      \draw[-latex] (7.5,6.8) -- (7.5,6.2);
-    \end{tikzpicture}
-  \end{center}
-  
-  Les grammaires décrivent des mots et des langages par \structure{réécriture}.\\
-  À la différence des définitions rationnelles, elles autorisent la \structure{récursivité}. 
 \end{frame}
 \endgroup

@@ -8,155 +8,93 @@
 \begingroup
 
 \begin{frame}{Exemple d'utilisation du lemme de pompage}
+  
+  \tfBlock[top=-5mm]{Montrer que $L \eqdef \{a^nb^nc^n \mid n\in \mathbb{N}\}$ n'est pas algébrique}{
+    Soit $\Sigma \eqdef \{a, b, c\}$.%
+    \only<2-|handout>{
+      Si $L$ est algébrique, $L$ vérifie le lemme de pompage :
 
-  \vspace{-3mm}
-  \begin{tikzpicture}
-    \draw (0,10) node[below]{\begin{minipage}{\textwidth}
-        \begin{block}{Montrer que $\{a^nb^nc^n : n\in \mathbb{N}\}$ n'est pas algébrique}
-          
-          Soient $\Sigma = \{a, b, c\}$ et $L = \{a^nb^nc^n : n\in \mathbb{N}\}$.
-          
-          \uncover<2->{
-            Supposons (par l'absurde) que $L$ est algébrique.
-          }
-          \uncover<3->{
-            $L$ vérifie le lemme de pompage :
-            
-            \vspace{-3mm}
-            $$
-            \begin{array}{c}
-              \structure<4->{\exists N\in \mathbb{N}}, \alert<5->{\forall u\in L}, |u| \ge N \Rightarrow (\structure<6->{\exists v, w, x, y, z\in \Sigma^\star}, \\
-              u = v \cdot w \cdot x\cdot y \cdot z \land w \cdot y\neq \varepsilon \land |wxy| \le N \land \alert<7->{\forall i \in \mathbb{N}}, v\cdot w^i\cdot x\cdot y^i \cdot z \in L)
-            \end{array}
-            $$
-            \vspace{-1mm}
-          }
-          
-          \uncover<4->{%
-            \structure{Soit $N$ donné par le lemme pompage}. \\
-          }\uncover<5->{%
-            \alert{Posons $u = a^N b^N c^N$}. 
-          }\uncover<6->{%
-            On a bien $u\in L$ et $|u| = 3N \ge N$. \\
-          }\uncover<7->{%
-            \structure{Soit $v \cdot w \cdot x\cdot y \cdot z$ la décomposition de $u$ donnée par le lemme de pompage}. 
-          }
-          
-          \uncover<8- |handout:2>{
-            \vspace{1mm}
-            \begin{itemize}
-            \item Comme $wy \neq \varepsilon$, $\alpha = wy[1] \in \Sigma$ est une lettre de $wy$.
-            \item Comme $|wxy| \le N$, il existe $\beta \in \Sigma$ tel que $\beta$ n'est pas une lettre de $wy$. 
-            \item \alert{Posons $i=2$}. $|v w^2 x y^2  z|_\alpha > |v w^2 x y^2  z|_\beta$, donc $v w^2 x y^2  z\notin L$. 
-            \end{itemize}
-            Absurde ! Donc $L$ n'est pas algébrique. 
-          }
-        \end{block}
-    \end{minipage}};
-
-    \mode<beamer> {
-    \uncover<-7>{
-      \draw (0,5.5) node[below]{\begin{minipage}{\textwidth}
-          \begin{center}
-            \tikz\draw[example] (0,0) -- (5,0);\\
-          \end{center}
-          \vspace{-5mm}
-          \begin{exampleblock}{Brouillon}
-            \example{On veut démontrer :} 
-            \only<1>{ $L \notin \textsc{alg}_\Sigma$}
-            \only<2-4,6->{ Contradiction}
-            \only<5>{ $u\in L \land |u| \ge N$}
-
-            \example{On sait :} 
-            \begin{itemize}
-            \item 
-              \only<-2>{\hspace{-1.5mm}$\begin{array}[t]{l}
-                  \alert{\forall L \in \textsc{alg}_\Sigma}, \exists N\in \mathbb{N}, \forall u\in L, |u| \ge N \Rightarrow (\exists v, w, x, y, z\in \Sigma^\star, \\
-                  u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L)
-                \end{array}$}
-              \only<3>{$\hspace{-1.5mm}\begin{array}[t]{l}
-                  \structure{\exists N\in \mathbb{N}}, \forall u\in L, |u| \ge N \Rightarrow (\exists v, w, x, y, z\in \Sigma^\star, \\
-                  u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L)
-                \end{array}$}
-              \only<4>{$\hspace{-1.5mm}\begin{array}[t]{l}
-                  \alert{\forall u\in L, |u| \ge N \Rightarrow} (\exists v, w, x, y, z\in \Sigma^\star, \\
-                  u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L)
-                \end{array}$}
-              \only<5>{$\hspace{-1.5mm}\begin{array}[t]{l}
-                  \alert{(u\in L \land |u| \ge N) \Rightarrow} (\exists v, w, x, y, z\in \Sigma^\star, \\
-                  u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L)
-                \end{array}$}
-              \only<6>{$\structure{\exists v, w, x, y, z\in \Sigma^\star}, u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L$}
-              \only<7->{$\forall i \in \mathbb{N}, v w^i x y^i  z \in L$}
-            \end{itemize}
-
-            \vspace{-1mm}
-            \begin{minipage}{2.5cm}
-              \begin{itemize}
-              \item<2-> $L \in \textsc{alg}_\Sigma$
-              \item<4-> $N \in \mathbb{N}$
-              \item<7-> $wy\neq \varepsilon$
-              \end{itemize}
-            \end{minipage}
-            \begin{minipage}{3cm}
-              \begin{itemize}
-              \item<7-> $v, w, x, y, z\in \Sigma^\star$
-              \item<7-> $u = v w x y z$
-              \item<7-> $\alert{|wxy| \le N}$
-              \end{itemize}
-            \end{minipage}
-          \end{exampleblock}
-      \end{minipage}};}
-    }
-
-    \mode<handout>{
-    \uncover<handout:1> {
-      \draw (0,5.5) node[below]{\begin{minipage}{\textwidth}
-          \begin{center}
-            \tikz\draw[example] (0,0) -- (5,0);\\
-          \end{center}
-          \vspace{-5mm}
-          \begin{exampleblock}{Brouillon}
-            \example{On veut démontrer :} Contradiction
- 
-            \example{On sait :} 
-            \begin{itemize}
-            \item $\forall i \in \mathbb{N}, v w^i x y^i  z \in L$
-            \end{itemize}
- 
-            \vspace{-1mm}
-            \begin{minipage}{2.5cm}
-              \begin{itemize}
-              \item $L \in \textsc{alg}_\Sigma$
-              \item $N \in \mathbb{N}$
-              \item $wy\neq \varepsilon$
-              \end{itemize}
-            \end{minipage}
-            \begin{minipage}{3cm}
-              \begin{itemize}
-              \item $v, w, x, y, z\in \Sigma^\star$
-              \item $u = v w x y z$
-              \item $\alert{|wxy| \le N}$
-              \end{itemize}
-            \end{minipage}
-          \end{exampleblock}
-      \end{minipage}};
-    }
+      \vspace{-4mm}
+      $$
+      \begin{array}{c}
+        \structure{\exists N\in \mathbb{N}}, \alert{\forall u\in L, |u| \ge N} \Rightarrow (\structure{\exists v, w, x, y, z\in \Sigma^\star}, \\
+        u = v \cdot w \cdot x\cdot y \cdot z \land w \cdot y\neq \varepsilon \land |w\cdot x\cdot y| \le N \land \alert{\forall i \in \mathbb{N}}, v\cdot w^i\cdot x\cdot y^i \cdot z \in L)
+      \end{array}
+      $$
+      \vspace{-2mm}
+      
+      \structure{Soit $N$ donné par le lemme pompage}.
     }
     
-    \draw<7|handout:1> (3,3.25) node{\scalebox{1}{\begin{tikzpicture}
-          \draw [alert] (5,5) node{$u = a \cdot ...  \cdot a  \cdot b  \cdot ...  \cdot b  \cdot c  \cdot ...  \cdot c$};
-          
-          \draw [decorate, decoration={brace, amplitude=5pt}] (3.6 ,5.15) -- (4.6 ,5.15) node[midway,yshift=4mm]{$N$};
-          \draw [decorate, decoration={brace, amplitude=5pt}] (4.85,5.15) -- (5.85,5.15) node[midway,yshift=4mm]{$N$};
-          \draw [decorate, decoration={brace, amplitude=5pt}] (6.1 ,5.15) -- (7.1 ,5.15) node[midway,yshift=4mm]{$N$};
-          
-          \draw [decorate, decoration={brace, amplitude=5pt, mirror}] (4.3,4.85) -- (5.1, 4.85) node[midway,yshift=-4mm]{$|wxy|\le N$};
-          \draw [decorate, decoration={brace, amplitude=5pt, mirror}] (5.5,4.85) -- (6.3, 4.85); 
+    \only<3-|handout>{%
+      \alert{Posons $u = a^N b^N c^N$. On a bien $u\in L$ et $|u| = 3N \ge N$}.\\
+      \structure{Soit $v \cdot w \cdot x\cdot y \cdot z$ la décomposition de $u$ donnée par le lemme de pompage}. 
+    }
+  }
+  
+  \tf<4-|handout>[y=-10mm]{
+    \begin{smArray}[width=4mm, height=3mm]
+      \smCell[\smNone]{$u=$}
+      \smCell[\smNone]{\alert{$a$}}      \smCoord{(a1)}
+      \smCell[\smNone]{\alert{$\cdots$}}               
+      \smCell[\smNone]{\alert{$a$}}      \smCoord{(an)}
+      \smCell[\smNone]{\alert{$\cdot$}}               
+      \smCell[\smNone]{\alert{$b$}}      \smCoord{(b1)}
+      \smCell[\smNone]{\alert{$\cdots$}}               
+      \smCell[\smNone]{\alert{$b$}}      \smCoord{(bn)}
+      \smCell[\smNone]{\alert{$\cdot$}}               
+      \smCell[\smNone]{\alert{$c$}}      \smCoord{(c1)}
+      \smCell[\smNone]{\alert{$\cdots$}}               
+      \smCell[\smNone]{\alert{$c$}}      \smCoord{(cn)}
+      
+      \draw [decorate, decoration={brace, amplitude=5pt}] ([xshift=1mm]a1.north west) -- ([xshift=-1mm]an.north east) node[midway,yshift=4mm]{$N$};
+      \draw [decorate, decoration={brace, amplitude=5pt}] ([xshift=1mm]b1.north west) -- ([xshift=-1mm]bn.north east) node[midway,yshift=4mm]{$N$};
+      \draw [decorate, decoration={brace, amplitude=5pt}] ([xshift=1mm]c1.north west) -- ([xshift=-1mm]cn.north east) node[midway,yshift=4mm]{$N$};
 
-          \draw (5,3.8) node{\structure{$wxy \in a^\star b^\star | b^\star c^\star$}};
-    \end{tikzpicture}}};
-  \end{tikzpicture}
+      \draw [decorate, decoration={brace, amplitude=5pt, mirror}] ([xshift=1mm]an.south west) -- ([xshift=-1mm]b1.south east) node[midway,yshift=-4mm]{$|wxy|\le N$};
+      \draw [decorate, decoration={brace, amplitude=5pt, mirror}] ([xshift=1mm]bn.south west) -- ([xshift=-1mm]c1.south east) node[midway,yshift=-4mm]{$|wxy|\le N$};
+    \end{smArray}       
+  }
+
+  \tf<5-|handout>[text, bottom=-1mm]{
+    \begin{itemize}
+    \item Comme $wy \neq \varepsilon$, $\alpha = wy[1] \in \Sigma$ est une lettre de $wy$.
+    \item Comme $|wxy| \le N$, il existe $\beta \in \Sigma$ tel que $\beta$ n'est pas une lettre de $wy$. 
+    \item \alert{Posons $i=2$}. $|v \cdot w^2 \cdot x\cdot  y^2\cdot   z|_\alpha > |v\cdot  w^2\cdot  x\cdot  y^2\cdot   z|_\beta$, donc $v\cdot  w^2\cdot  x\cdot  y^2\cdot   z\notin L$. 
+    \end{itemize}
+    Absurde ! Donc $L$ n'est pas algébrique. 
+  }
+
+  \tfExampleBlock<-4>[y=-25mm]{On sait}{}
+
+  \tf<1>[y=-25mm, anchor=north, text]{
+      \begin{itemize}
+      \item $\begin{array}[t]{l}
+        \alert{\forall L \in \textsc{alg}_\Sigma}, \structure{\exists N\in \mathbb{N}}, \forall u\in L, |u| \ge N \Rightarrow (\exists v, w, x, y, z\in \Sigma^\star, \\
+        u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L)
+      \end{array}$
+      \end{itemize}
+  }
+  \tf<2-4>[y=-25mm, anchor=north, left=.35\textwidth]{
+    \begin{itemize}
+    \item $L \in \textsc{alg}_\Sigma$
+    \item<3-> $v, w, x, y, z\in \Sigma^\star$
+    \end{itemize}
+  }
+  \tf<2-4>[y=-25mm, anchor=north, width=.35\textwidth]{
+    \begin{itemize}
+      \item $N \in \mathbb{N}$
+      \item<3-> $wy\neq \varepsilon$
+    \end{itemize}
+  }
+  \tf<3-4>[y=-25mm, anchor=north, right=.35\textwidth]{
+    \begin{itemize}
+      \item $v \cdot w \cdot x \cdot y \cdot z = a^N b^N c^N$
+      \item $\alert{|wxy| \le N}$
+    \end{itemize}
+  }
+
+  
 \end{frame}
 
 \endgroup

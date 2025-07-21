@@ -1,0 +1,62 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Associativité des opérateurs binaires}
+
+  \tfBlock[top=-4mm]{Définition -- Associativité}{
+    L'\structure{associativité} d'un opérateur $\oplus$ précise dans quel ordre évaluer
+
+    \vspace{-2mm}
+    $$\alert{x \oplus y \oplus z}.$$
+    
+    \begin{itemize}
+    \item\vspace{-1mm} $\oplus$ est \structure{associatif à gauche} quand :
+      \hspace\fill \alert{$x \oplus y \oplus z$ signifie $(x \oplus y) \oplus z$}\\
+      \example{Exemple : \lstinline{4 - 2 - 1} signifie \texttt{(4-2)-1}}
+    \item\vspace{1mm} $\oplus$ est \structure{associatif à droite} quand :
+      \hspace\fill \alert{$x \oplus y \oplus z$ signifie $x \oplus (y \oplus z)$}\\
+      \example{Exemple : \lstinline{x = y = 0;} signifie \texttt{x = (y = 0);}}
+    \end{itemize}
+  }
+
+  \tfBlock[anchor=north, y=0mm, left=.5\textwidth]{Associativité à gauche :}{
+    \centering
+    \alert{$A \, \rightarrow \, A \oplus B \mid B$}
+    
+    \begin{tikzpicture}
+      \node[structure] (a) at (5,7.1) {$A$};      
+      \node[structure] (b) at (4,6.4) {$A$};      \smPath (a) edge (b); 
+      \node[alert]     (c) at (5,6.4) {$\oplus$}; \smPath (a) edge (c); 
+      \node[structure] (d) at (6,6.4) {$B$};      \smPath (a) edge (d); 
+      \node[structure] (e) at (3,5.7) {$A$};      \smPath (b) edge (e); 
+      \node[alert]     (f) at (4,5.7) {$\oplus$}; \smPath (b) edge (f); 
+      \node[structure] (g) at (5,5.7) {$B$};      \smPath (b) edge (g); 
+      \node[structure] (h) at (3,5.0) {$B$};      \smPath (e) edge (h); 
+    \end{tikzpicture}
+  }
+
+  \tfBlock[anchor=north, y=0mm, right=.5\textwidth]{Associativité à droite :}{
+    \centering
+    \alert{$A \, \rightarrow \, B \oplus A \mid B$}
+
+    \begin{tikzpicture}
+      \node[structure] (a) at (5,7.1) {$A$};      
+      \node[structure] (b) at (4,6.4) {$A$};      \smPath (a) edge (b); 
+      \node[alert]     (c) at (5,6.4) {$\oplus$}; \smPath (a) edge (c); 
+      \node[structure] (d) at (6,6.4) {$B$};      \smPath (a) edge (d); 
+      \node[structure] (e) at (5,5.7) {$A$};      \smPath (d) edge (e); 
+      \node[alert]     (f) at (6,5.7) {$\oplus$}; \smPath (d) edge (f); 
+      \node[structure] (g) at (7,5.7) {$B$};      \smPath (d) edge (g); 
+      \node[structure] (h) at (7,5.0) {$B$};      \smPath (g) edge (h); 
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

@@ -8,73 +8,65 @@
 \begingroup
 
 \begin{frame}{Équivalence grammaires rationnelles / automates}
-  
-  \begin{block}{Théorème -- Générations des grammaires rationnelles}
+  \tfBlock[top=-2mm]{Théorème -- Générations des grammaires rationnelles}{
     Soit $\Sigma$ un alphabet et $L \in \mathscr{P}(\Sigma^\star)$ un langage. \\
     $L$ est généré par une grammaire rationnelle droite ssi L est rationnel. 
-  \end{block}
+  }
   
-  \uncover<2->{\structure{Démonstration :}}
-  
-  \begin{enumerate}
-  \item<2-> Supposons que \structure{$L$ rationnel}. $L$ est reconnu par un AFD $A = \langle \Sigma, Q, \{i\}, F, \mu \rangle$. 
- 
-    Soit $R = \begin{array}[t]{rclcll}
-      & \{ & A \rightarrow aB &|& \langle A, a, B\rangle \in \mu & \}\\
-      \cup & \{ & A \rightarrow a\phantom{B} &|& \exists f\in F, \langle A, a, f\rangle \in \mu & \}.
-    \end{array}$\\
-    Alors \alert{$L$ est généré par la grammaire rationnelle droite $\langle \Sigma, Q, i, R \rangle$.}
-  \item<3-> Supposons que \structure{$L$ est généré par $G = \langle \Sigma, \Gamma, S, R \rangle$ rationnelle droite.}\\
-    Soient $F \notin \Gamma$ et $\mu = \begin{array}[t]{rclcll}
-      & \{ & \langle A, a, B\rangle &|& A \rightarrow aB \in R &\}\\
-      \cup & \{ & \langle A, a, F\rangle &|& A \rightarrow a\phantom{B} \in R &\}.
-    \end{array}$\\
-    Alors l'AFN $\langle \Sigma, \Gamma \cup \{F\}, \{S\}, \{F\}, \mu \rangle$ reconnaît $L$, donc \alert{$L$ rationnel}.
-  \end{enumerate}
+  \tfBlock<2|handout:1>[anchor=north, y=20mm]{Démonstration -- Rationnel $\Rightarrow$ Généré}{
+    Soit \structure{$L$ rationnel}, reconnu par un AFD \structure{$A = \langle \Sigma, Q, \{i\}, F, \mu \rangle$}.\\ 
+    Alors \alert{$L$ est généré par la grammaire rationnelle droite $\langle \Sigma, Q, i, R \rangle$}, avec
+    $$\alert{R = \left\{ A \rightarrow aB \,\middle\mid\,  A \xrightarrow{a} B \in \mu \right\} \cup \left\{ A \rightarrow a \mid \exists f\in F, A \xrightarrow{a} f \right\}}.$$
+  }
+
+  \tfBlock<3|handout:2>[anchor=north, y=20mm]{Démonstration -- Généré $\Rightarrow$ Rationnel}{
+    Soit \structure{$L$ généré par une grammaire rationnelle droite $G = \langle \Sigma, \Gamma, S, R \rangle$}.\\
+    Alors \alert{$L$ est reconnu par l'AFN $\langle \Sigma, \Gamma \cup \{F\}, \{S\}, \{F\}, \mu \rangle$}, avec $\alert{F \notin \Gamma}$ et 
+    $$\alert{\mu = \left\{ A \xrightarrow{a} B \,\middle\mid\, A \rightarrow aB \in R \right\} \cup \left\{ A \xrightarrow{a} F \,\middle\mid\, A \rightarrow a \in R \right\}}.$$ 
+  }
 
   
- 
-  \uncover<2->{\example{Exemple :}}
- 
-  \uncover<2->{%
-    \begin{minipage}{.2\textwidth}
-      \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-          \node [state, initial, initial text=] (S)                     {$S$}; 
-          \node [state, accepting]              (A) [above right=of S]  {$A$}; 
-          \node [state, accepting]              (B) [below right=of S]  {$B$}; 
-          \path [->]    (S) edge node {$a$} (A);
-          \path [->]    (S) edge node {$b$} (B);
-          \path [->]    (A) edge[loop right, looseness=5] node {$a$} (A);
-          \path [->]    (B) edge[loop right, looseness=5] node {$b$} (B);
-      \end{tikzpicture}}
-    \end{minipage}%
-    \begin{minipage}{.55\textwidth}
-      $$
-      \Rightarrow \hspace{3mm}
-      \left\{\begin{array}{rcl}
-      S & \rightarrow & aA | bB | a | b\\
-      A & \rightarrow & aA | a\\
-      B & \rightarrow & bB | b\\
-      \end{array}\right.
-      \hspace{3mm} \uncover<3->{\Rightarrow}
-      $$
-  \end{minipage}}%
-  \uncover<3->{%
-    \begin{minipage}{.25\textwidth}
-      \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-          \node [state, initial, initial text=] (S)                     {$S$}; 
-          \node [state]                         (A) [above right=of S]  {$A$}; 
-          \node [state]                         (B) [below right=of S]  {$B$}; 
-          \node [state, accepting]              (F) [below right=of A]  {$F$}; 
-          \path [->]    (S) edge node {$a$} (A);
-          \path [->]    (S) edge node {$b$} (B);
-          \path [->]    (A) edge node {$a$} (F);
-          \path [->]    (B) edge node {$b$} (F);
-          \path [->]    (S) edge node {$a, b$} (F);
-          \path [->]    (A) edge[loop right, looseness=5] node {$a$} (A);
-          \path [->]    (B) edge[loop right, looseness=5] node {$b$} (B);
-      \end{tikzpicture}}
-  \end{minipage}}
+  \tfExampleBlock[y=-14mm]{Exemple}{}
+  
+  \tf<1-|handout:1>[y=-30mm, x=-.4\textwidth]{\footnotesize
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smInitial]   (S) at (0, 0.8) {$S$}; 
+      \smState[\smAccepting] (A) at (1, 0.0) {$A$}; 
+      \smState[\smAccepting] (B) at (1, 1.6) {$B$}; 
+      \smPath (S) edge             node[swap] {$a$} (A);
+      \smPath (S) edge             node       {$b$} (B);
+      \smPath (A) edge[loop right] node       {$a$} (A);
+      \smPath (B) edge[loop right] node       {$b$} (B);
+    \end{tikzpicture}
+  }
+
+  \tf<2-|handout:1>[y=-30mm, x=-23mm]{$\Rightarrow$}
+
+  \tf<2-|handout>[y=-30mm, text]{
+    $$\left\{\begin{array}{rcl}
+      S & \rightarrow & aA \mid bB \mid a \mid b\\
+      A & \rightarrow & aA \mid a\\
+      B & \rightarrow & bB \mid b\\
+      \end{array}\right.$$
+  }
+
+  \tf<3-|handout:2>[y=-30mm, x=23mm]{$\Rightarrow$}
+
+  \tf<3-|handout:2>[y=-30mm, x=.4\textwidth]{\footnotesize
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smInitial]   (S) at (0, 0.8) {$S$}; 
+      \smState               (A) at (1, 0.0) {$A$}; 
+      \smState               (B) at (1, 1.6) {$B$}; 
+      \smState[\smAccepting] (F) at (2, 0.8) {$F$}; 
+      \smPath (S) edge             node       {$a$} (A);
+      \smPath (S) edge             node[swap] {$b$} (B);
+      \smPath (A) edge             node       {$a$} (F);
+      \smPath (B) edge             node[swap] {$b$} (F);
+      \smPath (S) edge             node       {$a, b$} (F);
+      \smPath (A) edge[loop right] node       {$a$} (A);
+      \smPath (B) edge[loop right] node       {$b$} (B);
+    \end{tikzpicture}
+  }
 
 \end{frame}
 \endgroup

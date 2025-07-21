@@ -8,14 +8,15 @@
 \begingroup
 
 \begin{frame}{Langages algébriques}
-  Soit \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique. 
+  Soient \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique et \alert{$u \in \Sigma^\star$} un mot sur $\Sigma$. 
 
   \begin{block}{Définitions -- Génération et langage engendré}
     \begin{itemize}
-    \item On dit qu'un mot $u \in \Sigma^\star$ est \structure{généré} par $G$ s'il existe une dérivation $S \vdash^\star u$, appelée \structure{génération} de $u$. 
-    \item Le langage $\alert{\mathcal{L}(G)}$ des mots générés par $G$ est appelé le \structure{langage engendré} par $G$ :
-      $\alert{\mathcal{L}(G) = \{u\in\Sigma^\star | S \vdash^\star u \}}.$
-    \item Un langage est dit \structure{algébrique} s'il existe une grammaire algébrique qui l'engendre.
+    \item Une \structure{génération de $u$ par $G$} est une dérivation \alert{$S \vdash^\star u$} à partir de $S$.
+    \item On dit que \structure{$u$ est généré par $G$} s'il existe une génération de $u$ par $G$. 
+    \item Le \structure{langage engendré} par $G$ $\alert{\mathcal{L}(G)}$ contient les mots générés par $G$ :
+      $$\alert{\mathcal{L}(G) = \left\{u\in\Sigma^\star \,\middle\mid\, S \vdash^\star u \right\}}.$$
+    \item Un langage engendré par une grammaire algébrique est dit \structure{algébrique}.
     \item L'ensemble des langages algébriques sur $\Sigma$ est noté $\alert{\textsc{alg}_\Sigma}$.
     \end{itemize}
   \end{block}

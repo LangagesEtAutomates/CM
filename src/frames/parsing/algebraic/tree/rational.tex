@@ -8,100 +8,76 @@
 \begingroup
 
 \begin{frame}{Grammaire des expressions rationnelles}
-  \label{slide:grammaireRegex}
+
+  \tf[text, top]{
   Soit $\Sigma = \{a, b\}$. Le langage des expressions rationnelles sur $\Sigma$, \\$\textsc{reg}_\Sigma$ est engendré par la grammaire non-ambiguë
-  $\langle \tilde\Sigma, \Gamma, \structure{\textsc{Union}}, R \rangle$, où :
+  $\langle \tilde\Sigma, \Gamma, \structure{\textsc{Union}}, R \rangle$, où : \small
+  \vspace{2mm}
   \begin{itemize}
-  \item $\tilde\Sigma = \{\example{\underline{a}}, \example{\underline{b}}, \example{\underline{\emptyset}}, \example{\underline{\varepsilon}}, \example{\underline{(}}, \example{\underline{)}}, \example{\underline{|}}, \example{\underline{\cdot}}, \example{\underline{{}^\star}} \}$
+  \item $\tilde\Sigma = \{\alert{a}, \alert{b}, \alert{\emptyset}, \alert{\varepsilon}, \alert{(}, \alert{)}, \alert{|}, \alert{\cdot}, \alert{\star} \}$
   \item $\Gamma = \{\structure{\textsc{Union}}, \structure{\textsc{Concat}}, \structure{\textsc{Etoile}}, \structure{\textsc{Par}}, \structure{\textsc{Terme}}\}$
-  \item $R =   \left\{\begin{array}{lllll}
-    \structure{\textsc{Union}} &\rightarrow& \structure{\textsc{Union}} \, \example{\underline{|}} \, \structure{\textsc{Concat}} & | &  \structure{\textsc{Concat}} \\
-    \structure{\textsc{Concat}} &\rightarrow& \structure{\textsc{Concat}} \, \example{\underline{\cdot}} \, \structure{\textsc{Etoile}} & | & \structure{\textsc{Etoile}} \\
-    \structure{\textsc{Etoile}} &\rightarrow& \structure{\textsc{Etoile}}\,^{\example{\underline{\star}}} & | & \structure{\textsc{Par}} \\
-    \structure{\textsc{Par}} &\rightarrow&  \example{\underline{(}} \structure{\textsc{Union}} \example{\underline{)}} & | &  \structure{\textsc{Terme}} \\
-    \structure{\textsc{Terme}} &\rightarrow& \example{\underline{\varepsilon}} \,|\, \example{\underline{\emptyset}} \,|\, \example{\underline{a}} \,|\, \example{\underline{b}}  \\
-  \end{array}\right\}$
+  \item $R =   \left\{\begin{array}{rcl}
+    \structure{\textsc{Union}}  &\rightarrow& \structure{\textsc{Union}} \, \alert{|} \, \structure{\textsc{Concat}} \\
+    & | &  \structure{\textsc{Concat}} \\
+    \structure{\textsc{Concat}} &\rightarrow& \structure{\textsc{Concat}} \, \alert{\cdot} \, \structure{\textsc{Etoile}} \\
+    & | & \structure{\textsc{Etoile}} \\
+    \structure{\textsc{Etoile}} &\rightarrow& \structure{\textsc{Etoile}}\,^{\alert{\star}} \\
+    & | & \structure{\textsc{Par}} \\
+    \structure{\textsc{Par}}    &\rightarrow& \alert{(} \structure{\textsc{Union}} \alert{)} \\
+    & | &  \structure{\textsc{Terme}} \\
+    \structure{\textsc{Terme}}  &\rightarrow& \alert{\varepsilon} \,|\, \alert{\emptyset} \,|\, \alert{a} \,|\, \alert{b}  \\
+  \end{array}\right.$
   \end{itemize}
+  }
+  
+  \tf[x=.25\textwidth, bottom=-1mm]{\footnotesize
+    \begin{tikzpicture}
+      \draw[black!30, fill=black!10, rounded corners] (1.5,-.7) -- (1.5,1.4) -- (5.3,6) -- (7.5,6) -- (7.5,-.7) -- cycle;
+      \draw[structure, below left] (7.5,6) node{CST};
+      
+      \node[structure] (a) at (6,5.6) {$\textsc{Union}$};
+      \node[structure] (b) at (6,4.9) {$\textsc{Etoile}$};   \smPath (a) edge (b);
+      \node[structure] (c) at (5,4.2) {$\textsc{Etoile}$};   \smPath (b) edge (c);
+      \node[alert]     (d) at (7,4.2) {$\star$};             \smPath (b) edge (d);
+      \node[structure] (e) at (5,3.5) {$\textsc{Par}$};      \smPath (c) edge (e);
+      \node[alert]     (f) at (4,2.8) {$($};                 \smPath (e) edge (f);
+      \node[structure] (g) at (5,2.8) {$\textsc{Union}$};    \smPath (e) edge (g);
+      \node[alert]     (h) at (6,2.8) {$)$};                 \smPath (e) edge (h);
+      \node[structure] (i) at (4,2.1) {$\textsc{Union}$};    \smPath (g) edge (i);
+      \node[alert]     (j) at (5,2.1) {$|$};                 \smPath (g) edge (j);
+      \node[structure] (k) at (6,2.1) {$\textsc{Concat}$};   \smPath (g) edge (k);
+      \node[structure] (l) at (3,1.4) {$\textsc{Concat}$};   \smPath (i) edge (l);
+      \node[structure] (m) at (2,0.7) {$\textsc{Concat}$};   \smPath (l) edge (m);
+      \node[alert]     (n) at (3,0.7) {$\cdot$};             \smPath (l) edge (n);
+      \node[structure] (o) at (4,0.7) {$\textsc{Etoile}$};   \smPath (l) edge (o);
+      \node[structure] (p) at (5,1.4) {$\textsc{Concat}$};   \smPath (k) edge (p);
+      \node[alert]     (q) at (6,1.4) {$\cdot$};             \smPath (k) edge (q);
+      \node[structure] (r) at (7,1.4) {$\textsc{Etoile}$};   \smPath (k) edge (r);
+      \node[structure] (s) at (2,0.0) {$\textsc{Terme}$};    \smPath (m) edge (s);
+      \node[structure] (t) at (4,0.0) {$\textsc{Terme}$};    \smPath (o) edge (t);
+      \node[structure] (u) at (5,0.7) {$\textsc{Terme}$};    \smPath (p) edge (u);
+      \node[structure] (v) at (7,0.7) {$\textsc{Terme}$};    \smPath (r) edge (v);
+      \node[alert]     (w) at (2,-.7) {$a$};                 \smPath (s) edge (w);
+      \node[alert]     (x) at (4,-.7) {$b$};                 \smPath (t) edge (x);
+      \node[alert]     (y) at (5,0.0) {$b$};                 \smPath (u) edge (y);
+      \node[alert]     (z) at (7,0.0) {$a$};                 \smPath (v) edge (z);
+    \end{tikzpicture}
+  }
 
-  \begin{minipage}[t]{.5\textwidth}
-    \begin{block}{Arbre de la syntaxe concrète}
-      \scalebox{.5}{\begin{tikzpicture}
-          \draw (6,5.6) node{$\structure{\textsc{Union}}$};
-          \draw (6,4.9) node{$\structure{\textsc{Etoile}}$};
-          \draw (5,4.2) node{$\structure{\textsc{Etoile}}$};
-          \draw (7,4.2) node{${}^{\example{\underline{\star}}}$};
-          \draw (5,3.5) node{$\structure{\textsc{Par}}$};
-          \draw (4,2.8) node{$\example{\underline{(}}$};
-          \draw (5,2.8) node{$\structure{\textsc{Union}}$};
-          \draw (6,2.8) node{$\example{\underline{)}}$};
-          \draw (1,2.1) node{$\structure{\textsc{Concat}}$};
-          \draw (3,2.1) node{$\structure{\textsc{Union}}$};
-          \draw (5,2.1) node{$\example{\underline{|}}$};
-          \draw (7,2.1) node{$\structure{\textsc{Concat}}$};
-          \draw (0,1.4) node{$\structure{\textsc{Concat}}$};
-          \draw (1,1.4) node{$\example{\underline{\cdot}}$};
-          \draw (2,1.4) node{$\structure{\textsc{Etoile}}$};
-          \draw (6,1.4) node{$\structure{\textsc{Concat}}$};
-          \draw (7,1.4) node{$\example{\underline{\cdot}}$};
-          \draw (8,1.4) node{$\structure{\textsc{Etoile}}$};
-          \draw (0,0.7) node{$\structure{\textsc{Terme}}$};
-          \draw (2,0.7) node{$\structure{\textsc{Terme}}$};
-          \draw (6,0.7) node{$\structure{\textsc{Terme}}$};
-          \draw (8,0.7) node{$\structure{\textsc{Terme}}$};
-          \draw (0,0.0) node{$\example{\underline{a}}$};
-          \draw (2,0.0) node{$\example{\underline{b}}$};
-          \draw (6,0.0) node{$\example{\underline{b}}$};
-          \draw (8,0.0) node{$\example{\underline{a}}$};
-          
-          \draw[-latex] (6.0,5.4) -- (6.0,5.1);
-          \draw[-latex] (5.8,4.7) -- (5.2,4.4);
-          \draw[-latex] (6.2,4.7) -- (6.8,4.4);
-          \draw[-latex] (5.0,4.0) -- (5.0,3.7);
-          \draw[-latex] (4.8,3.3) -- (4.2,3.0);
-          \draw[-latex] (5.0,3.3) -- (5.0,3.0);
-          \draw[-latex] (5.2,3.3) -- (5.8,3.0);
-          \draw[-latex] (2.3,2.1) -- (1.7,2.1);
-          \draw[-latex] (4.6,2.6) -- (3.4,2.3);
-          \draw[-latex] (5.0,2.6) -- (5.0,2.3);
-          \draw[-latex] (5.4,2.6) -- (6.6,2.3);
-          \draw[-latex] (0.8,1.9) -- (0.2,1.6);
-          \draw[-latex] (1.0,1.9) -- (1.0,1.6);
-          \draw[-latex] (1.2,1.9) -- (1.8,1.6);
-          \draw[-latex] (6.8,1.9) -- (6.2,1.6);
-          \draw[-latex] (7.0,1.9) -- (7.0,1.6);
-          \draw[-latex] (7.2,1.9) -- (7.8,1.6);
-          \draw[-latex] (0.0,1.2) -- (0.0,0.9);
-          \draw[-latex] (2.0,1.2) -- (2.0,0.9);
-          \draw[-latex] (6.0,1.2) -- (6.0,0.9);
-          \draw[-latex] (8.0,1.2) -- (8.0,0.9);
-          \draw[-latex] (0.0,0.5) -- (0.0,0.2);
-          \draw[-latex] (2.0,0.5) -- (2.0,0.2);
-          \draw[-latex] (6.0,0.5) -- (6.0,0.2);
-          \draw[-latex] (8.0,0.5) -- (8.0,0.2);
-      \end{tikzpicture}}
-    \end{block}
-  \end{minipage}%
-  \begin{minipage}[t]{.5\textwidth}
-    \begin{block}{Arbre de la syntaxe abstraite}
-      \scalebox{.75}{\begin{tikzpicture}
-          \draw (3.0,3.0) node{${}^{\example{\underline{\star}}}$};
-          \draw (3.0,2.0) node{$\example{\underline{|}}$};
-          \draw (1.0,1.0) node{$\example{\underline{\cdot}}$};
-          \draw (5.0,1.0) node{$\example{\underline{\cdot}}$};
-          \draw (0.0,0.0) node{$\example{\underline{a}}$};
-          \draw (2.0,0.0) node{$\example{\underline{b}}$};
-          \draw (4.0,0.0) node{$\example{\underline{b}}$};
-          \draw (6.0,0.0) node{$\example{\underline{a}}$};
-
-          \draw[-latex] (3.0,2.8) -- (3.0,2.3); 
-          \draw[-latex] (2.6,1.8) -- (1.4,1.2); 
-          \draw[-latex] (3.4,1.8) -- (4.6,1.2); 
-          \draw[-latex] (0.8,0.8) -- (0.2,0.2); 
-          \draw[-latex] (1.2,0.8) -- (1.8,0.2); 
-          \draw[-latex] (4.8,0.8) -- (4.2,0.2); 
-          \draw[-latex] (5.2,0.8) -- (5.8,0.2); 
-      \end{tikzpicture}}
-    \end{block}
-  \end{minipage}
+  \tf[x=-.33\textwidth, bottom=-1mm]{\footnotesize
+    \begin{tikzpicture}
+      \draw[black!30, fill=black!10, rounded corners] (-.5, -.1) rectangle (3.5,2);
+      \draw[structure, below right] (-.5, 2) node{AST};
+      
+      \node[structure] (a) at (1.5,1.7) {$\star$};
+      \node[structure] (b) at (1.5,1.0) {$|$};            \smPath (a) edge (b);  
+      \node[structure] (c) at (0.5,0.5) {$\cdot$};        \smPath (b) edge (c);  
+      \node[structure] (d) at (2.5,0.5) {$\cdot$};        \smPath (b) edge (d);  
+      \node[alert]     (e) at (0.0,0.0) {$a$};            \smPath (c) edge (e);  
+      \node[alert]     (f) at (1.0,0.0) {$b$};            \smPath (c) edge (f);  
+      \node[alert]     (g) at (2.0,0.0) {$b$};            \smPath (d) edge (g);  
+      \node[alert]     (h) at (3.0,0.0) {$a$};            \smPath (d) edge (h);  
+    \end{tikzpicture}
+  }
 \end{frame}
 \endgroup
