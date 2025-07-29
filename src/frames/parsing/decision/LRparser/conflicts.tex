@@ -1,0 +1,123 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+  
+\begin{frame}{Conflits}
+  
+  \tf[text,top=-2mm]{
+    \begin{itemize}
+    \item Si l'automate à pile est déterministe, on a terminé
+    \item Sinon, l'algorithme échoue sur un conflit
+    \end{itemize}
+  }
+
+  \tfBlock[y=8mm]{Conflit par réduction/réduction}{
+    \begin{itemize}
+    \item Quelle réduction suivre en 1 ? 
+    \end{itemize}
+    \example{$
+      G_1 = \left(
+      \begin{array}{c}
+      \{a,b,\$\}, \{S, E, A, B\}, S, \\
+      \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& E \$\\
+        E &\rightarrow & A a \mid B b\\
+        A &\rightarrow& a \\
+        B &\rightarrow & a 
+      \end{array}\right\}
+      \end{array}
+      \right)
+    $}
+  }
+  
+  \tf[y=7mm,x=30mm]{
+    \begin{tikzpicture}[smAutomaton, initial text=0]\tiny
+      \node[alert, fill=alert!20, state, rectangle, rounded corners] (1) at (-1.0,1.2) {$1:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& E \$\\
+        E &\rightarrow & A a \mid B b\\
+        A &\rightarrow& a \bullet\\
+        B &\rightarrow & a \bullet
+        \end{array}\right.
+        $};
+      \node[state,initial above] (0) at (1.0,1.2) {$0$};
+      \node[state]               (2) at (0.0,2.4) {$2$};
+      \node[state]               (3) at (0.0,0.0) {$3$};
+      \node[state]               (4) at (2.0,1.2) {$4$};
+      \node[state]               (5) at (2.0,2.4) {$5$};
+      \node[state]               (6) at (2.0,0.0) {$6$};
+      \node[state,accepting]     (7) at (3.0,1.2) {$7$};
+
+      \path[->,densely dotted] (0) edge                 node[swap]             {$A$}                              (2);
+      \path[->,densely dotted] (0) edge                 node                   {$B$}                              (3);
+      \path[->,densely dotted] (0) edge                 node                   {$E$}                              (4);
+      \path[-latex]            (0) edge                 node[swap]             {\smPAtrans{a}{\varepsilon}{1}}    (1);
+      \path[-latex]            (2) edge                 node                   {\smPAtrans{a}{\varepsilon}{5}}    (5);
+      \path[-latex]            (3) edge                 node[swap]             {\smPAtrans{b}{\varepsilon}{6}}    (6);
+      \path[-latex]            (4) edge                 node                   {\smPAtrans{\$}{\varepsilon}{7}}   (7);
+      \path[-latex, alert]     (1) edge[bend left=7mm]  node[]                 {\smPAtrans{\varepsilon}{01}{02}}  (2);
+      \path[-latex, alert]     (1) edge[bend right=7mm] node[swap]             {\smPAtrans{\varepsilon}{01}{03}}  (3);
+      \path[-latex]            (5) edge                 node[yshift=1mm]       {\smPAtrans{\varepsilon}{025}{04}} (4);
+      \path[-latex]            (6) edge                 node[yshift=-1mm,swap] {\smPAtrans{\varepsilon}{036}{04}} (4);
+    \end{tikzpicture}
+  }
+    
+  \tfBlock[bottom=1mm]{Conflit par décalage/réduction}{
+    \begin{itemize}
+    \item Décaler ou réduire en 1 ? 
+    \end{itemize}
+    \example{$
+      G_2 = \left(
+      \begin{array}{c}
+      \{1,+,\$\}, \{S, E, T\}, S, \\
+      \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& E \$\\
+        E &\rightarrow & T +E \mid T\\
+        T &\rightarrow& 1
+      \end{array}\right\}
+      \end{array}
+      \right)
+    $}
+  }
+
+  \tf[y=-27mm,x=30mm]{
+    \begin{tikzpicture}[smAutomaton, initial text=0]\tiny
+      \node[alert, fill=alert!20, state, rectangle, rounded corners] (1) at (2.0,1.2) {$1:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& E \$\\
+        E &\rightarrow & T \bullet +E \mid T \bullet\\
+        T &\rightarrow& 1
+        \end{array}\right.
+        $};
+      \node[state,initial]   (0) at (0.0,1.2) {$0$};
+      \node[state]           (2) at (0.0,0.0) {$2$};
+      \node[state]           (3) at (4.0,0.0) {$3$};
+      \node[state]           (4) at (4.0,1.2) {$4$};
+      \node[state]           (5) at (2.0,2.4) {$5$};
+      \node[state,accepting] (6) at (0.0,2.4) {$6$};
+
+      \path[->,densely dotted] (0) edge[]               node              {$E$}                               (5);
+      \path[->,densely dotted] (0) edge[]               node[swap]        {$T$}                               (1);
+      \path[->,densely dotted] (3) edge[bend left =5mm] node              {$T$}                               (1);
+      \path[->,densely dotted] (3) edge[]               node[swap]        {$E$}                               (4);
+      \path[-latex]            (5) edge                 node[swap,sloped] {\smPAtrans{\$}{\varepsilon}{6}}    (6);
+      \path[-latex]            (0) edge                 node[swap,sloped] {\smPAtrans{1}{\varepsilon}{2}}     (2);
+      \path[-latex,example]    (1) edge                 node[sloped]      {\smPAtrans{+}{\varepsilon}{3}}     (3);
+      \path[-latex]            (3) edge                 node[swap]        {\smPAtrans{1}{\varepsilon}{2}}     (2);
+      \path[-latex,alert]      (1) edge                 node              {\smPAtrans{\varepsilon}{01}{05}}   (5);
+      \path[-latex]            (4) edge                 node[sloped]      {\smPAtrans{\varepsilon}{0134}{05}} (5);
+      \path[-latex,alert]      (1) edge                 node[swap]        {\smPAtrans{\varepsilon}{31}{34}}   (4);
+      \path[-latex]            (4) edge[loop above]     node              {\smPAtrans{\varepsilon}{3134}{34}} (4);
+      \path[-latex]            (2) edge                 node[sloped]      {\smPAtrans{\varepsilon}{32}{31}}
+                                                        node[swap,sloped] {\smPAtrans{\varepsilon}{02}{01}}   (1);
+    \end{tikzpicture}
+  }
+    
+\end{frame}
+
+\endgroup

@@ -11,31 +11,28 @@
 
   Soit $A = \langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$ un automate à pile.
 
-  \vspace{-1mm}
   \begin{block}{Définition -- Automate à pile déterministe}
-    On dit que $A$ est \structure{déterministe} si toutes les conditions sont vérifiées : 
+    On dit que $A$ est \structure{déterministe}\footnote[frame]{Il existe d'autres définitions, généralement plus restrictives, dans la littérature classique.} si ces deux conditions sont vérifiées : 
     \begin{enumerate}
-    \item $A$ ne possède pas qu'un seul état initial : \alert{$|I| = 1$}
-    \item Pour tout état $q \in Q$ et tout symbole de pile $p \in \Pi$, on a : 
+    \item $A$ ne possède qu'un seul état initial : \alert{$|I| = 1$}
+    \item Pour tout état \structure{$q \in Q$} et transitions \structure{$q\xrightarrow{\footnotesize\smPAtrans{a_1}{p_1}{p'_1}} q_1 \in \mu$}
+      et \structure{$q\xrightarrow{\footnotesize\smPAtrans{a_2}{p_2}{p'_2}} q_2 \in \mu$} :
       \begin{itemize}
-      \item soit chaque lettre est consommée par au plus une transition \\
-        et il n'existe pas d'$\varepsilon$-transition \\
+      \item Soit on peut distinguer selon les symboles lus $a_1$ et $a_2$ :
+        $$\alert{a_1 \notin \mathit{Prefix}(a_2) \land a_2 \notin \mathit{Prefix}(a_1)}$$
+      \item Soit on peut distinguer selon la pile  $p_1$ et $p_2$ :
+        $$\alert{p_1 \notin \mathit{Prefix}(p_2) \land p_2 \notin \mathit{Prefix}(p_1)}$$
       \end{itemize}
-      $$\alert{\forall a, \unique q', p' : \langle \langle q, a, p\rangle, \langle q', p'\rangle \rangle \in \mu \land \forall q', p' : \langle \langle q, \varepsilon, p\rangle, \langle q', p'\rangle \rangle \notin \mu}$$
-      \begin{itemize}
-      \item \vspace{-5mm}soit il existe une unique $\varepsilon$-transition\\
-        et aucune transition consommant des lettres :
-      \end{itemize}
-      $$\alert{\existsunique q', p' : \langle \langle q, \varepsilon, p\rangle, \langle q', p'\rangle \rangle \in \mu \land \forall u\in \Sigma^+, q', p' : \langle \langle q, u, p\rangle, \langle q', p'\rangle \rangle \notin \mu}$$
     \end{enumerate}
   \end{block}
 
-  \vspace{-2mm}
   \begin{alertblock}{Remarque}
     \begin{itemize}
-    \item \vspace{-1mm} On note $\mu(q, a, p) \eqdef \langle q', p'\rangle$ tel que $\langle \langle q, a, p\rangle, \langle q', p'\rangle \rangle \in \mu$
+    \item \vspace{-1mm} On note $\mu(q, a, p) \eqdef \langle q', p'\rangle$ lorsque $q \xrightarrow{\footnotesize\smPAtrans{a}{p}{p'}} q' \in \mu$ (si elle est définie).
+%      On note $\mu(q, a, p) \eqdef \langle q', p'\rangle$ tel que $q\xrightarrow{\footnotesize\smPAtrans{a}{p}{p'}} q' \in \mu$
     \end{itemize}
   \end{alertblock}
 \end{frame}
+
 
 \endgroup

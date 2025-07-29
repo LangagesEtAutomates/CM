@@ -8,57 +8,64 @@
 \begingroup
 
 \begin{frame}{Normalisation d'un automate fini}
-  \begin{block}{Théorème -- Normalisation}
-    Soit $\Sigma$ un alphabet et $L \in \textsc{rec}_\Sigma$.
 
-    Il existe un automate normalisé qui reconnaît $L$.
-  \end{block}
-  \begin{block}{Démonstration}
-    Soit $T = \langle \Sigma, Q, I, F, \mu \rangle$ un automate qui reconnaît $L$.
-    \begin{itemize}
-    \item Soient $i, f \notin Q$
-    \item Soit $\mu' = \mu \cup \structure{\{\langle i, \varepsilon, q\rangle | q \in I\}} \cup \alert{\{\langle q, \varepsilon, f\rangle | q \in F\}}$
-    \end{itemize}
-    $\langle \Sigma, Q \cup \{i, f\}, \structure{\{i\}}, \alert{\{f\}}, \mu' \rangle$ est un automate normalisé qui reconnaît $L$.
-  \end{block}
+  \tf[text,top=-5mm]{
+    \begin{block}{Théorème -- Normalisation}
+      Soit $\Sigma$ un alphabet et $L \in \textsc{rec}_\Sigma$.
 
-  \begin{exampleblock}{Exemple}
-  \scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-      \node (i)   {};
-      \node [state,initial, initial text=] (q0) [above right=of i]   {$q_0$};
-      \node [state,initial, initial text=] (q1) [below right=of i]  {$q_1$};
-      \node [state,accepting] (q2) [right=of q0]  {$q_2$};
-      \node [state,accepting] (q3) [right=of q1]  {$q_3$};
-      \node (f) [below right=of q2]  {};
+      Il existe un automate normalisé qui reconnaît $L$.
+    \end{block}
+    \begin{block}{Démonstration}
+      Soit $T = \langle \Sigma, Q, I, F, \mu \rangle$ un automate qui reconnaît $L$.
+      \begin{itemize}
+      \item Soient $i, f \notin Q$
+      \item Soit $\mu' = \mu \cup \structure{\{\langle i, \varepsilon, q\rangle | q \in I\}} \cup \alert{\{\langle q, \varepsilon, f\rangle | q \in F\}}$
+      \end{itemize}
+      $\langle \Sigma, Q \cup \{i, f\}, \structure{\{i\}}, \alert{\{f\}}, \mu' \rangle$ est un automate normalisé qui reconnaît $L$.
+    \end{block}
 
-      \path [->]  (q0) edge node[above] {$a$} (q2);
-      \path [->]  (q0) edge node[above] {$a$} (q3);
-      \path [->]  (q1) edge node[below] {$b$} (q2);
-      \path [->]  (q1) edge node[below] {$b$} (q3);
-  \end{tikzpicture}} \hspace\fill%\hspace{1cm}$\Rightarrow$\hspace{1cm}
-  \scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-      \node [state,initial, initial text=, structure, fill=structure!20] (i)   {$i$};
+    \begin{exampleblock}{Exemple}\end{exampleblock}
+  }
 
-      \node [state] (q0) [above right=of i]   {$q_0$};
-      \node [state] (q1) [below right=of i]  {$q_1$};
-      \node [state] (q2) [right=of q0]  {$q_2$};
-      \node [state] (q3) [right=of q1]  {$q_3$};
-
-      \node [state,accepting, alert, fill=alert!20] (f) [below right=of q2]  {$f$};
-
-      \path [->]  (q0) edge node[above] {$a$} (q2);
-      \path [->]  (q0) edge node[above] {$a$} (q3);
-      \path [->]  (q1) edge node[below] {$b$} (q2);
-      \path [->]  (q1) edge node[below] {$b$} (q3);
-
-      \path [->, structure]  (i)  edge node[above] {$\varepsilon$} (q0);
-      \path [->, structure]  (i)  edge node[below] {$\varepsilon$} (q1);
-      \path [->, alert]  (q2) edge node[above] {$\varepsilon$} (f);
-      \path [->, alert]  (q3) edge node[below] {$\varepsilon$} (f);
-
+  \tf[bottom,x=-.25\textwidth]{\footnotesize
+    \begin{tikzpicture}[smAutomaton, node distance=1.2cm]
+      \smState               (2)                     {$2$};
+      \smState[\smInitial]   (0) [above left =of 2]  {$0$};
+      \smState[\smInitial]   (1) [below left =of 2]  {$1$};
+      \smState[\smAccepting] (3) [above right=of 2]  {$3$};
+      \smState[\smAccepting] (4) [below right=of 2]  {$4$};
       
-  \end{tikzpicture}}
-  \end{exampleblock}
+      \smPath  (0) edge node {$a$} (3);
+      \smPath  (0) edge node {$b$} (2);
+      \smPath  (1) edge node {$a$} (2);
+      \smPath  (1) edge node {$b$} (4);
+      \smPath  (2) edge node {$a$} (3);
+      \smPath  (2) edge node {$b$} (4);
+    \end{tikzpicture}
+  }
+  \tf[bottom,x=.25\textwidth]{\footnotesize
+    \begin{tikzpicture}[smAutomaton, node distance=1.2cm]
+      \smState                         (2)                     {$2$};
+      \smState                         (0) [above left =of 2]  {$0$};
+      \smState                         (1) [below left =of 2]  {$1$};
+      \smState                         (3) [above right=of 2]  {$3$};
+      \smState                         (4) [below right=of 2]  {$4$};
+      \smState[\smInitial\smStructure] (i) [above left =of 1]  {$i$};
+      \smState[\smAccepting\smAlert]   (f) [above right=of 4]  {$f$};
+
+      \smPath  (0) edge node {$a$} (3);
+      \smPath  (0) edge node {$b$} (2);
+      \smPath  (1) edge node {$a$} (2);
+      \smPath  (1) edge node {$b$} (4);
+      \smPath  (2) edge node {$a$} (3);
+      \smPath  (2) edge node {$b$} (4);
+      \smPath[\smStructure] (i) edge node {$\varepsilon$} (0);
+      \smPath[\smStructure] (i) edge node {$\varepsilon$} (1);
+      \smPath[\smAlert]     (3) edge node {$\varepsilon$} (f);
+      \smPath[\smAlert]     (4) edge node {$\varepsilon$} (f);
+    \end{tikzpicture}
+  }
+  
 \end{frame}
 
 

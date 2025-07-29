@@ -40,10 +40,10 @@
     \begin{tikzpicture}[smAutomaton]
       \draw (1,0.75) node{\normalsize $\simeq$};
 
-      \smState[\smStructure, \smInitial]   (a0) at (0.0, 1.5) {$A$};
-      \smState[\smStructure, \smAccepting] (a1) at (0.0, 0.0) {$B$};
-      \smState[\smExample, \smInitial]     (b0) at (2.0, 1.5) {$0$};
-      \smState[\smExample, \smAccepting]   (b1) at (2.0, 0.0) {$1$};
+      \smState[\smStructure \smInitial]   (a0) at (0.0, 1.5) {$A$};
+      \smState[\smStructure \smAccepting] (a1) at (0.0, 0.0) {$B$};
+      \smState[\smExample \smInitial]     (b0) at (2.0, 1.5) {$0$};
+      \smState[\smExample \smAccepting]   (b1) at (2.0, 0.0) {$1$};
 
       \smPath[\smStructure] (a0) edge[bend left]  node {$a$} (a1);
       \smPath[\smStructure] (a1) edge[bend left]  node {$a$} (a0);

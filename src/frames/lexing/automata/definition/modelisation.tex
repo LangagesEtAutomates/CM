@@ -8,11 +8,10 @@
 \begingroup
 
 \begin{frame}{Modélisation mathématique}
-  \vspace{-4mm}
   \begin{block}{Définition -- Automate fini non-déterministe (AFN)}
     \vspace{3mm}
     Un \structure{automate fini} est un quintuplet \alert{$\langle \Sigma, Q, I, F, \mu \rangle$} tel que :
-    \begin{description}
+    \begin{description}[xxxxx]
     \item[\alert{$\Sigma$}] ensemble fini non vide : \structure{l'alphabet}
     \item[\alert{$Q$}] ensemble fini non vide : \structure{les états possibles}
     \item[\alert{$I$}] $\subseteq Q$ : \structure{les états initiaux}
@@ -21,19 +20,21 @@
     \end{description}
 
     \vspace{3mm}
-    Une \structure{transition} est un triplet \alert{$\langle q, a, q' \rangle \in \mu$} tel que :
-    \begin{description}
+    Une \structure{transition} est un triplet \alert{$\langle q, a, q' \rangle \in \mu$} (noté \alert{$q\xrightarrow{a} q'$}) tel que :
+    \begin{description}[xxxxx]
     \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
     \item[\alert{$a$}] $\in \Sigma \cup \{\varepsilon\}$ : \structure{l'étiquette}
     \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
     \end{description}
   \end{block}
 
-  \vspace{-1.3cm}\hspace{7cm}  \scalebox{.9}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-      \node [state] (q) {$q$}; 
-      \node [state] (q1) [right=of q]  {$q'$}; 
-      \path [->]    (q) edge node {$a$} (q1);
-  \end{tikzpicture}}
+  \tf[y=-25mm, x=30mm]{
+    \begin{tikzpicture}[smAutomaton]
+      \smState (q)  at (0,0) {$q$}; 
+      \smState (q1) at (2,0) {$q'$}; 
+      \smPath  (q) edge node {$a$} (q1);
+    \end{tikzpicture}
+  }
 \end{frame}
 
 \endgroup

@@ -7,15 +7,28 @@
 
 \begingroup
 
-\begin{frame}{Statégies d'analyse syntaxique}
-  \begin{block}{Construction d'un automate à pile déterministe}
+\begin{frame}{Stratégies d’analyse syntaxique}
+
+  \begin{itemize}
+    \item Certaines grammaires ne sont pas reconnues de manière déterministe
+    \item On peut se restreindre à certains sous-ensembles de grammaires
+  \end{itemize}
+
+  \begin{block}{Analyseurs LL (\emph{Left-to-right, Leftmost derivation})}
     \begin{itemize}
-    \item Analyseurs $LL(k)$, $LR(k)$, $SLR$, $LALR$, ... 
-    \item Reconnaissent un sous-ensemble des grammaires
-    \item Voir l'ancien distanciel sur Madoc sur les analyseurs $LL$
-    \item En TP : bison est un analyseur $LR$
+      \item Relativement simples à mettre en œuvre
+      \item Utilisés par \texttt{ANTLR} (Java)
     \end{itemize}
   \end{block}
+
+  \begin{block}{Analyseurs LR (\emph{Left-to-right, Rightmost derivation})}
+    \begin{itemize}
+      \item Permettent de reconnaître plus de grammaires
+      \item Variantes : $LR(k)$, $SLR(k)$, $LALR(k)$, etc.
+      \item Utilisés par \texttt{Bison} (C/C++), \texttt{CUP} (Java), etc.
+    \end{itemize}
+  \end{block}
+
 \end{frame}
 
 \endgroup

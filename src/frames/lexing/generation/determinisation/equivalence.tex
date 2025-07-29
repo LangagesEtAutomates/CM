@@ -8,19 +8,15 @@
 \begingroup
 
 \begin{frame}{Théorème d'équivalence entre AFN et AFD}
-  \SetKwData{Input}{motif}
 
-  \vspace{-1.5cm}
-  \begin{minipage}{4.8cm}
-    \begin{block}{Théorème}
-      Tout langage reconnaissable par un automate fini  non-déterministe 
-      est reconnaissable par un automate fini déterministe
-    \end{block}
-  \end{minipage}
+  \tfBlock[top, left=48mm]{Théorème}{
+    Tout langage reconnaissable par un automate fini  non-déterministe 
+    est reconnaissable par un automate fini déterministe
+  }
+  
 
-  \vspace{1.3cm}
-  \begin{block}{Démonstration}
-    Méthode des sous-ensembles de Rabin et Scott
+  \tfBlock[y=-15mm]{Démonstration}{
+    Méthode des sous-ensembles de Rabin et Scott\footnote[frame]{Prix Turing 1976 pour leurs travaux sur le non-déterminisme}
     \begin{description}
     \item [Entrée :] automate fini non-déterministe \structure{$A$}
     \item [Sortie :] automate fini déterministe \structure{$B$} tel que $\mathcal{L}(B) = \mathcal{L}(A)$ 
@@ -29,21 +25,23 @@
       \item $B$ est également complet
       \end{itemize}
     \end{description}
-  \end{block}
+  }
 
-  \vspace{-7.4cm}\hspace\fill
-  \begin{minipage}{2.7cm}
-    \centering
-    \includegraphics[height=4cm]{img/Rabin}
-    
-    Michael O. Rabin${}^1$
-  \end{minipage}\hspace{2mm}
-  \begin{minipage}{2.7cm}
-    \centering
-    \includegraphics[height=4cm]{img/Scott}
-    
-    Dana S. Scott\footnote[frame,1]{Prix Turing 1976 pour leurs travaux sur le non-déterminisme}
-  \end{minipage}
+  \tfImage[x=12mm,y=15mm]{%
+    height=3.5cm,
+    title={Michael O. Rabin},
+    license={{CC-BY-SA} (\href{https://commons.wikimedia.org/wiki/File:M_O_Rabin.jpg}{Wikimedia})},
+    img={Rabin.jpg}
+  }
+
+  \tfImage[x=42mm,y=15mm]{%
+    height=3.5cm,
+    title={Dana S. Scott},
+    license={{CC-BY-SA} (2003, \href{https://commons.wikimedia.org/wiki/File:Scott_Dana_small.jpg}{Wikimedia})},
+    img={Scott.jpg}
+  }
+
+  
 \end{frame}
 
 \endgroup

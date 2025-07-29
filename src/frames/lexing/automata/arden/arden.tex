@@ -17,15 +17,15 @@
   \end{block}
   \begin{exampleblock}{Exemple}
     \noindent\begin{minipage}{.4\textwidth}
-    \begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-      \node [state,initial, initial text=] (s1)   {$0$}; 
-      \node [state,accepting] (s2) [right=of s1]  {$1$};
-      \path [->]    (s1) edge[loop above, looseness=5] node {a} (s1);
-      \path [->]    (s1) edge node[above] {b} (s2);
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smInitial]   (s1)                {$0$}; 
+      \smState[\smAccepting] (s2) [right=of s1]  {$1$};
+      \smPath (s1) edge[loop above] node {$a$} (s1);
+      \smPath (s1) edge             node {$b$} (s2);
     \end{tikzpicture}
     \end{minipage}%
     \begin{minipage}{.6\textwidth}
-      $ L = a L | b = a^\star b$
+      $ L = a L \mid b = a^\star b$
     \end{minipage}
   \end{exampleblock}
   \begin{block}{Remarques}

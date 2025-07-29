@@ -15,7 +15,7 @@
   \begin{block}{Définition -- Miroir}
     \begin{itemize}
     \item \vspace{-1mm}Le miroir d'un mot $u$ est $u^{\textsc{r}} = u[|u|]\cdots u[1]$.
-    \item \vspace{-1mm}Le miroir d'un langage $L$ est $(L)^{\textsc{r}} = \{u^{\textsc{r}} | u \in L\}$.
+    \item \vspace{-1mm}Le miroir d'un langage $L$ est $L^{\textsc{r}} = \{u^{\textsc{r}} \mid u \in L\}$.
     \end{itemize}
   \end{block}
   
@@ -31,7 +31,7 @@
     $m \eqdef \left\{\begin{array}{rcl}
       \textsc{reg}_\Sigma & \rightarrow & \textsc{reg}_\Sigma\\
       a & \mapsto & a\\
-      u | v & \mapsto & m(u) | m(v)\\
+      u \mid v & \mapsto & m(u) \mid m(v)\\
       u \cdot v & \mapsto & m(v) \cdot m(u)\\
       u^\star & \mapsto & m(u)^\star\\
       \end{array}\right.$
@@ -44,32 +44,32 @@
   \begin{minipage}[t]{.5\textwidth}
     \structure{Preuve : Automates}
 
-        \vspace{3mm}
-Soit $A = \langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
-
-      Posons $\mu' = \{\langle q', a, q  \rangle | \langle q, a, q'  \rangle \in \mu\}$.
-
-      On a $\mathcal{L}(\langle \Sigma, Q, F, I, \mu' \rangle) = (\mathcal{L}(A))^{\textsc{r}}.$
-
+    \vspace{3mm}
+    Soit $A = \langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
+    
+    Posons $\mu' = \left\{ q' \xrightarrow{a} q \,\middle\mid\, q \xrightarrow{a} q' \in \mu \right\}$.
+    
+    On a $\mathcal{L}(\langle \Sigma, Q, F, I, \mu' \rangle) = (\mathcal{L}(A))^{\textsc{r}}.$
+    
 
       \vspace{3mm}\example{Exemple :}
       
-      \scalebox{.7}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-          \node [state, initial above, initial text=] (S)                     {$S$}; 
-          \node [state, accepting]              (A) [left=of S]  {$A$}; 
-          \node [state, accepting]              (B) [right=of S]  {$B$}; 
-          \path [->]    (S) edge node [above] {$a$} (A);
-          \path [->]    (S) edge node [above] {$b$} (B);
-          \path [->]    (A) edge[loop below, looseness=5] node {$a$} (A);
-          \path [->]    (B) edge[loop below, looseness=5] node {$b$} (B);
+      \scalebox{.7}{\begin{tikzpicture}[smAutomaton]
+          \smState[\smAccepting]    (A) at (0.0, 0.0) {$A$}; 
+          \smState[\smInitialAbove] (S) at (1.5, 0.0) {$S$}; 
+          \smState[\smAccepting]    (B) at (3.0, 0.0) {$B$}; 
+          \smPath (S) edge             node {$a$} (A);
+          \smPath (S) edge             node {$b$} (B);
+          \smPath (A) edge[loop below] node {$a$} (A);
+          \smPath (B) edge[loop below] node {$b$} (B);
 
-          \node [state, initial above, initial text=]              (A2) [right=of B]  {$A$}; 
-          \node [state, accepting]                                 (S2) [right=of A2] {$S$}; 
-          \node [state, initial above, initial text=]              (B2) [right=of S2] {$B$}; 
-          \path [->]    (A2) edge node [above] {$a$} (S2);
-          \path [->]    (B2) edge node [above] {$b$} (S2);
-          \path [->]    (A2) edge[loop below, looseness=5] node {$a$} (A2);
-          \path [->]    (B2) edge[loop below, looseness=5] node {$b$} (B2);
+          \smState[\smInitialAbove] (A2) at (4.5, 0.0) {$A$}; 
+          \smState[\smAccepting]    (S2) at (6.0, 0.0) {$S$}; 
+          \smState[\smInitialAbove] (B2) at (7.5, 0.0) {$B$}; 
+          \smPath (A2) edge             node {$a$} (S2);
+          \smPath (B2) edge             node {$b$} (S2);
+          \smPath (A2) edge[loop below] node {$a$} (A2);
+          \smPath (B2) edge[loop below] node {$b$} (B2);
       \end{tikzpicture}}
   \end{minipage}
 \end{frame}

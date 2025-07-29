@@ -1,0 +1,44 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Exemple : représentation d'un nombre réel}
+
+  \begin{block}{Langage représentant le calcul des décimales de $\pi$}
+    On étend la notation \structure{$(n)_{10}$} aux nombres $n$ décimaux. 
+    \begin{itemize}
+    \item Pour $x\in \mathbb{R}$, on note $\alert{\mathcal{L}_{x}}$ le langage des troncatures de $x$
+      $$\alert{\mathcal{L}_{x} \eqdef \left\{\left(\frac{\left\lfloor 10^n x \right\rfloor}{10^n} \right)_{10} \Big| n \in \mathbb{N}\right\}}$$
+    \item Par exemple, $\example{\mathcal{L}_{\pi} = \left\{\text{``3''}, \text{``3.1''}, \text{``3.14''}, \text{``3.141''}, \text{``3.1415''}, ...   \right\}}$
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{alertblock}{Remarques}
+    \begin{itemize}
+    \item L'ensemble des langages est indénombrable
+      \begin{itemize}
+      \item Au moins autant de langages $\alert{\mathcal{L}_{x}}$ que de réel $\alert{x}$
+      \end{itemize}
+    \item Tout langage est dénombrable
+      \begin{itemize}
+      \item Par exemple, le langage des mots sur $\{1, 2\}$ est inclus dans $\alert{\mathcal{L}_{\mathbb{N}}}$
+      \end{itemize}
+    \item Aucun langage ne peut exprimer tous les langages 
+      \begin{itemize}
+      \item Même les langages de programmation $\rightarrow$ \alert{problèmes indécidables}
+      \item Même le langage des mathématiques ~$\rightarrow$ \alert{problèmes indéfinissables}
+      \end{itemize}
+    \end{itemize}
+  \end{alertblock}
+
+\end{frame}
+
+\endgroup

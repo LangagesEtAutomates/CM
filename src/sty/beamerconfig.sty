@@ -45,7 +45,33 @@
 
 
 
-
+\usepackage{array}
+\newcolumntype\math[1]{>{\(}#1<{\)}}
+\newcounter{iteration}
+\makeatletter
+\newcommand*\tableonly%>>>
+  {%
+    \omit\@ifnextchar<\table@only\table@@only
+  }%<<<
+\protected\long\def\table@only<#1>#2%>>>
+  {%
+    \gdef\beamer@doifnotinframe{\cr}%
+    \def\beamer@doifinframe{\cr#2}%
+    \beamer@masterdecode{#1}%
+    \beamer@donow
+  }%<<<
+\protected\long\def\table@@only#1%>>>
+  {%
+    \beamer@ifnextcharospec{\table@@@only{#1}}{\cr#1}%
+  }%<<<
+\long\def\table@@@only#1<#2>%>>>
+  {%
+    \gdef\beamer@doifnotinframe{\cr}%
+    \def\beamer@doifinframe{\cr#1}%
+    \beamer@masterdecode{#2}%
+    \beamer@donow
+  }%<<<
+\makeatother
 
 
 

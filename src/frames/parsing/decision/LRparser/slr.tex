@@ -1,0 +1,69 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{SLR(1) : Simple LR (anticipation d'un symbole)}
+
+  \tfBlock[top=-3mm]{Comment régler les conflits ?}{
+    \begin{itemize}
+    \item Parfois, il suffit de fusionner une réduction avec le décalage suivant
+      \begin{center}
+        \begin{tikzpicture}[smAutomaton]\footnotesize
+          \node[state] (1) at (0,0.0) {$q_1$};
+          \node[state] (2) at (3,0.4) {$q_2$};
+          \node[state] (3) at (6,0.0) {$q_3$};
+
+          \path[-latex, densely dotted] (1) edge node[sloped] {\smPAtrans{\varepsilon}{p}{p'}}    (2);
+          \path[-latex, densely dotted] (2) edge node[sloped] {\smPAtrans{a}{\varepsilon}{q_3}}    (3);
+          \path[-latex]                 (1) edge node[swap]   {\smPAtrans{a}{p}{p'q_3}}         (3);
+        \end{tikzpicture}
+      \end{center}
+    \item $SLR(k)$ : on considère les $k$ décalages qui suivent chaque réduction
+    \end{itemize}
+  }
+
+  \tfExampleBlock[y=-9mm]{Exemple}{
+    \example{$
+      \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+      S &\rightarrow& E \$\\
+      E &\rightarrow & A a \mid B b\\
+      A &\rightarrow& a \\
+      B &\rightarrow & a 
+      \end{array}\right.
+      $}
+  }
+  
+  \tf[bottom]{
+    \begin{tikzpicture}[smAutomaton, initial text=0]\footnotesize
+      \node[state,initial]                           (0) at (0.0,1.2) {$0$};
+      \node[state]                                   (1) at (1.5,1.2) {$1$};
+      \node[state, alert!50, fill=alert!10]          (2) at (3.0,2.4) {$2$};
+      \node[state, structure!50, fill=structure!10]  (3) at (3.0,0.0) {$3$};
+      \node[state]                                   (5) at (4.5,2.4) {$5$};
+      \node[state]                                   (6) at (4.5,0.0) {$6$};
+      \node[state, example!50, fill=example!10]      (4) at (6.0,1.2) {$4$};
+      \node[state,accepting]                         (7) at (7.5,1.2) {$7$};
+
+      \path[-latex]                               (0) edge                 node[swap]        {\smPAtrans{a}{\varepsilon}{1}}    (1);
+      \path[-latex, densely dotted, alert!50]     (2) edge                 node              {\smPAtrans{a}{\varepsilon}{5}}    (5);
+      \path[-latex, densely dotted, structure!50] (3) edge                 node[swap]        {\smPAtrans{b}{\varepsilon}{6}}    (6);
+      \path[-latex, densely dotted, example!50]   (4) edge                 node              {\smPAtrans{\$}{\varepsilon}{7}}   (7);
+      \path[-latex, densely dotted, alert!50]     (1) edge[bend left=7mm]  node[sloped]      {\smPAtrans{\varepsilon}{01}{02}}  (2);
+      \path[-latex, densely dotted, structure!50] (1) edge[bend right=7mm] node[sloped,swap] {\smPAtrans{\varepsilon}{01}{03}}  (3);
+      \path[-latex, densely dotted, example!50]   (5) edge[bend left=7mm]  node[sloped,swap] {\smPAtrans{\varepsilon}{025}{04}} (4);
+      \path[-latex, densely dotted, example!50]   (6) edge[bend right=7mm] node[sloped]      {\smPAtrans{\varepsilon}{036}{04}} (4);
+      \path[-latex, alert]                        (1) edge                 node[sloped,swap] {\smPAtrans{a}{01}{025}}           (5);
+      \path[-latex, structure]                    (1) edge                 node[sloped]      {\smPAtrans{b}{01}{036}}           (6);
+      \path[-latex, example]                      (5) edge[bend left=7mm]  node[sloped]      {\smPAtrans{\$}{025}{047}}         (7);
+      \path[-latex, example]                      (6) edge[bend right=7mm] node[sloped,swap] {\smPAtrans{\$}{036}{047}}         (7);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

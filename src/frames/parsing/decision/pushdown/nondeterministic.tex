@@ -13,22 +13,21 @@
   \begin{exampleblock}{Exemples et contre-exemples}
     \begin{itemize}
     \item Les langages $\example{\{ a^n b^n | n\in \mathbb{N}\}}$ et $\example{\{ a^n b^{2n} | n\in \mathbb{N}\}}$ sont déterministes.
-    \item Leur union $\example{\{ a^n b^n | n\in \mathbb{N}\} \cup \{ a^n b^{2n} | n\in \mathbb{N}\}}$ est non-déterministe.
+    \item\vspace{2mm} Leur union $\example{\{ a^n b^n | n\in \mathbb{N}\} \cup \{ a^n b^{2n} | n\in \mathbb{N}\}}$ est non-déterministe.
       \begin{itemize}
       \item Faut-il dépiler à chaque fois ou une fois sur deux ? 
       \end{itemize}
-    \item Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$ est déterministe.
+    \item\vspace{2mm} Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$ est déterministe.
       \begin{center}
-        \structure{\scalebox{.8}{\begin{tikzpicture}[shorten >=1pt,node distance=2.5cm,on grid,auto]
-              \node [state,initial above, initial text=$\diamond$] (b)  {$1$}; 
-              \node [state, accepting] (c) [right=of b]  {$2$}; 
-              \path [->]    (b) edge node[above] {$c/\varepsilon/\varepsilon$} (c);
-              \path [->]    (b) edge[loop left, looseness=5] node {$\begin{array}{c}a/\varepsilon/A\\b/\varepsilon/B\end{array}$} (b);
-              \path [->]    (c) edge[loop right, looseness=5] node {$\begin{array}{c}a/A/\varepsilon\\b/B/\varepsilon\end{array}$} (c);
-        \end{tikzpicture}}}\\
-        (Arrêt sur état final)
+        \begin{tikzpicture}[structure, smAutomaton, initial text=$\diamond$]
+          \smState[\smInitial]   (b) at (0.0, 0.0) {$1$}; 
+          \smState[\smAccepting] (c) at (3.5, 0.0) {$2$}; 
+          \smPath (b) edge             node {\smPAtrans{c}{\varepsilon}{\varepsilon}}                      (c);
+          \smPath (b) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}, \smPAtrans{b}{\varepsilon}{B}} (b);
+          \smPath (c) edge[loop above] node {\smPAtrans{a}{A}{\varepsilon}, \smPAtrans{b}{B}{\varepsilon}} (c);
+        \end{tikzpicture}\\
       \end{center}
-    \item Par contre, le langage des palindromes est non-déterministe :
+    \item\vspace{2mm} Par contre, le langage des palindromes est non-déterministe :
       $$\example{\{ w \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$$
     \end{itemize}
   \end{exampleblock}

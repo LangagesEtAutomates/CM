@@ -6,25 +6,29 @@
 \part{Introduction}
  
  
-\section{Présentation du module}
+\section{Introduction}
+ 
+\subsection{Notion de langages formels}
+\input{languages/introduction/examples/definitions}
+\input{languages/introduction/examples/natural_language}
+\input{languages/introduction/examples/programming_language}
+\input{languages/introduction/examples/compiler}
+ 
+\subsection{Langages et problèmes de décision}
+\input{languages/introduction/decision/primality}
+\input{languages/introduction/decision/problem}
+\input{languages/introduction/decision/real_numbers}
+\input{languages/introduction/decision/hierarchy}
+ 
+\subsection{Automates}
+\input{languages/introduction/automata/automata}
+\input{languages/introduction/automata/compiler}
  
 \subsection{Généralités} 
 \input{languages/introduction/generalities/objectives}
 \input{languages/introduction/generalities/bibliography}
-\input{languages/introduction/generalities/definitions}
  
-\subsection{Exemples de langages}
  
-\input{languages/introduction/examples/natural_language}
-\input{languages/introduction/examples/programming_language}
-\input{languages/introduction/examples/compiler}
-\input{languages/introduction/examples/primality}
-\input{languages/introduction/examples/problem}
-\input{languages/introduction/examples/real_numbers}
-\input{languages/introduction/examples/hierarchy}
- 
-\subsection{Objectifs du cours}
-\input{languages/introduction/summary/summary}
  
 \section{Mots et langages formels}
  
@@ -91,7 +95,6 @@
 \input{lexing/automata/recognition/accepted}
 \input{lexing/automata/recognition/equivalence}
 \input{lexing/automata/recognition/right_language}
-\input{lexing/automata/recognition/left_language}
 \input{lexing/automata/recognition/pruned}
 \input{lexing/automata/recognition/pruning}
  
@@ -140,12 +143,11 @@
 \input{lexing/limits/pumping/pumping}
 \input{lexing/limits/pumping/proof}
 \input{lexing/limits/pumping/example}
-\input{lexing/limits/pumping/example2}
  
  
 \part{Analyse Syntaxique}
-
-
+ 
+ 
 \section{Langages algébriques}
  
 \subsection{Introduction}
@@ -158,7 +160,7 @@
 \input{parsing/algebraic/grammars/derivation}
 \input{parsing/algebraic/grammars/language}
 \input{parsing/algebraic/grammars/examples}
-
+ 
 \subsection{Structure arborescente des langages algébriques}
 \input{parsing/algebraic/tree/cst}
 \input{parsing/algebraic/tree/ast}
@@ -166,7 +168,7 @@
 \input{parsing/algebraic/tree/associativity}
 \input{parsing/algebraic/tree/priority}
 \input{parsing/algebraic/tree/rational}
-
+ 
 \section{Algorithmes de décision}
  
 \subsection{Algorithme Cocke-Younger-Kasami}
@@ -174,7 +176,7 @@
 \input{parsing/decision/CYK/CNF}
 \input{parsing/decision/CYK/CNF_transform}
 \input{parsing/decision/CYK/CYK}
-
+ 
 \subsection{Automates à pile}
 \input{parsing/decision/pushdown/generalized}
 \input{parsing/decision/pushdown/recursion}
@@ -190,8 +192,14 @@
  
 \subsection{Parsers LR}
 \input{parsing/decision/LRparser/strategies}
+\input{parsing/decision/LRparser/ancbn}
+\input{parsing/decision/LRparser/states}
+\input{parsing/decision/LRparser/dfa}
+\input{parsing/decision/LRparser/pa}
+\input{parsing/decision/LRparser/conflicts}
+\input{parsing/decision/LRparser/slr}
  
-\section{Frontières des langages algébriques}
+\section{Expressivité des langages algébriques}
  
 \subsection{Grammaires rationnelles}
 \input{parsing/theory/regular/theorem}
@@ -206,7 +214,7 @@
 \input{parsing/theory/limits/pumping}
 \input{parsing/theory/limits/proof}
 \input{parsing/theory/limits/example}
- 
+
 \endgroup
 \endinput
 
@@ -243,6 +251,9 @@
 %\input{languages/maths/induction/strong}
 
 
+%\input{lexing/automata/recognition/left_language}
+
+%\input{lexing/limits/pumping/example2}
 
 
 %\section{Hiérarchie de Chomsky}

@@ -10,51 +10,51 @@
 \begin{frame}{Démonstration du lemme de l'étoile}
 
   \vspace{-2mm}  
-  \only<-3|handout:1>{\hspace\fill\example{\textbf{Exemple}}}%
-  \only<4-|handout:2>{\hspace\fill\alert{\textbf{Lemme de l'étoile}}}
+  \only<-3>{\hspace\fill\example{\textbf{Exemple}}}%
+  \only<4-|handout>{\hspace\fill\alert{\textbf{Lemme de l'étoile}}}
 
   Soient $\Sigma$ un alphabet, et $L$ un langage rationnel sur $\Sigma$.
-  \only<-3|handout:1>{\hspace\fill\example{$L = a(bc)^\star a$}}
-  \only<4-|handout:2>{\hspace\fill\alert{$\forall \Sigma, \forall L\in \textsc{rat}_\Sigma,$}}
+  \only<-3>{\hspace\fill\example{$L = a(bc)^\star a$}}
+  \only<4-|handout>{\hspace\fill\alert{$\forall \Sigma, \forall L\in \textsc{rat}_\Sigma,$}}
 
   Soit $A$ son automate minimal. Posons $N = |A|$.  
-  \only<-3|handout:1>{\hspace\fill\example{$N=4$}}
-  \only<4-|handout:2>{\hspace\fill\alert{$\exists N\in \mathbb{N},$}}
+  \only<-3>{\hspace\fill\example{$N=4$}}
+  \only<4-|handout>{\hspace\fill\alert{$\exists N\in \mathbb{N},$}}
   
   Soit $u \in L$ tel que $|u| \ge N$. 
-  \only<-3|handout:1>{\hspace\fill\example{$u = abca$}}
-  \only<4-|handout:2>{\hspace\fill\alert{$\forall u\in L, |u| \ge N \Rightarrow ($}}
+  \only<-3>{\hspace\fill\example{$u = abca$}}
+  \only<4-|handout>{\hspace\fill\alert{$\forall u\in L, |u| \ge N \Rightarrow ($}}
 
   \begin{center}
-    \scalebox{.75}{\begin{tikzpicture}[shorten >=1pt,node distance=1.5cm,on grid,auto]
-        \node [state,initial, initial text=] (0) {$0$};
-        \node [state, alert, fill=alert!20] (1) [right=of 0]  {$1$};
-        \node [state, example, fill=example!20] (2) [right=of 1]  {$2$};
-        \node [state,accepting] (3) [right=of 2]  {$3$};
+    \begin{tikzpicture}[smAutomaton]\footnotesize
+        \smState[\smInitial]   (0) at (0.0, 0.5) {$0$};
+        \smState[\smAlert]     (1) at (1.5, 0.0) {$1$};
+        \smState[\smExample]   (2) at (3.0, 0.0) {$2$};
+        \smState[\smAccepting] (3) at (0.0, -.5) {$3$};
 
-        \path [->, structure]  (0) edge node[above] {$a$} (1);
-        \path [->, example]  (1) edge node[below] {$b$} (2);
-        \path [->, example]  (2) edge[bend right] node[above] {$c$} (1);
-        \path [->, structure]  (1) edge[bend right] node[below] {$a$} (3);
-    \end{tikzpicture}}
+        \smPath[\smStructure]  (0) edge node {$a$} (1);
+        \smPath[\smExample]    (1) edge[bend left] node {$b$} (2);
+        \smPath[\smExample]    (2) edge[bend left] node {$c$} (1);
+        \smPath[\smStructure]  (1) edge node {$a$} (3);
+    \end{tikzpicture}
 
     \pause
     \structure{Pour reconnaître un mot de 4 lettres ou plus, il faut suivre une boucle}
   \end{center}
 
   Il existe un état $q$ que l'on visite deux fois. Posons :
-  \only<-3|handout:1>{\hspace\fill\example{$q = 1$}}%
+  \only<-3>{\hspace\fill\example{$q = 1$}}%
   
   \begin{itemize}
   \item $x$ le préfixe de $u$ avant la première visite de $q$
-    \only<-3|handout:1>{\hspace\fill\example{$x = a$}}
-    \only<4-|handout:2>{\hspace\fill\alert{$\exists x, y, z \in \Sigma^\star,$}}
+    \only<-3>{\hspace\fill\example{$x = a$}}
+    \only<4-|handout>{\hspace\fill\alert{$\exists x, y, z \in \Sigma^\star,$}}
   \item $y$ le facteur de $u$ entre les deux visites de $q$
-    \only<-3|handout:1>{\hspace\fill\example{$y = bc$}}
-    \only<4-|handout:2>{\hspace\fill\alert{$y \neq \varepsilon$}}
+    \only<-3>{\hspace\fill\example{$y = bc$}}
+    \only<4-|handout>{\hspace\fill\alert{$y \neq \varepsilon$}}
   \item $z$ le suffixe de $u$ après la deuxième visite de $q$
-    \only<-3|handout:1>{\hspace\fill\example{$z = a$}}
-    \only<4-|handout:2>{\hspace\fill\alert{$\land\; u = x\cdot y \cdot z$}}
+    \only<-3>{\hspace\fill\example{$z = a$}}
+    \only<4-|handout>{\hspace\fill\alert{$\land\; u = x\cdot y \cdot z$}}
   \end{itemize}
 
   \pause
@@ -64,11 +64,11 @@
   On a :
   \begin{itemize}
   \item On peut prendre la boucle $0$, $2$, $3$, ... fois
-    \only<-3|handout:1>{\hspace\fill\example{$aa \in L, abcbca\in L$}}
-    \only<4-|handout:2>{\hspace\fill\alert{$\land\; \forall i\in \mathbb{N}, x \cdot y^i \cdot z \in L$}}
+    \only<-3>{\hspace\fill\example{$aa \in L, abcbca\in L$}}
+    \only<4-|handout>{\hspace\fill\alert{$\land\; \forall i\in \mathbb{N}, x \cdot y^i \cdot z \in L$}}
   \item $N$ lettres suffisent pour repasser dans un état
-    \only<-3|handout:1>{\hspace\fill\example{$|abc| \le 4$}}
-    \only<4-|handout:2>{\hspace\fill\alert{$\land\; |x\cdot y| \le N)$}}
+    \only<-3>{\hspace\fill\example{$|abc| \le 4$}}
+    \only<4-|handout>{\hspace\fill\alert{$\land\; |x\cdot y| \le N)$}}
   \end{itemize}
 
   \phantom{.}

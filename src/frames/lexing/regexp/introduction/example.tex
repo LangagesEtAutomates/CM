@@ -20,11 +20,11 @@
   \begin{block}{Spécifier les adresses email valides}
     \begin{itemize}
     \item En général : un nom d'utilisateur, une arobase, un nom de domaine
-      \vspace{-3mm}\uncover<5->{\alert{$$(a\mid b\mid ...\mid z\mid \text{-}\mid .)^+ \text{@} (a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^+ $$}}
+      \vspace{-3mm}\uncover<5-|handout>{\alert{$$(a\mid b\mid ...\mid z\mid \text{-}\mid .)^+ \text{@} \structure{(a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^+} $$}}
     \item\vspace{-6mm} Le nom de domaine est une suite de labels, séparés par des points
-      \vspace{-3mm}\uncover<4->{\alert{$$(a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^+ $$}}
+      \vspace{-3mm}\uncover<4-|handout>{\alert{$$\structure{(a\mid b\mid ...\mid z\mid \text{-})^+} (. \structure{(a\mid b\mid ...\mid z\mid \text{-})^+)}^+ $$}}
     \item\vspace{-6mm} Un label est une suite non-vide de symboles (lettres et tirets)
-      \vspace{-3mm}\uncover<3->{\alert{$$\mathit{symbole} = a\mid b\mid ...\mid z\mid \text{-} \hspace{10mm}  \mathit{label} = (a\mid b\mid ...\mid z\mid \text{-})^+ $$}}
+      \vspace{-3mm}\uncover<3-|handout>{\alert{$$\mathit{symbole} = a\mid b\mid ...\mid z\mid \text{-} \hspace{10mm}  \mathit{label} = (\structure{a\mid b\mid ...\mid z\mid \text{-}})^+ $$}}
     \end{itemize}
   \end{block}
 \end{frame}
