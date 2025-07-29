@@ -1,0 +1,34 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Introduction aux langages algébriques}
+  \begin{block}{Définition}
+    Les \structure{langages algébriques} (ou \emph{langages context-free}) sont définis par :
+    \begin{itemize}
+      \item des grammaires algébriques
+      \item des automates à pile non déterministes
+      \item des arbres de dérivation syntaxique
+    \end{itemize}
+    Ils forment une classe notée $\structure{\textsc{cf}_\Sigma}$, avec $\alert{\textsc{rat}_\Sigma \subsetneq \textsc{cf}_\Sigma \subsetneq \mathcal{P}(\Sigma^\star)}$.
+  \end{block}
+
+  \begin{block}{Pourquoi s'y intéresser ?}
+    \begin{itemize}
+      \item Ils modélisent la structure syntaxique de nombreux langages.
+      \item Ils permettent la dérivation d’arbres syntaxiques et d'AST :
+        \begin{itemize}
+          \item reconnaissance de la structure d’un programme (\texttt{CUP}, \texttt{Bison}, \texttt{ANTLR}, etc.)
+          \item base des compilateurs et interpréteurs
+          \item vérification de la syntaxe (analyse syntaxique)
+        \end{itemize}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\endgroup

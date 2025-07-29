@@ -30,30 +30,8 @@ $(DOCSDIR)/%.pdf: $(SRCDIR)/%.tex | $(BUILDDIR) $(DOCSDIR)
 	@echo ">>> Compiling $<"
 	$(PDFLATEX) $<
 	$(PDFLATEX) $<     # deux passes pour références
+	$(PDFLATEX) $<     # trois passes pour overlays
 	mv $(BUILDDIR)/$*.pdf $@
-
-# -------------------------------
-# Submodule styles
-# -------------------------------
-
-init-sty:
-	@git submodule update --init src/sty
-
-update-sty:
-	@cd src/sty && git pull origin main
-	@git add src/sty
-	@git commit -m "Update styles from latex-libs"
-
-push-sty:
-	@if [ -z "$(m)" ]; then \
-	  echo "Error: You must provide a commit message. e.g."; \
-	  echo "  make push-sty m=\"Update header style\""; \
-	  exit 1; \
-	fi
-	@cd src/sty && git add . && git commit -m "$(m)" && git push origin main
-	@git add src/sty
-	@git commit -m "Update styles: $(m)"
-	@git push
 
 # -------------------------------
 # Création des répertoires

@@ -13,7 +13,7 @@
 
   \begin{block}{Définition -- Automate unitaire}
     $A$ est dit \structure{unitaire} s'il ne possède qu'un seul état initial :
-    $\alert{\exists i \in Q, I = \{i\}}.$
+    $\alert{\exists q_0 \in Q, I = \{q_0\}}.$
   \end{block}
 
   \begin{block}{Définition -- Automate standard}
@@ -21,7 +21,7 @@
     \begin{enumerate}
     \item il est \alert{unitaire}
     \item aucune transition n'arrive sur l'état initial :
-    $\alert{\forall q\in Q, \forall a\in \Sigma, \langle q, a, i\rangle \notin \mu}.$
+    $\alert{\forall q\in Q, \forall a\in \Sigma, q \xrightarrow{a} q_0 \notin \mu}.$
     \end{enumerate}
   \end{block}
 

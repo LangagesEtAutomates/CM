@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Généralisation des grammaires}
+
+  \tfExampleBlock[top]{Exemple : génération de $\{a^n b^n c^n \mid n>0\}$}{}
+  
+  \tf[y=10mm, x=-25mm]{
+    $\left\{\begin{array}{rcl}
+    S  & \rightarrow & \structure<2>{aSBC} \mid \example<2>{aBC}  \\
+    CB & \rightarrow & \alert<3>{BC}   \\
+    aB & \rightarrow & \alert<4>{ab}   \\
+    bB & \rightarrow & \structure<4>{bb}   \\
+    C  & \rightarrow & \example<4>{c}
+    \end{array}\right.$
+  }
+
+  \tf[bottom=10mm, x=20mm]{
+    \begin{tikzpicture}
+      \node (40) at (2,4.0) {$S$};
+      \uncover<2-|handout>{
+        \node (30) at (2,3.0) {\structure<2>{$S$}}; \smPath[\smStructure<2>] (40) edge (30);
+        \node (20) at (0,2.0) {\structure<2>{$a$}}; \smPath[\smStructure<2>] (40) edge (20);
+        \node (21) at (1,2.0) {\example<2>  {$a$}}; \smPath[\smExample<2>  ] (30) edge (21);
+        \node (22) at (2,2.0) {\example<2>  {$B$}}; \smPath[\smExample<2>  ] (30) edge (22);
+        \node (23) at (3,2.0) {\example<2>  {$C$}}; \smPath[\smExample<2>  ] (30) edge (23);
+        \node (24) at (4,2.0) {\structure<2>{$B$}}; \smPath[\smStructure<2>] (40) edge (24);
+        \node (25) at (5,2.0) {\structure<2>{$C$}}; \smPath[\smStructure<2>] (40) edge (25);
+      }
+      \uncover<3-|handout>{
+        \node (12) at (3,1.0) {\alert<3>{$B$}};     \smPath[\smAlert<3>    ] (23) edge (12); \smPath[\smAlert<3>    ] (24) edge (12);
+        \node (13) at (4,1.0) {\alert<3>{$C$}};     \smPath[\smAlert<3>    ] (23) edge (13); \smPath[\smAlert<3>    ] (24) edge (13);
+      }
+      \uncover<4-|handout>{
+        \node (10) at (1,1.0) {\alert<4>    {$a$}}; \smPath[\smAlert<4>    ] (21) edge (10); \smPath[\smAlert<4>    ] (22) edge (10);
+        \node (11) at (2,1.0) {\alert<4>    {$b$}}; \smPath[\smAlert<4>    ] (21) edge (11); \smPath[\smAlert<4>    ] (22) edge (11);
+        \node (00) at (2,0.0) {\structure<4>{$b$}}; \smPath[\smStructure<4>] (11) edge (00); \smPath[\smStructure<4>] (12) edge (00);
+        \node (01) at (3,0.0) {\structure<4>{$b$}}; \smPath[\smStructure<4>] (11) edge (01); \smPath[\smStructure<4>] (12) edge (01);
+        \node (02) at (4,0.0) {\example<4>  {$c$}}; \smPath[\smExample<4>  ] (13) edge (02);
+        \node (14) at (5,1.0) {\example<4>  {$c$}}; \smPath[\smExample<4>  ] (25) edge (14);
+      }
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

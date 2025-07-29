@@ -19,11 +19,11 @@
   \begin{exampleblock}{Exemple}% : $(a^+ | b^+) c^\star$}
     \centering  
     \begin{tikzpicture}[smAutomaton]
-      \smState[\smInitial, \smStructure] (s1) at (0,1.5)  {$s_1$}; 
-      \smState                           (s2) at (2,1.5)  {$s_2$}; 
-      \smState[\smAccepting]             (s3) at (4,.75) {$s_3$}; 
-      \smState[\smInitial, \smStructure] (s4) at (0,0.0)  {$s_4$}; 
-      \smState                           (s5) at (2,0.0)  {$s_5$}; 
+      \smState[\smInitial \smStructure] (s1) at (0,1.5)  {$s_1$}; 
+      \smState                          (s2) at (2,1.5)  {$s_2$}; 
+      \smState[\smAccepting]            (s3) at (4,.75) {$s_3$}; 
+      \smState[\smInitial \smStructure] (s4) at (0,0.0)  {$s_4$}; 
+      \smState                          (s5) at (2,0.0)  {$s_5$}; 
 
       \smPath[\smAlert] (s1) edge             node[swap]  {$a$}           (s2);
       \smPath[\smAlert] (s1) edge[loop above] node        {$a$}           (s1);

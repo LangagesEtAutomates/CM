@@ -58,9 +58,9 @@
      
     \tf[x=.3\textwidth, y=-1cm]{
       \begin{tikzpicture}[smAutomaton, node distance=1.5cm]
-        \smState[\smInitial, \smAccepting] (0)              {0}; 
-        \smState[\smAccepting]             (1) [right=of 0] {1}; 
-        \smState                           (2) [right=of 1] {2}; 
+        \smState[\smInitial \smAccepting] (0)              {0}; 
+        \smState[\smAccepting]            (1) [right=of 0] {1}; 
+        \smState                          (2) [right=of 1] {2}; 
         
         \smPath (0) edge[loop above] node{$a$}    (0);
         \smPath (0) edge             node{$b$}    (1);

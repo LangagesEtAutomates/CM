@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Au-delà des langages algébriques}
+
+  \begin{block}{Langages contextuels (type 1)}
+    \begin{itemize}
+      \item Définis par des grammaires où le contexte est pris en compte
+        \begin{itemize}
+        \item Règles de la forme : $\structure{u \alert{A} v \rightarrow u \alert{w} v}$
+        \end{itemize}
+      \item Reconnaissables par des \structure{automates linéairement bornés}
+      \item Exemple : $\example{\{ a^n b^n c^n \mid n \geq 0 \}}$
+      \item Utilisation : modélisation des langues naturelles
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Langages généraux (type 0)}
+    \begin{itemize}
+      \item Définis par des grammaires sans aucune restriction
+        \begin{itemize}
+        \item Règles de la forme : $\structure{x \rightarrow y}$
+        \end{itemize}
+      \item Reconnaissables par des \structure{machines de Turing}
+      \item Exemple : $\example{\left\{ (p)_{10} \mid p\in \mathbb{N} \land p \text{ premier} \right\}}$
+      \item Utilisation : formalisation générale de la notion d’algorithme
+      \item \structure{Classe étudiée en L3 dans le cours de} \alert{Calculabilité et Complexité}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup
