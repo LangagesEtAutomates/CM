@@ -7,41 +7,106 @@
 
 \begingroup
 
-\begin{frame}[fragile]{Algorithme de Moore}
-  \begin{block}{Relation d'équivalence}
-      \vspace{-2mm}
-    Soit $\langle \Sigma, Q, I, F, \mu \rangle$ un automate, $P$ une partition de $Q$, $a\in \Sigma$ et $q, q' \in Q$. 
-    \begin{itemize}
-    \item On dit que $q$ et $q'$ sont \structure{équivalents}, noté $\alert{q \sim_S q'}$, si toutes leurs transitions sortantes mènent dans la même partie $E$ de $P$ : 
-      \vspace{-2mm}
-      $$\alert{q \sim_S q' \;  \eqdef \; \forall a \in \Sigma, \exists E \in P, \mu(q, a) \in E \land \mu (q', a) \in E}$$
-    \end{itemize}
-  \end{block}
-  
-  \begingroup
-  \renewcommand{\emph}[1]{\structure{#1}} 
-  \scalebox{1}{\begin{algorithm}[H]
-      \SetKwFunction{Moore}{moore}
-      \SetKwData{Input}{motif}
-      \SetKwFor{Pour}{pour}{faire}{fin pour}
+\SetKwFunction{Moore}{moore}
+\SetKwData{Input}{motif}
 
-      \Fn{\Moore( $A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate ) : automate}{
-        $P \leftarrow \alert{\{F, Q\setminus F\}}$\;
-        \lTantque{$P \neq Q/_{\sim_{P}}$}{
-          $P \leftarrow Q/_{\sim_{P}}$%
-          \footnote[frame, 1]{
-            \structure{Rappels :} $[q]_{\sim_P}$ est la classe d'équivalence de $q$, et $Q/_{\sim_P}$ l'ensemble quotient de $Q$.\\
-            ~\hspace\fill
-            $[q]_{\sim_P} \eqdef \{q' \in Q \,|\, q \sim_P q' \} \hspace\fill Q/_{\sim_P} \eqdef \{[q]_{\sim_P} | q\in Q\}$
-            \hspace\fill~
-          }%
+\begin{frame}{L'algorithme de Moore}
+
+  \tf[text,top=-2mm]{\small
+    \begin{algorithm}[H]
+      \Fn{\Moore( $A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : AFD ) : AFD}{
+        \tfAlert<2>{$S \leftarrow \{F, Q\setminus F\}$}\;
+        \Repeter{
+          $\tau \gets \left\{ \left\langle s, a, s' \right\rangle \in S \times \Sigma \times S \,\middle\mid\, \exists q\in s, \exists q'\in s',~ q\xrightarrow{a} q'\right\} $\;
+          \eSi{\tfAlert<3>{$\exists \langle s, a, s_1 \rangle, \langle s, a, s_2 \rangle \in \tau,~s_1 \neq s_2$}}{
+            $\begin{array}{@{}l@{\,\gets\,}l@{}}
+              s'_1 & \left\{q \in s \,\middle\mid\, \exists q' \in s_1, q \xrightarrow{a}q'\right\};\\
+              s'_2 & \left\{q \in s \,\middle\mid\, \exists q' \in s_2, q \xrightarrow{a}q'\right\};\\
+              S    & S \setminus \left\{s\right\} \cup \left\{s'_1, s'_2\right\};
+            \end{array}$
+          }{
+            $\begin{array}{@{}l@{\,\gets\,}l@{}}
+              S_0 & \left\{ s \in S \,\middle\mid\, I \subseteq s\right\};\\
+              S_f & \left\{ s \in S \,\middle\mid\, s \cap F \neq \emptyset\right\};
+            \end{array}$\\
+            \Retourner $\langle \Sigma, S, S_0, S_f, \tau \rangle$\;
+          }
         }
-        $I'\hspace{1.2mm} \leftarrow \{ E \in P | I \subseteq E\}$\;
-        $F' \leftarrow \{ E \in P | E \cap F \neq \emptyset \}$\;
-        $\mu' \leftarrow \{ \langle E , a, E' \rangle \in P \times \Sigma \times P | \exists q\in E, \exists q'\in E', \langle q, a, q' \rangle \in \mu\}$\;
-        \Retourner $\langle \Sigma, P, I', F', \mu' \rangle$\;
       }
-    \end{algorithm}}
-    \endgroup
+    \end{algorithm}
+  }
+
+  \tfBlock[y=-10mm, anchor=north]{Un algorithme optimiste}{
+    \vspace{-2mm}
+    \begin{itemize}
+    \item  Peut-être que tous les états sont équivalents ? 
+    \item<2-|handout> Non : seuls les états finaux reconnaissent $\varepsilon$
+      \begin{itemize}
+      \item Séparer les états finaux et les autres
+      \end{itemize}
+    \item<3-|handout> Essayer de placer les transitions
+      \begin{itemize}
+      \item<4-|handout> Partitionner tant qu'on n'y arrive pas
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \tfExampleBlock[top=-5mm, right=.29\textwidth]{Exemple}{\scriptsize
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smInitial  \smExample\smStructure<2,3>       ] (0) at (0,0.8) {$0$};
+      \smState[            \smExample\smStructure<2-|handout>] (1) at (1,1.6) {$1$};
+      \smState[            \smExample\smStructure<2-|handout>] (2) at (1,0.0) {$2$};
+      \smState[\smAccepting\smExample\smAlert<2-|handout>    ] (3) at (2,0.8) {$3$};
+      
+      \smPath                  (0) edge[bend left ] node       {$a$} (1);
+      \smPath[\smStructure<3>] (0) edge[bend right] node[swap] {$b$} (2);
+      \smPath[\smAlert<3>]     (1) edge[bend left ] node       {$b$} (3);
+      \smPath[\smAlert<3>]     (2) edge[bend right] node[swap] {$b$} (3);
+      \smPath                  (1) edge[loop below] node       {$a$} (1);
+      \smPath                  (2) edge[loop above] node       {$a$} (2);
+      \smPath                  (3) edge[loop right] node       {$a, b$} (3);
+    \end{tikzpicture}
+  }
+
+  \tfExampleBlock[y=-3mm, right=.29\textwidth]{Automate minimal}{\scriptsize
+    \begin{tikzpicture}[smAutomaton]
+      \smState[\smInitial\smExample\smStructure<2,3>] (D) at (0.0,0.0) {\alt<4->{$D$}{\alt<1>{$A$}{$B$}}};
+      \uncover<2-|handout>{
+        \smState[\smAccepting\smAlert] (C) at (2.0,0.0) {$C$};
+      }
+      \uncover<3-|handout>{
+        \smPath                (C) edge[loop right] node[right] {$a, b$} (C);
+      }
+      \uncover<3>{
+        \smPath[\smStructure]  (D) edge[loop right] node[above] {$b$?}    (D);
+        \smPath[\smAlert]      (D) edge             node[above] {$b$?}    (C);
+        \smPath                (D) edge[loop below] node[below] {$a$}     (D);
+      }
+      \uncover<4-|handout>{
+        \smState[\smStructure] (E) at (1,0.0) {$E$};
+        \smPath                (D) edge             node[above] {$a$} node[below] {$b$} (E);
+        \smPath                (E) edge             node[above] {$b$}                   (C);
+        \smPath                (E) edge[loop below] node[below] {$a$}                   (E);
+      }
+    \end{tikzpicture}
+  }
+
+  \tfExampleBlock[y=-10mm, anchor=north, right=.29\textwidth]{Partitionnement}{\footnotesize
+    \begin{tikzpicture}
+      \node[example]     (a) at (1.50,1.6) {$A = \{0,1,2, 3\}$};
+      \uncover<2-|handout>{
+        \node[structure] (b) at (0.75,0.8) {$B = \{0,1,2\}$};    \smPath (a) edge (b);
+        \node[alert]     (c) at (2.25,0.8) {$C = \{3\}$};        \smPath (a) edge (c);
+        \node at([yshift=-1mm]a) {$\varepsilon$};
+      }
+      \uncover<4-|handout>{
+        \node[example]   (d) at (0.00,0.00) {$D = \{0\}$};       \smPath (b) edge (d);
+        \node[structure] (e) at (1.50,0.00) {$E = \{1,2\}$};     \smPath (b) edge (e);
+        \node at ([yshift=-1mm]b) {$b$};
+      }
+    \end{tikzpicture}
+  }
+
 \end{frame}
+
 \endgroup

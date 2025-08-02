@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Introduction aux langages rationnels}
+  
+  \begin{block}{Définition}
+    Les \structure{langages rationnels} (ou \emph{réguliers}) sont les langages définis par :
+    \begin{itemize}
+      \item des expressions rationnelles
+      \item des automates finis
+      \item des grammaires linéaires
+      \item des équations de type $X = aX \mid b$, etc
+    \end{itemize}
+    Ils forment une classe notée $\alert{\textsc{rat}_\Sigma \subsetneq \mathscr{P}(\Sigma^\star)}$.
+  \end{block}
+
+  \begin{block}{Pourquoi s’y intéresser ?}
+    \begin{itemize}
+      \item Ils modélisent des motifs simples et décidables
+      \item Ils sont utilisés dans les outils de traitement de texte et de code :
+        \begin{itemize}
+          \item remplacement automatique (éditeurs de texte, compilateurs)
+          \item recherche dans un fichier (\texttt{grep})
+          \item découpage lexical (\texttt{JFlex}, analyse lexicale)
+          \item vérification de chaînes (\texttt{java.util.regex.Pattern})
+        \end{itemize}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

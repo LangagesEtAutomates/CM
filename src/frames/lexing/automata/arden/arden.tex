@@ -11,13 +11,13 @@
   Soient $\Sigma$ un alphabet, et $A, B \in \mathscr{P}(\Sigma^\star)$ deux langages.
   \begin{block}{Lemme -- Lemme d'Arden}
     \begin{itemize}
-    \item \alert{$A^\star B$} est la \structure{plus petite solution} de l'équation \structure{$X = AX | B$}
-    \item si \structure{$\varepsilon \notin A$}, alors \alert{$A^\star B$} est l'\alert{unique} solution de l'équation \structure{$X = AX | B$}
+    \item \alert{$A^\star B$} est la \structure{plus petite solution} de l'équation \structure{$X = AX \mid B$}
+    \item si \structure{$\varepsilon \notin A$}, alors \alert{$A^\star B$} est l'\alert{unique} solution de l'équation \structure{$X = AX \mid B$}
     \end{itemize}
   \end{block}
   \begin{exampleblock}{Exemple}
     \noindent\begin{minipage}{.4\textwidth}
-    \begin{tikzpicture}[smAutomaton]
+    \begin{tikzpicture}[automaton]
       \smState[\smInitial]   (s1)                {$0$}; 
       \smState[\smAccepting] (s2) [right=of s1]  {$1$};
       \smPath (s1) edge[loop above] node {$a$} (s1);
@@ -30,8 +30,8 @@
   \end{exampleblock}
   \begin{block}{Remarques}
     \begin{itemize}
-    \item {\small L'équation $X = AX | B$ est appelée \structure{équation rationnelle linéaire à droite}}
-    \item {\small Pour l'équation $X = XA | B$ linéaire à gauche, mêmes résultats avec $B A^\star$}
+    \item {\small L'équation $X = AX \mid B$ est appelée \structure{équation rationnelle linéaire à droite}}
+    \item {\small Pour l'équation $X = XA \mid B$ linéaire à gauche, mêmes résultats avec $B A^\star$}
     \item {\small Si \structure{$\varepsilon \in A$}, $\Sigma^\star$ est également solution des deux équations}
     \end{itemize}
   \end{block}

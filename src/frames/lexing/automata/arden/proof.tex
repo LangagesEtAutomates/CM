@@ -30,37 +30,37 @@
   }
 
   \tf<3-6>[text, y=-5mm]{
+    \begin{itemize}
+    \item Montrons que \alert{$\forall n\in \mathbb{N}, A^n B \subseteq \mathcal{X}$}\only<4->{ par récurrence sur $n$}.\\
+      \uncover<4->{
+        \structure{Initialisation :} Montrons \alert{$A^0 B \subseteq \mathcal{X}$}.
+      }
+      \uncover<5->{
         \begin{itemize}
-        \item Montrons que \alert{$\forall n\in \mathbb{N}, A^n B \subseteq \mathcal{X}$}\only<4->{ par récurrence sur $n$}.\\
-          \uncover<4->{
-            \structure{Initialisation :} Montrons \alert{$A^0 B \subseteq \mathcal{X}$}.
-          }
-          \uncover<5->{
-            \begin{itemize}
-            \item $\begin{array}[t]{rcll}
-              A^0 B\hspace{1.5mm}~
-              & = & B & \text{par définition de $A^0$}\\
-              & \subseteq & A\mathcal{X} \cup B & \text{par croissance de l'union}\\
-              & \subseteq & \mathcal{X} & \text{par définition de $\mathcal{X}$}\\
-            \end{array}$
-            \end{itemize}
-          }
-          \uncover<4->{
-            \structure{Hérédité :} Supposons \example{$A^n B \subseteq \mathcal{X}$} pour un $n \in \mathbb{N}$, montrons \alert{$A^{n+1} B \subseteq \mathcal{X}$}.
-          }
-          \uncover<6->{
-            \begin{itemize}
-            \item \hspace{-2mm}$\begin{array}[t]{rcll}
-              A^{n+1} B
-              & = & A (A^{n} B) & \text{par associativité}\\
-              & \subseteq & A\mathcal{X} & \text{par l'hypothèse de récurrence}\\
-              & \subseteq & A\mathcal{X} \cup B & \text{par croissance de l'union}\\
-              & \subseteq & \mathcal{X} & \text{par définition de $\mathcal{X}$}\\
-            \end{array}$
-            \end{itemize}
-          }
-        \item Finalement, $\displaystyle A^\star B = \bigcup_{n\in \mathbb{N}} A^n B \subseteq \bigcup_{n\in \mathbb{N}} \mathcal{X} = \mathcal{X}$
+        \item $\begin{array}[t]{rcll}
+          A^0 B\hspace{1.5mm}~
+          & = & B & \text{par définition de $A^0$}\\
+          & \subseteq & A\mathcal{X} \cup B & \text{par croissance de l'union}\\
+          & \subseteq & \mathcal{X} & \text{par définition de $\mathcal{X}$}\\
+        \end{array}$
         \end{itemize}
+      }
+      \uncover<4->{
+        \structure{Hérédité :} Supposons \example{$A^n B \subseteq \mathcal{X}$} pour un $n \in \mathbb{N}$, montrons \alert{$A^{n+1} B \subseteq \mathcal{X}$}.
+      }
+      \uncover<6->{
+        \begin{itemize}
+        \item \hspace{-2mm}$\begin{array}[t]{rcll}
+          A^{n+1} B
+          & = & A (A^{n} B) & \text{par associativité}\\
+          & \subseteq & A\mathcal{X} & \text{par l'hypothèse de récurrence}\\
+          & \subseteq & A\mathcal{X} \cup B & \text{par croissance de l'union}\\
+          & \subseteq & \mathcal{X} & \text{par définition de $\mathcal{X}$}\\
+        \end{array}$
+        \end{itemize}
+      }
+    \item Finalement, $\displaystyle A^\star B = \bigcup_{n\in \mathbb{N}} A^n B \subseteq \bigcup_{n\in \mathbb{N}} \mathcal{X} = \mathcal{X}$
+    \end{itemize}
   }
 
   \tf<7->[text, bottom=3mm]{
@@ -111,11 +111,11 @@
       \begin{itemize}
       \item Montrons que \alert{$\forall n\in \mathbb{N}, A^n B \subseteq \mathcal{X}$} par récurrence sur $n$.\\
         \structure{Initialisation :}  $
-          A^0 B
-          = B
-          \subseteq A\mathcal{X} \cup B
-          \subseteq \mathcal{X}$
-          
+        A^0 B
+        = B
+        \subseteq A\mathcal{X} \cup B
+        \subseteq \mathcal{X}$
+        
         \structure{Hérédité :} Supposons \example{$A^n B \subseteq \mathcal{X}$} pour un $n \in \mathbb{N}$, montrons \alert{$A^{n+1} B \subseteq \mathcal{X}$}.
         \begin{itemize}
         \item $
@@ -131,32 +131,25 @@
       
     \item \structure{Si $\varepsilon \notin A$, $A^\star B$ est la seule solution de $X = AX \mid  B$} \hspace\fill \alert{$\varepsilon \notin A \Rightarrow A^\star B = \mathcal{X}$}
       \begin{itemize}
-%      \item Supposons que \example{$\varepsilon \notin A$}. 
       \item Montrons que $\alert{\forall n\in \mathbb{N}, \mathcal{X} \cap \Sigma^n \subseteq A^\star B}$ par récurrence forte sur $n$.\\
         Soit $n \in \mathbb{N}$. Supposons $\example{\forall m < n, \mathcal{X} \cap \Sigma^m \subseteq A^\star B}$. Montrons \alert{$\mathcal{X} \cap \Sigma^n \subseteq A^\star B$}.\\
-%        \begin{itemize}
         Soit \example{$u \in \mathcal{X} \cap \Sigma^n$}. On a $u \in \mathcal{X} = A\mathcal{X} \mid  B$. Deux cas possibles :\\
         \begin{description}[xxxx]
-          \item[Cas $u \in A\mathcal{X}$ :]
-           Il existe une décomposition $u=ax$, avec $a \in A$ et $x \in \mathcal{X}$.\\
-           Comme $\varepsilon \notin A$, $|x| = |u| - |a| < |u| = n$.\\
-           Par récurrence forte, $\mathcal{X} \cap \Sigma^{|x|} \subseteq A^\star B$, donc $x \in A^\star B$.
-           $u = ax \in A\cdot A^\star B \subseteq A^\star B$.
-          \item[Cas $u \in B$ :]
-            %          \begin{itemize}
-            $u \in A^0 B \subseteq A^\star B$
-%          \end{itemize}
-            %        \end{itemize}
-                    \end{description}
+        \item[Cas $u \in A\mathcal{X}$ :]
+          Il existe une décomposition $u=ax$, avec $a \in A$ et $x \in \mathcal{X}$.\\
+          Comme $\varepsilon \notin A$, $|x| = |u| - |a| < |u| = n$.\\
+          Par récurrence forte, $\mathcal{X} \cap \Sigma^{|x|} \subseteq A^\star B$, donc $x \in A^\star B$.
+          $u = ax \in A\cdot A^\star B \subseteq A^\star B$.
+        \item[Cas $u \in B$ :]
+          $u \in A^0 B \subseteq A^\star B$
+        \end{description}
 
       \item Montrons que \alert{$\mathcal{X} \subseteq A^\star B$}. Soit $u \in \mathcal{X}$. On a $u\in \mathcal{X} \cap \Sigma^{|u|} \subseteq A^\star B$.
       \item Par double inclusion, $\mathcal{X} = A^\star B$
       \end{itemize}
     \end{enumerate}
-    }
-
+  }
   
 \end{frame}
-
 
 \endgroup

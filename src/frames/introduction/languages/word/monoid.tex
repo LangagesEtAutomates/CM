@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Structure de monoïde}
+
+  Soit $\Sigma$ un alphabet. 
+  
+  \begin{block}{Propriétés de la concaténation}
+    \begin{description}[Non-commutativité :]
+    \item[Fermeture :] $\forall u, v \in \Sigma^\star, \alert{u\cdot v \in \Sigma^\star}$
+    \item[Associativité :] $\forall u, v, w \in \Sigma^\star, \alert{(u\cdot v)\cdot w = u\cdot (v\cdot w)}$
+      \begin{itemize}
+      \item On notera $\structure{u\cdot v\cdot w}$
+      \end{itemize}
+    \item[Neutralité d'$\varepsilon$ :] $\forall u \in \Sigma^\star, \alert{\varepsilon \cdot u = u = u \cdot \varepsilon}$
+    \item[Simplifiabilité :] $\forall u, v, w \in \Sigma^\star,$
+      \begin{description}
+      \item[À gauche :] $\alert{u \cdot v = u \cdot w \Rightarrow v=w}$
+      \item[À droite :] $\alert{v \cdot u = w \cdot u \Rightarrow v=w}$
+      \end{description}
+    \item[Non-commutativité :] $\exists u,v \in \Sigma^\star, \alert{u\cdot v \neq v\cdot u}$
+    \item[Décomposabilité :] $\forall u\in \Sigma^\star, \exists! v_1,..., v_{|u|} \in \Sigma^1, u = v_1 \cdots v_{|u|}$ 
+    \end{description}
+  \end{block}
+
+  \begin{block}{Remarque}
+    Un \structure{monoïde} est un ensemble muni d'une loi de composition interne associative, et d'un élément neutre. \\
+    Le monoïde \structure{$\langle \Sigma^\star, \cdot , \varepsilon \rangle$} est appelé \alert{monoïde libre engendré par $\Sigma$}.
+  \end{block}
+
+\end{frame}
+
+\endgroup

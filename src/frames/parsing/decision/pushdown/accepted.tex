@@ -9,29 +9,29 @@
 
 \begin{frame}{Langages reconnus par un automate à pile}
   
-  Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$ un automate à pile.
+  Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \rightarrow \rangle$ un automate à pile.
 
-  \begin{block}{Définition -- langage reconnu}
+  \begin{block}{Définitions -- Langages reconnus}
+    \begin{description}[xxxxxx]
+    \item[$\mathcal{L}_F(A)$] est le langage des mots reconnus \alert{par état final}
+      $$\alert{\mathcal{L}_F(A) = \{u \in \Sigma^\star \mid
+      \exists i\in I, \exists \structure{f\in F}, \exists \structure{\pi\in\Pi^\star}, \langle u, i, \diamond \rangle \leadsto_A^\star \langle \varepsilon, \structure{f}, \structure{\pi} \rangle\}}$$
+    \item[$\mathcal{L}_\varepsilon(A)$] est le langage des mots reconnus \alert{par pile vide}
+      $$\alert{\mathcal{L}_\varepsilon(A) = \{u \in \Sigma^\star \mid
+      \exists i\in I, \exists \structure{q\in Q}, \langle u, i, \diamond \rangle \leadsto_A^\star \langle \varepsilon, \structure{q}, \structure{\varepsilon} \rangle\}}$$
+    \item[$\mathcal{L}(A)$] est le langage des mots reconnus \alert{par état final et pile vide}
+      $$\alert{\mathcal{L}(A) = \{u \in \Sigma^\star \mid
+      \exists i\in I, \exists \structure{f\in F}, \langle u, i, \diamond \rangle \leadsto_A^\star \langle \varepsilon, \structure{f}, \structure{\varepsilon} \rangle\}}$$
+    \end{description}
+  \end{block}
+
+  \begin{block}{Théorème -- Équivalence des classes de langages}
+    Les trois méthodes de reconnaissance définissent les mêmes langages
     \begin{itemize}
-    \item\vspace{-1mm} Le \structure{langage des mots reconnus par état final}, noté $\alert{\mathcal{L}_F(A)}$ contient les mots menant d'un état initial à un état final, quelle que soit la pile à l'arrivée. 
-      $$\alert{\mathcal{L}_F(A) = \{u \in \Sigma^\star | \exists i\in I, \exists \structure{f\in F}, \exists \structure{\pi\in\Pi^\star}, \langle u, i, \diamond \rangle \leadsto_A^\star \langle \varepsilon, \structure{f}, \structure{\pi} \rangle\}}$$
-    \item\vspace{-1mm} Le \structure{langage des mots reconnus par pile vide}, noté $\alert{\mathcal{L}_\varepsilon(A)}$ contient les mots menant d'un état initial à un état quelconque et une pile vide. 
-      $$
-      \alert{\mathcal{L}_\varepsilon(A) = \{u \in \Sigma^\star | \exists i\in I, \exists \structure{q\in Q}, \langle u, i, \diamond \rangle \leadsto_A^\star \langle \varepsilon, \structure{q}, \structure{\varepsilon} \rangle\}}
-      $$
-    \item\vspace{-1mm} Le \structure{langage des mots reconnus par état final et pile vide}, noté $\alert{\mathcal{L}(A)}$ contient les mots menant d'un état initial à un état final et une pile vide. 
-      $$
-      \alert{\mathcal{L}(A) = \{u \in \Sigma^\star | \exists i\in I, \exists \structure{f\in F}, \langle u, i, \diamond \rangle \leadsto_A^\star \langle \varepsilon, \structure{f}, \structure{\varepsilon} \rangle\}}
-      $$
+    \item Ajouter des $\varepsilon$-transitions vers un état final et une boucle pour vider la pile
     \end{itemize}
   \end{block}
 
-  \vspace{-2mm}
-  \begin{block}{Équivalence entre méthodes de reconnaissance}
-    \begin{itemize}
-    \item \vspace{-2mm}Preuve en TD
-    \end{itemize}
-  \end{block}
 \end{frame}
 
 \endgroup

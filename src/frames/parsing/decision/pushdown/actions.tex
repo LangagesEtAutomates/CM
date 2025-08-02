@@ -8,13 +8,14 @@
 \begingroup
 
 \begin{frame}{Actions d'un automate à pile}
+
   \tf[top, text]{
-    Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$ un automate à pile. 
-    \begin{block}{Définition -- action et chemin d'actions}
+    Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \rightarrow \rangle$ un automate à pile. 
+    \begin{block}{Définition -- Action et chemin d'actions}
       Les \structure{actions} de $A$ sont définies par une
       relation binaire \alert{$\leadsto_A$} sur les configurations.
       Pour tous $u, v \in \Sigma^\star$, $\pi, p, p' \in \Pi^\star$, $q, q'\in Q$, on a 
-      \alert{$$\langle v \cdot u, q, p \pi \rangle \leadsto_A \langle u, q', p' \pi \rangle \hspace{3mm} \Leftrightarrow \hspace{3mm} q\xrightarrow{\smPAtrans{p}{v}{p'}}q' \in \mu$$}
+      \alert{$$\langle v \cdot u, q, p \pi \rangle \leadsto_A \langle u, q', p' \pi \rangle \hspace{3mm} \Leftrightarrow \hspace{3mm} q\xrightarrow{\smPAtrans{p}{v}{p'}}q'$$}
       On note \alert{$\leadsto_A^\star$} la fermeture transitive et réflexive de $\leadsto_A$.
     \end{block}
   }
@@ -37,9 +38,9 @@
       \smState[\smAccepting        ] (c) at (5.0,0.0) {$2$}; 
 
       \smPath           (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
-      \smPath           (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
-      \smPath[\smAlert] (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
-      \smPath           (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \smPath           (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}                 } (a);
+      \smPath[\smAlert] (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}                 } (b);
+      \smPath           (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}                 } (b);
       \smPath           (b) edge             node[above] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
     \end{tikzpicture}
   }

@@ -91,14 +91,14 @@
         \node[state, accepting] (F) at (7.0,0.0) {$\mathcal{F}:$\begin{tabular}{@{\,}c@{}}accepte sur\\état final\end{tabular}};
       }
       
-      \smPath[\smAlert]   (I) edge                node[swap]             {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                  (A);
-      \smPath[\smAlert]   (A) edge[loop above]    node[]                 {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                  (A);
-      \smPath[\smAlert]   (A) edge                node[sloped]           {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                  (C);
-      \smPath[\smAlert]   (I) edge                node[]                 {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                  (C);
+      \smPath[\smAlert]   (I) edge                node[swap]             {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                       (A);
+      \smPath[\smAlert]   (A) edge[loop above]    node[]                 {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                       (A);
+      \smPath[\smAlert]   (A) edge                node[sloped]           {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                       (C);
+      \smPath[\smAlert]   (I) edge                node[]                 {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                       (C);
       \smPath[\smExample] (C) edge                node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{I}C}}{\mathcal{\structure{I}F}}}   (F);
-      \smPath[\smExample] (C) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{A} C}}{\mathcal{\structure{A} S}}}      (S);
-      \smPath[\smAlert]   (S) edge                node[]                 {\smPAtrans{b}{\varepsilon}{\mathcal{B}}}                                  (B);
-      \smPath[\smExample] (B) edge[bend left=5mm] node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{A}ASB}}{\mathcal{\structure{A}S}}}      (S);
+      \smPath[\smExample] (C) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{A} C}}{\mathcal{\structure{A} S}}} (S);
+      \smPath[\smAlert]   (S) edge                node[]                 {\smPAtrans{b}{\varepsilon}{\mathcal{B}}}                                       (B);
+      \smPath[\smExample] (B) edge[bend left=5mm] node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{A}ASB}}{\mathcal{\structure{A}S}}} (S);
       \smPath[\smExample] (B) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{I}ASB}}{\mathcal{\structure{I}F}}} (F);
     \end{tikzpicture}
   }
@@ -112,6 +112,7 @@
       \smCell[                              \smExample<6>    ]{$\only<6>{\mathcal{B}}$}
     \end{smStack}
   }
+
 \end{frame}
 
 \endgroup

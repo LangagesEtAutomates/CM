@@ -13,9 +13,8 @@
     Un langage $L$ sur $\Sigma$ est \structure{reconnaissable} s'il est reconnu par un AFN. 
 
     L'ensemble des langages reconnaissables sur $\Sigma$ est noté \alert{$\textsc{rec}_\Sigma$} :
-
-    \vspace{-2mm}
-    $$\alert{\textsc{rec}_\Sigma \eqdef \{ L \in \mathscr{P}(\Sigma^\star) | \exists A, L = \mathcal{L}(A)\}} $$
+%    $$\alert{\textsc{rec}_\Sigma \eqdef \{ L \in \mathscr{P}(\Sigma^\star) \mid \exists A, L = \mathcal{L}(A)\}} $$
+    $$\alert{\textsc{rec}_\Sigma \eqdef \left\{ L \subseteq \Sigma^\star \;\middle|\; \exists A = \langle \Sigma, Q, I, F, \rightarrow \rangle,\; L = \mathcal{L}(A) \right\}}$$
 
   \end{block}
   
@@ -28,10 +27,9 @@
     \structure{Étant donné un AFN $A$, comment déterminer une expression rationnelle décrivant $\mathcal{L}(A)$ ?}
   \end{center}
   
-  \vspace{-3mm}
   \begin{block}{Étapes}
     \begin{itemize}
-    \item \vspace{-3mm} Langage droit d'un état
+    \item Langage droit d'un état
     \item Système d'équations rationnelles
     \item Lemme d'Arden
     \end{itemize}

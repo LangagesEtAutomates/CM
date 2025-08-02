@@ -8,20 +8,38 @@
 \begingroup
 
 \begin{frame}{Automate émondé}
+
+  \vspace{-2mm}
   \begin{block}{Définition -- Propriétés des états}
-    Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN. Un état $q \in Q$ est dit
-    \begin{description}
-    \item[accessible] s'il peut être atteint à partir d'un état initial : \alert{$\mathcal{LG}_A(q) \neq \emptyset$}
+    Soit $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN. Un état $q \in Q$ est dit
+    \begin{description}[co-accessible]
+    \item[accessible] s'il peut être atteint à partir d'un état initial
+
+      \vspace{-3mm}
+      $$\alert{\exists i\in I, \exists u\in \Sigma^\star, \langle u, i\rangle \leadsto^\star \langle \varepsilon, q\rangle}$$
+      \vspace{-6mm}
+
     \item[inaccessible] s'il n'est pas accessible
-    \item[co-accessible] si on peut atteindre un état final à partir de $q$ : \alert{$\mathcal{LD}_A(q) \neq \emptyset$}
+    \item[co-accessible] si on peut atteindre un état final à partir de $q$
+
+      \vspace{-3mm}
+      $$\alert{\exists f\in F, \exists u\in \Sigma^\star, \langle u, q\rangle \leadsto^\star \langle \varepsilon, f\rangle}$$
+      \vspace{-6mm}
+
     \item[stérile] s'il n'est pas co-accessible
     \item[utile] s'il est accessible et co-accessible
     \item[inutile] s'il n'est pas utile
     \end{description}
   \end{block}
+  
   \begin{block}{Définition -- Automate émondé}
     Un AFN est dit \structure{émondé} si tous ses états sont utiles. 
   \end{block}
+
+  \begin{block}{Théorème -- Émondage}
+    Tout AFN est équivalent à un automate émondé.
+  \end{block}
+
 \end{frame}
 
 

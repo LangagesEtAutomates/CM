@@ -1,0 +1,33 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Combinaison logique de prédicats}
+  \begin{block}{Opérateurs}
+    \begin{description}
+    \item[Négation : ] \alert{$\lnot f$} (\structure{non $f$}) : vraie si $f$ est fausse, et fausse sinon
+    \item[Conjonction : ] \alert{$f \land g$} (\structure{$f$ et $g$}) : vraie si $f$ et $g$ sont toutes les deux vraies
+    \item[Disjonction : ] \alert{$f \lor g$} (\structure{$f$ ou $g$}) : vraie si au moins l'une des deux est vraie 
+    \item[Implication : ] \alert{$f \Rightarrow g$} (\structure{$f$ implique $g$}) : vraie si $f$ est fausse ou $g$ est vraie 
+    \item[Équivalence : ] $\alert{f \Leftrightarrow g} \eqdef (f \Rightarrow g) \land (g \Rightarrow f)$ : \structure{$f$ équivalent à $g$}
+    \end{description}
+  \end{block}
+  \begin{block}{Quantificateurs}
+    \begin{description}
+    \item[Universel : ] \alert{$\forall x : f(x)$} : \structure{pour tout $x$, $f(x)$}
+    \item[Existentiel : ] \alert{$\exists x : f(x)$} : \structure{il existe $x$ tel que $f(x)$}
+    \item[Unicité conditionnelle: ] $\alert{\unique x : f(x)} \eqdef \forall x \forall y\, f(x) \land f(y) \Rightarrow x=y$\\
+      \structure{S'il existe $x$ tel que $f(x)$, $x$ est unique}
+    \item[Existence-unicité : ] $\alert{\existsunique x : f(x)} \eqdef \exists x : f(x) \land \unique x : f(x)$\\
+      \structure{il existe un unique $x$ tel que $f(x)$}
+    \end{description}
+  \end{block}
+\end{frame}
+
+
+\endgroup

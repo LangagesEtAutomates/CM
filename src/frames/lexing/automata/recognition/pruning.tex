@@ -9,27 +9,23 @@
 
 \SetKwFunction{Emondage}{emondage}
 \SetKwFunction{Accessible}{accessible}
-\SetKwFunction{Coaccessible}{co-accessible}
+\SetKwFunction{Coaccessible}{coaccessible}
 
 \begin{frame}[fragile]{Algorithme de l'émondage}
 
-  \tfBlock[top=-5mm]{Théorème -- Émondage}{
-    Soit $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN. Il existe un automate émondé $B \equiv A$.
-  }
-
-  \tf[text, y=2mm]{\small
+  \tf[text, top]{
     \begin{algorithm}[H]
-      \Fn{\Emondage($A = \langle \Sigma, Q, I, F, \mu \rangle$ : automate) : automate}{
+      \Fn{\Emondage($A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : automate) : automate}{
         \tfStructure<2|handout>{$\Accessible \leftarrow I$}\;
-        \Tantque{\tfStructure<3-5|handout>{$\exists q \xrightarrow{a} q' \in \mu :  q\in \Accessible \land q'\notin\Accessible$}}{
+        \Tantque{\tfStructure<3-5|handout>{$\exists a \in \Sigma, \exists q\in \Accessible, \exists q'\notin\Accessible, q \xrightarrow{a} q'$}}{
           \tfStructure<3-5|handout>{$\Accessible \leftarrow \Accessible \cup \{q'\}$}\;
         }
         \tfExample<6|handout>{$\Coaccessible \leftarrow F$}\;
-        \Tantque{\tfExample<7-9|handout>{$\exists q \xrightarrow{a} q' \in \mu, q\not\in \Coaccessible \land q'\in\Coaccessible$}}{
+        \Tantque{\tfExample<7-9|handout>{$\exists a \in \Sigma, \exists q\notin \Coaccessible, \exists q'\in\Coaccessible, q \xrightarrow{a} q'$}}{
           \tfExample<7-9|handout>{$\Coaccessible \leftarrow \Coaccessible \cup \{q\}$}\;
         }
         \tfAlert<10|handout>{$Q' \leftarrow \Accessible \cap \Coaccessible$}\;
-        \Retourner $\displaystyle\left\langle \Sigma, Q', I \cap Q', F \cap Q', \mu \cap (Q' \times \Sigma \times Q')\right\rangle$\;
+        \Retourner $\displaystyle\left\langle \Sigma, Q', I \cap Q', F \cap Q', \rightarrow \cap (Q' \times \Sigma \times Q')\right\rangle$\;
       }
     \end{algorithm}
   }

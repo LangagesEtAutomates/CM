@@ -7,37 +7,34 @@
 
 \begingroup
 
-
 \begin{frame}{Exemples de langages rationnels}
+
   \begin{block}{Langages finis}
-    \vspace{-2mm}
     \begin{description}
     \item[Théorème :]
       Tout \alert{langage fini} sur un alphabet $\Sigma$ est rationnel.
     \item[Preuve :]
-      Soit $L = \{u_1, ..., u_n\}$ un langage fini sur $\Sigma$.
-      $L = \mathcal{S} \left( (u_1[1] \cdot ... \cdot u_1[|u_1|])  \mid ... \mid   (u_n[1] \cdot ... \cdot u_n[|u_n|]) \right) $
-    \item[\example{Exemple :}] le langage \example{$\{0,1\}^8$} décrivant les symboles de la table ASCII en binaire sur 8 bits.
+      Soit $L = \{u_1, ..., u_n\}$ un langage fini sur $\Sigma$ :
+      \structure{$L = \mathcal{L} \left( u_1 \mid ... \mid u_n \right)$}
+    \item[\example{Exemple :}] le langage \example{$\{0,1\}^8$} des symboles ASCII en binaire sur 8 bits.
     \end{description}
   \end{block}
 
   \begin{block}{Langages maximaux}
-    \vspace{-2mm}
     \begin{description}
     \item[Théorème :]
       Pour tout alphabet $\Sigma$, le langage \alert{$\Sigma^\star$} est rationnel.
     \item[Preuve :]
-      Soit $\Sigma = \{a_1, ..., a_n\}$ un alphabet.
-      $\Sigma^\star = \mathcal{S}((a_1 \mid ... \mid a_n)^\star)$.
+      Soit $\Sigma = \{a_1, ..., a_n\}$ un alphabet : \structure{$\Sigma^\star = \mathcal{L}((a_1 \mid ... \mid a_n)^\star)$}.
     \item[\example{Exemple :}] le langage décrivant les \example{chaînes de caractères} en C.
     \end{description}
   \end{block}
 
-    \begin{block}{Autre exemples}
-      \begin{itemize}
-      \item $\mathcal{S}(\example{((a|b)(a|b))^\star})$ : mots sur $\{a, b\}$ de longueur paire.
-      \item $\mathcal{S}(\example{a^\star b^\star})$ : mots sur $\{a, b\}$ dont tous les $a$ précèdent tous les $b$.
-      \end{itemize}
+  \begin{block}{Autre exemples}
+    \begin{itemize}
+    \item $\mathcal{L}(\example{((a\mid b)(a\mid b))^\star})$ : mots sur $\{a, b\}$ de longueur paire.
+    \item $\mathcal{L}(\example{a^\star b^\star})$ : mots sur $\{a, b\}$ dont tous les $a$ précèdent tous les $b$.
+    \end{itemize}
   \end{block}
   
 \end{frame}

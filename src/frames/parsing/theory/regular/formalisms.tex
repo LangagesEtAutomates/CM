@@ -11,79 +11,75 @@
 
   \tf{
     \begin{tikzpicture}
-      \small
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (exp) at (4.0,7.0) {Expression\\ rationnelle};
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (nfa) at (4.0,5.0) {Automate fini\\ non-déterministe};
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (dfa) at (8.0,5.0) {Automate fini\\ déterministe};
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (lrg) at (6.0,3.0) {Grammaire\\ rationnelle gauche};
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (rrg) at (2.0,3.0) {Grammaire\\ rationnelle droite};
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (llg) at (6.0,1.0) {Grammaire\\ linéaire gauche};
-      \node[structure, smBox, minimum width=24mm, minimum height=10mm] (rlg) at (2.0,1.0) {Grammaire\\ linéaire droite};
+      \tikzset{box/.style={structure, smBox, text width=24mm, minimum height=12mm},}
+      \node[box] (exp) at (0,5.2) {Expression rationnelle};
+      \node[box] (nfa) at (4,5.2) {Automate fini non-déterministe};
+      \node[box] (dfa) at (8,5.2) {Automate fini déterministe};
+      \node[box] (lrg) at (6,3.0) {Grammaire\\ rationnelle\\ à gauche};
+      \node[box] (rrg) at (2,3.0) {Grammaire\\ rationnelle\\ à droite};
+      \node[box] (llg) at (6,0.8) {Grammaire\\ linéaire   \\ à gauche};
+      \node[box] (rlg) at (2,0.8) {Grammaire\\ linéaire   \\ à droite};
 
-
-      \node[example, left] at (exp.west) {
-        $a^+ b$
-      };
-      \node[example, left, xshift=-2mm] at (nfa.west) {
+      \node[example, above, yshift=2mm] at (exp.north) {$a^+ b$};
+      \node[example, above, yshift=2mm, xshift=-3mm] at (nfa.north) {\small
         \begin{tikzpicture}[smAutomaton]
-          \smState[\smInitial  ] (a) at (0.0,0) {$A$};
-          \smState[            ] (b) at (1.2,0) {$B$};
-          \smState[\smAccepting] (c) at (2.4,0) {$C$};
+          \smState[\smInitial] (a) at (0.0,0) {$A$};
+          \smState[            ] (b) at (1.1,0) {$B$};
+          \smState[\smAccepting] (c) at (2.2,0) {$C$};
           \smPath (a) edge [loop above] node {$a$} (a);
           \smPath (a) edge              node {$a$} (b);
           \smPath (b) edge              node {$b$} (c);
-          \path[opacity=0] (a) edge [loop below] node {$a$} (a);
         \end{tikzpicture}
       };
-      \node[example, above, yshift=1mm] at (dfa.north) {
+      \node[example, above, yshift=2mm] at (dfa.north) {\small
         \begin{tikzpicture}[smAutomaton]
-          \smState[\smInitial  ] (a) at (0.0,0) {$A$};
-          \smState[            ] (b) at (1.2,0) {$B$};
-          \smState[\smAccepting] (c) at (2.4,0) {$C$};
+          \smState[\smInitialAbove] (a) at (0.0,0) {$A$};
+          \smState[            ] (b) at (1.1,0) {$B$};
+          \smState[\smAccepting] (c) at (2.2,0) {$C$};
           \smPath (b) edge [loop above] node {$a$} (b);
           \smPath (a) edge              node {$a$} (b);
           \smPath (b) edge              node {$b$} (c);
         \end{tikzpicture}
       };
       \node[example, left] at (rrg.west) {
-        $\left\{\begin{array}{rcl}
-        S & \rightarrow & aS \mid aB\\
-        B & \rightarrow & b\\
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+        S & aS \mid aB\\
+        B & b\\
         \end{array}\right.$
       };
       \node[example, left] at (rlg.west) {
-        $\left\{\begin{array}{rcl}
-        S & \rightarrow & aS \mid ab\\
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+        S & aS \mid ab\\
         \end{array}\right.$
       };
       \node[example, right] at (lrg.east) {
-        $\left\{\begin{array}{rcl}
-        S & \rightarrow & Bb\\
-        B & \rightarrow & a \mid Ba\\
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+        S & Bb\\
+        B & Ba \mid a\\
         \end{array}\right.$
       };
       \node[example, right] at (llg.east) {
-        $\left\{\begin{array}{rcl}
-        S & \rightarrow & ab \mid Bab\\
-        B & \rightarrow & Ba \mid \varepsilon\\
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+        S & ab & Bab\\
+        B & Ba & \varepsilon\\
         \end{array}\right.$
       };
       
-      \scriptsize
-      \smPath (exp) edge[bend left=5mm] node[right] {Thompson} (nfa);
-      \smPath (nfa) edge[bend left=5mm] node[left] {Arden} (exp);
-      \smPath (nfa) edge[bend left=3mm] node[above] {Rabin \& Scott} (dfa);
+      \footnotesize
+      \smPath (exp) edge[bend left=3mm] node[above] {Thompson} (nfa);
+      \smPath (nfa) edge[bend left=3mm] node[below] {Arden} (exp);
+      \smPath (nfa) edge[bend left=3mm] node[above] {\scriptsize Rabin, Scott} (dfa);
       \smPath (dfa) edge[bend left=3mm] node[below] {inclusion} (nfa);
       \smPath (lrg) edge[bend left=5mm] node[right] {inclusion} (llg);
-      \smPath (llg) edge[bend left=5mm] node[left] {direct} (lrg);
+      \smPath (llg) edge[bend left=5mm] node[left ] {direct} (lrg);
       \smPath (rrg) edge[bend left=5mm] node[right] {inclusion} (rlg);
-      \smPath (rlg) edge[bend left=5mm] node[left] {direct} (rrg);
+      \smPath (rlg) edge[bend left=5mm] node[left ] {direct} (rrg);
       
-      \path[latex-latex] (rrg) edge node[right] {direct} (nfa);
-      \path[latex-latex] (lrg) edge node[left] {miroir} (nfa);
-
+      \path[latex-latex] (rrg) edge node[left, xshift=-1mm] {direct} (nfa);
+      \path[latex-latex] (lrg) edge node[right, xshift=1mm] {miroir} (nfa);
     \end{tikzpicture}
   }
   
 \end{frame}
+
 \endgroup

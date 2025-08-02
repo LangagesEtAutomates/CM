@@ -9,18 +9,19 @@
 
 \SetKwFunction{Dick}{decide}
 
-\begin{frame}{Automates finis généralisés}
+\begin{frame}{Aller au-delà des automates finis}
 
-  \tfBlock[top=-3mm]{Automate fini généralisé}{
+  \tfBlock[top=-5mm]{Automates finis généralisés}{
     Si un automate fini n'est pas suffisant, ajouter une structure de données
     \begin{itemize}
+    \item Entier : \structure{automate à compteur}
     \item Pile : \structure{automate à pile}
-    \item Tableau de taille $|u|$ : \structure{machine linéairement bornée}
+    \item Tableau de taille $|u|$ : \structure{automate linéairement borné}
     \item Ruban infini : \structure{machine de Turing}
     \end{itemize}
   }
 
-  \tfExampleBlock[bottom]{Exemple : le langage $\{a^n b^n | n>0\}$}{
+  \tfExampleBlock[bottom=-2mm]{Exemple : le langage $\{a^n b^n \mid n>0\}$}{
     \begin{algorithm}[H]
       \Fn{$\Dick(u : \text{mot}) : \text{booléen}$}{
         $q\leftarrow 0$; $c \leftarrow 0$\;
@@ -39,11 +40,11 @@
     \end{algorithm}
   }
 
-  \tfBlock[right=.4\textwidth,y=1mm]{Grammaire :}{
-    $S \rightarrow a S b \,|\, ab $
+  \tfBlock[right=.4\textwidth,y=-1mm]{Grammaire}{
+    $S \rightarrow a S b \mid ab $
   }
   
-  \tfBlock[right=.4\textwidth, bottom=3mm]{Automate à compteur :}{
+  \tfBlock[right=.4\textwidth, bottom=3mm]{Automate à compteur}{
     \begin{tikzpicture}[smAutomaton]
       \smState[\smInitial]   (a) at (0,0) {0};
       \smState[\smAccepting] (b) at (2,0) {1};

@@ -7,39 +7,36 @@
 
 \begingroup
 
-
 \begin{frame}{Lien entre langages droits}
 
-
   \tfExampleBlock[bottom, left=.55\textwidth]{Exemple}{
-    Pour $i \in \{0, 1, 2, 3\}$, on pose $L_i = \mathcal{LD}_{A}(q_i)$
-      $$
-      \left\{
-      \begin{array}{rclcl}
-        \mathcal{L}(A) = L_0 &=& \left(\example{\{b\} \cdot L_0} \right) \cup \left(\structure{\{a\} \cdot L_1} \right) &=& \example{b\cdot L_0} \mid \structure{a\cdot L_1} \\
-        L_1 &=& \left(\{b\} \cdot L_1 \right) \cup \left(\{b\} \cdot L_2 \right) &=& b\cdot L_1 \mid b\cdot L_2 \\
-        L_2 &=& \left(\{\varepsilon\} \cdot L_3 \right) \cup \{\varepsilon\} &=& L_3 \mid \varepsilon \\
-        L_3 &=& \left(\{a\} \cdot L_3 \right) \cup \left(\{b\} \cdot L_1 \right) &=& a \cdot L_3 \mid b\cdot L_1 \\
-      \end{array}
-      \right.
-      $$
+    Pour $i \in \{0, 1, 2, 3\}$, on pose $L_i = \mathcal{L}_{A}(q_i)$
+    $$
+    \left\{
+    \begin{array}{rclcl}
+      \mathcal{L}(A) = L_0 &=& \left(\example{\{b\} \cdot L_0} \right) \cup \left(\structure{\{a\} \cdot L_1} \right) &=& \example{b\cdot L_0} \mid \structure{a\cdot L_1} \\
+      L_1 &=& \left(\{b\} \cdot L_1 \right) \cup \left(\{b\} \cdot L_2 \right) &=& b\cdot L_1 \mid b\cdot L_2 \\
+      L_2 &=& \left(\{\varepsilon\} \cdot L_3 \right) \cup \{\varepsilon\} &=& L_3 \mid \varepsilon \\
+      L_3 &=& \left(\{a\} \cdot L_3 \right) \cup \left(\{b\} \cdot L_1 \right) &=& a \cdot L_3 \mid b\cdot L_1 \\
+    \end{array}
+    \right.
+    $$
   }
   \tfBlock[top=-5mm]{Analyse}{
-    Soient $A=\langle \Sigma, Q, I, F, \mu \rangle$ un AFN, $\alpha\in \Sigma \cup \{\varepsilon\}$, $u\in \Sigma^\star$, $v\in \Sigma^+$, et $q\in Q \setminus F$
-
-    \vspace{-4mm}
-    $$
-    \begin{array}{rcl}
-      \alpha u \in \mathcal{LD}_{A}(q) &\Leftrightarrow& \exists f\in F, \structure{\langle \alpha u, q\rangle \leadsto^\star \langle \varepsilon, f \rangle}\\
-      &\Leftrightarrow& \exists f\in F, \exists q', \example{\langle \alpha u, q\rangle \leadsto \langle u, q' \rangle} \structure{\leadsto^\star \langle \varepsilon, f \rangle}\\
-      &\Leftrightarrow& \exists q', \example{q \xrightarrow{\alpha} q' \in \mu} \land \structure{u \in \mathcal{LD}_{A}(q')}\vspace{3mm}\\
-      v\in \mathcal{LD}_{A}(q) &\Leftrightarrow& \exists \beta, \exists q', \example{q \xrightarrow{\beta} q' \in \mu} \land  \structure{v \in \{\beta\} \cdot \mathcal{LD}_{A}(q')}\vspace{3mm}\\
-      \alert{\mathcal{LD}_{A}(q)} &\alert{=}& \displaystyle \alert{\bigcup_{\begin{array}{c}\beta\in \Sigma \cup\{\varepsilon\}, q'\in Q\\ q, \xrightarrow{\beta}, q' \in \mu\end{array}} \{\beta\} \cdot \mathcal{LD}_{A}(q')} \hspace{5mm}(\cup \{\varepsilon\}~\text{si}~q \in F)\\
-    \end{array}
-    $$
+    Soient $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN, $a\in \Sigma \cup \{\varepsilon\}$, $u\in \Sigma^\star$, et $q\in Q$. On a :
+    {\small
+      $$
+      \begin{array}{rcl}
+        a u \in \mathcal{L}_{A}(q) &\Leftrightarrow& \exists f\in F, \structure{\langle a u, q\rangle \leadsto^\star \langle \varepsilon, f \rangle}\\
+        &\Leftrightarrow& \exists f\in F, \exists q', \example{\langle a u, q\rangle \leadsto \langle u, q' \rangle} \structure{\leadsto^\star \langle \varepsilon, f \rangle}\\
+        &\Leftrightarrow& \exists q', \example{q \xrightarrow{a} q'} \land \structure{u \in \mathcal{L}_{A}(q')}\\
+      \end{array}$$
+    }
+    De plus, $\varepsilon \in \mathcal{L}_A(q)$ si $q \in F$. Ainsi, pour tout $q$ :
+      $$\alert{\mathcal{L}_{A}(q) = \bigcup_{q \xrightarrow{b} q'} \{b\} \cdot \mathcal{L}_{A}(q') \quad\cup \left\{\begin{array}{@{\,}cl}\{\varepsilon\}&\text{si }q \in F\\\emptyset&\text{sinon}\end{array}\right.}$$
   }
 
-    \tf[bottom, x=45mm]{\small
+  \tf[bottom, x=45mm]{\small
     \begin{tikzpicture}[smAutomaton, node distance=1.3cm]
       \smState[\smInitial]   (q0)   {$q_0$};
       \smState               (q1) [below=of q0]  {$q_1$};

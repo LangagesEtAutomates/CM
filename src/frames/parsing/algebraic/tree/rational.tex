@@ -10,30 +10,30 @@
 \begin{frame}{Grammaire des expressions rationnelles}
 
   \tf[text, top]{
-  Soit $\Sigma = \{a, b\}$. Le langage des expressions rationnelles sur $\Sigma$, \\$\textsc{reg}_\Sigma$ est engendré par la grammaire non-ambiguë
-  $\langle \tilde\Sigma, \Gamma, \structure{\textsc{Union}}, R \rangle$, où : \small
-  \vspace{2mm}
-  \begin{itemize}
-  \item $\tilde\Sigma = \{\alert{a}, \alert{b}, \alert{\emptyset}, \alert{\varepsilon}, \alert{(}, \alert{)}, \alert{|}, \alert{\cdot}, \alert{\star} \}$
-  \item $\Gamma = \{\structure{\textsc{Union}}, \structure{\textsc{Concat}}, \structure{\textsc{Etoile}}, \structure{\textsc{Par}}, \structure{\textsc{Terme}}\}$
-  \item $R =   \left\{\begin{array}{rcl}
-    \structure{\textsc{Union}}  &\rightarrow& \structure{\textsc{Union}} \, \alert{|} \, \structure{\textsc{Concat}} \\
-    & | &  \structure{\textsc{Concat}} \\
-    \structure{\textsc{Concat}} &\rightarrow& \structure{\textsc{Concat}} \, \alert{\cdot} \, \structure{\textsc{Etoile}} \\
-    & | & \structure{\textsc{Etoile}} \\
-    \structure{\textsc{Etoile}} &\rightarrow& \structure{\textsc{Etoile}}\,^{\alert{\star}} \\
-    & | & \structure{\textsc{Par}} \\
-    \structure{\textsc{Par}}    &\rightarrow& \alert{(} \structure{\textsc{Union}} \alert{)} \\
-    & | &  \structure{\textsc{Terme}} \\
-    \structure{\textsc{Terme}}  &\rightarrow& \alert{\varepsilon} \,|\, \alert{\emptyset} \,|\, \alert{a} \,|\, \alert{b}  \\
-  \end{array}\right.$
-  \end{itemize}
+    Soit $\Sigma = \{a, b\}$. Le langage des expressions rationnelles sur $\Sigma$, \\$\textsc{reg}_\Sigma$ est engendré par la grammaire non-ambiguë
+    $\langle \tilde\Sigma, \Gamma, \structure{\textsc{Union}}, \rightarrow \rangle$, où : \small
+    \vspace{2mm}
+    \begin{itemize}
+    \item $\tilde\Sigma = \{\alert{a}, \alert{b}, \alert{\emptyset}, \alert{\varepsilon}, \alert{(}, \alert{)}, \alert{|}, \alert{\cdot}, \alert{\star} \}$
+    \item $\Gamma = \{\structure{\textsc{Union}}, \structure{\textsc{Concat}}, \structure{\textsc{Etoile}}, \structure{\textsc{Par}}, \structure{\textsc{Terme}}\}$
+    \item $\left\{\begin{array}{rcl}
+      \structure{\textsc{Union}}  &\rightarrow& \structure{\textsc{Union}} \, \alert{|} \, \structure{\textsc{Concat}} \\
+      & | &  \structure{\textsc{Concat}} \\
+      \structure{\textsc{Concat}} &\rightarrow& \structure{\textsc{Concat}} \, \alert{\cdot} \, \structure{\textsc{Etoile}} \\
+      & | & \structure{\textsc{Etoile}} \\
+      \structure{\textsc{Etoile}} &\rightarrow& \structure{\textsc{Etoile}}\,^{\alert{\star}} \\
+      & | & \structure{\textsc{Par}} \\
+      \structure{\textsc{Par}}    &\rightarrow& \alert{(} \structure{\textsc{Union}} \alert{)} \\
+      & | &  \structure{\textsc{Terme}} \\
+      \structure{\textsc{Terme}}  &\rightarrow& \alert{\varepsilon} \,|\, \alert{\emptyset} \,|\, \alert{a} \,|\, \alert{b}  \\
+    \end{array}\right.$
+    \end{itemize}
   }
   
   \tf[x=.25\textwidth, bottom=-1mm]{\footnotesize
     \begin{tikzpicture}
       \draw[black!30, fill=black!10, rounded corners] (1.5,-.7) -- (1.5,1.4) -- (5.3,6) -- (7.5,6) -- (7.5,-.7) -- cycle;
-      \draw[structure, below left] (7.5,6) node{CST};
+      \draw[below left] (7.5,6) node{CST};
       
       \node[structure] (a) at (6,5.6) {$\textsc{Union}$};
       \node[structure] (b) at (6,4.9) {$\textsc{Etoile}$};   \smPath (a) edge (b);
@@ -67,7 +67,7 @@
   \tf[x=-.33\textwidth, bottom=-1mm]{\footnotesize
     \begin{tikzpicture}
       \draw[black!30, fill=black!10, rounded corners] (-.5, -.1) rectangle (3.5,2);
-      \draw[structure, below right] (-.5, 2) node{AST};
+      \draw[below right] (-.5, 2) node{AST};
       
       \node[structure] (a) at (1.5,1.7) {$\star$};
       \node[structure] (b) at (1.5,1.0) {$|$};            \smPath (a) edge (b);  
@@ -79,5 +79,7 @@
       \node[alert]     (h) at (3.0,0.0) {$a$};            \smPath (d) edge (h);  
     \end{tikzpicture}
   }
+
 \end{frame}
+
 \endgroup

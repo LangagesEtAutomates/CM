@@ -7,40 +7,37 @@
 
 \begingroup
 
-\begin{frame}{Exemple : $(a^+ | b^+) c^\star$}
+\begin{frame}{Exemple : $(a^+ \mid b^+) \cdot c^\star$}
 
-  \tfBlock[top=-3mm]{Représentation mathématique}{
+  \tfBlock[top=-3mm]{Représentation mathématique}{\vspace{-1mm}
     $$\begin{array}{lccl}
       \text{\structure{alphabet}} & \Sigma & = & \{a, b, c\}\\
-      \text{\structure{états}} & Q & = & \{s_1, s_2, s_3, s_4, s_5\}\\
-      \text{\structure{états initiaux}} & I & = & \{s_1, s_4\}\\
-      \text{\structure{états finaux}} & F & = & \{s_3\}\\
-      \text{\structure{transitions}} & \mu & = & \left\{ \begin{array}{lll}
-        
-        \langle s_1, a, s_1 \rangle,&
-        \langle s_1, a, s_2 \rangle,&
-        \langle s_2, a, s_2 \rangle,\\
-
-        \langle s_4, b, s_5 \rangle,&
-        \langle s_4, b, s_4 \rangle,&
-        \langle s_5, b, s_5 \rangle,\\
-
-        \langle s_2, \varepsilon, s_3 \rangle,&
-        \langle s_5, \varepsilon, s_3 \rangle,&
-        \langle s_3, c, s_3 \rangle
+      \text{\structure{états}} & Q & = & \{1, 2, 3, 4, 5\}\\
+      \text{\structure{états initiaux}} & I & = & \{1, 4\}\\
+      \text{\structure{états finaux}} & F & = & \{3\}\\
+      \text{\structure{transitions}} & \rightarrow & = & \left\{ \begin{array}{@{~\langle\;}c@{,\,}c@{,\,}c@{\;\rangle,~\langle\;}c@{,\,}c@{,\,}c@{\;\rangle,~\langle\;}c@{,\,}c@{,\,}c@{\;\rangle}l@{~}}
+        1 & a           & 1 &
+        1 & a           & 2 &
+        2 & a           & 2 &,\\
+        4 & b           & 5 &
+        4 & b           & 4 &
+        5 & b           & 5 &,\\
+        2 & \varepsilon & 3 &
+        5 & \varepsilon & 3 &
+        3 & c           & 3    
       \end{array}\right\}\\
     \end{array}$$
   }
 
-  \tfBlock[left=.5\textwidth, bottom]{Représentation graphique}{\footnotesize
+  \tfBlock[left=.5\textwidth, y=-2mm, anchor=north]{Représentation graphique}{\footnotesize
       \begin{tikzpicture}[smAutomaton,node distance=1.5cm]
-        \smState[\smInitial]   (s1) at (0.0,1)  {$s_1$}; 
-        \smState               (s2) at (1.5,1)  {$s_2$}; 
-        \smState[\smAccepting] (s3) at (3.0,.5) {$s_3$}; 
-        \smState[\smInitial]   (s4) at (0.0,0)  {$s_4$}; 
-        \smState               (s5) at (1.5,0)  {$s_5$}; 
+        \smState[\smInitial]   (s1) at (0.0,1)  {$1$}; 
+        \smState               (s2) at (1.5,1)  {$2$}; 
+        \smState[\smAccepting] (s3) at (3.0,.5) {$3$}; 
+        \smState[\smInitial]   (s4) at (0.0,0)  {$4$}; 
+        \smState               (s5) at (1.5,0)  {$5$}; 
 
-        \smPath (s1) edge             node[swap]  {$a$}           (s2);
+        \smPath (s1) edge             node        {$a$}           (s2);
         \smPath (s1) edge[loop above] node        {$a$}           (s1);
         \smPath (s2) edge[loop above] node        {$a$}           (s2);
         \smPath (s4) edge             node[swap]  {$b$}           (s5);
@@ -53,18 +50,18 @@
   }
 
 
-  \tfBlock[right=.5\textwidth, bottom]{Représentation matricielle}{
+  \tfBlock[right=.5\textwidth, y=-2mm, anchor=north]{Représentation matricielle}{
       \begin{tabular}{|l|c|c|c|c|}
         \hline
-        & \multicolumn{4}{c|}{\textbf{Entrée}}\\
+        & \multicolumn{4}{c|}{\rule{0pt}{0.5em}\textbf{Entrée}}\\
         \hline
-        \textbf{\'Etat} & $a$ & $b$ & $c$ & $\varepsilon$ \\
+        \rule{0pt}{1.1em}\textbf{\'Etat} & $a$ & $b$ & $c$ & $\varepsilon$ \\
         \hline
-        $s_1$ i& $s_1$, $s_2$ &  & & \\
-        $s_2$ & $s_2$ &  &  & $s_3$ \\
-        $s_3$ f&  &  & $s_3$ & \\
-        $s_4$ i& &$s_4$, $s_5$  & & \\
-        $s_5$ &  & $s_5$ & &$s_3$ \\
+        $1$ i& $1$, $2$ &  & & \\
+        $2$ & $2$ &  &  & $3$ \\
+        $3$ f&  &  & $3$ & \\
+        $4$ i& &$4$, $5$  & & \\
+        $5$ &  & $5$ & &$3$ \\
         \hline
       \end{tabular}
   }

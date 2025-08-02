@@ -7,23 +7,31 @@
 
 \begingroup
 
-
 \begin{frame}{Équivalence entre expressions rationnelles}
 
   \begin{block}{Définition -- Équivalence entre expressions rationnelles}
     Deux expressions rationnelles \alert{$u$} et \alert{$v$} sont dites \structure{équivalentes}
     (ou par abus de langage ``égales''), noté \alert{$u \equiv v$},
     si elles décrivent le même langage.
-    \alert{$$u \equiv v ~\eqdef~ \mathcal{S}(u) = \mathcal{S}(v)$$}
+    $$\alert{u \equiv v ~\eqdef~ \mathcal{L}(u) = \mathcal{L}(v)}$$
   \end{block}
 
+  \vspace{-2mm}
   \begin{exampleblock}{Exemples}
     \begin{itemize}
-    \item \example{$a^\star | b^\star \not\equiv (a|b)^\star$} : $ab \in \mathcal{S}((a|b)^\star)$ mais $ab \not\in \mathcal{S}(a^\star | b^\star)$
-    \item \example{$(a^\star | b^\star)^\star \equiv (a|b)^\star$} : $\mathcal{S}((a^\star | b^\star)^\star) = \mathcal{S}((a|b)^\star) = \{a, b\}^\star$
+    \item \example{$a^\star \mid b^\star \not\equiv (a \mid b)^\star$} : $ab \in \mathcal{L}((a \mid b)^\star)$ mais $ab \not\in \mathcal{L}(a^\star \mid  b^\star)$
+    \item \example{$(a^\star \mid b^\star)^\star \equiv (a \mid b)^\star$} : $\mathcal{L}((a^\star \mid b^\star)^\star) = \mathcal{L}((a \mid b)^\star) = \{a, b\}^\star$
     \end{itemize}
   \end{exampleblock}
-  
+
+  \begin{block}{Rappel -- Relation d'équivalence}
+    L'équivalence est bien une relation d'équivalence, car elle vérifie :
+    \begin{description}
+    \item[Réflexivité :] $\forall u\in\textsc{regex}_\Sigma, u\equiv u$
+    \item[Symétrie :]    $\forall u, v\in\textsc{regex}_\Sigma, u\equiv v \Rightarrow v\equiv u$
+    \item[Transitivité :]$\forall u, v, w\in\textsc{regex}_\Sigma, (u\equiv v \land v \equiv w) \Rightarrow u\equiv w$
+    \end{description}
+  \end{block}
   
 \end{frame}
 

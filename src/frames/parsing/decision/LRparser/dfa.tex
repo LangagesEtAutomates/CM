@@ -8,8 +8,8 @@
 \begingroup
 
 \begin{frame}{Construction de l'automate sous-jacent}
+  
   \tf[text, top=-1mm]{
-    Soit $G=\langle \Sigma, \Gamma, S, R \rangle$ une grammaire algébrique.\\
     On construit un automate fini déterministe sur l'alphabet $\Sigma \cup \Gamma$  :
     \begin{itemize}
     \item \structure{L'état initial} est $\alert{\mathit{fermeture}\left(\{S \rightarrow \bullet A \$ \}\right)}$
@@ -19,65 +19,66 @@
     \item<3-|handout> \structure{L'état final} est \alert{$\{S \rightarrow A \$ \bullet \}$}
     \end{itemize}
   }
+  
   \tfExampleBlock[bottom]{Exemple pour le langage $\left\{ a^n c b^n \mid n\in \mathbb{N}\right\}$}{\footnotesize\centering
     \begin{tikzpicture}[smAutomaton]
       \tikzset{rstate/.style={state, rectangle, rounded corners=4mm, minimum width=22mm, minimum height=8mm},}
       \smDraw[]{
         \node[rstate, initial]   (I) at (0.0,0.0) {\only<-3|handout>{$
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& \bullet A \$\\
-          A &\rightarrow& \bullet a A b \mid \bullet c
-          \end{array}\right.
-          $}\only<4>{0}};
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& \bullet A \$\\
+            A &\rightarrow& \bullet a A b \mid \bullet c
+            \end{array}\right.
+            $}\only<4>{0}};
       }
       \smDraw<2>[]{
         \node[state, black!30, fill=black!10] (E) at (1.7,1.5) {$\emptyset$};
         \path[-latex, black!30, densely dotted, thick] (I) edge   node[swap,sloped] {$b, S, \$$} (E);
       }
       \smDraw<2-|handout>[]{
-        \node[rstate]            (C) at (3,.75) {\only<-3|handout>{$%\mathcal{C}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& A \$\\
-          A &\rightarrow& a A b \mid  c \bullet
-          \end{array}\right.
-          $}\only<4>{2}};
-        \node[rstate]            (A) at (0.0,1.5) {\only<-3|handout>{$%\mathcal{A}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& A \$\\
-          A &\rightarrow& \bullet a \bullet A b \mid \bullet c
-          \end{array}\right.
-          $}\only<4>{3}}; 
+        \node[rstate]            (C) at (3,.75) {\only<-3|handout>{$
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& A \$\\
+            A &\rightarrow& a A b \mid  c \bullet
+            \end{array}\right.
+            $}\only<4>{2}};
+        \node[rstate]            (A) at (0.0,1.5) {\only<-3|handout>{$
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& A \$\\
+            A &\rightarrow& \bullet a \bullet A b \mid \bullet c
+            \end{array}\right.
+            $}\only<4>{3}}; 
         \node[rstate] (X) at (5,0.0) {\only<-3|handout>{$
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& A \bullet \$\\
-          A &\rightarrow& a A b \mid c
-          \end{array}\right.
-          $}\only<4>{1}};
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& A \bullet \$\\
+            A &\rightarrow& a A b \mid c
+            \end{array}\right.
+            $}\only<4>{1}};
         \path[-latex, densely dotted, thick] (I) edge             node[swap] {$A$} (X);
         \path[-latex, densely dotted, thick] (I) edge             node[swap] {$a$} (A);
         \path[-latex, densely dotted, thick] (I) edge             node {$c$} (C);
       }
       \smDraw<3-|handout>[]{
-        \node[rstate]            (S) at (5,1.5) {\only<-3|handout>{$%\mathcal{S}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& A \$\\
-          A &\rightarrow& a A \bullet b \mid c
-          \end{array}\right.
-          $}\only<4>{4}};  
-        \node[rstate]            (B) at (8,1.5) {\only<-3|handout>{$%\mathcal{B}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& A \$\\
-          A &\rightarrow& a A b \bullet \mid  c
-          \end{array}\right.
-          $}\only<4>{5}};
+        \node[rstate]            (S) at (5,1.5) {\only<-3|handout>{$
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& A \$\\
+            A &\rightarrow& a A \bullet b \mid c
+            \end{array}\right.
+            $}\only<4>{4}};  
+        \node[rstate]            (B) at (8,1.5) {\only<-3|handout>{$
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& A \$\\
+            A &\rightarrow& a A b \bullet \mid  c
+            \end{array}\right.
+            $}\only<4>{5}};
       }
       \smDraw<3-|handout>[]{
         \node[rstate, accepting] (F) at (8,0.0) {\only<-3|handout>{$
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-          S &\rightarrow& A \$ \bullet\\
-          A &\rightarrow& a A b \mid c
-          \end{array}\right.
-          $}\only<4>{6}};
+            \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
+            S &\rightarrow& A \$ \bullet\\
+            A &\rightarrow& a A b \mid c
+            \end{array}\right.
+            $}\only<4>{6}};
         
         \path[-latex, densely dotted, thick] (A) edge[loop above] node {$a$} (A);
         \path[-latex, densely dotted, thick] (A) edge             node[swap] {$c$} (C);
@@ -85,9 +86,9 @@
         \path[-latex, densely dotted, thick] (A) edge             node {$A$} (S);
         \path[-latex, densely dotted, thick] (X) edge             node[swap] {$\$$} (F);
       }
-
     \end{tikzpicture}
   }
+
 \end{frame}
 
 \endgroup

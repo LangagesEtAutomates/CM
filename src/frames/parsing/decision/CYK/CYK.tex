@@ -7,20 +7,19 @@
 
 \begingroup
 
-          \SetKwFunction{CYK}{CYK}
-            \SetKwData{Input}{motif}
-  
+\SetKwFunction{CYK}{CYK}
+
 \begin{frame}[fragile]{Algorithme Cocke-Younger-Kasami (CYK)}
   \tf[top, text]{\small
     \begin{algorithm}[H]
-      \Fn{\CYK($\langle \Sigma, \Gamma, S, R \rangle$ : grammaire, $u \in \Sigma^\star$) : booléen}{
-        \lSi{$u = \varepsilon$}{\Retourner $S \rightarrow \varepsilon \in R$}
+      \Fn{\CYK($\langle \Sigma, \Gamma, S, \rightarrow \rangle$ : grammaire, $u \in \Sigma^\star$) : booléen}{
+        \lSi{$u = \varepsilon$}{\Retourner $S \rightarrow \varepsilon$}
         \Pour{$j$ allant de $1$ à $|u|$}{
-          \tfAlert<3>{$T[1, j] \leftarrow \{N\in \Gamma | N \rightarrow u[j] \in R\}$}\;
+          \tfAlert<3>{$T[1, j] \leftarrow \{N\in \Gamma \mid N \rightarrow u[j]\}$}\;
         }
         \Pour{$i$ allant de $2$ à $|u|$}{
           \Pour{$j$ allant de $1$ à $|u|-i+1$}{
-            \tfAlert<4->{$\displaystyle T[i, j] \leftarrow \bigcup_{k=1}^{i-1} \{N\in \Gamma | \exists X \in T[k,j], \exists Y \in T[i-k,j+k], N \rightarrow X Y \in R\}$}\;
+            \tfAlert<4->{$\displaystyle T[i, j] \leftarrow \bigcup_{k=1}^{i-1} \left\{N\in \Gamma \,\middle\mid\, \exists X \in T[k,j], \exists Y \in T[i-k,j+k],~ N \rightarrow X Y\right\}$}\;
           }
         }
         \Retourner \tfAlert<2>{$S\in T[|u|, 1]$}\;
@@ -30,124 +29,125 @@
 
   \tfExampleBlock[bottom]{Exemple}{
     \vspace{2mm}
-    $G=\left\{\begin{array}{lll}
-    \alert<5,9>{S} &\alert<5,9>{\rightarrow}&  \alert<9>{AC} \;|\; \alert<5>{AB} \;|\; \varepsilon  \\
+    $\begin{array}{@{}l@{~=~}l@{}}
+    G & \left\{\begin{array}{@{~}l@{~}l@{~}l@{\,}}
+    \alert<5,9>{S} &\alert<5,9>{\rightarrow}&  \alert<9>{AC} \mid \alert<5>{AB} \mid \varepsilon  \\
     \alert<8>{C} &\alert<8>{\rightarrow}&  \alert<8>{TB}  \\
-    \alert<5,9>{T} &\alert<5,9>{\rightarrow}&  \alert<9>{AC} \;|\; \alert<5>{AB}  \\
+    \alert<5,9>{T} &\alert<5,9>{\rightarrow}&  \alert<9>{AC} \mid \alert<5>{AB}  \\
     \alert<3>{A} &\alert<3>{\rightarrow}& \alert<3>{a}  \\
-    \alert<3>{B} &\alert<3>{\rightarrow}& \alert<3>{b} \end{array}\right.$
-    
-    \vspace{2mm}
-    $u = aabb$
+    \alert<3>{B} &\alert<3>{\rightarrow}& \alert<3>{b}
+    \end{array}\right.\\
+    u & aabb
+    \end{array}$
   }
 
   \tf[x=17mm, y=-2cm]{
-      \begin{tikzpicture}
-        {\scriptsize
-          \draw (-.75,2.8) node[above left]{\scriptsize $T[i,j]$};
-          \draw (0.0 ,2.8) node[above]     {\scriptsize $j=1$};
-          \draw (1.5 ,2.8) node[above]     {\scriptsize $j=2$};
-          \draw (3.0 ,2.8) node[above]     {\scriptsize $j=3$};
-          \draw (4.5 ,2.8) node[above]     {\scriptsize $j=4$};
-          \draw (-.75,2.4) node[left]      {\scriptsize $i=1$};
-          \draw (-.75,1.6) node[left]      {\scriptsize $i=2$};
-          \draw (-.75,0.8) node[left]      {\scriptsize $i=3$};
-          \draw (-.75,0.0) node[left]      {\scriptsize $i=4$};
-        }
-        
-        \node (a1) at (0.0,2.4) {}; 
-        \node (a2) at (1.5,2.4) {}; 
-        \node (a3) at (3.0,2.4) {}; 
-        \node (a4) at (4.5,2.4) {}; 
-        \node (b1) at (0.0,1.6) {}; 
-        \node (b2) at (1.5,1.6) {}; 
-        \node (b3) at (3.0,1.6) {}; 
-        \node (c1) at (0.0,0.8) {}; 
-        \node (c2) at (1.5,0.8) {}; 
-        \node (d1) at (0.0,0.0) {}; 
-        
+    \begin{tikzpicture}
+      {\scriptsize
+        \draw (-.75,2.8) node[above left]{\scriptsize $T[i,j]$};
+        \draw (0.0 ,2.8) node[above]     {\scriptsize $j=1$};
+        \draw (1.5 ,2.8) node[above]     {\scriptsize $j=2$};
+        \draw (3.0 ,2.8) node[above]     {\scriptsize $j=3$};
+        \draw (4.5 ,2.8) node[above]     {\scriptsize $j=4$};
+        \draw (-.75,2.4) node[left]      {\scriptsize $i=1$};
+        \draw (-.75,1.6) node[left]      {\scriptsize $i=2$};
+        \draw (-.75,0.8) node[left]      {\scriptsize $i=3$};
+        \draw (-.75,0.0) node[left]      {\scriptsize $i=4$};
+      }
+      
+      \node (a1) at (0.0,2.4) {}; 
+      \node (a2) at (1.5,2.4) {}; 
+      \node (a3) at (3.0,2.4) {}; 
+      \node (a4) at (4.5,2.4) {}; 
+      \node (b1) at (0.0,1.6) {}; 
+      \node (b2) at (1.5,1.6) {}; 
+      \node (b3) at (3.0,1.6) {}; 
+      \node (c1) at (0.0,0.8) {}; 
+      \node (c2) at (1.5,0.8) {}; 
+      \node (d1) at (0.0,0.0) {}; 
+      
 
-        \draw[fill=structure!15] (a1) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (a2) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (a3) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (a4) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (b1) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (b2) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (b3) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (c1) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (c2) +(-.75,-.4) rectangle +(.75,.4);
-        \draw[fill=structure!15] (d1) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (a1) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (a2) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (a3) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (a4) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (b1) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (b2) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (b3) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (c1) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (c2) +(-.75,-.4) rectangle +(.75,.4);
+      \draw[fill=structure!15] (d1) +(-.75,-.4) rectangle +(.75,.4);
 
-        {\footnotesize
-          \draw[example] (a1) +(-.75,-.4) node[above right] {$a$};
-          \draw[example] (a2) +(-.75,-.4) node[above right] {$a$};    
-          \draw[example] (a3) +(-.75,-.4) node[above right] {$b$};    
-          \draw[example] (a4) +(-.75,-.4) node[above right] {$b$};    
-          \draw[example] (b1) +(-.75,-.4) node[above right] {$aa$};   
-          \draw[example] (b2) +(-.75,-.4) node[above right] {$ab$};   
-          \draw[example] (b3) +(-.75,-.4) node[above right] {$bb$};   
-          \draw[example] (c1) +(-.75,-.4) node[above right] {$aab$};  
-          \draw[example] (c2) +(-.75,-.4) node[above right] {$abb$};  
-          \draw[example] (d1) +(-.75,-.4) node[above right] {$aabb$}; 
-        }
- 
-        \only<1>{
-          \draw[-latex, example] (1.25,0.9) -- (1.25,2.5);
-          \draw[-latex, example] (1.25,0.9) -- (4.25,2.5);
-        }\only<2>{
-          \node[structure] at (a1) {$\{...\}$};
-          \node[structure] at (a2) {$\{...\}$};
-          \node[structure] at (a3) {$\{...\}$};
-          \node[structure] at (a4) {$\{...\}$};
-          \node[structure] at (b1) {$\{...\}$};
-          \node[structure] at (b2) {$\{...\}$};
-          \node[structure] at (b3) {$\{...\}$};
-          \node[structure] at (c1) {$\{...\}$};
-          \node[structure] at (c2) {$\{...\}$};
-          \node[structure] at (d1) {$\{...\alert{S?}...\}$};
-        }\only<3-|handout>{
-          \node[structure] at (a1) {$\{A\}$};
-          \node[structure] at (a2) {$\{A\}$};
-          \node[structure] at (a3) {$\{B\}$};
-          \node[structure] at (a4) {$\{B\}$};
-        }\only<4-|handout>{
-          \node[structure] at (b1) {$\emptyset$};
-        }\only<5-|handout>{
-          \node[structure] at (b2) {$\{S, T\}$};
-        }\only<6-|handout>{
-          \node[structure] at (b3) {$\emptyset$};
-        }\only<7-|handout>{
-          \node[structure] at (c1) {$\emptyset$};
-        }\only<7>{
-          \draw[alert] (0.0,2.55)  -- (1.5,1.75);
-          \draw[alert] (0.0,1.75)  -- (3.0,2.55);
-        }\only<8-|handout>{
-          \node<8->[structure] at (c2) {$\{C\}$};
-        }\only<8>{
-          \draw[alert] (1.5,2.55)  -- (3.0,1.75);
-          \draw[alert] (1.5,1.75)  -- (4.5,2.55);
-        }\only<9-|handout>{
-          \node[structure] at (d1) {$\{\alert{S}, T\}$};
-        }\only<9>{
-          \draw[alert] (0,2.55)  -- (1.5,0.95)  ;
-          \draw[alert] (0,1.75)  -- (3.0,1.75)  ;
-          \draw[alert] (0,0.95)  -- (4.5,2.55)  ;
-        }
-        
-      \end{tikzpicture}
+      {\footnotesize
+        \draw[example] (a1) +(-.75,-.4) node[above right] {$a$};
+        \draw[example] (a2) +(-.75,-.4) node[above right] {$a$};    
+        \draw[example] (a3) +(-.75,-.4) node[above right] {$b$};    
+        \draw[example] (a4) +(-.75,-.4) node[above right] {$b$};    
+        \draw[example] (b1) +(-.75,-.4) node[above right] {$aa$};   
+        \draw[example] (b2) +(-.75,-.4) node[above right] {$ab$};   
+        \draw[example] (b3) +(-.75,-.4) node[above right] {$bb$};   
+        \draw[example] (c1) +(-.75,-.4) node[above right] {$aab$};  
+        \draw[example] (c2) +(-.75,-.4) node[above right] {$abb$};  
+        \draw[example] (d1) +(-.75,-.4) node[above right] {$aabb$}; 
+      }
+      
+      \only<1>{
+        \draw[-latex, example] (1.25,0.9) -- (1.25,2.5);
+        \draw[-latex, example] (1.25,0.9) -- (4.25,2.5);
+      }\only<2>{
+        \node[structure] at (a1) {$\{...\}$};
+        \node[structure] at (a2) {$\{...\}$};
+        \node[structure] at (a3) {$\{...\}$};
+        \node[structure] at (a4) {$\{...\}$};
+        \node[structure] at (b1) {$\{...\}$};
+        \node[structure] at (b2) {$\{...\}$};
+        \node[structure] at (b3) {$\{...\}$};
+        \node[structure] at (c1) {$\{...\}$};
+        \node[structure] at (c2) {$\{...\}$};
+        \node[structure] at (d1) {$\{...\alert{S?}...\}$};
+      }\only<3-|handout>{
+        \node[structure] at (a1) {$\{A\}$};
+        \node[structure] at (a2) {$\{A\}$};
+        \node[structure] at (a3) {$\{B\}$};
+        \node[structure] at (a4) {$\{B\}$};
+      }\only<4-|handout>{
+        \node[structure] at (b1) {$\emptyset$};
+      }\only<5-|handout>{
+        \node[structure] at (b2) {$\{S, T\}$};
+      }\only<6-|handout>{
+        \node[structure] at (b3) {$\emptyset$};
+      }\only<7-|handout>{
+        \node[structure] at (c1) {$\emptyset$};
+      }\only<7>{
+        \draw[alert] (0.0,2.55)  -- (1.5,1.75);
+        \draw[alert] (0.0,1.75)  -- (3.0,2.55);
+      }\only<8-|handout>{
+        \node<8->[structure] at (c2) {$\{C\}$};
+      }\only<8>{
+        \draw[alert] (1.5,2.55)  -- (3.0,1.75);
+        \draw[alert] (1.5,1.75)  -- (4.5,2.55);
+      }\only<9-|handout>{
+        \node[structure] at (d1) {$\{\alert{S}, T\}$};
+      }\only<9>{
+        \draw[alert] (0,2.55)  -- (1.5,0.95)  ;
+        \draw[alert] (0,1.75)  -- (3.0,1.75)  ;
+        \draw[alert] (0,0.95)  -- (4.5,2.55)  ;
+      }
+      
+    \end{tikzpicture}
   }
 
   \tf[width=40mm, x=43mm, y=-23mm, anchor=north]{\small%
     \only<-2|handout>{%
       \example{%
         $T[i,j]$ représente le facteur \\
-        $u_{i,j} = u[j], ..., u[j+i]$\\\vspace{2mm}
+        $u_{i,j} = u[j] \cdots u[j+i]$\\\vspace{2mm}
       }%
     }%
     \only<2|handout>{%
       \structure{%
         $T[i,j]$ contient \\
-        $\{N \in \Gamma | N \vdash^\star u_{i,j}\}$
+        $\{N \in \Gamma \mid N \vdash^\star u_{i,j}\}$
       }%
     }%
     \only<4>{%

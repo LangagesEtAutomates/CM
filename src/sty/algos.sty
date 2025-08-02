@@ -21,10 +21,11 @@
 \SetKw{Retourner}{retourner}
 \SetKwFunction{Ecrire}{écrire}
 
-\SetKwIF{Si}{SinonSi}{Sinon}{si}{:}{sinon si}{sinon}{fin si}
-\SetKwFor{Pour}{pour}{:}{fin pour}
-\SetKwFor{Tantque}{tant que}{:}{fin tant que}
-\SetKwRepeat{Faire}{faire :}{tant que}
+\SetKwIF{Si}{SinonSi}{Sinon}{si}{alors}{sinon si}{sinon :}{fin si}
+\SetKwFor{Pour}{pour}{faire}{fin pour}
+\SetKwFor{Tantque}{tant que}{faire}{fin tant que}
+\SetKwRepeat{Faire}{faire}{tant que}
+\SetKwBlock{Repeter}{répéter}{fin}
 
 \SetKw{False}{false}
 \SetKw{True}{true}
@@ -35,13 +36,6 @@
 \SetKw{KwA}{à}
 \SetKw{AvecPas}{avec un pas de}
 \SetKwIF{Variables}{DebutVariables}{Debut}{Variables}{}{b}{Debut}{Fin}
-
-\SetKwFunction{AlgoSearchPerfect}{cherche\_parfait}
-\SetKwFunction{AlgoIsPerfect}{est\_parfait}
-\SetKwFunction{AlgoBoucler}{boucler}
-\SetKwFunction{AlgoCompter}{compter}
-
-
 
 
 \newcommand\KWStyle[1]{\textbf{\structure{#1}}}

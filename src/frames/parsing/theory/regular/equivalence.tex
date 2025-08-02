@@ -7,66 +7,44 @@
 
 \begingroup
 
-\begin{frame}{Équivalence grammaires rationnelles / automates}
-  \tfBlock[top=-2mm]{Théorème -- Générations des grammaires rationnelles}{
+\begin{frame}{Équivalence grammaire rationnelle / automate}
+
+  \tfBlock[top]{Théorème}{
     Soit $\Sigma$ un alphabet et $L \in \mathscr{P}(\Sigma^\star)$ un langage. \\
-    $L$ est généré par une grammaire rationnelle droite ssi L est rationnel. 
-  }
-  
-  \tfBlock<2|handout:1>[anchor=north, y=20mm]{Démonstration -- Rationnel $\Rightarrow$ Généré}{
-    Soit \structure{$L$ rationnel}, reconnu par un AFD \structure{$A = \langle \Sigma, Q, \{i\}, F, \mu \rangle$}.\\ 
-    Alors \alert{$L$ est généré par la grammaire rationnelle droite $\langle \Sigma, Q, i, R \rangle$}, avec
-    $$\alert{R = \left\{ A \rightarrow aB \,\middle\mid\,  A \xrightarrow{a} B \in \mu \right\} \cup \left\{ A \rightarrow a \mid \exists f\in F, A \xrightarrow{a} f \right\}}.$$
+    $L$ est généré par une grammaire rationnelle à droite ssi L est rationnel. 
   }
 
-  \tfBlock<3|handout:2>[anchor=north, y=20mm]{Démonstration -- Généré $\Rightarrow$ Rationnel}{
-    Soit \structure{$L$ généré par une grammaire rationnelle droite $G = \langle \Sigma, \Gamma, S, R \rangle$}.\\
-    Alors \alert{$L$ est reconnu par l'AFN $\langle \Sigma, \Gamma \cup \{F\}, \{S\}, \{F\}, \mu \rangle$}, avec $\alert{F \notin \Gamma}$ et 
-    $$\alert{\mu = \left\{ A \xrightarrow{a} B \,\middle\mid\, A \rightarrow aB \in R \right\} \cup \left\{ A \xrightarrow{a} F \,\middle\mid\, A \rightarrow a \in R \right\}}.$$ 
+  \tfBlock[y=0mm]{Démonstration}{
+    \begin{itemize}
+    \item $L$ est engendré par la grammaire rationnelle à droite \structure{$G = \langle \Sigma, \Gamma, S, \rightarrow_G \rangle$}
+      \footnote[frame,1]{on suppose $G$ sans règle $\structure{A \rightarrow a}$, qui peut toujours être remplacé par \structure{$A \rightarrow a \cdot F$}, avec \structure{$F \rightarrow \varepsilon$}}
+    \item ssi, $L$ est reconnu par l'AFN unitaire $\varepsilon$-libre \structure{$A = \langle \Sigma, \Gamma, \{S\}, F, \rightarrow_A \rangle$}, avec
+    \end{itemize}
+    $$\structure{\begin{array}{r@{~}c@{~}l@{\quad\Leftrightarrow\quad}r@{~}c@{~}l}
+        X & \xrightarrow{a}_A & Y & X & \rightarrow_G & a Y \\
+        X & \in               & F & X & \rightarrow_G & \varepsilon 
+    \end{array}}$$
   }
 
-  
-  \tfExampleBlock[y=-14mm]{Exemple}{}
-  
-  \tf<1-|handout:1>[y=-30mm, x=-.4\textwidth]{\footnotesize
-    \begin{tikzpicture}[smAutomaton]
-      \smState[\smInitial]   (S) at (0, 0.8) {$S$}; 
-      \smState[\smAccepting] (A) at (1, 0.0) {$A$}; 
-      \smState[\smAccepting] (B) at (1, 1.6) {$B$}; 
-      \smPath (S) edge             node[swap] {$a$} (A);
-      \smPath (S) edge             node       {$b$} (B);
-      \smPath (A) edge[loop right] node       {$a$} (A);
-      \smPath (B) edge[loop right] node       {$b$} (B);
+  \tfExampleBlock[y=-25mm]{Exemple}{\vspace{-6mm}
+    $$\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+        S & aA\\
+        A & aA & bB\\
+        B & bB & \varepsilon
+      \end{array}\right.
+    \quad\quad\Leftrightarrow\quad\quad
+    \begin{tikzpicture}[smAutomaton, baseline=(S)]
+      \smState[\smInitial]   (S) at (0.0, 0) {$S$}; 
+      \smState               (A) at (1.5, 0) {$A$}; 
+      \smState[\smAccepting] (B) at (3.0, 0) {$B$}; 
+      \smPath (S) edge             node {$a$} (A);
+      \smPath (A) edge[loop above] node {$a$} (A);
+      \smPath (A) edge             node {$b$} (B);
+      \smPath (B) edge[loop above] node {$b$} (B);
     \end{tikzpicture}
-  }
-
-  \tf<2-|handout:1>[y=-30mm, x=-23mm]{$\Rightarrow$}
-
-  \tf<2-|handout>[y=-30mm, text]{
-    $$\left\{\begin{array}{rcl}
-      S & \rightarrow & aA \mid bB \mid a \mid b\\
-      A & \rightarrow & aA \mid a\\
-      B & \rightarrow & bB \mid b\\
-      \end{array}\right.$$
-  }
-
-  \tf<3-|handout:2>[y=-30mm, x=23mm]{$\Rightarrow$}
-
-  \tf<3-|handout:2>[y=-30mm, x=.4\textwidth]{\footnotesize
-    \begin{tikzpicture}[smAutomaton]
-      \smState[\smInitial]   (S) at (0, 0.8) {$S$}; 
-      \smState               (A) at (1, 0.0) {$A$}; 
-      \smState               (B) at (1, 1.6) {$B$}; 
-      \smState[\smAccepting] (F) at (2, 0.8) {$F$}; 
-      \smPath (S) edge             node       {$a$} (A);
-      \smPath (S) edge             node[swap] {$b$} (B);
-      \smPath (A) edge             node       {$a$} (F);
-      \smPath (B) edge             node[swap] {$b$} (F);
-      \smPath (S) edge             node       {$a, b$} (F);
-      \smPath (A) edge[loop right] node       {$a$} (A);
-      \smPath (B) edge[loop right] node       {$b$} (B);
-    \end{tikzpicture}
+    $$
   }
 
 \end{frame}
+
 \endgroup

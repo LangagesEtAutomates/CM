@@ -1,0 +1,112 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Configurations d'un AFN}
+  
+  \tfBlock[top=-3mm]{Définition -- Configuration d'un AFN}{
+    Soit $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN. \\
+    Une \structure{configuration} de $A$ est un couple \alert{$\langle u, q \rangle$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{mot restant à reconnaître}
+    \item[\alert{$q$}] $\in Q$ \,: \structure{l'état courant dans la simulation}
+    \end{description}
+    Une configuration $\langle u, q \rangle$ est dite \structure{initiale} si \alert{$q\in I$} et \structure{acceptante} si \alert{$u=\varepsilon \land q \in F$}
+  }
+
+  \tfExampleBlock[y=-1mm]{Exemples}{}
+
+  \tf[bottom, left=.33\textwidth]{
+    \centering
+    \example{\large $\langle bbbcc, 3 \rangle$}
+    \\\vspace{1mm}
+    \begin{smArray}[size=5mm]
+      \smCell[\smExample]{b} \smHead[example]
+      \smCell[\smExample]{b}
+      \smCell[\smExample]{b}
+      \smCell[\smExample]{c}
+      \smCell[\smExample]{c}
+    \end{smArray}
+    \\\vspace{1mm}
+    \begin{tikzpicture}[smAutomaton]\footnotesize
+      \smState[\smInitial]                (1) at (0.0,1.2) {$1$}; 
+      \smState[\smAccepting]              (2) at (1.5,1.2) {$2$}; 
+      \smState[\smExample\smInitialAbove] (3) at (0.0,0.0) {$3$}; 
+      \smState[]                          (4) at (1.5,0.0) {$4$}; 
+
+      \smPath (1) edge             node[swap] {$a$}           (2);
+      \smPath (1) edge[loop above] node       {$a$}           (1);
+      \smPath (3) edge             node       {$b$}           (4);
+      \smPath (3) edge[loop left ] node       {$b$}           (3);
+      \smPath (4) edge[loop right] node       {$b$}           (4);
+      \smPath (2) edge[loop above] node       {$c$}           (2);
+      \smPath (4) edge             node       {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+
+  \tf[bottom, width=.33\textwidth]{
+    \centering
+    \example{\large $\langle bcc, 4 \rangle$}
+    \\\vspace{1mm}
+    \begin{smArray}[size=5mm]
+      \smCell{b}
+      \smCell{b}
+      \smCell[\smExample]{b} \smHead[example]
+      \smCell[\smExample]{c}
+      \smCell[\smExample]{c}
+    \end{smArray}
+    \\\vspace{1mm}
+    \begin{tikzpicture}[smAutomaton]\footnotesize
+      \smState[\smInitial]      (1) at (0.0,1.2) {$1$}; 
+      \smState[\smAccepting]    (2) at (1.5,1.2) {$2$}; 
+      \smState[\smInitialAbove] (3) at (0.0,0.0) {$3$}; 
+      \smState[\smExample]      (4) at (1.5,0.0) {$4$}; 
+
+      \smPath (1) edge             node[swap] {$a$}           (2);
+      \smPath (1) edge[loop above] node       {$a$}           (1);
+      \smPath (3) edge             node       {$b$}           (4);
+      \smPath (3) edge[loop left ] node       {$b$}           (3);
+      \smPath (4) edge[loop right] node       {$b$}           (4);
+      \smPath (2) edge[loop above] node       {$c$}           (2);
+      \smPath (4) edge             node       {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+
+  \tf[bottom, right=.33\textwidth]{
+    \centering
+    \example{\large $\langle \varepsilon, 2 \rangle$}
+    \\\vspace{1mm}
+    \begin{smArray}[size=5mm]
+      \smCell[\smNone]{}
+      \smCell{b}
+      \smCell{b}
+      \smCell{b} 
+      \smCell{c}
+      \smCell{c}
+      \smCell[\smNone]{}\smHead[example]
+    \end{smArray}
+    \\\vspace{1mm}
+    \begin{tikzpicture}[smAutomaton]\footnotesize
+      \smState[\smInitial]             (1) at (0.0,1.2) {$1$}; 
+      \smState[\smAccepting\smExample] (2) at (1.5,1.2) {$2$}; 
+      \smState[\smInitialAbove]        (3) at (0.0,0.0) {$3$}; 
+      \smState[]                       (4) at (1.5,0.0) {$4$}; 
+
+      \smPath (1) edge             node[swap] {$a$}           (2);
+      \smPath (1) edge[loop above] node       {$a$}           (1);
+      \smPath (3) edge             node       {$b$}           (4);
+      \smPath (3) edge[loop left ] node       {$b$}           (3);
+      \smPath (4) edge[loop right] node       {$b$}           (4);
+      \smPath (2) edge[loop above] node       {$c$}           (2);
+      \smPath (4) edge             node       {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

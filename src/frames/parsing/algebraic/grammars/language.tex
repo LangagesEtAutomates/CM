@@ -8,25 +8,30 @@
 \begingroup
 
 \begin{frame}{Langages algébriques}
-  Soient \alert{$G = \langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique et \alert{$u \in \Sigma^\star$} un mot sur $\Sigma$. 
-
+  
   \begin{block}{Définitions -- Génération et langage engendré}
+    Soient \alert{$G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire algébrique et \alert{$u \in \Sigma^\star$} un mot sur $\Sigma$. 
     \begin{itemize}
     \item Une \structure{génération de $u$ par $G$} est une dérivation \alert{$S \vdash^\star u$} à partir de $S$.
     \item On dit que \structure{$u$ est généré par $G$} s'il existe une génération de $u$ par $G$. 
-    \item Le \structure{langage engendré} par $G$ $\alert{\mathcal{L}(G)}$ contient les mots générés par $G$ :
+    \item Le \structure{langage engendré} par $G$, $\alert{\mathcal{L}(G)}$, contient les mots générés par $G$ :
       $$\alert{\mathcal{L}(G) = \left\{u\in\Sigma^\star \,\middle\mid\, S \vdash^\star u \right\}}.$$
     \item Un langage engendré par une grammaire algébrique est dit \structure{algébrique}.
     \item L'ensemble des langages algébriques sur $\Sigma$ est noté $\alert{\textsc{alg}_\Sigma}$.
     \end{itemize}
   \end{block}
+
   \begin{exampleblock}{Exemple}
-    Soit \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{rcl} S &\rightarrow & aSb \,|\, B \\ B &\rightarrow & cB \,|\, \varepsilon \end{array}\right\} \right\rangle$}. On a :
+    Soit \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{@{\,}r@{~\rightarrow~}c@{\,\mid\,}c@{}}
+    S & aSb & B \\
+    B & cB & \varepsilon
+    \end{array}\right\} \right\rangle$}. On a :
     \begin{itemize}
-    \item $aacbb \in \mathcal{L}(G)$, car $S \vdash aSb \vdash aaSbb \vdash aaBbb \vdash aacBbb \vdash aacbb$.
-    \item $\mathcal{L}(G) = \{a^n c^m b^n | n, m \in \mathbb{N}\}$ est algébrique. 
+    \item \example{$aacbb \in \mathcal{L}(G)$}, car $S \vdash aSb \vdash aaSbb \vdash aaBbb \vdash aacBbb \vdash aacbb$.
+    \item $\mathcal{L}(G) = \{a^n c^m b^n \mid m, n \in \mathbb{N}\}$ est algébrique. 
     \end{itemize}
   \end{exampleblock}
+
 \end{frame}
 
 \endgroup

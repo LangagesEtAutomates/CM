@@ -10,12 +10,12 @@
 \begin{frame}{Stabilité par miroir}
 
   \vspace{-1mm}
-  Soient $\Sigma$ un alphabet, $u \in \Sigma^\star$ un mot, et $L \in \mathscr{P}(\Sigma^\star)$ un langage.
+  Soient $\Sigma$ un alphabet, $u \in \Sigma^\star$ un mot, et $L \subseteq \Sigma^\star$ un langage.
 
   \begin{block}{Définition -- Miroir}
     \begin{itemize}
-    \item \vspace{-1mm}Le miroir d'un mot $u$ est $u^{\textsc{r}} = u[|u|]\cdots u[1]$.
-    \item \vspace{-1mm}Le miroir d'un langage $L$ est $L^{\textsc{r}} = \{u^{\textsc{r}} \mid u \in L\}$.
+    \item \vspace{-1mm}Le \structure{miroir d'un mot $u$} est \alert{$(u_1\cdots u_n)^{\textsc{r}} = u_n \cdots u_1$}
+    \item \vspace{-1mm}Le \structure{miroir d'un langage $L$} est \alert{$L^{\textsc{r}} = \left\{u^{\textsc{r}} \,\middle\mid\, u \in L\right\}$}
     \end{itemize}
   \end{block}
   
@@ -29,48 +29,51 @@
 
     \vspace{3mm}
     $m \eqdef \left\{\begin{array}{rcl}
-      \textsc{reg}_\Sigma & \rightarrow & \textsc{reg}_\Sigma\\
-      a & \mapsto & a\\
-      u \mid v & \mapsto & m(u) \mid m(v)\\
-      u \cdot v & \mapsto & m(v) \cdot m(u)\\
-      u^\star & \mapsto & m(u)^\star\\
-      \end{array}\right.$
+    \textsc{reg}_\Sigma & \rightarrow & \textsc{reg}_\Sigma\\
+    a & \mapsto & a\\
+    u \mid v & \mapsto & m(u) \mid m(v)\\
+    u \cdot v & \mapsto & m(v) \cdot m(u)\\
+    u^\star & \mapsto & m(u)^\star\\
+    \end{array}\right.$
 
     $\forall u \in \textsc{reg}_\Sigma, \mathcal{L}(m(u)) = (\mathcal{L}(u))^{\textsc{r}}$
     
-    \vspace{3mm}\example{Exemple :}\\ $(ab^\star | ba^\star)^{\textsc{r}} = b^\star a | a^\star b$
-      
+    \vspace{3mm}\example{Exemple :}\\ $(ab^\star \mid ba^\star)^{\textsc{r}} = b^\star a \mid a^\star b$
+    
   \end{minipage}%
   \begin{minipage}[t]{.5\textwidth}
     \structure{Preuve : Automates}
 
     \vspace{3mm}
-    Soit $A = \langle \Sigma, Q, I, F, \mu \rangle$ un AFN.
-    
-    Posons $\mu' = \left\{ q' \xrightarrow{a} q \,\middle\mid\, q \xrightarrow{a} q' \in \mu \right\}$.
-    
-    On a $\mathcal{L}(\langle \Sigma, Q, F, I, \mu' \rangle) = (\mathcal{L}(A))^{\textsc{r}}.$
-    
+    Soit $\example{A = \langle \Sigma, Q, I, F, \rightarrow \rangle}$ un AFN.\\
+    On a $(\mathcal{L}(A))^{\textsc{r}} = \mathcal{L}(\alert{\langle \Sigma, Q, F, I, \rightarrow_1 \rangle})$, où
 
-      \vspace{3mm}\example{Exemple :}
-      
-      \scalebox{.7}{\begin{tikzpicture}[smAutomaton]
-          \smState[\smAccepting]    (A) at (0.0, 0.0) {$A$}; 
-          \smState[\smInitialAbove] (S) at (1.5, 0.0) {$S$}; 
-          \smState[\smAccepting]    (B) at (3.0, 0.0) {$B$}; 
-          \smPath (S) edge             node {$a$} (A);
-          \smPath (S) edge             node {$b$} (B);
-          \smPath (A) edge[loop below] node {$a$} (A);
-          \smPath (B) edge[loop below] node {$b$} (B);
+    \vspace{-2mm}
+    $$\alert{q' \xrightarrow{a}_1 q \Leftrightarrow q \xrightarrow{a} q'}$$
 
-          \smState[\smInitialAbove] (A2) at (4.5, 0.0) {$A$}; 
-          \smState[\smAccepting]    (S2) at (6.0, 0.0) {$S$}; 
-          \smState[\smInitialAbove] (B2) at (7.5, 0.0) {$B$}; 
-          \smPath (A2) edge             node {$a$} (S2);
-          \smPath (B2) edge             node {$b$} (S2);
-          \smPath (A2) edge[loop below] node {$a$} (A2);
-          \smPath (B2) edge[loop below] node {$b$} (B2);
-      \end{tikzpicture}}
+    \example{Exemple :}
+    
+    \begin{tikzpicture}[smAutomaton]\scriptsize
+      \example{
+        \smState[\smAccepting]    (A) at (0, 0) {$A$}; 
+        \smState[\smInitialAbove] (S) at (1, 0) {$S$}; 
+        \smState[\smAccepting]    (B) at (2, 0) {$B$}; 
+        \smPath (S) edge             node[swap] {$a$} (A);
+        \smPath (S) edge             node {$b$} (B);
+        \smPath (A) edge[loop below] node {$a$} (A);
+        \smPath (B) edge[loop below] node {$b$} (B);
+      }
+      \alert{
+        \smState[\smInitialAbove] (A2) at (3, 0) {$A$}; 
+        \smState[\smAccepting]    (S2) at (4, 0) {$S$}; 
+        \smState[\smInitialAbove] (B2) at (5, 0) {$B$}; 
+        \smPath (A2) edge             node {$a$} (S2);
+        \smPath (B2) edge             node[swap] {$b$} (S2);
+        \smPath (A2) edge[loop below] node {$a$} (A2);
+        \smPath (B2) edge[loop below] node {$b$} (B2);
+      }
+    \end{tikzpicture}
   \end{minipage}
 \end{frame}
+
 \endgroup

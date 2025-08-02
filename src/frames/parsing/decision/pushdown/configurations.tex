@@ -10,10 +10,10 @@
 \begin{frame}{Configurations d'un automate à pile}
   
   \tf[top, text]{
-    Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \mu \rangle$ un automate à pile. 
+    Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \rightarrow \rangle$ un automate à pile. 
     \begin{block}{Définition -- Configuration}
       Une \structure{configuration} de $A$ est un triplet \alert{$\langle u, q, \pi \rangle$} tel que :
-      \begin{description}
+      \begin{description}[xxxx]
       \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{mot restant à reconnaître}
       \item[\alert{$q$}] $\in Q$ : \structure{l'état courant dans la simulation}
       \item[\alert{$\pi$}] $\in \Pi^\star$ : \structure{l'état courant de la pile}

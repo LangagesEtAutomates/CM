@@ -15,8 +15,8 @@
 
   \tfBlock<2-|handout>[y=8mm]{Preuve}{
     \begin{itemize}
-    \item Il existe $\example{A = \langle \Sigma, Q, I, F, \mu \rangle}$ \alert{déterministe complet} qui reconnaît $L$.
-    \item $\overline{L}$ est reconnu par $\structure{\overline{A} = \langle \Sigma, Q, I, Q \setminus F, \mu \rangle}$.
+    \item Il existe $\example{A = \langle \Sigma, Q, I, F, \rightarrow \rangle}$ \alert{déterministe complet} qui reconnaît $L$.
+    \item $\overline{L}$ est reconnu par $\structure{\overline{A} = \langle \Sigma, Q, I, Q \setminus F, \rightarrow \rangle}$.
     \end{itemize}
   }
 
@@ -24,7 +24,7 @@
 
   \tf[bottom,x=-.25\textwidth]{
     \begin{tikzpicture}[smAutomaton, example]
-      \node at (1.0,1.3) {$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 1 [2] \}$};
+      \node at (1.0,1.3) {$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 1 \pmod{2} \}$};
       \smState[\smInitial]   (a) at (0.0,0.0) {$0$};
       \smState[\smAccepting] (b) at (2.0,0.0) {$1$};
       
@@ -37,7 +37,7 @@
   
   \tf<2-|handout>[bottom,x=.25\textwidth]{
     \begin{tikzpicture}[smAutomaton, structure]
-      \node at (1.0,1.3) {$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 0 [2] \}$};
+      \node at (1.0,1.3) {$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 0 \pmod{2} \}$};
       \smState[\smInitial\smAccepting]   (a) at (0.0,0.0) {$0$};
       \smState                           (b) at (2.0,0.0) {$1$};
       
@@ -49,4 +49,5 @@
   }
   
 \end{frame}
+
 \endgroup

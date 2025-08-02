@@ -8,34 +8,37 @@
 \begingroup
 
 \begin{frame}{Dérivations}
-  Soit \alert{$\langle \Sigma, \Gamma, S, R \rangle$} une grammaire algébrique. 
 
   \begin{block}{Définitions -- Dérivation}
-    Soient $u, v \in (\Sigma \cup \Gamma)^\star$. 
+    Soient \structure{$\langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire algébrique et \structure{$u, v \in (\Sigma \cup \Gamma)^\star$} deux mots. 
 
     \begin{itemize}
     \item On dit que \structure{$u$ se dérive directement en $v$}, noté $\alert{u \vdash v}$, si :
 
-      \vspace{-2mm}
-      $$\alert{\exists \structure{x}, \structure{y} \in (\Sigma \cup \Gamma)^\star, \exists \example{A \rightarrow \alpha} \in R,
-        u = \structure{x} \cdot \example{A} \cdot \structure{y} \land v = \structure{x} \cdot \example{\alpha} \cdot \structure{y}}$$
+      $$\alert{\exists x, y, A, \alpha \in (\Sigma \cup \Gamma)^\star,~
+        \example{A \rightarrow \alpha} \land u = \structure{x} \cdot \example{A} \cdot \structure{y} \land v = \structure{x} \cdot \example{\alpha} \cdot \structure{y}}$$
 
-    \item On note parfois \structure{$x A y \vdash_{A \rightarrow \alpha} x \alpha y$} pour indiquer la règle utilisée.
+    \item On note parfois \structure{$x \example{A} y \alert{\vdash_{A \rightarrow \alpha}} x \example{\alpha} y$} pour indiquer la règle utilisée.
 
     \item On dit que \structure{$u$ se dérive en $v$} si \alert{$u \vdash^\star v$},\\
       où \alert{$\vdash^\star$ est la fermeture transitive et réflexive de $\vdash$}.
 
     \end{itemize}
   \end{block}
-  \begin{exampleblock}{Exemple}
-    Soit \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{rcl} S &\rightarrow & aSb \,|\, B \\ B &\rightarrow & cB \,|\, \varepsilon \end{array}\right\} \right\rangle$}. On a :
 
+  \begin{exampleblock}{Exemple}
+    Soit \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{@{\,}r@{~\rightarrow~}c@{\,\mid\,}c@{}}
+    S & aSb & B \\
+    B & cB & \varepsilon
+    \end{array}\right\} \right\rangle$}. On a :
+
+    \vspace{2mm}
     \begin{itemize}
-    \item $\structure{a}\alert{S}\structure{b} \vdash_{S \rightarrow aSb} \structure{a}\alert{aSb}\structure{b}$
-    \item $aSb \vdash aaSbb \vdash aaBbb \vdash aacBbb \vdash aaccBbb$
+    \item $\structure{a}\example{S}\structure{b} \vdash_{S \rightarrow aSb} \structure{a}\example{aSb}\structure{b} \vdash aaBbb \vdash aacBbb \vdash aaccBbb$
     \item $aSb \vdash^\star aSb \vdash^\star aaccBbb$
     \end{itemize}
   \end{exampleblock}
+
 \end{frame}
 
 \endgroup

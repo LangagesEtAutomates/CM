@@ -17,21 +17,22 @@
   \vspace{-2mm}
   \begin{block}{Démonstration}
     \begin{itemize}
-    \item Introduction des grammaires linéaires/rationnelles droites/gauches
+    \item Introduction des grammaires rationnelles
       \begin{itemize}
       \item Preuve de l'équivalence avec les automates finis
       \end{itemize}
-    \item L'inclusion est stricte, car $\{a^n b^n | n\in \mathbb{N} \} \in \textsc{alg}_\Sigma \setminus \textsc{rat}_\Sigma$
+    \item L'inclusion est stricte, car $\{a^n b^n \mid  n\in \mathbb{N} \} \in \textsc{alg}_\Sigma \setminus \textsc{rat}_\Sigma$
     \end{itemize}
   \end{block}
+
   \begin{exampleblock}{Exemple}
     Le langage \example{$a^\star b^\star$} est engendré par
-    $$\example{\left\langle \{a, b\}, \{S, A\}, S, \left\{ \begin{array}{rcl}
-        S &\rightarrow& aS | A\\
-        A &\rightarrow& bA | \varepsilon
+    $$\example{\left\langle \{a, b\}, \{S, A\}, S, \left\{ \begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+        S & aS & A\\
+        A & bA & \varepsilon
       \end{array}\right\}\right\rangle}$$
-
   \end{exampleblock}
   
 \end{frame}
+
 \endgroup

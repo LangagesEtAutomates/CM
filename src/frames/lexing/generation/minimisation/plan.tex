@@ -12,9 +12,9 @@
   \tfBlock[top=-5mm]{Problème}{
     \begin{description}
     \item[Entrée :] une expression rationnelle $r$
-    \item[Sortie :] un \alert{analyseur lexical} pour le langage $\mathcal{S}(r)$
+    \item[Sortie :] un \alert{analyseur lexical} pour le langage $\mathcal{L}(r)$
       \begin{itemize}
-      \item Programme qui décide si son entrée appartient à $\mathcal{S}(r)$
+      \item Programme qui décide si son entrée appartient à $\mathcal{L}(r)$
       \end{itemize}
     \end{description}
   }
@@ -35,9 +35,9 @@
       \path[-latex, structure,dashed] (exp) edge                                                                        (lex);
       \path[-latex, structure]        (exp) edge[bend left] node[right, align=left] {Algorithme de\\Thompson}           (nfa);
       \path[-latex, structure]        (nfa) edge[bend left] node[left, align=right] {Lemme\\d'Arden}                    (exp);
-      \path[-latex, structure]        (nfa) edge            node[align=center]      {Sous-ensembles de\\Rabin \& Scott} (dfa);
+      \path[-latex, structure]        (nfa) edge            node[align=center]      {Sous-ensembles\\de Rabin \& Scott} (dfa);
       \path[-latex, alert    ]        (dfa) edge            node[align=center]      {Méthode de\\Moore}                 (min);
-      \path[-latex, structure]        (min) edge            node[left, align=right] {Transcription}                     (lex);
+      \path[-latex,          ]        (min) edge            node[left, align=right] {Transcription}                     (lex);
     \end{tikzpicture}
   }
   

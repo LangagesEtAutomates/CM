@@ -1,0 +1,47 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Construction des expressions rationnelles}
+  
+  Les expressions rationnelles sur un alphabet $\Sigma$ sont construites par induction
+  
+  \begin{description}[xxxxxxxxxxx]
+  \item[$\emptyset$ :] représente le langage vide \alert{$\emptyset$}
+  \item[$\varepsilon$ :] représente le langage neutre \alert{$\{\varepsilon\}$}
+  \item[$a$ :] représente le langage \alert{$\{a\}$}, pour tout $a\in \Sigma$
+  \item[$\mathit{reg}_1 \cdot \mathit{reg}_2$ :] représente le langage \alert{$\mathcal{L}(\mathit{reg}_1) \cdot \mathcal{L}(\mathit{reg}_2)$}
+  \item[$\mathit{reg}_1 \mid \mathit{reg}_2$ :] représente le langage \alert{$\mathcal{L}(\mathit{reg}_1) \cup \mathcal{L}(\mathit{reg}_2)$}
+  \item[$\mathit{reg}^\star$ :] représente le langage \alert{$\mathcal{L}(\mathit{reg})^\star$}
+  \end{description}
+
+  Où \structure{$\mathcal{L}(\mathit{reg})$} est le langage représenté par l'expression rationnelle $\mathit{reg}$
+
+  \pause
+  \begin{block}{Notations}
+    \begin{itemize}
+    \item L'opérateur \alert{$\cdot$} est le plus souvent \structure{omis}
+    \item On utilise les règles de \alert{préséance} : \quad
+      \structure{1.} \alert{${}^\star$} \quad
+      \structure{2.} \alert{$\cdot$}   \quad
+      \structure{3.} \alert{$|$}
+      \begin{center}
+        Par exemple, \example{$\mathcal{L}(ab^\star\mid cd^\star) = \mathcal{L}(((a \cdot b^\star) \mid (c \cdot d^\star)))$}
+      \end{center}
+    \item D'autres constructions peuvent être ajoutées \emph{(sucre syntaxique)}
+      \begin{center}
+        \structure{$\mathit{reg}^+ \eqdef (\mathit{reg} \cdot \mathit{reg}^\star)$} \quad\quad
+        \structure{$\mathit{reg}^? \eqdef (\mathit{reg} \mid \varepsilon)$}
+      \end{center}
+    \item Une expression rationnelle \structure{canonique} n'utilise que les opérateurs \alert{$.$}, \alert{$|$} et \alert{${}^\star$}
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

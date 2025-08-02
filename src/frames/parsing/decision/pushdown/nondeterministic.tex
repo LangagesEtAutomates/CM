@@ -8,16 +8,17 @@
 \begingroup
 
 \begin{frame}{Langages algébriques non-déterministes}
+  
   Soit $\Sigma = \{a, b\}$.
   
   \begin{exampleblock}{Exemples et contre-exemples}
     \begin{itemize}
-    \item Les langages $\example{\{ a^n b^n | n\in \mathbb{N}\}}$ et $\example{\{ a^n b^{2n} | n\in \mathbb{N}\}}$ sont déterministes.
-    \item\vspace{2mm} Leur union $\example{\{ a^n b^n | n\in \mathbb{N}\} \cup \{ a^n b^{2n} | n\in \mathbb{N}\}}$ est non-déterministe.
+    \item Les langages $\example{\{ a^n b^n \mid n\in \mathbb{N}\}}$ et $\example{\{ a^n b^{2n} \mid n\in \mathbb{N}\}}$ sont déterministes.
+    \item\vspace{2mm} Leur union $\example{\{ a^n b^n \mid n\in \mathbb{N}\} \cup \{ a^n b^{2n} \mid n\in \mathbb{N}\}}$ est non-déterministe.
       \begin{itemize}
-      \item Faut-il dépiler à chaque fois ou une fois sur deux ? 
+      \item Faut-il dépiler à chaque $b$ ou un $b$ sur deux ? 
       \end{itemize}
-    \item\vspace{2mm} Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$ est déterministe.
+    \item\vspace{2mm} Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} \mid w\in \Sigma^\star\}}$ est déterministe.
       \begin{center}
         \begin{tikzpicture}[structure, smAutomaton, initial text=$\diamond$]
           \smState[\smInitial]   (b) at (0.0, 0.0) {$1$}; 
@@ -28,9 +29,10 @@
         \end{tikzpicture}\\
       \end{center}
     \item\vspace{2mm} Par contre, le langage des palindromes est non-déterministe :
-      $$\example{\{ w \cdot w^{\textsc{r}} | w\in \Sigma^\star\}}$$
+      $$\example{\{ w \cdot w^{\textsc{r}} \mid w\in \Sigma^\star\}}$$
     \end{itemize}
   \end{exampleblock}
+
 \end{frame}
 
 \endgroup

@@ -1,0 +1,35 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Opérations sur les langages}
+
+  Soit $\Sigma$ un alphabet, et $L, M \in \mathscr{P}(\Sigma^\star)$ deux langages. 
+  
+  \begin{block}{Rappel -- Opérations ensemblistes}
+    \begin{description}[Fermeture de Kleene :]
+    \item[Union :] $\alert{L \cup M} \eqdef \{ x \in \Sigma^\star \mid x \in L \lor x \in M\}$
+    \item[Intersection :] $\alert{L \cap M} \eqdef \{ x \in \Sigma^\star \mid x \in L \land x \in M\}$
+    \item[Différence :] $\alert{L \setminus M} \eqdef \{ x \in \Sigma^\star \mid x \in L \land x \notin M\}$
+    \item[Complémentaire :] $\alert{\overline{L}} \eqdef \{ x \in \Sigma^\star \mid x \notin L\} = \Sigma^\star \setminus L$
+    \end{description}
+  \end{block}
+
+  \begin{block}{Définition -- Concaténation des langages}
+    \begin{description}[Fermeture de Kleene :]
+    \item[Concaténation :] $\alert{L \cdot M} \eqdef \{ x \cdot y \mid x \in L \land y \in M\}$ (parfois noté $LM$)
+    \item[Puissance :] $L^n = L \cdots L$ ($L$ est répété $n$ fois) :
+      $$\alert{L^0} \eqdef \{\varepsilon\} \quad\text{et}\quad \alert{L^{n+1}} \eqdef L^n \cdot L$$
+    \item[Fermeture de Kleene :] $\alert{L^\star} \eqdef \bigcup_{i\in \mathbb{N}} L^i$
+    \item[Fermeture positive :] $\alert{L^+} \eqdef \bigcup_{i>0} L^i = L^\star \cdot L = L \cdot L^\star$
+    \end{description}
+  \end{block}
+
+\end{frame}
+
+\endgroup

@@ -8,14 +8,21 @@
 \begingroup
 
 \begin{frame}{Exemple}
+
   \begin{exampleblock}{Représentation mathématique}
     \vspace{-2mm}
-    $$\left\langle \{a, b, c\}, \{S, B\}, S, \left\{ \begin{array}{c}\langle S, aSb \rangle, \langle S, B \rangle,\\ \langle B, cB \rangle, \langle B, \varepsilon \rangle \end{array} \right\} \right\rangle$$
+    $$\left\langle \{a, b, c\}, \{S, B\}, S, \left\{ \begin{array}{@{\langle}c@{,\,}c@{\rangle, \langle}c@{,\,}c@{\rangle}l@{}}
+      S&aSb&S&B&,\\
+      B&cB&B&\varepsilon
+    \end{array} \right\} \right\rangle$$
   \end{exampleblock}
 
   \begin{exampleblock}{Représentation informelle}
     \vspace{-2mm}
-    $$\left\{\begin{array}{rcl} S &\rightarrow & aSb | B \\ B &\rightarrow & cB | \varepsilon \end{array}\right.$$
+    $$\left\{\begin{array}{@{\,}r@{~\rightarrow~}c@{\,\mid\,}c@{}}
+    S & aSb & B \\
+    B & cB & \varepsilon
+    \end{array}\right.$$
   \end{exampleblock}
 
 
@@ -28,9 +35,11 @@
     \end{itemize}
 
     \vspace{-2mm}
-    $$\left\{\begin{array}{lll} \text{\textless$S$\textgreater} & \Coloneqq & \text{``$a$" \textless$S$\textgreater{} ``$b$"} \,|\, \textless$B$\textgreater\\
-    \text{\textless$B$\textgreater} & \Coloneqq & \text{``$c$" \textless$B$\textgreater} \,|\, \text{`` "}
-    \end{array}\right.$$
+    $$\begin{array}{lll} \text{\textless$S$\textgreater} & \Coloneqq & \text{``$a$'' \textless$S$\textgreater{} ``$b$''} \mid \textless$B$\textgreater\\
+    \text{\textless$B$\textgreater} & \Coloneqq & \text{``$c$'' \textless$B$\textgreater} \mid \text{`` ''}
+    \end{array}$$
   \end{exampleblock}
+
 \end{frame}
+
 \endgroup

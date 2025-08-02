@@ -6,221 +6,213 @@
 \part{Introduction}
  
  
-\section{Introduction}
-
-%\subsection{Notion de langages formels}
-%\input{languages/introduction/examples/definitions}
-%\input{languages/introduction/examples/natural_language}
-%\input{languages/introduction/examples/programming_language}
-%\input{languages/introduction/examples/compiler}
-% 
-%\subsection{Langages et problèmes de décision}
-%\input{languages/introduction/decision/primality}
-%\input{languages/introduction/decision/problem}
-%\input{languages/introduction/decision/real_numbers}
-%\input{languages/introduction/decision/hierarchy}
-% 
-%\subsection{Automates}
-%\input{languages/introduction/automata/automata}
-%\input{languages/introduction/automata/compiler}
-% 
-%\subsection{Généralités} 
-%\input{languages/introduction/generalities/objectives}
-%\input{languages/introduction/generalities/bibliography}
+\section{Objectifs}
  
-% 
-% 
-%\section{Mots et langages formels}
-% 
-%\subsection{Notion d'alphabet}
-%\input{languages/languages/alphabet/alphabet}
-% 
-%\subsection{Notion de mot}
-%\input{languages/languages/word/word}
-%\input{languages/languages/word/length}
-%\input{languages/languages/word/concatenation}
-%\input{languages/languages/word/monoid}
-%\input{languages/languages/word/decomposition}
-%\input{languages/languages/word/order}
-% 
-%\subsection{Notion de langage}
-%\input{languages/languages/language/language}
-%\input{languages/languages/language/operations}
-%\input{languages/languages/language/algebra}
-% 
-% 
+\subsection{Notion de langages formels}
+\input{introduction/introduction/examples/definitions}
+\input{introduction/introduction/examples/natural_language}
+\input{introduction/introduction/examples/programming_language}
+\input{introduction/introduction/examples/compiler}
+ 
+\subsection{Langages et problèmes de décision}
+\input{introduction/introduction/decision/primality}
+\input{introduction/introduction/decision/problem}
+\input{introduction/introduction/decision/real_numbers}
+\input{introduction/introduction/decision/hierarchy}
+ 
+\subsection{Automates}
+\input{introduction/introduction/automata/automata}
+\input{introduction/introduction/automata/compiler}
+ 
+\subsection{Généralités} 
+\input{introduction/introduction/generalities/objectives}
+\input{introduction/introduction/generalities/bibliography}
+ 
+ 
+ 
+\section{Mots et langages formels}
+ 
+\subsection{Notion de mot}
+\input{introduction/languages/word/alphabet}
+\input{introduction/languages/word/word}
+\input{introduction/languages/word/length}
+\input{introduction/languages/word/concatenation}
+\input{introduction/languages/word/monoid}
+\input{introduction/languages/word/decomposition}
+\input{introduction/languages/word/order}
+ 
+\subsection{Notion de langage}
+\input{introduction/languages/language/language}
+\input{introduction/languages/language/operations}
+\input{introduction/languages/language/algebra}
+ 
+ 
 \part{Analyse Lexicale}
  
  
 \section{Langages et expressions rationnels}
  
-\subsection{Introduction}
-%\input{lexing/regexp/introduction/introduction}
-%\input{lexing/regexp/introduction/example}
-%\input{lexing/regexp/introduction/regexp}
+\subsection{Expressions rationnelles}
+\input{lexing/regexp/regexp/introduction}
+\input{lexing/regexp/regexp/example}
+\input{lexing/regexp/regexp/regexp}
+\input{lexing/regexp/regexp/syntax_semantics}
+\input{lexing/regexp/regexp/regdefs}
  
-%\subsection{Expressions rationnelles}
-%\input{lexing/regexp/regexp/syntax}
-%\input{lexing/regexp/regexp/semantics}
-%\input{lexing/regexp/regexp/sugar}
-% 
-%\subsection{Langages rationnels}
-%\input{lexing/regexp/languages/definition}
-%\input{lexing/regexp/languages/example}
-%\input{lexing/regexp/languages/equivalence1}
-%\input{lexing/regexp/languages/equivalence2}
-% 
-%\subsection{Définitions rationnelles}
-%\input{lexing/regexp/definitions/example}
-%\input{lexing/regexp/definitions/definition}
-% 
-%\section{Automates finis}
-% 
-%\subsection{Reconnaissance d'un langage rationnel}
-%\input{lexing/automata/introduction/plan}
-%\input{lexing/automata/introduction/lexer}
-%\input{lexing/automata/introduction/datastructure}
-%\input{lexing/automata/introduction/goal}
-% 
-%\subsection{Définition des automates finis}
-%\input{lexing/automata/definition/non_determinism}
-%\input{lexing/automata/definition/interpretation}
-%\input{lexing/automata/definition/modelisation}
-%\input{lexing/automata/definition/example}
-\input{lexing/automata/definition/deterministic}
-\input{lexing/automata/definition/complete}
-% 
-%\subsection{Langage reconnu par un automate}
-%\input{lexing/automata/recognition/configuration}
-%\input{lexing/automata/recognition/between_language}
-%\input{lexing/automata/recognition/accepted}
-%\input{lexing/automata/recognition/equivalence}
-%\input{lexing/automata/recognition/right_language}
-%\input{lexing/automata/recognition/pruned}
-%\input{lexing/automata/recognition/pruning}
-% 
-%\subsection{Des automates aux expressions rationnelles}
-%\input{lexing/automata/arden/language}
-%\input{lexing/automata/arden/equations}
-%\input{lexing/automata/arden/arden}
-%\input{lexing/automata/arden/proof}
-%\input{lexing/automata/arden/solution}
-%\input{lexing/automata/arden/application}
-% 
-%\section{Des expressions rationnelles aux automates}
-% 
-%\subsection{Génération d'un automate fini non-déterministe}
-%\input{lexing/generation/thompson/plan}
-%\input{lexing/generation/thompson/generation}
-%\input{lexing/generation/thompson/normalised}
-%\input{lexing/generation/thompson/normalisation}
-%\input{lexing/generation/thompson/thompson}
-%\input{lexing/generation/thompson/example}
-% 
-%\subsection{Déterminisation d'un automate fini}
-%\input{lexing/generation/determinisation/plan}
-%\input{lexing/generation/determinisation/equivalence}
-%\input{lexing/generation/determinisation/interpretation}
-%\input{lexing/generation/determinisation/algorithm}
-% 
-%\subsection{Minimisation d'un automate fini déterministe}
-%\input{lexing/generation/minimisation/plan}
-%\input{lexing/generation/minimisation/minimality}
-%\input{lexing/generation/minimisation/example}
-%\input{lexing/generation/minimisation/ideas}
-%\input{lexing/generation/minimisation/moore}
-%\input{lexing/generation/minimisation/example2}
-%\input{lexing/generation/minimisation/equivalence}
-%\input{lexing/generation/minimisation/conclusion}
-% 
-%\section{Expressivité des langages rationnels}
-% 
-%\subsection{Stabilité du formalisme}
-%\input{lexing/limits/stability/complement}
-%\input{lexing/limits/stability/intersection}
-%\input{lexing/limits/stability/mirror}
-% 
-%\subsection{Lemme de l'étoile}
-%\input{lexing/limits/pumping/pumping}
-%\input{lexing/limits/pumping/proof}
-%\input{lexing/limits/pumping/example}
-% 
-% 
+\subsection{Langages rationnels}
+\input{lexing/regexp/languages/definition}
+\input{lexing/regexp/languages/example}
+\input{lexing/regexp/languages/equivalence1}
+\input{lexing/regexp/languages/equivalence2}
+ 
+\section{Automates finis}
+ 
+\subsection{Reconnaissance d'un langage rationnel}
+\input{lexing/automata/intuition/plan}
+\input{lexing/automata/intuition/lexer}
+\input{lexing/automata/intuition/goal}
+\input{lexing/automata/intuition/non_determinism}
+\input{lexing/automata/intuition/interpretation}
+ 
+\subsection{Définition des automates finis}
+\input{lexing/automata/definition/modelisation}
+\input{lexing/automata/definition/example}
+\input{lexing/automata/definition/configuration}
+\input{lexing/automata/definition/action}
+\input{lexing/automata/definition/language}
+ 
+\subsection{Premiers algorithmes sur les automates}
+\input{lexing/automata/recognition/equivalence}
+\input{lexing/automata/recognition/complete}
+\input{lexing/automata/recognition/pruned}
+\input{lexing/automata/recognition/pruning}
+ 
+\subsection{Langages reconnaissables par automate}
+\input{lexing/automata/arden/language}
+\input{lexing/automata/arden/right_language}
+\input{lexing/automata/arden/equations}
+\input{lexing/automata/arden/arden}
+\input{lexing/automata/arden/proof}
+\input{lexing/automata/arden/solution}
+\input{lexing/automata/arden/application}
+ 
+\section{Des expressions rationnelles aux automates}
+ 
+\subsection{Génération d'un automate fini non-déterministe}
+\input{lexing/generation/thompson/plan}
+\input{lexing/generation/thompson/generation}
+\input{lexing/generation/thompson/normalised}
+\input{lexing/generation/thompson/normalisation}
+\input{lexing/generation/thompson/thompson}
+\input{lexing/generation/thompson/example}
+ 
+\subsection{Déterminisation d'un automate fini}
+\input{lexing/generation/determinisation/plan}
+\input{lexing/generation/determinisation/deterministic}
+\input{lexing/generation/determinisation/equivalence}
+\input{lexing/generation/determinisation/interpretation}
+\input{lexing/generation/determinisation/algorithm}
+ 
+\subsection{Minimisation d'un automate fini déterministe}
+\input{lexing/generation/minimisation/plan}
+\input{lexing/generation/minimisation/minimality}
+\input{lexing/generation/minimisation/example}
+\input{lexing/generation/minimisation/moore}
+\input{lexing/generation/minimisation/example2}
+\input{lexing/generation/minimisation/equivalence}
+ 
+\subsection{Transcription d'un automate fini déterministe}
+\input{lexing/generation/transcription/plan}
+\input{lexing/generation/transcription/implementation}
+\input{lexing/generation/transcription/conclusion}
+ 
+\section{Expressivité des langages rationnels}
+ 
+\subsection{Stabilité du formalisme}
+\input{lexing/limits/stability/complement}
+\input{lexing/limits/stability/intersection}
+\input{lexing/limits/stability/mirror}
+ 
+\subsection{Lemme de l'étoile}
+\input{lexing/limits/pumping/pumping}
+\input{lexing/limits/pumping/proof}
+\input{lexing/limits/pumping/example}
+ 
+ 
 \part{Analyse Syntaxique}
  
  
 \section{Langages algébriques}
  
 \subsection{Introduction}
-%\input{parsing/algebraic/introduction/introduction}
-%\input{parsing/algebraic/introduction/french}
-%\input{parsing/algebraic/introduction/regexp}
+\input{parsing/algebraic/introduction/introduction}
+\input{parsing/algebraic/introduction/french}
+\input{parsing/algebraic/introduction/regexp}
  
-%\subsection{Grammaires algébriques}
-%\input{parsing/algebraic/grammars/model}
-%\input{parsing/algebraic/grammars/example}
-%\input{parsing/algebraic/grammars/derivation}
-%\input{parsing/algebraic/grammars/language}
-%\input{parsing/algebraic/grammars/examples}
-% 
-%\subsection{Structure arborescente des langages algébriques}
-%\input{parsing/algebraic/tree/cst}
-%\input{parsing/algebraic/tree/ast}
-%\input{parsing/algebraic/tree/ambiguity}
-%\input{parsing/algebraic/tree/associativity}
-%\input{parsing/algebraic/tree/priority}
-%\input{parsing/algebraic/tree/rational}
-% 
-%\section{Algorithmes de décision}
-% 
-%\subsection{Algorithme Cocke-Younger-Kasami}
-%\input{parsing/decision/CYK/strategy}
-%\input{parsing/decision/CYK/CNF}
-%\input{parsing/decision/CYK/CNF_transform}
-%\input{parsing/decision/CYK/CYK}
-% 
-%\subsection{Automates à pile}
-%\input{parsing/decision/pushdown/generalized}
-%\input{parsing/decision/pushdown/recursion}
-%\input{parsing/decision/pushdown/modelisation}
-%\input{parsing/decision/pushdown/example}
-%\input{parsing/decision/pushdown/configurations}
-%\input{parsing/decision/pushdown/actions}
-%\input{parsing/decision/pushdown/accepted}
-%\input{parsing/decision/pushdown/equivalence}
-%\input{parsing/decision/pushdown/deterministic}
-%\input{parsing/decision/pushdown/determinisation}
-%\input{parsing/decision/pushdown/nondeterministic}
-% 
-%\subsection{Parsers LR}
-%\input{parsing/decision/LRparser/strategies}
-%\input{parsing/decision/LRparser/ancbn}
-%\input{parsing/decision/LRparser/states}
-%\input{parsing/decision/LRparser/dfa}
-%\input{parsing/decision/LRparser/pa}
-%\input{parsing/decision/LRparser/conflicts}
-%\input{parsing/decision/LRparser/slr}
-% 
-%\section{Expressivité des langages algébriques}
-% 
-%\subsection{Grammaires rationnelles}
-%\input{parsing/theory/regular/theorem}
-%\input{parsing/theory/regular/right_linear}
-%\input{parsing/theory/regular/transformation}
-%\input{parsing/theory/regular/equivalence}
-%\input{parsing/theory/regular/left_linear}
-%\input{parsing/theory/regular/formalisms}
-%\input{parsing/theory/regular/generalisation}
-% 
-%\subsection{Limites des langages algébriques}
-%\input{parsing/theory/limits/pumping}
-%\input{parsing/theory/limits/proof}
-%\input{parsing/theory/limits/example}
-% 
-%\subsection{Conclusion}
-%\input{parsing/theory/conclusion/generalization}
-%\input{parsing/theory/conclusion/grammars}
-%\input{parsing/theory/conclusion/turing_machine}
+\subsection{Grammaires algébriques}
+\input{parsing/algebraic/grammars/model}
+\input{parsing/algebraic/grammars/example}
+\input{parsing/algebraic/grammars/derivation}
+\input{parsing/algebraic/grammars/language}
+\input{parsing/algebraic/grammars/examples}
+ 
+\subsection{Structure arborescente des langages algébriques}
+\input{parsing/algebraic/tree/cst}
+\input{parsing/algebraic/tree/ast}
+\input{parsing/algebraic/tree/ambiguity}
+\input{parsing/algebraic/tree/associativity}
+\input{parsing/algebraic/tree/priority}
+\input{parsing/algebraic/tree/rational}
+ 
+\section{Algorithmes de décision}
+ 
+\subsection{Algorithme Cocke-Younger-Kasami}
+\input{parsing/decision/CYK/strategy}
+\input{parsing/decision/CYK/CNF}
+\input{parsing/decision/CYK/CNF_transform}
+\input{parsing/decision/CYK/CYK}
+ 
+\subsection{Automates à pile}
+\input{parsing/decision/pushdown/generalized}
+\input{parsing/decision/pushdown/recursion}
+\input{parsing/decision/pushdown/modelisation}
+\input{parsing/decision/pushdown/example}
+\input{parsing/decision/pushdown/configurations}
+\input{parsing/decision/pushdown/actions}
+\input{parsing/decision/pushdown/accepted}
+\input{parsing/decision/pushdown/equivalence}
+\input{parsing/decision/pushdown/deterministic}
+\input{parsing/decision/pushdown/determinisation}
+\input{parsing/decision/pushdown/nondeterministic}
+ 
+\subsection{Parsers LR}
+\input{parsing/decision/LRparser/strategies}
+\input{parsing/decision/LRparser/ancbn}
+\input{parsing/decision/LRparser/states}
+\input{parsing/decision/LRparser/dfa}
+\input{parsing/decision/LRparser/pa}
+\input{parsing/decision/LRparser/conflicts}
+\input{parsing/decision/LRparser/slr}
+ 
+\section{Expressivité des langages algébriques}
+ 
+\subsection{Grammaires rationnelles}
+\input{parsing/theory/regular/theorem}
+\input{parsing/theory/regular/degree}
+\input{parsing/theory/regular/linear}
+\input{parsing/theory/regular/equivalence}
+\input{parsing/theory/regular/transformation}
+\input{parsing/theory/regular/formalisms}
+ 
+\subsection{Limites des langages algébriques}
+\input{parsing/theory/limits/pumping}
+\input{parsing/theory/limits/proof}
+\input{parsing/theory/limits/example}
+ 
+\subsection{Conclusion}
+\input{parsing/theory/conclusion/generalization}
+\input{parsing/theory/conclusion/grammars}
+\input{parsing/theory/conclusion/turing_machine}
 \input{parsing/theory/conclusion/chomsky}
 
 \endgroup

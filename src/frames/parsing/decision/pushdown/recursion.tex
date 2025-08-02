@@ -51,25 +51,25 @@
 
   \tf<2-|handout>[y=-25mm, x=-.25\textwidth]{
     \begin{tikzpicture}[smAutomaton, initial text=$\text{empile}(\diamond)$]
-      \smState[\smInitialAbove] (a) at (0,1.5) {0};
+      \smState[\smInitial] (a) at (0,0) {0};
       
-      \smPath (a) edge [loop right] node {
+      \smPath (a) edge [loop below] node {
         $\begin{array}{@{}r@{\,}c@{\,}l@{}}
-          \uncover<5-|handout>{\langle &:& \text{empile}(\langle)}\\
           \uncover<2-|handout>{\{ &:& \text{empile}(\})}\\
           \uncover<4-|handout>{\} &:& \text{dépile}(\})}\\
+          \uncover<5-|handout>{\langle &:& \text{empile}(\langle)}\\
           \uncover<6-|handout>{\rangle &:& \text{dépile}(\rangle)}\\
         \end{array}$
       } (a);
 
       \uncover<8-|handout>{
-        \smState[\smAccepting] (b) at (0,0) {1};
-        \smPath (a) edge node[left] {$\diamond : \text{dépile}(\diamond)$} (b);
+        \smState[\smAccepting] (b) at (3,0) {1};
+        \smPath (a) edge node {$\diamond : \text{dépile}(\diamond)$} (b);
       }
     \end{tikzpicture}
   }
 
-  \tf<2-|handout>[y=-25mm, x=.25\textwidth]{
+  \tfBlock<2-|handout>[y=-25mm, right=37mm]{Pile d'appels}{
     \begin{smStack}[width=2cm]
       \smCell{\only<2-|handout>{$\Decider(u)$}}
       \smCell{\only<2-8|handout>{$\Trouver(u, \diamond)$}}

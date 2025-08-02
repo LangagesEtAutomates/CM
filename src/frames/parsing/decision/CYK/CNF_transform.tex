@@ -7,16 +7,16 @@
 
 \begingroup
 
-\begin{frame}{Transformation en forme normale de Chomsky}\label{slide:FNC}
+\begin{frame}{Transformation en forme normale de Chomsky}
 
   \tfBlock[top=-3mm]{Démonstration du théorème}{
     Appliquer successivement les règles suivantes :
     \begin{enumerate}
     \item Introduire une règle \structure{$X \rightarrow x$} pour chaque $x\in \Sigma$
-    \item Eliminer les règles \structure{$X \rightarrow ...S...$} 
-    \item Eliminer les règles \structure{$X \rightarrow \varepsilon$} pour $X \not= S$
-    \item Eliminer les règles \structure{$X \rightarrow Y$}
-    \item Remplacer les règles \structure{$N \rightarrow A_1 A_2 ... A_n$} par \structure{$N \rightarrow A_1 B$} et \structure{$B \rightarrow A_2 ... A_n$}
+    \item Eliminer les règles \structure{$X \rightarrow ...S...$} ayant $S$ dans le menbre droit 
+    \item Eliminer les règles \structure{$X \rightarrow \varepsilon$}, quand $X \not= S$
+    \item Eliminer les règles \structure{$X \rightarrow Y$}, quand $Y$ un unique terminal
+    \item Eliminer les règles \structure{$N \rightarrow A_1 ... A_n$}, quand $n>2$
     \end{enumerate}
   }
 
@@ -133,7 +133,7 @@
     \item Remplacer $S \rightarrow ADB$ par :\\
       $\begin{array}{lll}
       S &\rightarrow& AE\\
-      E &\rightarrow& BD\\
+      E &\rightarrow& DB\\
     \end{array}$
     \end{enumerate}
   }

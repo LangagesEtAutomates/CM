@@ -7,26 +7,33 @@
 
 \begingroup
 
-\begin{frame}{Statégie d'analyse syntaxique}
-  \begin{alertblock}{Question}
-    Étant donnés un mot $u$ et une grammaire $G$, est-ce que $u \in \mathcal{L}(G)$ ?
+\begin{frame}{Deux grandes approches pour l'analyse syntaxique}
+
+  \begin{alertblock}{Problème}
+    Étant donnés :
+    \begin{itemize}
+      \item une grammaire algébrique $G$
+      \item un mot $u \in \Sigma^\star$
+    \end{itemize}
+    peut-on décider efficacement si \structure{$u \in \mathcal{L}(G)$} ?
   \end{alertblock}
 
-  \pause
-
-  \begin{block}{Algorithme Cocke-Younger-Kasami (CYK)}
-
-    \begin{description}
-    \item [Entrées]
-      \begin{itemize}
-      \item Une grammaire algébrique $G = \langle \Sigma, \Gamma, S, R \rangle$ \\ sous \structure{forme normale de Chomsky}
-      \item Un mot $u$
-      \end{itemize}
-
-    \item [Sortie :] Une réponse booléenne sur \structure{$u \in \mathcal{L}(G)$}
-
-    \item [Complexité :] $\mathcal{O}\left(|R| \times |u|^3 \right)$
-    \end{description}
+  \begin{block}{Approche 1 -- Algorithme CYK (Cocke–Younger–Kasami)}
+    \begin{itemize}
+      \item S'applique à \structure{toute grammaire} mise en \structure{forme normale de Chomsky}%Fonctionne uniquement si $G$ est en \structure{forme normale de Chomsky (FNC)}.
+      \item Repose sur une analyse exhaustive par \structure{programmation dynamique}
+      \item Complexité en $\mathcal{O}(|R| \times |u|^3)$
+    \end{itemize}
   \end{block}
+
+  \begin{block}{Approche 2 -- Analyse déterministe (parsers LL ou LR)}
+    \begin{itemize}
+      \item S'applique aux grammaires \structure{non-ambiguës} et \structure{déterministes}
+      \item Utilise un \structure{automate à pile déterministe}
+      \item Complexité en $\mathcal{O}(|R| \times |u|)$
+    \end{itemize}
+  \end{block}
+
 \end{frame}
+
 \endgroup

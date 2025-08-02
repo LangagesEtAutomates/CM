@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaires linéaires et rationnelles}
+
+  Soit \alert{$G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire linéaire. 
+
+  \begin{block}{Définition -- Grammaires linéaires à droite ou à gauche}
+    \begin{itemize}
+    \item $G$ est dite \structure{linéaire à droite} si ses règles sont de la forme :
+      \begin{center}
+        $\alert{A \rightarrow u \cdot B}$ \quad ou\quad $\alert{A \rightarrow u}$ \quad avec \structure{$A, B \in \Gamma$} et \structure{$u\in \Sigma^\star$}
+      \end{center}
+    \item $G$ est dite \structure{linéaire à gauche} si ses règles sont de la forme :
+      \begin{center}
+        $\alert{A \rightarrow B \cdot u}$ \quad ou\quad $\alert{A \rightarrow u}$ \quad avec \structure{$A, B \in \Gamma$} et \structure{$u\in \Sigma^\star$}
+      \end{center}
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Cas particulier -- Grammaire rationnelles}
+    \begin{itemize}
+    \item $G$ est dite \structure{rationnelle à droite} si ses règles sont de la forme :
+      \begin{center}
+        $\alert{A \rightarrow a \cdot B}$ \quad ou\quad $\alert{A \rightarrow a}$ \quad ou\quad $\alert{A \rightarrow \varepsilon}$
+        \quad avec \structure{$A, B \in \Gamma$} et \structure{$a\in \Sigma$}
+      \end{center}
+    \item $G$ est dite \structure{rationnelle à gauche} si ses règles sont de la forme :
+      \begin{center}
+        $\alert{A \rightarrow B \cdot a}$ \quad ou\quad $\alert{A \rightarrow a}$ \quad ou\quad $\alert{A \rightarrow \varepsilon}$
+        \quad avec \structure{$A, B \in \Gamma$} et \structure{$a\in \Sigma$}
+      \end{center}
+    \item $G$ est dite \structure{rationnelle} si elle est \structure{rationnelle à droite ou à gauche}
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

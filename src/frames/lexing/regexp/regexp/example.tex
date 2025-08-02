@@ -1,0 +1,40 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple introductif}
+
+  \begin{exampleblock}{Quelques adresses email valides}
+    \begin{itemize}
+    \item matthieu.perrin@univ-nantes.fr
+    \item e12345@etu.univ-nantes.fr
+    \item mmemichu@gmail.com
+    \end{itemize}
+  \end{exampleblock}
+
+  \pause
+  \begin{block}{Spécifier les adresses email valides}
+    \begin{itemize}
+    \item En général : un nom d'utilisateur, une arobase, un nom de domaine
+    \item Les \structure{noms d'utilisateur} sont des suites de labels, séparés par des points
+    \item Les \structure{noms de domaines} également, mais contiennent au moins un point
+    \item Un \structure{label} est une suite non-vide de \structure{symboles} (lettres et tirets)
+    \end{itemize}
+
+    $$\alert{\begin{array}{r@{~~=~~}l}
+    \mathit{symbole}     & a\mid b\mid ...\mid z\mid \text{-}\\
+    \mathit{label}       & \structure{\mathit{symbole}}^+ \\
+    \mathit{utilisateur} & \structure{\mathit{label}} (.\,\structure{\mathit{label}}) ^\star \\
+    \mathit{domaine}     & \structure{\mathit{label}} (.\,\structure{\mathit{label}}) ^+ \\
+    \mathit{email}       & \structure{\mathit{utilisateur}} \,\text{@}\, \structure{\mathit{domaine}} \\
+    \end{array}}$$
+  \end{block}
+  
+\end{frame}
+
+\endgroup

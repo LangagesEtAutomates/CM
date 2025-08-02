@@ -7,39 +7,93 @@
 
 \begingroup
 
-\begin{frame}{Transformation en grammaire rationnelle}
-  \begin{block}{Théorème}
-    Toute grammaire \structure{linéaire droite} peut être transformée en une
-    grammaire \structure{rationnelle droite} reconnaissant le même langage. 
+\begin{frame}{Grammaires pour les langages rationnels}
+
+  Un langage $L$ est rationnel ssi $L$ est engendré par une grammaire :\\
+  \vspace{2mm}
+  \begin{minipage}{.5\textwidth}
+    \begin{itemize}
+    \item linéaire à gauche
+    \item rationnelle à gauche 
+    \end{itemize}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \begin{itemize}
+    \item linéaire à droite 
+    \item rationnelle à droite 
+    \end{itemize}
+  \end{minipage}
+  
+  \begin{block}{De linéaire à droite à rationnelle à droite}
+    \begin{itemize}
+    \item Transformation des règles similaire à la forme normale de Chomsky
+    \end{itemize}
+    
+    \footnotesize $$\example{
+      \left\{\begin{array}{@{\,}l@{~\rightarrow~}l@{\,}}
+      S & abA \mid A \\
+      A & c
+      \end{array}\right.
+      ~\Rightarrow~
+      \left\{\begin{array}{@{\,}l@{~\rightarrow~}l@{\,}}
+      S & abA \mid c \\
+      A & c
+      \end{array}\right.
+      ~\Rightarrow~
+      \left\{\begin{array}{@{\,}l@{~\rightarrow~}l@{\,}}
+      S & aB \mid c \\
+      A & c         \\
+      B & bA
+      \end{array}\right.
+    }$$
+  \end{block}
+
+  \begin{block}{De rationnelle à gauche à rationnelle à droite}
+    \begin{itemize}
+    \item On passe par le miroir : $\mathcal{L}(G)^{\textsc{r}} = \mathcal{L}(\langle \Sigma, \Gamma, S, \{ \langle g, d^{\textsc{r}} \rangle \mid g \rightarrow d\} \rangle)$.
+    \end{itemize}
+    
+    \footnotesize $$\example{
+      \left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+      S & Aa\\
+      A & Aa & Bb\\
+      B & Bb & \varepsilon
+      \end{array}\right.
+      ~\xRightarrow{\textsc{r}}~
+      \left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+      S & aA\\
+      A & aA & bB\\
+      B & bB & \varepsilon
+      \end{array}\right.
+      ~\Rightarrow~
+      \begin{tikzpicture}[smAutomaton, baseline=(c)]\scriptsize
+        \smState[\smInitialBelow]   (S) at (0.3, 0.5) {$S$}; 
+        \smState                    (A) at (1.0, 1.0) {$A$}; 
+        \smState[\smAccepting]      (B) at (1.0, 0.0) {$B$}; 
+        \smPath (S) edge             node {$a$} (A);
+        \smPath (A) edge[loop right] node {$a$} (A);
+        \smPath (A) edge             node (c) {$b$} (B);
+        \smPath (B) edge[loop right] node {$b$} (B);
+      \end{tikzpicture}
+      ~\xRightarrow{\textsc{r}}~
+      \begin{tikzpicture}[smAutomaton, baseline=(c)]\scriptsize
+        \smState[\smAccepting]   (S) at (0.3, 0.5) {$S$}; 
+        \smState                 (A) at (1.0, 1.0) {$A$}; 
+        \smState[\smInitial]     (B) at (1.0, 0.0) {$B$}; 
+        \smPath (A) edge             node[swap] {$a$} (S);
+        \smPath (A) edge[loop right] node {$a$} (A);
+        \smPath (B) edge             node[swap] (c) {$b$} (A);
+        \smPath (B) edge[loop right] node {$b$} (B);
+      \end{tikzpicture}
+      ~\Rightarrow~
+      \left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+      B & bB & bA\\
+      A & aA & aS\\
+      S & \varepsilon
+      \end{array}\right.
+    }$$
   \end{block}
   
-  \begin{block}{Démonstration}
-    Appliquer successivement les règles suivantes :
-    \begin{enumerate}
-    \item Eliminer les règles \structure{$A \rightarrow B$} : remplacer $B$ par sa définition
-    \item Remplacer les règles \structure{$A \rightarrow a_1 a_2 ... a_n B$} par \structure{$A \rightarrow a_1 C$} et \structure{$C \rightarrow a_2 ... a_n B$}
-    \end{enumerate}
-  \end{block}
-  
-  \begin{exampleblock}{Exemple}
-    \vspace{-5mm}
-    $$
-    \left\{\begin{array}{lll}
-    S &\rightarrow& abA \;|\; A \\
-    A &\rightarrow& c\\
-    \end{array}\right.
-    \hspace{2mm}\Rightarrow\hspace{2mm}
-    \left\{\begin{array}{lll}
-    S &\rightarrow& abA \;|\; c \\
-    A &\rightarrow& c\\
-    \end{array}\right.
-    \hspace{2mm}\Rightarrow\hspace{2mm}
-    \left\{\begin{array}{lll}
-    S &\rightarrow& aB \;|\; c \\
-    A &\rightarrow& c\\
-    B &\rightarrow& bA\\
-    \end{array}\right.$$
-  \end{exampleblock}
 \end{frame}
 
 \endgroup

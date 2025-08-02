@@ -8,11 +8,12 @@
 \begingroup
 
 \begin{frame}{États d'un parser LR}
-  Soit $G=\langle \Sigma, \Gamma, S, R \rangle$ une grammaire algébrique.
+  
+  Soit $G=\langle \Sigma, \Gamma, S, \rightarrow \rangle$ une grammaire algébrique.
 
   \begin{block}{Définition -- Items et ensembles d'items}
     \begin{itemize}
-    \item On suppose l'existence d'une seule règle $S\rightarrow \alpha$ dans $R$ :  \structure{$S \rightarrow A \$$}
+    \item On suppose l'existence d'une seule règle $S\rightarrow \alpha$ :  \structure{$S \rightarrow A \$$}
       \begin{itemize}
       \item $\$$ signifie \og end of file \fg
       \item On peut ajouter la règle : \hspace\fill
@@ -25,7 +26,7 @@
         \right\}
       }$
       \end{itemize}
-    \item Un \structure{item} est un couple $\langle A \rightarrow \alpha_1 \ldots \alpha_n, k \rangle \in R \times \mathbb{N}$, tel que $0 \le k\le n$, noté :
+    \item Un \structure{item} est un couple $\langle A \rightarrow \alpha_1 \ldots \alpha_n, k \rangle \in\, \rightarrow\! \times \mathbb{N}$, tel que $0 \le k\le n$, noté :
       $$\alert{A \rightarrow \alpha_1 \ldots \alpha_k  \bullet \alpha_{k+1}\ldots \alpha_n}$$
     \item La \structure{fermeture} d'un ensemble d'items $E$ est le plus petit ensemble $E'$ tq :
       \begin{itemize}
@@ -47,6 +48,7 @@
     \item Les états de l'analyseur sont des ensembles fermés d'items.
     \end{itemize}
   \end{block}
+  
 \end{frame}
 
 \endgroup

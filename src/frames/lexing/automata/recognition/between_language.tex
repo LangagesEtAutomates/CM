@@ -34,8 +34,8 @@
     \begin{tikzpicture}[smAutomaton]
       \smState[\smInitial]   (s1) at (0.0,1.2) {$s_1$}; 
       \smState[\smAccepting] (s2) at (1.5,1.2) {$s_2$}; 
-      \smState[\smInitial]   (s3) at (0.0,0,0) {$s_3$}; 
-      \smState               (s4) at (1.5,0,0) {$s_4$}; 
+      \smState[\smInitial]   (s3) at (0.0,0.0) {$s_3$}; 
+      \smState               (s4) at (1.5,0.0) {$s_4$}; 
 
       \smPath (s1) edge             node[above] {$a$}           (s2);
       \smPath (s1) edge[loop above] node        {$a$}           (s1);

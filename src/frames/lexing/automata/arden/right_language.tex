@@ -1,0 +1,61 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage reconnu depuis un état}
+
+  \tfExampleBlock[y=-8mm]{Exemple}{}
+
+  \tfBlock[top=-2mm]{Définition -- Langage droit}{
+    Soit $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN.\\
+    Le \structure{langage droit} d'un état $q \in Q$, noté \alert{$\mathcal{L}_A(q)$},
+    est l'ensemble des mots reconnus par un chemin d'actions menant de $q$ à un état final de $A$. 
+    \alert{$$\mathcal{L}_A(q) \eqdef \{u \in \Sigma^\star \mid \exists f\in F,  \langle u, q \rangle \leadsto_A^\star \langle \varepsilon, f\rangle\}$$}
+
+    \vspace{-5mm}
+    \begin{description}
+    \item[Remarques :] $\displaystyle\mathcal{L}(A) = \bigcup_{i\in I} \mathcal{L}_A(i)$ \hspace\fill $\displaystyle\mathcal{L}_A(q) = \mathcal{L}\left(\langle \Sigma, Q, \{q\}, F, \rightarrow \rangle\right)$
+    \end{description}
+  }
+
+
+  \tf[y=-25mm, x=-.3\textwidth]{\small
+        \begin{tikzpicture}[smAutomaton]
+        \smState[\smInitial]   (s1) at (0.0,1.2) {$q_1$}; 
+        \smState[\smAccepting] (s2) at (1.2,1.2) {$q_2$}; 
+        \smState[\smInitial]   (s4) at (0.0,0.0) {$q_3$}; 
+        \smState[\smExample]   (s5) at (1.2,0.0) {$q_4$}; 
+
+        \smPath (s1) edge             node[above] {$a$} (s2);
+        \smPath (s1) edge[loop above] node        {$a$} (s1);
+        \smPath (s4) edge             node[above] {$b$} (s5);
+        \smPath (s4) edge[loop below] node        {$b$} (s4);
+        \smPath (s5) edge[loop below] node        {$b$} (s5);
+        \smPath (s2) edge[loop right] node        {$c$} (s2);
+        \smPath (s5) edge node                    {$\varepsilon$} (s2);
+    \end{tikzpicture}
+  }
+
+  \tf[y=-25mm, x=.2\textwidth]{
+    \example{$\mathcal{L}_A(q_4) = \mathcal{L}\left(
+      \begin{tikzpicture}[smAutomaton,baseline=(b)]\footnotesize
+        \coordinate (b) at (0,-2mm);
+        \smState[\smInitial\smExample]   (s5) at (0.0,0) {$q_4$}; 
+        \smState[\smAccepting]           (s2) at (1.2,0) {$q_2$}; 
+
+        \smPath (s5) edge[loop below] node        {$b$} (s5);
+        \smPath (s2) edge[loop right] node        {$c$} (s2);
+        \smPath (s5) edge node                    {$\varepsilon$} (s2);
+      \end{tikzpicture}
+      \right) = b^\star c^\star $}
+  }
+  
+\end{frame}
+
+
+\endgroup

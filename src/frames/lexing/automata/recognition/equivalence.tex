@@ -7,10 +7,10 @@
 
 \begingroup
 
-\begin{frame}{Équivalence entre automates}
+\begin{frame}{Équivalence et isomorphisme entre automates}
 
   \tf[text, top]{
-    Soient $A = \langle \Sigma, Q, I, F, \mu \rangle$ et $B = \langle \Sigma, Q', I', F', \mu' \rangle$ deux automates. 
+    Soient $A = \langle \Sigma, Q_A, I_A, F_A, \rightarrow_A \rangle$ et $B = \langle \Sigma, Q_B, I_B, F_B, \rightarrow_B \rangle$ deux automates. 
   }
 
   \tfBlock[y=17mm]{Définition -- Automates équivalents}{
@@ -20,15 +20,15 @@
 
   \tfBlock[bottom=2mm]{Définition -- Automates isomorphes}{
     $A$ et $B$ sont \structure{isomorphes}, noté $\alert{A \simeq B}$, s'ils ne diffèrent que par le nom de leurs états, \textit{c.-à-d.}
-    s'il existe une fonction bijective $f : Q \rightarrow Q'$ telle que :
+    s'il existe une fonction bijective $f : Q_A \rightarrow Q_B$ telle que :
 
     \vspace{2mm}
-    $\structure{\begin{array}[t]{rcl}
-        \Sigma' &=& \Sigma\\
-        Q' &=& \displaystyle\left\{ f(q) \mid q\in Q\right\}\\
-        I' &=& \displaystyle\left\{f(q) \mid q\in I\right\}\\
-        F' &=& \displaystyle\left\{f(q) \mid q\in F\right\}\\
-        \mu' &=& \displaystyle\left\{ f(q) \xrightarrow{a} f(q') \mid q \xrightarrow{a} q' \in \mu \right\}
+    $\structure{\forall a\in \Sigma, \forall q, q',}$\\
+    $\structure{\begin{array}[t]{@{\quad\quad}lll}
+        q\in Q_A &\Leftrightarrow& f(q) \in Q_B \\
+        q\in I_A &\Leftrightarrow& f(q) \in I_B \\
+        q\in F_A &\Leftrightarrow& f(q) \in F_B \\
+        q \xrightarrow{a}_A q' &\Leftrightarrow& f(q) \xrightarrow{a}_B f(q')
       \end{array}
     }$
     \vspace{2mm}

@@ -1,0 +1,41 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Relations d'ordre sur les mots}
+
+  Soient $\Sigma$ un alphabet, muni d'un ordre total \structure{$\le$}, et $u, v \in \Sigma^\star$.
+
+  \begin{block}{Définitions}
+    \begin{description}[Ordre lexicographique]
+    \item[Ordre préfixiel]: noté \alert{$\le_p$}, c'est un \example{ordre partiel} défini par : \\
+      \alert{$u \le_p v$} si \alert{$u$ est un préfixe de $v$}.
+ 
+    \item[Ordre lexicographique]: noté \alert{$\le_l$}, c'est un \example{ordre total} défini par :\\
+       \alert{$u \le_l v$} si l'une de ces deux conditions est vérifiée :
+        \begin{itemize}
+        \item \alert{$u \le_p v$}
+        \item $\exists x, y, z \in \Sigma^\star, a, b \in \Sigma,~ \alert{u = x\cdot a\cdot y \land v = x\cdot b\cdot z \land a \le b}$
+        \end{itemize}
+
+    \item[Ordre hiérarchique]: noté \alert{$\le_h$}, c'est un \example{ordre total} défini par :\\
+      \alert{$u \le_h v$} si \alert{$|u| < |v| \lor (|u| = |v| \land u \le_l v)$}.
+    \end{description}
+  \end{block}
+
+  \begin{exampleblock}{Exemples}
+    \begin{itemize}
+      \item $\text{barbare} \le_p \text{barbares}$. 
+      \item $\text{barbare} \le_l \text{barbes}$ car $a \le e$. 
+      \item $\text{barbes} \le_h \text{barbare}$ car $|\text{barbes}| = 6 < 7 = |\text{barbare}|$
+    \end{itemize}
+  \end{exampleblock}
+  
+\end{frame}
+
+\endgroup

@@ -9,24 +9,25 @@
 
 \begin{frame}{Normalisation d'un automate fini}
 
-  \tf[text,top=-5mm]{
-    \begin{block}{Théorème -- Normalisation}
+  \tfBlock[top=-3mm]{Théorème -- Normalisation}{
       Soit $\Sigma$ un alphabet et $L \in \textsc{rec}_\Sigma$.
-
-      Il existe un automate normalisé qui reconnaît $L$.
-    \end{block}
-    \begin{block}{Démonstration}
-      Soit $T = \langle \Sigma, Q, I, F, \mu \rangle$ un automate qui reconnaît $L$.
-      \begin{itemize}
-      \item Soient $i, f \notin Q$
-      \item Soit $\mu' = \mu \cup \structure{\{\langle i, \varepsilon, q\rangle | q \in I\}} \cup \alert{\{\langle q, \varepsilon, f\rangle | q \in F\}}$
-      \end{itemize}
-      $\langle \Sigma, Q \cup \{i, f\}, \structure{\{i\}}, \alert{\{f\}}, \mu' \rangle$ est un automate normalisé qui reconnaît $L$.
-    \end{block}
-
-    \begin{exampleblock}{Exemple}\end{exampleblock}
+      $L$ est reconnu par un automate normalisé.
   }
 
+  \tfBlock[y=5mm]{Démonstration}{
+    Soit $\langle \Sigma, Q, I, F, \rightarrow \rangle$ un automate qui reconnaît $L$.
+    \begin{itemize}
+    \item Soient $i, f \notin Q$
+    \item Soit $\rightarrow' \,=\, \rightarrow \,\cup\,
+      \structure{\{\langle i, \varepsilon, q\rangle \mid q \in I\}} \,\cup\,
+      \alert{\{\langle q, \varepsilon, f\rangle \mid q \in F\}}$
+    \end{itemize}
+    Alors $L$ est reconnu par l'automate normalisé :
+    $$\langle \Sigma, Q \cup \{i, f\}, \structure{\{i\}}, \alert{\{f\}}, \rightarrow' \rangle$$
+  }
+
+  \tfExampleBlock[y=-15mm]{Exemple}{}
+  
   \tf[bottom,x=-.25\textwidth]{\footnotesize
     \begin{tikzpicture}[smAutomaton, node distance=1.2cm]
       \smState               (2)                     {$2$};
@@ -43,6 +44,7 @@
       \smPath  (2) edge node {$b$} (4);
     \end{tikzpicture}
   }
+  
   \tf[bottom,x=.25\textwidth]{\footnotesize
     \begin{tikzpicture}[smAutomaton, node distance=1.2cm]
       \smState                         (2)                     {$2$};

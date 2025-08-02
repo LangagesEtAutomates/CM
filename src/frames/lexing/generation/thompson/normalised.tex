@@ -9,19 +9,19 @@
 
 \begin{frame}{Automate normalisé}
 
-  Soit $A = \langle \Sigma, Q, I, F, \mu\rangle$ un automate fini. 
+  Soit $A = \langle \Sigma, Q, I, F, \rightarrow\rangle$ un automate fini. 
 
   \begin{block}{Définition -- Automate unitaire}
-    $A$ est dit \structure{unitaire} s'il ne possède qu'un seul état initial :
-    $\alert{\exists q_0 \in Q, I = \{q_0\}}.$
+    $A$ est dit \structure{unitaire} s'il possède un unique état initial \hspace\fill
+    $\alert{\exists q_0 \in Q,~ I = \{q_0\}}$
   \end{block}
 
   \begin{block}{Définition -- Automate standard}
     $A$ est dit \structure{standard} si :
     \begin{enumerate}
     \item il est \alert{unitaire}
-    \item aucune transition n'arrive sur l'état initial :
-    $\alert{\forall q\in Q, \forall a\in \Sigma, q \xrightarrow{a} q_0 \notin \mu}.$
+    \item aucune transition n'arrive sur l'état initial \hspace\fill
+    $\alert{\nexists q\in Q,~ \nexists a\in \Sigma,~ q \xrightarrow{a} q_0}$
     \end{enumerate}
   \end{block}
 
@@ -29,10 +29,12 @@
     $A$ est dit \structure{normalisé} si :
     \begin{enumerate}
     \item il est \alert{standard}
-    \item il ne possède qu'un seul état final : $\alert{\exists f \in Q, F = \{f\}}.$
-    \item aucune transition n'a pour origine l'état final :
-    $\alert{\forall q\in Q, \forall a\in \Sigma, \langle f, a, q\rangle \notin \mu}.$
+    \item il possède un unique état final \hspace\fill $\alert{\exists q_f \in Q,~ F = \{q_f\}}$
+    \item aucune transition ne sort de l'état final \hspace\fill
+    $\alert{\nexists q\in Q,~ \nexists a\in \Sigma,~ q_f \xrightarrow{a} q}$
     \end{enumerate}
   \end{block}
+  
 \end{frame}
+
 \endgroup

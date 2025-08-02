@@ -6,10 +6,10 @@
 % Frame: 
 
 \begingroup
-  
+
 \begin{frame}{Transformation en automate à pile}
 
-  \tf[text, top=-1mm]{
+  \tf[text, top=-3mm]{
     \begin{description}[Acceptation :]
     \item[États :] Les états sont les mêmes que dans l'automate sous-jacent.
     \item[Pile :] La pile contient un chemin menant à l'état courant
@@ -18,25 +18,25 @@
       \end{itemize}
     \item<2-|handout>[\alert{Décalage :}] Pour tout $a\in Sigma$ et transition $q \xrightarrow{a} q'$ :
       \begin{tikzpicture}[smAutomaton, baseline=(q)]\footnotesize
-      \smState (q) at (0.0,0.0) {$q$};
-      \smState (p) at (2.0,0.0) {$q'$};
-      \path[-latex, structure, densely dotted, thick]  (q) edge[bend left =5mm] node       {$a$} (p);
-      \path[-latex, alert]                             (q) edge[bend right=5mm] node[swap] {\smPAtrans{a}{\varepsilon}{q'}} (p);
-    \end{tikzpicture}
+        \smState (q) at (0.0,0.0) {$q$};
+        \smState (p) at (2.0,0.0) {$q'$};
+        \path[-latex, structure, densely dotted, thick]  (q) edge[bend left =5mm] node       {$a$} (p);
+        \path[-latex, alert]                             (q) edge[bend right=5mm] node[swap] {\smPAtrans{a}{\varepsilon}{q'}} (p);
+      \end{tikzpicture}
     \item<3-|handout>[\example{Réduction :}] Pour tout $A\in \Gamma$ et $A \rightarrow \alpha_1 \ldots \alpha_n \in R$, et transition $q \xrightarrow{A} q'$ :
       \begin{tikzpicture}[smAutomaton]\footnotesize
-      \smState[\smStructure] (0) at (0.0,0.0) {$q_0$};
-      \smState[\smAlert]     (1) at (1.5,0.5) {$q_1$};
-      \smState[\smAlert]     (m) at (3.0,0.5) {\tiny$q_{n-1}$};
-      \smState[\smExample]     (n) at (4.5,0.5) {$q_n$};
-      \smState[\smExample]   (p) at (6.0,0.0) {$q'$};
-      
-      \path[-latex, alert, densely dotted, thick]      (0) edge node       {$\alpha_1$}                                      (1);
-      \path[-latex, alert, densely dotted, thick]      (1) edge node       {$\ldots$}                                        (m);
-      \path[-latex, alert, densely dotted, thick]      (m) edge node       {$\alpha_n$}                                      (n);
-      \path[-latex, structure, densely dotted, thick]  (0) edge node[swap] {$A$}                                             (p);
-      \path[-latex, example]                           (n) edge node       {\smPAtrans{\varepsilon}{q_0 \ldots q_n}{q_0 q'}} (p);
-    \end{tikzpicture}
+        \smState[\smStructure] (0) at (0.0,0.0) {$q_0$};
+        \smState[\smAlert]     (1) at (1.5,0.5) {$q_1$};
+        \smState[\smAlert]     (m) at (3.0,0.5) {\tiny$q_{n-1}$};
+        \smState[\smExample]     (n) at (4.5,0.5) {$q_n$};
+        \smState[\smExample]   (p) at (6.0,0.0) {$q'$};
+        
+        \path[-latex, alert, densely dotted, thick]      (0) edge node       {$\alpha_1$}                                      (1);
+        \path[-latex, alert, densely dotted, thick]      (1) edge node       {$\ldots$}                                        (m);
+        \path[-latex, alert, densely dotted, thick]      (m) edge node       {$\alpha_n$}                                      (n);
+        \path[-latex, structure, densely dotted, thick]  (0) edge node[swap] {$A$}                                             (p);
+        \path[-latex, example]                           (n) edge node       {\smPAtrans{\varepsilon}{q_0 \ldots q_n}{q_0 q'}} (p);
+      \end{tikzpicture}
     \end{description}
   }
 
@@ -70,7 +70,7 @@
       \smState[             ] (4) at (3.4,2.0) {$4$};  
       \smState[\smExample<3|handout>] (5) at (5.1,2.0) {$5$};
       \smState[\smAccepting ] (6) at (5.1,0.0) {$6$};
-            
+      
       \smDraw<2-|handout>[\smExample]{
         \smPath[\smAlert]  (3) edge[loop left]     node       {\smPAtrans{a} {\varepsilon}{3}} (3);
         \smPath[\smAlert]  (0) edge                 node       {\smPAtrans{a} {\varepsilon}{3}} (3);
@@ -90,7 +90,6 @@
     \end{tikzpicture}
   }
 
-  
 \end{frame}
 
 \endgroup

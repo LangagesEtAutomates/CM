@@ -8,36 +8,38 @@
 \begingroup
 
 \begin{frame}{Équivalence entre expressions rationnelles}
+
   Mêmes propriétés que les langages.
   
   Soient $\Sigma$ un alphabet et $u$, $v$ et $w$ des expressions rationnelles. 
- 
+  
   \begin{itemize}
-  \item \textbf{Union} 
-    \begin{description}
-    \item[neutralité :] $\emptyset | u \equiv u \equiv u | \emptyset$ 
-    \item[associativité :] $u | (v | w) \equiv (u | v) | w$ \hspace{5mm} \structure{noté $u|v|w$} 
-    \item[commutativité :] $u | v \equiv v | u$
-    \item[idempotence :] $u | u \equiv u$
+  \item Union
+    \begin{description}[commutativité :]
+    \item[neutralité :] $\emptyset \mid  u \equiv u \equiv u \mid  \emptyset$ 
+    \item[associativité :] $u \mid  (v \mid  w) \equiv (u \mid  v) \mid  w$ \quad \structure{noté $u\mid v\mid w$} 
+    \item[commutativité :] $u \mid  v \equiv v \mid  u$
+    \item[idempotence :] $u \mid  u \equiv u$
     \end{description}
-  \item \textbf{Concaténation} 
-    \begin{description}
+  \item Concaténation 
+    \begin{description}[commutativité :]
     \item[neutralité :] $\varepsilon \cdot u \equiv u \equiv u \cdot \varepsilon$
-    \item[associativité :] $u \cdot (v \cdot w) \equiv (u \cdot v) \cdot w$  \hspace{5mm} \structure{noté $u\cdot v\cdot w$ ou $uvw$}
+    \item[associativité :] $u \cdot (v \cdot w) \equiv (u \cdot v) \cdot w$  \quad \structure{noté $u\cdot v\cdot w$ ou $uvw$}
     \item[absorption :] $u \cdot \emptyset \equiv \emptyset \equiv \emptyset \cdot u$
     \end{description}
-  \item \textbf{Mise à l'étoile} 
-    \begin{description}
+  \item Mise à l'étoile
+    \begin{description}[commutativité :]
     \item[neutralité :] $\emptyset^\star \equiv \varepsilon$
     \item[idempotence :] $u^{\star^\star} \equiv u^\star$
     \end{description}
-  \item \textbf{Intéraction entre opérateurs} 
-    \begin{description}
-    \item[distributivité :] $u (v | w) \equiv uv | uw$ \hspace{5mm} \structure{et} \hspace{5mm} $(v | w) u \equiv vu | wu$
-    \item[absorption :] $u | u^\star \equiv u^\star \equiv u^\star | u$
-    \item[fermetures :] $u^\star \equiv \varepsilon | u^+$
+  \item Intéraction entre opérateurs 
+    \begin{description}[commutativité :]
+    \item[distributivité :] $u \cdot (v \mid  w) \equiv u\cdot v \mid  u \cdot w$ \quad \structure{et} \quad $(v \mid  w)\cdot u \equiv v\cdot u \mid  w\cdot u$
+    \item[absorption :] $u \mid  u^\star \equiv u^\star \equiv u^\star \mid  u$
+    \item[fermetures :] $u^\star \equiv \varepsilon \mid  u^+$
     \end{description}
   \end{itemize}
+
 \end{frame}
 
 

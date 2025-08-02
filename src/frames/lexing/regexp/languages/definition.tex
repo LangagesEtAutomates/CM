@@ -8,11 +8,12 @@
 \begingroup
 
 \begin{frame}{Définition des langages rationnels}
+
   Soient $\Sigma$ un alphabet, et $L \in \mathscr{P}(\Sigma^\star)$ un langage sur $\Sigma$.
 
   \begin{block}{Définition -- Langage rationnel}
     $L$ est \structure{rationnel}, noté $\alert{L\in \textsc{rat}_\Sigma}$ s'il est décrit par une expression rationnelle :
-    $$\alert{\textsc{rat}_\Sigma = \{\mathcal{S}(u) \mid u \in \textsc{regex}_\Sigma\}}$$
+    $$\alert{\textsc{rat}_\Sigma = \{\mathcal{L}(u) \mid u \in \textsc{regex}_\Sigma\}}$$
   \end{block}
 
   \begin{exampleblock}{Conséquences}
@@ -26,6 +27,7 @@
       \vspace{1mm}\example{Fermeture}& $\forall L_1 \in \textsc{rat}_\Sigma$&\alert{$ L_1^\star \in \textsc{rat}_\Sigma$}\\
     \end{tabular}
   \end{exampleblock}
+
 \end{frame}
 
 \endgroup

@@ -8,39 +8,106 @@
 \begingroup
 
 \begin{frame}{Équivalence entre automates à pile et grammaires}
-  \begin{block}{Théorème -- Équivalence entre formalismes}
+
+  \tfBlock[top=-5mm]{Théorème -- Équivalence entre formalismes}{
     Tout langage peut être reconnu par un automate à pile ssi il est algébrique. 
-  \end{block}
+  }
   
-  \begin{block}{Preuve}
+  \tfBlock[y=10mm]{Preuve}{
     \begin{enumerate}
-    \item \structure{Des grammaires algébriques aux automates à pile}\\
-      
-      Soit $G = \langle \Sigma, \Gamma, S, R\rangle$ une grammaire en forme normale de Chomsky.
-      
-      Alors $\mathcal{L}(G) = \mathcal{L}(\langle \Sigma, \Gamma, \{q\}, \{q\}, \{q\}, S, \mu \rangle)$, avec
-      $$\mu = \left\{ q \xrightarrow{\smPAtrans{a}{A}{\varepsilon}} q \,\middle\mid\, A \rightarrow a \in R \right\} \cup
-      \left\{q\xrightarrow{\smPAtrans{\varepsilon}{A}{BC}}q \,\middle\mid\,  A \rightarrow BC\in R \right\}$$
-
-      \begin{center}
-        \scalebox{1}{\begin{tikzpicture}[smAutomaton, initial text=$S$]
-            \smState[\smInitial\smAccepting] (q) {$q$};
-            \smPath (q) edge [loop right] node {
-              $\begin{array}{ll}
-                \smPAtrans{a}{A}{\varepsilon}  & \text{ pour } A\rightarrow a \\
-                \smPAtrans{\varepsilon}{A}{BC} & \text{ pour } A\rightarrow BC \\
-              \end{array}$
-            } (q);
-        \end{tikzpicture}}
-      \end{center}
-
-      
     \item \structure{Des automates à pile aux grammaires algébriques}
       \begin{itemize}
       \item Admis, car un peu technique
       \end{itemize}
+    \item \structure{Des grammaires algébriques aux automates à pile}\\
+      Soit $G = \langle \Sigma, \Gamma, S, R\rangle$ une grammaire en forme normale de Chomsky.\\
+      Alors $\mathcal{L}(G)$ est reconnu sur pile vide par l'automate à pile :
     \end{enumerate}
-  \end{block}
+  }
+ 
+  \tf[y=-10mm]{\footnotesize
+    \begin{tikzpicture}[smAutomaton, initial text=$S$]
+      \smState[\smInitial\smAccepting] (q) {};
+      \smPath (q) edge [loop right] node {
+        $\begin{array}{ll}
+          \smPAtrans{a}{A}{\varepsilon}  & \text{ pour } A\rightarrow a \\
+          \smPAtrans{\varepsilon}{A}{CB} & \text{ pour } A\rightarrow BC \\
+        \end{array}$
+      } (q);
+    \end{tikzpicture}
+  }
+  
+  \tfExampleBlock<2-|handout>[y=-18mm]{Exemple : $\{ a^n c b^n \mid n\in \mathbb{N} \}$}{}
+
+  \tf<2-|handout>[bottom=-5mm,x=-.45\textwidth]{
+    \begin{smStack}
+      \smCell[\smAlert<2>]{\oneof[$S$]{\on<3->{$T$}\on<5->{$B$}\on<7->{}}}
+      \smCell             {\oneof[]{\on<3>{$A$}\on<5>{$S$}}}
+    \end{smStack}
+  }
+
+  \tf<2-|handout>[bottom=13mm,x=-.3\textwidth]{
+    \begin{smArray}[height=4mm]
+      \smCell[\smAlert<4->]{$a$} \smHead<-3|handout>
+      \smCell[\smAlert<6->]{$c$} \smHead<4-5>
+      \smCell[\smAlert<7->]{$b$} \smHead<6>
+    \end{smArray}
+  }
+
+  \tf<2-|handout>[bottom,x=-.15\textwidth]{\small
+    \begin{tikzpicture}[smAutomaton, initial text={\alert<2>{$S$}}]
+      \smState[\smInitialAbove\smAccepting] (q) {};
+      \smPath (q) edge [loop left] node {
+        $\begin{array}{r}
+          \alert<4>{\smPAtrans{a}{A}{\varepsilon}} \\
+          \alert<7>{\smPAtrans{b}{B}{\varepsilon}} \\
+          \alert<6>{\smPAtrans{c}{S}{\varepsilon}} \\
+        \end{array}$
+      } (q);
+      \smPath (q) edge [loop right] node {
+        $\begin{array}{l}
+          \alert<3>{\smPAtrans{\varepsilon}{S}{TA}} \\
+          \alert<5>{\smPAtrans{\varepsilon}{T}{BS}} \\
+        \end{array}$
+      } (q);
+    \end{tikzpicture}
+  }
+
+  \tf<2-|handout>[bottom=5mm, x=.2\textwidth, width=2.5cm]{
+    \example{Grammaire FNC}\\\vspace{2mm}
+    $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+    S & \alert<3>{AT} \mid \alert<6>{c}\\
+    T & \alert<5>{SB}\\
+    A & \alert<4>{a}\\
+    B & \alert<7>{b}\\
+    \end{array}\right.$
+  }
+
+  \tf<2-|handout>[bottom,x=.4\textwidth]{
+    \begin{tikzpicture}
+      \smDraw<2-|handout>{
+        \node[structure] (S) at (.375,2.1) {\alert<2>{$S$}};
+      }
+      \smDraw<3-|handout>{
+        \node[structure] (A) at (0.00,1.4) {\alert<3>{$A$}}; \path[-latex] (S) edge (A); 
+        \node[structure] (T) at (0.75,1.4) {\alert<3>{$T$}}; \path[-latex] (S) edge (T); 
+      }
+      \smDraw<4-|handout>{
+        \node[example]   (a) at (0.00,0.0) {\alert<4>{$a$}}; \path[-latex] (A) edge (a); 
+      }
+      \smDraw<5-|handout>{
+        \node[structure] (C) at (0.50,0.7) {\alert<5>{$S$}}; \path[-latex] (T) edge (C); 
+        \node[structure] (B) at (1.00,0.7) {\alert<5>{$B$}}; \path[-latex] (T) edge (B); 
+      }
+      \smDraw<6-|handout>{
+        \node[example]   (c) at (0.50,0.0) {\alert<6>{$c$}}; \path[-latex] (C) edge (c); 
+      }
+      \smDraw<7-|handout>{
+        \node[example]   (b) at (1.00,0.0) {\alert<7>{$b$}}; \path[-latex] (B) edge (b); 
+      }
+    \end{tikzpicture}
+  }
+  
 \end{frame}
 
 \endgroup

@@ -6,7 +6,7 @@
 % Frame: 
 
 \begingroup
-  
+
 \begin{frame}{Conflits}
   
   \tf[text,top=-2mm]{
@@ -15,24 +15,20 @@
     \item Sinon, l'algorithme échoue sur un conflit
     \end{itemize}
   }
-
+ 
   \tfBlock[y=8mm]{Conflit par réduction/réduction}{
     \begin{itemize}
     \item Quelle réduction suivre en 1 ? 
     \end{itemize}
-    \example{$
-      G_1 = \left(
-      \begin{array}{c}
-      \{a,b,\$\}, \{S, E, A, B\}, S, \\
-      \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+    \example{$\begin{array}{c}
+        G_1 = \langle\{a,b,\$\}, \{S, E, A, B\}, S, \\
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
         S &\rightarrow& E \$\\
         E &\rightarrow & A a \mid B b\\
         A &\rightarrow& a \\
         B &\rightarrow & a 
-      \end{array}\right\}
-      \end{array}
-      \right)
-    $}
+        \end{array}\right\}\rangle
+      \end{array}$}
   }
   
   \tf[y=7mm,x=30mm]{
@@ -52,7 +48,7 @@
       \node[state]               (5) at (2.0,2.4) {$5$};
       \node[state]               (6) at (2.0,0.0) {$6$};
       \node[state,accepting]     (7) at (3.0,1.2) {$7$};
-
+ 
       \path[->,densely dotted] (0) edge                 node[swap]             {$A$}                              (2);
       \path[->,densely dotted] (0) edge                 node                   {$B$}                              (3);
       \path[->,densely dotted] (0) edge                 node                   {$E$}                              (4);
@@ -66,25 +62,21 @@
       \path[-latex]            (6) edge                 node[yshift=-1mm,swap] {\smPAtrans{\varepsilon}{036}{04}} (4);
     \end{tikzpicture}
   }
-    
+  
   \tfBlock[bottom=1mm]{Conflit par décalage/réduction}{
     \begin{itemize}
     \item Décaler ou réduire en 1 ? 
     \end{itemize}
-    \example{$
-      G_2 = \left(
-      \begin{array}{c}
-      \{1,+,\$\}, \{S, E, T\}, S, \\
-      \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+    \example{$\begin{array}{c}
+        G_2 = \langle\{1,+,\$\}, \{S, E, T\}, S, \\
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
         S &\rightarrow& E \$\\
         E &\rightarrow & T +E \mid T\\
         T &\rightarrow& 1
-      \end{array}\right\}
-      \end{array}
-      \right)
-    $}
+        \end{array}\right\}\rangle
+      \end{array}$}
   }
-
+ 
   \tf[y=-27mm,x=30mm]{
     \begin{tikzpicture}[smAutomaton, initial text=0]\tiny
       \node[alert, fill=alert!20, state, rectangle, rounded corners] (1) at (2.0,1.2) {$1:
@@ -100,7 +92,7 @@
       \node[state]           (4) at (4.0,1.2) {$4$};
       \node[state]           (5) at (2.0,2.4) {$5$};
       \node[state,accepting] (6) at (0.0,2.4) {$6$};
-
+ 
       \path[->,densely dotted] (0) edge[]               node              {$E$}                               (5);
       \path[->,densely dotted] (0) edge[]               node[swap]        {$T$}                               (1);
       \path[->,densely dotted] (3) edge[bend left =5mm] node              {$T$}                               (1);
@@ -113,8 +105,7 @@
       \path[-latex]            (4) edge                 node[sloped]      {\smPAtrans{\varepsilon}{0134}{05}} (5);
       \path[-latex,alert]      (1) edge                 node[swap]        {\smPAtrans{\varepsilon}{31}{34}}   (4);
       \path[-latex]            (4) edge[loop above]     node              {\smPAtrans{\varepsilon}{3134}{34}} (4);
-      \path[-latex]            (2) edge                 node[sloped]      {\smPAtrans{\varepsilon}{32}{31}}
-                                                        node[swap,sloped] {\smPAtrans{\varepsilon}{02}{01}}   (1);
+      \path[-latex]            (2) edge                 node[sloped]      {\smPAtrans{\varepsilon}{32}{31}} node[swap,sloped] {\smPAtrans{\varepsilon}{02}{01}}   (1);
     \end{tikzpicture}
   }
     
