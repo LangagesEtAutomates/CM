@@ -2,9 +2,11 @@
 
 This repository contains modular and reusable teaching materials for a university-level course on formal languages and automata.
 
+
 ## Latest PDFs:
-- Slides (full animated version):  https://<org>.github.io/<repo>/slides.pdf
-- Handout (printable version): https://<org>.github.io/<repo>/handout.pdf
+- [Slides](https://LangagesEtAutomates.github.io/CM/slides.pdf): full animated version
+- [Handout](https://LangagesEtAutomates.github.io/CM/handout.pdf): printable version
+
 
 ## Structure
 
