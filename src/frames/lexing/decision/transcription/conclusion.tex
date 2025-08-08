@@ -1,0 +1,94 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages rationnels et langages reconnaissables}
+
+  \onBlock[top=-5mm]{Théorème}{
+    Les langages sur un alphabet $\Sigma$ reconnaissables par un automate fini, déterministe ou non,  sont exactement les langages rationnels
+    $$ \alert{\textsc{rat}_\Sigma =  \textsc{rec}_\Sigma} $$
+  }
+
+  \on[y=2mm]{\footnotesize
+    \begin{tikzpicture}
+      \small
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (exp) at (0,1.7) {Expression\\rationnelle};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (lex) at (8,1.7) {Analyseur\\lexical};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (nfa) at (0,0.0) {Automate fini\\non-déterministe};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (dfa) at (4,0.0) {Automate fini\\déterministe};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (min) at (8,0.0) {Automate fini\\minimal};
+
+      \node[example, above] at (exp.north) {$a (b|c)^\star$};
+      \node[example, above] at (lex.north) {$abc \rightarrow \cmark$, $bac \rightarrow \xmark$ };
+      
+      \tiny
+      \path[-latex, structure,dashed] (exp) edge                                                                        (lex);
+      \path[-latex, structure]        (exp) edge[bend left] node[right, align=left] {Algorithme de\\Thompson}           (nfa);
+      \path[-latex, structure]        (nfa) edge[bend left] node[left, align=right] {Lemme\\d'Arden}                    (exp);
+      \path[-latex, structure]        (nfa) edge            node[align=center]      {Sous-ensembles de\\Rabin \& Scott} (dfa);
+      \path[-latex, structure]        (dfa) edge            node[align=center]      {Méthode de\\Moore}                 (min);
+      \path[-latex, structure]        (min) edge            node[left, align=right] {Transcription}                     (lex);
+    \end{tikzpicture}
+  }
+  
+  \on[y=-30mm, x=-.38\textwidth,scale=.9]{
+    \begin{tikzpicture}[automaton, grid size=10mm, example]
+      \state[initial  ] (1) at (0,1) {$1$};
+      \state[         ] (2) at (0,2) {$2$};
+      \state[         ] (3) at (1,2) {$3$};
+      \state[         ] (4) at (2,2) {$4$};
+      \state[         ] (5) at (1,1) {$5$};
+      \state[         ] (6) at (2,1) {$6$};
+      \state[         ] (7) at (1,0) {$7$};
+      \state[         ] (8) at (2,0) {$8$};
+      \state[accepting] (9) at (0,0) {$9$};
+
+      \path (1) edge node       {$a$}           (2);
+      \path (3) edge node[swap] {$b$}           (4);
+      \path (7) edge node       {$c$}           (8);
+      \path (5) edge node[swap] {$\varepsilon$} (3);
+      \path (5) edge node       {$\varepsilon$} (7);
+      \path (4) edge node[swap] {$\varepsilon$} (6);
+      \path (8) edge node       {$\varepsilon$} (6);
+      \path (6) edge node       {$\varepsilon$} (5);
+      \path (2) edge node[swap] {$\varepsilon$} (5);
+      \path (5) edge node[swap] {$\varepsilon$} (9);
+    \end{tikzpicture}
+  }
+  
+  \on[y=-32mm,scale=.9]{
+    \begin{tikzpicture}[automaton, grid size=10mm, example]
+      \state[initial]   (1) at (0,1) {$1$};
+      \state[accepting] (2) at (1,1) {$2$};
+      \state[accepting] (3) at (1,0) {$3$};
+      \state[accepting] (4) at (0,0) {$4$};
+
+      \path  (1) edge             node[swap] {$a$} (2);
+      \path  (2) edge             node       {$b$} (3);
+      \path  (2) edge             node[swap] {$c$} (4);
+      \path  (3) edge[bend left]  node       {$c$} (4);
+      \path  (4) edge             node {$b$} (3);
+      \path  (3) edge[loop right] node       {$b$} (3);
+      \path  (4) edge[loop left ] node       {$c$} (4);
+    \end{tikzpicture}
+  }
+  
+  \on[y=-30mm, x=.33\textwidth,scale=.9]{
+    \begin{tikzpicture}[automaton, grid size=10mm, example]
+      \state[initial]   (1) at (0,0) {$1$};
+      \state[accepting] (2) at (1,0) {$2$};
+
+      \path  (1) edge             node {$a$} (2);
+      \path  (2) edge[loop above] node {$b$} (2);
+      \path  (2) edge[loop below] node {$c$} (2);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

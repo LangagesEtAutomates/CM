@@ -1,0 +1,55 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automate complet}
+
+  \onBlock[top=-2mm]{Définition -- AFN complet}{
+    Un AFN $A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ est dit \structure{complet} si pour chaque état $q$ et chaque symbole $a$, il existe au moins une transition sortant de $q$ étiquetée $a$ :
+    $$\forall q\in Q,  \forall a\in \Sigma, \alert{\exists q' \in Q,~q \xrightarrow{a} q'}$$
+  }
+
+  \onBlock{Théorème -- Complétion d'un automate}{
+    Tout AFN est équivalent à un AFN complet.
+  }
+
+  \onBlock[bottom=3mm]{Démonstration}{
+    $\mathcal{L}(A) = \mathcal{L}\left(\left\langle \Sigma, Q \cup \{\example{q_\bot}\}, I, F, \rightarrow_B \right\rangle\right)$, avec \\[2mm]
+    $\begin{array}{@{}r@{~}c@{~\big\{\,\big\langle}c@{,\,}c@{,\,}c@{\big\rangle\, \big\mid\; }l@{}}
+      \rightarrow_B~= & & q     & a & q'    & q \xrightarrow{a} q' \,\big\}\\
+      &            \cup & \alert{q}     & \alert{a} & \alert{q_\bot} & \alert{\nexists q'\in Q,~ q \xrightarrow{a} q'} \,\big\}\\
+      &            \cup & \example{q_\bot} & \example{a} & \example{q_\bot} & \example{a\in \Sigma} \,\big\}\\
+    \end{array}$
+  }
+  
+  \on[bottom, x=.33\textwidth]{
+    \begin{tikzpicture}[automaton]\small
+      \state[initial]   (1) at (0,2) {$1$}; 
+      \state[accepting] (2) at (2,2) {$2$}; 
+      \state[initial]   (3) at (0,0) {$3$}; 
+      \state            (4) at (2,0) {$4$}; 
+      \state[example]   (5) at (1,1) {$q_\bot$}; 
+
+      \path          (1) edge             node         {$a$}           (2);
+      \path          (1) edge[loop above] node         {$a$}           (1);
+      \path          (3) edge             node[swap]   {$b$}           (4);
+      \path          (3) edge[loop below] node         {$b$}           (3);
+      \path          (4) edge[loop below] node         {$b$}           (4);
+      \path          (2) edge[loop above] node         {$c$}           (2);
+      \path          (4) edge             node[swap]   {$\varepsilon$} (2);
+      \path[alert]   (1) edge             node[sloped] {$b, c$}        (5);
+      \path[alert]   (2) edge             node[sloped] {$a, b$}        (5);
+      \path[alert]   (3) edge             node[sloped] {$a, c$}        (5);
+      \path[alert]   (4) edge             node[sloped] {$a, c$}        (5);
+      \path[example] (5) edge[loop left]  node         {$a,b,c$}       (5);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

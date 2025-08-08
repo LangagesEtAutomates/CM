@@ -1,0 +1,52 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Hiérarchie de Chomsky}
+  
+  \centering
+  \begin{tikzpicture}[2Darray, x=25mm, y=17mm]
+    \arrayColumn[width=8mm, header=Type]{
+      \arrayLine{0}
+      \arrayLine{1}
+      \arrayLine{2}
+      \arrayLine{3}
+    }
+    
+    \arrayColumn[header=Grammaire]{
+      \arrayLine{Non-restreinte\\ $\alpha A \beta \rightarrow \gamma$}
+      \arrayLine{Contextuelle\\   $\alpha A \beta \rightarrow \alpha \gamma \beta$ \\ $\gamma\neq\varepsilon$}
+      \arrayLine{Algébrique\\     $A \rightarrow \beta$}
+      \arrayLine{Rationnelle\\    $A \rightarrow a B \mid b \mid \varepsilon$}
+    }
+    
+    \arrayColumn[header=Langage]{
+      \arrayLine{Récursivement\\ énumérable}
+      \arrayLine{Contextuel}
+      \arrayLine{Algébrique}
+      \arrayLine{Rationnel}
+    }
+    
+    \arrayColumn[header=Automate]{
+      \arrayLine{Machine\\de Turing}
+      \arrayLine{Automate\\linéairement\\ borné}
+      \arrayLine{Automate à pile\\non déterministe}
+      \arrayLine{Automate fini}
+    }
+    
+    \arrayColumn[header=Déterminisable]{
+      \arrayLine{Oui, mais \\complexité inconnue\\ \footnotesize $\textsc{p} \stackrel{?}{=} \textsc{np}$}
+      \arrayLine{Inconnu\\ \footnotesize $\textsc{nspace}(\mathcal{O}(n))$ \\ $\stackrel{?}{=}$\\$\textsc{dspace}(\mathcal{O}(n))$}
+      \arrayLine{Impossible}
+      \arrayLine{Oui,\\ exponentiel\\ en nombre\\ d'états}
+    }
+  \end{tikzpicture}
+  
+\end{frame}
+
+\endgroup

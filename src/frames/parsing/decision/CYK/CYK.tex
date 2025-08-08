@@ -10,38 +10,39 @@
 \SetKwFunction{CYK}{CYK}
 
 \begin{frame}[fragile]{Algorithme Cocke-Younger-Kasami (CYK)}
-  \tf[top, text]{\small
+
+  \on[top=-2mm, text]{\small
     \begin{algorithm}[H]
       \Fn{\CYK($\langle \Sigma, \Gamma, S, \rightarrow \rangle$ : grammaire, $u \in \Sigma^\star$) : booléen}{
         \lSi{$u = \varepsilon$}{\Retourner $S \rightarrow \varepsilon$}
         \Pour{$j$ allant de $1$ à $|u|$}{
-          \tfAlert<3>{$T[1, j] \leftarrow \{N\in \Gamma \mid N \rightarrow u[j]\}$}\;
+          \Alertb<3>{$T[1, j] \leftarrow \{N\in \Gamma \mid N \rightarrow u[j]\}$}\;
         }
         \Pour{$i$ allant de $2$ à $|u|$}{
           \Pour{$j$ allant de $1$ à $|u|-i+1$}{
-            \tfAlert<4->{$\displaystyle T[i, j] \leftarrow \bigcup_{k=1}^{i-1} \left\{N\in \Gamma \,\middle\mid\, \exists X \in T[k,j], \exists Y \in T[i-k,j+k],~ N \rightarrow X Y\right\}$}\;
+            \Alertb<4->{$\displaystyle T[i, j] \leftarrow \bigcup_{k=1}^{i-1} \left\{N\in \Gamma \,\middle\mid\, \exists X \in T[k,j], \exists Y \in T[i-k,j+k],~ N \rightarrow X Y\right\}$}\;
           }
         }
-        \Retourner \tfAlert<2>{$S\in T[|u|, 1]$}\;
+        \Retourner \Alertb<2>{$S\in T[|u|, 1]$}\;
       }
     \end{algorithm}
   }
 
-  \tfExampleBlock[bottom]{Exemple}{
+  \onExampleBlock[bottom]{Exemple}{
     \vspace{2mm}
     $\begin{array}{@{}l@{~=~}l@{}}
     G & \left\{\begin{array}{@{~}l@{~}l@{~}l@{\,}}
-    \alert<5,9>{S} &\alert<5,9>{\rightarrow}&  \alert<9>{AC} \mid \alert<5>{AB} \mid \varepsilon  \\
-    \alert<8>{C} &\alert<8>{\rightarrow}&  \alert<8>{TB}  \\
-    \alert<5,9>{T} &\alert<5,9>{\rightarrow}&  \alert<9>{AC} \mid \alert<5>{AB}  \\
-    \alert<3>{A} &\alert<3>{\rightarrow}& \alert<3>{a}  \\
-    \alert<3>{B} &\alert<3>{\rightarrow}& \alert<3>{b}
+    \alertb<5,9>{S} &\alertb<5,9>{\rightarrow}&  \alertb<9>{AC} \mid \alertb<5>{AB} \mid \varepsilon  \\
+    \alertb<8>{C} &\alertb<8>{\rightarrow}&  \alertb<8>{TB}  \\
+    \alertb<5,9>{T} &\alertb<5,9>{\rightarrow}&  \alertb<9>{AC} \mid \alertb<5>{AB}  \\
+    \alertb<3>{A} &\alertb<3>{\rightarrow}& \alertb<3>{a}  \\
+    \alertb<3>{B} &\alertb<3>{\rightarrow}& \alertb<3>{b}
     \end{array}\right.\\
     u & aabb
     \end{array}$
   }
 
-  \tf[x=17mm, y=-2cm]{
+  \on[x=17mm, y=-2cm]{
     \begin{tikzpicture}
       {\scriptsize
         \draw (-.75,2.8) node[above left]{\scriptsize $T[i,j]$};
@@ -65,7 +66,6 @@
       \node (c1) at (0.0,0.8) {}; 
       \node (c2) at (1.5,0.8) {}; 
       \node (d1) at (0.0,0.0) {}; 
-      
 
       \draw[fill=structure!15] (a1) +(-.75,-.4) rectangle +(.75,.4);
       \draw[fill=structure!15] (a2) +(-.75,-.4) rectangle +(.75,.4);
@@ -91,10 +91,10 @@
         \draw[example] (d1) +(-.75,-.4) node[above right] {$aabb$}; 
       }
       
-      \only<1>{
+      \onlyb<1>{
         \draw[-latex, example] (1.25,0.9) -- (1.25,2.5);
         \draw[-latex, example] (1.25,0.9) -- (4.25,2.5);
-      }\only<2>{
+      }\onlyb<2>{
         \node[structure] at (a1) {$\{...\}$};
         \node[structure] at (a2) {$\{...\}$};
         \node[structure] at (a3) {$\{...\}$};
@@ -105,70 +105,69 @@
         \node[structure] at (c1) {$\{...\}$};
         \node[structure] at (c2) {$\{...\}$};
         \node[structure] at (d1) {$\{...\alert{S?}...\}$};
-      }\only<3-|handout>{
+      }\only<3->{
         \node[structure] at (a1) {$\{A\}$};
         \node[structure] at (a2) {$\{A\}$};
         \node[structure] at (a3) {$\{B\}$};
         \node[structure] at (a4) {$\{B\}$};
-      }\only<4-|handout>{
+      }\only<4->{
         \node[structure] at (b1) {$\emptyset$};
-      }\only<5-|handout>{
+      }\only<5->{
         \node[structure] at (b2) {$\{S, T\}$};
-      }\only<6-|handout>{
+      }\only<6->{
         \node[structure] at (b3) {$\emptyset$};
-      }\only<7-|handout>{
+      }\only<7->{
         \node[structure] at (c1) {$\emptyset$};
-      }\only<7>{
+      }\onlyb<7>{
         \draw[alert] (0.0,2.55)  -- (1.5,1.75);
         \draw[alert] (0.0,1.75)  -- (3.0,2.55);
-      }\only<8-|handout>{
+      }\only<8->{
         \node<8->[structure] at (c2) {$\{C\}$};
-      }\only<8>{
+      }\onlyb<8>{
         \draw[alert] (1.5,2.55)  -- (3.0,1.75);
         \draw[alert] (1.5,1.75)  -- (4.5,2.55);
-      }\only<9-|handout>{
+      }\only<9->{
         \node[structure] at (d1) {$\{\alert{S}, T\}$};
-      }\only<9>{
+      }\onlyb<9>{
         \draw[alert] (0,2.55)  -- (1.5,0.95)  ;
         \draw[alert] (0,1.75)  -- (3.0,1.75)  ;
         \draw[alert] (0,0.95)  -- (4.5,2.55)  ;
       }
-      
     \end{tikzpicture}
   }
 
-  \tf[width=40mm, x=43mm, y=-23mm, anchor=north]{\small%
-    \only<-2|handout>{%
+  \on[width=40mm, x=43mm, y=-23mm, anchor=north]{\small%
+    \only<-2>{%
       \example{%
         $T[i,j]$ représente le facteur \\
         $u_{i,j} = u[j] \cdots u[j+i]$\\\vspace{2mm}
       }%
     }%
-    \only<2|handout>{%
+    \only<2>{%
       \structure{%
         $T[i,j]$ contient \\
         $\{N \in \Gamma \mid N \vdash^\star u_{i,j}\}$
       }%
     }%
-    \only<4>{%
+    \onlyb<4>{%
       On cherche \alert{$N \rightarrow XY \vdash aa$}\\
       $\bullet$ $X = A \in T[1,1]$ \\
       $\bullet$ $Y = A \in T[1,2]$ \\
       Pas de règle \alert{$N \rightarrow AA$}\\
     }%
-    \only<5>{%
+    \onlyb<5>{%
       On cherche \alert{$N \rightarrow XY \vdash ab$}\\
       $\bullet$ $X = A \in T[1,2]$ \\
       $\bullet$ $Y = B \in T[1,3]$ \\
       Deux règles \alert{$N \rightarrow AB$}\\
     }%
-    \only<6>{%
+    \onlyb<6>{%
       On cherche \alert{$N \rightarrow XY \vdash bb$}\\
       $\bullet$ $X = B \in T[1,3]$ \\
       $\bullet$ $Y = B \in T[1,4]$ \\
       Pas de règle \alert{$N \rightarrow BB$}\\
     }%
-    \only<7>{%
+    \onlyb<7>{%
       $aab = a \cdot ab = aa \cdot b$\\
       On cherche \alert{$N \rightarrow XY$}\\
       $\bullet$ $X \vdash^\star a$, $Y \vdash^\star ab$  \\
@@ -176,7 +175,7 @@
       \footnotesize \alert{$XY \in \{A\} \cdot \{S, T\} \cup \emptyset \cdot \{B\}$}\\
       Pas de règle \alert{$N \rightarrow AS$} ou \alert{$N \rightarrow AT$}\\
     }%
-    \only<8>{%
+    \onlyb<8>{%
       $aab = a \cdot bb = ab \cdot b$\\
       On cherche \alert{$N \rightarrow XY$}\\
       $\bullet$ $X \vdash^\star a$, $Y \vdash^\star bb$  \\
@@ -184,7 +183,7 @@
       \footnotesize \alert{$XY \in \{A\} \cdot \emptyset \cup \{S, T\} \cdot \{B\}$}\\
       Une règle \alert{$N \rightarrow TB$}\\
     }%
-    \only<9>{
+    \onlyb<9>{
       $\begin{array}{lll}
         aabb &=& a \cdot bbb\\
         &=& aa \cdot bb\\

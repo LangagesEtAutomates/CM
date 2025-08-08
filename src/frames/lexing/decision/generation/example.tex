@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple}
+
+  \on[y=27mm, text, align=center]{
+    Trouver un automate qui reconnaît\Large
+    $$\structure{a} \cdot \alert{(\structure{b} \example{\mid} \structure{c})^\star}$$
+  }
+  
+  \on[y=-10mm]{
+    \begin{tikzpicture}[automaton, x=6mm, y=20mm]
+      \tikzset{box/.style={rounded corners, draw=black!30, fill=black!10, inner sep=4mm,},}
+      
+      \uncover<2->{
+        \state[initial,           structure] (1)  at ( 0,2) {$1$};
+        \state[accepting ob=<-4>, structure] (2)  at ( 3,2) {$2$};
+        \state[initial ob=<2>,    structure] (3)  at (10,2) {$3$};
+        \state[accepting ob=<2>,  structure] (4)  at (13,2) {$4$};
+        \state[initial ob=<2>,    structure] (5)  at (10,0) {$5$};
+        \state[accepting ob=<2>,  structure] (6)  at (13,0) {$6$};
+        \path[structure] (1) edge node {$a$}           (2);
+        \path[structure] (3) edge node {$b$}           (4);
+        \path[structure] (5) edge node {$c$}           (6);
+      }\uncover<3->{
+        \state[initial ob=<3>,    example  ] (7)  at ( 8,1) {$7$};
+        \state[accepting ob=<3>,  example  ] (8)  at (15,1) {$8$};
+        \path[example]   (7) edge node {$\varepsilon$} (3);
+        \path[example]   (7) edge node {$\varepsilon$} (5);
+        \path[example]   (4) edge node {$\varepsilon$} (8);
+        \path[example]   (6) edge node {$\varepsilon$} (8);
+      }\uncover<4->{
+        \state[initial ob=<4>,    alert    ] (9)  at ( 6,2) {$9$};
+        \state[accepting,         alert    ] (10) at ( 6,0) {$10$};
+        \path[alert]     (9) edge node {$\varepsilon$} (7);
+        \path[alert]     (8) edge node {$\varepsilon$} (7);
+        \path[alert]     (7) edge node {$\varepsilon$} (10);
+      }\uncover<5->{
+        \path            (2) edge node {$\varepsilon$} (9);
+      }
+      
+      \begin{scope}[on background layer]%
+        \uncoverb<2-4>{ \node [box, fit=(1)(2)]       (box a)    {};   \node [above right, structure] at (box a.south west)    {$a$}; }
+        \uncoverb<2>{   \node [box, fit=(3)(4)]       (box b)    {};   \node [above right, structure] at (box b.south west)    {$b$}; }
+        \uncoverb<2>{   \node [box, fit=(5)(6)]       (box c)    {};   \node [above right, structure] at (box c.south west)    {$c$}; }
+        \uncoverb<3>{   \node [box, fit=(3)(6)(7)(8)] (box bc)   {};   \node [above right, example  ] at (box bc.south west)   {$b\mid c$}; }
+        \uncoverb<4>{   \node [box, fit=(8)(9)(10)]   (box star) {};   \node [below left , alert    ] at (box star.north east) {$(b\mid c)^\star$}; }
+        \uncover<5->{   \node [box, fit=(1)(8)(10)]   (box all)  {};   \node [above right,          ] at (box all.south west)  {$a\cdot(b\mid c)^\star$}; }
+      \end{scope}%
+    \end{tikzpicture}
+  }
+
+  \on[x=-35mm, y=-15mm]{
+    \begin{tikzpicture}[tree, x=9mm, y=8mm]
+      \tree[      node={           on=<{1,5-}>}                    ]{$\cdot$}{
+        \tree[    node={structure, on=<{1,2-}>}, edge={         on=<{1,5-}>}]{$a$}{}
+        \tree[    node={alert,     on=<{1,4-}>}, edge={         on=<{1,5-}>}]{$\star$}{
+          \tree[  node={example,   on=<{1,3-}>}, edge={alert,   on=<{1,4-}>}]{$\mid$}{
+            \tree[node={structure, on=<{1,2-}>}, edge={example, on=<{1,3-}>}]{$b$}{}
+            \tree[node={structure, on=<{1,2-}>}, edge={example, on=<{1,3-}>}]{$c$}{}
+          }
+        }
+      }
+    \end{tikzpicture}
+  }
+
+  
+\end{frame}
+
+\endgroup

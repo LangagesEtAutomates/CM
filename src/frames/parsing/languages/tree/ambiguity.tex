@@ -1,0 +1,74 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Ambiguïté d'une grammaire algébrique}
+
+  \onBlock[top=-3mm]{Définition -- Ambiguïté}{
+    Une grammaire est \structure{ambiguë} si \alert{un mot a plusieurs arbres de dérivation}.
+  }
+
+  \onExampleBlock[y=16mm]{Exemple : $u = a + a \times a$ et $G = \{A \rightarrow A + A \mid A \times A \mid a\}$}{}
+  
+  \on[y=-2mm,x=-.25\textwidth]{
+    \begin{tikzpicture}[tree, x=10mm, y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree[name=root] {$A$}{
+        \tree {$A$}{
+          \tree {$A$}{
+            \tree {$a$}{}
+          }
+          \tree {$+$}{}
+          \tree {$A$}{
+            \tree {$a$}{}
+          }
+        }
+        \tree[xshift=-1] {$\times$}{}
+        \tree {$A$}{
+          \tree[xshift=-1] {$a$}{}
+        }
+      }
+      \node[example] at ([yshift=4mm]root) {$(a + a) \times a$};
+    \end{tikzpicture}
+  }
+
+  \on[y=-2mm,x=.25\textwidth]{
+    \begin{tikzpicture}[tree, x=10mm, y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree[name=root] {$A$}{
+        \tree {$A$}{
+          \tree[xshift=1] {$a$}{}
+        }
+        \tree[xshift=1] {$+$}{}
+        \tree {$A$}{
+          \tree {$A$}{
+            \tree {$a$}{}
+          }
+          \tree {$\times$}{}
+          \tree {$A$}{
+            \tree {$a$}{}
+          }
+        }
+      }
+      \node[example] at ([yshift=4mm]root) {$a + (a \times a)$};
+    \end{tikzpicture}
+  }
+
+  \onBlock[bottom=-1mm]{Remarques}{
+    \vspace{-2mm}
+    \begin{itemize}
+    \item L'ambiguïté est une \structure{propriété de la grammaire}, pas du langage
+    \item Il existe des \structure{langages intrinsèquement ambigus}
+      \begin{itemize}
+      \item Toutes les grammaires qui l'engendrent sont ambiguës
+      \item Par exemple \example{$\left\{ a^i b^j c^k \,\middle\mid\, i=j \lor j=k \right\}$}
+      \end{itemize}
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\endgroup

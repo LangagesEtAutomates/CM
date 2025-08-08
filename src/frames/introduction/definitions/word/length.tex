@@ -1,0 +1,33 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Longueur et occurrences}
+  
+  \begin{block}{Définitions}
+    Soient $\Sigma$ un alphabet, $a\in\Sigma$, $u\in \Sigma^\star$ et $i\in \llbracket |u|\rrbracket$.
+    \begin{itemize}
+    \item La \structure{longueur} de $u$, notée $\alert{|u|}$, est l'unique $n$ tel que $u\in \Sigma^n$
+    \item On note \alert{$u_i = u(i)$} le $i^\text{ème}$ caractère de $u$
+    \item Une \structure{occurrence de $a$ dans $u$} est un indice $i\in \llbracket |u|\rrbracket$ tel que $u_i = a$
+    \item Le nombre d'occurrences de $a$ dans $u$ est noté $\alert{|u|_a}$
+    \end{itemize}
+  \end{block}
+  
+  \begin{exampleblock}{Exemples}
+    \begin{itemize}
+    \item $|\text{``banane''}| = 6$
+    \item $\forall x\in \Sigma^\star, |x| = 0 \Leftrightarrow x = \varepsilon$ car $\Sigma^0 = \{\varepsilon\}$
+    \item Les occurrences de `a' dans ``banane'' sont les indices 2 et 4
+    \item $|\text{``banane''}|_{\text{`a'}} = 2$
+    \end{itemize}
+  \end{exampleblock}
+
+\end{frame}
+
+\endgroup

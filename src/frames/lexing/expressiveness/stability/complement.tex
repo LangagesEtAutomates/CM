@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Stabilité par complémentaire}
+  
+  \onBlock[top]{Théorème -- Stabilité par complémentaire}{
+    Soient $\Sigma$ un alphabet et $L \in \textsc{rat}_\Sigma$. Alors $\overline{L} = \Sigma^\star \setminus L \in \textsc{rat}_\Sigma$. 
+  }
+
+  \onBlock<2-|handout>[y=8mm]{Preuve}{
+    \begin{itemize}
+    \item Il existe $\example{A = \langle \Sigma, Q, I, F, \rightarrow \rangle}$ \alert{déterministe complet} qui reconnaît $L$.
+    \item $\overline{L}$ est reconnu par $\structure{\overline{A} = \langle \Sigma, Q, I, Q \setminus F, \rightarrow \rangle}$.
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=-10mm]{Exemple}{}
+
+  \on[bottom,x=-.25\textwidth]{
+    \begin{tikzpicture}[automaton, example]
+      \node at (1,1) {\normalsize$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 1 \pmod{2} \}$};
+      \state[initial]   (a) at (0,0) {$0$};
+      \state[accepting] (b) at (2,0) {$1$};
+      
+      \path (a) edge[bend left ] node {$a$} (b);
+      \path (b) edge[bend left ] node {$a$} (a);
+      \path (a) edge[loop below] node {$b$} (a);
+      \path (b) edge[loop below] node {$b$} (b);
+    \end{tikzpicture}
+  }
+  
+  \on<2->[bottom,x=.25\textwidth]{
+    \begin{tikzpicture}[automaton, structure]
+      \node at (1,1) {\normalsize$\{ u\in \{a, b\}^\star \;|\; |u|_a \equiv 0 \pmod{2} \}$};
+      \state[initial,accepting]   (a) at (0,0) {$0$};
+      \state                      (b) at (2,0) {$1$};
+      
+      \path (a) edge[bend left ] node {$a$} (b);
+      \path (b) edge[bend left ] node {$a$} (a);
+      \path (a) edge[loop below] node {$b$} (a);
+      \path (b) edge[loop below] node {$b$} (b);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

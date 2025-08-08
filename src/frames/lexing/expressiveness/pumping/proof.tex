@@ -1,0 +1,78 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Démonstration du lemme de l'étoile}
+
+  \vspace{-2mm}  
+  \onlyb<-3>{\hspace\fill\example{\textbf{Exemple}}}%
+  \only<4->{\hspace\fill\alert{\textbf{Lemme de l'étoile}}}
+
+  Soient $\Sigma$ un alphabet, et $L$ un langage rationnel sur $\Sigma$.
+  \onlyb<-3>{\hspace\fill\example{$L = a(bc)^\star a$}}
+  \only<4->{\hspace\fill\alert{$\forall \Sigma, \forall L\in \textsc{rat}_\Sigma,$}}
+
+  Soit $A$ son automate minimal. Posons $N = |A|$.  
+  \onlyb<-3>{\hspace\fill\example{$N=4$}}
+  \only<4->{\hspace\fill\alert{$\exists N\in \mathbb{N},$}}
+  
+  Soit $u \in L$ tel que $|u| \ge N$. 
+  \onlyb<-3>{\hspace\fill\example{$u = abca$}}
+  \only<4->{\hspace\fill\alert{$\forall u\in L, |u| \ge N \Rightarrow ($}}
+
+  \begin{center}
+    \begin{tikzpicture}[automaton, y=5mm]
+      \state[initial]   (0) at (0, 2) {$0$};
+      \state[alert]     (1) at (1, 1) {$1$};
+      \state[example]   (2) at (2, 1) {$2$};
+      \state[accepting] (3) at (0, 0) {$3$};
+
+      \path[structure]  (0) edge node {$a$} (1);
+      \path[example]    (1) edge[bend left] node {$b$} (2);
+      \path[example]    (2) edge[bend left] node {$c$} (1);
+      \path[structure]  (1) edge node {$a$} (3);
+    \end{tikzpicture}
+
+    \pause
+    \structure{Pour reconnaître un mot de 4 lettres ou plus, il faut suivre une boucle}
+  \end{center}
+
+  Il existe un état $q$ que l'on visite deux fois. Posons :
+  \onlyb<-3>{\hspace\fill\example{$q = 1$}}%
+  
+  \begin{itemize}
+  \item $x$ le préfixe de $u$ avant la première visite de $q$
+    \onlyb<-3>{\hspace\fill\example{$x = a$}}
+    \only<4-|handout>{\hspace\fill\alert{$\exists x, y, z \in \Sigma^\star,$}}
+  \item $y$ le facteur de $u$ entre les deux visites de $q$
+    \onlyb<-3>{\hspace\fill\example{$y = bc$}}
+    \only<4-|handout>{\hspace\fill\alert{$y \neq \varepsilon$}}
+  \item $z$ le suffixe de $u$ après la deuxième visite de $q$
+    \onlyb<-3>{\hspace\fill\example{$z = a$}}
+    \only<4-|handout>{\hspace\fill\alert{$\land\; u = x\cdot y \cdot z$}}
+  \end{itemize}
+
+  \pause
+
+  \begin{center}\structure{Si on suit une boucle une fois, on peut la suivre plusieurs fois}\end{center}
+
+  On a :
+  \begin{itemize}
+  \item On peut prendre la boucle $0$, $2$, $3$, ... fois
+    \onlyb<-3>{\hspace\fill\example{$aa \in L, abcbca\in L$}}
+    \only<4-|handout>{\hspace\fill\alert{$\land\; \forall i\in \mathbb{N}, x \cdot y^i \cdot z \in L$}}
+  \item $N$ lettres suffisent pour repasser dans un état
+    \onlyb<-3>{\hspace\fill\example{$|abc| \le 4$}}
+    \only<4-|handout>{\hspace\fill\alert{$\land\; |x\cdot y| \le N)$}}
+  \end{itemize}
+
+  \phantom{.}
+\end{frame}
+
+
+\endgroup

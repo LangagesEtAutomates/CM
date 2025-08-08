@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple illustratif : grammaire française}
+
+  \begin{itemize}
+  \item Une grammaire est une collection de règles grammaticales du type :\vspace{1mm}
+    \begin{center}
+      \example{\og Une phrase est formée d'un sujet, et d'un groupe verbal \fg}\vspace{-2mm}
+      $$\example{\mathit{Phrase} \rightarrow \mathit{Sujet}~\mathit{GV}}$$
+      \begin{tikzpicture}[tree, x=2cm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+        \tree                  {$\mathit{Phrase}$}{
+          \tree                {$\mathit{Sujet}$}{
+            \tree              {$\mathit{Groupe~nominal}$}{
+              \tree[yshift=-1] {Jean}{}
+            }                   
+          }                     
+          \tree                {$\mathit{Groupe~verbal}$}{
+            \tree              {$\mathit{Verbe}$}{
+              \tree[yshift=-1] {mange}{}
+            }                   
+            \tree              {$\mathit{Groupe~nominal}$}{
+              \tree            {$\mathit{Determinant}$}{
+                \tree          {une}{}
+              }                 
+              \tree            {$\mathit{Nom~commun}$}{
+                \tree          {pomme}{}
+              }
+            }
+          }
+        }
+      \end{tikzpicture}
+    \end{center}
+  \item Les grammaires décrivent des mots et des langages par \structure{réécriture}.
+  \item À la différence des définitions rationnelles, elles autorisent la \structure{récursivité}.
+  \end{itemize}
+
+\end{frame}
+
+\endgroup

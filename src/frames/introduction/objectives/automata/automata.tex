@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Et les automates ?}
+
+  \on[text, top=-2mm]{
+    \begin{description}
+    \item[Langage :] abstraction d'un problème binaire
+    \item[Automate :] abstraction d'une solution au problème binaire
+      \begin{itemize}
+      \item Modèle mathématique d'une structure algorithmique
+      \item Différents types selon l'organisation de la mémoire
+      \end{itemize}
+    \end{description}
+  }
+ 
+  \onBlock<2->[y=10mm]{La hiérarchie de Chomsky}{}
+ 
+  \on<2->[x=-15mm, y=-15mm]{\small
+    \begin{tikzpicture}[2Darray]
+      \arrayColumn[header=Langage,width=28mm]{
+        \arrayLine[anchor=center,]{Récursivement\\ énumérable}
+        \arrayLine[anchor=center,]{Contextuel}
+        \arrayLine[structure]{Algébrique}
+        \arrayLine[structure]{Rationnel}
+      }
+      \arrayColumn[header=Automate,width=28mm]{
+        \arrayLine{Machine de Turing}
+        \arrayLine{Automate\\linéairement borné}
+        \arrayLine[structure]{Automate à pile\\non déterministe}
+        \arrayLine[structure]{Automate fini}
+      }
+      \arrayColumn[header=Exemples,width=28mm]{
+        \arrayLine{Primalité, \\Sudoku...}
+        \arrayLine{Langues\\naturelles}
+        \arrayLine[structure]{Langages de\\programmation}
+        \arrayLine[structure]{Identifiants,\\ nombres...}
+      }
+    \end{tikzpicture}
+  }
+  
+  \onImage<2->[x=45mm,y=-17mm]{%
+    width=2.2cm,
+    title={Noam Chomsky},
+    license={{\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA}} (\ccbysa{} — 2017, \href{https://commons.wikimedia.org/wiki/File:Noam_Chomsky_portrait_2017_retouched.png}{Wikimedia})},
+    img={Chomsky.jpg}
+  }
+  
+\end{frame}
+
+\endgroup

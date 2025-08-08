@@ -1,0 +1,90 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaire des expressions rationnelles}
+
+  \on[text, top]{
+    Soit $\Sigma = \{a, b\}$. Le langage des expressions rationnelles sur $\Sigma$, \\$\textsc{reg}_\Sigma$ est engendré par la grammaire non-ambiguë
+    $\langle \tilde\Sigma, \Gamma, \structure{\textsc{Union}}, \rightarrow \rangle$, où : \small
+    \vspace{2mm}
+    \begin{itemize}
+    \item $\tilde\Sigma = \{\alert{a}, \alert{b}, \alert{\emptyset}, \alert{\varepsilon}, \alert{(}, \alert{)}, \alert{|}, \alert{\cdot}, \alert{\star} \}$
+    \item $\Gamma = \{\structure{\textsc{Union}}, \structure{\textsc{Concat}}, \structure{\textsc{Etoile}}, \structure{\textsc{Par}}, \structure{\textsc{Terme}}\}$
+    \item $\left\{\begin{array}{rcl}
+      \structure{\textsc{Union}}  &\rightarrow& \structure{\textsc{Union}} \, \alert{|} \, \structure{\textsc{Concat}} \\
+      & | &  \structure{\textsc{Concat}} \\
+      \structure{\textsc{Concat}} &\rightarrow& \structure{\textsc{Concat}} \, \alert{\cdot} \, \structure{\textsc{Etoile}} \\
+      & | & \structure{\textsc{Etoile}} \\
+      \structure{\textsc{Etoile}} &\rightarrow& \structure{\textsc{Etoile}}\,^{\alert{\star}} \\
+      & | & \structure{\textsc{Par}} \\
+      \structure{\textsc{Par}}    &\rightarrow& \alert{(} \structure{\textsc{Union}} \alert{)} \\
+      & | &  \structure{\textsc{Terme}} \\
+      \structure{\textsc{Terme}}  &\rightarrow& \alert{\varepsilon} \,|\, \alert{\emptyset} \,|\, \alert{a} \,|\, \alert{b}  \\
+    \end{array}\right.$
+    \end{itemize}
+  }
+  
+  \on[x=.2\textwidth, bottom=-1mm]{\footnotesize
+    \begin{tikzpicture}[tree, x=11mm,y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree[name=north]{\textsc{Union}}{
+        \tree{\textsc{Etoile}}{
+          \tree{\textsc{Etoile}}{
+            \tree{\textsc{Par}}{
+              \tree[xshift=3]{$($}{}
+              \tree{\textsc{Union}}{
+                \tree[xshift=1]{\textsc{Union}}{
+                  \tree{\textsc{Concat}}{
+                    \tree[name=west]{\textsc{Concat}}{\tree[edge=densely dotted]{\textsc{Terme}}{\tree[name=south]{$a$}{}}}
+                    \tree{$\cdot$}{}
+                    \tree{\textsc{Etoile}}{\tree[edge=densely dotted]{\textsc{Terme}}{\tree{$b$}{}}}
+                  }
+                }
+                \tree{$|$}{}
+                \tree{\textsc{Concat}}{
+                  \tree{\textsc{Concat}}{\tree[edge=densely dotted]{\textsc{Terme}}{\tree[xshift=-1]{$b$}{}}}
+                  \tree[xshift=-1]{$\cdot$}{}
+                  \tree[name=east]{\textsc{Etoile}}{\tree[edge=densely dotted]{\textsc{Terme}}{\tree[xshift=-1]{$a$}{}}}
+                }
+              }
+              \tree[xshift=-3]{$)$}{}
+            }
+          }
+          \tree[xshift=-3]{$\star$}{}
+        }
+      }
+      \begin{pgfonlayer}{background}
+        \node[fit=(north)(south)(east)(west), inner sep=0pt, outer sep=0pt] (box) {};
+        \draw[rounded corners, black!30, fill=black!10] (box.south west) -- (west.north west) -- (north.north west) -- (box.north east) -- (box.south east) -- cycle;
+        \node[anchor=north east] at (box.north east) {CST};
+      \end{pgfonlayer}
+    \end{tikzpicture}
+  }
+
+  \on[x=-.33\textwidth, bottom=-1mm]{\footnotesize
+    \begin{tikzpicture}[tree, y=5mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree[name=root]{$*$}{\tree{$|$}{
+          \tree{$\cdot$}{
+            \tree[name=left]{$a$}{}
+            \tree{$b$}{}
+          }
+          \tree{$\cdot$}{
+            \tree{$b$}{}
+            \tree[name=right]{$a$}{}
+          }
+      }}
+      \begin{pgfonlayer}{background}
+        \node[rounded corners, draw=black!30, fill=black!10, fit=(left)(root)(right)] (box) {};
+        \node[anchor=north west] at (box.north west) {AST};
+      \end{pgfonlayer}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

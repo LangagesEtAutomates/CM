@@ -9,7 +9,7 @@
 
 \begin{frame}{Langage reconnu par un AFN}
 
-  \tf[text, top]{
+  \on[text, top]{
     Soit $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN.
 
     \begin{block}{Définition -- langage reconnu (ou accepté)}
@@ -20,7 +20,7 @@
     \end{block}
   }
 
-  \tfExampleBlock[bottom]{Exemple}{
+  \onExampleBlock[bottom]{Exemple}{
     Pour \example{$i=3$}, \example{$f=2$} et \example{$u=bbc$}, on a : 
     \begin{enumerate}
     \item $\langle bbc, 1 \rangle \leadsto^\star \langle \varepsilon, 2 \rangle$
@@ -30,20 +30,20 @@
     Donc \example{$bbc \in \mathcal{L}(A)$}
   }
 
-  \tf[bottom, x=.25\textwidth]{
-    \begin{tikzpicture}[smAutomaton]\small
-      \smState[\smInitial]      (1) at (0.0,1.5) {$1$}; 
-      \smState[\smAccepting]    (2) at (1.5,1.5) {$2$}; 
-      \smState[\smInitialAbove] (3) at (0.0,0,0) {$3$}; 
-      \smState                  (4) at (1.5,0,0) {$4$}; 
+  \on[bottom, x=.25\textwidth]{
+    \begin{tikzpicture}[automaton, grid size=15mm]
+      \state[initial]       (1) at (0,1) {$1$}; 
+      \state[accepting]     (2) at (1,1) {$2$}; 
+      \state[initial above] (3) at (0,0) {$3$}; 
+      \state                (4) at (1,0) {$4$}; 
 
-      \smPath (1) edge             node       {$a$}           (2);
-      \smPath (1) edge[loop above] node       {$a$}           (1);
-      \smPath (3) edge             node[swap] {$b$}           (4);
-      \smPath (3) edge[loop left ] node       {$b$}           (3);
-      \smPath (4) edge[loop right] node       {$b$}           (4);
-      \smPath (2) edge[loop above] node       {$c$}           (2);
-      \smPath (4) edge             node[swap] {$\varepsilon$} (2);
+      \path (1) edge             node       {$a$}           (2);
+      \path (1) edge[loop above] node       {$a$}           (1);
+      \path (3) edge             node[swap] {$b$}           (4);
+      \path (3) edge[loop left ] node       {$b$}           (3);
+      \path (4) edge[loop right] node       {$b$}           (4);
+      \path (2) edge[loop above] node       {$c$}           (2);
+      \path (4) edge             node[swap] {$\varepsilon$} (2);
     \end{tikzpicture}
   }
   

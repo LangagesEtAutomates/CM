@@ -8,53 +8,54 @@
 \begingroup
 
 \begin{frame}{Résolution de système d'équations rationnelles}
-    \tfBlock[top]{Système d'équations rationnelles}{
-    $\left\{\begin{array}{rcl}
-    L_0 &=& bL_0 \mid a L_1 \\
-    L_1 &=& b L_1 \mid b L_2 \\
-    L_2 &=& L_3 \mid \varepsilon \\
-    L_3 &=& a L_3 \mid b L_1 \\
+  
+  \onBlock[top]{Système d'équations rationnelles}{
+    $\left\{\begin{array}{@{~}c@{~=~}r@{\;\mid\;}l@{}}
+    L_0 & bL_0 & a L_1 \\
+    L_1 & b L_1 & b L_2 \\
+    L_2 & L_3 & \varepsilon \\
+    L_3 & a L_3 & b L_1 \\
     \end{array}\right.$
   }
 
-  \tf[top,x=.25\textwidth]{\small
-    \begin{tikzpicture}[smAutomaton, node distance=1.3cm]
-      \smState[\smInitial]   (q0)   {$q_0$};
-      \smState               (q1) [right=of q0]  {$q_1$};
-      \smState[\smAccepting] (q2) [below=of q1]  {$q_2$}; 
-      \smState               (q3) [right=of q1]  {$q_3$}; 
+  \on[top,x=.25\textwidth]{
+    \begin{tikzpicture}[automaton]
+      \state[initial]   (q0) at (0,1)  {$q_0$};
+      \state            (q1) at (1,1)  {$q_1$};
+      \state[accepting] (q2) at (2,1)  {$q_2$}; 
+      \state            (q3) at (1,0)  {$q_3$}; 
 
-      \smPath[\smStructure] (q0) edge             node {$a$} (q1);
-      \smPath               (q1) edge             node[swap] {$b$} (q2);
-      \smPath               (q2) edge             node[swap] {$\varepsilon$} (q3);
-      \smPath               (q3) edge             node[swap] {$b$} (q1);
-      \smPath[\smExample]   (q0) edge[loop above] node       {$b$} (q0);
-      \smPath               (q1) edge[loop above] node       {$b$} (q1);
-      \smPath               (q3) edge[loop above] node       {$a$} (q3);
+      \path[structure] (q0) edge             node {$a$} (q1);
+      \path            (q1) edge             node {$b$} (q2);
+      \path            (q2) edge             node {$\varepsilon$} (q3);
+      \path            (q3) edge             node {$b$} (q1);
+      \path[example]   (q0) edge[loop above] node {$b$} (q0);
+      \path            (q1) edge[loop above] node {$b$} (q1);
+      \path            (q3) edge[loop left ] node {$a$} (q3);
     \end{tikzpicture}
   }
 
-  \tf[text,bottom]{
+  \on[text,bottom]{
     \begin{enumerate}
     \item \structure{$L_1 = b L_1 \mid b L_2$}. $\varepsilon \notin \{b\}$, donc d'après Arden, $L_1 = b^\star b L_2 = b^+ L_2$. 
     \item \structure{$L_0 = b L_0 \mid a L_1$}. $\varepsilon \notin \{b\}$, donc d'après Arden, $L_0 = b^\star a L_1 = b^\star a b^+ L_2$. 
     \item \structure{$L_3 = a L_3 \mid b L_1$}. $\varepsilon \notin \{a\}$, donc d'après Arden, $L_3 = a^\star b L_1 = a^\star b b^+ L_2$. 
-    \item $\structure{L_2 = L_3 \mid \varepsilon} = a^\star b b^+ L_2 \mid \varepsilon$. $\varepsilon \notin a^\star b b^+$, donc $L_2 = (a^\star b.b^+)^\star$. 
+    \item $\structure{L_2 = \phantom{a}L_3 \mid \varepsilon} = a^\star b b^+ L_2 \mid \varepsilon$. $\varepsilon \notin a^\star b b^+$, donc $L_2 = (a^\star b.b^+)^\star$. 
     \end{enumerate}
 
     $$
     \left\{
-    \begin{array}{rclclcl}
-      L_0 &=& b^\star a b^+ (a^\star bb^+)^\star\\
-      L_1 &=& b^+ (a^\star bb^+)^\star \\
-      L_2 &=& (a^\star bb^+)^\star \\
-      L_3 &=& (a^\star bb^+)^+\\
+    \begin{array}{@{~}r@{~=~}l}
+      L_0 & b^\star a b^+ (a^\star bb^+)^\star\\
+      L_1 & b^+ (a^\star bb^+)^\star \\
+      L_2 & (a^\star bb^+)^\star \\
+      L_3 & (a^\star bb^+)^+\\
     \end{array}
     \right.
     $$
-
     \alert{L'automate reconnaît le langage $\mathcal{L}(A) = b^\star a b^+ (a^\star bb^+)^\star$.}
   }
+  
 \end{frame}
 
 \endgroup

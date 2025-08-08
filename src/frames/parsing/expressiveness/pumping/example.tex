@@ -1,0 +1,102 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple d'utilisation du lemme de pompage}
+  
+  \onBlock[top=-5mm]{Montrer que $L \eqdef \{a^nb^nc^n \mid n\in \mathbb{N}\}$ n'est pas algébrique}{
+    Soit $\Sigma \eqdef \{a, b, c\}$.%
+    \only<2-|handout>{
+      Si $L$ est algébrique, $L$ vérifie le lemme de pompage :
+
+      \vspace{-4mm}
+      $$
+      \begin{array}{c}
+        \structure{\exists N\in \mathbb{N}}, \alert{\forall u\in L, |u| \ge N} \Rightarrow (\structure{\exists v, w, x, y, z\in \Sigma^\star}, \\
+        u = v \cdot w \cdot x\cdot y \cdot z \land w \cdot y\neq \varepsilon \land |w\cdot x\cdot y| \le N \land \alert{\forall i \in \mathbb{N}}, v\cdot w^i\cdot x\cdot y^i \cdot z \in L)
+      \end{array}
+      $$
+      \vspace{-2mm}
+      
+      \structure{Soit $N$ donné par le lemme pompage}.
+    }
+    
+    \only<3->{%
+      \alert{Posons $u = a^N b^N c^N$. On a bien $u\in L$ et $|u| = 3N \ge N$}.\\
+      \structure{Soit $v \cdot w \cdot x\cdot y \cdot z$ la décomposition de $u$ donnée par le lemme de pompage}. 
+    }
+  }
+  
+  \on<4->[y=-10mm]{
+    \begin{tikzpicture}[word, x=4mm, y=3mm]
+      \cell[open]{\alert{$a$}}      \smsave{a1}
+      \cell[open]{\alert{$\cdots$}}             
+      \cell[open]{\alert{$a$}}      \smsave{an}
+      \cell[open]{\alert{$\cdot$}}             
+      \cell[open]{\alert{$b$}}      \smsave{b1}
+      \cell[open]{\alert{$\cdots$}}             
+      \cell[open]{\alert{$b$}}      \smsave{bn}
+      \cell[open]{\alert{$\cdot$}}             
+      \cell[open]{\alert{$c$}}      \smsave{c1}
+      \cell[open]{\alert{$\cdots$}}             
+      \cell[open]{\alert{$c$}}      \smsave{cn}
+      
+      \draw [decorate, decoration={brace, amplitude=5pt}] ([xshift=1mm]a1.north west) -- ([xshift=-1mm]an.north east) node[midway,yshift=4mm]{$N$};
+      \draw [decorate, decoration={brace, amplitude=5pt}] ([xshift=1mm]b1.north west) -- ([xshift=-1mm]bn.north east) node[midway,yshift=4mm]{$N$};
+      \draw [decorate, decoration={brace, amplitude=5pt}] ([xshift=1mm]c1.north west) -- ([xshift=-1mm]cn.north east) node[midway,yshift=4mm]{$N$};
+
+      \draw [decorate, decoration={brace, amplitude=5pt, mirror}] ([xshift=1mm]an.south west) -- ([xshift=-1mm]b1.south east) node[midway,yshift=-4mm]{$|wxy|\le N$};
+      \draw [decorate, decoration={brace, amplitude=5pt, mirror}] ([xshift=1mm]bn.south west) -- ([xshift=-1mm]c1.south east) node[midway,yshift=-4mm]{$|wxy|\le N$};
+      \node [anchor=east] at (a1.west) {$u=$};
+    \end{tikzpicture}       
+  }
+
+  \on<5->[text, bottom=-1mm]{
+    \begin{itemize}
+    \item Comme $wy \neq \varepsilon$, $\alpha = wy[1] \in \Sigma$ est une lettre de $wy$.
+    \item Comme $|wxy| \le N$, il existe $\beta \in \Sigma$ tel que $\beta$ n'est pas une lettre de $wy$. 
+    \item \alert{Posons $i=2$}. $|v \cdot w^2 \cdot x\cdot  y^2\cdot   z|_\alpha > |v\cdot  w^2\cdot  x\cdot  y^2\cdot   z|_\beta$, donc $v\cdot  w^2\cdot  x\cdot  y^2\cdot   z\notin L$. 
+    \end{itemize}
+    Absurde ! Donc $L$ n'est pas algébrique. 
+  }
+
+  \obExampleBlock<-4>[y=-25mm]{On sait}{}
+
+  \ob<1>[y=-25mm, anchor=north, text]{
+    \begin{itemize}
+    \item $\begin{array}[t]{l}
+      \alert{\forall L \in \textsc{alg}_\Sigma}, \structure{\exists N\in \mathbb{N}}, \forall u\in L, |u| \ge N \Rightarrow (\exists v, w, x, y, z\in \Sigma^\star, \\
+      u = v w x y z \land w y\neq \varepsilon \land |wxy| \le N \land \forall i \in \mathbb{N}, v w^i x y^i z \in L)
+    \end{array}$
+    \end{itemize}
+  }
+
+  \ob<2-4>[y=-25mm, anchor=north, left=.35\textwidth]{
+    \begin{itemize}
+    \item $L \in \textsc{alg}_\Sigma$
+    \item<3-> $v, w, x, y, z\in \Sigma^\star$
+    \end{itemize}
+  }
+  
+  \ob<2-4>[y=-25mm, anchor=north, width=.35\textwidth]{
+    \begin{itemize}
+    \item $N \in \mathbb{N}$
+    \item<3-> $wy\neq \varepsilon$
+    \end{itemize}
+  }
+  
+  \ob<3-4>[y=-25mm, anchor=north, right=.35\textwidth]{
+    \begin{itemize}
+    \item $v \cdot w \cdot x \cdot y \cdot z = a^N b^N c^N$
+    \item $\alert{|wxy| \le N}$
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\endgroup

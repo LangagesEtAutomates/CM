@@ -9,7 +9,7 @@
 
 \begin{frame}{Parser LR (simplifié) pour le langage $\left\{ a^n c b^n \mid n\in \mathbb{N}\right\}$}
 
-  \tfBlock[bottom=-2mm]{Deux sortes de transitions}{
+  \onBlock[bottom=-2mm]{Deux sortes de transitions}{
     \begin{description}
     \item[\alert{Décalage} :]
       lecture d'un terminal
@@ -24,93 +24,80 @@
     \end{description}
   }
   
-  \tf[left=.5\textwidth, top]{
+  \on[left=.5\textwidth, top]{
     \structure{$G = \left \langle \{a, b, c\}, \{S\}, S, \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{\,}}
-    S &\rightarrow& a S b \\
-    S &\rightarrow & c
-    \end{array}\right\}\right\rangle$}
+      S &\rightarrow& a S b \\
+      S &\rightarrow & c
+      \end{array}\right\}\right\rangle$}
   }
   
-  \tf[right=.4\textwidth, top]{
-    \begin{smArray}
-      \smCell[\smNone]{}
-      \smCell[\smAlert<-1>]{a} \smHead<1|handout> 
-      \smCell[\smAlert<-2>]{a} \smHead<2> 
-      \smCell[\smAlert<-3>]{c} \smHead<3> 
-      \smCell[\smAlert<-5>]{b} \smHead<4-5> 
-      \smCell[\smAlert<-7>]{b} \smHead<6-7> 
-      \smCell[\smNone]{} \smHead<8-> 
-    \end{smArray}
+  \on[right=.4\textwidth, top]{
+    \begin{tikzpicture}[grid, x=5mm, y=5mm]
+      \cell[open]{}
+      \cell[alert ob=<-1>]{a} \smhead[on=<1>  ] 
+      \cell[alert ob=<-2>]{a} \smhead[ob=<2>  ] 
+      \cell[alert ob=<-3>]{c} \smhead[ob=<3>  ] 
+      \cell[alert ob=<-5>]{b} \smhead[ob=<4-5>] 
+      \cell[alert ob=<-7>]{b} \smhead[ob=<6-7>] 
+      \cell[open]{}           \smhead[ob=<8-> ] 
+    \end{tikzpicture}
   }
 
-  \tf[x=-10mm, y=5mm]{\footnotesize
-    \begin{tikzpicture}[smAutomaton, initial text=$\mathcal{I}$]
-      \tikzset{state/.append style={rectangle, rounded corners=4mm, minimum width=22mm, minimum height=8mm},}
+  \on[x=-10mm, y=5mm]{
+    \begin{tikzpicture}[pushdown, initial text=$\mathcal{I}$, x=35mm]
 
-      \smDraw[\smAlert<1>]{
-        \node[state, initial]   (I) at (0.0,0.0) {$\mathcal{I}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
-          S &\rightarrow& \alert{\bullet} a S b \\
-          S &\rightarrow & \alert{\bullet} c
-          \end{array}\right.
-          $};
-      }
-      \smDraw[\smAlert<2-3>]{
-        \node[state]            (A) at (0.0,2.0) {$\mathcal{A}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
-          S &\rightarrow& \alert{\bullet} a \!\structure{\bullet}\! S b \\
-          S &\rightarrow & \alert{\bullet} c
-          \end{array}\right.
-          $}; 
-      }
-      \smDraw[\smExample<6,8>]{
-        \node[state]            (B) at (7.0,2.0) {$\mathcal{B}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
-          S &\rightarrow& a S b \example{\bullet}  \\
-          S &\rightarrow &  c
-          \end{array}\right.
-          $};
-      }
-      \smDraw[\smExample<4>]{
-        \node[state]            (C) at (3.5,0.0) {$\mathcal{C}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
-          S &\rightarrow& a S b  \\
-          S &\rightarrow &  c \example{\bullet}
-          \end{array}\right.
-          $};
-      }
-      \smDraw[\smAlert<5,7>]{
-        \node[state]            (S) at (3.5,2.0) {$\mathcal{S}:
-          \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
-          S &\rightarrow& a S \alert{\bullet} b  \\
-          S &\rightarrow &  c
-          \end{array}\right.
-          $};  
-      }
-      \smDraw[\smStructure<9>]{
-        \node[state, accepting] (F) at (7.0,0.0) {$\mathcal{F}:$\begin{tabular}{@{\,}c@{}}accepte sur\\état final\end{tabular}};
-      }
+      \state[rectangle, initial, alert ob=<1>]   (I) at (0,0) {$\mathcal{I}:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& \alert{\bullet} a S b \\
+        S &\rightarrow & \alert{\bullet} c
+        \end{array}\right.
+        $};
+      \state[rectangle, alert ob=<2-3>]            (A) at (0,1) {$\mathcal{A}:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& \alert{\bullet} a \structure{\bullet} S b \\
+        S &\rightarrow & \alert{\bullet} c
+        \end{array}\right.
+        $}; 
+      \state[rectangle, example ob=<6>, alert ob=<8>]            (B) at (2,1) {$\mathcal{B}:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& a S b \example{\bullet}  \\
+        S &\rightarrow &  c
+        \end{array}\right.
+        $};
+      \state[rectangle, example ob=<4>]            (C) at (1,0) {$\mathcal{C}:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& a S b  \\
+        S &\rightarrow &  c \example{\bullet}
+        \end{array}\right.
+        $};
+      \state[rectangle, alert ob=<5>, alert ob=<7>]            (S) at (1,1) {$\mathcal{S}:
+        \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
+        S &\rightarrow& a S \alert{\bullet} b  \\
+        S &\rightarrow &  c
+        \end{array}\right.
+        $};  
+      \state[rectangle, accepting, structure ob=<9>] (F) at (2,0) {$\mathcal{F}:$\begin{tabular}{@{\,}c@{}}accepte sur\\état final\end{tabular}};
       
-      \smPath[\smAlert]   (I) edge                node[swap]             {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                       (A);
-      \smPath[\smAlert]   (A) edge[loop above]    node[]                 {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                       (A);
-      \smPath[\smAlert]   (A) edge                node[sloped]           {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                       (C);
-      \smPath[\smAlert]   (I) edge                node[]                 {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                       (C);
-      \smPath[\smExample] (C) edge                node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{I}C}}{\mathcal{\structure{I}F}}}   (F);
-      \smPath[\smExample] (C) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{A} C}}{\mathcal{\structure{A} S}}} (S);
-      \smPath[\smAlert]   (S) edge                node[]                 {\smPAtrans{b}{\varepsilon}{\mathcal{B}}}                                       (B);
-      \smPath[\smExample] (B) edge[bend left=5mm] node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{A}ASB}}{\mathcal{\structure{A}S}}} (S);
-      \smPath[\smExample] (B) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{I}ASB}}{\mathcal{\structure{I}F}}} (F);
+      \path[alert]   (I) edge                node[swap]             {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                       (A);
+      \path[alert]   (A) edge[loop above]    node[]                 {\smPAtrans{a}{\varepsilon}{\mathcal{A}}}                                       (A);
+      \path[alert]   (A) edge                node[sloped]           {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                       (C);
+      \path[alert]   (I) edge                node[]                 {\smPAtrans{c}{\varepsilon}{\mathcal{C}}}                                       (C);
+      \path[example] (C) edge                node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{I}C}}{\mathcal{\structure{I}F}}}   (F);
+      \path[example] (C) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{A} C}}{\mathcal{\structure{A} S}}} (S);
+      \path[alert]   (S) edge                node[]                 {\smPAtrans{b}{\varepsilon}{\mathcal{B}}}                                       (B);
+      \path[example] (B) edge[bend left=5mm] node[]                 {\smPAtrans{\varepsilon}{\mathcal{\structure{A}ASB}}{\mathcal{\structure{A}S}}} (S);
+      \path[example] (B) edge                node[swap,yshift=-1mm] {\smPAtrans{\varepsilon}{\mathcal{\structure{I}ASB}}{\mathcal{\structure{I}F}}} (F);
     \end{tikzpicture}
   }
   
-  \tf[x=51mm,y=1mm]{
-    \begin{smStack}[width=10mm]
-      \smCell[\smAlert<-7,9>   \smStructure<8>               ]{$\mathcal{I}$}
-      \smCell[\smAlert<2-5,7,9>\smStructure<6>\smExample<8>  ]{$\only<2-8>{\mathcal{A}}\only<9>{\mathcal{F}}$}
-      \smCell[\smAlert<3,5,7>\smStructure<4>\smExample<6,8>  ]{$\only<3-6>{\mathcal{A}}\only<7-8>{\mathcal{S}}$}
-      \smCell[\smAlert<5>                   \smExample<4,6,8>]{$\only<4>{\mathcal{C}}\only<5,6>{\mathcal{S}}\only<8>{\mathcal{B}}$}
-      \smCell[                              \smExample<6>    ]{$\only<6>{\mathcal{B}}$}
-    \end{smStack}
+  \on[x=51mm,y=1mm]{
+    \begin{tikzpicture}[stack, x=10mm]
+      \cell[alert ob=<{-7,9}>,    structure ob=<8>                      ]{$\mathcal{I}$}
+      \cell[alert ob=<{2-5,7,9}>, structure ob=<6>, example ob=<8>      ]{$\onlyb<2-8>{\mathcal{A}}\onlyb<9>{\mathcal{F}}$}
+      \cell[alert ob=<{3,5,7}>,   structure ob=<4>, example ob=<{6,8}>  ]{$\onlyb<3-6>{\mathcal{A}}\onlyb<7-8>{\mathcal{S}}$}
+      \cell[alert ob=<5>,                           example ob=<{4,6,8}>]{$\onlyb<4>{\mathcal{C}}\onlyb<5,6>{\mathcal{S}}\onlyb<8>{\mathcal{B}}$}
+      \cell[                                        example ob=<6>      ]{$\onlyb<6>{\mathcal{B}}$}
+    \end{tikzpicture}
   }
 
 \end{frame}

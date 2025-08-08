@@ -1,10 +1,9 @@
-# Non-free images
-src/img/imitation_game.jpg
-src/img/Church.jpg
-
 # LaTeX compilation files
 build/
 docs/*.pdf
+
+# External dependency
+latex-libs/
 
 # Auxiliary LaTeX Files 
 *.aux

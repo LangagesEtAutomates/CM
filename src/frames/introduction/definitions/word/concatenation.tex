@@ -1,0 +1,48 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Concaténation}
+
+  \onBlock[top=-5mm]{Définition -- Concaténation de deux mots}{
+    Soient $\Sigma$ un alphabet, $u, v \in \Sigma^\star$, et $n\in \mathbb{N}$.
+
+    \begin{itemize}
+    \item La \structure{concaténation} de $u$ et $v$, notée \structure{$u \cdot v$} (ou \structure{$uv$}), est le mot
+      de longueur $|u| + |v| $ dont les premiers symboles forment $u$ et les derniers forment $v$
+      $$\alert{
+        u \cdot v  \quad\eqdef\quad  \left\{\begin{array}{@{}r@{~}c@{~}ll@{}}
+        \llbracket |u| + |v| \rrbracket& \rightarrow & \Sigma\\
+         i   & \mapsto & u_i & \text{pour } i \in \llbracket |u| \rrbracket \\
+        |u| + j & \mapsto & v_j & \text{pour } j \in \llbracket |v| \rrbracket
+        \end{array}\right.
+        \quad=\quad u_1 \cdots u_{|u|} \cdot v_1 \cdots v_{|v|}
+      }$$
+    \item La \structure{puissance $n$ du mot $x$} est le mot \alert{$x^n = x\cdots x$} (répété $n$ fois)
+      $$\alert{u^0 \eqdef \varepsilon} \quad \text{ et } \quad \alert{u^{n+1} \eqdef u \cdot u^n}$$
+    \end{itemize}
+  }
+
+  \onExampleBlock[bottom]{Exemple}{\small\vspace{-7mm}
+    $$\text{``bon''} \cdot \text{``jour''} = \left\{
+    \begin{array}{@{~}r@{~~}c@{~~}l@{~~}c@{~~}c@{~}}
+    \llbracket 3 + 4 \rrbracket & \rightarrow & \Sigma\\
+    1 & \mapsto & \text{``bon''}_{1}  & = &\text{`b'}\\
+    2 & \mapsto & \text{``bon''}_{2}  & = &\text{`o'}\\
+    3 & \mapsto & \text{``bon''}_{3}  & = &\text{`n'}\\
+    3+1 & \mapsto & \text{``jour''}_{1} & = &\text{`j'}\\
+    3+2 & \mapsto & \text{``jour''}_{2} & = &\text{`o'}\\
+    3+3 & \mapsto & \text{``jour''}_{3} & = &\text{`u'}\\
+    3+4 & \mapsto & \text{``jour''}_{4} & = &\text{`r'}\\
+    \end{array}
+    \right. = \text{``bonjour''}$$
+  }
+
+\end{frame}
+
+\endgroup

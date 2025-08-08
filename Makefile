@@ -2,49 +2,88 @@
 # Configuration
 # -------------------------------
 
+SHELL    := bash
 SRCDIR   := src/drivers
 BUILDDIR := build
 DOCSDIR  := docs
 
-PDFLATEX := pdflatex -output-directory=$(BUILDDIR)
-
-# Les deux drivers présents dans $(SRCDIR)
+# LaTeX drivers from $(SRCDIR)
 TEXS    := slides handout
 PDFS    := $(addsuffix .pdf,$(TEXS))
 
+# Choose engine (override with: make PDFLATEX=xelatex)
+PDFLATEX ?= pdflatex
+PDFLATEX_FLAGS := -halt-on-error -interaction=nonstopmode -output-directory=$(BUILDDIR)
+
+# Latex-libs library (Option A: local clone + TEXINPUTS)
+LATEX_LIBS_REPO := https://github.com/MatthieuPerrin/Latex-libs.git
+LATEX_LIBS_DIR  := latex-libs
+
+# Path separator (Windows vs Unix)
+ifeq ($(OS),Windows_NT)
+  PATHSEP := ;
+else
+  PATHSEP := :
+endif
+
+# Add latex-libs to TeX search path (recursive with //); keep default path via trailing sep
+export TEXINPUTS := $(CURDIR)/$(LATEX_LIBS_DIR)//$(PATHSEP)
+
 # -------------------------------
-# Cibles principales
+# Main targets
 # -------------------------------
 
-.PHONY: all slides handout init-sty update-sty clean cleanall help
+.PHONY: all slides handout update clean cleanall help
 
-# Par défaut : tout compiler
+# By default: build everything
 all: slides handout
 
-# Alias pour compiler chaque PDF
+# Aliases to build each PDF
 slides: $(DOCSDIR)/slides.pdf
 handout: $(DOCSDIR)/handout.pdf
 
-# Règle générique pour sortir docs/%.pdf à partir de src/drivers/%.tex
-$(DOCSDIR)/%.pdf: $(SRCDIR)/%.tex | $(BUILDDIR) $(DOCSDIR)
-	@echo ">>> Compiling $<"
-	$(PDFLATEX) $<
-	$(PDFLATEX) $<     # deux passes pour références
-	$(PDFLATEX) $<     # trois passes pour overlays
-	mv $(BUILDDIR)/$*.pdf $@
+# Generic rule: build docs/%.pdf from src/drivers/%.tex
+$(DOCSDIR)/%.pdf: $(SRCDIR)/%.tex FORCE | $(BUILDDIR) $(DOCSDIR) deps
+	$(PDFLATEX) $(PDFLATEX_FLAGS) $<
+	$(PDFLATEX) $(PDFLATEX_FLAGS) $<   # second pass for cross-refs
+	@mv $(BUILDDIR)/$*.pdf $@
+
+FORCE:
 
 # -------------------------------
-# Création des répertoires
+# Dependencies management (latex-libs)
 # -------------------------------
 
-$(BUILDDIR) :
+# Ensure local clone exists (used as a prerequisite by build rules)
+deps:
+	@if [ ! -d "$(LATEX_LIBS_DIR)/.git" ]; then \
+	  echo ">>> Cloning latex-libs into $(LATEX_LIBS_DIR)"; \
+	  git clone --depth 1 $(LATEX_LIBS_REPO) $(LATEX_LIBS_DIR); \
+	fi
+
+# Update both the main repo and the local dependency clone
+update:
+	@echo ">>> Updating main repository"; \
+	git pull --ff-only || echo ">>> Skipping main repo update (offline or non-fast-forward)."; \
+	if [ -d "$(LATEX_LIBS_DIR)/.git" ]; then \
+	  echo ">>> Updating $(LATEX_LIBS_DIR)"; \
+	  git -C $(LATEX_LIBS_DIR) pull --ff-only || echo ">>> Skipping latex-libs update (offline or non-fast-forward)."; \
+	else \
+	  echo ">>> latex-libs not present; run 'make deps' when online."; \
+	fi
+
+# -------------------------------
+# Create folders
+# -------------------------------
+
+$(BUILDDIR):
 	@mkdir -p $@
 
-$(DOCSDIR) :
+$(DOCSDIR):
 	@mkdir -p $@
 
 # -------------------------------
-# Nettoyage
+# Cleaning
 # -------------------------------
 
 clean:
@@ -54,7 +93,7 @@ cleanall: clean
 	@rm -f $(DOCSDIR)/*.pdf
 
 # -------------------------------
-# Aide
+# Help
 # -------------------------------
 
 help:
@@ -62,7 +101,6 @@ help:
 	@echo "  make            – Build both slides and handout"
 	@echo "  make slides     – Build docs/slides.pdf"
 	@echo "  make handout    – Build docs/handout.pdf"
-	@echo "  make init-sty   – Initialize LaTeX styles submodule"
-	@echo "  make update-sty – Pull latest styles and commit update"
+	@echo "  make update     – Update local project and LaTeX-libs (git pull)"
 	@echo "  make clean      – Remove build artifacts"
 	@echo "  make cleanall   – Also remove generated PDFs"

@@ -9,7 +9,7 @@
 
 \begin{frame}{Transformation en forme normale de Chomsky}
 
-  \tfBlock[top=-3mm]{Démonstration du théorème}{
+  \onBlock[top=-3mm]{Démonstration du théorème}{
     Appliquer successivement les règles suivantes :
     \begin{enumerate}
     \item Introduire une règle \structure{$X \rightarrow x$} pour chaque $x\in \Sigma$
@@ -20,19 +20,19 @@
     \end{enumerate}
   }
 
-  \tfExampleBlock<1,8|handout>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \onExampleBlock<1,8>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& a S b \;|\; T \\
     T &\rightarrow& c T \;|\; \varepsilon\\
     \end{array}\right.$
   }
-  \tfExampleBlock<2>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \obExampleBlock<2>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& \alert{a} S \alert{b} \;|\; T \\
     T &\rightarrow& \alert{c} T \;|\; \varepsilon\\
     \end{array}\right.$
   }
-  \tfExampleBlock<3>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \obExampleBlock<3>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& A\alert{S}B \;|\; T \\
     T &\rightarrow& CT \;|\; \varepsilon\\
@@ -41,7 +41,7 @@
     C &\rightarrow& c \\
     \end{array}\right.$
   }
-  \tfExampleBlock<4>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \obExampleBlock<4>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& D \\
     D &\rightarrow& ADB \;|\; T \\
@@ -51,7 +51,7 @@
     C &\rightarrow& c \\
     \end{array}\right.$
   }
-  \tfExampleBlock<5>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \obExampleBlock<5>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& D \\
     D &\rightarrow& ADB \;|\; T \;|\; \alert{\varepsilon} \\
@@ -61,7 +61,7 @@
     C &\rightarrow& c \\
     \end{array}\right.$
   }
-  \tfExampleBlock<6>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \obExampleBlock<6>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& \alert{D} \;|\; \varepsilon \\
     D &\rightarrow& ADB  \;|\; AB \;|\; \alert{T} \\
@@ -71,7 +71,7 @@
     C &\rightarrow& c \\
     \end{array}\right.$
   }
-  \tfExampleBlock<7>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
+  \obExampleBlock<7>[left=.5\textwidth, y=-2mm, anchor=north]{Exemple}{
     $\left\{\begin{array}{rcl}
     S &\rightarrow& \alert{ADB}  \;|\; AB \;|\; CT \;|\; c \;|\; \varepsilon \\
     D &\rightarrow& \alert{ADB}  \;|\; AB \;|\; CT \;|\; c \\
@@ -82,7 +82,7 @@
     \end{array}\right.$
   }
 
-  \tfBlock<2>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 1}{
+  \obBlock<2>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 1}{
     \begin{enumerate}
     \item Introduire trois nouveaux non-terminaux\\ $A$, $B$ et $C$ 
     \item Introduire les règles
@@ -90,14 +90,14 @@
     \item Remplacer $a$ par $A$, $b$ par $B$ et $c$ par $C$
     \end{enumerate}
   }
-  \tfBlock<3>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 2}{
+  \obBlock<3>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 2}{
     \begin{enumerate}
     \item Introduire un nouveau non-terminal $D$ 
     \item Renommer $S$ en $D$
     \item Introduire une règle $S \rightarrow D$
     \end{enumerate}
   }
-  \tfBlock<4>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 3}{
+  \obBlock<4>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 3}{
     \begin{enumerate}
     \item Isoler $\varepsilon$ dans $T$ :\\
       $\begin{array}{lll}
@@ -109,7 +109,7 @@
     \item Renommer $T'$ en $T$
     \end{enumerate}
   }
-  \tfBlock<5>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 3}{
+  \obBlock<5>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 3}{
     \begin{enumerate}
     \item Isoler $\varepsilon$ dans $D$ :\\
       $\begin{array}{lll}
@@ -121,14 +121,14 @@
     \item Renommer $D'$ en $D$
     \end{enumerate}
   }
-  \tfBlock<6>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 4}{
+  \obBlock<6>[right=.6\textwidth, y=-2mm, anchor=north]{Application de la règle 4}{
     \begin{enumerate}
     \item Remplacer $T \rightarrow C$ par $T \rightarrow c$
     \item Remplacer $D \rightarrow T$ par $D \rightarrow CT \;|\; c$
     \item Remplacer $S \rightarrow D$ par $S \rightarrow ADB  \;|\; AB \;|\; CT \;|\; c$
     \end{enumerate}
   }
-  \tfBlock<7>[right=.5\textwidth, y=-2mm, anchor=north]{Application de la règle 5}{
+  \obBlock<7>[right=.5\textwidth, y=-2mm, anchor=north]{Application de la règle 5}{
     \begin{enumerate}
     \item Remplacer $S \rightarrow ADB$ par :\\
       $\begin{array}{lll}
@@ -137,7 +137,7 @@
     \end{array}$
     \end{enumerate}
   }
-  \tf<8|handout>[right=.5\textwidth, y=-10mm, anchor=north]{
+  \on<8>[right=.5\textwidth, y=-10mm, anchor=north]{
     $\Rightarrow \left\{\begin{array}{rcl}
     S &\rightarrow& AE  \;|\; AB \;|\; CT \;|\; c \;|\; \varepsilon \\
     D &\rightarrow& AE  \;|\; AB \;|\; CT \;|\; c \\

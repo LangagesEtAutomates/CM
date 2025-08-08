@@ -9,7 +9,7 @@
 
 \begin{frame}{Démonstration du lemme d'Arden}
 
-  \tf<1->[text, top]{
+  \ob<1->[text, top]{
     Soient $\Sigma$ un alphabet, et $A, B, \mathcal{X} \in \mathscr{P}(\Sigma^\star)$ tels que $\mathcal{X} = A\mathcal{X} \cup B$.
     \begin{enumerate}
     \item \structure{$A^\star B$ est solution de $X = AX \mid  B$} \hspace\fill \alert{$A^\star B = A (A^\star B) \cup B$}
@@ -18,7 +18,7 @@
     \end{enumerate}
   }
 
-  \tf<2>[text, y=15mm]{
+  \ob<2>[text, y=15mm]{
     \begin{itemize}
     \item $\begin{array}[t]{rcll}
       \structure{A} (\example{A^\star B}) \structure{\cup B}
@@ -29,7 +29,7 @@
     \end{itemize}
   }
 
-  \tf<3-6>[text, y=-5mm]{
+  \ob<3-6>[text, y=-5mm]{
     \begin{itemize}
     \item Montrons que \alert{$\forall n\in \mathbb{N}, A^n B \subseteq \mathcal{X}$}\only<4->{ par récurrence sur $n$}.\\
       \uncover<4->{
@@ -63,7 +63,7 @@
     \end{itemize}
   }
 
-  \tf<7->[text, bottom=3mm]{
+  \ob<7->[text, bottom=3mm]{
     \begin{itemize}
     \item Supposons que \example{$\varepsilon \notin A$}. 
     \item<8-> \vspace{-1mm}Montrons que $\alert{\forall n\in \mathbb{N}, \mathcal{X} \cap \Sigma^n \subseteq A^\star B}$\only<9->{ par récurrence forte sur $n$}.\\
@@ -95,7 +95,7 @@
   }
 
   
-  \tf<handout>[text, top]{
+  \oh[text, top]{
     Soient $\Sigma$ un alphabet, et $A, B, \mathcal{X} \in \mathscr{P}(\Sigma^\star)$ tels que $\mathcal{X} = A\mathcal{X} \cup B$.
     \begin{enumerate}
     \item \structure{$A^\star B$ est solution de $X = AX \mid  B$} \hspace\fill \alert{$A^\star B = A (A^\star B) \cup B$}

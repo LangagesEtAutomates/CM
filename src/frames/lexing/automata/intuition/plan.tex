@@ -9,7 +9,7 @@
 
 \begin{frame}{Génération d'analyseur lexical}
 
-  \tfBlock[top]{Problème}{
+  \onBlock[top]{Problème}{
     \begin{description}
     \item[Entrée :] une expression rationnelle $r$
     \item[Sortie :] un \alert{analyseur lexical} pour le langage $\mathcal{L}(r)$
@@ -19,7 +19,7 @@
     \end{description}
   }
 
-  \tf[y=-3mm]{
+  \on[y=-3mm]{
     \begin{tikzpicture}
       \node[smBox, minimum width=3cm, minimum height=1.2cm] (exp) at (0,0) {Expression\\rationnelle};
       \node[smBox, minimum width=3cm, minimum height=1.2cm] (lex) at (6,0) {Analyseur\\lexical};
@@ -27,7 +27,7 @@
       \node[example, above] at (exp.north) {$a (b|c)^\star$};
       \node[example, above] at (lex.north) {$abc \rightarrow \cmark$, $bac \rightarrow \xmark$ };
       
-      \path[-latex, structure,dashed] (exp) edge node[above]{JFlex} node[below]{Grep} (lex);
+      \path[-latex, structure, dashed] (exp) edge node[above]{JFlex} node[below]{Grep} (lex);
     \end{tikzpicture}
   }
 

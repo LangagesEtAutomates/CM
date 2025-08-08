@@ -12,7 +12,7 @@
 
 \begin{frame}[fragile]{Algorithme de reconnaissance récursif}
 
-  \tf[top, text]{
+  \on[top, text]{
     \begin{algorithm}[H]
       \Fn{$\Decider(u : \text{mot}) : \text{booléen}$}{
         \Retourner $\Trouver( u \cdot \text{`$\diamond$'}, \text{`$\diamond$'} )$\;
@@ -29,7 +29,7 @@
     \end{algorithm}
   }
 
-  \tfBlock[top=-2mm, right=37mm]{Grammaire}{
+  \onBlock[top=-2mm, right=37mm]{Grammaire}{
     $\left\{\begin{array}{l}
     S \rightarrow \varepsilon\\
     S \rightarrow \alert{\{}S\alert{\}}S\\
@@ -37,23 +37,23 @@
     \end{array}\right.$
   }
 
-  \tfExampleBlock<2-|handout>[y=5mm,right=37mm]{Exemple : $u = \{\{\}\langle\rangle\}$}{
-    \begin{smArray}
-      \smCell{$\{$}       \smHead<2>
-      \smCell{$\{$}       \smHead<3>
-      \smCell{$\}$}       \smHead<4>
-      \smCell{$\langle$}  \smHead<5>
-      \smCell{$\rangle$}  \smHead<6>
-      \smCell{$\}$}       \smHead<7>
-      \smCell{$\diamond$} \smHead<8>
-    \end{smArray}
+  \onExampleBlock<2-|handout>[y=5mm,right=37mm]{Exemple : $u = \{\{\}\langle\rangle\}$}{
+    \begin{tikzpicture}[word, size=5mm]
+      \cell{$\{$}       \smhead[ob=<2>] 
+      \cell{$\{$}       \smhead[ob=<3>] 
+      \cell{$\}$}       \smhead[ob=<4>] 
+      \cell{$\langle$}  \smhead[ob=<5>] 
+      \cell{$\rangle$}  \smhead[ob=<6>] 
+      \cell{$\}$}       \smhead[ob=<7>] 
+      \cell{$\diamond$} \smhead[ob=<8>] 
+    \end{tikzpicture}
   }
 
-  \tf<2-|handout>[y=-25mm, x=-.25\textwidth]{
-    \begin{tikzpicture}[smAutomaton, initial text=$\text{empile}(\diamond)$]
-      \smState[\smInitial] (a) at (0,0) {0};
+  \on<2->[y=-25mm, x=-.25\textwidth]{
+    \begin{tikzpicture}[pushdown]
+      \state[initial, initial text=$\text{empile}(\diamond)$] (a) at (0,0) {0};
       
-      \smPath (a) edge [loop below] node {
+      \path (a) edge [loop below] node {
         $\begin{array}{@{}r@{\,}c@{\,}l@{}}
           \uncover<2-|handout>{\{ &:& \text{empile}(\})}\\
           \uncover<4-|handout>{\} &:& \text{dépile}(\})}\\
@@ -62,20 +62,20 @@
         \end{array}$
       } (a);
 
-      \uncover<8-|handout>{
-        \smState[\smAccepting] (b) at (3,0) {1};
-        \smPath (a) edge node {$\diamond : \text{dépile}(\diamond)$} (b);
+      \uncover<8->{
+        \state[accepting] (b) at (2,0) {1};
+        \path (a) edge node {$\diamond : \text{dépile}(\diamond)$} (b);
       }
     \end{tikzpicture}
   }
 
-  \tfBlock<2-|handout>[y=-25mm, right=37mm]{Pile d'appels}{
-    \begin{smStack}[width=2cm]
-      \smCell{\only<2-|handout>{$\Decider(u)$}}
-      \smCell{\only<2-8|handout>{$\Trouver(u, \diamond)$}}
-      \smCell{\only<3-7>{$\Trouver(u, \})$}}
-      \smCell{\only<4>{$\Trouver(u, \})$}\only<6>{$\Trouver(u, \rangle)$}}
-    \end{smStack}
+  \onBlock<2->[y=-25mm, right=37mm]{Pile d'appels}{
+    \begin{tikzpicture}[stack, x=2cm, y=5mm]
+      \cell{\only<2->{$\Decider(u)$}}
+      \cell{\only<2-8>{$\Trouver(u, \diamond)$}}
+      \cell{\onlyb<3-7>{$\Trouver(u, \})$}}
+      \cell{\onlyb<4>{$\Trouver(u, \})$}\onlyb<6>{$\Trouver(u, \rangle)$}}
+    \end{tikzpicture}
   }
 
 \end{frame}

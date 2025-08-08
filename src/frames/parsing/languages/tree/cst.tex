@@ -1,0 +1,66 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Arbre de dérivation }
+
+  \onBlock[top=-3mm]{Arbre de dérivation (ou CST : \emph{Concrete Syntax Tree})}{
+    Soit \alert{$G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire algébrique.\\
+    Chaque génération de $G$ peut être représentée par un \structure{arbre de dérivation}.
+    \begin{description}[N\oe ud interne :]
+    \item[Racine :] l'axiome $S$
+    \item[N\oe ud interne :] Symbole non-terminal de $\Gamma$
+    \item[Feuille :] Symbole terminal de $\Sigma$, ou $\varepsilon$ ($\varepsilon$ ne peut pas avoir de frère)
+    \item[Filiation :] Si les fils de $A$ sont $a_1$, ..., $a_n$, alors $A \rightarrow a_1...a_n$
+    \end{description}
+    Le mot généré est alors la concaténation des feuilles de l'arbre.
+  }
+
+  \onExampleBlock[bottom]{Exemple}{
+    \example{$G = \left\langle \{a, b, c\}, \{S, B\}, S, \left\{\begin{array}{@{\,}r@{~\rightarrow~}c@{\,\mid\,}c@{}}
+      S & aSb & B \\
+      B & cB & \varepsilon
+      \end{array}\right\} \right\rangle$}.
+    \begin{itemize}
+    \item Génération de $aacbb$ :
+      \begin{itemize}
+      \item $\structure{S}
+        \uncover<2-|handout>{\vdash \alert{a}\structure{S}\alert{b}}
+        \uncover<3-|handout>{\vdash \alert{aa}\structure{S}\alert{bb}}
+        \uncover<4-|handout>{\vdash \alert{aa}\structure{B}\alert{bb}}
+        \uncover<5-|handout>{\vdash \alert{aac}\structure{B}\alert{bb}}
+        \uncover<6-|handout>{\vdash \alert{aacbb}}$
+      \end{itemize}
+    \item Dérivation de $aacbb$ (à droite) :
+    \end{itemize}
+  }
+
+  \on[bottom, x=40mm] {\small
+    \begin{tikzpicture}[tree, x=8mm, y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree                                                   {$S$}{
+        \tree[on=<2->,xshift=1]                               {$a$}{}
+        \tree[on=<2->]                                        {$S$}{
+          \tree[on=<3->]                                      {$a$}{}
+          \tree[on=<3->]                                      {$S$}{
+            \tree[on=<4->]                                    {$B$}{
+              \tree[on=<5->]                                  {$c$}{}
+              \tree[on=<5->,xshift=-1]                        {$B$}{
+                \tree[on=<6->,node=example,xshift=1,yshift=1] {\example{$\varepsilon$}}{}
+              }
+            }
+          }
+          \tree[on=<3->]                                      {$b$}{}
+        }                                                      
+        \tree[on=<2->,xshift=-1]                              {$b$}{}
+      }
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

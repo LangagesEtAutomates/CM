@@ -1,0 +1,107 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config}[2024/06/24 Configuration of the Languages and Automate course]
+
+\def\input@path{{src/frames}}
+\graphicspath{{src/}{src/img/}}
+
+\usepackage[french]{babel}
+
+
+
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+\fi
+
+\RequirePackage{overlay}
+
+\RequirePackage{frameconfig} 
+
+\RequirePackage{ccicons}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{fontawesome, pifont, MnSymbol}
+\providecommand\cmark{\example{\text{\ding{51}}}}
+\providecommand\xmark{\alert{\text{\ding{55}}}}
+
+\RequirePackage{dominos}
+\tikzset{
+  domino top/.style={fill=structure!20},
+  domino bottom/.style={fill=example!20},
+}
+
+\RequirePackage{statemachines}
+\colorlet{sm@head@color}{alert}
+\colorlet{sm@fill@alert}{alert}
+\colorlet{sm@fill@example}{example}
+\colorlet{sm@fill@structure}{structure}
+
+\RequirePackage{trees}
+
+
+\RequirePackage{algos}
+\RequirePackage{citations}
+
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+
+\RequirePackage{graphicx}
+
+
+
+\RequirePackage{amsmath, amssymb, amsfonts}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+\RequirePackage{stmaryrd}
+
+\providecommand\eqdef{\stackrel{\text{def}}{=}}
+
+
+\usepackage{array}
+\newcolumntype\math[1]{>{\(}#1<{\)}}
+\newcounter{iteration}
+
+\newcommand*\tableonly{%
+  \omit\@ifnextchar<\table@only\table@@only%
+}%
+\protected\long\def\table@only<#1>#2{%
+  \gdef\beamer@doifnotinframe{\cr}%
+  \def\beamer@doifinframe{\cr#2}%
+  \beamer@masterdecode{#1}%
+  \beamer@donow
+}%
+\protected\long\def\table@@only#1{%
+  \beamer@ifnextcharospec{\table@@@only{#1}}{\cr#1}%
+}%
+\long\def\table@@@only#1<#2>{%
+  \gdef\beamer@doifnotinframe{\cr}%
+  \def\beamer@doifinframe{\cr#1}%
+  \beamer@masterdecode{#2}%
+  \beamer@donow
+}%
+
+
+
+
+%\RequirePackage{tikz}
+\usetikzlibrary{shapes}
+
+\usetikzlibrary{arrows,automata,shadows}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns.meta}
+%\tikzstyle directed=[postaction={decorate,decoration={markings, mark=at position .65 with {\arrow{latex}}}}]
+
+
+\mode<all>
+\endinput
+
+

@@ -1,0 +1,82 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+
+\begin{frame}{Exemple}
+
+  \on[y=22mm, x=-.25\textwidth]{
+    \begin{tikzpicture}[automaton, grid size=10mm]
+        \state[initial]   (a) at (0,1) {$0$};
+        \state[example]   (b) at (1,2) {$1$};
+        \state[example]   (c) at (1,0) {$2$};
+        \state[accepting] (d) at (2,1) {$3$};
+        
+        \path  (a) edge[bend left ] node[swap] {$a$} (b);
+        \path  (a) edge[bend right] node {$b$} (c);
+        \path  (b) edge[bend left ] node[swap] {$b$} (d);
+        \path  (c) edge[bend right] node {$b$} (d);
+        \path  (b) edge[loop below] node {$a$} (b);
+        \path  (c) edge[loop above] node {$a$} (c);
+        \path  (d) edge[loop right] node {$a, b$} (d);
+    \end{tikzpicture}
+  }
+
+  \on[y=22mm, right=.5\textwidth]{
+    $\left\{
+    \begin{array}{lcl}
+      \mathcal{L}_A(0) & = & (a|b) a^\star b (a|b)^\star\\
+      \example{\mathcal{L}_A(1)} & = & \example{a^\star b (a|b)^\star}\\
+      \example{\mathcal{L}_A(2)} & = & \example{a^\star b (a|b)^\star}\\
+      \mathcal{L}_A(3) & = & (a|b)^\star\\
+    \end{array}
+    \right.$
+  }
+  
+  \on[text,y=7mm]{
+    \begin{itemize}
+    \item Les états $1$ et $2$ ont le même langage droit, on les fusionne en $\{1,2\}$
+    \end{itemize}
+  }
+
+  \on[y=-8mm, x=-.25\textwidth]{
+    \begin{tikzpicture}[automaton]
+        \state[initial]   (a) at (0.0,0.0) {$0$};
+        \state[example]   (b) at (1.2,0.0) {$1, 2$};
+        \state[accepting] (d) at (2.4,0.0) {$3$};
+        
+        \path (a) edge             node {$a, b$} (b);
+        \path (b) edge             node {$b$} (d);
+        \path (b) edge[loop below] node {$a$} (b);
+        \path (d) edge[loop right] node {$a, b$} (d);
+    \end{tikzpicture}
+  }
+
+  \on[y=-8mm, right=.5\textwidth]{
+    $\left\{
+    \begin{array}{lcl}
+      \mathcal{L}_A(\{0\}) & = & (a|b) a^\star b (a|b)^\star\\
+      \example{\mathcal{L}_A(\{1, 2\})} & \example{=} & \example{a^\star b (a|b)^\star}\\
+      \mathcal{L}_A(\{3\}) & = & (a|b)^\star\\
+    \end{array}
+    \right.$
+  }
+
+  \onAlertBlock[bottom]{Algorithme de minimisation}{
+    \begin{itemize}
+    \item Deux états sont \structure{équivalents} s'ils ont le même langage droit
+    \item Les états de l'automate minimal sont les classes d'équivalence
+    \end{itemize}
+    \begin{description}
+    \item [Question :] comment calculer les classes d'équivalence ?
+    \end{description}
+  }  
+  
+\end{frame}
+
+\endgroup

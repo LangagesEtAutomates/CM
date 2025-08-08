@@ -1,0 +1,61 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Équivalence et isomorphisme entre automates}
+
+  \on[text, top]{
+    Soient $A = \langle \Sigma, Q_A, I_A, F_A, \rightarrow_A \rangle$ et $B = \langle \Sigma, Q_B, I_B, F_B, \rightarrow_B \rangle$ deux automates. 
+  }
+
+  \onBlock[y=17mm]{Définition -- Automates équivalents}{
+    $A$ et $B$ sont \structure{équivalents}, noté $\alert{A \equiv B}$, s'ils acceptent le même langage :
+    $$\alert{A_1 \equiv A_2  \eqdef \mathcal{L}(A_1) = \mathcal{L}(A_2)}.$$
+  }
+
+  \onBlock[bottom=2mm]{Définition -- Automates isomorphes}{
+    $A$ et $B$ sont \structure{isomorphes}, noté $\alert{A \simeq B}$, s'ils ne diffèrent que par le nom de leurs états, \textit{c.-à-d.}
+    s'il existe une fonction bijective $f : Q_A \rightarrow Q_B$ telle que :
+
+    \vspace{2mm}
+    $\structure{\forall a\in \Sigma, \forall q, q',}$\\
+    $\structure{\begin{array}[t]{@{\quad\quad}lll}
+        q\in Q_A &\Leftrightarrow& f(q) \in Q_B \\
+        q\in I_A &\Leftrightarrow& f(q) \in I_B \\
+        q\in F_A &\Leftrightarrow& f(q) \in F_B \\
+        q \xrightarrow{a}_A q' &\Leftrightarrow& f(q) \xrightarrow{a}_B f(q')
+      \end{array}
+    }$
+    \vspace{2mm}
+
+    Deux automates isomorphes sont équivalents. 
+  }
+
+  \on[bottom=2mm, x=3cm]{\small
+    \begin{tikzpicture}[automaton, x=10mm, y=15mm]
+      \draw (1,.5) node{\normalsize $\simeq$};
+
+      \state[structure, initial]   (a0) at (0, 1) {$A$};
+      \state[structure, accepting] (a1) at (0, 0) {$B$};
+      \state[example, initial]     (b0) at (2, 1) {$0$};
+      \state[example, accepting]   (b1) at (2, 0) {$1$};
+
+      \path[structure] (a0) edge[bend left]  node {$a$} (a1);
+      \path[structure] (a1) edge[bend left]  node {$a$} (a0);
+      \path[structure] (a1) edge[loop right] node {$b$} (a1);
+      \path[structure] (a0) edge[loop right] node {$b$} (a0);
+      
+      \path[example]   (b0) edge[bend left]  node {$a$} (b1);
+      \path[example]   (b1) edge[bend left]  node {$a$} (b0);
+      \path[example]   (b1) edge[loop right] node {$b$} (b1);
+      \path[example]   (b0) edge[loop right] node {$b$} (b0);
+    \end{tikzpicture}
+  }
+\end{frame}
+
+\endgroup

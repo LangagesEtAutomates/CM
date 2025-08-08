@@ -1,0 +1,77 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Stabilité par miroir}
+ 
+  \onBlock[top=-5mm]{Définition -- Miroir}{
+    Soient $\Sigma$ un alphabet, $u \in \Sigma^\star$ un mot, et $L \subseteq \Sigma^\star$ un langage.
+    \begin{itemize}
+    \item \vspace{-1mm}Le \structure{miroir d'un mot $u$} est \alert{$(u_1\cdots u_n)^{\textsc{r}} = u_n \cdots u_1$}
+    \item \vspace{-1mm}Le \structure{miroir d'un langage $L$} est \alert{$L^{\textsc{r}} = \left\{u^{\textsc{r}} \,\middle\mid\, u \in L\right\}$}
+    \end{itemize}
+  }
+  
+  \onAlertBlock[y=11mm]{Théorème -- Stabilité par miroir}{
+    Les langages rationnels sont stables par miroir : $\alert{\forall L \in \textsc{rat}_\Sigma, L^{\textsc{r}} \in \textsc{rat}_\Sigma}.$
+  }
+
+  \on[left=.5\textwidth, y=1mm, anchor=north]{
+    \structure{Preuve : Expressions rationnelles}
+ 
+    \vspace{3mm}
+    $m \eqdef \left\{\begin{array}{rcl}
+    \textsc{reg}_\Sigma & \rightarrow & \textsc{reg}_\Sigma\\
+    a & \mapsto & a\\
+    u \mid v & \mapsto & m(u) \mid m(v)\\
+    u \cdot v & \mapsto & m(v) \cdot m(u)\\
+    u^\star & \mapsto & m(u)^\star\\
+    \end{array}\right.$
+ 
+    $\forall u \in \textsc{reg}_\Sigma, \mathcal{L}(m(u)) = (\mathcal{L}(u))^{\textsc{r}}$
+    
+    \vspace{3mm}\example{Exemple :}\\ $m(ab^\star \mid ba^\star) = b^\star a \mid a^\star b$
+  }
+  
+  \on[right=.5\textwidth, y=1mm, anchor=north]{
+    \structure{Preuve : Automates}
+    
+    \vspace{3mm}
+    Soit $\example{A = \langle \Sigma, Q, I, F, \rightarrow \rangle}$ un AFN.\\
+    On a $(\mathcal{L}(A))^{\textsc{r}} = \mathcal{L}(\alert{\langle \Sigma, Q, F, I, \rightarrow_1 \rangle})$, où
+    $$\alert{q' \xrightarrow{a}_1 q \Leftrightarrow q \xrightarrow{a} q'}$$
+
+    \example{Exemple :}
+  }
+
+  \on[x=.25\textwidth, y=-35mm]{
+    \begin{tikzpicture}[automaton, x=10mm]
+      \begin{scope}[example]
+        \state[accepting    ] (A) at (0, 0) {$A$}; 
+        \state[initial above] (S) at (1, 0) {$S$}; 
+        \state[accepting    ] (B) at (2, 0) {$B$}; 
+        \path (S) edge             node[swap] {$b$} (A);
+        \path (S) edge             node       {$a$} (B);
+        \path (A) edge[loop below] node       {$a$} (A);
+        \path (B) edge[loop below] node       {$b$} (B);
+      \end{scope}
+      \begin{scope}[alert]
+        \state[initial above] (A2) at (3, 0) {$A$}; 
+        \state[accepting    ] (S2) at (4, 0) {$S$}; 
+        \state[initial above] (B2) at (5, 0) {$B$}; 
+        \path (A2) edge             node       {$b$} (S2);
+        \path (B2) edge             node[swap] {$a$} (S2);
+        \path (A2) edge[loop below] node       {$a$} (A2);
+        \path (B2) edge[loop below] node       {$b$} (B2);
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

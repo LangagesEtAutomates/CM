@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Priorité des opérateurs binaires}
+
+  \onBlock[top=-4mm]{Définition -- Priorité}{
+    La \structure{priorité} entre deux opérateurs $\oplus$ et $\otimes$ précise dans quel ordre évaluer 
+
+    \vspace{-2mm}
+    $$\alert{x \otimes y \oplus z}  \text{ et }  \alert{x \oplus y \otimes z}.$$
+
+    \begin{itemize}
+    \item\vspace{-1mm} \structure{$\otimes$ est prioritaire sur $\oplus$} quand :
+      \begin{itemize}
+        \item \alert{$x \otimes y \oplus z$ signifie $(x \otimes y) \oplus z$}
+        \item \alert{$x \oplus y \otimes z$ signifie $x \oplus (y \otimes z)$}
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \onExampleBlock{Exemple -- \lstinline{3 * 5 + 2} signifie \lstinline{(3 * 5) + 2}}{}
+
+  \on[y=-20mm, x=-3cm]{
+    $\left\{\begin{array}{rcl}
+    \structure{\textsc{Somme}} & \rightarrow & \structure{\textsc{Somme}} \alert{+} \structure{\textsc{Produit}} \\
+    &|& \structure{\textsc{Produit}} \\
+    \structure{\textsc{Produit}} & \rightarrow & \structure{\textsc{Produit}} \alert{*} \structure{\textsc{Terme}}\\
+    &|& \structure{\textsc{Terme}} \\
+    \structure{\textsc{Terme}} & \rightarrow & \alert{(} \structure{\textsc{Somme}} \alert{)}\\
+    &|& \alert{\mathit{nombres...}}
+    \end{array}\right.$
+  }
+  
+  \on[bottom, x=3cm]{
+    \begin{tikzpicture}[tree, y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree{\textsc{Somme}}{
+        \tree[xshift=1]{\textsc{Somme}}{
+          \tree{\textsc{Produit}}{
+            \tree{\textsc{Produit}}{\tree{\textsc{Terme}}{\tree{$3$}{}}}
+            \tree{$*$}{}
+            \tree{\textsc{Terme}}{\tree{$5$}{}}
+          }
+        }
+        \tree{$+$}{}
+        \tree{\textsc{Produit}}{\tree{\textsc{Terme}}{\tree{$2$}{}}}
+      }
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

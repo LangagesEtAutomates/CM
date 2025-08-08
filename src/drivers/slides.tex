@@ -1,16 +1,9 @@
 \documentclass[9pt]{beamer}
 
-\makeatletter
-\def\input@path{{src/}{src/frames/}{src/sty/}}
-\makeatother
-\graphicspath{{src/}{src/img/}}
-
 \usetheme[sectionpage]{Nantes}
+\usepackage{src/drivers/config}
 
-\usepackage{beamerconfig}
-\usepackage[french]{babel}
-
-\title[Langages et Automates]{Langages et Automates\footnote[frame]{Code source : \url{https://github.com/LangagesEtAutomates/CM}}}
+\title[Langages et Automates]{Langages et Automates}
 
 \author[Matthieu Perrin]{
   Matthieu Perrin\\
@@ -26,12 +19,23 @@
   2025-2026
 }
 
+\hypersetup{
+  pdftitle  = {Langages et Automates},
+  pdfauthor = {Matthieu Perrin}
+}
+
 \begin{document}
 
 \begin{frame}[plain,noframenumbering]
   \titlepage
+  \on[text, bottom=-5mm]{\scriptsize
+    \begin{description}
+    \item[Licence :] \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0} (\ccbysa{}) — Matthieu Perrin
+    \item[Code source :]\vspace{-.5mm}  \url{https://github.com/LangagesEtAutomates/CM}
+    \end{description}
+  }
 \end{frame}
 
-\input{index}
+\input{src/drivers/index}
 
 \end{document}

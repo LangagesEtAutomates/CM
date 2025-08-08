@@ -1,0 +1,62 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Emondage}{emondage}
+\SetKwFunction{Accessible}{accessible}
+\SetKwFunction{Coaccessible}{coaccessible}
+
+\begin{frame}[fragile]{Algorithme de l'émondage}
+
+  \on[text, top]{
+    \begin{algorithm}[H]
+      \Fn{\Emondage($A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : automate) : automate}{
+        \Structure<2>{$\Accessible \leftarrow I$}\;
+        \Tantque{\Structure<3-5>{$\exists a \in \Sigma, \exists q\in \Accessible, \exists q'\notin\Accessible, q \xrightarrow{a} q'$}}{
+          \Structure<3-5>{$\Accessible \leftarrow \Accessible \cup \{q'\}$}\;
+        }
+        \Example<6>{$\Coaccessible \leftarrow F$}\;
+        \Tantque{\Example<7>{$\exists a \in \Sigma, \exists q\notin \Coaccessible, \exists q'\in\Coaccessible, q \xrightarrow{a} q'$}}{
+          \Example<7>{$\Coaccessible \leftarrow \Coaccessible \cup \{q\}$}\;
+        }
+        \Alert<8>{$Q' \leftarrow \Accessible \cap \Coaccessible$}\;
+        \Retourner $\displaystyle\left\langle \Sigma, Q', I \cap Q', F \cap Q', \rightarrow \cap (Q' \times \Sigma \times Q')\right\rangle$\;
+      }
+    \end{algorithm}
+  }
+
+  \onExampleBlock[bottom]{Exemple}{
+    \begin{itemize}
+    \item<2-|handout>  \structure{$\Accessible = \{2, 4\only<3-|handout>{, 3}\only<4-|handout>{, 5}\only<5-|handout>{, 6}\}$}
+    \item<6-|handout>  \example{$\Coaccessible = \{0, 6\only<7-|handout>{, 3, 1, 2}\}$}
+    \item<8-|handout> \alert{$Q' = \{2, 3, 6\}$}
+    \end{itemize}
+  }
+
+  \on[bottom, x=.35\textwidth]{
+    \begin{tikzpicture}[automaton]
+      \state[accepting,                     example on=<6-7>, fade ob=<8> ] (0) at (0,2) {$0$}; 
+      \state[                               example on=<7>,   fade ob=<8> ] (1) at (1,2) {$1$}; 
+      \state[initial,   structure ob=<2-5>, example ob=<7>,   alert on=<8>] (2) at (0,1) {$2$}; 
+      \state[           structure ob=<3-5>, example ob=<7>,   alert on=<8>] (3) at (1,1) {$3$}; 
+      \state[initial,   structure on=<2-5>,                   fade ob=<8> ] (4) at (0,0) {$4$}; 
+      \state[           structure on=<4-5>,                   fade ob=<8> ] (5) at (1,0) {$5$}; 
+      \state[accepting, structure ob=<5>,   example ob=<6-7>, alert on=<8>] (6) at (2,1) {$6$}; 
+
+      \path[                                                  fade ob=<8> ] (0) edge node{$a$} (1);
+      \path[                                example ob=<7>,   fade ob=<8> ] (1) edge node{$b$} (3);
+      \path[            structure ob=<3>,   example ob=<7>,   alert on=<8>] (2) edge node{$a$} (3);
+      \path[            structure ob=<4>,                     fade ob=<8> ] (3) edge node{$b$} (5);
+      \path[            structure ob=<4>,                     fade ob=<8> ] (4) edge node{$a$} (5);
+      \path[            structure ob=<5>,   example ob=<7>,   alert on=<8>] (3) edge node{$b$} (6);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

@@ -9,7 +9,7 @@
 
 \begin{frame}{Exemple : $(a^+ \mid b^+) \cdot c^\star$}
 
-  \tfBlock[top=-3mm]{Représentation mathématique}{\vspace{-1mm}
+  \onBlock[top=-3mm]{Représentation mathématique}{\vspace{-1mm}
     $$\begin{array}{lccl}
       \text{\structure{alphabet}} & \Sigma & = & \{a, b, c\}\\
       \text{\structure{états}} & Q & = & \{1, 2, 3, 4, 5\}\\
@@ -29,28 +29,28 @@
     \end{array}$$
   }
 
-  \tfBlock[left=.5\textwidth, y=-2mm, anchor=north]{Représentation graphique}{\footnotesize
-      \begin{tikzpicture}[smAutomaton,node distance=1.5cm]
-        \smState[\smInitial]   (s1) at (0.0,1)  {$1$}; 
-        \smState               (s2) at (1.5,1)  {$2$}; 
-        \smState[\smAccepting] (s3) at (3.0,.5) {$3$}; 
-        \smState[\smInitial]   (s4) at (0.0,0)  {$4$}; 
-        \smState               (s5) at (1.5,0)  {$5$}; 
+  \onBlock[left=.5\textwidth, y=-2mm, anchor=north]{Représentation graphique}{\footnotesize
+      \begin{tikzpicture}[automaton, y=7mm]
+        \state[initial]   (s1) at (0,2)  {$1$}; 
+        \state            (s2) at (1,2)  {$2$}; 
+        \state[accepting] (s3) at (2,1) {$3$}; 
+        \state[initial]   (s4) at (0,0)  {$4$}; 
+        \state            (s5) at (1,0)  {$5$}; 
 
-        \smPath (s1) edge             node        {$a$}           (s2);
-        \smPath (s1) edge[loop above] node        {$a$}           (s1);
-        \smPath (s2) edge[loop above] node        {$a$}           (s2);
-        \smPath (s4) edge             node[swap]  {$b$}           (s5);
-        \smPath (s4) edge[loop below] node        {$b$}           (s4);
-        \smPath (s5) edge[loop below] node        {$b$}           (s5);
-        \smPath (s3) edge[loop right] node        {$c$}           (s3);
-        \smPath (s2) edge             node        {$\varepsilon$} (s3);
-        \smPath (s5) edge             node[swap]  {$\varepsilon$} (s3);
+        \path (s1) edge             node        {$a$}           (s2);
+        \path (s1) edge[loop above] node        {$a$}           (s1);
+        \path (s2) edge[loop above] node        {$a$}           (s2);
+        \path (s4) edge             node[swap]  {$b$}           (s5);
+        \path (s4) edge[loop below] node        {$b$}           (s4);
+        \path (s5) edge[loop below] node        {$b$}           (s5);
+        \path (s3) edge[loop right] node        {$c$}           (s3);
+        \path (s2) edge             node        {$\varepsilon$} (s3);
+        \path (s5) edge             node[swap]  {$\varepsilon$} (s3);
     \end{tikzpicture}
   }
 
 
-  \tfBlock[right=.5\textwidth, y=-2mm, anchor=north]{Représentation matricielle}{
+  \onBlock[right=.5\textwidth, y=-2mm, anchor=north]{Représentation matricielle}{
       \begin{tabular}{|l|c|c|c|c|}
         \hline
         & \multicolumn{4}{c|}{\rule{0pt}{0.5em}\textbf{Entrée}}\\

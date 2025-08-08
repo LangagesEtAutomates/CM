@@ -1,0 +1,74 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Normalisation d'un automate fini}
+
+  \onBlock[top=-3mm]{Théorème -- Normalisation}{
+      Soit $\Sigma$ un alphabet et $L \in \textsc{rec}_\Sigma$.
+      $L$ est reconnu par un automate normalisé.
+  }
+
+  \onBlock[y=5mm]{Démonstration}{
+    Soit $\langle \Sigma, Q, I, F, \rightarrow \rangle$ un automate qui reconnaît $L$.
+    \begin{itemize}
+    \item Soient $i, f \notin Q$
+    \item Soit $\rightarrow' \,=\, \rightarrow \,\cup\,
+      \structure{\{\langle i, \varepsilon, q\rangle \mid q \in I\}} \,\cup\,
+      \alert{\{\langle q, \varepsilon, f\rangle \mid q \in F\}}$
+    \end{itemize}
+    Alors $L$ est reconnu par l'automate normalisé :
+    $$\langle \Sigma, Q \cup \{i, f\}, \structure{\{i\}}, \alert{\{f\}}, \rightarrow' \rangle$$
+  }
+
+  \onExampleBlock[y=-15mm]{Exemple}{}
+  
+  \on[bottom,x=-.25\textwidth]{
+    \begin{tikzpicture}[automaton]
+      \state            (2)                     {$2$};
+      \state[initial]   (0) [above left =of 2]  {$0$};
+      \state[initial]   (1) [below left =of 2]  {$1$};
+      \state[accepting] (3) [above right=of 2]  {$3$};
+      \state[accepting] (4) [below right=of 2]  {$4$};
+      
+      \path  (0) edge node {$a$} (3);
+      \path  (0) edge node {$b$} (2);
+      \path  (1) edge node {$a$} (2);
+      \path  (1) edge node {$b$} (4);
+      \path  (2) edge node {$a$} (3);
+      \path  (2) edge node {$b$} (4);
+    \end{tikzpicture}
+  }
+  
+  \on[bottom,x=.25\textwidth]{
+    \begin{tikzpicture}[automaton]
+      \state                     (2)                     {$2$};
+      \state                     (0) [above left =of 2]  {$0$};
+      \state                     (1) [below left =of 2]  {$1$};
+      \state                     (3) [above right=of 2]  {$3$};
+      \state                     (4) [below right=of 2]  {$4$};
+      \state[initial, structure] (i) [above left =of 1]  {$i$};
+      \state[accepting, alert]   (f) [above right=of 4]  {$f$};
+
+      \path            (0) edge node {$a$} (3);
+      \path            (0) edge node {$b$} (2);
+      \path            (1) edge node {$a$} (2);
+      \path            (1) edge node {$b$} (4);
+      \path            (2) edge node {$a$} (3);
+      \path            (2) edge node {$b$} (4);
+      \path[structure] (i) edge node {$\varepsilon$} (0);
+      \path[structure] (i) edge node {$\varepsilon$} (1);
+      \path[alert]     (3) edge node {$\varepsilon$} (f);
+      \path[alert]     (4) edge node {$\varepsilon$} (f);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+
+\endgroup

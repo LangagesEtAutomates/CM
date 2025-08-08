@@ -9,7 +9,7 @@
 
 \begin{frame}{Configurations d'un automate à pile}
   
-  \tf[top, text]{
+  \on[top, text]{
     Soit $A=\langle \Sigma, \Pi, Q, I, F, \diamond, \rightarrow \rangle$ un automate à pile. 
     \begin{block}{Définition -- Configuration}
       Une \structure{configuration} de $A$ est un triplet \alert{$\langle u, q, \pi \rangle$} tel que :
@@ -21,38 +21,38 @@
     \end{block}
   }
 
-  \tfExampleBlock[y=-5mm]{Exemple -- Configuration $\langle abb, 0, A\diamond \rangle$}{}
+  \onExampleBlock[y=-5mm]{Exemple -- Configuration $\langle abb, 0, A\diamond \rangle$}{}
 
 
-  \tf[y=-25mm, x=-45mm]{
-    \begin{smArray}
-        \smCell          {$a$}  
-        \smCell[\smExample]{$a$} \smHead[example]       
-        \smCell[\smExample]{$b$}          
-        \smCell[\smExample]{$b$} 
-    \end{smArray}
-  }
-
-  \tf[y=-25mm,x=5mm]{
-    \begin{tikzpicture}[smAutomaton, node distance=2.5cm, initial text=$\diamond$]
-      \smState[\smInitial\smExample] (a) at (0.0,0.0) {$0$}; 
-      \smState[                  ] (b) at (2.5,0.0) {$1$}; 
-      \smState[\smAccepting      ] (c) at (5.0,0.0) {$2$}; 
-
-      \smPath (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
-      \smPath (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
-      \smPath (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
-      \smPath (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
-      \smPath (b) edge             node[above] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+  \on[y=-25mm, x=-40mm]{
+    \begin{tikzpicture}[word, x=7mm, y=7mm]
+      \cell         {$a$}  
+      \cell[example]{$a$} \smhead[example]       
+      \cell[example]{$b$}          
+      \cell[example]{$b$} 
     \end{tikzpicture}
   }
 
-  \tf[y=-25mm, x=5cm]{
-    \begin{smStack}[width=7.5mm]
-        \smCell[\smExample]{$\diamond$}  
-        \smCell[\smExample]{$A$}        
-        \smCell          {}          
-    \end{smStack}
+  \on[y=-25mm,x=5mm]{
+    \begin{tikzpicture}[pushdown]
+      \state[initial, example] (a) at (0,0) {$0$}; 
+      \state[                ] (b) at (1,0) {$1$}; 
+      \state[accepting       ] (c) at (2,0) {$2$}; 
+
+      \path (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+      \path (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
+      \path (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \path (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \path (b) edge             node[above] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+    \end{tikzpicture}
+  }
+
+  \on[y=-25mm, x=45mm]{
+    \begin{tikzpicture}[stack, x=7mm, y=7mm]
+      \cell[example]{$\diamond$}  
+      \cell[example]{$A$}        
+      \cell            {}          
+    \end{tikzpicture}
   }
   
 \end{frame}

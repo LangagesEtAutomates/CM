@@ -29,11 +29,11 @@
     \end{description}
   \end{block}
 
-  \tf[y=-25mm, x=30mm]{
-    \begin{tikzpicture}[smAutomaton]
-      \smState (q)  at (0,0) {$q$}; 
-      \smState (q1) at (2,0) {$q'$}; 
-      \smPath  (q) edge node {$a$} (q1);
+  \on[y=-25mm, x=30mm]{
+    \begin{tikzpicture}[automaton]
+      \state (q)  at (0,0) {$q$}; 
+      \state (q1) at (1,0) {$q'$}; 
+      \path  (q) edge node {$a$} (q1);
     \end{tikzpicture}
   }
 

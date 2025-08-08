@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Définitions rationnelles}
+
+  \on[text,top]{
+    Une \structure{définition rationnelle} sur un alphabet $\Sigma$ est une liste finie de règles
+    $$\alert{
+      d_1 \to r_1,\quad
+      d_2 \to r_2,\;\dots,\;
+      d_n \to r_n
+    }$$
+    telles que pour chaque $i=1,\dots,n$ :
+    \begin{description}[xxxx]
+    \item[$d_i$] est un \alert{identificateur unique}, n'appartenant pas à $\tilde{\Sigma}^\star$
+    \item[$r_i$] est une \alert{expression rationnelle} sur $\Sigma \cup \{d_1, \ldots, d_{i-1}\}$
+    \end{description}
+    \structure{Attention :} \alert{$d_i \notin r_j$ si $i\ge j$} (les définitions ne sont pas récursives)
+  }
+  
+  \onExampleBlock[y=-11mm]{Exemple -- Reconnaissance des adresses email}{
+    \example{Par une expression rationnelle :}
+    $$(a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^\star \text{@} (a\mid b\mid ...\mid z\mid \text{-})^+ (. (a\mid b\mid ...\mid z\mid \text{-})^+)^+$$
+    
+    \example{Par une définition rationnelle :}
+  }
+
+  \on[bottom, x=25mm]{
+    $\left\{\begin{array}{r@{~~\rightarrow~~}l}
+    \example{\mathit{symbole}}     & a\mid b\mid ...\mid z\mid \text{-}\\
+    \example{\mathit{label}}       & \example{\mathit{symbole}}^+ \\
+    \example{\mathit{utilisateur}} & \example{\mathit{label}} (.\,\example{\mathit{label}}) ^\star \\
+    \example{\mathit{domaine}}     & \example{\mathit{label}} (.\,\example{\mathit{label}}) ^+ \\
+    \example{\mathit{email}}       & \example{\mathit{utilisateur}} \,\text{@}\, \example{\mathit{domaine}} \\
+    \end{array}\right.$
+  }
+  
+\end{frame}
+
+\endgroup

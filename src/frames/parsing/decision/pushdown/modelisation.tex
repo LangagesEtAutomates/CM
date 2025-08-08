@@ -33,11 +33,11 @@
     \end{description}
   \end{block}
 
-  \tf[x=3cm, y=-3cm]{
-    \begin{tikzpicture}[smAutomaton]
-      \smState (q)  at (0.0,0) {$q$}; 
-      \smState (q1) at (2.5,0) {$q'$};
-      \smPath  (q) edge node {\smPAtrans{u}{p}{p'}} (q1);
+  \on[x=3cm, y=-3cm]{
+    \begin{tikzpicture}[pushdown]
+      \state (q)  at (0,0) {$q$}; 
+      \state (q1) at (1,0) {$q'$};
+      \path  (q) edge node {\smPAtrans{u}{p}{p'}} (q1);
     \end{tikzpicture}
   }
 

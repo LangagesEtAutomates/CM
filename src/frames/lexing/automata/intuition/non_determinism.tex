@@ -17,24 +17,24 @@
     C'est une transition \textit{spontanée} : l'automate \textit{décide} de changer d'état sans lire de symbole.
   \end{enumerate}
   
-  \begin{exampleblock}{Exemple}% : $(a^+ | b^+) c^\star$}
+  \begin{exampleblock}{Exemple}
     \centering  
-    \begin{tikzpicture}[smAutomaton]
-      \smState[\smInitial \smStructure] (s1) at (0,1.5)  {$s_1$}; 
-      \smState                          (s2) at (2,1.5)  {$s_2$}; 
-      \smState[\smAccepting]            (s3) at (4,.75) {$s_3$}; 
-      \smState[\smInitial \smStructure] (s4) at (0,0.0)  {$s_4$}; 
-      \smState                          (s5) at (2,0.0)  {$s_5$}; 
+    \begin{tikzpicture}[automaton, x=20mm, y=10mm]
+      \state[initial, structure] (s1) at (0,2)  {$s_1$}; 
+      \state                     (s2) at (1,2)  {$s_2$}; 
+      \state[accepting]          (s3) at (2,1)  {$s_3$}; 
+      \state[initial, structure] (s4) at (0,0)  {$s_4$}; 
+      \state                     (s5) at (1,0)  {$s_5$}; 
 
-      \smPath[\smAlert] (s1) edge             node[swap]  {$a$}           (s2);
-      \smPath[\smAlert] (s1) edge[loop above] node        {$a$}           (s1);
-      \smPath (s2) edge[loop above] node        {$a$}           (s2);
-      \smPath[\smAlert] (s4) edge             node[swap]  {$b$}           (s5);
-      \smPath[\smAlert] (s4) edge[loop below] node        {$b$}           (s4);
-      \smPath (s5) edge[loop below] node        {$b$}           (s5);
-      \smPath (s3) edge[loop right] node        {$c$}           (s3);
-      \smPath[\smExample] (s2) edge             node        {$\varepsilon$} (s3);
-      \smPath[\smExample] (s5) edge             node[swap]  {$\varepsilon$} (s3);
+      \path[alert]   (s1) edge             node[swap]  {$a$}           (s2);
+      \path[alert]   (s1) edge[loop above] node        {$a$}           (s1);
+      \path          (s2) edge[loop above] node        {$a$}           (s2);
+      \path[alert]   (s4) edge             node[swap]  {$b$}           (s5);
+      \path[alert]   (s4) edge[loop below] node        {$b$}           (s4);
+      \path          (s5) edge[loop below] node        {$b$}           (s5);
+      \path          (s3) edge[loop right] node        {$c$}           (s3);
+      \path[example] (s2) edge             node        {$\varepsilon$} (s3);
+      \path[example] (s5) edge             node[swap]  {$\varepsilon$} (s3);
     \end{tikzpicture}
   \end{exampleblock}
 

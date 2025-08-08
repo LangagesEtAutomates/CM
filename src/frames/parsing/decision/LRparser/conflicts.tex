@@ -9,14 +9,14 @@
 
 \begin{frame}{Conflits}
   
-  \tf[text,top=-2mm]{
+  \on[text,top=-2mm]{
     \begin{itemize}
     \item Si l'automate à pile est déterministe, on a terminé
     \item Sinon, l'algorithme échoue sur un conflit
     \end{itemize}
   }
  
-  \tfBlock[y=8mm]{Conflit par réduction/réduction}{
+  \onBlock[y=8mm]{Conflit par réduction/réduction}{
     \begin{itemize}
     \item Quelle réduction suivre en 1 ? 
     \end{itemize}
@@ -31,9 +31,9 @@
       \end{array}$}
   }
   
-  \tf[y=7mm,x=30mm]{
-    \begin{tikzpicture}[smAutomaton, initial text=0]\tiny
-      \node[alert, fill=alert!20, state, rectangle, rounded corners] (1) at (-1.0,1.2) {$1:
+  \on[y=7mm,x=30mm]{
+    \begin{tikzpicture}[pushdown, initial text=0, grid size=12mm]
+      \state[alert, rectangle] (1) at (-1,1) {\scriptsize$1:
         \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
         S &\rightarrow& E \$\\
         E &\rightarrow & A a \mid B b\\
@@ -41,29 +41,29 @@
         B &\rightarrow & a \bullet
         \end{array}\right.
         $};
-      \node[state,initial above] (0) at (1.0,1.2) {$0$};
-      \node[state]               (2) at (0.0,2.4) {$2$};
-      \node[state]               (3) at (0.0,0.0) {$3$};
-      \node[state]               (4) at (2.0,1.2) {$4$};
-      \node[state]               (5) at (2.0,2.4) {$5$};
-      \node[state]               (6) at (2.0,0.0) {$6$};
-      \node[state,accepting]     (7) at (3.0,1.2) {$7$};
+      \state[initial above] (0) at (1,1) {$0$};
+      \state                (2) at (0,2) {$2$};
+      \state                (3) at (0,0) {$3$};
+      \state                (4) at (2,1) {$4$};
+      \state                (5) at (2,2) {$5$};
+      \state                (6) at (2,0) {$6$};
+      \state[accepting]     (7) at (3,1) {$7$};
  
-      \path[->,densely dotted] (0) edge                 node[swap]             {$A$}                              (2);
-      \path[->,densely dotted] (0) edge                 node                   {$B$}                              (3);
-      \path[->,densely dotted] (0) edge                 node                   {$E$}                              (4);
-      \path[-latex]            (0) edge                 node[swap]             {\smPAtrans{a}{\varepsilon}{1}}    (1);
-      \path[-latex]            (2) edge                 node                   {\smPAtrans{a}{\varepsilon}{5}}    (5);
-      \path[-latex]            (3) edge                 node[swap]             {\smPAtrans{b}{\varepsilon}{6}}    (6);
-      \path[-latex]            (4) edge                 node                   {\smPAtrans{\$}{\varepsilon}{7}}   (7);
-      \path[-latex, alert]     (1) edge[bend left=7mm]  node[]                 {\smPAtrans{\varepsilon}{01}{02}}  (2);
-      \path[-latex, alert]     (1) edge[bend right=7mm] node[swap]             {\smPAtrans{\varepsilon}{01}{03}}  (3);
-      \path[-latex]            (5) edge                 node[yshift=1mm]       {\smPAtrans{\varepsilon}{025}{04}} (4);
-      \path[-latex]            (6) edge                 node[yshift=-1mm,swap] {\smPAtrans{\varepsilon}{036}{04}} (4);
+      \path[->, densely dotted] (0) edge                 node[swap]             {\scriptsize$A$}                              (2);
+      \path[->, densely dotted] (0) edge                 node                   {\scriptsize$B$}                              (3);
+      \path[->, densely dotted] (0) edge                 node                   {\scriptsize$E$}                              (4);
+      \path                     (0) edge                 node[swap]             {\scriptsize\smPAtrans{a}{\varepsilon}{1}}    (1);
+      \path                     (2) edge                 node                   {\scriptsize\smPAtrans{a}{\varepsilon}{5}}    (5);
+      \path                     (3) edge                 node[swap]             {\scriptsize\smPAtrans{b}{\varepsilon}{6}}    (6);
+      \path                     (4) edge                 node                   {\scriptsize\smPAtrans{\$}{\varepsilon}{7}}   (7);
+      \path[alert]              (1) edge[bend left=7mm]  node[]                 {\scriptsize\smPAtrans{\varepsilon}{01}{02}}  (2);
+      \path[alert]              (1) edge[bend right=7mm] node[swap]             {\scriptsize\smPAtrans{\varepsilon}{01}{03}}  (3);
+      \path                     (5) edge                 node[yshift=1mm]       {\scriptsize\smPAtrans{\varepsilon}{025}{04}} (4);
+      \path                     (6) edge                 node[yshift=-1mm,swap] {\scriptsize\smPAtrans{\varepsilon}{036}{04}} (4);
     \end{tikzpicture}
   }
   
-  \tfBlock[bottom=1mm]{Conflit par décalage/réduction}{
+  \onBlock[bottom=1mm]{Conflit par décalage/réduction}{
     \begin{itemize}
     \item Décaler ou réduire en 1 ? 
     \end{itemize}
@@ -77,35 +77,35 @@
       \end{array}$}
   }
  
-  \tf[y=-27mm,x=30mm]{
-    \begin{tikzpicture}[smAutomaton, initial text=0]\tiny
-      \node[alert, fill=alert!20, state, rectangle, rounded corners] (1) at (2.0,1.2) {$1:
+  \on[y=-27mm,x=30mm]{
+    \begin{tikzpicture}[pushdown, initial text=0, grid size=12mm]
+      \state[alert, rectangle] (1) at (2.0,1.2) {\scriptsize$1:
         \left\{\begin{array}{@{\,}r@{\,}c@{\,}l@{}}
         S &\rightarrow& E \$\\
         E &\rightarrow & T \bullet +E \mid T \bullet\\
         T &\rightarrow& 1
         \end{array}\right.
         $};
-      \node[state,initial]   (0) at (0.0,1.2) {$0$};
-      \node[state]           (2) at (0.0,0.0) {$2$};
-      \node[state]           (3) at (4.0,0.0) {$3$};
-      \node[state]           (4) at (4.0,1.2) {$4$};
-      \node[state]           (5) at (2.0,2.4) {$5$};
-      \node[state,accepting] (6) at (0.0,2.4) {$6$};
+      \state[initial  ] (0) at (0.0,1.2) {$0$};
+      \state[         ] (2) at (0.0,0.0) {$2$};
+      \state[         ] (3) at (4.0,0.0) {$3$};
+      \state[         ] (4) at (4.0,1.2) {$4$};
+      \state[         ] (5) at (2.0,2.4) {$5$};
+      \state[accepting] (6) at (0.0,2.4) {$6$};
  
-      \path[->,densely dotted] (0) edge[]               node              {$E$}                               (5);
-      \path[->,densely dotted] (0) edge[]               node[swap]        {$T$}                               (1);
-      \path[->,densely dotted] (3) edge[bend left =5mm] node              {$T$}                               (1);
-      \path[->,densely dotted] (3) edge[]               node[swap]        {$E$}                               (4);
-      \path[-latex]            (5) edge                 node[swap,sloped] {\smPAtrans{\$}{\varepsilon}{6}}    (6);
-      \path[-latex]            (0) edge                 node[swap,sloped] {\smPAtrans{1}{\varepsilon}{2}}     (2);
-      \path[-latex,example]    (1) edge                 node[sloped]      {\smPAtrans{+}{\varepsilon}{3}}     (3);
-      \path[-latex]            (3) edge                 node[swap]        {\smPAtrans{1}{\varepsilon}{2}}     (2);
-      \path[-latex,alert]      (1) edge                 node              {\smPAtrans{\varepsilon}{01}{05}}   (5);
-      \path[-latex]            (4) edge                 node[sloped]      {\smPAtrans{\varepsilon}{0134}{05}} (5);
-      \path[-latex,alert]      (1) edge                 node[swap]        {\smPAtrans{\varepsilon}{31}{34}}   (4);
-      \path[-latex]            (4) edge[loop above]     node              {\smPAtrans{\varepsilon}{3134}{34}} (4);
-      \path[-latex]            (2) edge                 node[sloped]      {\smPAtrans{\varepsilon}{32}{31}} node[swap,sloped] {\smPAtrans{\varepsilon}{02}{01}}   (1);
+      \path[->,densely dotted] (0) edge                node              {\scriptsize$E$}                               (5);
+      \path[->,densely dotted] (0) edge                node[swap]        {\scriptsize$T$}                               (1);
+      \path[->,densely dotted] (3) edge[bend left=5mm] node              {\scriptsize$T$}                               (1);
+      \path[->,densely dotted] (3) edge                node[swap]        {\scriptsize$E$}                               (4);
+      \path                    (5) edge                node[swap,sloped] {\scriptsize\smPAtrans{\$}{\varepsilon}{6}}    (6);
+      \path                    (0) edge                node[swap,sloped] {\scriptsize\smPAtrans{1}{\varepsilon}{2}}     (2);
+      \path[example]           (1) edge                node[sloped]      {\scriptsize\smPAtrans{+}{\varepsilon}{3}}     (3);
+      \path                    (3) edge                node[swap]        {\scriptsize\smPAtrans{1}{\varepsilon}{2}}     (2);
+      \path[alert]             (1) edge                node              {\scriptsize\smPAtrans{\varepsilon}{01}{05}}   (5);
+      \path                    (4) edge                node[sloped]      {\scriptsize\smPAtrans{\varepsilon}{0134}{05}} (5);
+      \path[alert]             (1) edge                node[swap]        {\scriptsize\smPAtrans{\varepsilon}{31}{34}}   (4);
+      \path                    (4) edge[loop above]    node              {\scriptsize\smPAtrans{\varepsilon}{3134}{34}} (4);
+      \path                    (2) edge                node[sloped]      {\scriptsize\smPAtrans{\varepsilon}{32}{31}} node[swap,sloped] {\smPAtrans{\varepsilon}{02}{01}}   (1);
     \end{tikzpicture}
   }
     

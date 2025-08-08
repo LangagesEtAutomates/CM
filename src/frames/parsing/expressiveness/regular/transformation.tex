@@ -1,0 +1,99 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaires pour les langages rationnels}
+
+  Un langage $L$ est rationnel ssi $L$ est engendré par une grammaire :\\
+  \vspace{2mm}
+  \begin{minipage}{.5\textwidth}
+    \begin{itemize}
+    \item linéaire à gauche
+    \item rationnelle à gauche 
+    \end{itemize}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \begin{itemize}
+    \item linéaire à droite 
+    \item rationnelle à droite 
+    \end{itemize}
+  \end{minipage}
+  
+  \begin{block}{De linéaire à droite à rationnelle à droite}
+    \begin{itemize}
+    \item Transformation des règles similaire à la forme normale de Chomsky
+    \end{itemize}
+    
+    \footnotesize $$\example{
+      \left\{\begin{array}{@{\,}l@{~\rightarrow~}l@{\,}}
+      S & abA \mid A \\
+      A & c
+      \end{array}\right.
+      ~\Rightarrow~
+      \left\{\begin{array}{@{\,}l@{~\rightarrow~}l@{\,}}
+      S & abA \mid c \\
+      A & c
+      \end{array}\right.
+      ~\Rightarrow~
+      \left\{\begin{array}{@{\,}l@{~\rightarrow~}l@{\,}}
+      S & aB \mid c \\
+      A & c         \\
+      B & bA
+      \end{array}\right.
+    }$$
+  \end{block}
+
+  \begin{block}{De rationnelle à gauche à rationnelle à droite}
+    \begin{itemize}
+    \item On passe par le miroir : $\mathcal{L}(G)^{\textsc{r}} = \mathcal{L}(\langle \Sigma, \Gamma, S, \{ \langle g, d^{\textsc{r}} \rangle \mid g \rightarrow d\} \rangle)$.
+    \end{itemize}
+    
+    \footnotesize $$\example{
+      \left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+      S & Aa\\
+      A & Aa & Bb\\
+      B & Bb & \varepsilon
+      \end{array}\right.
+      ~\xRightarrow{\textsc{r}}~
+      \left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+      S & aA\\
+      A & aA & bB\\
+      B & bB & \varepsilon
+      \end{array}\right.
+      ~\Rightarrow~
+      \begin{tikzpicture}[automaton, baseline=(c)]
+        \state[initial below]   (S) at (0.3, 0.5) {$S$}; 
+        \state                  (A) at (1.0, 1.0) {$A$}; 
+        \state[accepting ]      (B) at (1.0, 0.0) {$B$}; 
+        \path (S) edge             node     {$a$} (A);
+        \path (A) edge[loop right] node     {$a$} (A);
+        \path (A) edge             node (c) {$b$} (B);
+        \path (B) edge[loop right] node     {$b$} (B);
+      \end{tikzpicture}
+      ~\xRightarrow{\textsc{r}}~
+      \begin{tikzpicture}[automaton, baseline=(c)]
+        \state[accepting]   (S) at (0.3, 0.5) {$S$}; 
+        \state              (A) at (1.0, 1.0) {$A$}; 
+        \state[initial]     (B) at (1.0, 0.0) {$B$}; 
+        \path (A) edge             node[swap] {$a$} (S);
+        \path (A) edge[loop right] node {$a$} (A);
+        \path (B) edge             node[swap] (c) {$b$} (A);
+        \path (B) edge[loop right] node {$b$} (B);
+      \end{tikzpicture}
+      ~\Rightarrow~
+      \left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+      B & bB & bA\\
+      A & aA & aS\\
+      S & \varepsilon
+      \end{array}\right.
+    }$$
+  \end{block}
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,81 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Arbre de la syntaxe abstraite}
+
+  \onBlock[top=-5mm]{Arbre de la syntaxe abstraite (AST : Abstract Syntax Tree)}{\vspace{-1mm}
+    \begin{itemize}
+    \item Les arbres de dérivation peuvent être simplifiés en un AST
+      \begin{description}[Feuilles :]
+      \item[N\oe uds :] Constructions du langage (par exemple opérateurs)
+      \item[Feuilles :] Constantes ou variables
+      \end{description}
+    \item La suite de la compilation utilise un AST. Par exemple, en CUP\\
+      \texttt{S::=    S:g PLUS S:d    \{: RESULT = new Sum(g, d); :\}}
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=-2mm]{Exemple -- Dérivation de $u$ par $G$}{\vspace{-1mm}
+    \begin{itemize}
+    \item $u=\example{((1+1)\times (1+1))}$
+    \item $G = \langle \{\example{1}, \example{+}, \example{\times}, \example{(}, \example{)}\}, \{S\}, S, \{S \rightarrow \example{(}S \example{+} S\example{)} | \example{(}S \example{\times} S\example{)} | \example{1} \} \rangle$
+    \end{itemize}
+  }
+
+  \on[bottom=-1mm, x=-.25\textwidth] {
+    \begin{tikzpicture}[tree, x=4mm, y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree[name=root] {$S$}{
+        \tree {$($}{}
+        \tree {$S$}{
+          \tree {$($}{}
+          \tree {$S$}{
+            \tree {$1$}{}
+          }
+          \tree {$+$}{}
+          \tree {$S$}{
+            \tree {$1$}{}
+          }
+          \tree {$)$}{}
+        }
+        \tree {$\times$}{}
+        \tree {$S$}{
+          \tree {$($}{}
+          \tree {$S$}{
+            \tree {$1$}{}
+          }
+          \tree {$+$}{}
+          \tree {$S$}{
+            \tree {$1$}{}
+          }
+          \tree {$)$}{}
+        }
+        \tree {$)$}{}
+      }
+      \node[example] at ([yshift=2mm]root) {Arbre de la syntaxe concrète};
+    \end{tikzpicture}
+  }
+  \on[bottom=-1mm, x=.25\textwidth] {
+    \begin{tikzpicture}[tree, x=8mm, y=10.5mm, tree node internal/.append style={structure,}, tree node leave/.append style={alert,},]
+      \tree[name=root] {$\times$}{
+        \tree {$+$}{
+          \tree {$1$}{}
+          \tree {$1$}{}
+        }
+        \tree {$+$}{
+          \tree {$1$}{}
+          \tree {$1$}{}
+        }
+      }
+      \node[example] at ([yshift=2mm]root) {Arbre de la syntaxe abstraite};
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

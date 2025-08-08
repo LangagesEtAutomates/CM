@@ -9,7 +9,7 @@
 
 \begin{frame}{Lien entre langages droits}
 
-  \tfExampleBlock[bottom, left=.55\textwidth]{Exemple}{
+  \onExampleBlock[bottom, left=.55\textwidth]{Exemple}{
     Pour $i \in \{0, 1, 2, 3\}$, on pose $L_i = \mathcal{L}_{A}(q_i)$
     $$
     \left\{
@@ -22,7 +22,7 @@
     \right.
     $$
   }
-  \tfBlock[top=-5mm]{Analyse}{
+  \onBlock[top=-5mm]{Analyse}{
     Soient $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN, $a\in \Sigma \cup \{\varepsilon\}$, $u\in \Sigma^\star$, et $q\in Q$. On a :
     {\small
       $$
@@ -36,20 +36,20 @@
       $$\alert{\mathcal{L}_{A}(q) = \bigcup_{q \xrightarrow{b} q'} \{b\} \cdot \mathcal{L}_{A}(q') \quad\cup \left\{\begin{array}{@{\,}cl}\{\varepsilon\}&\text{si }q \in F\\\emptyset&\text{sinon}\end{array}\right.}$$
   }
 
-  \tf[bottom, x=45mm]{\small
-    \begin{tikzpicture}[smAutomaton, node distance=1.3cm]
-      \smState[\smInitial]   (q0)   {$q_0$};
-      \smState               (q1) [below=of q0]  {$q_1$};
-      \smState[\smAccepting] (q2) [below=of q1]  {$q_2$}; 
-      \smState               (q3) [right=of q1]  {$q_3$}; 
+  \on[bottom, x=45mm]{
+    \begin{tikzpicture}[automaton]
+      \state[initial]   (q0) at (0,2)  {$q_0$};
+      \state            (q1) at (0,1)  {$q_1$};
+      \state[accepting] (q2) at (0,0)  {$q_2$}; 
+      \state            (q3) at (1,1)  {$q_3$}; 
 
-      \smPath[\smStructure] (q0) edge             node[swap] {$a$} (q1);
-      \smPath               (q1) edge             node[swap] {$b$} (q2);
-      \smPath               (q2) edge             node[swap] {$\varepsilon$} (q3);
-      \smPath               (q3) edge             node[swap] {$b$} (q1);
-      \smPath[\smExample]   (q0) edge[loop right] node       {$b$} (q0);
-      \smPath               (q1) edge[loop left ] node       {$b$} (q1);
-      \smPath               (q3) edge[loop above] node       {$a$} (q3);
+      \path[structure] (q0) edge             node[swap] {$a$} (q1);
+      \path            (q1) edge             node[swap] {$b$} (q2);
+      \path            (q2) edge             node[swap] {$\varepsilon$} (q3);
+      \path            (q3) edge             node[swap] {$b$} (q1);
+      \path[example]   (q0) edge[loop right] node       {$b$} (q0);
+      \path            (q1) edge[loop left ] node       {$b$} (q1);
+      \path            (q3) edge[loop above] node       {$a$} (q3);
     \end{tikzpicture}
   }
 

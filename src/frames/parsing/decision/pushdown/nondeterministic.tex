@@ -20,13 +20,13 @@
       \end{itemize}
     \item\vspace{2mm} Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} \mid w\in \Sigma^\star\}}$ est déterministe.
       \begin{center}
-        \begin{tikzpicture}[structure, smAutomaton, initial text=$\diamond$]
-          \smState[\smInitial]   (b) at (0.0, 0.0) {$1$}; 
-          \smState[\smAccepting] (c) at (3.5, 0.0) {$2$}; 
-          \smPath (b) edge             node {\smPAtrans{c}{\varepsilon}{\varepsilon}}                      (c);
-          \smPath (b) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}, \smPAtrans{b}{\varepsilon}{B}} (b);
-          \smPath (c) edge[loop above] node {\smPAtrans{a}{A}{\varepsilon}, \smPAtrans{b}{B}{\varepsilon}} (c);
-        \end{tikzpicture}\\
+        \begin{tikzpicture}[pushdown]
+          \state[initial]   (b) at (0,0) {$1$}; 
+          \state[accepting] (c) at (1,0) {$2$}; 
+          \path (b) edge             node {\smPAtrans{c}{\varepsilon}{\varepsilon}}                      (c);
+          \path (b) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}, \smPAtrans{b}{\varepsilon}{B}} (b);
+          \path (c) edge[loop above] node {\smPAtrans{a}{A}{\varepsilon}, \smPAtrans{b}{B}{\varepsilon}} (c);
+        \end{tikzpicture}
       \end{center}
     \item\vspace{2mm} Par contre, le langage des palindromes est non-déterministe :
       $$\example{\{ w \cdot w^{\textsc{r}} \mid w\in \Sigma^\star\}}$$

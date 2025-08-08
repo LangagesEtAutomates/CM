@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{RabinScott}{rabin\_scott}
+
+\begin{frame}{Théorème d'équivalence entre AFN et AFD}
+
+  \onBlock[top, left=48mm]{Théorème}{
+    Tout langage reconnaissable par un automate fini  non-déterministe 
+    est reconnaissable par un automate fini déterministe
+  }
+
+  \onBlock[y=-15mm]{Démonstration}{
+    Méthode des sous-ensembles de Rabin et Scott\footnote{Prix Turing 1976 pour leurs travaux sur le non-déterminisme}
+    \begin{description}
+    \item [Entrée :] automate fini non-déterministe \structure{$A$}
+    \item [Sortie :] automate fini déterministe \structure{$\RabinScott(A)$} tel que
+      \vspace{-2mm}
+      $$\alert{\mathcal{L}(A) = \mathcal{L}(\RabinScott(A))}$$ 
+    \end{description}
+    \vspace{-3mm}
+    \begin{itemize}
+    \item Les états de $\RabinScott(A)$ sont des ensembles d'états de $A$ 
+    \item $\RabinScott(A)$ est également complet
+    \end{itemize}
+  }
+
+  \onImage[x=12mm,y=15mm]{%
+    height=32mm,
+    title={Michael O. Rabin},
+    license={{\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA}} (\ccbysa{} — \href{https://commons.wikimedia.org/wiki/File:M_O_Rabin.jpg}{Wikimedia})},
+    img={Rabin.jpg}
+  }
+
+  \onImage[x=42mm,y=15mm]{%
+    height=32mm,
+    title={Dana S. Scott},
+    license={{\href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA}} (\ccbysa{} — 2003, \href{https://commons.wikimedia.org/wiki/File:Scott_Dana_small.jpg}{Wikimedia})},
+    img={Scott.jpg}
+  }
+  
+\end{frame}
+
+\endgroup

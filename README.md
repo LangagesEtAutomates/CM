@@ -2,24 +2,23 @@
 
 This repository contains modular and reusable teaching materials for a university-level course on formal languages and automata.
 
+## Latest PDFs:
+- Slides (full animated version):  https://<org>.github.io/<repo>/slides.pdf
+- Handout (printable version): https://<org>.github.io/<repo>/handout.pdf
+
 ## Structure
 
 ├── LICENSE.md            # License CC-BY-SA 4.0  
 ├── Makefile              # Automatic compilation  
 ├── README.md             # This file  
 ├── build/                # Temporary files used during compilation  
+├── latex-libs/           # Dependency from [latex-libs](https://github.com/MatthieuPerrin/latex-libs)
 ├── docs/                 # Final PDF files (i.e. compiled course)  
 ├── src/                  # LaTeX source files  
 │   ├── drivers/          # Main document files for the course  
-│   ├── sty/              # LaTeX style files and custom macros  
 │   ├── frame/            # Individual slides organized by topic (one file per slide)  
 │   └── img/              # (shareable) images used in the slides
 
-> **Note:** `src/sty/` is managed via a Git subtree from the [latex-libs](https://github.com/MathieuPerrin/latex-libs) repository.  
-> Update your styles with:
-> ```bash
-> make update-sty
-> ```
 
 ## Compilation
 
@@ -31,7 +30,7 @@ make
 
 This creates `docs/slides.pdf` and `docs/handout.pdf`.
 
-You can also build a single deck:
+Build individually:
 
 ```bash
 make slides     # Builds docs/slides.pdf
@@ -40,6 +39,19 @@ make handout    # Builds docs/handout.pdf
 make clean      # Remove temporary files in build/
 make cleanall   # Also remove PDFs in docs/
 ```
+
+
+## Dependencies
+
+These slides rely on styles from the [latex-libs](https://github.com/MatthieuPerrin/latex-libs) project.
+- On the first build, the Makefile automatically clones the library into `./latex-libs` (internet required).
+- Subsequent builds work offline.
+- Update both this repo and the library with:
+
+```bash
+make update
+```
+
 
 ## Licensing
 
@@ -50,7 +62,8 @@ This means:
 - You must give appropriate credit.
 - You must distribute derivatives under the same license.
 
-See [`LICENSE.txt`](LICENSE.txt) for full terms.
+See [`LICENSE.md`](LICENSE.md) for full terms.
+
 
 ## Contributions
 
@@ -62,3 +75,12 @@ Each slide is in a separate file, making it easy to reuse or improve specific pa
 - Translate to other languages
 
 Use pull requests to suggest changes.
+
+
+## Related projects
+
+You may also be interested in:
+- [latex-libs](https://github.com/MatthieuPerrin/latex-libs): the graphical/style library used here
+- [Main organization](https://github.com/LangagesEtAutomates/): additional resources for exercises and labs 
+- [Calculabilité et Complexité](https://github.com/CalculabiliteEtComplexite): a course on Turing machines, computability, and complexity
+

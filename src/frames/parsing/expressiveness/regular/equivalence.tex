@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Équivalence grammaire rationnelle / automate}
+
+  \onBlock[top]{Théorème}{
+    Soit $\Sigma$ un alphabet et $L \in \mathscr{P}(\Sigma^\star)$ un langage. \\
+    $L$ est généré par une grammaire rationnelle à droite ssi L est rationnel. 
+  }
+
+  \onBlock[y=0mm]{Démonstration}{
+    \begin{itemize}
+    \item $L$ est engendré par la grammaire rationnelle à droite \structure{$G = \langle \Sigma, \Gamma, S, \rightarrow_G \rangle$}
+      \footnote{on suppose $G$ sans règle $\structure{A \rightarrow a}$, qui peut toujours être remplacé par \structure{$A \rightarrow a \cdot F$}, avec \structure{$F \rightarrow \varepsilon$}}
+    \item ssi, $L$ est reconnu par l'AFN unitaire $\varepsilon$-libre \structure{$A = \langle \Sigma, \Gamma, \{S\}, F, \rightarrow_A \rangle$}, avec
+    \end{itemize}
+    $$\structure{\begin{array}{r@{~}c@{~}l@{\quad\Leftrightarrow\quad}r@{~}c@{~}l}
+        X & \xrightarrow{a}_A & Y & X & \rightarrow_G & a Y \\
+        X & \in               & F & X & \rightarrow_G & \varepsilon 
+    \end{array}}$$
+  }
+
+  \onExampleBlock[y=-25mm]{Exemple}{\vspace{-6mm}
+    $$\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+        S & aA\\
+        A & aA & bB\\
+        B & bB & \varepsilon
+      \end{array}\right.
+    \quad\quad\Leftrightarrow\quad\quad
+    \begin{tikzpicture}[automaton, baseline=(S)]
+      \state[initial]   (S) at (0, 0) {$S$}; 
+      \state            (A) at (1, 0) {$A$}; 
+      \state[accepting] (B) at (2, 0) {$B$}; 
+      \path (S) edge             node {$a$} (A);
+      \path (A) edge[loop above] node {$a$} (A);
+      \path (A) edge             node {$b$} (B);
+      \path (B) edge[loop above] node {$b$} (B);
+    \end{tikzpicture}
+    $$
+  }
+
+\end{frame}
+
+\endgroup

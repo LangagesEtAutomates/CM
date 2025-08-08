@@ -1,0 +1,59 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Interprétation ubiquitaire du non-déterminisme}
+
+  \onBlock[top=-3mm]{Interprétation du non-déterminisme comme de l'ubiquité}{
+    \begin{itemize}
+    \item L'automate se trouve dans un sous-ensemble des états
+    \item Le mot est reconnu si l'un des états du sous-ensemble est final
+    \item Ces sous-ensembles forment un nouvel automate, qui est déterministe
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=1mm]{Exemple : reconnaissance de $\alert{abc}$ par l'automate suivant}{
+    \vspace{-2mm}
+    $$
+    \alertb<1>{\{1\}}
+    \uncover<2->{\xrightarrow{a} \alert<2> {\{2, 3, 5, 7, 9, 10\}}}
+    \uncover<3->{\xrightarrow{b} \alertb<3>{\{3, 4, 5, 7, 8, 10\}}}
+    \uncover<4->{\xrightarrow{c} \alertb<4>{\{3, 5, 6, 7, 8, 10\}}}
+    $$
+  }
+  
+  \on[bottom] {
+    \begin{tikzpicture}[automaton]
+      \state[initial,   alert ob=<1> ] (1)  at (0,2) {$1$};    
+      \state[           alert on=<2> ] (2)  at (1,2) {$2$};    
+      \state[           alert on=<2->] (3)  at (4,2) {$3$};    
+      \state[           alert ob=<3> ] (4)  at (5,2) {$4$};    
+      \state[           alert on=<2->] (5)  at (4,0) {$5$};    
+      \state[           alert ob=<4->] (6)  at (5,0) {$6$};    
+      \state[           alert on=<2->] (7)  at (3,1) {$7$};    
+      \state[           alert ob=<3->] (8)  at (6,1) {$8$};    
+      \state[           alert on=<2> ] (9)  at (2,2) {$9$};    
+      \state[accepting, alert on=<2->] (10) at (2,0) {$10$};   
+
+      \path (1) edge node {$a$}           (2);
+      \path (3) edge node {$b$}           (4);
+      \path (5) edge node {$c$}           (6);
+      \path (7) edge node {$\varepsilon$} (3);
+      \path (7) edge node {$\varepsilon$} (5);
+      \path (4) edge node {$\varepsilon$} (8);
+      \path (6) edge node {$\varepsilon$} (8);
+      \path (9) edge node {$\varepsilon$} (7);
+      \path (8) edge node {$\varepsilon$} (7);
+      \path (7) edge node {$\varepsilon$} (10);
+      \path (2) edge node {$\varepsilon$} (9);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

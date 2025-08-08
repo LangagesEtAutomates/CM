@@ -9,7 +9,7 @@
 
 \begin{frame}{Génération d'analyseur lexical}
 
-  \tfBlock[top=-5mm]{Problème}{
+  \onBlock[top=-5mm]{Problème}{
     \begin{description}
     \item[Entrée :] une expression rationnelle $r$
     \item[Sortie :] un \alert{analyseur lexical} pour le langage $\mathcal{L}(r)$
@@ -19,7 +19,7 @@
     \end{description}
   }
 
-  \tf[y=-5mm]{\footnotesize
+  \on[y=-5mm]{\footnotesize
     \begin{tikzpicture}
       \small
       \node[smBox, minimum width=2.4cm, minimum height=1cm] (exp) at (0,1.7) {Expression\\rationnelle};
@@ -28,12 +28,12 @@
       \node[example, above] at (exp.north) {$a (b|c)^\star$};
       \node[example, above] at (lex.north) {$abc \rightarrow \cmark$, $bac \rightarrow \xmark$ };
 
-      \smDraw<1>{
+      \uncoverb<1>{
         \draw[-latex, alert, rounded corners] (exp.south) -- (0,0) -- node[above]{??} (dfa.west);
         \draw[-latex, alert, rounded corners] (dfa.east)  -- node[above]{??} (8,0) -- (lex.south);
       }
       
-      \smDraw<2|handout>{
+      \uncover<2>{
         \small
         \node[smBox, minimum width=2.4cm, minimum height=1cm] (nfa) at (0,0.0) {Automate fini\\non-déterministe};
         \node[smBox, minimum width=2.4cm, minimum height=1cm] (min) at (8,0.0) {Automate fini\\minimal};
@@ -49,7 +49,7 @@
     \end{tikzpicture}
   }
 
-  \tfBlock<2|handout>[bottom]{Nécessité de monter en abstraction}{
+  \onBlock<2>[bottom]{Nécessité de monter en abstraction}{
     \begin{itemize}
     \item Notion d'automate non-déterministe
     \end{itemize}

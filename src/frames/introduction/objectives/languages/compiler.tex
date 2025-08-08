@@ -1,0 +1,102 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\tikzset{
+  compstep/.style ={draw, rectangle, rounded corners, fill=#1!20, text width=30mm, text height=2mm, align=center, rotate=90, font={\footnotesize}},
+  compstep2/.style={draw, rectangle, rounded corners, fill=structure!20, minimum width=2cm, minimum height=1.1cm, align=center},
+  compback/.style ={draw, rectangle, rounded corners, fill=example!15},
+  complabel/.style={anchor=north, align=center, minimum height=3mm, inner sep=0pt, outer sep=0pt, above=1mm of #1, font={\small}},
+  comppath/.style ={-latex, font={\scriptsize}},
+}
+
+\begin{frame}{Architecture d'un compilateur}
+    \on[top]{
+      \begin{tikzpicture}[x=8mm,anchor=base]
+        \node                     (start)                          {};
+        \node[compstep=structure] (front1) at ($(start)  + (2.0,0)$) {Analyse lexicale};
+        \node[compstep=structure] (front2) at ($(front1) + (1.0,0)$) {Analyse syntaxique};
+        \node[compstep=white    ] (front3) at ($(front2) + (1.0,0)$) {Analyse contextuelle};
+        \node[compstep=white    ] (front4) at ($(front3) + (1.0,0)$) {Élaboration};
+        \node[compstep=white    ] (optim1) at ($(front4) + (1.5,0)$) {Optimisation $1$};
+        \node[compstep=white    ] (optimn) at ($(optim1) + (1.5,0)$) {Optimisation $n$};
+        \node[compstep=white    ] (back1)  at ($(optimn) + (1.5,0)$) {Sélection d'instructions};
+        \node[compstep=white    ] (back2)  at ($(back1)  + (1.0,0)$) {Ordonnancement};
+        \node[compstep=white    ] (back3)  at ($(back2)  + (1.0,0)$) {Allocation de registres};
+        \node[compstep=white    ] (back4)  at ($(back3)  + (1.0,0)$) {Génération};
+        \node                     (end)    at ($(back4)  + (2.0,0)$) {};
+   
+        \node[complabel=$.5*(front1.east)+.5*(front4.east)$] (front) {Front end};
+        \node[complabel=$.5*(optim1.east)+.5*(optimn.east)$] (optim) {Optimiseur};
+        \node[complabel=$.5*(back1.east)+.5*(back4.east)$  ] (back)  {Back end};
+        
+        \begin{pgfonlayer}{background}
+          \node[compback, fit=(front1)(front4)(front)] {};
+          \node[compback, fit=(optim1)(optimn)(optim)] {};
+          \node[compback, fit=(back1)(back4)(back)   ] {};
+        \end{pgfonlayer}
+        
+        \scriptsize
+        \path[comppath] (start)   edge node[above]{Langage} node[below]{source} (front1);
+        \path[comppath] (front1)  edge                                          (front2);
+        \path[comppath] (front2)  edge                                          (front3);
+        \path[comppath] (front3)  edge                                          (front4);
+        \path[comppath] (front4)  edge                                          (optim1);
+        \path[comppath] (optim1)  edge node[above]{...}                         (optimn);
+        \path[comppath] (optimn)  edge                                          (back1);
+        \path[comppath] (back1)   edge                                          (back2);
+        \path[comppath] (back2)   edge                                          (back3);
+        \path[comppath] (back3)   edge                                          (back4);
+        \path[comppath] (back4)   edge node[above]{Langage} node[below]{cible}  (end);
+      \end{tikzpicture}
+    }
+   
+    \onBlock[bottom]{Objectifs du cours}{
+      \begin{itemize}
+      \item \vspace{-2mm} Comprendre comment un compilateur ``lit'' le code source
+      \item Concevoir un interpréteur pour le langage algorithmique
+      \end{itemize}
+    }
+   
+    \on[y=-17mm]{
+      \begin{tikzpicture}[x=5mm]
+        \node            (start)   at (00, 0) {};
+        \node[compstep2] (lexer)   at (05, 0) {Analyseur\\lexical\vspace{2mm}\\\textit{Lexer}};
+        \node[compstep2] (parser)  at (14, 0) {Analyseur\\syntaxique\vspace{2mm}\\\textit{Parser}};
+        \node            (end)     at (20, 0) {};
+   
+        \scriptsize
+        \path[-latex] (start) edge
+        node[above,align=center]{Langage\\ source}
+        node[below, example]{$15+2 * x$}
+        (lexer);
+   
+        \path[-latex] (lexer) edge
+        node[above]{Chaîne de tokens}
+        node[below, example]{$\textsc{int}~\textsc{plus}~\textsc{int}~\textsc{times}~\textsc{var}$}
+        (parser);
+        
+        \path[-latex] (parser) edge
+        node[above, align=center]{Arbre de la syntaxe\\abstraite (AST)}
+        node[below, example]{
+          \begin{tikzpicture}[tree, x=7mm,y=4mm]
+            \tree    {$+$}{
+              \tree  {$15$}{}
+              \tree  {$*$}{
+                \tree{$2$}{}
+                \tree{$x$}{}
+              }
+            }
+          \end{tikzpicture}
+        }
+        (end);
+      \end{tikzpicture}
+    }
+\end{frame}
+
+\endgroup

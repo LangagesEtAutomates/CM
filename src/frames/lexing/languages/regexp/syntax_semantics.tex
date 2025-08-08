@@ -1,0 +1,59 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Syntaxe et sémantique des expressions rationnelles}
+  
+  \vspace{-3mm}
+  \begin{block}{Syntaxe du langage des expressions rationnelles}
+    Soit \structure{$\Sigma$} un alphabet. Posons \alert{$\tilde{\Sigma} = \Sigma \cup \{
+    \text{`\example{$\emptyset$}'},
+    \text{`\example{$\varepsilon$}'},
+    \text{`\example{$($}'},
+    \text{`\example{$)$}'},
+    \text{`\example{$|$}'},
+    \text{`\example{$\cdot$}'},
+    \text{`\example{${}^\star$}'}
+    \}$}
+
+    \begin{itemize}
+    \item Les \structure{expressions rationnelles} sur $\Sigma$ sont des mots sur $\tilde{\Sigma}$
+    \item Le \structure{langage des expressions rationnelles} sur $\Sigma$ est noté \alert{$\textsc{regex}_\Sigma \subseteq \tilde{\Sigma}^\star$}%
+      \footnote{On donnera une définition plus précise de $\textsc{regex}_\Sigma$ dans la partie dédiée à l'analyse syntaxique.} 
+    \end{itemize}
+  \end{block}
+ 
+  \begin{block}{Sémantique d'une expression rationnelle}
+    \begin{itemize}
+      \item\vspace{-1mm} Toute expression rationnelle \alert{$\mathit{reg}$} sur $\Sigma$ \alert{décrit} un langage \alert{$\mathcal{L}(\mathit{reg}) \subseteq \Sigma^\star$}
+      \item $\mathcal{L}$ est appelée \structure{la fonction sémantique} des expressions rationnelles
+      \item $\alert{\mathcal{L} : \textsc{regex}_\Sigma \rightarrow \mathscr{P}(\Sigma^\star)}$ est définie récursivement :
+    \end{itemize}
+    $$\structure{
+      \begin{array}{r@{~=~}l@{\quad}r@{~=~}l@{\quad}r@{~=~}l}
+        \mathcal{L}(\varepsilon) & \{\varepsilon\} &
+        \mathcal{L}(\emptyset) & \emptyset &
+        \mathcal{L}(\mathit{reg}_1 \mid \mathit{reg}_2) & \mathcal{L}(\mathit{reg}_1) \cup \mathcal{L}(\mathit{reg}_2) \\
+        \mathcal{L}(a) & \{a\} &
+        \mathcal{L}(\mathit{reg}_1^\star) & \mathcal{L}(\mathit{reg}_1)^\star &
+        \mathcal{L}(\mathit{reg}_1 \cdot \mathit{reg}_2) & \mathcal{L}(\mathit{reg}_1) \cdot \mathcal{L}(\mathit{reg}_2)
+    \end{array}}
+    $$
+  \end{block}
+ 
+  \vspace{-2mm}
+  \begin{exampleblock}{Exemple}
+  \begin{itemize}
+    \item\vspace{-1mm} $\mathcal{L}(\example{a (a \mid b) b}) = \mathcal{L}(\example{a}) \alert{\cdot} \mathcal{L}(\example{a \mid b}) \alert{\cdot} \mathcal{L}(\example{b}) = \alert{\{a\} \cdot \{a, b\} \cdot \{b\}}  = \alert{\{aab, abb\}}$
+    \item $\example{a (a \mid b) b \in \textsc{regex}_\Sigma}$, mais $\alert{\{aab, abb\} \in \mathscr{P}(\Sigma^\star)}$
+    \end{itemize}
+  \end{exampleblock}
+ 
+\end{frame}
+
+\endgroup

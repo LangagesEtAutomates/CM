@@ -1,0 +1,66 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Associativité des opérateurs binaires}
+
+  \onBlock[top=-4mm]{Définition -- Associativité}{
+    L'\structure{associativité} d'un opérateur $\oplus$ précise dans quel ordre évaluer
+
+    \vspace{-2mm}
+    $$\alert{x \oplus y \oplus z}.$$
+    
+    \begin{itemize}
+    \item\vspace{-1mm} $\oplus$ est \structure{associatif à gauche} quand :
+      \hspace\fill \alert{$x \oplus y \oplus z$ signifie $(x \oplus y) \oplus z$}\\
+      \example{Exemple : \lstinline{4 - 2 - 1} signifie \texttt{(4-2)-1}}
+    \item\vspace{1mm} $\oplus$ est \structure{associatif à droite} quand :
+      \hspace\fill \alert{$x \oplus y \oplus z$ signifie $x \oplus (y \oplus z)$}\\
+      \example{Exemple : \lstinline{x = y = 0;} signifie \texttt{x = (y = 0);}}
+    \end{itemize}
+  }
+
+  \onBlock[anchor=north, y=0mm, left=.5\textwidth]{Associativité à gauche :}{
+    \centering
+    \begin{tikzpicture}[tree, y=7mm, tree node/.append style={structure,},]
+      \tree[name=root] {$A$}{
+        \tree {$A$}{
+          \tree[xshift=-1] {$A$}{
+            \tree[xshift=1] {$B$}{}
+          }
+          \tree {\alert{$\oplus$}}{}
+          \tree {$B$}{}
+        }
+        \tree[xshift=-1] {\alert{$\oplus$}}{}
+        \tree[xshift=-1] {$B$}{}
+      }
+      \node[alert] at ([yshift=7mm]root) {$A \, \rightarrow \, A \oplus B \mid B$};
+    \end{tikzpicture}
+  }
+
+  \onBlock[anchor=north, y=0mm, right=.5\textwidth]{Associativité à droite :}{
+    \centering
+    \begin{tikzpicture}[tree, y=7mm, tree node/.append style={structure,},]
+      \tree[name=root] {$A$}{
+        \tree[xshift=1] {$B$}{}
+        \tree[xshift=1] {\alert{$\oplus$}}{}
+        \tree {$A$}{
+          \tree {$B$}{}
+          \tree {\alert{$\oplus$}}{}
+          \tree[xshift=1] {$A$}{
+            \tree[xshift=-1] {$B$}{}
+          }
+        }
+      }
+      \node[alert] at ([yshift=7mm]root) {$A \, \rightarrow \, B \oplus A \mid B$};
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

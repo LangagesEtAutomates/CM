@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Généralisation des automates : machines de Turing}
+  
+  \onExampleBlock[top=-3mm]{Exemple : reconnaissance de $\{a^n b^n c^n \mid n>0\}$}{}
+  
+  \on[y=17mm] {
+    \begin{tikzpicture}[tape, size=9mm]
+      \cell{$\#$}
+      \cell{\alt<-1>{$a$}{$A$}}  \smhead[on=<1>]              \smheadfrom[ob=<9>]{1}
+      \cell{\alt<-10>{$a$}{$A$}} \smheadfrom[ob=<{2,10}>]{-1} \smheadfrom[ob=<8>]{1}   \smheadfrom[ob=<13>]{4}
+      \cell{\alt<-3>{$b$}{$B$}}  \smheadfrom[ob=<3>]{-1}      \smheadfrom[ob=<7>]{1}
+      \cell{\alt<-11>{$b$}{$B$}} \smheadfrom[ob=<4>]{-1}      \smheadfrom[ob=<11>]{-2} \smheadfrom[ob=<6>]{1}
+      \cell{\alt<-5>{$c$}{$C$}}  \smheadfrom[ob=<5>]{-1}  
+      \cell{\alt<-12>{$c$}{$C$}} \smheadfrom[ob=<12>]{-2}     \smheadfrom[ob=<15>]{1}
+      \cell{$\#$}                \smheadfrom[ob=<14>]{-5}
+    \end{tikzpicture}%
+  }
+  
+  \on[y=-10mm] {
+    \begin{tikzpicture}[turingMachine]
+      \state[initial above, alert on=<{1,10}>   ] (0) at (1, 1) {0};
+      \state[               alert ob=<{2-3,11}> ] (1) at (1, 0) {1};
+      \state[               alert ob=<{4-5,12}> ] (2) at (0, 0) {2};
+      \state[               alert ob=<{6-9,13}> ] (3) at (0, 1) {3};
+      \state[               alert ob=<14>       ] (4) at (2, 1) {4};
+      \state[accepting,     alert ob=<15>       ] (5) at (3, 1) {5};
+      
+      \path[alert ob=<{2,11}>  ] (0) edge             node {\smTMtransR{a}{A}} (1);
+      \path[alert ob=<{4,12}>  ] (1) edge             node {\smTMtransR{b}{B}} (2);
+      \path[alert ob=<{6,13}>  ] (2) edge             node {\smTMtransL{c}{C}} (3);
+      \path[alert ob=<{10,14}>] (3) edge             node {\smTMtransR{A}{A}} (0);
+      \path[alert ob=<14>      ] (0) edge             node {\smTMtransR{B}{B}} (4);
+      \path[alert ob=<15>      ] (4) edge             node {\smTMtransL{\#}{\#}} (5);
+      \path[alert ob=<3>       ] (1) edge[loop right] node {\smAlign{\smTMtransR{a}{a}\smTMtransR{B}{B}}} (1);
+      \path[alert ob=<5>       ] (2) edge[loop left ] node {\smAlign{\smTMtransR{b}{b}\smTMtransR{C}{C}}} (2);
+      \path[alert ob=<{7-9,13}>] (3) edge[loop left ] node {\smAlign{\smTMtransL{a}{a}\smTMtransL{b}{b}\smTMtransL{B}{B}\smTMtransL{C}{C}}} (3);
+      \path[alert ob=<{14}>    ] (4) edge[loop below] node {\smAlign{\smTMtransR{B}{B}\smTMtransR{C}{C}}} (4);
+    \end{tikzpicture}
+  }
+
+  \on[text,bottom] {\footnotesize
+    \begin{description}
+    \item[$0 \xrightarrow{\smTMtransR{a}{A}} 1$ :] si on lit $a$ dans l'état $0$, écrire $A$, aller en $1$ et se déplacer à droite\vspace{-2mm}
+    \item[$2 \xrightarrow{\smTMtransL{c}{C}} 3$ :] si on lit $c$ dans l'état $2$, écrire $C$, aller en $3$ et se déplacer à gauche
+    \end{description}
+  }
+
+\end{frame}
+
+\endgroup

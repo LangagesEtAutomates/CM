@@ -8,33 +8,38 @@
 \begingroup
 
 \begin{frame}{Lemme d'Arden}
-  Soient $\Sigma$ un alphabet, et $A, B \in \mathscr{P}(\Sigma^\star)$ deux langages.
-  \begin{block}{Lemme -- Lemme d'Arden}
+
+  \onBlock[top]{Lemme -- Lemme d'Arden}{
+    Soient $\Sigma$ un alphabet, et $A, B \in \mathscr{P}(\Sigma^\star)$ deux langages.
     \begin{itemize}
     \item \alert{$A^\star B$} est la \structure{plus petite solution} de l'équation \structure{$X = AX \mid B$}
     \item si \structure{$\varepsilon \notin A$}, alors \alert{$A^\star B$} est l'\alert{unique} solution de l'équation \structure{$X = AX \mid B$}
     \end{itemize}
-  \end{block}
-  \begin{exampleblock}{Exemple}
-    \noindent\begin{minipage}{.4\textwidth}
+  }
+
+  \onExampleBlock[y=5mm]{Exemple}{}
+
+  \on[y=-5mm, x=-.20\textwidth]{
     \begin{tikzpicture}[automaton]
-      \smState[\smInitial]   (s1)                {$0$}; 
-      \smState[\smAccepting] (s2) [right=of s1]  {$1$};
-      \smPath (s1) edge[loop above] node {$a$} (s1);
-      \smPath (s1) edge             node {$b$} (s2);
+      \state[initial]   (0) at (0,0)  {$0$}; 
+      \state[accepting] (1) at (1,0)  {$1$};
+      \path (0) edge[loop above] node {$a$} (0);
+      \path (0) edge             node {$b$} (1);
     \end{tikzpicture}
-    \end{minipage}%
-    \begin{minipage}{.6\textwidth}
-      $ L = a L \mid b = a^\star b$
-    \end{minipage}
-  \end{exampleblock}
-  \begin{block}{Remarques}
+  }
+
+  \on[y=-8mm, x=.20\textwidth]{
+    $L = a L \mid b = a^\star b$
+  }
+  
+  \onBlock[bottom]{Remarques}{
     \begin{itemize}
     \item {\small L'équation $X = AX \mid B$ est appelée \structure{équation rationnelle linéaire à droite}}
     \item {\small Pour l'équation $X = XA \mid B$ linéaire à gauche, mêmes résultats avec $B A^\star$}
     \item {\small Si \structure{$\varepsilon \in A$}, $\Sigma^\star$ est également solution des deux équations}
     \end{itemize}
-  \end{block}
+  }
+
 \end{frame}
 
 \endgroup

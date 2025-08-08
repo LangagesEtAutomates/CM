@@ -9,11 +9,11 @@
 
 \begin{frame}{Équivalence entre automates à pile et grammaires}
 
-  \tfBlock[top=-5mm]{Théorème -- Équivalence entre formalismes}{
+  \onBlock[top=-5mm]{Théorème -- Équivalence entre formalismes}{
     Tout langage peut être reconnu par un automate à pile ssi il est algébrique. 
   }
   
-  \tfBlock[y=10mm]{Preuve}{
+  \onBlock[y=10mm]{Preuve}{
     \begin{enumerate}
     \item \structure{Des automates à pile aux grammaires algébriques}
       \begin{itemize}
@@ -25,10 +25,10 @@
     \end{enumerate}
   }
  
-  \tf[y=-10mm]{\footnotesize
-    \begin{tikzpicture}[smAutomaton, initial text=$S$]
-      \smState[\smInitial\smAccepting] (q) {};
-      \smPath (q) edge [loop right] node {
+  \on[y=-10mm]{\footnotesize
+    \begin{tikzpicture}[pushdown]
+      \state[initial, accepting, initial text=$S$] (q) {};
+      \path (q) edge [loop right] node {
         $\begin{array}{ll}
           \smPAtrans{a}{A}{\varepsilon}  & \text{ pour } A\rightarrow a \\
           \smPAtrans{\varepsilon}{A}{CB} & \text{ pour } A\rightarrow BC \\
@@ -37,34 +37,34 @@
     \end{tikzpicture}
   }
   
-  \tfExampleBlock<2-|handout>[y=-18mm]{Exemple : $\{ a^n c b^n \mid n\in \mathbb{N} \}$}{}
+  \onExampleBlock<2->[y=-18mm]{Exemple : $\{ a^n c b^n \mid n\in \mathbb{N} \}$}{}
 
-  \tf<2-|handout>[bottom=-5mm,x=-.45\textwidth]{
-    \begin{smStack}
-      \smCell[\smAlert<2>]{\oneof[$S$]{\on<3->{$T$}\on<5->{$B$}\on<7->{}}}
-      \smCell             {\oneof[]{\on<3>{$A$}\on<5>{$S$}}}
-    \end{smStack}
+  \on<2->[bottom=-1mm,x=-.45\textwidth]{
+    \begin{tikzpicture}[stack, x=7mm, y=7mm]
+      \cell[alert ob=<2>]{\oneof[$S$]{\on<3->{$T$}\on<5->{$B$}\on<7->{}}}
+      \cell              {\oneof[]{\on<3>{$A$}\on<5>{$S$}}}
+    \end{tikzpicture}
   }
 
-  \tf<2-|handout>[bottom=13mm,x=-.3\textwidth]{
-    \begin{smArray}[height=4mm]
-      \smCell[\smAlert<4->]{$a$} \smHead<-3|handout>
-      \smCell[\smAlert<6->]{$c$} \smHead<4-5>
-      \smCell[\smAlert<7->]{$b$} \smHead<6>
-    \end{smArray}
+  \on<2->[bottom=13mm,x=-.3\textwidth]{
+    \begin{tikzpicture}[word, x=5mm, y=5mm]
+      \cell[alert ob=<4->]{$a$} \smhead[on=<-3>]
+      \cell[alert ob=<6->]{$c$} \smhead[ob=<4-5>]
+      \cell[alert ob=<7->]{$b$} \smhead[ob=<6>]
+    \end{tikzpicture}
   }
 
-  \tf<2-|handout>[bottom,x=-.15\textwidth]{\small
-    \begin{tikzpicture}[smAutomaton, initial text={\alert<2>{$S$}}]
-      \smState[\smInitialAbove\smAccepting] (q) {};
-      \smPath (q) edge [loop left] node {
+  \on<2->[bottom,x=-.15\textwidth]{\small
+    \begin{tikzpicture}[pushdown]
+      \state[initial above, accepting, initial text={\alert<2>{$S$}}] (q) {};
+      \path (q) edge [loop left] node {
         $\begin{array}{r}
           \alert<4>{\smPAtrans{a}{A}{\varepsilon}} \\
           \alert<7>{\smPAtrans{b}{B}{\varepsilon}} \\
           \alert<6>{\smPAtrans{c}{S}{\varepsilon}} \\
         \end{array}$
       } (q);
-      \smPath (q) edge [loop right] node {
+      \path (q) edge [loop right] node {
         $\begin{array}{l}
           \alert<3>{\smPAtrans{\varepsilon}{S}{TA}} \\
           \alert<5>{\smPAtrans{\varepsilon}{T}{BS}} \\
@@ -73,7 +73,7 @@
     \end{tikzpicture}
   }
 
-  \tf<2-|handout>[bottom=5mm, x=.2\textwidth, width=2.5cm]{
+  \on<2->[bottom=5mm, x=.2\textwidth, width=2.5cm]{
     \example{Grammaire FNC}\\\vspace{2mm}
     $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
     S & \alert<3>{AT} \mid \alert<6>{c}\\
@@ -83,27 +83,20 @@
     \end{array}\right.$
   }
 
-  \tf<2-|handout>[bottom,x=.4\textwidth]{
-    \begin{tikzpicture}
-      \smDraw<2-|handout>{
-        \node[structure] (S) at (.375,2.1) {\alert<2>{$S$}};
-      }
-      \smDraw<3-|handout>{
-        \node[structure] (A) at (0.00,1.4) {\alert<3>{$A$}}; \path[-latex] (S) edge (A); 
-        \node[structure] (T) at (0.75,1.4) {\alert<3>{$T$}}; \path[-latex] (S) edge (T); 
-      }
-      \smDraw<4-|handout>{
-        \node[example]   (a) at (0.00,0.0) {\alert<4>{$a$}}; \path[-latex] (A) edge (a); 
-      }
-      \smDraw<5-|handout>{
-        \node[structure] (C) at (0.50,0.7) {\alert<5>{$S$}}; \path[-latex] (T) edge (C); 
-        \node[structure] (B) at (1.00,0.7) {\alert<5>{$B$}}; \path[-latex] (T) edge (B); 
-      }
-      \smDraw<6-|handout>{
-        \node[example]   (c) at (0.50,0.0) {\alert<6>{$c$}}; \path[-latex] (C) edge (c); 
-      }
-      \smDraw<7-|handout>{
-        \node[example]   (b) at (1.00,0.0) {\alert<7>{$b$}}; \path[-latex] (B) edge (b); 
+  \on<2->[bottom,x=.4\textwidth]{
+    \begin{tikzpicture}[tree, x=7mm,y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={example,},]
+      \tree{\alertb<2>{$S$}}{
+        \tree[on=<3->]{\alertb<3>{$A$}}{
+          \tree[on=<4->,yshift=-1]{\alertb<4>{$a$}}{}
+        }
+        \tree[on=<3->]{\alertb<3>{$T$}}{
+          \tree[on=<5->]{\alertb<5>{$S$}}{
+            \tree[on=<6->]{\alertb<6>{$c$}}{}
+          }
+          \tree[on=<5->]{\alertb<5>{$B$}}{
+            \tree[on=<7->]{\alertb<7>{$b$}}{}
+          }
+        }
       }
     \end{tikzpicture}
   }
