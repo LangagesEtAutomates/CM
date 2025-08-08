@@ -1,30 +1,46 @@
 # Project License
 
-This project contains various types of files, each subject to compatible but distinct licenses.
+**Author:** Matthieu Perrin  
+**Copyright:** © 2025 Matthieu Perrin
 
-## `.tex`, `.sty`, `.cls` Files
+This project is licensed under the **Creative Commons Attribution–ShareAlike 4.0 International** (CC BY-SA 4.0).
 
-Unless otherwise stated in the file header, these files are licensed under the [Creative Commons Attribution - ShareAlike 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/) license.
+**Scope.** Except where otherwise noted, all **original teaching materials** in this repository (slides, exercises, LaTeX sources/macros, etc.) are licensed under CC BY-SA 4.0.  
+**Third-party content** (e.g., some images) remains under its own license as indicated below.
 
-- Author: Matthieu Perrin  
-- Attribution required: Yes. The author's name (Matthieu Perrin) must appear on the title slide or in a clearly visible credits section of any derived presentation.
-- ShareAlike required: Yes
+You are free to **share** and **adapt** the material for any purpose, even commercially, under these terms:
+- **Attribution** — Give appropriate credit, provide a link to the license, and indicate if changes were made. Attribution should be given in a **reasonable** manner (for presentations, a title or credits slide is recommended).
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the **same license**.
 
-## Notes
+- **License summary:** https://creativecommons.org/licenses/by-sa/4.0/  
+- **Full legal code:** https://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-Files with a different license are explicitly marked. For commercial use, please ensure that you check the rights associated with each image.
+> CC licenses do not affect patent or trademark rights and may not grant all permissions necessary for your intended use. No warranties are given.
 
+## LaTeX files (`.tex` and `.sty`)
 
+Unless otherwise stated in the file header, these files are licensed under **CC BY-SA 4.0**.
 
+- **Author:** Matthieu Perrin  
+- **Attribution required:** Yes (credit Matthieu Perrin; include the license name and link; indicate modifications if any).  
+- **ShareAlike required:** Yes.
 
-Author: Matthieu Perrin
+*Suggested attribution example:*  
+“*Languages and Automata* — © 2025 Matthieu Perrin, CC BY-SA 4.0, changes: none”  
+(or describe changes if you made any).
 
-This project is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
+## Images
 
-Unless otherwise stated, all teaching materials (slides, exercises, images, macros, etc.) are covered by this license.
+Images in `src/img/` have varying licenses:
 
-You are free to share and adapt the material for any purpose, even commercially, under the terms of:
-- Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
-- ShareAlike — If you remix, transform, or build upon the material, you must distribute your contributions under the same license.
+- `Chomsky.jpg` — **CC BY-SA 2.0** (Augusto Starita, 2015)
+  <https://commons.wikimedia.org/wiki/File:Noam_Chomsky_portrait_2015.jpg>
+- `Rabin.jpg` — **CC BY-SA 2.0** (Konrad Jacobs)  
+  <https://commons.wikimedia.org/wiki/File:M_O_Rabin.jpg>
+- `Scott.jpg` — **CC BY-SA 2.5** (Andrej Bauer, 2003)  
+  <https://commons.wikimedia.org/wiki/File:Scott_Dana_small.jpg>
+- `Thompson.jpg` — **CC BY-SA 4.0** (A.C.Diller, 2019)  
+  <https://commons.wikimedia.org/wiki/File:Brian_Kernighan_and_Ken_Thompson.jpg>
 
-Full license text: https://creativecommons.org/licenses/by-sa/4.0/
+Please verify third-party licenses before redistributing compiled PDFs that include those images.
+
