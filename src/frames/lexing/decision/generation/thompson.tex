@@ -15,9 +15,9 @@
   \on[y=-3mm]{\footnotesize
     \begin{algorithm}[H]
       
-      \Fn{\Thompson(\Motif : \textsc{regex}, $\Sigma$ : alphabet) : automate}{
+      \Fun{\Thompson(\Motif : \textsc{regex}, $\Sigma$ : alphabet) : automate}{
         \Lets \alert{$q_0$}, \alert{$q_f$} deux nouveaux états\;
-        \uSi{$\Motif = \emptyset$}{
+        \uIf{$\Motif = \emptyset$}{
           \vspace{.5mm}
           \uncover<2->{
             $\begin{array}{@{}l@{\,\gets\,}l@{}}
@@ -26,7 +26,7 @@
             \end{array}$
           }
           \vspace{.5mm}
-        }\uSinonSi{$\Motif = a\in \Sigma \cup \{\varepsilon\}$}{
+        }\uElseIf{$\Motif = a\in \Sigma \cup \{\varepsilon\}$}{
           \vspace{.5mm}
           \uncover<3->{
             $\begin{array}{@{}l@{\,\gets\,}l@{}}
@@ -35,7 +35,7 @@
             \end{array}$
           }
           \vspace{.5mm}
-        }\uSinonSi{$\Motif = u \mid v$}{
+        }\uElseIf{$\Motif = u \mid v$}{
           \vspace{.5mm}
           \uncover<4->{
             $\langle \structure{\Sigma}, \structure{Q_u}, \{\structure{u_0}\}, \{\structure{u_f}\}, \structure{\tau_{u}} \rangle \gets \structure{\Thompson(u, \Sigma)}$\;
@@ -50,7 +50,7 @@
             \end{array}$
           }
           \vspace{.5mm}
-        }\uSinonSi{$\Motif = u \cdot v$}{
+        }\uElseIf{$\Motif = u \cdot v$}{
           \vspace{.5mm}
           \uncover<5->{
             $\langle \structure{\Sigma}, \structure{Q_u}, \{\structure{u_0}\}, \{\structure{u_f}\}, \structure{\tau_{u}} \rangle \gets \structure{\Thompson(u, \Sigma)}$\;
@@ -62,7 +62,7 @@
             \end{array}$
           }
           \vspace{.5mm}
-        }\SinonSi{$\Motif = u^\star$}{
+        }\ElseIf{$\Motif = u^\star$}{
           \vspace{.5mm}
           \uncover<6->{
             $\langle \structure{\Sigma}, \structure{Q_u}, \{\structure{u_0}\}, \{\structure{u_f}\}, \structure{\tau_{u}} \rangle \gets \structure{\Thompson(u, \Sigma)}$\;
@@ -72,15 +72,15 @@
             \end{array}$
           }
         }
-        \Retourner $\langle \Sigma, Q, \{q_0\}, \{q_f\}, \tau \rangle$\;
+        \Return $\langle \Sigma, Q, \{q_0\}, \{q_f\}, \tau \rangle$\;
       }
     \end{algorithm}
   }
 
   \on<2->[x=-1cm, y=26mm]{\footnotesize
     \begin{tikzpicture}[automaton]
-      \state[initial,   alert] (q0) at (0,0) {$q_0$}; 
-      \state[accepting, alert] (qf) at (1,0) {$q_f$}; 
+      \state[initial,alert  ] (q0) at (0,0) {$q_0$}; 
+      \state[accepting,alert] (qf) at (1,0) {$q_f$}; 
     \end{tikzpicture}
   }
 
@@ -94,12 +94,12 @@
 
   \on<4->[y=22mm, x=5mm, anchor=west]{
     \begin{tikzpicture}[automaton, x=5mm, y=5mm]
-      \state [initial,   alert] (q0) at (0,1) {$q_0$};
-      \state [       structure] (u0) at (2,2) {$u_0$};
-      \state [       structure] (uf) at (5,2) {$u_f$};
-      \state [         example] (v0) at (2,0) {$v_0$};
-      \state [         example] (vf) at (5,0) {$v_f$};
-      \state [accepting, alert] (qf) at (7,1) {$q_f$};
+      \state[initial,alert   ] (q0) at (0,1) {$q_0$};
+      \state[structure       ] (u0) at (2,2) {$u_0$};
+      \state[structure       ] (uf) at (5,2) {$u_f$};
+      \state[example         ] (v0) at (2,0) {$v_0$};
+      \state[example         ] (vf) at (5,0) {$v_f$};
+      \state[accepting, alert] (qf) at (7,1) {$q_f$};
 
       \path[alert] (q0) edge node       {$\varepsilon$} (u0);
       \path[alert] (q0) edge node[swap] {$\varepsilon$} (v0);
@@ -113,10 +113,10 @@
   
   \on<5->[y=-6mm, x=5mm, anchor=west]{\footnotesize
     \begin{tikzpicture}[automaton]
-      \state [initial,   structure] (u0) at (0,2) {$u_0$};
-      \state [           structure] (uf) at (1,2) {$u_f$};
-      \state [           example  ] (v0) at (2,2) {$v_0$};
-      \state [accepting, example  ] (vf) at (3,2) {$v_f$};
+      \state[initial,structure] (u0) at (0,2) {$u_0$};
+      \state[structure        ] (uf) at (1,2) {$u_f$};
+      \state[example          ] (v0) at (2,2) {$v_0$};
+      \state[accepting,example] (vf) at (3,2) {$v_f$};
       \cloudPath[structure]{u0}{uf}
       \cloudPath[example]  {v0}{vf}
       
@@ -124,9 +124,9 @@
  
       \node[anchor=base]  at (1.5,1.5) {OU};
 
-      \state [initial, structure  ] (u0) at (0  ,1) {$u_0$};
-      \state [alert, rectangle    ]       (q)  at (1.5,1) {$u_f = v_0$};
-      \state [accepting, example  ] (vf) at (3  ,1) {$v_f$};
+      \state [initial, structure] (u0) at (0  ,1) {$u_0$};
+      \state [alert, rectangle  ]       (q)  at (1.5,1) {$u_f = v_0$};
+      \state [accepting, example] (vf) at (3  ,1) {$v_f$};
       \cloudPath[structure]{u0}{q}
       \cloudPath[example]  {q}{vf}
     \end{tikzpicture}
@@ -134,10 +134,10 @@
 
   \on<6->[y=-32mm, x=5mm, anchor=west]{
     \begin{tikzpicture}[automaton, x=15mm, y=5mm]
-      \state[initial,   alert    ] (q0) at (0,2) {$q_0$};
-      \state[           structure] (u0) at (1,1) {$u_0$};
-      \state[           structure] (uf) at (2,1) {$u_f$};
-      \state[accepting, alert    ] (qf) at (0,0) {$q_f$};
+      \state[initial, alert  ] (q0) at (0,2) {$q_0$};
+      \state[structure       ] (u0) at (1,1) {$u_0$};
+      \state[structure       ] (uf) at (2,1) {$u_f$};
+      \state[accepting, alert] (qf) at (0,0) {$q_f$};
       \cloudPath[structure]{u0}{uf}
       
       \path[alert] (q0) edge                 node {$\varepsilon$} (u0);

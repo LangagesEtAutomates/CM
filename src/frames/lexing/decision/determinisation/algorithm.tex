@@ -14,12 +14,12 @@
 
   \onExampleBlock[right=3.3cm, top=-5mm]{Exemple}{\vspace{-3mm}
     \begin{tikzpicture}[automaton, grid size=10mm]
-      \state[initial,                      example on=<2-4>] (0) at (0,1) {$0$};
-      \state[accepting,alert ob=<5>                        ] (1) at (1,1) {$1$};
-      \state[                                              ] (2) at (2,1) {$2$};
-      \state[initial,                      example on=<2-4>] (3) at (0,0) {$3$};
-      \state[            structure on=<2>, example ob=<3-4>] (4) at (1,0) {$4$};
-      \state[            structure on=<2>, example ob=<3-4>] (5) at (2,0) {$5$};
+      \state[initial, example on=<2-4>         ] (0) at (0,1) {$0$};
+      \state[accepting, alert ob=<5>           ] (1) at (1,1) {$1$};
+      \state[                                  ] (2) at (2,1) {$2$};
+      \state[initial, example on=<2-4>         ] (3) at (0,0) {$3$};
+      \state[structure on=<2>, example ob=<3-4>] (4) at (1,0) {$4$};
+      \state[structure on=<2>, example ob=<3-4>] (5) at (2,0) {$5$};
       
       \path[structure on=<2>] (3) edge             node {$\varepsilon$} (4);
       \path[structure on=<2>] (4) edge             node {$\varepsilon$} (5);
@@ -44,13 +44,13 @@
   
   \on[top=-2mm]{\small
     \begin{algorithm}[H]
-      \Fn{\RabinScott($A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : AFN) : AFD}{
+      \Fun{\RabinScott($A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : AFN) : AFD}{
         $\begin{array}{@{}l@{\,\gets\,}l@{}}
           s_0 & \Alertb<2>{\Fermeture_A(I)};\\
           S & \{s_0\};\\
           \tau & \emptyset;
         \end{array}$\\
-        \Tantque{\Alertb<3-4>{$\exists s\in S, \exists a\in \Sigma, \nexists s'\in S,~ \langle s, a, s' \rangle \in \tau$}}{
+        \While{\Alertb<3-4>{$\exists s\in S, \exists a\in \Sigma, \nexists s'\in S,~ \langle s, a, s' \rangle \in \tau$}}{
           $\begin{array}{@{}l@{\,\gets\,}l@{}}
             s' & \Structureb<4>{\Fermeture_A(\{q'\in Q \mid \exists q\in s,~ q \xrightarrow{a} q' \})};\\
             S & S \cup \{s'\};\\
@@ -58,11 +58,11 @@
           \end{array}$\\
         }
         $S_f \gets \Alertb<5>{\{s \in S \mid s \cap F \neq \emptyset\}}$\;
-        \Retourner $\langle \Sigma, S, \{s_0\}, S_f, \tau \rangle$\;
+        \Return $\langle \Sigma, S, \{s_0\}, S_f, \tau \rangle$\;
       }
-      \Fn{$\Fermeture_A(s \subseteq Q) \subseteq Q$}{
-        \lTantque{\Structureb<2>{$\exists q\in s,~ \exists q' \notin s,~ q\xrightarrow{\varepsilon} q'$}}{$s \gets s \cup \{q'\}$}
-        \Retourner $s$\;
+      \Fun{$\Fermeture_A(s \subseteq Q) \subseteq Q$}{
+        \lWhile{\Structureb<2>{$\exists q\in s,~ \exists q' \notin s,~ q\xrightarrow{\varepsilon} q'$}}{$s \gets s \cup \{q'\}$}
+        \Return $s$\;
       }
     \end{algorithm}
   }

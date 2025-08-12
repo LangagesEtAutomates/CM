@@ -13,17 +13,17 @@
 
   \on[top=-2mm, text]{\small
     \begin{algorithm}[H]
-      \Fn{\CYK($\langle \Sigma, \Gamma, S, \rightarrow \rangle$ : grammaire, $u \in \Sigma^\star$) : booléen}{
-        \lSi{$u = \varepsilon$}{\Retourner $S \rightarrow \varepsilon$}
-        \Pour{$j$ allant de $1$ à $|u|$}{
+      \Fun{\CYK($\langle \Sigma, \Gamma, S, \rightarrow \rangle$ : grammaire, $u \in \Sigma^\star$) : booléen}{
+        \lIf{$u = \varepsilon$}{\Return $S \rightarrow \varepsilon$}
+        \For{$j$ \From $1$ \To $|u|$}{
           \Alertb<3>{$T[1, j] \leftarrow \{N\in \Gamma \mid N \rightarrow u[j]\}$}\;
         }
-        \Pour{$i$ allant de $2$ à $|u|$}{
-          \Pour{$j$ allant de $1$ à $|u|-i+1$}{
+        \For{$i$ \From $2$ \To $|u|$}{
+          \For{$j$ \From $1$ \To $|u|-i+1$}{
             \Alertb<4->{$\displaystyle T[i, j] \leftarrow \bigcup_{k=1}^{i-1} \left\{N\in \Gamma \,\middle\mid\, \exists X \in T[k,j], \exists Y \in T[i-k,j+k],~ N \rightarrow X Y\right\}$}\;
           }
         }
-        \Retourner \Alertb<2>{$S\in T[|u|, 1]$}\;
+        \Return \Alertb<2>{$S\in T[|u|, 1]$}\;
       }
     \end{algorithm}
   }

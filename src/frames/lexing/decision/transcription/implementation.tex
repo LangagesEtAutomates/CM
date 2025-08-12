@@ -29,10 +29,10 @@
 
   \on[y=0mm]{\small
     \begin{algorithm}[H]
-      \Fn{\Decider($u \in \Sigma^\star$, $A$ : AFN) : booléen}{
+      \Fun{\Decider($u \in \Sigma^\star$, $A$ : AFN) : booléen}{
         $q \leftarrow 0$\;
-        \Pour{$i$ de $1$ à $|u|$}{$q \leftarrow A.\Transition[A.\Symbols[u[i]], q]$}
-        \Retourner $A.\Final[q]$\;
+        \For{$i$ \From $1$ \To $|u|$}{$q \leftarrow A.\Transition[A.\Symbols[u[i]], q]$}
+        \Return $A.\Final[q]$\;
       }
     \end{algorithm}
   }
@@ -113,11 +113,11 @@
       \Final &\leftarrow&
       \begin{tikzpicture}[x=6mm, y=4mm, baseline=(center)]
         \coordinate (center) at (0,-1mm);
-        \node[draw, rectangle, minimum width=6mm] (x) at (0,0) {\tiny\Faux}; 
-        \node[draw, rectangle, minimum width=6mm] (x) at (1,0) {\tiny\Faux};     
-        \node[draw, rectangle, minimum width=6mm] (x) at (2,0) {\tiny\Faux}; 
-        \node[draw, rectangle, minimum width=6mm] (x) at (3,0) {\tiny\Vrai};     
-        \node[draw, rectangle, minimum width=6mm] (x) at (4,0) {\tiny\Faux}; 
+        \node[draw, rectangle, minimum width=6mm] (x) at (0,0) {\tiny\False}; 
+        \node[draw, rectangle, minimum width=6mm] (x) at (1,0) {\tiny\False};     
+        \node[draw, rectangle, minimum width=6mm] (x) at (2,0) {\tiny\False}; 
+        \node[draw, rectangle, minimum width=6mm] (x) at (3,0) {\tiny\True};     
+        \node[draw, rectangle, minimum width=6mm] (x) at (4,0) {\tiny\False}; 
       \end{tikzpicture}\\
     \end{array}
     $

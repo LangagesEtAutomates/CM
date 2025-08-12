@@ -29,16 +29,16 @@
   
   \on[bottom] {
     \begin{tikzpicture}[automaton]
-      \state[initial,   alert ob=<1> ] (1)  at (0,2) {$1$};    
-      \state[           alert on=<2> ] (2)  at (1,2) {$2$};    
-      \state[           alert on=<2->] (3)  at (4,2) {$3$};    
-      \state[           alert ob=<3> ] (4)  at (5,2) {$4$};    
-      \state[           alert on=<2->] (5)  at (4,0) {$5$};    
-      \state[           alert ob=<4->] (6)  at (5,0) {$6$};    
-      \state[           alert on=<2->] (7)  at (3,1) {$7$};    
-      \state[           alert ob=<3->] (8)  at (6,1) {$8$};    
-      \state[           alert on=<2> ] (9)  at (2,2) {$9$};    
-      \state[accepting, alert on=<2->] (10) at (2,0) {$10$};   
+      \state[alert ob=<1>,initial   ] (1)  at (0,2) {$1$};    
+      \state[alert on=<2>           ] (2)  at (1,2) {$2$};    
+      \state[alert on=<2->          ] (3)  at (4,2) {$3$};    
+      \state[alert ob=<3>           ] (4)  at (5,2) {$4$};    
+      \state[alert on=<2->          ] (5)  at (4,0) {$5$};    
+      \state[alert ob=<4->          ] (6)  at (5,0) {$6$};    
+      \state[alert on=<2->          ] (7)  at (3,1) {$7$};    
+      \state[alert ob=<3->          ] (8)  at (6,1) {$8$};    
+      \state[alert on=<2>           ] (9)  at (2,2) {$9$};    
+      \state[alert on=<2->,accepting] (10) at (2,0) {$10$};   
 
       \path (1) edge node {$a$}           (2);
       \path (3) edge node {$b$}           (4);

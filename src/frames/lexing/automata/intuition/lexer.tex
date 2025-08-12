@@ -16,17 +16,17 @@
   
   \on[text,y=1.5]{
     \begin{algorithm}[H]
-      \Fn{\Decide(\Mot : mot) : booléen}{
+      \Fun{\Decide(\Mot : mot) : booléen}{
         $\Alertb<2>{\alert<2->\VuA}   \leftarrow \Alertb<3>{\False}$,
         $\Exampleb<2>{\example<2->\VuB} \leftarrow \Alertb<3>{\False}$\;
-        \Pour{$i$ de $1$ à $|\Mot|$}{
-          \uSi{\Structureb<4-5>{$\Mot[i] = \text{`a'} \land \lnot \VuB$}}{
+        \For{$i$ \From $1$ \To $|\Mot|$}{
+          \uIf{\Structureb<4-5>{$\Mot[i] = \text{`a'} \land \lnot \VuB$}}{
             \Alertb<4>{$\VuA \leftarrow \True$}\;
-          }\uSinonSi{\Structureb<6-8>{$\Mot[i]=\text{`b'} \land \VuA$}}{
+          }\uElseIf{\Structureb<6-8>{$\Mot[i]=\text{`b'} \land \VuA$}}{
             \Alertb<6>{$\VuB \leftarrow \True$}\;
-          }\lSinon{\Retourner \False}
+          }\lElse{\Return \False}
         }
-        \Retourner \Alertb<9>{$\VuA \land \VuB$}\;
+        \Return \Alertb<9>{$\VuA \land \VuB$}\;
       }
     \end{algorithm}
   }
@@ -85,9 +85,9 @@
     \begin{tikzpicture}[automaton]
       \useasboundingbox (-1,-1) rectangle (2,2);
       
-      \state[initial on=<3->,  alert ob=<3>,   structure ob=<4>] (00) at (0,1) {\alert{0}\example{0}}; 
-      \state[                  alert ob=<4-5>, structure ob=<6>] (10) at (1,1) {\alert{1}\example{0}}; 
-      \state[accepting on=<9>, alert ob=<6->                   ] (11) at (1,0) {\alert{1}\example{1}};
+      \state[alert ob=<3>,   structure ob=<4>, initial on=<3-> ] (00) at (0,1) {\alert{0}\example{0}}; 
+      \state[alert ob=<4-5>, structure ob=<6>                  ] (10) at (1,1) {\alert{1}\example{0}}; 
+      \state[alert ob=<6->, accepting on=<9>                   ] (11) at (1,0) {\alert{1}\example{1}};
       \state[                                                  ] (01) at (0,0) {\alert{0}\example{1}};
 
       \path<4->[structure ob=<4>]   (00) edge             node {$a$} (10);

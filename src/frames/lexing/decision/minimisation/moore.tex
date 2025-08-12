@@ -13,11 +13,11 @@
 
   \on[text,top=-2mm]{\small
     \begin{algorithm}[H]
-      \Fn{\Moore( $A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : AFD ) : AFD}{
+      \Fun{\Moore( $A = \langle \Sigma, Q, I, F, \rightarrow \rangle$ : AFD ) : AFD}{
         \Alertb<2>{$S \leftarrow \{F, Q\setminus F\}$}\;
-        \Repeter{
+        \Repeat{
           $\tau \gets \left\{ \left\langle s, a, s' \right\rangle \in S \times \Sigma \times S \,\middle\mid\, \exists q\in s, \exists q'\in s',~ q\xrightarrow{a} q'\right\} $\;
-          \eSi{\Alertb<3>{$\exists \langle s, a, s_1 \rangle, \langle s, a, s_2 \rangle \in \tau,~s_1 \neq s_2$}}{
+          \eIf{\Alertb<3>{$\exists \langle s, a, s_1 \rangle, \langle s, a, s_2 \rangle \in \tau,~s_1 \neq s_2$}}{
             $\begin{array}{@{}l@{\,\gets\,}l@{}}
               s'_1 & \left\{q \in s \,\middle\mid\, \exists q' \in s_1, q \xrightarrow{a}q'\right\};\\
               s'_2 & \left\{q \in s \,\middle\mid\, \exists q' \in s_2, q \xrightarrow{a}q'\right\};\\
@@ -28,7 +28,7 @@
               S_0 & \left\{ s \in S \,\middle\mid\, I \subseteq s\right\};\\
               S_f & \left\{ s \in S \,\middle\mid\, s \cap F \neq \emptyset\right\};
             \end{array}$\\
-            \Retourner $\langle \Sigma, S, S_0, S_f, \tau \rangle$\;
+            \Return $\langle \Sigma, S, S_0, S_f, \tau \rangle$\;
           }
         }
       }
@@ -52,10 +52,10 @@
   
   \onExampleBlock[top=-5mm, right=.29\textwidth]{Exemple}{
     \begin{tikzpicture}[automaton, grid size=8mm]
-      \state[initial,  example, structure ob=<2-3>] (0) at (0,1) {$0$};
-      \state[          example, structure on=<2>  ] (1) at (1,2) {$1$};
-      \state[          example, structure on=<2>  ] (2) at (1,0) {$2$};
-      \state[accepting,example, alert on=<2->     ] (3) at (2,1) {$3$};
+      \state[example, structure ob=<2-3>, initial] (0) at (0,1) {$0$};
+      \state[example, structure on=<2>           ] (1) at (1,2) {$1$};
+      \state[example, structure on=<2>           ] (2) at (1,0) {$2$};
+      \state[example, alert on=<2->, accepting   ] (3) at (2,1) {$3$};
       
       \path                   (0) edge[bend left ] node       {$a$} (1);
       \path[structure ob=<3>] (0) edge[bend right] node[swap] {$b$} (2);

@@ -40,9 +40,9 @@
 
   \on[y=-25mm, x=15mm]{
     \begin{tikzpicture}[pushdown]
-      \state[initial,   structure ob=<-3> ] (a) at (0,0) {$0$}; 
-      \state[           structure ob=<4-5>] (b) at (1,0) {$1$}; 
-      \state[accepting, structure ob=<6>  ] (c) at (2,0) {$2$}; 
+      \state[structure ob=<-3>,initial,   ] (a) at (0,0) {$0$}; 
+      \state[structure ob=<4-5>           ] (b) at (1,0) {$1$}; 
+      \state[structure ob=<6>, accepting, ] (c) at (2,0) {$2$}; 
  
       \path                     (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
       \path[structure ob=<1-2>] (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);

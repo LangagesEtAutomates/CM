@@ -14,17 +14,17 @@
 
   \on[top, text]{
     \begin{algorithm}[H]
-      \Fn{$\Decider(u : \text{mot}) : \text{booléen}$}{
-        \Retourner $\Trouver( u \cdot \text{`$\diamond$'}, \text{`$\diamond$'} )$\;
+      \Fun{$\Decider(u : \text{mot}) : \text{booléen}$}{
+        \Return $\Trouver( u \cdot \text{`$\diamond$'}, \text{`$\diamond$'} )$\;
       }
-      \Fn{$\Trouver(\textbf{\color{black}m } u : \text{mot}, \omega : \text{caractère}) : \text{booléen}$}{
-        \lSi{$u = \varepsilon$}{\Retourner \False}
+      \Fun{$\Trouver(\textbf{\color{black}m } u : \text{mot}, \omega : \text{caractère}) : \text{booléen}$}{
+        \lIf{$u = \varepsilon$}{\Return \False}
         $c \leftarrow u[1]$; 
         $u \leftarrow u[2]...u[|u|]$\;
-        \lSi{$c = \omega\,$}{\Retourner \True}
-        \lSi{$c = \alert{\text{`$\{$'}}$}{\Retourner $\Trouver(u, \alert{\text{`$\}$'}}) \land \Trouver(u, c)$}
-        \lSi{$c = \hspace{.3mm}\alert{\text{`$\langle$'}}$}{\Retourner $\Trouver(u, \alert{\text{`$\rangle$'}}) \land \Trouver(u, c)$}
-        \Retourner \False\;
+        \lIf{$c = \omega\,$}{\Return \True}
+        \lIf{$c = \alert{\text{`$\{$'}}$}{\Return $\Trouver(u, \alert{\text{`$\}$'}}) \land \Trouver(u, c)$}
+        \lIf{$c = \hspace{.3mm}\alert{\text{`$\langle$'}}$}{\Return $\Trouver(u, \alert{\text{`$\rangle$'}}) \land \Trouver(u, c)$}
+        \Return \False\;
       }
     \end{algorithm}
   }

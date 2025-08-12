@@ -23,19 +23,19 @@
 
   \onExampleBlock[bottom=-2mm]{Exemple : le langage $\{a^n b^n \mid n>0\}$}{
     \begin{algorithm}[H]
-      \Fn{$\Dick(u : \text{mot}) : \text{booléen}$}{
+      \Fun{$\Dick(u : \text{mot}) : \text{booléen}$}{
         $q\leftarrow 0$; $c \leftarrow 0$\;
-        \Pour{$i$ allant de $1$ à $|u|$}{
-          \uSi{$q = 0 \land u[i] = \text{`$a$'}$}{
+        \For{$i$ \From $1$ \To $|u|$}{
+          \uIf{$q = 0 \land u[i] = \text{`$a$'}$}{
             $c \leftarrow c + 1$
           }
-          \uSinonSi{$c > 0 \land u[i] = \text{`$b$'}$}{
+          \uElseIf{$c > 0 \land u[i] = \text{`$b$'}$}{
             $q\leftarrow 1$;
             $c \leftarrow c - 1$\;
           }
-          \lSinon{\Retourner \False}
+          \lElse{\Return \False}
         }
-        \Retourner $q=1 \land c=0$\;
+        \Return $q=1 \land c=0$\;
       }
     \end{algorithm}
   }
