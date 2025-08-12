@@ -15,8 +15,8 @@ PDFS    := $(addsuffix .pdf,$(TEXS))
 PDFLATEX ?= pdflatex
 PDFLATEX_FLAGS := -halt-on-error -interaction=nonstopmode -output-directory=$(BUILDDIR)
 
-# Latex-libs library (Option A: local clone + TEXINPUTS)
-LATEX_LIBS_REPO := https://github.com/MatthieuPerrin/Latex-libs.git
+# Latex-libs library (local clone + TEXINPUTS)
+LATEX_LIBS_REPO := git@github.com:MatthieuPerrin/Latex-libs.git
 LATEX_LIBS_DIR  := latex-libs
 
 # Path separator (Windows vs Unix)
