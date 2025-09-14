@@ -1,6 +1,16 @@
 % SPDX-License-Identifier: CC-BY-SA-4.0
 % Author: Matthieu Perrin
 
+\ifdefined\HANDOUT
+  \documentclass[9pt, handout]{beamer}
+  \usetheme{Nantes}
+\else
+  \documentclass[9pt]{beamer}
+  \usetheme[sectionpage]{Nantes}
+\fi
+
+\usepackage{src/sty/config}
+
 \title[Langages et Automates]{Langages et Automates}
 
 \author[Matthieu Perrin]{
@@ -15,6 +25,13 @@
   Nantes Université\\
   Licence d'Informatique, deuxième année\\
   2025-2026
+}
+
+\hypersetup{
+  pdftitle  = {\insertshorttitle},
+  pdfauthor = {\insertshortauthor},
+  pdfsubject  = {Cours de L2 sur les langages formels et les automates},
+  pdfkeywords = {automates finis, expressions régulières, grammaires, analyse lexicale}
 }
 
 \begin{document}

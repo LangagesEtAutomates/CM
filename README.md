@@ -4,8 +4,8 @@ This repository contains modular and reusable teaching materials for a universit
 
 
 ## Latest PDFs:
-- [Slides](https://LangagesEtAutomates.github.io/CM/slides.pdf): full animated version
-- [Handout](https://LangagesEtAutomates.github.io/CM/handout.pdf): printable version
+- [Slides](https://LangagesEtAutomates.github.io/CM/LEA.pdf): full animated version
+- [Handout](https://LangagesEtAutomates.github.io/CM/LEA-handout.pdf): printable version
 
 
 ## Structure
@@ -17,9 +17,10 @@ This repository contains modular and reusable teaching materials for a universit
 ├── latex-libs/           # Dependency from [latex-libs](https://github.com/MatthieuPerrin/latex-libs)
 ├── docs/                 # Final PDF files (i.e. compiled course)  
 ├── src/                  # LaTeX source files  
-│   ├── drivers/          # Main document files for the course  
+│   ├── main/             # Main document files for the course  
 │   ├── frame/            # Individual slides organized by topic (one file per slide)  
-│   └── img/              # (shareable) images used in the slides
+│   ├── img/              # (shareable) images used in the slides
+│   └── sty/              # Style files
 
 
 ## Compilation
@@ -35,8 +36,8 @@ This creates `docs/slides.pdf` and `docs/handout.pdf`.
 Build individually:
 
 ```bash
-make slides     # Builds docs/slides.pdf
-make handout    # Builds docs/handout.pdf
+make slides     # Builds docs/LEA.pdf
+make handout    # Builds docs/LEA-handout.pdf
 
 make clean      # Remove temporary files in build/
 make cleanall   # Also remove PDFs in docs/
