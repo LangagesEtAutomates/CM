@@ -66,19 +66,19 @@ This means:
 - You must distribute derivatives under the same license.
 
 See [`LICENSE.md`](LICENSE.md) for full terms.
-
-
+   
 ## Contributions
 
 Contributions are welcome!
 
-Each slide is in a separate file, making it easy to reuse or improve specific parts. You can:
+Each slide is defined in [`src/frame/`](src/frame/) as a separate `.tex` file,
+making it easy to reuse or improve specific parts. You can:
 - Propose new slides
 - Improve existing content or visuals
 - Translate to other languages
 
 Use pull requests to suggest changes.
-
+For major changes, please open an issue first to discuss your ideas.
 
 ## Related projects
 
