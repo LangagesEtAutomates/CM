@@ -35,6 +35,8 @@ Images in `src/img/` have varying licenses:
 
 - `Chomsky.jpg` — **CC BY-SA 2.0** (Augusto Starita, 2015)
   <https://commons.wikimedia.org/wiki/File:Noam_Chomsky_portrait_2015.jpg>
+- `Kleene.jpg` — **Public domain** (Harold N. Hone, Madison, Wisconsin, circa 1963)  
+  <https://commons.wikimedia.org/wiki/File:Stephen_Cole_Kleene_circa_1963.tif>
 - `Rabin.jpg` — **CC BY-SA 2.0** (Konrad Jacobs)  
   <https://commons.wikimedia.org/wiki/File:M_O_Rabin.jpg>
 - `Scott.jpg` — **CC BY-SA 2.5** (Andrej Bauer, 2003)  

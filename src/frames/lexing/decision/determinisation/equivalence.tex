@@ -11,23 +11,23 @@
 
 \begin{frame}{Théorème d'équivalence entre AFN et AFD}
 
-  \onBlock[top, left=48mm]{Théorème}{
+  \onBlock[top, left=50mm]{Théorème}{
     Tout langage reconnaissable par un automate fini  non-déterministe 
-    est reconnaissable par un automate fini déterministe
+    est reconnaissable par un automate fini \alert{déterministe} et \alert{complet}
   }
 
   \onBlock[y=-15mm]{Démonstration}{
     Méthode des sous-ensembles de Rabin et Scott\footnote{Prix Turing 1976 pour leurs travaux sur le non-déterminisme}
     \begin{description}
     \item [Entrée :] automate fini non-déterministe \structure{$A$}
-    \item [Sortie :] automate fini déterministe \structure{$\RabinScott(A)$} tel que
+    \item [Sortie :] automate fini déterministe et complet \structure{$\RabinScott(A)$} tel que
       \vspace{-2mm}
       $$\alert{\mathcal{L}(A) = \mathcal{L}(\RabinScott(A))}$$ 
     \end{description}
     \vspace{-3mm}
     \begin{itemize}
     \item Les états de $\RabinScott(A)$ sont des ensembles d'états de $A$ 
-    \item $\RabinScott(A)$ est également complet
+%    \item $\RabinScott(A)$ est également \alert{complet}
     \end{itemize}
   }
 

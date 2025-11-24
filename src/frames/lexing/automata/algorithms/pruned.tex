@@ -13,22 +13,22 @@
   \begin{block}{Définition -- Propriétés des états}
     Soit $A=\langle \Sigma, Q, I, F, \rightarrow \rangle$ un AFN. Un état $q \in Q$ est dit
     \begin{description}[co-accessible]
-    \item[accessible] s'il peut être atteint à partir d'un état initial
+    \item[accessible] s'il peut être atteint à partir d'un état initial \hspace\fill  \example{ex : 2, 3, 4, 5, 6}
 
       \vspace{-3mm}
       $$\alert{\exists i\in I, \exists u\in \Sigma^\star, \langle u, i\rangle \leadsto^\star \langle \varepsilon, q\rangle}$$
       \vspace{-6mm}
 
-    \item[inaccessible] s'il n'est pas accessible
-    \item[co-accessible] si on peut atteindre un état final à partir de $q$
+    \item[inaccessible] s'il n'est pas accessible  \hspace\fill  \example{ex : 0, 1}
+    \item[co-accessible] si on peut atteindre un état final à partir de $q$  \hspace\fill  \example{ex : 0,1, 2, 3, 6}
 
       \vspace{-3mm}
       $$\alert{\exists f\in F, \exists u\in \Sigma^\star, \langle u, q\rangle \leadsto^\star \langle \varepsilon, f\rangle}$$
       \vspace{-6mm}
 
-    \item[stérile] s'il n'est pas co-accessible
-    \item[utile] s'il est accessible et co-accessible
-    \item[inutile] s'il n'est pas utile
+    \item[stérile] s'il n'est pas co-accessible  \hspace\fill  \example{ex : 4, 5}
+    \item[utile] s'il est accessible et co-accessible  \hspace\fill  \example{ex : 3, 6}
+    \item[inutile] s'il n'est pas utile  \hspace\fill  \example{ex : 0, 1, 4, 5}
     \end{description}
   \end{block}
   
@@ -40,6 +40,26 @@
     Tout AFN est équivalent à un automate émondé.
   \end{block}
 
+  \on[bottom, x=.35\textwidth]{
+    \begin{tikzpicture}[automaton, example, y=10mm]
+      \state[accepting] (0) at (0,2) {$0$}; 
+      \state            (1) at (1,2) {$1$}; 
+      \state[initial  ] (2) at (0,1) {$2$}; 
+      \state            (3) at (1,1) {$3$}; 
+      \state[initial  ] (4) at (0,0) {$4$}; 
+      \state            (5) at (1,0) {$5$}; 
+      \state[accepting] (6) at (2,1) {$6$}; 
+
+      \path (0) edge node{$a$} (1);
+      \path (1) edge node{$b$} (3);
+      \path (2) edge node{$a$} (3);
+      \path (3) edge node{$b$} (5);
+      \path (4) edge node{$a$} (5);
+      \path (3) edge node{$b$} (6);
+    \end{tikzpicture}
+  }
+
+  
 \end{frame}
 
 
