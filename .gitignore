@@ -5,6 +5,9 @@ docs/*.pdf
 # External dependency
 latex-libs/
 
+# Configuration file
+.current_course.mk
+
 # Auxiliary LaTeX Files 
 *.aux
 *.bbl
