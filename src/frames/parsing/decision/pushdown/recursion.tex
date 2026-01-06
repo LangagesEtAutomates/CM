@@ -15,7 +15,7 @@
   \on[top, text]{
     \begin{algorithm}[H]
       \Fun{$\Decider(u : \text{mot}) : \text{booléen}$}{
-        \Return $\Trouver( u \cdot \text{`$\diamond$'}, \text{`$\diamond$'} )$\;
+        \Return $\Trouver( u \cdot \text{`$\blank$'}, \text{`$\blank$'} )$\;
       }
       \Fun{$\Trouver(\textbf{\color{black}m } u : \text{mot}, \omega : \text{caractère}) : \text{booléen}$}{
         \lIf{$u = \varepsilon$}{\Return \False}
@@ -45,13 +45,13 @@
       \cell{$\langle$}  \smhead[ob=<5>] 
       \cell{$\rangle$}  \smhead[ob=<6>] 
       \cell{$\}$}       \smhead[ob=<7>] 
-      \cell{$\diamond$} \smhead[ob=<8>] 
+      \cell{$\blank$} \smhead[ob=<8>] 
     \end{tikzpicture}
   }
 
   \on<2->[y=-25mm, x=-.25\textwidth]{
     \begin{tikzpicture}[pushdown]
-      \state[initial, initial text=$\text{empile}(\diamond)$] (a) at (0,0) {0};
+      \state[initial, initial text=$\text{empile}(\blank)$] (a) at (0,0) {0};
       
       \path (a) edge [loop below] node {
         $\begin{array}{@{}r@{\,}c@{\,}l@{}}
@@ -64,7 +64,7 @@
 
       \uncover<8->{
         \state[accepting] (b) at (2,0) {1};
-        \path (a) edge node {$\diamond : \text{dépile}(\diamond)$} (b);
+        \path (a) edge node {$\blank : \text{dépile}(\blank)$} (b);
       }
     \end{tikzpicture}
   }
@@ -72,7 +72,7 @@
   \onBlock<2->[y=-25mm, right=37mm]{Pile d'appels}{
     \begin{tikzpicture}[stack, x=2cm, y=5mm]
       \cell{\only<2->{$\Decider(u)$}}
-      \cell{\only<2-8>{$\Trouver(u, \diamond)$}}
+      \cell{\only<2-8>{$\Trouver(u, \blank)$}}
       \cell{\onlyb<3-7>{$\Trouver(u, \})$}}
       \cell{\onlyb<4>{$\Trouver(u, \})$}\onlyb<6>{$\Trouver(u, \rangle)$}}
     \end{tikzpicture}

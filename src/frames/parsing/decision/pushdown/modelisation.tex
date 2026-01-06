@@ -11,15 +11,15 @@
 
   \vspace{-2mm}
   \begin{block}{Définition -- Automate à pile non-déterministe}
-    Un \structure{automate à pile} est un septuplet \alert{$\langle \Sigma, \Pi, Q, I, F, \diamond, \rightarrow \rangle$} tel que :
+    Un \structure{automate à pile} est un septuplet \alert{$\langle \Sigma, \Gamma, \blank, Q, I, F, \rightarrow \rangle$} tel que :
     \begin{description}[xxxx]
     \item[\alert{$\Sigma$}] ensemble fini non vide : \structure{l'alphabet d'entrée}
-    \item[\alert{$\Pi$}] ensemble fini non vide : \structure{l'alphabet de pile}
+    \item[\alert{$\Gamma$}] ensemble fini non vide : \structure{l'alphabet de pile}
+    \item[\alert{$\blank$}] $\in \Gamma$ : \structure{le symbole de fond de pile}
     \item[\alert{$Q$}] ensemble fini non vide : \structure{les états possibles}
     \item[\alert{$I$}] $\subseteq Q$ : \structure{les états initiaux}
     \item[\alert{$F$}] $\subseteq Q$ : \structure{les états finaux (ou accepteurs)}
-    \item[\alert{$\diamond$}] $\in \Pi$ : \structure{le symbole de fond de pile}
-    \item[\alert{$\rightarrow$}] $\subseteq  (Q \times \Sigma^\star \times \Pi^\star) \times (Q \times \Pi^\star)$ : \structure{la relation de transition}
+    \item[\alert{$\rightarrow$}] $\subseteq  (Q \times \Sigma^\star \times \Gamma^\star) \times (Q \times \Gamma^\star)$ : \structure{la relation de transition}
     \end{description}
 
     \vspace{-1mm}
@@ -27,9 +27,9 @@
     \begin{description}[xxxx]
     \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
     \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{le mot reconnu}
-    \item[\alert{$p$}] $\in \Pi^\star$ : \structure{le mot dépilé}
+    \item[\alert{$p$}] $\in \Gamma^\star$ : \structure{le mot dépilé}
     \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
-    \item[\alert{$p'$}] $\in \Pi^\star$ : \structure{le mot empilé}
+    \item[\alert{$p'$}] $\in \Gamma^\star$ : \structure{le mot empilé}
     \end{description}
   \end{block}
 

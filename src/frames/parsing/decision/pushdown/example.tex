@@ -10,20 +10,20 @@
 \begin{frame}{Exemple : le langage $\{a^n b^n \mid n\in \mathbb{N}\}$}
 
   \on[top]{\small
-    $\left\langle \{a, b\}, \{A, \diamond\}, \{0, 1, 2\}, \{0\}, \{2\},  \diamond, \left\{
+    $\left\langle \{a, b\}, \{A, \blank\}, \blank, \{0, 1, 2\}, \{0\}, \{2\}, \left\{
     \begin{array}{@{~\langle \langle~}c@{,~}c@{,~}c@{\rangle, \langle}c@{,~}c@{~\rangle \rangle~}}
       0 & a           & \varepsilon &  0 & A            \\ 
       0 & b           & A           &  1 & \varepsilon  \\        
-      0 & \varepsilon & \diamond    &  2 & \varepsilon  \\        
+      0 & \varepsilon & \blank    &  2 & \varepsilon  \\        
       1 & b           & A           &  1 & \varepsilon  \\        
-      1 & \varepsilon & \diamond    &  2 & \varepsilon  \\        
+      1 & \varepsilon & \blank    &  2 & \varepsilon  \\        
     \end{array}
     \right\} \right\rangle$
   }
 
   \on[y=-20mm, x=-40mm]{
     \begin{tikzpicture}[stack]
-      \cell{\only<1-5>{$\diamond$}}  
+      \cell{\only<1-5>{$\blank$}}  
       \cell{\onlyb<2-4>{$A$}}        
       \cell{\onlyb<3>{$A$}}          
     \end{tikzpicture}
@@ -44,11 +44,11 @@
       \state[structure ob=<4-5>           ] (b) at (1,0) {$1$}; 
       \state[structure ob=<6>, accepting, ] (c) at (2,0) {$2$}; 
  
-      \path                     (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+      \path                     (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (c);
       \path[structure ob=<1-2>] (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
       \path[structure ob=<3>]   (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
       \path[structure ob=<4>]   (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
-      \path[structure ob=<5>]   (b) edge             node[above] {\smPAtrans{\varepsilon}{\diamond}{\varepsilon}} (c);
+      \path[structure ob=<5>]   (b) edge             node[above] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (c);
     \end{tikzpicture}
   }
   
