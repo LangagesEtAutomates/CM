@@ -22,8 +22,8 @@
         $c \leftarrow u[1]$; 
         $u \leftarrow u[2]...u[|u|]$\;
         \lIf{$c = \omega\,$}{\Return \True}
-        \lIf{$c = \alert{\text{`$\{$'}}$}{\Return $\Trouver(u, \alert{\text{`$\}$'}}) \land \Trouver(u, c)$}
-        \lIf{$c = \hspace{.3mm}\alert{\text{`$\langle$'}}$}{\Return $\Trouver(u, \alert{\text{`$\rangle$'}}) \land \Trouver(u, c)$}
+        \lIf{$c = \alert{\text{`$\{$'}}$}{\Return $\Trouver(u, \alert{\text{`$\}$'}}) \land \Trouver(u, \omega)$}
+        \lIf{$c = \hspace{.3mm}\alert{\text{`$\langle$'}}$}{\Return $\Trouver(u, \alert{\text{`$\rangle$'}}) \land \Trouver(u, \omega)$}
         \Return \False\;
       }
     \end{algorithm}
