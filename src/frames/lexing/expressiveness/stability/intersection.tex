@@ -32,12 +32,12 @@
 
   \onExampleBlock<2->[bottom]{Exemple}{
     \begin{itemize}
-    \item $\structure{L_1 = \{u \in (a|b)^\star \;|\; |u|_a \equiv 0 \pmod{2}\}}$
-    \item $\example{L_2 = \{u \in (a|b)^\star \;|\; |u|_b \equiv 1 \pmod{2}\}}$
+    \item $\structure{L_1 = \{u \in (a|b)^\star \;|\; |u|_a \equiv 1 \pmod{2}\}}$
+    \item $\example{L_2 = \{u \in (a|b)^\star \;|\; |u|_b \equiv 0 \pmod{2}\}}$
     \item<3-> $\alert{L_1 \cap L_2 = \left\{u \in (a|b)^\star \,\middle\mid\,
       \begin{array}{@{}r@{}}
-        |u|_a \equiv 0 \pmod{2}\\
-        \land |u|_b \equiv 1 \pmod{2}
+        |u|_a \equiv 1 \pmod{2}\\
+        \land |u|_b \equiv 0 \pmod{2}
       \end{array}\right\}}$
     \end{itemize}
   }
@@ -80,7 +80,8 @@
     \begin{tikzpicture}[word, size=5mm]
       \cell{a} \smhead[on=<4>]
       \cell{b} \smhead[ob=<5>]
-      \cell{a} \smhead[ob=<6>]
+      \cell{b} \smhead[ob=<6>]
+      \cell[open]{} \smhead[ob=<7>]
     \end{tikzpicture}
   }
   
