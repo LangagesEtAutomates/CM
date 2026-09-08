@@ -1,20 +1,17 @@
 % SPDX-License-Identifier: CC-BY-SA-4.0
 % Author: Matthieu Perrin
 
-\ifdefined\HANDOUT
-  \documentclass[9pt, handout]{beamer}
-  \usetheme{Nantes}
-\else
-  \documentclass[9pt]{beamer}
-  \usetheme[sectionpage]{Nantes}
-\fi
+\documentclass[9pt]{beamer}
+\mode<beamer>{\PassOptionsToPackage{sectionpage}{beamerthemeNantes}}
+\usetheme{Nantes}
 
 \usepackage{src/sty/config}
 
 \title[Langages et Automates]{Langages et Automates}
 
 \author[Matthieu Perrin]{
-  Matthieu Perrin\\
+  \structure{Matthieu \textsc{Perrin}}\\[2mm]
+  Nantes Université\\
   Laboratoire des Sciences du Numérique de Nantes \\
   UMR CNRS 6004\\
   Bureau 410, bâtiment 34 \\
@@ -22,10 +19,10 @@
 }
 
 \date{
-  Nantes Université\\
   Licence d'Informatique, deuxième année\\
-  2025-2026
+  2026-2027
 }
+
 
 \hypersetup{
   pdftitle  = {\insertshorttitle},
@@ -203,7 +200,22 @@
 \input{parsing/languages/tree/associativity}
 \input{parsing/languages/tree/priority}
 \input{parsing/languages/tree/rational}
+
+%\section{Expressivité des langages algébriques}
+% 
+%\subsection{Grammaires rationnelles}
+%\input{parsing/expressiveness/regular/theorem}
+%\input{parsing/expressiveness/regular/degree}
+%\input{parsing/expressiveness/regular/linear}
+%\input{parsing/expressiveness/regular/equivalence}
+%\input{parsing/expressiveness/regular/transformation}
+%\input{parsing/expressiveness/regular/formalisms}
  
+\subsection{Limites des langages algébriques}
+\input{parsing/expressiveness/pumping/theorem}
+\input{parsing/expressiveness/pumping/proof}
+\input{parsing/expressiveness/pumping/example}
+
 \section{Algorithmes de décision}
  
 \subsection{Algorithme Cocke-Younger-Kasami}
@@ -233,23 +245,8 @@
 \input{parsing/decision/LRparser/pa}
 \input{parsing/decision/LRparser/conflicts}
 \input{parsing/decision/LRparser/slr}
- 
-\section{Expressivité des langages algébriques}
- 
-\subsection{Grammaires rationnelles}
-\input{parsing/expressiveness/regular/theorem}
-\input{parsing/expressiveness/regular/degree}
-\input{parsing/expressiveness/regular/linear}
-\input{parsing/expressiveness/regular/equivalence}
-\input{parsing/expressiveness/regular/transformation}
-\input{parsing/expressiveness/regular/formalisms}
- 
-\subsection{Limites des langages algébriques}
-\input{parsing/expressiveness/pumping/theorem}
-\input{parsing/expressiveness/pumping/proof}
-\input{parsing/expressiveness/pumping/example}
- 
- 
+
+
 \part{Conclusion}
  
  

@@ -84,9 +84,9 @@
   \on[x=-.33\textwidth, bottom]{
     \begin{tikzpicture}[automaton, x=15mm, y=15mm]
       \state[initial, fill=alert!10]      (H) at (0,1) {\oneof[$H$]{\on<-3>{$B$}}};
-      \state[accepting, example]            (G) at (1,1) {\oneof[$G$]{\on<1>{$C$}\on<2>{$D$}}};
+      \state[accepting, example]            (G) at (1,1) {\oneof[$F$]{\on<1>{$C$}\on<2>{$D$}}};
       \state[accepting, structure, on=<2->] (E) at (1,2) {$E$};
-      \state[accepting, alert,     on=<3->] (F) at (2,1) {$F$};
+      \state[accepting, alert,     on=<3->] (F) at (2,1) {$G$};
       \state[fill=structure!10,    on=<4->] (I) at (1,0) {$I$};
       
       \path[on=<5->] (I) edge[loop right] node[right] {$a$} (I);
@@ -110,8 +110,8 @@
         }                                                     
         \tree    [node=example,   name=c        ]{$C = \{2,4,5,6,7\}$}{
           \tree  [node=example,   name=d,on=<2->]{$D = \{2,5,6,7\}$}{
-            \tree[node=alert,            on=<3->]{$F = \{5\}$}{}
-            \tree[node=example,          on=<3->]{$G = \{2,6,7\}$}{}
+            \tree[node=example,          on=<3->]{$F = \{2,6,7\}$}{}
+            \tree[node=alert,            on=<3->]{$G = \{5\}$}{}
           }                                                         
           \tree  [node=structure,        on=<2->]{$E = \{4\}$}{}
         }
