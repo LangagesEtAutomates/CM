@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Modélisation mathématique}
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- Automate à pile non-déterministe}
+    Un \structure{automate à pile} est un septuplet \alert{$\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$\Sigma$}] $\in \Omega_f$ ensemble fini non vide : \structure{l'alphabet d'entrée}
+    \item[\alert{$\Gamma$}] $\in \Omega_f$ ensemble fini non vide : \structure{l'alphabet de pile}
+    \item[\alert{$\blank$}] $\in \Gamma$ : \structure{le symbole de fond de pile}
+    \item[\alert{$Q$}] $\in \Omega_f$ ensemble fini non vide : \structure{les états possibles}
+    \item[\alert{$q_0$}] $\in Q$ : l'\structure{état initial}
+    \item[\alert{$F$}] $\subseteq Q$ : \structure{les états finaux (ou accepteurs)}
+    \item[\alert{$\rightarrow$}] $\subseteq  (Q \times \Sigma^\star \times \Gamma^\star) \times (Q \times \Gamma^\star)$ : \structure{la relation de transition}
+    \end{description}
+
+    \vspace{-1mm}
+    Une \structure{transition} est un tuple \alert{$\langle \langle q, u, p \rangle, \langle q', p' \rangle \rangle \in \rightarrow$}, noté \alert{$q \xrightarrow{\smPAtrans{u}{p}{p'}} q'$}, tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
+    \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{le mot reconnu}
+    \item[\alert{$p$}] $\in \Gamma^\star$ : \structure{le mot dépilé}
+    \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
+    \item[\alert{$p'$}] $\in \Gamma^\star$ : \structure{le mot empilé}
+    \end{description}
+  \end{block}
+
+  \on[x=3cm, y=-3cm]{
+    \begin{tikzpicture}[pushdown]
+      \state (q)  at (0,0) {$q$}; 
+      \state (q1) at (1,0) {$q'$};
+      \path  (q) edge node {\smPAtrans{u}{p}{p'}} (q1);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,89 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Complexité de la MT déterminisée}
+
+  \vspace{1mm}
+  \begin{itemize}
+  \item Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTND.
+    \begin{itemize}
+    \item $M$ reconnaît $\mathcal{L}(M)$ en temps \structure{$NT_M(n)$}
+    \item $M$ possède au plus \structure{$|\rightarrow|$}
+    \end{itemize}
+  \item $M_D$ explore jusqu'à $\mathcal{O}\left(|\rightarrow|^{NT_M(n)}\right)$ n\oe uds
+  \item Autres complexités de $M_D$ polynomiales
+    \begin{itemize}
+    \item Gestion de la file et des configurations
+    \end{itemize}
+  \item Donc \alert{$T_{M_D}(n) \in \mathcal{O}\left(|\rightarrow|^{NT_M(n)} \times \textsc{poly}\right)$}
+  \end{itemize}
+
+  \vspace{2mm}
+  En particulier, on a :
+  {\Large
+    $$\alert{\textsc{p} \subseteq \textsc{np} \subseteq \textsc{exptime}}$$
+  }
+  
+  \begin{description}[$\textsc{np} \subseteq \textsc{exptime}$ : ]
+  \item[$\textsc{p} \subseteq \textsc{np}$ : ] Toute MTD est une MTND.
+  \item[$\textsc{np} \subseteq \textsc{exptime}$ : ] Si \structure{$NT_M(n) \in \mathcal{O}\left(n^k\right)$}, alors \structure{$T_{M_D}(n) \in \mathcal{O}\left(|\rightarrow|^{n^k} \times \textsc{poly}\right)$}
+  \end{description}
+  
+  \begin{alertblock}{Peut-on faire mieux ?}
+    \begin{itemize}
+    \item La machine déterminisée n'est peut-être pas optimale
+      \begin{itemize}
+      \item Pour l'exemple, le même langage peut être décidé en $\mathcal{O}(1)$
+      \end{itemize}
+    \item Peut-on décider \textsc{Subset-sum} en temps polynomial ? 
+    \end{itemize}
+    \begin{center}
+      \Large
+      \alert{A-t-on $\textsc{p} = \textsc{np}$ ?}
+    \end{center}
+  \end{alertblock}
+
+  \on[x=45mm,y=-30mm] {
+    \begin{tikzpicture}[turingMachine, draw=example, text=example, x=14mm]
+      \state[initial]   (0) at (0,0) {$0$}; 
+      \state[accepting] (2) at (1,0) {$2$}; 
+      \path (0) edge node {$\smTMtransR{a}{a}$} (2);
+    \end{tikzpicture}
+  }
+
+  \on[x=33mm,y=18mm] {
+    \begin{tikzpicture}[tree, x=4.5mm, y=15mm, draw=example, text=example]\small
+       \tikzset{thebrace/.style={decorate, decoration={brace, amplitude=5pt, raise=3pt, mirror}},}
+      \tree[edges=leadsto]{$C_0$}{
+        \tree[edges=leadsto]{$C_1$}{
+          \tree{$C_4$}{}
+          \tree{$C_5$}{}
+          \tree{$C_6$}{}
+        }
+        \tree[edges=leadsto]{$C_2$}{
+          \tree{$C_7$}{}
+          \tree{$C_8$}{}
+          \tree{$C_9$}{}
+        }
+        \tree[edges=leadsto]{$C_3$}{
+          \tree{$C_{10}$}{}
+          \tree{$C_{11}$}{}
+          \tree{$C_{12}$}{}
+        }
+      }
+      \draw[thebrace] (3.5,-3) -- node[midway,below=7pt]{$|\rightarrow|$} (6.5,-3);
+      \draw[<->] (9.7,-3.1) -- (9.7,-.9);
+      \node[left] at (9.7,-1.2) {$NT_M(n)$};
+      
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

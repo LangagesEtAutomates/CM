@@ -1,0 +1,136 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exemple de machine de Turing universelle}\label{limits/universality/semidecidable/mtu}
+  
+  \onBlock[top=-4mm,right=7cm] {Machine simulée :}{\vspace{-4mm}\scriptsize
+    \begin{tikzpicture}[turingMachine]
+      \state[alert ob=<24>,          accepting    ]  (F)  at (0,0) {$F$}; 
+      \state[alert on=<{1-7,21-23}>, initial above]  (00) at (1,0) {$00$}; 
+      \state[alert ob=<18-20>                     ]  (01) at (2,0) {$01$}; 
+      \state[alert ob=<8-17>                      ]  (10) at (3,0) {$10$}; 
+      
+      \path (00) edge[bend left] node {$\smTMtransR{1}{1}$} (10);
+      \path (10) edge            node {$\smTMtransR{1}{1}$} (01);
+      \path (01) edge            node {$\smTMtransR{1}{1}$} (00);
+      \path (00) edge            node {$\smTMtransL{0}{0}$} (F);
+    \end{tikzpicture}
+  }
+  
+  \on[x=-60mm,y=2.5,anchor=west]{\scriptsize
+    \begin{tikzpicture}[tape, size=3.5mm]
+      \smsave{s} \node[anchor=east] at (s.west) {\textsc{r} :};
+      \cell[                                       ]{$0$}
+      \cell[structure ob=<1>,       example ob=<5> ]{$1$} \smhead<-8>   
+      \cell[structure ob=<{11,15}>, example ob=<17>]{$1$} \smheadb<9-18> 
+      \cell[                        example ob=<20>]{$1$} \smheadb<19,20>
+      \cell[structure ob=<21>                      ]{$0$} \smheadb<21->
+    \end{tikzpicture}
+  }
+  
+  \on[x=-60mm,y=1.75,anchor=west] {\scriptsize
+    \begin{tikzpicture}[tape, size=3.5mm]
+      \smsave{s} \node[anchor=east] at (s.west) {\textsc{q} :};
+      \cell                                                                 {}                \smheadb<8>              \smheadb<13>\smheadfromb<18>{2}
+      \cell[structure ob=<{2,16,22}>, example ob=<{7,18,20}>, alert ob=<12>]{\alt<-7,18->{$0$}{$1$}}  \smhead<-2,7,9-12,14,15,19-21> 
+      \cell[structure ob=<{3,16,22}>, example ob=<{6,18,20}>               ]{\alt<-17,21->{$0$}{$1$}} \smheadb<3,5,6,17,23->          
+      \cell                                                                 {}                \smheadb<4>              \smheadfromb<16,22>{-2}
+      \cell                                                                 {}
+    \end{tikzpicture}                                                          
+  }
+  
+  \on[x=-60mm,y=1,anchor=west] {\scriptsize
+    \begin{tikzpicture}[tape, size=3.5mm]
+      \smsave{s} \node[anchor=east] at (s.west) {\textsc{m} :};
+      \cell[                               ] {}                       \smheadfromb<19>{15}\smheadfromb<10>{7}
+      \cell[structure ob=<{1,11}>          ] {$1$}                    \smhead<1,11>  
+      \cell[structure ob=<2>, alert ob=<12>] {$0$}                    \smheadb<2,12-13>  
+      \cell[structure ob=<3>               ] {$0$}                    \smheadb<3>        
+      \cell[                               ] {$\rightarrow$}          \smheadb<4>        
+      \cell[                example ob=<5> ] {$1$}                    \smheadb<5>        
+      \cell[                example ob=<6> ] {$0$}                    \smheadb<6>        
+      \cell[                example ob=<7> ] {$1$}                    \smheadb<7,9>        
+      \cell[                               ] {$\filledtriangleright$} \smheadb<8>\smheadfromb<14>{-6}
+      \cell[structure ob=<15>              ] {$1$}                    \smheadb<15>     
+      \cell[structure ob=<16>              ] {$1$}                                
+      \cell[structure ob=<16>              ] {$0$}                                
+      \cell[                               ] {$\rightarrow$}          \smheadfromb<16>{-2}
+      \cell[                example ob=<17>] {$1$}                    \smheadb<17>       
+      \cell[                example ob=<18>] {$1$}                                
+      \cell[                example ob=<18>] {$0$}                                
+      \cell[                               ] {$\filledtriangleright$} \smheadfromb<18>{-2}
+      \cell[structure ob=<20>              ] {$1$}                    \smheadfromb<20>{-16}            
+      \cell[structure ob=<20>              ] {$0$}                                
+      \cell[structure ob=<20>              ] {$1$}                                
+      \cell[structure ob=<20>              ] {$\rightarrow$}                      
+      \cell[structure ob=<20>              ] {$1$}                                
+      \cell[structure ob=<20>              ] {$0$}                                
+      \cell[structure ob=<20>              ] {$0$}                                
+      \cell[                               ] {$\filledtriangleright$}                   
+      \cell[structure ob=<21>              ] {$0$}                    \smheadfromb<21>{-24}
+      \cell[structure ob=<22>              ] {$0$}                                
+      \cell[structure ob=<22>              ] {$0$}                                
+      \cell[                               ] {$\rightarrow$}          \smheadfromb<22>{-2}
+      \cell[                  alert ob=<23>] {$F$}                    \smheadb<23->      
+      \cell[                               ] {}         
+    \end{tikzpicture}
+  }
+  
+  \onBlock[bottom=-2mm]{Machine universelle :}{\scriptsize
+    \vspace{-5mm}
+    \begin{tikzpicture}[turingMachine, y=17mm, x=28mm]
+      \state[alert ob=<14>                            ] (E) at (0,2) {\faForward}; 
+      \state[alert on=<{1,11,15,20-21}>, initial above] (A) at (1,2) {\faMapMarker}; 
+      \state[alert ob=<{9-10,19}>                     ] (G) at (2,2) {\faFastBackward}; 
+      \state[alert ob=<{6-8,18}>                      ] (D) at (3,2) {\faPencil}; 
+      \state[alert ob=<13>                            ] (H) at (0,1) {\faBackward}; 
+      \state[alert ob=<{2-4,12,16,22}>                ] (B) at (1,1) {\faSearch}; 
+      \state[alert ob=<{5,17,23}>                     ] (C) at (2,1) {\faThumbsUp}; 
+      \state[alert ob=<24>,                  accepting] (F) at (3,1) {\faCheck}; 
+      
+      \path (A) edge                node[swap]   {\smGroup{\smTMtransS[\textsc{r}]{a}{a}\smTMtransR[\textsc{m}]{a}{a}}}                               (B);
+      \path (B) edge                node[swap]   {\smGroup{\smTMtransL[\textsc{q}]{\blank}{\blank}\smTMtransR[\textsc{m}]{\rightarrow}{\rightarrow}}} (C);
+      \path (B) edge[loop below]    node         {\smGroup{\smTMtransR[\textsc{q}]{a}{a}\smTMtransR[\textsc{m}]{a}{a}}}                               (B);
+      \path (C) edge                node[sloped] {\smGroup{\smTMtransS[\textsc{r}]{b}{a}\smTMtransR[\textsc{m}]{a}{a}}}                               (D);
+      \path (D) edge[loop above]    node         {\smGroup{\smTMtransL[\textsc{q}]{b}{a}\smTMtransR[\textsc{m}]{a}{a}}}                               (D);
+      \path (G) edge[loop above]    node         {\smTMtransL[\textsc{m}]{x}{x}}                                                                      (G);
+      \path (G) edge                node[swap]   {\smGroup{\smTMtransR[\textsc{q}]{\blank}{\blank}\smTMtransR[\textsc{m}]{\blank}{\blank}}}           (A);
+      \path (H) edge[loop left]     node         {\smTMtransL[\textsc{q}]{a}{a}}                                                                      (H);
+      \path (H) edge                node         {\smTMtransR[\textsc{q}]{\blank}{\blank}}                                                            (E);
+      \path (E) edge[loop left]     node         {\smTMtransR[\textsc{m}]{y}{y}}                                                                      (E);
+      \path (E) edge[bend right=25] node         {\smTMtransR[\textsc{m}]{z}{z}}                                                                      (A);
+      \path (C) edge                node[swap]   {\smGroup{\smTMtransS[\textsc{m}]{F}{F}}}                                                            (F);
+      \path (D) edge                node[swap]   {\begin{tabular}{c}
+          \smGroup{\smTMtransL[\textsc{r}]{a}{a}\smTMtransR[\textsc{q}]{\blank}{\blank}\smTMtransL[\textsc{m}]{\filledtriangleleft}{\filledtriangleleft}}\\ 
+          \smGroup{\smTMtransR[\textsc{r}]{a}{a}\smTMtransR[\textsc{q}]{\blank}{\blank}\smTMtransL[\textsc{m}]{\filledtriangleright}{\filledtriangleright}}
+      \end{tabular}}                                                                                                                                  (G);
+      \path (A) edge              node[swap]{\begin{tabular}{@{}c@{}}
+          \smGroup{\smTMtransS[\textsc{r}]{0}{0}\smTMtransR[\textsc{m}]{1}{1}}\\
+          \smGroup{\smTMtransS[\textsc{r}]{1}{1}\smTMtransR[\textsc{m}]{0}{0}}\\
+      \end{tabular}}                                                                                                                                  (E);
+      \path (B) edge              node            {\begin{tabular}{@{}c@{}}
+          \smGroup{\smTMtransS[\textsc{q}]{0}{0}\smTMtransS[\textsc{m}]{1}{1}}\\
+          \smGroup{\smTMtransS[\textsc{q}]{1}{1}\smTMtransS[\textsc{m}]{0}{0}}\\
+      \end{tabular}}                                                                                                                                  (H);
+
+      \node[structure, anchor=center] at (1.65,1.5) {
+        $\begin{array} {@{}r@{\hspace{2mm}\in\hspace{2mm}}l@{}}
+        \forall a, b & \{0, 1\} \\
+        \forall x    & \{0,1,\rightarrow,\filledtriangleleft, \filledtriangleright, F\} \\
+        \forall y    & \{0, 1, \rightarrow, F\} \\
+        \forall z    & \{\filledtriangleleft, \filledtriangleright, F\}
+        \end{array}$
+      };
+      
+    \end{tikzpicture}
+  }
+ 
+\end{frame}
+
+\endgroup

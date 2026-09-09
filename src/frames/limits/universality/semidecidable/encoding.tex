@@ -1,0 +1,90 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Encodage des machines de Turing}
+
+  \on[text,y=1.5]{
+    Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une machine de Turing telle que :
+    \begin{itemize}
+    \item Encodage des états :
+      \begin{itemize}
+      \item $\mathit{encode}_Q : Q \rightarrow \{0,1\}^{\left\lceil \log_2(|Q|) \right\rceil} \cup \{F\}$
+      \item $\mathit{encode}_Q(q_0) \in 0^\star$
+      \item $\mathit{encode}_Q(q_f) = F$
+      \end{itemize}
+    \item Encodage des transitions :
+      \begin{itemize}
+      \item $\mathit{encode}_\rightarrow\left(q \xrightarrow{\smTMtrans{a}{b}{d}} q' \right) = a \cdot \mathit{encode}_Q(q) \cdot {\rightarrow} \cdot a' \cdot \mathit{encode}_Q(q')^{\textsc{r}} \cdot d$
+      \end{itemize}
+    \item Encodage de $M$ : $\displaystyle \mathit{encode}(M) = \prod_{t \in \rightarrow} \mathit{encode}_\rightarrow(t) $
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=-1]{Exemple :}{}
+
+  \on[y=-2] {
+      \begin{tikzpicture}[turingMachine]
+        \state (F)  at (0,0) {$F$}; 
+        \state (00) at (1,0) {$00$}; 
+        \state (01) at (2,0) {$01$}; 
+        \state (10) at (3,0) {$10$}; 
+
+        \path (00) edge[bend left] node {\smTMtransR{1}{1}} (10);
+        \path (10) edge            node {\smTMtransR{1}{1}} (01);
+        \path (01) edge            node {\smTMtransR{1}{1}} (00);
+        \path (00) edge            node {\smTMtransL{0}{0}} (F);
+    \end{tikzpicture}
+  }
+
+  
+  \on[y=-3.75] {\scriptsize
+    \begin{tikzpicture}[tape, x=4mm, y=4mm]
+      \cell{$\blank$}
+      \cell{$1$}                    \smsave{T1L}
+      \cell{$0$}                    
+      \cell{$0$}                    
+      \cell{$\rightarrow$}          
+      \cell{$1$}                    
+      \cell{$0$}                    
+      \cell{$1$}                    
+      \cell{$\filledtriangleright$} \smsave{T1R}
+      \cell{$1$}                    \smsave{T2L}
+      \cell{$1$}                    
+      \cell{$0$}                    
+      \cell{$\rightarrow$}          
+      \cell{$1$}                    
+      \cell{$1$}                    
+      \cell{$0$}                    
+      \cell{$\filledtriangleright$} \smsave{T2R}
+      \cell{$1$}                    \smsave{T3L}
+      \cell{$0$}                    
+      \cell{$1$}                    
+      \cell{$\rightarrow$}          
+      \cell{$1$}                    
+      \cell{$0$}                    
+      \cell{$0$}                    
+      \cell{$\filledtriangleright$} \smsave{T3R}
+      \cell{$0$}                    \smsave{T4L}
+      \cell{$0$}                    
+      \cell{$0$}                    
+      \cell{$\rightarrow$}          
+      \cell{$F$}                    \smsave{T4R}
+      \cell{$\blank$}
+
+      \tikzset{thebrace/.style={decorate, decoration={brace, amplitude=5pt, raise=3pt, mirror}},}
+      \draw[thebrace] ([xshift=2pt]T1L.south west) --  ([xshift=-2pt]T1R.south east) node[midway,below=7pt] {$00 \xrightarrow{\smTMtransR{1}{1}} 10$};
+      \draw[thebrace] ([xshift=2pt]T2L.south west) --  ([xshift=-2pt]T2R.south east) node[midway,below=7pt] {$10 \xrightarrow{\smTMtransR{0}{0}} 01$};
+      \draw[thebrace] ([xshift=2pt]T3L.south west) --  ([xshift=-2pt]T3R.south east) node[midway,below=7pt] {$01 \xrightarrow{\smTMtransR{1}{1}} 00$};
+      \draw[thebrace] ([xshift=2pt]T4L.south west) --  ([xshift=-2pt]T4R.south east) node[midway,below=7pt] {$00 \xrightarrow{\smTMtransL{\blank}{\blank}} F$};
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

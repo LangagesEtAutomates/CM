@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Configurations d'un automate à pile}
+  
+  \on[top, text]{
+    Soit $A=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ un automate à pile. 
+    \begin{block}{Définition -- Configuration}
+      Une \structure{configuration} de $A$ est un triplet \alert{$\langle u, q, \pi \rangle$} tel que :
+      \begin{description}[xxxx]
+      \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{mot restant à reconnaître}
+      \item[\alert{$q$}] $\in Q$ : \structure{l'état courant dans la simulation}
+      \item[\alert{$\pi$}] $\in \Gamma^\star$ : \structure{l'état courant de la pile}
+      \end{description}
+      La \structure{configuration initiale} pour un mot $u \in \Sigma^\star$ est \alert{$\langle u, q_0, \blank \rangle$}
+    \end{block}
+  }
+
+  \onExampleBlock[y=-8mm]{Exemple -- Configuration $\langle abb, 0, A\blank \rangle$}{}
+
+  \on[y=-25mm, x=-40mm]{
+    \begin{tikzpicture}[word, x=7mm, y=7mm]
+      \cell         {$a$}  
+      \cell[example]{$a$} \smhead[example]       
+      \cell[example]{$b$}          
+      \cell[example]{$b$} 
+    \end{tikzpicture}
+  }
+
+  \on[y=-25mm,x=5mm]{
+    \begin{tikzpicture}[pushdown]
+      \state[initial, example] (a) at (0,0) {$0$}; 
+      \state[                ] (b) at (1,0) {$1$}; 
+      \state[accepting       ] (c) at (2,0) {$2$}; 
+
+      \path (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (c);
+      \path (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                  (a);
+      \path (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \path (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                  (b);
+      \path (b) edge             node[above] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (c);
+    \end{tikzpicture}
+  }
+
+  \on[y=-25mm, x=45mm]{
+    \begin{tikzpicture}[stack, x=7mm, y=7mm]
+      \cell[example]{$\blank$}  
+      \cell[example]{$A$}        
+      \cell            {}          
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

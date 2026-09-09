@@ -1,0 +1,48 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple : le \og busy beaver \fg}
+  
+  \on[top=4mm] {
+    \begin{tikzpicture}[tape]
+      \cell{0}
+      \cell[alert ob=<{6}>       ]{\alt<-6> {0}{1}} \smheadb<6>
+      \cell[alert ob=<{5,7}>     ]{\alt<-5> {0}{1}} \smheadb<5,7>
+      \cell[alert ob=<{4,8}>     ]{\alt<-4> {0}{1}} \smheadb<4,8>
+      \cell[alert on=<{1,3,9,13}>]{\alt<-1> {0}{1}} \smhead<1,3,9,13>
+      \cell[alert ob=<{2,10,12}> ]{\alt<-2> {0}{1}} \smheadb<2,10,12>
+      \cell[alert ob=<{11}>      ]{\alt<-11>{0}{1}} \smheadb<11>
+      \cell{0}
+    \end{tikzpicture}
+  }
+  
+  \on[y=-6mm]{
+    \begin{tikzpicture}[turingMachine, x=13mm, y=20mm]
+      \state[alert on=<{1,3,6,12}>, initial] (a) at (0, 1) {$A$};
+      \state[alert ob=<{2,5,7-11}>         ] (b) at (2, 1) {$B$};
+      \state[alert ob=<{4,13}>,   accepting] (c) at (1, 0) {$C$};
+      
+      \path[alert on=<{1,6}>   ] (a) edge[bend left]  node       {\smTMtransR{0}{1}} (b);
+      \path[alert ob=<{3,12}>  ] (a) edge[bend right] node[swap] {\smTMtransL{1}{1}} (c);
+      \path[alert ob=<{2,5,11}>] (b) edge[bend left]  node       {\smTMtransL{0}{1}} (a);
+      \path[alert ob=<{7-10}>  ] (b) edge[loop right] node       {\smTMtransR{1}{1}} (b);
+      \path[alert ob=<{4}>     ] (c) edge[bend right] node[swap] {\smTMtransL{0}{1}} (b);
+    \end{tikzpicture}
+  }
+ 
+  \on[text,bottom] {\footnotesize
+    \begin{description}
+    \item[$A \xrightarrow{\smTMtransR{0}{1}} B$ :] si on lit $0$ dans l'état $A$, écrire $1$, aller en $B$ et se déplacer à droite\vspace{-2mm}
+    \item[$B \xrightarrow{\smTMtransL{0}{1}} A$ :] si on lit $0$ dans l'état $B$, écrire $1$, aller en $A$ et se déplacer à gauche
+    \end{description}
+  }
+
+\end{frame}
+
+\endgroup

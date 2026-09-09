@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Comment modéliser la mémoire ?}
+
+  \begin{block}{Modèle de processus dans les OS}
+    \begin{itemize}
+    \item \structure{Mémoire disponible : }
+      \begin{itemize}
+      \item Un tableau de $2^N$ octets.
+      \item Des pointeurs sur $N$ bits.
+        \begin{itemize}
+        \item Typiquement, $N=32$ ou $N=64$.
+        \end{itemize}
+      \end{itemize}
+    \item \alert{Problème :} 
+      \begin{itemize}
+      \item En théorie, un automate fini à $256^{2^N}$ états
+        \begin{itemize}
+        \item En pratique, $N$ fini et $2^N$ infini
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{block}{Modèle RAM (\emph{Random access machine})}
+    \begin{itemize}
+    \item \structure{Mémoire disponible : }
+      \begin{itemize}
+      \item Un tableau infini d'entiers non-bornés.
+      \end{itemize}
+    \item \alert{Problème :} 
+      \begin{itemize}
+      \item Il faut des opérations sur les entiers dans le modèle
+        \begin{itemize}
+        \item Ces opérations ne sont-elles pas déjà des algorithmes ?
+        \item On veut un \structure{ensemble de règles fini}.
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

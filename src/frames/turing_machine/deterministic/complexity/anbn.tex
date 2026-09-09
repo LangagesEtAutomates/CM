@@ -1,0 +1,117 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exemple : Le langage $\{a^p b^p \mid p\in \mathbb{N}\}$}
+
+  \on<-20>[x=23mm, y=25mm]{
+    \begin{tikzpicture}[tape, x=6mm, y=6mm]
+      \cell{}
+      \cell[structure ob=<1>,  alert ob=<2> ]{\alt<1>{$a$}{}}   \smhead<1>           \smheadfromb<10>{4}
+      \cell[structure ob=<11>, alert ob=<12>]{\alt<-11>{$a$}{}} \smheadb<2,11>       \smheadfromb<14>{2}  
+      \cell[structure ob=<15>, alert ob=<16>]{\alt<-15>{$a$}{}} \smheadb<3,15,18>   
+      \cell[structure ob=<17>, alert ob=<18>]{\alt<-17>{$b$}{}} \smheadb<4,17,19> 
+      \cell[structure ob=<13>, alert ob=<14>]{\alt<-13>{$b$}{}} \smheadb<5,9,13,20>  \smheadfromb<16>{-1}
+      \cell[structure ob=<8>,  alert ob=<9> ]{\alt<-8>{$b$}{}}  \smheadb<6,8>        \smheadfromb<12>{-3}  
+      \cell{}                                                   \smheadb<7>            
+    \end{tikzpicture}
+  }
+
+  \ob<21->[x=23mm, y=25mm]{
+    \begin{tikzpicture}[tape, x=6mm, y=6mm]
+      \cell                                 {}
+      \cell[structure ob=<21>,alert ob=<22>]{\alt<-21>{$a$}{}}  \smheadb<21>          \smheadfromb<24>{4}
+      \cell[alert ob=<25->]                 {$b$}               \smheadb<25->
+      \cell                                 {$a$}
+      \cell                                 {$b$}
+      \cell                                 {$a$}
+      \cell[structure ob=<23>,alert ob=<24>]{\alt<-23>{$b$}{}}  \smheadb<23>
+      \cell                                 {}                                        \smheadfromb<22>{-5}
+    \end{tikzpicture}
+  }
+
+  \on[x=23mm, y=3mm]{
+    \begin{tikzpicture}[turingMachine]
+      \state [alert ob=<{1,11,15,19,21,25-}>, initial above] (A) at (1,1) {\textbf{A}}; 
+      \state [alert ob=<{2-7,12,16,22}>                    ] (B) at (2,1) {\faForward}; 
+      \state [alert ob=<{8,13,17,23}>                      ] (C) at (2,0) {\textbf{B}}; 
+      \state [alert ob=<{9,10,14,18,24}>                   ] (D) at (1,0) {\faBackward}; 
+      \state [alert ob=<{20}>, accepting                   ] (E) at (0,1) {\faCheck}; 
+
+      \path (A) edge             node {\smTMtransR{a}{\blank}} (B);
+      \path (B) edge[loop right] node {\smGroup{\smTMtransR{a}{a}\smTMtransR{b}{b}}} (B);
+      \path (B) edge             node {\smTMtransL{\blank}{\blank}} (C);
+      \path (C) edge             node {\smTMtransL{b}{\blank}} (D);
+      \path (D) edge[loop left]  node {\smGroup{\smTMtransL{a}{a}\smTMtransL{b}{b}}} (D);
+      \path (D) edge             node {\smTMtransR{\blank}{\blank}} (A);
+      \path (A) edge             node {\smTMtransR{\blank}{\blank}} (E);
+    \end{tikzpicture}
+  }
+
+  \onBlock[left=40mm, y=25mm]{Exécution de $aaabbb$}{
+    \begin{itemize}
+    \item $T_M(aaabbb) \alt<-19>{\ge}{=} \oneof[28]{%
+      \on<1>{0}%
+      \on<2>{1}%
+      \on<3>{2}% 
+      \on<4>{3}% 
+      \on<5>{4}% 
+      \on<6>{5}% 
+      \on<7>{6}% 
+      \on<8>{7}% 
+      \on<9>{8}% 
+      \on<10>{12}% 
+      \on<11>{13}% 
+      \on<12>{17}% 
+      \on<13>{18}% 
+      \on<14>{21}% 
+      \on<15>{22}% 
+      \on<16>{24}% 
+      \on<17>{25}% 
+      \on<18>{26}% 
+      \on<19>{27}% 
+    }$
+    \item $S_M(aaabbb) = 6$
+    \item<20-> $aaabbb$ est \alert{accepté}
+    \end{itemize}
+  }
+
+  \onBlock<21->[left=40mm]{Exécution de $ababab$}{
+    \begin{itemize}
+    \item $T_M(ababab) \alt<-24>{\ge}{=} \oneof[13]{%
+      \on<21>{0}%
+      \on<22>{6}%
+      \on<23>{7}% 
+      \on<24>{12}% 
+    }$
+    \item $S_M(ababab) = 6$
+    \item<25-> $ababab$ est \alert{rejeté}
+    \end{itemize}
+  }
+
+  \onBlock<26->[bottom=2mm]{Exécution de $M$ dans le pire cas}{
+    Si le mot est rejeté, l'exécution s'arrêtera plus rapidement.
+    
+    \vspace{1mm}
+    \begin{minipage}{.5\textwidth}
+      \begin{itemize}
+      \item $T_M(6) = 28$
+      \item $S_M(6) = 6$
+      \end{itemize}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+      \begin{itemize}
+      \item $T_M(n) = \frac{(n+1)(n+2)}{2} \in \mathcal{O}\left(n^2\right)$
+      \item $S_M(n) = n$
+      \end{itemize}
+    \end{minipage}%
+  }
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,117 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Importance de la classe P}
+
+  \onBlock[top=-4mm]{La classe des problèmes \og raisonnables \fg}{
+    \begin{itemize}
+    \item Souvent faisable en pratique pour les ordinateurs modernes
+    \item Composer deux algorithmes polynomiaux reste polynomial
+    \item Classe très stable vis-à-vis de variantes raisonnables du calcul
+      \begin{itemize}
+      \item langages de programmation, $\lambda$-calcul, extensions des MTD...
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \onExampleBlock[bottom=2mm, left=.6\textwidth]{Illustration}{
+    \begin{itemize}
+    \item On suppose 1 ns par instruction
+    \end{itemize}
+    \footnotesize
+    \begin{tabular}{c|c@{~~}c@{~~}c}
+      \structure{$n$} 
+      & \structure{$n^2$} 
+      & \structure{$n^3$} 
+      & \structure{$n^6$} \\
+      \hline
+      10
+      & 100 ns
+      & 1 µs
+      & 1 ms \\
+
+      20
+      & 400 ns
+      & 8 µs
+      & 64 ms \\
+
+      40
+      & 1.6 µs
+      & 64 µs
+      & 4.1 s \\
+
+      60
+      & 3.6 µs
+      & 216 µs
+      & 46.7 s \\[2mm]
+
+      \structure{$n$} 
+      & \structure{$2^n$} 
+      & \structure{$3^n$} 
+      & \structure{$n^n$} \\
+      \hline
+      10
+      & 1 µs
+      & 59 µs
+      & 10 s \\
+
+      20
+      & 1 ms
+      & 3.48 s
+      & $6.49 \cdot 10^{6}$ ans \\
+
+      40
+      & 18.3 min
+      & 385 ans
+      & $1.49 \cdot 10^{42}$ ans \\
+
+      60
+      & 36.5 ans
+      & $1.34 \cdot 10^{12}$ ans
+      & $1.54 \cdot 10^{83}$ ans \\
+    \end{tabular}
+  }
+  
+  \on[bottom, x=30mm]{
+    \begin{tikzpicture}[x=1mm, y=3mm]
+      
+      \footnotesize
+      \draw[->]             (0,0) -- (45,0) node[right]{$n$};
+      \draw[->]             (0,0) -- (0,10) node[above]{$t {\color{black!40}(s)}$};
+
+      \foreach \x in {0,5,...,45}{
+        \draw[densely dotted, black!40] (\x,0) -- (\x,10);
+        \node[below, black!40] at (\x,0) {\tiny\x};
+      }
+      \foreach \y in {0,1,...,10}{
+        \draw[densely dotted, black!40] (0,\y) -- (45,\y);
+        \node[left, black!40] at (0,\y) {\tiny\y};
+      }
+
+      \begin{scope}
+        \clip (0,0) rectangle (45,10);
+        \draw[domain=0.1:11, samples=100, smooth, black!40 ] plot (\x,{exp(\x*ln(\x)-9*ln(10))});
+        \draw[domain=0:22,   samples=100, smooth, alert    ] plot (\x,{exp(\x*ln(3) -9*ln(10))});
+        \draw[domain=0:34,   samples=100, smooth, alert    ] plot (\x,{exp(\x*ln(2) -9*ln(10))});
+        \draw[domain=0.1:45, samples=100, smooth, structure] plot (\x,{exp(6*ln(\x) -9*ln(10))});
+        \draw[domain=0.1:45, samples=100, smooth, structure] plot (\x,{exp(5*ln(\x) -9*ln(10))});
+      \end{scope}
+      
+      \node[below right, black!40 ] at (10,10)  {$n^n$};
+      \node[below right, alert    ] at (21,10)  {$3^n$};
+      \node[below right, alert    ] at (33,10)  {$2^n$};
+      \node[above left,  structure] at (45,3.5) {$n^6$};
+      \node[above left,  structure] at (45,0)   {$n^5$};
+
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,59 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\PROBLEM{\textsc{problem}}
+
+\begin{frame}{Description informelle d'un problème de décision}
+
+  \on[top, text]{
+    Un problème de décision \PROBLEM{} est décrit par :
+    \begin{description}
+    \item[Instance :] une entrée possible de \PROBLEM
+    \item[Question :] une question fermée (oui/non) sur les instances
+      \begin{itemize}
+      \item Une instance est \alert{positive} si la réponse est ``\structure{oui}''
+      \item Une instance est \alert{négative} si la réponse est ``\structure{non}''
+      \end{itemize}
+    \end{description}
+  }
+
+  \onExampleBlock[left=.5\textwidth, y=10mm, anchor=north]{Exemple : langage}{
+    Soit $L = a^+ b^+$
+    
+    \Probleme{\example{Decision$_L$}}{
+      Un mot $u \in \{a, b\}^\star$
+    }{
+      Est-ce que $u \in L$ ?
+    }
+    
+    \begin{itemize}
+    \item Instances positives : \example{$aab, abb$}
+    \item Instances négatives : \example{$bab, a$}
+    \end{itemize}
+  }
+
+  \onExampleBlock[right=.5\textwidth, y=10mm, anchor=north]{Exemple : test de primalité}{
+    ~
+    
+    \Probleme{\example{Primalité}}{
+      Un entier $n \in \mathbb{N}$
+    }{
+      $n$ est-il premier ?
+    }
+    
+    \begin{itemize}
+    \item Instances positives : \example{$2, 7, 13$}
+    \item Instances négatives : \example{$1, 9, 14$}
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

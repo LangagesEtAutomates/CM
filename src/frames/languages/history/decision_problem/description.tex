@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Comment décrire les problèmes de décision ?}
+
+  \vspace{-1mm}
+  \begin{alertblock}{Remarque}
+    \begin{itemize}
+    \item \vspace{-1mm} Un problème doit être décrit dans un formalisme centré sur un langage
+    \end{itemize}
+  \end{alertblock}
+  
+  \vspace{-1mm}
+  \begin{exampleblock}{Exemples : langage composé des seuls mots $aa$ et $ab$}
+    \begin{description}[Grammaires algébriques :]
+    \item[Mathématiques :]
+      $\{aa, ab\}$
+    \item[Expressions rationnelles :]
+      $a (a\mid b)$
+    \item[Grammaires algébriques :]
+      $\{S \rightarrow aa \mid ab\}$
+    \item[Langage C++ :]
+      \lstinline0bool decide(string s) \{return s=="aa" || s=="ab";\}0
+    \end{description}
+  \end{exampleblock}
+
+  \vspace{-1mm}
+  \begin{block}{Définition -- Formalisme}
+    Un \structure{formalisme} décrivant un ensemble $E$ est un couple $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ :
+    \begin{description}[$\llbracket \cdot \rrbracket : \mathcal{L} \rightarrow \textsc{lang}$]
+    \item[$\mathcal{L} \in \textsc{lang}$] est la \alert{syntaxe} du formalisme
+    \item[$\llbracket \cdot \rrbracket : \mathcal{L} \rightarrow E$] est la \alert{sémantique} du formalisme
+    \end{description}
+    \begin{itemize}
+    \item Dans ce cours, on considèrera \structure{$E \subseteq \textsc{lang}$} un ensemble de problèmes
+    \item Un mot \structure{$u \in \mathcal{L}$} est la représentation du problème \structure{$\llbracket u \rrbracket \in \textsc{lang}$}.
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup
+\endinput

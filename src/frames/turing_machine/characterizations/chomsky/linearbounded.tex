@@ -1,0 +1,67 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automates linéairement bornés}
+
+  \onBlock[top=-4mm] {Définition -- Automate linéairement borné}{
+    Un \structure{automate linéairement borné} est une machine de Turing telle que : 
+    \begin{itemize}
+    \item La configuration initiale pour $u$ est \alert{$C_\mathit{init}(u) = \langle \vdash, q_0, u \dashv \rangle$}
+    \item Les symboles $\vdash$ et $\dashv$ ne sont jamais franchis : $\forall q, q', a, b, d$,
+    \end{itemize}
+    $$\structure{
+      q \xrightarrow{\smTMtrans{\alert{\vdash}}{b}{d}} q'  \Rightarrow (b = \alert{\vdash} \land d = \alert{\triangleright})
+      \quad
+      \quad
+      \quad
+      q \xrightarrow{\smTMtrans{\alert{\dashv}}{b}{d}} q'  \Rightarrow (b = \alert{\dashv} \land d = \alert{\triangleleft})
+    }$$ 
+  }
+
+  \onBlock[left=.5\textwidth, y=6mm, anchor=north] {Théorème -- Kuroda (1964)}{
+    \centering
+    Les \structure{automates linéairement \\ bornés non-déterministes}\footnote{Problème ouvert : \alert{$\textsc{nspace}(n) \stackrel{?}{=} \textsc{dspace}(n)$}} \\reconnaissent exactement \\la classe \alert{\textsc{cs}} des \\ \structure{langages contextuels}
+    $$\alert{\textsc{cs} = \textsc{nspace}(n)}$$
+  }
+  
+  \onExampleBlock[right=.5\textwidth, y=6mm, anchor=north] {Exemple : $\{a^n b^n \mid n\in \mathbb{N}\}$}{}
+  
+  \on[y=-10mm, x=30mm]{
+    \begin{tikzpicture}[word, size=6mm]
+      \cell{$\vdash$}
+      \cell{\alt<-1>{$a$}{$\vdash$}} \smhead<1>  \smheadfromb<4>{2} 
+      \cell{\alt<-5>{$a$}{$\vdash$}} \smheadb<5,8,10> 
+      \cell{\alt<-7>{$b$}{$\dashv$}} \smheadb<7,9> 
+      \cell{\alt<-3>{$b$}{$\dashv$}} \smheadb<3> \smheadfromb<6>{-1} 
+      \cell{$\dashv$}                            \smheadfromb<2>{-3}
+    \end{tikzpicture}    
+  }
+
+  \on[y=-27mm, x=30mm]{
+    \begin{tikzpicture}[turingMachine, x=15mm, y=15mm]\footnotesize
+      \state[example ob=<{1,5,9}>, initial above] (a) at (1,1) {$a$}; 
+      \state[example ob=<{2,6}>                 ] (b) at (1,0) {\faForward}; 
+      \state[example ob=<{3,7}>                 ] (c) at (0,0) {$b$}; 
+      \state[example ob=<{4,8}>                 ] (d) at (0,1) {\faBackward}; 
+      \state[example ob=<10>, accepting         ] (e) at (2,1) {\faCheck}; 
+      
+      \path                  (a) edge               node         {\smTMtransR{a}{\vdash}}      (b);
+      \path                  (b) edge[loop right]   node         {\smTMtransR{x}{x}}           (b);
+      \path                  (b) edge               node         {\smTMtransL{\dashv}{\dashv}} (c);
+      \path                  (c) edge               node         {\smTMtransR{b}{\dashv}}      (d);
+      \path                  (d) edge[loop left]    node         {\smTMtransL{x}{x}}           (d);
+      \path                  (d) edge               node         {\smTMtransR{\vdash}{\vdash}} (a);
+      \path                  (a) edge               node         {\smTMtransL{\dashv}{\dashv}} (e);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

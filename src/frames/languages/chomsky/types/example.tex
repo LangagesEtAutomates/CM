@@ -1,0 +1,51 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\newcommand\DimEpsilon{{\color{structure!25}\varepsilon}}
+
+\begin{frame}{Exemple de grammaire contextuelle}
+  \vspace{-2mm}
+  \begin{block}{Générer le langage $\{a^n b^n c^n | n > 0\}$}
+    \vspace{-1mm}
+    \begin{enumerate}
+    \item<2-> \vspace{-1mm} Générer le langage $\{a^n (BC)^n | n > 0\}$
+    \item<3-> \vspace{-1mm} Ordonner les $B$ et les $C$
+    \item<4-> \vspace{-1mm} Transformer les $B$ en $b$ et les $C$ en $c$ 
+    \end{enumerate}
+    
+    \vspace{-2mm}
+    $$\left\{\begin{array}{ccccccc}
+    \uncover<2->{
+      \DimEpsilon   &\alert{S} & \DimEpsilon   & \rightarrow & \DimEpsilon   & \alert{aSBC} & \DimEpsilon   \\
+      \DimEpsilon   &\alert{S} & \DimEpsilon   & \rightarrow & \DimEpsilon   & \alert{aBC}  & \DimEpsilon   \\
+    }
+    \uncover<3->{
+      \structure{C} &\alert{B} & \DimEpsilon   & \rightarrow & \structure{C} & \alert{X}    & \DimEpsilon   \\
+      \DimEpsilon   &\alert{C} & \structure{X} & \rightarrow & \DimEpsilon   & \alert{B}    & \structure{X} \\
+      \structure{B} &\alert{X} & \DimEpsilon   & \rightarrow & \structure{B} & \alert{C}    & \DimEpsilon   \\
+    }
+    \uncover<4->{
+      \structure{a} &\alert{B} & \DimEpsilon   & \rightarrow & \structure{a} & \alert{b}    & \DimEpsilon   \\
+      \structure{b} &\alert{B} & \DimEpsilon   & \rightarrow & \structure{b} & \alert{b}    & \DimEpsilon   \\
+      \DimEpsilon   &\alert{C} & \DimEpsilon   & \rightarrow & \DimEpsilon   & \alert{c}    & \DimEpsilon
+    }\end{array}\right.$$
+  \end{block}
+  
+  \vspace{-1mm}
+  \begin{exampleblock}{Exemple : génération de $aabbcc$}
+    $\begin{array}{rclclclcl}
+      \uncover<2->{S & \vdash & a S BC &\vdash& aaBCBC\\}
+      \uncover<3->{& \vdash & aaBCXC &\vdash& aaBBXC &\vdash& aaBBCC\\}
+      \uncover<4->{& \vdash & aabBCC &\vdash& aabbCC &\vdash& aabbCc &\vdash& aabbcc\\}
+    \end{array}$
+  \end{exampleblock}
+\end{frame}
+
+\endgroup
+\endinput

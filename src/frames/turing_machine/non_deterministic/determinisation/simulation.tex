@@ -1,0 +1,195 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Simulation d'une MTND par une MTD}
+
+  \on[x=-35mm,y=18mm] {
+    \begin{tikzpicture}[turingMachine, draw=example, text=example, x=14mm]
+      \state[example ob=<{25-27}>, accepting]    (2) at (0,0) {$2$}; 
+      \state[example ob=<{3-15}>, initial below] (0) at (1,0) {$0$}; 
+      \state[example ob=<{16-24}>]               (1) at (2,0) {$1$}; 
+
+      \path (0) edge[bend left=5mm] node       {$\smTMtransR{a}{a}$} (1);
+      \path (1) edge[bend left=5mm] node       {$\smTMtransL{a}{a}$} (0);
+      \path (0) edge                node[swap] {$\smTMtransR{a}{a}$} (2);
+    \end{tikzpicture}
+  }
+  \on[x=-1mm, y=21mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm, example]
+      \cell{}
+      \cell{$a$} \smhead<3-15,25-27>
+      \cell{$a$} \smheadb<16-24>
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  \on[x=45mm, y=30mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \smsave{s} \node[anchor=east] at (s.west) {\textsc{h} :};
+      \cell[example ob=<{5-13,22-24}>]{\onlyb<5-13,22-24>{\cmark}} \smhead
+    \end{tikzpicture}
+  }
+  \on[x=35mm, y=21mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \smsave{s} \node[anchor=east] at (s.west) {\textsc{c} :};
+      \cell                                                                  {}                                               \smheadfromb<5,15>{1}
+      \cell[structure ob=<{3,12}>, alert ob=<{10}>]                          {\oneof{\on<3->{$0$}\on<16->{$a$}\on<25->{$a$}}} \smheadb<2,3,6,10,11,12,13,14> \smheadfromb<9>{3}
+      \cell[structure ob=<{4,12,21}>, example on=<1>, alert ob=<{19,23,25}>] {\oneof[$a$]       {\on<16->{$1$}\on<25->{$2$}}} \smhead<1,4,7,19->\smheadfromb<18>{2}
+      \cell[structure ob=<{21}>,example on=<1>]                              {\oneof[$a$]       {\on<16->{$a$}\on<25->{$a$}}}                    
+      \cell                                                                  {}                                               \smheadb<17>\smheadfromb<8>{-1}\smheadfromb<16>{-3}
+    \end{tikzpicture}
+  }
+  \on[x=-10mm, y=30mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \smsave{s} \node[anchor=east] at (s.west) {\textsc{f} :};
+      \cell{}                              \smheadfromb<14>{8}
+      \cell{\onlyb<6-15>{|}} \smhead<-5,15>
+      \cell{\onlyb<7-15>{a}} \smheadb<6>
+      \cell{\onlyb<8-15>{1}} \smheadb<7>
+      \cell{\onlyb<8-15>{a}} 
+      \cell{\onlyb<13-24>{|}} \smheadb<9-12>\smheadfromb<8>{-1}\smheadfromb<16>{-3}
+      \cell{\onlyb<13-24>{a}} 
+      \cell{\onlyb<13-24>{2}} 
+      \cell{\onlyb<13-24>{a}} 
+      \cell{\onlyb<22->{|}} \smheadb<18,19,20,21>\smheadfromb<13>{-4}\smheadfromb<17>{-4}
+      \cell{\onlyb<22->{0}} 
+      \cell{\onlyb<22->{a}} 
+      \cell{\onlyb<22->{a}} 
+      \cell{}              \smheadb<23-> \smheadfromb<22>{-4}
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  
+  \on[y=-13mm]{
+    \begin{tikzpicture}[turingMachine, x=14mm, y=13mm, state before/.append style={minimum height=0pt, minimum width=4mm}, font=\tiny]
+
+      \state[draw=structure, fill=white, alert ob=<1>, initial]    (i0) at (1,4) {}; 
+      \state[draw=structure, fill=white, alert ob=<2>]             (i1) at (2,4) {}; 
+      \state[draw=structure, fill=white, alert ob=<14>]            (r1) at (1,1) {}; 
+      \state[draw=structure, fill=white, alert ob=<15>]            (r2) at (1,2) {}; 
+      \state[draw=structure, fill=white, alert ob=<16>]            (r3) at (1,3) {}; 
+      \state[draw=structure, fill=white, alert ob=<17>]            (r4) at (2,3) {}; 
+      \state[draw=structure, fill=white, alert ob=<18>]            (r5) at (3,3) {}; 
+      \state[draw=structure, fill=white, alert ob=<27>, accepting] (f0) at (3,2) {}; 
+      \state[draw=example,   fill=white, alert ob=<{3,19,25}>]     (t0) at (3,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<4>]             (t1) at (4,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<5>]             (t2) at (5,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<6>]             (t3) at (6,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<7>]             (t4) at (7,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<8>]             (t5) at (8,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<{9,20}>]        (t6) at (9,4) {}; 
+      \state[draw=example,   fill=white, alert ob=<{10,21}>]       (u0) at (9,3) {}; 
+      \state[draw=example,   fill=white]                           (u1) at (8,3) {}; 
+      \state[draw=example,   fill=white]                           (u2) at (7,3) {}; 
+      \state[draw=example,   fill=white]                           (u3) at (6,3) {}; 
+      \state[draw=example,   fill=white]                           (u4) at (5,3) {}; 
+      \state[draw=example,   fill=white]                           (u5) at (5,2) {}; 
+      \state[draw=example,   fill=white]                           (u6) at (6,2) {}; 
+      \state[draw=example,   fill=white]                           (u7) at (7,2) {}; 
+      \state[draw=example,   fill=white]                           (u8) at (8,2) {}; 
+      \state[draw=example,   fill=white, alert ob=<{11,22}>]       (u9) at (9,2) {}; 
+      \state[draw=example,   fill=white, alert ob=<{12,23}>]       (v0) at (9,1) {}; 
+      \state[draw=example,   fill=white]                           (v1) at (8,1) {}; 
+      \state[draw=example,   fill=white]                           (v2) at (7,1) {}; 
+      \state[draw=example,   fill=white]                           (v3) at (6,1) {}; 
+      \state[draw=example,   fill=white]                           (v4) at (5,1) {}; 
+      \state[draw=example,   fill=white]                           (v5) at (4,1) {}; 
+      \state[draw=example,   fill=white, alert ob=<{13,24,26}>]    (v6) at (3,1) {}; 
+      
+      \node[black!60] at (4,2.5) {\scriptsize$\begin{array}{@{\forall~}r@{~\in~}l@{}}
+          q & Q\\
+          h & \{\blank, \cmark\}\\
+          x & \Gamma \setminus \{\blank\}\\
+          y & \Gamma \cup Q \setminus \{\blank\}\\
+          z & \Gamma \cup Q\\
+        \end{array}$};
+      
+      \path (v6) edge              node[swap]       {\smGroup{\smTMtransS[\textsc{c}]{2}{2}\smTMtransS[\textsc{h}]{\blank}{\blank}}}      (f0); 
+      \path (i0) edge              node[swap]       {\smTMtransL[\textsc{c}]{x}{x}}                                                       (i1);
+      \path (i1) edge              node[swap]       {\smTMtransS[\textsc{c}]{\blank}{0}}                                                  (t0);
+      \path (t0) edge[black!30, bend left=12pt]                                                                                           (t6);
+      \path (t1) edge[black!30, bend left=12pt]                                                                                           (t6);
+      \path (t0) edge             node[swap]        {\smTMtransR[\textsc{c}]{0}{0}}                                                       (t1);
+      \path (t1) edge             node[swap]        {\smGroup{\smTMtransL[\textsc{c}]{a}{a}\smTMtransL[\textsc{h}]{h}{\cmark}}}           (t2);
+      \path (t2) edge[loop above] node              {\smTMtransL[\textsc{c}]{y}{y}}                                                       (t2);     
+      \path (t2) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{|}\smTMtransR[\textsc{c}]{\blank}{\blank}}} (t3);
+      \path (t3) edge[loop above] node              {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (t3);
+      \path (t3) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{a}\smTMtransR[\textsc{c}]{0}{0}}}           (t4);
+      \path (t4) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{1}\smTMtransR[\textsc{c}]{a}{a}}}           (t5);
+      \path (t5) edge[loop above] node              {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (t5);
+      \path (t5) edge             node[swap]        {\smTMtransL[\textsc{c}]{\blank}{\blank}}                                             (t6);
+      \path (t6) edge[loop above] node              {\smTMtransL[\textsc{c}]{x}{x}}                                                       (t6);
+      \path (t6) edge             node[swap]        {\smTMtransS[\textsc{c}]{q}{q}}                                                       (u0);
+      \path (u0) edge[black!30, bend left]                                                                                                (u9);
+      \path (u1) edge[black!30]                                                                                                           (u9);
+      \path (u0) edge             node[swap]        {\smTMtransR[\textsc{c}]{1}{1}}                                                       (u1);
+      \path (u1) edge             node[swap]        {\smGroup{\smTMtransL[\textsc{c}]{a}{a}\smTMtransL[\textsc{h}]{h}{\cmark}}}           (u2);
+      \path (u2) edge[loop below] node              {\smTMtransL[\textsc{c}]{y}{y}}                                                       (u2);
+      \path (u2) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{|}\smTMtransR[\textsc{c}]{\blank}{\blank}}} (u3);
+      \path (u3) edge[loop below] node              {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (u3);
+      \path (u3) edge             node[swap]        {\smGroup{\smTMtransL[\textsc{f}]{\blank}{\blank}\smTMtransL[\textsc{c}]{1}{1}}}      (u4);
+      \path (u4) edge             node              {\smTMtransR[\textsc{f}]{x}{0}}                                                       (u5);
+      \path (u5) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (u6);
+      \path (u6) edge             node[swap]        {\smTMtransR[\textsc{c}]{1}{1}}                                                       (u7);
+      \path (u7) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{a}\smTMtransR[\textsc{c}]{a}{a}}}           (u8);
+      \path (u8) edge[loop above] node              {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (u8);
+      \path (u8) edge             node[swap]        {\smTMtransL[\textsc{c}]{\blank}{\blank}}                                             (u9);
+      \path (u9) edge[loop above] node              {\smTMtransL[\textsc{c}]{x}{x}}                                                       (u9);
+      \path (u9) edge             node[swap]        {\smTMtransS[\textsc{c}]{q}{q}}                                                       (v0);
+      \path (v0) edge[black!30, bend left=12pt]                                                                                           (v6);
+      \path (v1) edge[black!30, bend left=12pt]                                                                                           (v6);
+      \path (v0) edge             node[swap]        {\smTMtransR[\textsc{c}]{0}{0}}                                                       (v1);
+      \path (v1) edge             node[swap]        {\smGroup{\smTMtransL[\textsc{c}]{a}{a}\smTMtransL[\textsc{h}]{h}{\cmark}}}           (v2);
+      \path (v2) edge[loop below] node              {\smTMtransL[\textsc{c}]{y}{y}}                                                       (v2);
+      \path (v2) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{|}\smTMtransR[\textsc{c}]{\blank}{\blank}}} (v3);
+      \path (v3) edge[loop below] node              {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (v3);
+      \path (v3) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{a}\smTMtransR[\textsc{c}]{0}{0}}}           (v4);
+      \path (v4) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{\blank}{2}\smTMtransR[\textsc{c}]{a}{a}}}           (v5);
+      \path (v5) edge[loop below] node              {\smGroup{\smTMtransR[\textsc{f}]{\blank}{x}\smTMtransR[\textsc{c}]{x}{x}}}           (v5);
+      \path (v5) edge             node[swap]        {\smTMtransL[\textsc{c}]{\blank}{\blank}}                                             (v6);
+      \path (v6) edge[loop below] node              {\smTMtransL[\textsc{c}]{x}{x}}                                                       (v6);
+      \path (v6) edge             node[above]       {$\forall \langle q,h\rangle \neq \langle 2,\blank\rangle$}
+      node[below]       {\smGroup{\smTMtransS[\textsc{c}]{q}{q}\smTMtransS[\textsc{h}]{h}{\blank}\smTMtransL[\textsc{f}]{\blank}{\blank}}}(r1);
+      \path (r1) edge[loop below] node              {\smAlign{\smTMtransL[\textsc{f}]{y}{y}\smTMtransL[\textsc{f}]{|}{|}}}                (r1); 
+      \path (r1) edge             node[swap]        {\smTMtransR[\textsc{f}]{\blank}{\blank}}                                             (r2);
+      \path (r2) edge[loop right] node              {\smTMtransL[\textsc{c}]{y}{y}}                                                       (r2);
+      \path (r2) edge             node[swap]        {\smGroup{\smTMtransR[\textsc{f}]{|}{\blank}\smTMtransR[\textsc{c}]{\blank}{\blank}}} (r3);
+      \path (r3) edge[loop above] node              {\smGroup{\smTMtransR[\textsc{f}]{y}{\blank}\smTMtransR[\textsc{c}]{z}{y}}}           (r3);
+      \path (r3) edge             node[swap]        {\smTMtransL[\textsc{c}]{z}{\blank}}                                                  (r4); 
+      \path (r4) edge[loop above] node              {\smAlign{\smTMtransR[\textsc{f}]{y}{y}\smTMtransR[\textsc{f}]{|}{|}}}                (r4); 
+      \path (r4) edge             node[swap]        {\smTMtransS[\textsc{f}]{\blank}{\blank}}                                             (r5);
+      \path (r5) edge[loop below] node              {\smTMtransL[\textsc{c}]{x}{x}}                                                       (r5); 
+      \path (r5) edge             node[swap]        {\smTMtransS[\textsc{c}]{q}{q}}                                                       (t0); 
+
+      \begin{scope}[background]
+        \fill[alert!15]     (t6.west)  -- (t6.east)  -- (u0.east)  -- (u0.west);
+        \fill[alert!15]     (u9.west)  -- (u9.east)  -- (v0.east)  -- (v0.west);
+        \fill[alert!15]     (v6.south) -- (v6.north) -- (r1.north) -- (r1.south);
+        \fill[alert!15]     (v6.east)  -- (v6.west)  -- (f0.west)  -- (f0.east);
+        \fill[alert!15]     (t0.west)  -- (t0.east)  -- (r5.east)  -- (r5.west);
+        \fill[structure!15] (i0.south) -- (i0.north) -- (t0.north) -- (t0.south);
+        \fill[structure!15] (r1.west)  -- (r3.west) -- (r3.north) -- (r5.north) -- (r5.south east) -- (r1.south east);
+        \fill[example!10]   (t0.south) -- (t0.north) -- (t6.north) -- (t6.south);
+        \fill[example!10]   (u0.north) -- (u4.north) -- (u4.west)  -- (u5.west) -- (u5.south) -- (u9.south) -- (u9.east) -- (u0.east);
+        \fill[example!10]   (v0.south) -- (v0.north) -- (v6.north) -- (v6.south);
+      \end{scope}
+
+      \node[structure] at (1.5,4.25) {initialisation}; 
+      \node[structure] at (1.5,3.25) {reinitialisation}; 
+      \node[example] at (8.6,2.85) {$1 \xrightarrow{\smTMtransL{a}{a}} 0$}; 
+      \node[example] at (3.5,4.3) {$0 \xrightarrow{\smTMtransR{a}{a}} 1$}; 
+      \node[example] at (8.5,0.75) {$0 \xrightarrow{\smTMtransR{a}{a}} 2$}; 
+
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

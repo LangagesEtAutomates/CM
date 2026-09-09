@@ -1,0 +1,146 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{IsPow}{isPow2}
+\SetKwFunction{AlgoSearchPerfect}{search\_perfect}
+
+\begin{frame}{Signification de l'indécidabilité}
+
+  \onBlock[top=-3mm]{Ce que l'indécidabilité signifie :}{
+    \begin{itemize}
+    \item Aucun \alert{algorithme général} ne décide \textsc{Universal} \alert{pour tous les $\langle P, u \rangle$} 
+    \item En pratique, il y a bien des programmes difficiles à analyser 
+    \end{itemize}
+  }
+
+  \onBlock[bottom]{Solutions possibles :}{
+    \begin{itemize}
+    \item Restreindre le problème à une sous-classe.
+      \begin{itemize}
+      \item boucles \KWStyle{pour} avec borne explicite
+      \item langages de types 1, 2 ou 3
+      \end{itemize}
+    \item Utiliser des approximations et des heuristiques
+      \begin{itemize}
+      \item Trois réponses : ``oui'', ``non'' et ``je ne sais pas''
+      \item Deux réponses : ``oui'', ``attention''
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \on[y=2mm]{
+    \begin{tikzpicture}
+      \begin{scope}
+        \clip (0,0) ellipse (2cm and 1cm);
+
+        \begin{scope}
+          \clip (-2,0) rectangle (2,1);
+          \fill[structure!20] (-2,0) rectangle (2,1);
+          \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(1cm)=(structure!20)}
+          \shade[shading=alertToStructure] (2,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        \begin{scope}
+          \clip (-2,0) rectangle (2,-1);
+          \fill[example!20] (-2,0) rectangle (2,-1);
+          \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(1cm)=(example!20)}
+          \shade[shading=alertToExample] (2,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+
+        \draw[black!40,thick] (0,0) ellipse (2cm and 1cm);
+        \draw[black!40] (-2,0) -- (2,0);
+        \footnotesize
+        \node[align=center, structure] at (0, .6) {instances \\positives};
+        \node[align=center, example]   at (0,-.6) {instances \\négatives};
+        \node[align=center, alert]     at (1.15,-.03) {instances \\difficiles};
+
+        \node[alert]     at (1.85,0)  {$\bullet$};
+        \node[structure] at (-1.5, .5)  {$\bullet$};
+        \node[example]   at (-1.5,-.5) {$\bullet$};
+        \node[structure] at (1.1, .7)  {$\bullet$};
+        \node[example]   at (1.1,-.7) {$\bullet$};
+      \end{scope}
+      \small
+      \node[alert, right]     at ( 2.0,  0)      {$\langle \AlgoSearchPerfect, 3 \rangle$};
+      \node[structure, left]  at (-1.8, .5) {$\langle \IsPow, 8 \rangle$};
+      \node[example, left]    at (-1.8,-.5) {$\langle \IsPow,12 \rangle$};
+      \node[structure, right] at ( 1.6, .7) {$\langle \AlgoSearchPerfect, 2 \rangle$};
+      \node[example, right]   at ( 1.6,-.7) {$\langle \IsPow, 0 \rangle$};
+    \end{tikzpicture}
+  }
+
+  \on[x=40mm, y=-20mm]{
+    \begin{tikzpicture}[x=7mm, y=7mm]
+      \begin{scope}
+        \clip (0,0) ellipse (14mm and 7mm);
+
+        \begin{scope}
+          \clip (-2,0) rectangle (2,1);
+          \fill[structure!20] (-2,0) rectangle (2,1);
+          \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(10mm)=(structure!20)}
+          \shade[shading=alertToStructure] (2,0) ellipse (1.75cm and .5cm);
+        \end{scope}
+        \begin{scope}
+          \clip (-2,0) rectangle (2,-1);
+          \fill[example!20] (-2,0) rectangle (2,-1);
+          \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(10mm)=(example!20)}
+          \shade[shading=alertToExample] (2,0) ellipse (1.75cm and .5cm);
+        \end{scope}
+        \begin{scope}
+          \clip (-7mm,0) circle (5mm);
+          \fill[structure!40] (-2,0) rectangle (2,1);
+        \end{scope}
+        \begin{scope}
+          \clip (-7mm,0) circle (5mm);
+          \fill[example!40] (-2,0) rectangle (2,-1);
+        \end{scope}
+
+        \draw[black!40,thick] (0,0) ellipse (14mm and 7mm);
+        \draw[black!40] (-2,0) -- (2,0);
+        \draw[black!40,thick] (-7mm,0) circle (5mm);
+        
+
+        
+        \footnotesize
+        \node[structure] at (0, .6) {\textsc{pos}};
+        \node[example]   at (0,-.6) {\textsc{neg}};
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+  \on[x=40mm, y=-35mm]{
+    \begin{tikzpicture}[x=7mm, y=7mm]
+      \begin{scope}
+        \clip (0,0) ellipse (14mm and 7mm);
+
+        \begin{scope}
+          \clip (-2,0) rectangle (2,1);
+          \fill[structure!20] (-2,0) rectangle (2,1);
+        \end{scope}
+        \begin{scope}
+          \clip (-2,0) rectangle (2,-1);
+          \fill[example!20] (-2,0) rectangle (2,-1);
+        \end{scope}
+          \fill[alert!20] (0,0) -- (2,1) -- (2,-1);
+          \draw[black!40] (0,0) -- (2,1);
+          \draw[black!40] (0,0) -- (2,-1);
+
+        \draw[black!40,thick] (0,0) ellipse (14mm and 7mm);
+        \draw[black!40] (-2,0) -- (0,0);
+        
+        \footnotesize
+        \node[structure] at (0, .6) {\textsc{pos}};
+        \node[example]   at (0,-.6) {\textsc{neg}};
+        \node[alert]     at (1,0)   {?};
+      \end{scope}
+    \end{tikzpicture}
+  }  
+
+\end{frame}
+
+\endgroup

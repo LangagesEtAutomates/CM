@@ -1,0 +1,148 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{SubsetSum}{subset\_sum}
+\newcommand\somme{\textsc{s}}
+\newcommand\E{\textsc{e}}
+\newcommand\separator{\bullet}
+
+\tikzset{thebrace/.style={decorate, decoration={brace, amplitude=5pt, raise=0pt, mirror}},}
+
+\begin{frame}{Exemple pour $\{4, 3, -4\}$}
+  
+  \on[left=.5\textwidth, top] {
+    \begin{algorithm}[H]
+      \Fun{$\SubsetSum(\E \in \mathbb{Z}[])$}{
+        $\somme \leftarrow 0$;\\
+        \For{$x \in \E$}{
+          \If{choix nondéterministe}{
+            $\somme \leftarrow \somme + x$;
+          }
+        }
+        \Return $\somme = 0$;
+      }
+    \end{algorithm}
+  }
+
+  \on[x=-30mm, y=-5mm] {
+    \begin{tikzpicture}[tree, x=5mm, y=7mm]
+      \tree{\alert{\example<1>{$4$}}}{
+        \tree[edge={structure ob=<2->}, node={structure ob=<2->}]{$3$}{
+          \tree{$-4$}{
+            \tree{\xmark}{}
+            \tree{\xmark}{}
+          }
+          \tree[edge={structure ob=<2->}, node={structure ob=<2->}]{$-4$}{
+            \tree{\xmark}{}
+            \tree[edge={structure ob=<2->}]{\xmark}{}
+          }
+        }
+        \tree[edge={example}, node={example}]{$3$}{
+          \tree[edge={example}, node={example}]{$-4$}{
+            \tree{\xmark}{}
+            \tree[edge={example}]{\cmark}{}
+          }
+          \tree{$-4$}{
+            \tree{\xmark}{}
+            \tree{\xmark}{}
+          }
+        }
+      }
+    \end{tikzpicture}
+  }
+
+  \on<2->[x=25mm, y=10mm] {
+    \begin{tikzpicture}[turingMachine, x=10mm, y=22mm]
+      \state[alert ob=<2>,                                  initial] (0) at (1,0) {\faMapMarker}; 
+      \state[alert ob=<{3,5,7,9}>, structure ob=<4>, example ob=<6>] (1) at (2,1) {\faRandom}; 
+      \state[example ob=<10>,                             accepting] (2) at (3,0) {\faCheck}; 
+      \state[structure ob=<6>, example ob=<4>                      ] (3) at (0,1) {+}; 
+      \state[alert ob=<8>                                          ] (4) at (4,1) {-}; 
+      
+      \path                                       (0) edge                  node[left]  {\smTMtransS[\somme]{\blank}{\text{\tiny\faMapMarker}}} (1);
+      \path                                       (1) edge                  node[right] {\smGroup{\smTMtransL[\E]{\text{\blank}}{\blank}\smTMtransS[\somme]{\text{\tiny\faMapMarker}}{\blank}}} (2);
+      \path[example ob=<3>, structure ob=<5>]     (1) edge                  node        {\smTMtransR[\E]{+}{+}} (3);
+      \path                                       (1) edge                  node[swap]  {\smTMtransR[\E]{-}{-}} (4);
+      \path                                       (3) edge[bend left =15pt] node        {\smTMtransR[\E]{\separator}{\separator}} (1);
+      \path                                       (4) edge[bend right=15pt] node[swap]  {\smTMtransR[\E]{\separator}{\separator}} (1);
+      \path[structure ob=<3-4>, example ob=<5-6>] (1) edge[loop above]      node        {\smTMtransR[\E]{x}{x}} (1);
+      \path[example ob=<4>, structure ob=<6>]     (3) edge[loop above]      node        {\smGroup{\smTMtransR[\E]{1}{1}\smTMtransR[\somme]{x}{x}}} (3);
+      \path                                       (4) edge[loop above]      node        {\smGroup{\smTMtransR[\E]{1}{1}\smTMtransL[\somme]{x}{x}}} (4);
+
+      \node[structure] at (2,1.6) {$\forall x \in \Gamma$};
+    \end{tikzpicture}
+  }
+  
+  \on[y=-27mm] {
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\E:};
+      \cell{}
+      \cell[alert on=<3>]{+} \smheadb<2-3>        \smsave{AD}
+      \cell{1}               
+      \cell{1}               
+      \cell{1}               
+      \cell{1}                                    \smsave{AF}
+      \cell{$\separator$}    \smheadfromb<4>{-4}
+      \cell[alert ob=<5>]{+} \smheadb<5>          \smsave{BD}
+      \cell{1}               
+      \cell{1}               
+      \cell{1}                                    \smsave{BF}
+      \cell{$\separator$}    \smheadfromb<6>{-3}
+      \cell[alert ob=<7>]{-} \smheadb<7>          \smsave{CD}
+      \cell{1}               
+      \cell{1}               
+      \cell{1}               
+      \cell{1}                                    \smsave{CF}
+      \cell{$\separator$}   \smheadfromb<8>{-4}   \smheadb<10>[example]
+      \cell{}               \smheadb<9>
+
+      \uncover<1>{
+        \path (AD.south west) edge[thebrace] node[yshift=-4mm]{$4$}  (AF.south east);
+        \path (BD.south west) edge[thebrace] node[yshift=-4mm]{$3$}  (BF.south east);
+        \path (CD.south west) edge[thebrace] node[yshift=-4mm]{$-4$} (CF.south east);
+      }
+    \end{tikzpicture}
+  }
+
+  \on<1>[text,y=-38mm] {
+    \begin{itemize}
+    \item Encodage de $E$ comme une concaténation de valeurs suivies de $\bullet$
+    \item Encodage des valeurs en unaire
+    \end{itemize}
+  }
+
+  
+  \ob<2->[y=-38mm] {
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\somme:};
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}                        \smheadfrom[ob=<8>, structure]{4} \smhead[ob=<9>, structure]
+      \cell{\only<3->{\faMapMarker}} \smhead[on=<-3>] \smhead[ob=<4-5>, structure]\smheadfrom[ob=<8>, example]{4}\smhead[ob=<9->, example]
+      \cell{}
+      \cell{}
+      \cell{}                        \smheadfrom[ob=<6>, structure]{-3}\smhead[ob=<7>, structure]
+      \cell{}                        \smheadfrom[ob=<4>, example]{-4}\smhead[ob=<5-7>, example]
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+      \cell{}
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

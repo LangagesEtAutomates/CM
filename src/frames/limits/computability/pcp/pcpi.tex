@@ -1,0 +1,78 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Problème de Correspondance de Post Initialisé}
+
+  \on[text, top=-2mm]{
+    Soit $\Sigma$ un alphabet contenant au moins deux symboles. 
+  }
+
+  \onExampleBlock[bottom=4mm] {Exemples -- Les instances suivantes sont-elles positives ?} {\footnotesize
+    \vspace{-2mm}
+    \begin{itemize}
+    \item $\left\langle\, \left\{
+      \VDomino{a}{ab}, 
+      \VDomino{baba}{a}, 
+      \VDomino{bb}{ba}
+      \right\}, \VDomino{bb}{ba} \,\right\rangle \uncover<2->{\quad\alert{\in\textsc{neg}(\textsc{pcpi})}}$
+    \item $\left\langle\, \left\{
+      \VDomino{a}{ab}, 
+      \VDomino{baba}{a}, 
+      \VDomino{bb}{ba}
+      \right\}, \VDomino{a}{ab} \,\right\rangle
+      \uncover<3->{
+        \quad\example{\in\textsc{pos}(\textsc{pcpi})}
+        \quad \text{solution : }
+        \VDomino{a}{ab}\, 
+        \VDomino{bb}{ba}\,
+        \VDomino{a}{ab}\,
+        \VDomino{a}{ab}\,
+        \VDomino{baba}{a}
+      }$
+    \end{itemize}
+  }
+  
+  \on[text, top=0mm, width=1.15\textwidth]{
+    \Probleme{pcpi}{
+      \begin{itemize}
+      \item Un ensemble fini de \structure{sortes de dominos} {\small $D \in \mathscr{P}(\Sigma^+ \times \Sigma^+)$}
+        \begin{itemize}
+        \item Dominos de la forme \VDomino{$\alpha$}{$\beta$}, avec $\alpha$ et $\beta$ des mots sur $\Sigma$
+        \end{itemize}
+      \item Un \structure{domino initial} $d_0 = \VDomino{\gamma}{\delta} \in D$
+      \end{itemize}
+    }{
+      Existe-t-il un mot\footnote[frame]{On peut utiliser chaque domino autant de fois qu'on veut}
+      $\VDomino{\alpha_1}{\beta_1} \,\cdots\, \VDomino{\alpha_k}{\beta_k} \in D^+$ tel que :
+
+      \vspace{1mm}
+      \begin{minipage}{.3\textwidth}
+        \begin{itemize}
+        \item $\VDomino{\alpha_1}{\beta_1} = \VDomino{\gamma}{\delta}$
+        \end{itemize}
+      \end{minipage}%
+      \begin{minipage}{.3\textwidth}
+        \begin{itemize}
+        \item $\structure{\alpha_{1} \cdots \alpha_{k}} = \example{\beta_{1} \cdots \beta_{k}}$
+        \end{itemize}
+      \end{minipage}
+    }
+  }
+
+  \onImage[y=-2mm, x=40mm]{%
+    width=1.8cm,
+    title={Emil Post},
+    licenselogo={\ccPublicDomain},
+    license={Domaine public (\href{https://commons.wikimedia.org/wiki/File:Emil_Leon_Post.jpg}{Wikimedia})},
+    img={Post.jpg}
+  }
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automates déterministes et complets}
+
+  Soit $A = \langle \Sigma, Q, q_0, F, \rightarrow \rangle$ un AFN.
+  
+  \begin{block}{Définition -- Automate fini déterministe (AFD)}
+    On dit que $A$ est \structure{déterministe} si toutes les conditions sont vérifiées
+    \begin{description}[relation fonctionnelle :]
+    \item[$\varepsilon$-liberté :] $A$ ne possède pas d'$\varepsilon$-transition
+
+      \vspace{-2mm}
+      $$\alert{\rightarrow\, \subseteq Q \times \Sigma \times Q}$$
+
+    \item[relation fonctionnelle :] pour chaque état $q$ et chaque symbole $a$, il existe \alert{au plus} une transition sortant de $q$ étiquetée $a$
+
+      \vspace{-2mm}
+      $$\alert{\forall q, q_1, q_2\in Q,  \forall a\in \Sigma, \left(\structure{q\xrightarrow{a} q_1} \land \structure{q\xrightarrow{a} q_2}\right) \structure{\Rightarrow q_1 = q_2}}$$
+    \end{description}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- Automate fini complet}
+    On dit que $A$ est \structure{complet} si la condition suivante est vérifiée
+    \begin{description}[relation fonctionnelle :]
+    \item[relation totale :] pour chaque état $q$ et chaque symbole $a$, il existe \alert{au moins} une transition sortant de $q$ étiquetée $a$
+
+      \vspace{-2mm}
+      $$\alert{\forall q\in Q,  \forall a\in \Sigma, \structure{\exists q' \in Q,~q \xrightarrow{a} q'}}$$
+    \end{description}
+  \end{block}
+  
+\end{frame}
+
+\endgroup
+\endinput

@@ -1,0 +1,34 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Lien entre grammaires algébriques et contextuelles}
+
+  \begin{block}{Remarque -- Non-inclusion des grammaires}
+    Il existe des grammaires algébriques qui ne sont pas contextuelles. \\
+    \example{Contre-exemple} : $\left\langle \{a\}, \{S, A\}, S, \left\{\begin{array}{rcl} S &\rightarrow & aA \\ A &\rightarrow & b\alert{S} \,|\, \alert{\varepsilon} \end{array}\right\} \right\rangle$.
+    \begin{itemize}
+    \item Grammaire algébrique : le membre gauche des règles est $S$ ou $A$
+    \item Grammaire non contextuelle à cause de la règle $A \rightarrow \varepsilon$
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Théorème -- Inclusion des langages}
+    Tout langage algébrique est contextuel.
+  \end{block}
+  
+  \begin{block}{Remarque}
+    \begin{itemize}
+    \item Une règle $g \cdot A \cdot d \rightarrow g \cdot \alpha \cdot d$ peut être interprétée comme :\\ \og \structure{$A \rightarrow \alpha$, sous la restriction d'un contexte gauche et/ou droit} \fg
+    \item Les grammaires algébriques sont souvent appelées \structure{hors contexte} (\textit{context-free}), car $g = d = \varepsilon$ pour toute règle
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

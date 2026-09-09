@@ -1,0 +1,103 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Decide}{decider}
+\SetKwData{Mot}{u}
+\SetKwData{VuA}{vuA}
+\SetKwData{VuB}{vuB}
+
+\begin{frame}{Exemple d'algorithme d'analyse lexicale}
+  
+  \on[text,y=1.5]{
+    \begin{algorithm}[H]
+      \Fun{\Decide(\Mot : mot) : booléen}{
+        $\Alertb<2>{\alert<2->\VuA}   \leftarrow \Alertb<3>{\False}$,
+        $\Exampleb<2>{\example<2->\VuB} \leftarrow \Alertb<3>{\False}$\;
+        \For{$i$ \From $1$ \To $|\Mot|$}{
+          \uIf{\Structureb<4-5>{$\Mot[i] = \text{`a'} \land \lnot \VuB$}}{
+            \Alertb<4>{$\VuA \leftarrow \True$}\;
+          }\uElseIf{\Structureb<6-8>{$\Mot[i]=\text{`b'} \land \VuA$}}{
+            \Alertb<6>{$\VuB \leftarrow \True$}\;
+          }\lElse{\Return \False}
+        }
+        \Return \Alertb<9>{$\VuA \land \VuB$}\;
+      }
+    \end{algorithm}
+  }
+
+  \onBlock[text,y=-2.3]{Représentation graphique}{
+    \begin{tikzpicture}[automaton, x=20mm, y=10mm]
+      \uncover<2->{
+        \state            (q) at (0,2)    {$q$}; 
+        \node[right]          at (q.east) {\normalsize état de l'algorithme};
+      }
+      \uncover<3->{
+        \state[initial]   (i) at (0,1)    {}; 
+        \node[right]          at (i.east) {\normalsize initial};
+      }
+      \uncover<4->{
+        \state            (s) at (0,0)    {}; 
+        \state            (e) at (1,0)    {}; 
+        \node[right]          at (e.east) {\normalsize transition}; 
+        \path             (s) edge node{a} (e);
+      }
+      \uncover<9->{
+        \state[accepting] (f) at (1,1)    {}; 
+        \node[right]          at (f.east) {\normalsize final}; 
+      }
+    \end{tikzpicture}
+  }
+  
+  \onBlock[right=4cm, y=3] {Expression rationnelle} {
+    \vspace{-4mm}
+    \[\textstyle a^+ b^+ \]
+  }
+  
+  \onBlock<2>[right=4cm,y=2,anchor=north]{Variables}{
+    \begin{itemize}
+    \item \alert{\VuA} : a-t-on vu un $a$ ?
+    \item \example{\VuB} : a-t-on vu un $b$ ?
+    \end{itemize}
+  }
+ 
+  \obBlock<3->[right=4cm,y=2,anchor=north]{Exemple d'exécution}{
+    \centering
+    \begin{tikzpicture}[grid, x=5mm, y=5mm]
+      \cell[open]  { }   \smhead[ob=<3>] 
+      \cell        {a}   \smhead[ob=<4>] \smsave{start}
+      \cell        {a}   \smhead[ob=<5>] 
+      \cell        {b}   \smhead[ob=<6>] 
+      \cell        {b}   \smhead[ob=<7>] 
+      \cell        {b}   \smhead[ob=<8>] 
+      \cell[open]  { }   \smhead[ob=<9>] 
+      \node[anchor=east] at ([xshift=-1mm]start.west) {\Mot :};
+    \end{tikzpicture}
+    \uncover<9>{\alert{Mot reconnu}}
+  }
+ 
+  \on<2->[x=35mm, y=-23mm]{
+    \begin{tikzpicture}[automaton]
+      \useasboundingbox (-1,-1) rectangle (2,2);
+      
+      \state[alert ob=<3>,   structure ob=<4>, initial on=<3-> ] (00) at (0,1) {\alert{0}\example{0}}; 
+      \state[alert ob=<4-5>, structure ob=<6>                  ] (10) at (1,1) {\alert{1}\example{0}}; 
+      \state[alert ob=<6->, accepting on=<9>                   ] (11) at (1,0) {\alert{1}\example{1}};
+      \state[                                                  ] (01) at (0,0) {\alert{0}\example{1}};
+
+      \path<4->[structure ob=<4>]   (00) edge             node {$a$} (10);
+      \path<5->[structure ob=<5>]   (10) edge[loop above] node {$a$} (10); 
+      \path<6->[structure ob=<6>]   (10) edge             node {$b$} (11); 
+      \path<7->[structure ob=<7-8>] (11) edge[loop right] node {$b$} (11); 
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

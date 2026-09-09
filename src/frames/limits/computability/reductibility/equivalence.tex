@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Équivalence en calculabilité}
+
+  \vspace{-2mm}
+  \begin{block}{Propriété -- $\leq_m$ n'est pas une relation d'ordre ni d'équivalence}
+    \begin{itemize}
+    \item $\leq_m$ n'est pas antisymétrique. 
+      \begin{itemize}
+      \item Par exemple, on a \example{$\textsc{Halt} \leq_m \textsc{Halt-}\varepsilon$} et \example{$\textsc{Halt-}\varepsilon \leq_m \textsc{Halt}$}
+      \end{itemize}
+    \item $\leq_m$ n'est pas symétrique. 
+      \begin{itemize}
+      \item Par exemple, \example{$\mathcal{L}(a^\star b^\star) \leq_m \textsc{Universal}$}, mais \example{$\textsc{Universal} \not\leq_m \mathcal{L}(a^\star b^\star)$}
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- Degrés de calculabilité}
+    Soient $A, B \in \textsc{lang}$ deux problèmes de décision.
+    
+    On dit que \structure{$A$ est équivalent à $B$}, noté \alert{$A \equiv_m B$} si :
+    $$\alert{A \leq_m B \quad \text{et} \quad B \leq_m A}$$
+  \end{block}
+
+  \begin{itemize}
+    \item \vspace{-2mm} $\equiv_m$ est une \structure{relation d'équivalence} sur $\textsc{lang}$.
+    \item Les \structure{classes d'équivalence} sont appelées des \alert{degrés de calculabilité}
+    \item $\leq_m$ décrit une \structure{relation d'ordre} sur les degrés de calculabilité
+  \end{itemize}
+
+  \vspace{2mm}
+  \structure{Intuition :} si $A \equiv_m B$, alors $A$ et $B$ ont \og \emph{la même difficulté} \fg
+
+  \vspace{2mm}
+  \example{Exemple :} 
+  $\textsc{Universal} \equiv_m \textsc{Entscheidungsproblem}\equiv_m  \textsc{Halt} \equiv_m \textsc{pcp}$. 
+
+\end{frame}
+
+\endgroup

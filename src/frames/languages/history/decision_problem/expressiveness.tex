@@ -1,0 +1,47 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\PROBLEM{\textsc{problem}}
+
+\begin{frame}{Expressivité des formalismes}
+
+  On veut un formalisme $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ où tout langage est représentable :
+
+  \vspace{-2mm}
+  $$\alert{\forall \PROBLEM \in \textsc{lang},~ \exists u \in \mathcal{L},~ \PROBLEM = \llbracket u \rrbracket}$$
+  
+  \begin{block}{Théorème -- Corollaire du théorème de Cantor}
+    Il n'existe pas de formalisme $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$
+    où $\llbracket \cdot \rrbracket$ est surjective sur \textsc{lang}.
+  \end{block}
+
+  \vspace{-1mm}
+  \begin{alertblock}{Démonstration}
+    \begin{itemize}
+    \item Supposons (par contradiction) qu'il existe un tel $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$.
+    \item Posons $E = \{ x \in \mathcal{L} \mid x \notin \llbracket x \rrbracket\}$.
+    \item Par surjectivité, il existe $y \in \mathcal{L}$ tel que $E = \llbracket y \rrbracket$.
+    \item A-t-on $y \in \llbracket y \rrbracket$ ?
+    \end{itemize}
+  \end{alertblock}
+
+  \vspace{-1mm}
+  \begin{block}{Remarques}
+    C'est encore le paradoxe du barbier, avec :
+    \begin{itemize}
+    \item La relation $x \bowtie y \eqdef x \in \llbracket y \rrbracket$ joue le rôle de ``est rasé par''.
+    \item $y$ joue le rôle du barbier.
+    \end{itemize}
+    $\mathcal{L}$ est \structure{dénombrable} et $\textsc{lang}$ est \structure{indénombrable}.
+  \end{block}
+  
+\end{frame}
+
+\endgroup
+\endinput

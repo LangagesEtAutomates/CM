@@ -1,0 +1,126 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Limite des langages rationnels et algébriques}
+  \small
+
+  \onAlertBlock[top=-5mm, left=.5\textwidth]{Lemme -- Lemme de l'étoile}{
+    \vspace{-3mm}
+    $$
+    \begin{array}{l}
+      \forall \Sigma, \forall L\in \textsc{rat}_{\Sigma}, \exists N\in \mathbb{N},\\
+      \forall u\in L,|u| \ge N \Rightarrow\\
+      \exists x, y, z\in \Sigma^\star,\\
+      \begin{array}{rl}
+        &u = x\cdot y \cdot z \\
+        \land& y\neq \varepsilon \\
+        \land& |xy| \le N\\
+        \land& \forall i \in \mathbb{N}, x\cdot y^i \cdot z \in L
+      \end{array}
+    \end{array}
+    $$
+  }
+
+  \onAlertBlock[top=-5mm, right=.5\textwidth]{Lemme -- Lemme de pompage}{
+    \vspace{-6mm}
+    $$
+    \begin{array}{l}
+      \forall \Sigma, \forall L\in \textsc{alg}_{\Sigma}, \exists N\in \mathbb{N},\\
+      \forall u\in L,|u| \ge N \Rightarrow\\
+      \exists v, w, x, y, z\in \Sigma^\star\\
+      \begin{array}{rl}
+        &u = v \cdot w \cdot x\cdot y \cdot z \\
+        \land& wy\neq \varepsilon \\
+        \land& |wxy| \le N\\
+        \land& \forall i \in \mathbb{N}, v \cdot w^i \cdot x\cdot y^i \cdot z \in L
+      \end{array}
+    \end{array}
+    $$
+  }
+
+  \onBlock[y=-9mm, left=.5\textwidth]{Démonstration}{
+    Pour un \emph{grand} mot, on a $T \vdash^\star T y $
+
+    \vspace{-2mm}
+    \begin{center}
+    \begin{tikzpicture}[x=3mm, y=7mm]
+      \fill[structure!20] (0,3) -- (0,0) -- (6,0);
+      \fill[alert!20]     (0,2) -- (0,0) -- (4,0);
+      \fill[structure!20] (0,1) -- (0,0) -- (2,0);
+
+      \node (S)  at (0,3) {$S$};
+      \node (T1) at (0,2) {$T$};
+      \node (T2) at (0,1) {$T$};
+
+      \node (x) at ($(1,0)+(-2mm,2mm)$) {$x$};
+      \node (y) at ($(3,0)+(-2mm,2mm)$) {$y$};
+      \node (z) at ($(5,0)+(-2mm,2mm)$) {$z$};
+ 
+      \draw[dashed] (S)  -- (6,0);
+      \draw[dashed] (S)  -- (T1);
+      \draw[dashed] (T1) -- (4,0);
+      \draw[dashed] (T1) -- (T2);
+      \draw[dashed] (T2) -- (2,0);
+      \draw[dashed] (T2) -- (0,0);
+    \end{tikzpicture}
+    \end{center}
+  }
+  
+  \onBlock[y=-9mm, right=.5\textwidth]{Démonstration}{
+    Pour un \emph{grand} mot, on a $T \vdash^\star w T y $
+
+    \vspace{-2mm}
+    \begin{center}
+    \begin{tikzpicture}[x=3mm, y=7mm]
+      \fill[structure!20] (-6,0) -- (0,3) -- (6,0);
+      \fill[alert!20]     (-4,0) -- (0,2) -- (4,0);
+      \fill[structure!20] (-2,0) -- (0,1) -- (2,0);
+
+      \node (S)  at (0,3) {$S$};
+      \node (T1) at (0,2) {$T$};
+      \node (T2) at (0,1) {$T$};
+
+      \node (v) at ($(-5,0)+(2mm,2mm)$) {$v$};
+      \node (w) at ($(-3,0)+(2mm,2mm)$) {$w$};
+      \node (x) at ($(0,0)+(-0mm,2mm)$) {$x$};
+      \node (y) at ($(3,0)+(-2mm,2mm)$) {$y$};
+      \node (z) at ($(5,0)+(-2mm,2mm)$) {$z$};
+ 
+      \draw[dashed] (S)  -- (-6,0);
+      \draw[dashed] (S)  -- (T1);
+      \draw[dashed] (S)  -- (6,0);
+      \draw[dashed] (T1) -- (-4,0);
+      \draw[dashed] (T1) -- (T2);
+      \draw[dashed] (T1) -- (4,0);
+      \draw[dashed] (T2) -- (-2,0);
+      \draw[dashed] (T2) -- (2,0);
+    \end{tikzpicture}
+    \end{center}
+  }
+  
+  \onExampleBlock[bottom=4mm, left=.5\textwidth]{Illustration}{
+    \vspace{-1mm}
+    \begin{itemize}
+    \item Montrer que $\{a^n b^n \mid n\in \mathbb{N}\} \notin \textsc{rat}$.
+    \end{itemize}
+  }
+ 
+  \onExampleBlock[bottom=4mm, right=.5\textwidth]{Illustration}{
+    \vspace{-1mm}
+    \begin{itemize}
+    \item Montrer que $\{a^n b^n c^n \mid n\in \mathbb{N}\} \notin \textsc{alg}$.
+    \end{itemize}
+  }
+
+  \footnoteref{M. O. Rabin, D. Scott. \textit{Finite automata and their decision problems.} (1959)}
+  \footnoteref{Y. Bar-Hillel, M. Perles, E. Shamir. \textit{On formal properties of simple phrase structure grammars.} (1961)}
+\end{frame}
+
+\endgroup
+\endinput

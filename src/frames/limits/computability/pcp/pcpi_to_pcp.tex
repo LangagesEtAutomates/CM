@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\sep{\,\mathord{\circ}\,}
+
+\begin{frame}{Indécidabilité de PCP}
+
+  \vspace{-2mm}
+  \begin{block}{Théorème}
+    Le problème de correspondance de Post (\textsc{pcp}) est indécidable. 
+  \end{block}
+
+  \vspace{1mm}
+  \begin{block}{Démonstration}
+    \begin{itemize}
+    \item On propose la réduction $\varphi$ de $\textsc{pcpi}$ sur $\Sigma$ vers $\textsc{pcp}$ sur $\Sigma\cup \{\circ\}$ :
+    \end{itemize}
+    \vspace{2mm}
+
+    $$
+    \varphi : \left\{\begin{array}{r@{~~}c@{~~}l}
+    \mathcal{I}(\textsc{pcpi})
+    &\rightarrow&
+    \mathcal{I}(\textsc{pcp})
+    %
+    \vspace{2mm}\\
+    %
+    \left\langle\, D, \VDomino[1.3]{\gamma_1\ldots \gamma_{|\gamma|}}{\delta_1\ldots \delta_{|\delta|}} \,\right\rangle
+    &\mapsto&
+    \left\{\,
+    \VDomino[2.2]{\sep \alpha_1 \sep \ldots \sep \alpha_{|\alpha|} \phantom{\sep}}{\phantom{\sep} \beta_1 \sep \ldots \sep \beta_{|\beta|} \sep}
+    ~\middle|~\VDomino[1.3]{\alpha_1 \ldots \alpha_{|\alpha|}}{\beta_1 \ldots \beta_{|\beta|}} \in D
+    \,\right\}
+    \vspace{1mm}\\
+    &&\cup
+    \left\{\,
+    \VDomino[2.2]{\sep \gamma_1 \sep \dots \sep \gamma_{|\gamma|} \phantom{\sep}}{\sep \delta_1 \sep \ldots \sep \delta_{|\delta|} \sep},
+    \VDomino{\sep\sep}{\phantom{\sep}\sep}
+    \,\right\}
+    \end{array}\right.
+    $$
+
+    \vspace{3mm}
+    \begin{itemize}
+    \item $\varphi$ est bien calculable
+    \item $\forall x \in \mathcal{I}(\textsc{pcpi}), \quad \varphi(x) \in \textsc{pos}(\textsc{pcp}) \quad \Leftrightarrow \quad x \in \textsc{pos}(\textsc{pcpi})$
+    \item Or \textsc{pcpi} est indécidable, donc \textsc{pcp} est indécidable
+    \end{itemize}
+
+  \end{block}
+
+\end{frame}
+
+\endgroup

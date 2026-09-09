@@ -1,0 +1,111 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Problèmes NP-difficiles et NP-complets}
+
+  \onBlock[top=-4mm]{Définitions -- \textsc{np}-difficulté et \textsc{np}-complétude}{
+    Soit $A \in \textsc{lang}$ un problème de décision. On dit que : 
+    \begin{itemize}
+    \item $A$ est \structure{\textsc{np}-difficile} si tout problème \textsc{np} se réduit polynomialement à $A$ : 
+
+      \vspace{-2mm}
+      $$\alert{\forall P \in \textsc{np},~ P \leq_p A}$$
+
+    \item $A$ est \structure{\textsc{np}-complet} si $A \in \textsc{np}$ et $A$ est \structure{\textsc{np}-difficile}
+    \end{itemize}
+    Ainsi, le degré de Karp \textsc{np-complet} est le maximum de $\textsc{np}$ pour $\le_p$. 
+    \begin{itemize}
+    \item \alert{$\textsc{p} = \textsc{np} \quad\Leftrightarrow\quad \exists A \in \textsc{p} \cap \textsc{np-complet}$}
+    \end{itemize}
+  }
+  
+  \on[y=-22mm]{
+    \begin{tikzpicture}
+
+      \coordinate (X) at (4,2);
+      \coordinate (Y) at (8,2);
+      \node[circle,                                    outer sep=0pt, inner sep=0pt, text width=15mm] (R)  at   (0,2) {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=15mm] (NP) at   (6,3) {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=15mm] (CP) at   (6,1) {};
+      \fill[draw=alert!50,fill=alert!12] (R.north)  -- (X) -- (R.south);
+      \node[circle, draw=alert,     fill=alert!20,     outer sep=0pt, inner sep=0pt, text width=15mm]  at   (R) {};
+
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (NP0) at (3.25,3)    {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (NP1) at (3.5,2.5)   {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (NP2) at (4.10,3)    {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (NP3) at (4.25,2.35) {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CP0) at (3.25,1)    {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CP1) at (3.5,1.5)   {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CP2) at (4.10,1)    {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CP3) at (4.25,1.65) {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (A)   at (6,2)       {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (B)   at (7.5,2.75)  {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (C)   at (9,2)     {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (D)   at (7.5,1.25)  {};
+      \node[circle,                                    outer sep=3pt, inner sep=0pt, text width=3mm] (E)   at (9,2.75)     {\ldots};
+      \node[circle,                                    outer sep=3pt, inner sep=0pt, text width=3mm] (F)   at (9,1.25)     {\ldots};
+
+      \path[-latex] (2,2.38) edge (NP0);
+      \path[-latex] (3,2.2)  edge (NP1);
+      \path[-latex] (NP0)    edge (NP2);
+      \path[-latex] (NP1)    edge (NP2);
+      \path[-latex] (NP1)    edge (NP3);
+      \path[-latex] (NP2)    edge (NP);
+      \path[-latex] (NP3)    edge (NP);
+      \path[-latex] (NP3)    edge (A);
+      \path[-latex] (3,1.8)  edge (CP1);
+      \path[-latex] (2,1.62) edge (CP0);
+      \path[-latex] (CP0)    edge (CP2);
+      \path[-latex] (CP1)    edge (CP2);
+      \path[-latex] (CP1)    edge (CP3);
+      \path[-latex] (CP2)    edge (CP);
+      \path[-latex] (CP3)    edge (CP);
+      \path[-latex] (CP3)    edge (A);
+      \path[-latex] (NP)     edge (B);
+      \path[-latex] (CP)     edge (D);
+      \path[-latex] (A)      edge (B);
+      \path[-latex] (A)      edge (D);
+      \path[-latex] (B)      edge (E);
+      \path[-latex] (B)      edge (C);
+      \path[-latex] (C)      edge (E);
+      \path[-latex] (C)      edge (F);
+      \path[-latex] (D)      edge (C);
+      \path[-latex] (D)      edge (F);
+
+      \footnotesize
+      \node[alert, above]               at (R.center)  {$\textsc{p}$};
+      \node[alert, above]               at (1.5,2)     {$\textsc{np} \cap \textsc{co-np}$};
+      \node[structure]                  at (NP.center) {\textsc{np-complet}};
+      \node[example, align=center]      at (CP.center) {\textsc{co-np-}\\\textsc{complet}};
+      \node[structure]                  at (2,2.8)     {\textsc{np}};
+      \node[example]                    at (2,1.2)     {\textsc{co-np}};
+      \node[black!60, below]            at (8,3.75)    {\textsc{np-difficile}};
+      \node[black!60, above]            at (8,0.25)    {\textsc{co-np-difficile}};
+      \node[black!60]                   at ( 0.4,.5)   {si $\textsc{p} \neq \textsc{np} \neq \textsc{co-np}$};
+      \scriptsize
+      \node[black!60, rotate=90, left ] at (-1.0,2)    {symétrie par};
+      \node[black!60, rotate=90, right] at (-1.0,2)    {complémentaire};
+      \draw[black!60, densely dotted]      (-1.2,2) -- (9.5,2);
+
+      \begin{scope}[background]
+        \draw[draw=structure!50, fill=structure!10] (X) -- (NP.south) -- (NP.north) -- (R.north);
+        \draw[draw=example!50,   fill=example!10]   (X) -- (CP.north) -- (CP.south) -- (R.south);
+        \draw[draw=black!50,     fill=black!10]     (9.5,2.25) -- (Y) -- (NP.south) -- (NP.north) -- (9.5,3.75);
+        \draw[draw=black!50,     fill=black!10]     (9.5,1.75) -- (Y) -- (CP.north) -- (CP.south) -- (9.5,0.25);
+        \draw[draw=none,         fill=black!20]     (9.5,2.25) -- (Y) -- (9.5,1.75);
+      \end{scope}
+
+      
+      
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

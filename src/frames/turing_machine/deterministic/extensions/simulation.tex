@@ -1,0 +1,90 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\newcommand<>\cellTop[1]{%
+  \only#2{%
+    \smsave{x}%
+    \begin{scope}[background]%
+      \node[fill=structure!30, fit=(x.north west)(x.east), inner sep=0pt] {};%
+      \node[fit=(x.north west)(x.east), anchor=mid] {\structure{#1}};%
+    \end{scope}%
+  }
+}
+
+\newcommand<>\cellBot[1]{%
+  \only#2{%
+    \smsave{x}%
+    \begin{scope}[background]%
+      \node[fill=alert!30, fit=(x.south west)(x.east), inner sep=0pt] {};%
+      \node[fit=(x.south west)(x.east), anchor=mid] {\alert{#1}};%
+    \end{scope}%
+  }
+}
+
+\newcommand\transPair[2]{\structure{#1}\,\alert{#2}}
+
+
+\begin{frame}{Simulation d'une transition sur deux rubans}
+
+  \onBlock[bottom]{Remarques}{
+    \begin{itemize}
+    \item Hypothèse implicite : pas de $\blank$ au milieu du ruban
+    \item Bien vérifier que la transition est valide \structure{avant} de faire les décalages
+    \item Attention à conserver le déterminisme
+    \item On peut enchaîner les décalages séquentiellement
+    \end{itemize}
+  }
+  
+  \on[top]{
+    \begin{tikzpicture}[tape, anchor=mid, size=8mm]
+      \cell{}
+      \cell{} \cellTop{a}
+      \cell{} \cellTop{b}              \cellBot{b}
+      \cell{} \cellTop{b}              \cellBot{a}
+      \cell{} \cellTop{a}              \cellBot{a}
+      \cell[example]{\faMapMarker}                             \smheadb<2,10>[example]
+      \cell{} \cellTop{\alt<-9>{b}{a}} \cellBot{\alt<1>{a}{b}} \smhead<1,3,9,11>[example]
+      \cell{} \cellTop{\alt<-8>{a}{b}} \cellBot{a}             \smheadb<4,8>[example]
+      \cell{} \cellTop<-7>{b}          \cellBot{b}             \smheadb<5,7>[example]
+      \cell{}                          \cellBot{b}             \smheadb<6>[example]
+      \cell{}
+    \end{tikzpicture}    
+  }
+
+  \on[y=2mm]{
+    \begin{tikzpicture}[turingMachine, x=40mm, y=22mm]\footnotesize
+      \state[example on=<1>]      (a) at (0,1) {$q$}; 
+      \state[example ob=<2-6>]    (b) at (1,1) {\faForward}; 
+      \state[example ob=<7>]      (c) at (2,1) {$\blank$}; 
+      \state[example ob=<9>]      (d) at (2,0) {$a$}; 
+      \state[example ob=<{8,10}>] (e) at (1,0) {$b$}; 
+      \state[example on=<{1,11}>] (f) at (0,0) {$q'$}; 
+      
+      \path                  (a) edge               node         {\smTMtransL{\transPair{b}{a}}{\transPair{b}{b}}} (b);
+      \path                  (b) edge[loop below]   node         {\smAlign{
+          \smTMtransR{\example{\text{\faMapMarker}}}{\example{\text{\faMapMarker}}}
+          \smTMtransR{\transPair{a}{x}}{\transPair{a}{x}}
+          \smTMtransR{\transPair{b}{x}}{\transPair{b}{x}}}} (b);
+      \path                  (b) edge               node         {\smTMtransL{\transPair{\blank}{x}}{\transPair{\blank}{x}}} (c);
+      \path                  (c) edge               node         {\smTMtransL{\transPair{a}{x}}{\transPair{\blank}{x}}} (d);
+      \path                  (c) edge               node[sloped] {\smTMtransL{\transPair{b}{x}}{\transPair{\blank}{x}}} (e);
+      \path                  (d) edge[loop below]   node         {\smTMtransL{\transPair{a}{x}}{\transPair{a}{x}}}       (d);
+      \path                  (e) edge[loop below]   node         {\smTMtransL{\transPair{b}{x}}{\transPair{b}{x}}} (e);
+      \path                  (e) edge[bend left=15] node[swap]   {\smTMtransL{\transPair{a}{x}}{\transPair{b}{x}}} (d);
+      \path                  (d) edge[bend left=15] node         {\smTMtransL{\transPair{b}{x}}{\transPair{a}{x}}} (e);
+      \path                  (e) edge               node         {\smTMtransR{\example{\text{\faMapMarker}}}{\example{\text{\faMapMarker}}}} (f);
+      \path[example, dashed] (a) edge               node[swap]   {\smGroup{\smTMtransR[1]{b}{\varepsilon}\smTMtransS[2]{a}{b}}} (f);
+
+      \node[alert, anchor=mid] at (.5,.5) {$\forall x\in \{a, b, \blank\}$};
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

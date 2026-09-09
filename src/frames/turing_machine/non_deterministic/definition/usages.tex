@@ -1,0 +1,68 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Machine de Turing non-déterministe}
+  
+  \onBlock[top=-4mm]{Rappel -- Machine de Turing déterministe}{
+    Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une machine de Turing.
+    \begin{itemize}
+    \item $M$ est \structure{déterministe} si sa relation de transition $\rightarrow$ est fonctionnelle.
+    \item \alert{``Non-déterministe''} signifie \alert{``pas forcément déterministe''}.
+    \end{itemize}
+    \begin{description}[Ubiquité :]
+    \item[Modèle :] on autorise le modèle étendu (multi-ruban, immobilité, réécriture)
+    \item[Ubiquité :] si non-déterminisme, un \structure{oracle} \alert{\emph{devine}} la meilleure transition
+    \end{description}
+  }
+  
+  \onBlock<2->[y=-9mm]{Comment utiliser le non-déterminisme ?}{
+    \begin{itemize}
+    \item Déplacement à un endroit \alert{arbitraire} du ruban
+    \item Écriture d'un mot \example{arbitraire} sur le ruban
+    \item Choix \structure{arbitraire} d'une sous-machine à exécuter
+    \end{itemize}
+  }
+
+  \on<2->[x=40mm, y=-10mm] {
+    \begin{tikzpicture}[turingMachine, x=15mm, y=8mm]\scriptsize
+      \state[alert]     (01) at (0,1) {\faRandom}; 
+      \state[example]   (11) at (1,1) {\faRandom}; 
+      \state[example]   (21) at (2,1) {\faCheck}; 
+      \state[structure] (00) at (0,0) {$A$}; 
+      \state[structure] (10) at (1,0) {\faRandom}; 
+      \state[structure] (20) at (2,0) {$B$}; 
+
+      \path (01) edge[loop above] node  {\smAlign{\smTMtransR{x}{x}\smTMtransL{x}{x}}} (01);
+      \path (11) edge[loop above] node  {\smAlign{\smTMtransL{\blank}{a}\smTMtransL{\blank}{b}}} (11);
+      \path (11) edge node  {\smTMtransR{\blank}{\blank}} (21);
+
+      \path (10) edge node  {\smTMtransS{\varepsilon}{\varepsilon}} (20);
+      \path (10) edge node[swap] {\smTMtransS{\varepsilon}{\varepsilon}} (00);
+
+      \node at (2,2) {$\forall x\in \Sigma$}; 
+    \end{tikzpicture}
+  }
+  
+  \onBlock<2->[y=-20mm, left=.48\textwidth, anchor=north]{Reconnaître un langage $L$}{
+    \begin{description}[Entrée :]
+    \item[Entrée :] $u\in \Sigma^\star$ 
+    \item[Sortie :] \alert{une} exécution $\cmark{}$ si $u\in L$
+    \end{description}
+  }
+  
+  \onBlock<2->[y=-20mm, right=.48\textwidth, anchor=north]{Générer un langage $L$}{
+    \begin{description}[Entrée :]
+    \item[Entrée :] le mot vide $\varepsilon$ 
+    \item[Sortie :] \alert{un} mot arbitraire de $L$
+    \end{description}
+  }
+
+\end{frame}
+
+\endgroup

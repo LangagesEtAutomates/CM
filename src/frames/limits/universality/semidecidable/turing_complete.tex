@@ -1,0 +1,40 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Turing--complet}
+
+  \begin{block}{Rappel -- Thèse de Church--Turing}
+    \begin{center}
+      \structure{La définition des \og \alert{fonctions calculables} \fg par des \\
+        Machines de Turing déterministes  \\
+        caractérise la notion intuitive de \og \alert{procédure effective} \fg.}
+    \end{center}
+  \end{block}
+
+  \begin{block}{Définition -- Complet au sens de Turing}
+    Un système formel est dit \structure{Turing-complet} s'il peut \og simuler \fg toute MTD.
+  \end{block}
+
+  \begin{exampleblock}{Exemples}
+    \begin{itemize}
+    \item Le $\lambda$-calcul est équivalent aux machines de Turing
+    \item Les langages de programmation généralistes
+    \item Minecraft, le jeu de la vie...
+    \end{itemize}
+  \end{exampleblock}
+
+  \begin{alertblock}{Contre-exemples}
+    \begin{itemize}
+    \item Automates finis et à pile, HTML, CSS, SQL non récursif, ...
+    \end{itemize}
+  \end{alertblock}
+  
+\end{frame}
+
+\endgroup

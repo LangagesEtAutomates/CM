@@ -1,0 +1,40 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Interprétation du non-déterminisme}
+
+  \begin{block}{Plusieurs formes de non-déterminisme}
+    \begin{description}
+    \item[Aléatoire :] assigner \structure{une probabilité} à chaque transition possible
+      \begin{itemize}
+      \item Arrivée dans un état final \structure{avec grande probabilité}
+      \end{itemize}
+    \item[Adversaire :] la transition à emprunter est décidée par \structure{l'environnement}
+      \begin{itemize}
+      \item Arrivée dans un état final \structure{quel que soit le chemin}
+      \end{itemize}
+    \item[\alert{Ubiquitaire :}] la transition à emprunter est décidée par \alert{un oracle}
+      \begin{itemize}
+      \item Arrivée dans un état final \alert{pour au moins un chemin}
+      \end{itemize}
+    \end{description}
+  \end{block}
+  
+  \begin{block}{Le non-déterminisme comme de l'ubiquité}
+    \begin{itemize}
+    \item L'automate se trouve dans un sous-ensemble des états
+    \item Le mot est reconnu si l'un des états du sous-ensemble est final
+    \item Ces sous-ensembles forment un nouvel automate, qui est déterministe
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup
+\endinput

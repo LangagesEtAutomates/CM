@@ -1,0 +1,42 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Cadre formel et conventions\footnotemark[1]}
+
+  \vspace{-2mm}
+  \begin{block}{Univers des symboles}
+    On fixe un ensemble \alert{$\Omega$} \structure{infini dénombrable}.
+    \begin{itemize}
+    \item Contient symboles de mots, états, et autres marqueurs techniques
+    \item On note \alert{$\Omega_f$} l'ensemble des sous-ensembles \structure{finis} de $\Omega$
+    \end{itemize}
+  \end{block}
+
+  \vspace{-1mm}
+  \begin{block}{Alphabets, mots et langages}
+    \begin{itemize}
+    \item Un \structure{alphabet} est un ensemble \alert{$\Sigma \in \Omega_f$}
+    \item Un \structure{mot} sur $\Sigma$ est une suite finie de symbole de $\Sigma$
+    \item L'\structure{ensemble des mots} sur $\Sigma$ est noté \alert{$\Sigma^\star$}
+    \item L'\structure{ensemble des langages} sur $\Sigma$ est noté \alert{$\textsc{lang}_\Sigma \eqdef \mathscr{P}\left(\Sigma^\star\right)$}
+    \item On définit la \structure{classe\footnotemark[2] des mots} comme \alert{$\Omega^\star \eqdef \bigcup_{\Sigma \in \Omega_f} \Sigma^\star$}
+    \item On définit la \structure{classe des langages} comme \alert{$\textsc{lang} \eqdef \bigcup_{\Sigma \in \Omega_f} \textsc{lang}_\Sigma$}
+    \item Pour un langage $L\in \textsc{lang}$, on définit son alphabet \alert{$\Sigma(L)$} comme l'ensemble des symboles qu'il utilise :
+      $\alert{\Sigma(L) \eqdef \bigcap \{\Sigma \in \Omega_f \mid L\subseteq \Sigma^\star\}}$
+    \end{itemize}
+  \end{block}
+
+  \footnotetext[1]{Voir le cours de \structure{Langages et Automates} (\url{https://github.com/LangagesEtAutomates})}
+  \footnotetext[2]{Dans ce cours, on considère que \structure{ensemble} et \structure{classe} sont synonymes.}
+  
+\end{frame}
+
+\endgroup
+\endinput
+

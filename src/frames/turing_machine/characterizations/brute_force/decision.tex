@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Décision de l'appartenance à un langage contextuel}
+
+  \vspace{-1mm}
+  \begin{block}{Problème de décision}
+    Soit $L$ un langage de type 0 ou 1.
+    
+    \Probleme{\structure{Decision$_L$}}{
+      Un mot \structure{$u \in \Sigma^\star$}
+    }{
+      Est-ce que \structure{$u \in L$} ?
+    }
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Algorithme de recherche ascendante par force brute} 
+  \vspace{-1mm}
+
+    \begin{description}
+    \item [Entrées :]
+      \begin{itemize}
+      \item Une grammaire $G$, si possible contextuelle
+      \item Un mot $u$
+      \end{itemize}
+    \item [Sortie :] \example{$u \in \mathcal{L}(G)$}, \structure{$u \notin \mathcal{L}(G)$}, ou \alert{boucle infinie}
+    \item [Teminaison :] 
+      \begin{itemize}
+      \item garantie si $G$ est contextuelle (décision)
+      \item garantie si $G$ est générale et $u \in L$ (semi-décision)
+      \end{itemize}
+    \item [Complexité :] 
+      \begin{itemize}
+      \item exponentielle par rapport à $|u|$ si $G$ est contextuelle
+      \item non bornée si $G$ est générale (même si $u \in L$)
+      \end{itemize}
+    \end{description}
+  \end{block}
+  
+\end{frame}
+
+\endgroup
+\endinput

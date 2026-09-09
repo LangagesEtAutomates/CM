@@ -1,0 +1,61 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Séquençage du génome}
+
+  \on[text, top=-4mm]{
+    \Probleme{ShortestSuperstring}{
+      \begin{itemize}
+      \item Un langage fini $S = \{s_1, ..., s_k\} \subset \Sigma^\star$ 
+      \item Un entier $\ell$
+      \end{itemize}
+    }{
+      Existe-t-il un mot $w \in \Sigma^\star$ tel que :
+      \begin{itemize}
+      \item $|w| \le \ell$, et
+      \item pour tout $s_i\in S$, $s_i$ est un facteur de $w$ ?
+      \end{itemize}
+    }
+  }
+  
+  \onBlock[y=6mm, anchor=north]{Théorème (admis)}{
+    \textsc{ShortestSuperstring} est \textsc{np}-complet.
+  }
+
+  \onExampleBlock[y=-7mm, anchor=north]{Exemple : $S = \{ \textsc{tagcg}, \textsc{gcgat}, \textsc{acagt}, \textsc{agtag} \}, \ell = 11$}{
+
+    \begin{center}
+      \begin{tikzpicture}[word, size=7mm]
+        \cell{\textsc{a}} \smsave{c1}
+        \cell{\textsc{c}} 
+        \cell{\textsc{a}} \smsave{c2}
+        \cell{\textsc{g}} 
+        \cell{\textsc{t}} \smsave{c3}
+        \cell{\textsc{a}} 
+        \cell{\textsc{g}} \smsave{c4}
+        \cell{\textsc{c}} 
+        \cell{\textsc{g}} \smsave{c5}
+        \cell{\textsc{a}} 
+        \cell{\textsc{t}} \smsave{c6}
+
+        \draw [decorate, decoration={brace, amplitude=4pt        }] ([yshift= 0.5mm]c1.north west) -- ([yshift= 0.5mm]c3.north east) node[midway,yshift= 4mm]{\textsc{acagt}};
+        \draw [decorate, decoration={brace, amplitude=4pt        }] ([yshift= 0.5mm]c4.north west) -- ([yshift= 0.5mm]c6.north east) node[midway,yshift= 4mm]{\textsc{gcgat}};
+        \draw [decorate, decoration={brace, amplitude=4pt, mirror}] ([yshift=-0.5mm]c2.south west) -- ([yshift=-0.5mm]c4.south east) node[midway,yshift=-4mm]{\textsc{agtag}};
+        \draw [decorate, decoration={brace, amplitude=4pt, mirror}] ([yshift=-1.5mm]c3.south west) -- ([yshift=-1.5mm]c5.south east) node[midway,yshift=-3mm]{\textsc{tagcg}};
+
+        
+      \end{tikzpicture}
+    \end{center}
+  }
+
+  \footnoteref{J. Gallant, D. Maier, J. Storer. \emph{On finding minimal length superstrings}. JCSS (1980)}
+  
+\end{frame}
+
+\endgroup

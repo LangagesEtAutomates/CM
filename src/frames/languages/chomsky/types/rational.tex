@@ -1,0 +1,52 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaires et langages rationnels}
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- Grammaire rationnelle}
+    Soit \alert{$G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire algébrique. 
+    \begin{itemize}
+    \item $G$ est dite \structure{rationnelle à droite} si ses règles sont de la forme :
+      \begin{center}
+        $\alert{A \rightarrow a \cdot B}$ \quad ou\quad $\alert{A \rightarrow a}$ \quad ou\quad $\alert{A \rightarrow \varepsilon}$
+        \quad avec \structure{$A, B \in \Gamma$} et \structure{$a\in \Sigma$}
+      \end{center}
+    \item $G$ est dite \structure{rationnelle à gauche} si ses règles sont de la forme :
+      \begin{center}
+        $\alert{A \rightarrow B \cdot a}$ \quad ou\quad $\alert{A \rightarrow a}$ \quad ou\quad $\alert{A \rightarrow \varepsilon}$
+        \quad avec \structure{$A, B \in \Gamma$} et \structure{$a\in \Sigma$}
+      \end{center}
+    \item $G$ est dite \structure{rationnelle} si elle est \structure{rationnelle à droite ou à gauche}
+    \end{itemize}
+  \end{block}
+
+  \vspace{-1mm}
+  \begin{block}{Définition -- Langage rationnel}
+    \vspace{-1mm}
+    Soient $\Sigma$ un alphabet et $L$ un langage sur $\Sigma$.
+    \begin{itemize}
+    \item On dit que $L$ est \structure{rationnel} s'il est engendré par une grammaire rationnelle
+    \item L'\structure{ensemble des langages rationnels} sur $\Sigma$ est noté \alert{$\textsc{rat}_\Sigma$}
+    \item La \structure{classe des langages rationnels} est noté \alert{$\textsc{rat}$} (indépendant de $\Sigma$)
+    \end{itemize}
+  \end{block}
+
+  \vspace{-1mm}
+  \begin{exampleblock}{Exemple -- Langage $\{a^m b^n \mid m, n > 0\}$}
+  \vspace{-1mm}
+    \begin{itemize}
+    \item $G = \langle \{a, b\}, \{S, T\}, S, \left\{S \rightarrow a S \mid a T ; T \rightarrow b T \mid b \right\} \rangle $
+    \end{itemize}
+  \end{exampleblock}
+
+\end{frame}
+
+\endgroup
+\endinput

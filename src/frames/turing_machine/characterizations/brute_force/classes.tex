@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Équivalence entre formalismes}
+
+  \on[text,top=-2mm]{
+    \begin{itemize}
+    \item Les cinq classes suivantes sont égales
+    \item On nomme la classe commune \alert{\textsc{re}} (pour \structure{récursivement énumérable})
+    \item Classe robuste : argument en faveur de la thèse de Church-Turing
+    \end{itemize}
+  }
+  
+  \on[y=-12mm]{
+    \begin{tikzpicture}[x=38mm, y=33mm]\small
+      \tikzset{box/.style={structure, smBox, text width=27mm, minimum height=12mm},}
+      \node[box] (eng) at (1,1) {Langage\\\alert{engendré} par une\\ grammaire\\ non-restreinte};
+      \node[box] (rec) at (2,1) {Langage\\\alert{reconnu} par une \\ machine de Turing \\non déterministe};
+      \node[box] (gen) at (2,0) {Langage\\\alert{généré} par une \\ machine de Turing \\non déterministe};
+      \node[box] (sem) at (3,1) {Langage\\\alert{semi-décidé} par une \\ machine de Turing \\déterministe};
+      \node[box] (enu) at (3,0) {Langage\\\alert{énuméré} par une \\ machine de Turing \\déterministe};
+
+      \footnotesize
+      \path[-latex, structure] (rec) edge[bend left=20pt]  node[right, align=left] {énumération \\de $\Sigma^\star$} (gen);
+      \path[-latex, structure] (gen) edge[bend left=20pt]  node[left, align=right]  {test \\d'égalité} (rec);
+      \path[-latex, structure] (gen) edge[bend left]  node[auto]   {encodage}                     (eng);
+      \path[-latex, structure] (eng) edge[bend left]  node[auto,sloped] {force brute}                  (rec);
+      \path[-latex, structure] (rec) edge[bend left]  node[above]       {déterminisation}              (sem);
+      \path[-latex, structure] (sem) edge[bend left]  node[below]       {inclusion}                    (rec);
+      \path[-latex, structure] (gen) edge[bend left]  node[above]       {déterminisation}              (enu);
+      \path[-latex, structure] (enu) edge[bend left]  node[below]       {inclusion}                    (gen);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

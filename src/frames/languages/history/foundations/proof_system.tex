@@ -1,0 +1,46 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Cohérence et complétude d'un système de preuves}
+
+  \begin{block}{Système de preuves}
+    Un système de preuves est un triplet \structure{$S = \langle \Phi, \Pi, \valid \rangle$}, constitué de :
+    \begin{description}[Complétude :]
+    \item[$\Phi\in\textsc{lang}$ :] un langage de \structure{propositions} \hspace{\fill} \example{exemple : formules logiques}
+      \begin{itemize}
+      \item On suppose que $\Phi$ possède un opérateur de négation $\lnot$
+      \end{itemize}
+      \item[$\Pi\in\textsc{lang}$ :] un langage de \structure{preuves} \hspace{\fill} \example{exemple : arbres d'inférence}
+      \item[$\valid \subseteq \Pi \times \Phi$ :] une relation entre les preuves et les propositions
+      \begin{itemize}
+      \item ``\structure{$\pi \valid \varphi$}'' signifie ``$\pi$ est une preuve valide de $\varphi$''
+      \end{itemize}
+    \end{description}
+    Une proposition $\varphi \in \Phi$ est dite \structure{démontrable dans $S$} si \alert{$\exists \pi\in \Pi, \pi\valid\varphi$}.
+  \end{block}
+
+  \pause
+  \begin{block}{Deux propriétés fondamentales}
+    Un système de preuves $S=\langle \Phi,\Pi,\valid\rangle$ est dit :
+    \begin{description}[Complétude :]
+    \item[Complet] si pour toute proposition $\varphi \in \Phi$, \structure{$\varphi$ ou $\lnot \varphi$ est démontrable}
+      \begin{itemize}
+      \item sinon, \alert{certaines propositions restent indécidables}
+      \end{itemize}
+    \item[Cohérent] si pour toute proposition $\varphi \in \Phi$, \structure{$\varphi$ ou $\lnot \varphi$ est indémontrable}
+      \begin{itemize}
+      \item sinon, \alert{toute proposition est démontrable} : $(\varphi\land \lnot \varphi) \Rightarrow \psi$
+      \item donc le système logique devient inutile
+      \end{itemize}
+    \end{description}
+  \end{block}
+
+\end{frame}
+
+\endgroup

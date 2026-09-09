@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Diagonale}{diag}
+\SetKwFunction{Decide}{decide\_univ}
+
+\begin{frame}{L'argument par diagonalisation de Turing}
+
+  \onBlock[text,top=-3mm]{Les langages universels sont indécidables}{
+
+    \begin{itemize}
+    \item Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif.
+    \item Supposons que $\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$ est décidable par \structure{\Decide}.
+    \item<2-> A-t-on $\alert{\langle \Diagonale, \Diagonale\rangle \in \textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}}$ ?
+      \begin{algorithm}[H]
+        \Fun{$\Diagonale(u \in \Sigma^\star) \in \mathbb{B}$}{
+          \Return $\lnot \Decide(u, u)$;
+        }
+      \end{algorithm}
+
+    \item<3-> On a : $\structure{\langle \Diagonale, \Diagonale\rangle \in \textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle} \Leftrightarrow \lnot \Decide(\Diagonale, \Diagonale)}$ 
+    \item<3-> Absurde, donc \alert{$\Decide$ n'existe pas}. 
+    \end{itemize}
+  }
+  
+  \onBlock<3->[bottom]{Remarque : c'est encore le paradoxe du barbier}{
+    \begin{itemize}
+    \item \structure{\Diagonale} est l'équivalent du \structure{barbier}
+    \item $x \bowtie y \equiv \structure{x \in \llbracket y \rrbracket}$ est l'équivalent de \structure{$x$ est rasé par $y$}
+    \end{itemize}
+    $$\alert{\nexists \Diagonale, \forall u, u\in \llbracket \Diagonale \rrbracket \Leftrightarrow u \notin \llbracket u \rrbracket}$$
+    \begin{itemize}
+    \item \vspace{-4mm} or, \structure{\Diagonale} existe si \structure{\Decide} existe
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup

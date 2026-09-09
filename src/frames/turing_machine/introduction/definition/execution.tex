@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exécution d'une machine de Turing}
+  
+  \vspace{-1mm}Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une machine de Turing, $u\in \Sigma^\star$.
+ 
+  \begin{block}{Définitions -- Configurations remarquables}
+    Une configuration $c = \langle G, q, D \rangle \in \mathcal{C}_M$ est dite :
+    \begin{description}[s'arrête sur $u$ :]
+    \item[initiale :] si $G = \varepsilon$ et $q = q_0$
+      \hspace\fill{$\alert{C_{\mathit{init}}(u) \eqdef \langle \varepsilon, q_0, u \rangle}$}
+    \item[d'arrêt :] si elle ne permet aucune action
+      \hspace\fill{$\alert{\mathcal{C}_M^{\mathit{halt}} \eqdef \left\{c\in \mathcal{C}_M \,\middle\mid\, \nexists c', c\leadsto_M c'\right\}}$}
+    \item[acceptante :] si $c\in \mathcal{C}_M^\mathit{halt}$ et $q \in F$
+      \hspace\fill{$\alert{\mathcal{C}_M^+ \eqdef \left\{\langle G, q, D \rangle \in \mathcal{C}_M^\mathit{halt} \,\middle\mid\, q\in F\right\}}$}
+    \end{description}
+  \end{block}
+ 
+  \begin{block}{Définitions -- Exécution de $M$ sur $u$}
+    On dit que $M$ :
+    \begin{description}[s'arrête sur $u$ :]
+    \item[s'arrête sur $u$ :] si $M$ atteint une configuration d'arrêt
+      \hspace\fill{$\alert{\exists c\in \mathcal{C}_M^\mathit{halt}, C_{\mathit{init}}(u) \leadsto_M^\star c}$}
+    \item[accepte $u$ :] si $M$ atteint une config. acceptante
+      \hspace\fill{$\alert{\exists c\in \mathcal{C}_M^+, C_{\mathit{init}}(u) \leadsto_M^\star c}$}
+    \item[s'arrête :] si $M$ s'arrête sur toute entrée
+      \hspace\fill{$\alert{\forall u\in\Sigma^\star, \exists c\in \mathcal{C}_M^\mathit{halt}, C_{\mathit{init}}(u) \leadsto_M^\star c}$}
+    \end{description}
+
+    Le \structure{langage accepté par $M$} est l'ensemble des mots acceptés par $M$\\[-2mm]
+    $$\alert{\mathcal{L}(M) \eqdef \left\{u \in \Sigma^\star \;\middle\mid\; \exists c \in \mathcal{C}_M^+, C_{\mathit{init}}(u) \leadsto_M^\star c\right\}}$$
+  \end{block}
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Rendu de scènes 3D}
+
+  \on[top=-4mm, width=1.1\textwidth]{
+    \Probleme{ray tracing}{
+      \begin{itemize}
+      \item Une description de scène géométrique 2D ou 3D
+        \begin{itemize}
+        \item Par exemple un ensemble de polygones plans
+        \end{itemize}
+      \item Une source de lumière ponctuelle \structure{\faLightbulbO}
+      \item Une cible ponctuelle à éclairer \structure{\faCamera}
+      \end{itemize}
+    }{
+      Existe-t-il une trajectoire de la source vers la cible ?
+      \begin{itemize}
+      \item La lumière est reflétée sur les objets de la scène
+      \item On autorise les miroirs parfaits
+      \end{itemize}
+    }
+  }
+  
+  \onBlock[y=-6mm, anchor=north]{Théorème (admis)}{
+    \textsc{ray tracing} est indécidable.
+  }
+
+
+  \on[y=-24mm, x=25mm]{
+    \begin{tikzpicture}[size=4mm]
+
+      \draw[-latex, alert] (4.5,0.5) -- (0,5) -- (3,8) -- (4,7) -- (0,3) -- (2,1) -- (7,6) -- (8,5) ;
+      \node[alert] at (8.5,4.5) {?};
+
+      \draw[example, thick] (3.8,1) -- (0,1) -- (0,8) -- (4,8) -- (4,6) -- (5.8,6);
+      \draw[example, thick] (6.2,6) -- (9,6) -- (9,1) -- (4.2,1);
+      
+      \node[example] at (5,0) {\faLightbulbO};
+      \node[example] at (8,7.1) {\faCamera};
+      \node[example] at (4.5,0.5) {$\bullet$};
+      \node[example] at (7,7) {$\bullet$};
+      
+    \end{tikzpicture}
+  }
+
+  \footnoteref{Reif, Tygar, Yoshida. \emph{Computability and Complexity of Ray Tracing}. Discrete \& Computational Geometry (1994)}
+  
+\end{frame}
+
+\endgroup

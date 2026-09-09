@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exemples de problèmes semi-décidables}
+
+  \vspace{-2mm}
+  \begin{block}{Intersection de langages algébriques}
+
+  \vspace{-2mm}
+    \Probleme{Intersect-Alg}{
+      Deux grammaires algébriques $G$ et $H$
+    }{
+      Existe-t-il un mot $w \in \mathcal{L}(G) \cap \mathcal{L}(H)$ ?
+    }
+
+  \vspace{-2mm}
+    \begin{itemize}
+    \item \structure{Vérifier} que $w \in \mathcal{L}(G) \cap \mathcal{L}(H)$ est \alert{décidable} par CYK
+    \item \textsc{Intersect-Alg} est \alert{semi-décidable} (théorème précédent)
+    \item \textsc{Intersect-Alg} est \alert{indécidable} (preuve en TD)
+    \end{itemize}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Équations Diophantiennes}
+
+  \vspace{-2mm}
+    \Probleme{Diophantine}{
+      Un polynôme $P$ à coefficients entiers
+    }{
+      Existe-t-il un entier $x\in \mathbb{N}, P(x) = 0$ ?
+    }
+
+  \vspace{-2mm}
+    \begin{itemize}
+    \item \structure{Vérifier} que $P(x) = 0$ est \alert{décidable}
+    \item \textsc{Diophantine} est \alert{semi-décidable}, mais \alert{indécidable} (admis)
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

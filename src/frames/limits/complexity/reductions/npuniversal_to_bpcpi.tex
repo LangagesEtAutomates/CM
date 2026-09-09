@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Complexité de PCPI borné}
+
+  \vspace{-4mm}
+  
+  \begin{block}{Théorème -- Complexité de \textsc{bpcpi}}
+    Le problème \textsc{bpcpi} est \textsc{np}-complet
+
+    \vspace{2mm}
+    \structure{$\textsc{bpcpi} \in \textsc{np}$.} Voir TD
+
+    \vspace{1mm}
+    \structure{$\textsc{bpcpi} \in \textsc{np-difficile}$.} On montre $\textsc{NPUniversal} \leq_p \textsc{bpcpi}$ par la réduction $\varphi$ :
+
+    {\footnotesize
+    $$\begin{array}{@{}r@{~~}r@{~~}l@{}}
+      \varphi &:& \left\{\begin{array}{rcl}
+      \mathcal{I}(\textsc{NPUniversal}) &\rightarrow& \mathcal{I}(\textsc{bpcpi}) \vspace{.5mm}\\
+      \left\langle \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle
+      \footnote[frame]{Sans perte de généralité, on suppose que la machine efface son ruban et revient à sa position initiale}, u, k\right\rangle
+      &\mapsto&
+      \left\langle D, d_0, b \right\rangle
+      \end{array}
+      \right. \text{, avec}
+      %
+      \vspace{4mm}\\&&{\small\text{\example{// Réduction adaptée de $\textsc{Universal} \leq_m \textsc{pcpi}$ (page~\ref{limits/computability/pcp/universal_to_pcpi})}}}
+      \vspace{1mm}\\
+      %
+      D&=&
+      \left\{\,
+      \VDomino[2cm]{\langle\phantom{\blank^k, q_0, u \blank^k \rangle \leadsto\langle}}{\langle\blank^k, q_0, u\blank^k \rangle \leadsto\langle}, 
+      \VDomino[2]{\rangle\leadsto\langle \blank^k, f, \blank^{|u|+k}\rangle}{\phantom{\rangle\leadsto\langle \blank^k, f, \blank^{|u|+k}}\rangle}
+      \,\right\}
+      \cup
+      \left\{\,
+      \VDomino[.7]{\rangle\leadsto\langle}{\rangle\leadsto\langle} ~\middle|~ f\in F
+      \,\right\}
+      \cup
+      \left\{\,
+      \VDomino[.7]{z}{z} ~\middle|~ z\in \Gamma
+      \,\right\}
+      %
+      \vspace{1mm}\\&\cup &
+      %
+      \left\{\,
+      \VDomino[1.2]{z\phantom{y},q, x}{zy ,r,\phantom{x}} ~\middle|~ q\xrightarrow{\scriptsize\smTMtransR{x}{y}} r  \land z\in \Gamma
+      \,\right\}
+      \cup
+      \left\{\,
+      \VDomino[1.2]{z ,q, \phantom{z}\,x}{\phantom{z},r, z\, y} ~\middle|~ q\xrightarrow{\scriptsize\smTMtransL{x}{y}} r \land z\in \Gamma
+      \,\right\}
+      %
+      \vspace{2mm}\\
+      d_0 &=& \VDomino[2cm]{\langle\phantom{\blank^k, q_0, u \blank^k \rangle \leadsto\langle}}{\langle\blank^k, q_0, u\blank^k \rangle \leadsto\langle}
+      {\small\text{\example{\quad// Ruban de taille fixe $2k + |u|$}}}
+      \vspace{2mm}\\
+      b &=& 2k^2 + (k-1) (|u|-3)
+      {\small\text{\example{\quad// $\mathcal{O}(k^2)$ : $\mathcal{O}(k)$ configurations $\times~\mathcal{O}(k+|u|)$ cases}}}
+    \end{array}$$
+    }
+
+    \structure{Remarque.} $\varphi$ est bien polynomiale : $|D| \in \mathcal{O}(|M|)$, et $\forall d\in D, |d| \in \mathcal{O}(|u| + k)$,
+
+  \end{block}
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Classification des grammaires}
+
+  On dit qu'une grammaire $G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$ \structure{est de type} $i \in \{0, 1, 2, 3\}$ si :
+  \begin{description}[xType 0 :]
+  \item[Type 0 :] \vspace{2mm} $G$ est grammaire \alert{non-containte} si pour toute règle $\structure{\alpha \rightarrow \beta}$ \\
+    \begin{itemize}
+    \item \structure{$\alpha$} contient au moins un non-terminal de $\Gamma$
+    \item[\example{Exemple :}] $a B c \rightarrow B a$
+    \end{itemize}
+  \item[Type 1 :] \vspace{2mm}$G$ est grammaire \alert{contextuelle} si pour toute règle $\structure{\alpha \rightarrow \beta}$ \\
+    \begin{itemize}
+    \item \structure{$\alpha = g A d$} et \structure{$\beta = g \gamma d$} avec \structure{$A \in \Gamma$} et \structure{$\gamma \neq \varepsilon$}
+    \item[\example{Exemple :}] $a B c \rightarrow ac B ac \mid acac$ 
+    \end{itemize}
+  \item[Type 2 :] \vspace{2mm}$G$ est grammaire \alert{algébrique} si pour toute règle $\structure{\alpha \rightarrow \beta}$ \\
+    \begin{itemize}
+    \item \structure{$\alpha \in \Gamma$}
+    \item[\example{Exemple :}] $S \rightarrow a S b \mid \varepsilon$ 
+    \end{itemize}
+
+  \item[Type 3 :] \vspace{2mm}$G$ est grammaire \alert{rationnelle} si $G$ est dans l'un des deux cas :
+    \begin{itemize}
+    \item \alert{rationnelle droite :} $\forall \structure{\alpha \rightarrow \beta}$,  \structure{$\alpha \in \Gamma$} et \structure{$\beta \in (\Sigma \cdot \Gamma^?)^?$}
+    \item[\example{Exemple :}] $S \rightarrow aS \mid b \mid \varepsilon$ 
+    \end{itemize}
+    \begin{itemize}
+    \item \alert{rationnelle gauche :} $\forall \structure{\alpha \rightarrow \beta}$,  \structure{$\alpha \in \Gamma$} et \structure{$\beta \in (\Gamma^? \cdot \Sigma)^?$}
+    \item[\example{Exemple :}] $S \rightarrow Sa \mid b \mid \varepsilon$ 
+    \end{itemize}
+  \end{description}
+
+\end{frame}
+
+\endgroup

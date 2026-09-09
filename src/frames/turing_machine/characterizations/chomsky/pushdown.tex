@@ -1,0 +1,104 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automates à plusieurs piles}
+
+  \on[top=-2mm, text]{
+    \begin{center}
+      \structure{Les \alert{automates déterministes à deux piles} \\
+        (extension du formalisme des automates à pile)\\
+        reconnaissent exactement la classe \textsc{re} des\\
+        langages \alert{semi-décidables}}
+    \end{center}
+  }
+
+  \onExampleBlock[left=.5\textwidth,  y=9mm] {Machine de Turing}{}
+  \onExampleBlock[right=.5\textwidth, y=9mm]{Automate à deux piles}{}
+  
+  \on[x=2mm, y=-1mm]{
+    \begin{tikzpicture}[word, size=6mm]
+      \cell[open before]{...}
+      \cell{}
+      \cell{\only<-1>{a}} \smhead<1>  \smheadfromb<4>{2} 
+      \cell{\only<-5>{a}} \smheadb<5,8,10> 
+      \cell{\only<-7>{b}} \smheadb<7,9> 
+      \cell{\only<-3>{b}} \smheadb<3> \smheadfromb<6>{-1} 
+      \cell{}             \smheadfromb<2>{-3}
+      \cell[open after]{...}
+
+      \cell[open]{}
+      \cell[open]{}
+
+      \onlyb<4->{\cell[open]{}}
+      \onlyb<8->{\cell[open]{}}
+      \onlyb<10->{\cell[open]{}}
+      \only<-9>{\cell{\blank}}
+      \onlyb<3-4>{\cell{a}}
+      \onlyb<3-4,7>{\cell{b}}
+      \onlyb<3>{\cell{b}}
+
+      \cell[open after]{...}
+      \cell[open]{}
+      \cell[open before]{...}
+      
+      \only<1>{\cell{a}}
+      \only<1-2,5>{\cell{a}}
+      \only<1-2,5-6>{\cell{b}}
+      \only<1-2>{\cell{b}}
+      \only<-9>{\cell{\blank}}
+      \onlyb<2->{\cell[open]{}}
+      \onlyb<6->{\cell[open]{}}
+      \onlyb<10->{\cell[open]{}}
+    \end{tikzpicture}    
+  }
+
+  \on[bottom=7mm, x=-33mm]{
+    \begin{tikzpicture}[turingMachine, size=17mm]\footnotesize
+      \state[example ob=<{1,5,9}>, initial above] (a) at (1,1) {$a$}; 
+      \state[example ob=<{2,6}>                 ] (b) at (1,0) {\faForward}; 
+      \state[example ob=<{3,7}>                 ] (c) at (0,0) {$b$}; 
+      \state[example ob=<{4,8}>                 ] (d) at (0,1) {\faBackward}; 
+      \state[example ob=<10>, accepting         ] (e) at (2,1) {\faCheck}; 
+      
+      \path                  (a) edge               node         {\smTMtransR{a}{\blank}}      (b);
+      \path                  (b) edge[loop right]   node         {\smTMtransR{x}{x}}           (b);
+      \path                  (b) edge               node         {\smTMtransL{\blank}{\blank}} (c);
+      \path                  (c) edge               node         {\smTMtransR{b}{\blank}}      (d);
+      \path                  (d) edge[loop left]    node         {\smTMtransL{x}{x}}           (d);
+      \path                  (d) edge               node         {\smTMtransR{\blank}{\blank}} (a);
+      \path                  (a) edge               node         {\smTMtransL{\blank}{\blank}} (e);
+    \end{tikzpicture}
+  }
+
+  \on[bottom=7mm, x=30mm]{
+    \begin{tikzpicture}[pushdown, size=17mm]\footnotesize
+      \state[example ob=<{1,5,9}>, initial above] (a) at (1,1) {$a$}; 
+      \state[example ob=<{2,6}>                 ] (b) at (1,0) {\faForward}; 
+      \state[example ob=<{3,7}>                 ] (c) at (0,0) {$b$}; 
+      \state[example ob=<{4,8}>                 ] (d) at (0,1) {\faBackward}; 
+      \state[example ob=<10>, accepting         ] (e) at (2,1) {\faCheck}; 
+      
+      \path                  (a) edge               node         {\smPAtrans[g]{\varepsilon}{a}{\varepsilon}}      (b);
+      \path                  (b) edge[loop right]   node         {\smGroup{\smPAtrans[g]{\varepsilon}{x}{\varepsilon}\smPAtrans[d]{\varepsilon}{\varepsilon}{x}}}           (b);
+      \path                  (b) edge               node         {\smPAtrans[g]{\varepsilon}{\blank}{\blank}} (c);
+      \path                  (c) edge               node         {\smPAtrans[d]{\varepsilon}{b}{\varepsilon}}      (d);
+      \path                  (d) edge[loop left]    node         {\smGroup{\smPAtrans[g]{\varepsilon}{\varepsilon}{x}\smPAtrans[d]{\varepsilon}{x}{\varepsilon}}}           (d);
+      \path                  (d) edge               node         {\smPAtrans[d]{\varepsilon}{\blank}{\blank}} (a);
+      \path                  (a) edge               node         {\smGroup{\smPAtrans[g]{\varepsilon}{\blank}{\varepsilon}\smPAtrans[d]{\varepsilon}{\blank}{\varepsilon}}} (e);
+    \end{tikzpicture}
+  }
+
+  \on[text, bottom]{
+    \structure{À vous de jouer :} Mq. les \structure{automates à file} reconnaissent les langages \textsc{re}.
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

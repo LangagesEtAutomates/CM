@@ -1,0 +1,37 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages reconnus par un automate à pile}
+  
+  Soit $A=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ un automate à pile.
+
+  \begin{block}{Définitions -- Langages reconnus}
+    \begin{description}[xxxxxx]
+    \item[$\mathcal{L}_F(A)$] est le langage des mots reconnus \alert{par état final}
+      $$\alert{\mathcal{L}_F(A) = \{u \in \Sigma^\star \mid
+      \exists \structure{f\in F}, \exists \structure{\pi\in\Gamma^\star}, \langle u, q_0, \blank \rangle \leadsto_A^\star \langle \varepsilon, \structure{f}, \structure{\pi} \rangle\}}$$
+    \item[$\mathcal{L}_\varepsilon(A)$] est le langage des mots reconnus \alert{par pile vide}
+      $$\alert{\mathcal{L}_\varepsilon(A) = \{u \in \Sigma^\star \mid
+      \exists \structure{q\in Q}, \langle u, q_0, \blank \rangle \leadsto_A^\star \langle \varepsilon, \structure{q}, \structure{\varepsilon} \rangle\}}$$
+    \item[$\mathcal{L}(A)$] est le langage des mots reconnus \alert{par état final et pile vide}
+      $$\alert{\mathcal{L}(A) = \{u \in \Sigma^\star \mid
+      \exists \structure{f\in F}, \langle u, q_0, \blank \rangle \leadsto_A^\star \langle \varepsilon, \structure{f}, \structure{\varepsilon} \rangle\}}$$
+    \end{description}
+  \end{block}
+
+  \begin{block}{Théorème -- Équivalence des classes de langages}
+    Les trois méthodes de reconnaissance définissent les mêmes langages
+    \begin{itemize}
+    \item Ajouter des $\varepsilon$-transitions vers un état final et une boucle pour vider la pile
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

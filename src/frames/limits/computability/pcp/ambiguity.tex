@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Ambiguïté des grammaires algébriques}
+  
+  \Probleme{Ambiguity}{
+    Une grammaire algébrique $G$. 
+  }{
+    Y a-t-il un mot $w$ avec deux arbres de dérivation ?
+  }
+
+  \begin{exampleblock}{Exemples -- les grammaires suivantes sont-elles ambiguës ?}
+
+    \begin{itemize}
+    \item $G_1 = \langle \{a, +\}, \{A\}, A, \left\{\example{A \rightarrow A + a \mid a}\right\} \rangle \uncover<2->{\alert{\quad\in \textsc{neg}(\textsc{Ambiguity})}}$
+    \item $G_2 = \langle \{a, +\}, \{A\}, A, \left\{\example{A \rightarrow A + A \mid a}\right\} \rangle \uncover<2->{\example{\quad\in \textsc{pos}(\textsc{Ambiguity})}} $
+    \end{itemize}
+
+    \vspace{2mm}
+    \uncover<2->{
+      Le mot $\example{a+a+a}$ a deux arbres de dérivation selon $G_2$ :
+
+      ~\hfill
+      \begin{tikzpicture}[tree, x=8mm, y=6.5mm, tree node internal/.append style={alert,}, tree node leave/.append style={example,},]
+        \tree{$A$}{
+          \tree{$A$}{
+            \tree{$A$}{\tree{$a$}{}}
+            \tree{$+$}{}
+            \tree{$A$}{\tree{$a$}{}}
+          }
+          \tree{$+$}{}
+          \tree{$A$}{\tree{$a$}{}}
+        }
+      \end{tikzpicture}
+      \hfill
+      \begin{tikzpicture}[tree, x=8mm, y=6.5mm, tree node internal/.append style={alert,}, tree node leave/.append style={example,},]
+        \tree{$A$}{
+          \tree{$A$}{\tree{$a$}{}}
+          \tree{$+$}{}
+          \tree{$A$}{
+            \tree{$A$}{\tree{$a$}{}}
+            \tree{$+$}{}
+            \tree{$A$}{\tree{$a$}{}}
+          }
+        }
+      \end{tikzpicture}
+      \hfill~
+    }
+  \end{exampleblock}    
+
+\end{frame}
+
+\endgroup
+

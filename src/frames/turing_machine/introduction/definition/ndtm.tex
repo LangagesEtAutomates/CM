@@ -1,0 +1,42 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Machine de Turing Non-Déterministe (MTND)}
+
+  Une \structure{machine de Turing} est un septuplet \alert{$M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$} :
+  \begin{description}[-------]
+  \item[\alert{$\Sigma$}] $\in \Omega_f$ : ensemble fini non vide : \structure{l'alphabet d'entrée}
+  \item[\alert{$\Gamma$}] $\in \Omega_f$ tel que $\Sigma \subseteq \Gamma$ : \structure{l'alphabet de ruban}
+  \item[\alert{\blank}] $\in \Gamma\setminus\Sigma$ : \structure{le symbole vide}
+  \item[\alert{$Q$}] $\in \Omega_f$ : ensemble fini \structure{d'états}
+  \item[\alert{$q_0$}] $\in Q$ : \structure{état initial}
+  \item[\alert{$F$}] $\subseteq Q$ : l'ensemble des \structure{états accepteurs}
+  \item[\alert{$\rightarrow$}] $\subseteq \left(Q \times \Gamma\right) \times \left(Q \times \Gamma \times \{ \triangleleft, \triangleright \}\right)$ : \structure{la relation de transition}
+  \end{description}
+ 
+  Une \structure{transition} est une paire \alert{$\langle \langle q, a \rangle, \langle q', a', d \rangle \rangle \in \rightarrow$}, notée \alert{$q\xrightarrow{\smTMtrans{a}{a'}{d}} q'$} :
+  \begin{description}[-------]
+  \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
+  \item[\alert{$a$}] $\in \Gamma$ : \structure{le symbole lu sur le ruban}
+  \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
+  \item[\alert{$a'$}] $\in \Gamma$ : \structure{le symbole écrit sur le ruban}
+  \item[\alert{$d$}] $\in \{\triangleleft, \triangleright\}$ : \structure{le déplacement de la tête} ($\triangleleft$ gauche, $\triangleright$ droite)
+  \end{description}
+ 
+  \on[x=3.75,y=-2] {
+    \begin{tikzpicture}[turingMachine]
+      \state (q)  at (0,0) {$q$}; 
+      \state (q1) at (1,0) {$q'$}; 
+      \path  (q) edge node {\smTMtrans{a}{a'}{d}} (q1);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

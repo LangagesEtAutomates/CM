@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Conséquence : No Silver Bullet}
+
+  \onAlertBlock[top=-3mm]{Conséquence pour l'analyse statique de programmes}{
+    Il n'existe pas d'analyseur statique \alert{parfait}. Tout outil de vérification est soit
+    \begin{description}
+    \item[Incorrect :] il signale des "faux positifs", ou
+    \item[Incomplet :] il rate certains bugs.
+    \end{description}
+  }
+
+  \onExampleBlock[bottom=8mm]{Exemples de propriétés indécidables}{
+    \begin{itemize}
+    \item $P$ s'arrête sur une certaine entrée
+    \item $P$ s'arrête sur toutes ses entrées
+    \item $P$ ne déréférence pas le pointeur nul
+    \item $P$ ne lève pas d'exception
+    \item $P$ est un virus
+    \item $P$ retourne le même résultat qu'un autre programme
+    \item $P$ retourne un résultat correct par rapport à sa spécification
+    \end{itemize}
+  }  
+
+  \footnoteref{Brooks. \emph{No Silver Bullet -- Essence and Accident in Software Engineering.} IFIP (1986)}
+  \onImage[y=-2mm, x=40mm]{%
+    width=2cm,
+    title={Fred Brooks\footnote{Prix Turing 1999 pour ses contributions en architecture des ordinateurs, systèmes d'exploitation et logiciels}},
+    licenselogo={\ccbysa},
+    license={{\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA-3.0}} -- SD\&M, 2007 (\href{https://commons.wikimedia.org/wiki/File:Fred_Brooks.jpg}{Wikimedia})},
+    img={Brooks.jpg}
+  }
+
+\end{frame}
+
+\endgroup

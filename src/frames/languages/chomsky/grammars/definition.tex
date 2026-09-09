@@ -1,0 +1,41 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Notion de grammaire}
+  
+  \begin{block}{Définition -- Grammaire non-restreinte}
+    Une \structure{grammaire non-restreinte} est un quadruplet \alert{$\langle \Sigma, \Gamma, S, \rightarrow \rangle$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$\Sigma$}] $\in \Omega_f$ l'alphabet des \structure{terminaux}
+    \item[\alert{$\Gamma$}] $\in \Omega_f$ : l'alphabet des \structure{non-terminaux}; tel que $\Sigma \cap \Gamma = \emptyset$
+    \item[\alert{$S$}] $\in \Gamma$ : l'\structure{axiome}
+    \item[\alert{$\rightarrow$}] $\subseteq ((\Sigma \cup \Gamma)^\star \cdot \Gamma \cdot (\Sigma \cup \Gamma)^\star) \times (\Sigma \cup \Gamma)^\star$ : l'ensemble des \structure{règles de production}
+    \end{description}
+
+    \vspace{1mm}
+    Une \structure{règle de production} est un couple \alert{$\langle \alpha, \beta \rangle \in \rightarrow$}, noté $\alert{\alpha \rightarrow \beta}$ tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$\alpha$}] $\in (\Sigma \cup \Gamma)^\star \cdot \Gamma \cdot (\Sigma \cup \Gamma)^\star$ : \structure{membre gauche}
+    \item[\alert{$\beta$}] $\in (\Sigma \cup \Gamma)^\star$ : \structure{membre droit}
+    \end{description}
+  \end{block}
+
+  \begin{block}{Remarques}
+    Soient $G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$ une grammaire et $\langle \alpha, \beta \rangle \in \rightarrow$ une règle de production. 
+    \begin{itemize}
+    \item On n'impose pas que $|\alpha| = 1$ 
+    \item On impose que $\alpha$ contienne au moins un non-terminal 
+    \item On dit que $G$ est \structure{algébrique} si $\forall \langle \alpha, \beta \rangle \in \rightarrow, |\alpha| = 1$
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup
+\endinput

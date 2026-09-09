@@ -1,0 +1,92 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Équivalence entre automates à pile et grammaires}
+
+  \onBlock[top=-2mm, left=.7\textwidth]{Théorème de Chomsky et Schützenberger}{
+    Un langage est \structure{algébrique} si et seulement s’il est reconnu par un \structure{automate à pile non déterministe}.
+  }
+
+  \onImage[top, x=.35\textwidth]{%
+    height=20mm,
+    title={Marcel-Paul Schützenberger},
+    licenselogo={\ccby},
+    license={{\href{https://creativecommons.org/licenses/by/2.0/}{CC BY-2.0}} -- Konrad Jacobs, 1972 (\href{https://commons.wikimedia.org/wiki/File:Sch\%C3\%BCtzenberger.jpeg?uselang=fr}{Wikimedia})},
+    img={Schutzenberger.jpeg}
+  }
+
+ \onExampleBlock<2->[y=0mm]{Exemple : $\{ a^n c b^n \mid n\in \mathbb{N} \}$}{}
+ 
+ \on<2->[bottom=9mm,x=-.45\textwidth]{
+   \begin{tikzpicture}[stack, x=7mm, y=7mm]
+     \cell[alert ob=<2>]{\oneof[$S$]{\on<3->{$T$}\on<5->{$B$}\on<7->{}}}
+     \cell              {\oneof[]{\on<3>{$A$}\on<5>{$S$}}}
+   \end{tikzpicture}
+ }
+ 
+ \on<2->[bottom=23mm,x=-.3\textwidth]{
+   \begin{tikzpicture}[word, x=5mm, y=5mm]
+     \cell[alert ob=<4->]{$a$} \smhead[on=<-3>]
+     \cell[alert ob=<6->]{$c$} \smhead[ob=<4-5>]
+     \cell[alert ob=<7->]{$b$} \smhead[ob=<6>]
+   \end{tikzpicture}
+ }
+ 
+ \on<2->[bottom=10mm,x=-.15\textwidth]{\small
+   \begin{tikzpicture}[pushdown]
+     \state[initial above, accepting, initial text={\alertb<2>{$S$}}] (q) {};
+     \path (q) edge [loop left] node {
+       $\begin{array}{r}
+         \alertb<4>{\smPAtrans{a}{A}{\varepsilon}} \\
+         \alertb<7>{\smPAtrans{b}{B}{\varepsilon}} \\
+         \alertb<6>{\smPAtrans{c}{S}{\varepsilon}} \\
+       \end{array}$
+     } (q);
+     \path (q) edge [loop right] node {
+       $\begin{array}{l}
+         \alertb<3>{\smPAtrans{\varepsilon}{S}{TA}} \\
+         \alertb<5>{\smPAtrans{\varepsilon}{T}{BS}} \\
+       \end{array}$
+     } (q);
+   \end{tikzpicture}
+ }
+ 
+ \on<2->[bottom=15mm, x=.2\textwidth, width=2.5cm]{
+   \example{Grammaire}\\\vspace{2mm}
+   $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+   S & \alertb<3>{AT} \mid \alertb<6>{c}\\
+   T & \alertb<5>{SB}\\
+   A & \alertb<4>{a}\\
+   B & \alertb<7>{b}\\
+   \end{array}\right.$
+ }
+ 
+ \on<2->[bottom=10mm,x=.4\textwidth]{
+   \begin{tikzpicture}[tree, x=7mm,y=7mm, tree node internal/.append style={structure,}, tree node leave/.append style={example,},]
+     \tree{\alertb<2>{$S$}}{
+       \tree[on=<3->]{\alertb<3>{$A$}}{
+         \tree[on=<4->,yshift=-1]{\alertb<4>{$a$}}{}
+       }
+       \tree[on=<3->]{\alertb<3>{$T$}}{
+         \tree[on=<5->]{\alertb<5>{$S$}}{
+           \tree[on=<6->]{\alertb<6>{$c$}}{}
+         }
+         \tree[on=<5->]{\alertb<5>{$B$}}{
+           \tree[on=<7->]{\alertb<7>{$b$}}{}
+         }
+       }
+     }
+   \end{tikzpicture}
+ }
+
+  \footnoteref{Chomsky, Schützenberger. \emph{The algebraic theory of context-free languages.} SLFM. (1959)}
+  
+\end{frame}
+
+\endgroup

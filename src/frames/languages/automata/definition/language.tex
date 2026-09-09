@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage reconnu par un AFN}
+
+  \on[text, top]{
+    Soient $A=\langle \Sigma, Q, q_0, F, \rightarrow \rangle$ un AFN et $u \in \Sigma^\star$.
+
+    \begin{block}{Définition -- Langage reconnu (ou accepté)}
+      $u$ est \structure{reconnu} par $A$ s'il mène d'une config. initiale à une config. finale
+      \vspace{-1mm}
+      $$\exists f\in F,~  \alert{\langle u, q_0 \rangle \leadsto_A^\star \langle \varepsilon, f\rangle}$$
+      \vspace{-1mm}
+      Le langage \structure{reconnu} par $A$ est l'ensemble $\alert{\mathcal{L}(A)}$ des mots reconnus par $A$
+      \vspace{-1mm}
+      $$\alert{\mathcal{L}(A) \eqdef \left\{u \in \Sigma^\star \,\middle\mid\, \exists f\in F,  \langle u, q_0 \rangle \leadsto_A^\star \langle \varepsilon, f\rangle\right\}}$$
+      \vspace{-1mm}
+      La classe des langages \structure{reconnaissables} par un AFN est noté $\alert{\textsc{rec}}$.
+    \end{block}
+  }
+
+  \onExampleBlock[bottom]{Exemple}{
+    \begin{enumerate}
+    \item $\langle bbc, 3 \rangle \leadsto^\star \langle \varepsilon, 2 \rangle$
+    \item $3$ est l'état initial
+    \item $2$ est un état final
+    \end{enumerate}
+    Donc \example{$bbc \in \mathcal{L}(A)$}
+    \begin{itemize}
+    \item On a $\mathcal{L}(A) = b^+c^\star$
+    \end{itemize}
+  }
+
+  \on[bottom, x=.25\textwidth]{
+    \begin{tikzpicture}[automaton, grid size=15mm]
+      \state                (1) at (0,1) {$1$}; 
+      \state[accepting]     (2) at (1,1) {$2$}; 
+      \state[initial above] (3) at (0,0) {$3$}; 
+      \state                (4) at (1,0) {$4$}; 
+
+      \path (1) edge             node       {$a$}           (2);
+      \path (1) edge[loop above] node       {$a$}           (1);
+      \path (3) edge             node[swap] {$b$}           (4);
+      \path (3) edge[loop left ] node       {$b$}           (3);
+      \path (4) edge[loop right] node       {$b$}           (4);
+      \path (2) edge[loop above] node       {$c$}           (2);
+      \path (4) edge             node[swap] {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Actions d'un automate à pile}
+
+  \on[top, text]{
+    Soit $A=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ un automate à pile. 
+    \begin{block}{Définition -- Action et chemin d'actions}
+      Les \structure{actions} de $A$ sont définies par une
+      relation binaire \alert{$\leadsto_A$} sur les configurations.
+      Pour tous $u, v \in \Sigma^\star$, $\pi, p, p' \in \Gamma^\star$, $q, q'\in Q$, on a 
+      $$\alert{\langle v \cdot u, q, p \pi \rangle \leadsto_A \langle u, q', p' \pi \rangle \hspace{3mm} \Leftrightarrow \hspace{3mm} q\xrightarrow{\smPAtrans{p}{v}{p'}}q'}$$
+      On note \alert{$\leadsto_A^\star$} la fermeture transitive et réflexive de $\leadsto_A$.
+    \end{block}
+  }
+ 
+  \onExampleBlock[y=-7mm]{Exemple -- Action $\langle bb, 0, AA\blank \rangle \leadsto_A \langle b, 1, A\blank \rangle$}{}
+ 
+  \on[y=-25mm, x=-40mm]{
+    \begin{tikzpicture}[word, x=7mm, y=7mm]
+      \cell         {$a$}  
+      \cell         {$a$} 
+      \cell[example]{$b$} \smhead[example]
+      \cell[alert]  {$b$} 
+    \end{tikzpicture}
+  }
+ 
+  \on[y=-25mm,x=5mm]{
+    \begin{tikzpicture}[pushdown]
+      \state[initial, example] (a) at (0,0) {$0$}; 
+      \state[alert           ] (b) at (1,0) {$1$}; 
+      \state[accepting       ] (c) at (2,0) {$2$}; 
+ 
+      \path        (a) edge[bend right] node[below] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (c);
+      \path        (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}                 } (a);
+      \path[alert] (a) edge             node[above] {\smPAtrans{b}{A}{\varepsilon}                 } (b);
+      \path        (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}                 } (b);
+      \path        (b) edge             node[above] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}} (c);
+    \end{tikzpicture}
+  }
+ 
+  \on[y=-25mm, x=45mm]{
+    \begin{tikzpicture}[stack, x=7mm, y=7mm]
+      \cell[alert]{$\blank$}  
+      \cell[alert]{$A$}        
+      \cell[example]{$A$}          
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

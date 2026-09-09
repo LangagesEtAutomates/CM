@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Compression par grammaires}
+
+  \on[width=1.1\textwidth, top=-3mm]{
+    \Probleme{SmallestGrammar}{
+      \begin{itemize}
+      \item Un mot $w \in \Sigma^\star$
+      \item Un entier $k$
+      \end{itemize}
+    }{
+      Existe-t-il une grammaire algébrique  $G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$ tq :
+      \begin{itemize}
+      \item \structure{$\mathcal{L}(G) = \{ w \}$}, et
+      \item la taille de $G$ est au plus $k$ : \structure{$\displaystyle\sum_{A \rightarrow \beta} |\beta| \le k$} ?
+      \end{itemize}
+    }
+  }
+
+  \onBlock[y=2mm, anchor=north]{Théorème (admis)}{
+    \textsc{SmallestGrammar} est \textsc{np}-complet.
+  }
+
+  \onExampleBlock[bottom=3mm]{Exemple pour $w = \texttt{ababababab}$}{
+    Une grammaire minimale pour $w$ est $G_w$ :
+    
+    \quad\quad$G : \left\{\begin{array}{@{~}r@{~}c@{~}l@{~}}
+    S & \rightarrow & ABA \\
+    A & \rightarrow & BB \\
+    B & \rightarrow & ab
+    \end{array}\right.$ \quad(taille $7$)
+  }
+
+  \on[x=30mm, y=-20mm]{
+    \begin{tikzpicture}[tree, x=5mm, y=6.5mm, tree node internal/.append style={alert,}, tree node leave/.append style={example,},]
+      \tree{$S$}{
+        \tree{$A$}{
+          \tree{$B$}{
+            \tree{$a$}{}
+            \tree{$b$}{}
+          }
+          \tree{$B$}{
+            \tree{$a$}{}
+            \tree{$b$}{}
+          }
+        }
+          \tree{$B$}{
+            \tree{$a$}{}
+            \tree{$b$}{}
+          }
+        \tree{$A$}{
+          \tree{$B$}{
+            \tree{$a$}{}
+            \tree{$b$}{}
+          }
+          \tree{$B$}{
+            \tree{$a$}{}
+            \tree{$b$}{}
+          }
+        }
+      }
+    \end{tikzpicture}
+  }
+  
+  \footnoteref{Charikar et al. \emph{The Smallest Grammar Problem}. IEEE Trans. Inf. Theory (2005)}
+  
+\end{frame}
+
+\endgroup

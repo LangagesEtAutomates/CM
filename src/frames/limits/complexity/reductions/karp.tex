@@ -1,0 +1,63 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Réductions polynomiales de Karp}
+
+  \on[text, top=-2mm]{
+    Soient $A$ et $B$ deux problèmes de décision.
+  }
+  
+  \onBlock[top=0mm, left=.75\textwidth]{Définition -- Réduction polynomiale}{
+    \begin{itemize}
+    \item\vspace{-2mm} Une \structure{réduction polynomiale de $A$ vers $B$} est \\
+      une réduction par mappage $f$ de $A$ vers $B$
+      dont la complexité en temps est polynomiale :
+      \begin{itemize}
+      \item $f : \alert{\mathcal{I}(A) \rightarrow \mathcal{I}(B)}$
+      \item $f$ est \alert{calculable en temps polynomial}
+      \item $\forall u \in \mathcal{I}(A),\quad \alert{u\in \textsc{pos}(A) \Leftrightarrow f(u)\in \textsc{pos}(B)}$
+      \end{itemize}
+    \item En conséquence, \structure{$|f(x)| \in \textsc{poly}(|x|)$}
+    \end{itemize}
+  }
+
+  \onBlock<2->[bottom=5mm]{Définition -- Relation de réductibilité}{
+    \begin{itemize}
+    \item\vspace{-1mm} On note \structure{$A \leq_p B$} s'il existe une réduction polynomiale de $A$ vers $B$
+    \item La relation \structure{$\leq_p$} est un pré-ordre sur $\textsc{lang}$
+    \item Les classes d'équivalence pour \structure{$\equiv_p$} sont nommées \structure{degrés de Karp}
+    \item Si $A \leq_p B$, alors :
+    \begin{itemize}
+    \item\vspace{-1mm}$
+      \alert{B \in \textsc{p} \Rightarrow A \in \textsc{p}}
+      \quad\land\quad
+      \structure{B \in \textsc{np} \Rightarrow A \in \textsc{np}}
+      $\quad\quad
+      (par composition $A \xrightarrow{f} B \xrightarrow{\textsc{poly}} \mathbb{B}$) 
+    \item$
+      \alert{A \notin \textsc{p} \Rightarrow B \notin \textsc{p}}
+      \quad\land\quad
+      \structure{A \notin \textsc{np} \Rightarrow B \notin \textsc{np}}
+      $\quad\quad
+      (par contraposée) 
+    \end{itemize}
+    \end{itemize}
+  }
+
+  \onImage[y=12mm, x=40mm]{%
+    width=2.5cm,
+    title={Richard Karp\footnote{Prix Turing 1985 pour ses travaux sur la complexité}},
+    licenselogo={\ccbysa},
+    license={\href{https://creativecommons.org/licenses/by-sa/2.0/}{CC BY-SA 2.0} -- Rama 2009 -- \href{https://commons.wikimedia.org/wiki/File:Karp_mg_7725-b.cr2.jpg}{Wikimedia}},
+    img={Karp.jpg}
+  }
+  
+\end{frame}
+
+\endgroup

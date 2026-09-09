@@ -1,0 +1,102 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exemple -- Fonction calculable à plusieurs arguments}
+
+  \onBlock[top=-4mm]{Addition d'entiers}{
+    \structure{Entrées :}
+    \begin{itemize}
+    \item $a$ sur le ruban $\textsc{a}$
+    \item $b$ sur le ruban $\textsc{b}$
+    \end{itemize}
+    \structure{Sortie :}
+    \begin{itemize}
+    \item $a+b$ sur le ruban $\textsc{c}$
+    \end{itemize}
+  }
+
+  \on[x=23mm, y=30mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{a} :};
+      \cell{}    \smheadb<11>
+      \cell{$0$} \smhead<1,10,12>
+      \cell{$1$} \smheadb<9>
+      \cell{$0$} \smheadb<8>
+      \cell{$0$} \smheadb<7>
+      \cell{$1$} \smheadb<6>
+      \cell{$0$} \smheadb<5>
+      \cell{$1$} \smheadb<4>
+      \cell{$0$} \smheadb<3>
+      \cell{}    \smheadfromb<2>{-8}
+    \end{tikzpicture}
+  }
+  \on[x=23mm, y=20mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{b} :};
+      \cell{}    \smheadb<11>
+      \cell{$0$} \smhead<1,10,12>
+      \cell{$0$} \smheadb<9>
+      \cell{$0$} \smheadb<8>
+      \cell{$0$} \smheadb<7>
+      \cell{$1$} \smheadb<6>
+      \cell{$1$} \smheadb<5>
+      \cell{$0$} \smheadb<4>
+      \cell{$0$} \smheadb<3>
+      \cell{}    \smheadfromb<2>{-8}
+    \end{tikzpicture}
+  }
+  
+  \on[x=23mm, y=10mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{c} :};
+      \cell{}                 \smheadb<11>
+      \cell{$\onlyb<11->{0}$} \smheadb<10,12>
+      \cell{$\onlyb<10->{1}$} \smheadb<9>
+      \cell{$\onlyb<9->{0}$}  \smheadb<8>
+      \cell{$\onlyb<8->{1}$}  \smheadb<7>
+      \cell{$\onlyb<7->{0}$}  \smheadb<6>
+      \cell{$\onlyb<6->{1}$}  \smheadb<5>
+      \cell{$\onlyb<5->{1}$}  \smheadb<4>
+      \cell{$\onlyb<4->{0}$}  \smhead<-3>
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  \on[x=0mm, y=-20mm]{
+    \begin{tikzpicture}[turingMachine, x=45mm, y=7mm]
+      \state[alert ob=<{-2}>,initial]   (a) at (0,2) {\faForward}; 
+      \state[alert ob=<{3-6,8-11}>]     (0) at (1,2) {0}; 
+      \state[alert ob=<{7}>]            (1) at (1,0) {1}; 
+      \state[alert ob=<{12}>,accepting] (f) at (2,1) {\faCheck}; 
+      
+      \scriptsize
+      \path (a) edge[loop below]    node             {\begin{tabular}{@{}c@{}}\smGroup{\smTMtransR[\textsc{a}]{x}{x}\smTMtransR[\textsc{b}]{y}{y}}\\$\forall x, y \in \{0,1\}$\end{tabular}} (a);
+      \path (a) edge                node[below left] {\smGroup{\smTMtransL[\textsc{a}]{\blank}{\blank}\smTMtransL[\textsc{b}]{\blank}{\blank}}} (0);
+      \path (0) edge[bend right]    node[swap]       {\smGroup{\smTMtransL[\textsc{a}]{1}{1}\smTMtransL[\textsc{b}]{1}{1}\smTMtransL[\textsc{c}]{\blank}{0}}} (1);
+      \path (1) edge[bend right]    node[swap]       {\smGroup{\smTMtransL[\textsc{a}]{0}{0}\smTMtransL[\textsc{b}]{0}{0}\smTMtransL[\textsc{c}]{\blank}{1}}} (0);
+      \path (0) edge[bend left=10]  node             {\smGroup{\smTMtransR[\textsc{a}]{\blank}{\blank}\smTMtransR[\textsc{b}]{\blank}{\blank}\smTMtransR[\textsc{c}]{\blank}{\blank}}} (f);
+      \path (1) edge[bend right=10] node[swap]       {\smGroup{\smTMtransR[\textsc{a}]{\blank}{\blank}\smTMtransR[\textsc{b}]{\blank}{\blank}\smTMtransR[\textsc{c}]{\blank}{1}}} (f);
+      \path (0) edge[loop above]    node             {
+        \smGroup{\smTMtransL[\textsc{a}]{0}{0} \smTMtransL[\textsc{b}]{0}{0} \smTMtransL[\textsc{c}]{\blank}{0}}
+        \smGroup{\smTMtransL[\textsc{a}]{1}{1} \smTMtransL[\textsc{b}]{0}{0} \smTMtransL[\textsc{c}]{\blank}{1}}
+        \smGroup{\smTMtransL[\textsc{a}]{0}{0} \smTMtransL[\textsc{b}]{1}{1} \smTMtransL[\textsc{c}]{\blank}{1}}
+      } (0);
+      \path (1) edge[loop below]    node             {
+        \smGroup{\smTMtransL[\textsc{a}]{0}{0} \smTMtransL[\textsc{b}]{1}{1} \smTMtransL[\textsc{c}]{\blank}{0}}
+        \smGroup{\smTMtransL[\textsc{a}]{1}{1} \smTMtransL[\textsc{b}]{0}{0} \smTMtransL[\textsc{c}]{\blank}{0}}
+        \smGroup{\smTMtransL[\textsc{a}]{1}{1} \smTMtransL[\textsc{b}]{1}{1} \smTMtransL[\textsc{c}]{\blank}{1}}
+      } (1);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput
+

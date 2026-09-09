@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exemple -- Système de preuves formel}
+
+  \begin{block}{Rappel -- Deux problèmes mathématiques}
+
+    Soit $\langle \Phi, \Pi, \valid \rangle$ un système de preuve. On s'intéresse aux problèmes : 
+
+    \hspace\fill%
+    \begin{minipage}[t]{.45\textwidth}
+      \begin{problembox}
+        \textsc{Vérification des preuves}\\
+        \structure{Instance :} $\langle \pi, \varphi \rangle \in \Pi \times \Phi$ \\
+        \structure{Question :} $\pi \valid \varphi$ ?
+      \end{problembox}
+    \end{minipage}%
+    \hspace\fill%
+    \begin{minipage}[t]{.5\textwidth}
+      \begin{problembox}
+        \textsc{Entscheidungsproblem}\\
+        \structure{Instance :} $\varphi \in \Phi$ \\
+        \structure{Question :} $\exists \pi \in \Pi, \pi \valid \varphi$ ?
+      \end{problembox}
+    \end{minipage}%
+    \hspace\fill%
+  \end{block}
+
+  \begin{block}{Corollaire du théorème -- Système formel}
+    Les deux énoncés suivants sont équivalents :
+    \begin{enumerate}
+    \item On peut énumérer les propositions démontrables
+      $$\textsc{Entscheidungsproblem} \in \textsc{re}$$
+    \item On peut vérifier qu'une démonstration valide une proposition
+      $$\textsc{Vérification des preuves} \in \textsc{r}$$
+    \end{enumerate}
+    \begin{itemize}
+    \item On dira alors que $\langle \Phi, \Pi, \valid \rangle$ est un système de preuves \structure{formel}.
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

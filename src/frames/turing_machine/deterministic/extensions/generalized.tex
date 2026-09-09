@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Modèle étendu de machines de Turing}
+ 
+  \onBlock[top=-4mm]{Nouvelles fonctionnalités}{
+    Pour simplifier la conception de machines de Turing, on s'autorise :
+    \begin{description}[Multi-ruban :]
+    \item[Multi-ruban :] \(k\) rubans parallèles, une tête/opération par ruban (simultané).
+      \begin{itemize}
+      \item choisir un ruban pour les entrées/sorties
+      \end{itemize}
+    \item[Immobilité :] $\diamond$ ne déplace pas la tête de lecture
+      \begin{itemize}
+      \item $\varepsilon$-transitions possibles : $\smTMtransS{\varepsilon}{\varepsilon}$
+      \end{itemize}
+    \item[Réécriture :] lire un mot \(u\in\Gamma^\star\), écrire un mot \(v\in\Gamma^\star\)
+      \begin{itemize}
+      \item ajoute/supprime des cases si $|u| \neq |v|$
+      \end{itemize}
+    \end{description}
+  }
+ 
+  \onExampleBlock[y=-10mm]{Exemple : $\{ a^{3n} b^{2n} \mid n\in \mathbb{N} \}$}{}
+  
+  \on[y=-20mm, x=-20mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{i} :};
+      \cell{} 
+      \cell[alert ob=<1>]{\only<-1>{$a$}} \smhead<1> 
+      \cell[alert ob=<1>]{\only<-1>{$a$}} 
+      \cell[alert ob=<1>]{\only<-1>{$a$}} 
+      \cell[alert ob=<2>]{\only<-2>{$a$}} \smheadb<2> 
+      \cell[alert ob=<2>]{\only<-2>{$a$}} 
+      \cell[alert ob=<2>]{\only<-2>{$a$}} 
+      \cell[alert ob=<4>]{\only<-4>{$b$}} \smheadb<3,4> 
+      \cell[alert ob=<4>]{\only<-4>{$b$}} 
+      \cell[alert ob=<5>]{\only<-5>{$b$}} \smheadb<5> 
+      \cell[alert ob=<5>]{\only<-5>{$b$}} 
+      \cell{}                             \smheadb<6-> 
+    \end{tikzpicture}
+  }
+ 
+  \on[y=-20mm, x=40mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{n} :};
+      \cell{}                  \smheadb<6->
+      \cell{\onlyb<2-5>{$1$}}  \smhead<1,5>
+      \cell{\onlyb<3-4>{$1$}}  \smheadb<2,4>
+      \cell{}                  \smheadb<3>
+    \end{tikzpicture}
+  }
+  
+  \on[bottom=-2mm]{
+    \begin{tikzpicture}[turingMachine,x=35mm]
+      \state[alert ob=<{-3}>,  initial  ]  (0) at (0,0) {0}; 
+      \state[alert ob=<{4-6}>,          ]  (1) at (1,0) {1}; 
+      \state[alert ob=<{7}>, accepting]  (2) at (2,0) {2}; 
+      
+      \path (0) edge[loop below] node       {\smGroup{\smTMtransR[\textsc{i}]{aaa}{\varepsilon}  \smTMtransR[\textsc{n}]{\blank}{1}}}      (0);    
+      \path (0) edge             node[swap] {\smGroup{\smTMtransS[\textsc{i}]{b}{b}              \smTMtransL[\textsc{n}]{\blank}{\blank}}} (1);
+      \path (1) edge[loop below] node       {\smGroup{\smTMtransR[\textsc{i}]{bb}{\varepsilon}   \smTMtransL[\textsc{n}]{1}{\blank}}}      (1);    
+      \path (1) edge             node[swap] {\smGroup{\smTMtransS[\textsc{i}]{\blank}{\blank}    \smTMtransS[\textsc{n}]{\blank}{\blank}}} (2);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Totalité d'un langage algébrique}
+
+  \on[text, top=-3mm]{
+    \Probleme{Totality-Alg}{
+      Une grammaire algébrique $G$ sur un alphabet $\Sigma$
+    }{
+      Est-ce que $\mathcal{L}(G) = \Sigma^\star$ ?
+    }
+  }
+
+  \onBlock[y=10mm]{Théorème (admis)}{
+    \textsc{Totality-Alg} est indécidable.
+  }
+
+  \onExampleBlock[y=-8mm]{Exemples}{
+    \begin{itemize}
+    \item Instance positive : \example{$\left\{ S \rightarrow a S \mid b  S \mid \varepsilon\right.$}
+    \item Instance négative : \example{$\left\{ S \rightarrow a S b \mid \varepsilon\right.$}
+    \end{itemize}
+  }
+
+  \onAlertBlock[bottom=3mm]{Remarque -- restriction aux langages déterministes}{
+    \small
+    \begin{itemize}
+    \item \textsc{Totality-Alg} est \alert{indécidable} pour les automates à pile \alert{non-déterministes}
+    \item \textsc{Totality-Alg} est \alert{décidable} pour les automates à pile \alert{déterministes}
+    \end{itemize}
+  }
+  
+  \footnoteref{S. Ginsburg \& H. G. Rice. \emph{Two Families of Languages Related to ALGOL}. JACM (1962)}
+  
+\end{frame}
+
+\endgroup

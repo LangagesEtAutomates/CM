@@ -1,0 +1,61 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages rationnels et langages reconnaissables}
+
+  \onBlock[top=-2mm, left=.7\textwidth]{Théorème de Kleene}{
+    Les langages  reconnaissables \\
+    par un automate fini, déterministe ou non,  \\
+    sont exactement les langages rationnels.
+
+    \vspace{2mm}
+    Les langages rationnels sont stables par :
+    \begin{itemize}
+    \item union, intersection, complémentaire
+    \item concaténation, fermeture de Kleene
+    \end{itemize}
+  }
+
+  \onImage[top, x=.35\textwidth]{%
+    height=30mm,
+    title={Stephen C. Kleene},
+    licenselogo={\ccPublicDomain},
+    license={Domaine public (Harold N. Hone, 1963 -- \href{https://commons.wikimedia.org/wiki/File:Stephen_Cole_Kleene_circa_1963.tif}{Wikimedia})},
+    img={Kleene.jpg}
+  }
+  
+  \on[y=-20mm]{\footnotesize
+    \begin{tikzpicture}[y=17mm, x=40mm]
+      \small
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (exp) at (0,1) {Expression\\rationnelle};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (lex) at (2,1) {Analyseur\\lexical};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (nfa) at (0,0) {Automate fini\\non-déterministe};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (dfa) at (1,0) {Automate fini\\déterministe};
+      \node[smBox, minimum width=2.4cm, minimum height=1cm] (min) at (2,0) {Automate fini\\minimal};
+
+      \node[example, above] at (exp.north) {$a (b|c)^\star$};
+      \node[example, above] at (lex.north) {$abc \rightarrow \cmark$, $bac \rightarrow \xmark$ };
+
+      \node[alert] at (1,1) {\large $\textsc{rat} =  \textsc{rec}$};
+
+      \tiny
+      \path[-latex, structure]        (lex) edge[bend right=5mm]  node[above]             {Lemme d'Arden}                     (exp);
+      \path[-latex, structure,dashed] (exp) edge[bend right=5mm]                                                             (lex);
+      \path[-latex, structure]        (exp) edge[bend left]  node[right, align=left] {Algorithme de\\Thompson}           (nfa);
+      \path[-latex, structure]        (nfa) edge[bend left]  node[left, align=right] {Lemme\\d'Arden}                    (exp);
+      \path[-latex, structure]        (nfa) edge             node[align=center]      {Sous-ensembles de\\Rabin \& Scott} (dfa);
+      \path[-latex, structure]        (dfa) edge             node[align=center]      {Méthode de\\Moore}                 (min);
+      \path[-latex, structure]        (min) edge             node[left, align=right] {Transcription}                     (lex);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

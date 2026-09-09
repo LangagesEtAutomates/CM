@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwData{X}{x}
+\SetKwData{I}{i}
+\SetKwFunction{searchPerfect}{search\_perfect}
+\SetKwFunction{perfect}{perfect}
+\SetKwData{S}{s}
+
+\begin{frame}{Un exemple plus compliqué}
+  
+  \onExampleBlock[top=-4mm,left=.66\textwidth]{Ces instances sont-elles positives ?}{
+    \begin{itemize}
+    \item $\langle \searchPerfect, 2 \rangle$
+    \item $\langle \searchPerfect, 3 \rangle$
+    \end{itemize}
+    \begin{algorithm}[H]
+      \Fun{$\searchPerfect(\X \in \mathbb{N}) \in \mathbb{B}$}{
+        \lWhile{$\lnot \perfect(\X)$}{
+          $\X \leftarrow \X+2$%
+        }
+        \Return \True;
+      }
+      \Fun{$\perfect(\X \in \mathbb{N}) \in \mathbb{B}$}{
+        $\S\leftarrow 0$\;
+        \For{$\I$ \From $1$ \To $\X-1$}{
+          \lIf{$\X \equiv0 \pmod{\I}$}{$\S \leftarrow \S + \I$}
+        }
+        \Return $\S = \X$\;
+      }
+    \end{algorithm}
+  }
+  
+  \onBlock<2->[top=-4mm,right=.38\textwidth]{Nombre parfait}{
+    Nombre égal à la somme de ses diviseurs propres.
+  }
+
+  \onExampleBlock<2->[right=.38\textwidth,y=2mm]{Exemples}{
+    \begin{description}[45 :]
+    \item[$4$ :]  $1 + 2 = 3$ \xmark
+    \item[$6$ :]  $1 + 2 + 3 = 6$ \cmark
+    \item[$45$ :] $1 + 3 + 5 + 9 + 15 = 33$ \xmark
+    \end{description}
+  }
+
+  \onAlertBlock<3->[bottom=-9mm]{Conjecture -- Il n'existe pas de nombre parfait impair}{
+    \myquote[alert]{Euler}{
+      Il reste la question de savoir si un nombre parfait impair \\peut exister ; c'est une question assurément très difficile, jamais résolue ni par les Anciens ni par les Modernes.
+    }
+  }
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\PROBLEM{\textsc{problem}}
+
+\begin{frame}{Problème de décision}
+
+  \begin{block}{Définition -- Problème de décision formel}
+    Un \structure{problème de décision formel} est un langage \alert{$\PROBLEM{} \in \textsc{lang}$}. 
+  \end{block}
+
+  \begin{block}{Définition -- Problème de décision (à domaine) contraint}
+    Un \structure{problème de décision contraint} est un couple \alert{$\PROBLEM{} = \langle I, P \rangle$}, où :
+    \begin{description}
+    \item[$I \in \textsc{lang}$] est le langage des \structure{instances} de \PROBLEM{}
+    \item[$P \subseteq I$] est le langage des \structure{instances positives} de \PROBLEM{}
+    \end{description}
+  \end{block}
+  
+  \begin{block}{Notations}
+    \begin{tikzpicture}[2Darray, x=25mm, y=6mm]
+      \arrayColumn[header=\structure{Notation}]{
+        \arrayLine{\structure{$\Sigma(\PROBLEM)$}}
+        \arrayLine{\structure{$\mathcal{I}(\PROBLEM)$}}
+        \arrayLine{\structure{$\textsc{pos}(\PROBLEM)$}}
+        \arrayLine{\structure{$\textsc{neg}(\PROBLEM)$}}
+      }
+      \arrayColumn[header=\structure{$L \in \textsc{lang}$}]{
+        \arrayLine{$\Sigma(L)$}
+        \arrayLine{$\Sigma(L)^\star$}
+        \arrayLine{$L$}
+        \arrayLine{$\Sigma(L)^\star \setminus L$}
+      }
+      \arrayColumn[header=\structure{$\langle I, P\rangle \in \textsc{lang}^2$}]{
+        \arrayLine{$\Sigma(I)$}
+        \arrayLine{$I$}
+        \arrayLine{$P$}
+        \arrayLine{$I \setminus P$}
+      }
+      \arrayColumn[width=30mm, header=\structure{Notion}]{
+        \arrayLine{Alphabet}
+        \arrayLine{Instances}
+        \arrayLine{Instances positives}
+        \arrayLine{Instances négatives}
+      }
+    \end{tikzpicture}
+  \end{block}
+
+\end{frame}
+
+\endgroup
+\endinput

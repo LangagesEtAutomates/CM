@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Decide}{decide}
+
+\begin{frame}{Retour sur l'Entscheidungsproblem}
+
+  Soit $\langle \Phi, \Pi, \valid \rangle$ le système de preuve formel des mathématiques usuelles\footnote{Disons, la logique du premier ordre muni des axiomes de ZFC}
+
+  \Probleme{Entscheidungsproblem}{
+    Une proposition $\varphi \in \Phi$ 
+  }{
+    Est-ce que $\varphi$ est démontrable ($\exists \pi \in \Pi,   \pi \valid \varphi$) ?
+  }
+  
+  \begin{block}{Théorème -- Turing, Church (1936)}
+    Le \textsc{Entscheidungsproblem} est indécidable. 
+  \end{block}
+
+  \pause 
+  \begin{block}{Démonstration}
+    Si le \structure{\textsc{Entscheidungsproblem}} était décidable, \structure{$\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$} aussi :
+
+    \vspace{2mm}
+    \begin{algorithm}[H]
+      \Fun{$\Decide_{\textsc{Universal}}(\alert{\langle P, u \rangle} \in \mathcal{I}(\textsc{Universal})) \in \mathbb{B}$}{
+        \vspace{1mm}\Return $\Decide_{\textsc{Entscheidungsproblem}}(\alert{``u \in \llbracket P \rrbracket"})$;
+      }
+    \end{algorithm}
+    \vspace{1mm}
+    
+    Or \structure{$\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$} est indécidable, donc \structure{\textsc{Entscheidungsproblem}} aussi. 
+  \end{block}
+  
+\end{frame}
+
+\endgroup

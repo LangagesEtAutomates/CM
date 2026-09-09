@@ -1,0 +1,125 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Caractérisation des langages décidables}
+
+  \onBlock[top=-3mm]{Théorème --- Clôture par complémentaire}{
+    Soit $L$ un langage et $\overline{L}$ son complémentaire.\\
+    Les trois conditions suivantes sont équivalentes :
+    \begin{enumerate}
+    \item $L$ est décidable
+    \item $\overline{L}$ est décidable
+    \item $L$ et $\overline{L}$ sont tous les deux semi-décidables
+    \end{enumerate}
+  }
+  
+  \onBlock<2->[anchor=north, y=2mm]{Démonstration}{
+    \begin{description}[$1 \Rightarrow 2$ :]
+    \item<2->[$1 \Rightarrow 2$ :]
+      Si $M = \langle \Sigma, \Gamma, \blank, Q, q_0, \alert{F}, \rightarrow \rangle$ décide $L$,\\
+      alors $\overline{M} = \langle \Sigma, \Gamma, \blank, Q, q_0, \alert{Q \setminus F}, \rightarrow \rangle$ décide $\overline{L}$.\\
+    \item<3->[$2 \Rightarrow 3$ :] Décidable $\Rightarrow$ semi-décidable par définition.
+    \item<4->[$3 \Rightarrow 1$ :] On exécute un \structure{produit} des deux machines.\\
+      L'une finit par s'arrêter en donnant la réponse.
+    \end{description}
+    \uncover<4->{\footnotesize
+      $$
+      \alert{\left\langle \structure{q_1}, \example{q_2} \right\rangle
+        \xrightarrow{\smGroup{\smTMtrans[\structure{\textsc{l}}]{\structure{a_1}}{\structure{b_1}}{\structure{d_1}}
+            \smTMtrans[\example{\overline{\textsc{l}}}]{\example{a_2}}{\example{b_2}}{\example{d_2}}}}_{1\times 2}
+        \left\langle \structure{q'_1}, \example{q'_2} \right\rangle}
+      \quad\Leftrightarrow\quad
+      \structure{q_1 \xrightarrow{a_1/b_1,d_1}_1 q'_1}
+      \quad\land\quad
+      \example{q_2 \xrightarrow{a_2/b_2,d_2}_2 q'_2}
+      $$
+    }
+  }
+
+  \on<4->[top, x=40mm, y=15mm]{
+    \begin{tikzpicture}[turingMachine, x=5mm, y=5mm]\scriptsize
+      \begin{scope}[draw=structure, text=structure]
+        \state[structure on=<-5>, initial] (0) at (0,5) {$0$}; 
+        \state[structure ob=<6>,accepting] (1) at (3,5) {$1$}; 
+        \path     (0) edge[loop above]   node         {\smAlign{\smTMtransR[\textsc{l}]{b}{\blank}\smTMtransL[\textsc{l}]{\blank}{\blank}}}  (0);
+        \path     (0) edge               node         {\smTMtransL[\textsc{l}]{a}{a}}      (1);
+      \end{scope}
+      
+      \begin{scope}[draw=example, text=example]
+        \state[example, initial right] (a) at (5,3) {$a$}; 
+        \state[accepting]              (b) at (5,0) {$b$}; 
+        \path                  (a) edge[loop above]   node         {\smAlign{\smTMtransR[\overline{\textsc{l}}]{b}{b}\smTMtransS[\overline{\textsc{l}}]{a}{a}}}           (a);
+        \path                  (a) edge               node         {\smTMtransL[\overline{\textsc{l}}]{\blank}{\blank}}      (b);
+      \end{scope}
+      
+      \begin{scope}[draw=alert, text=alert]
+        \state[alert on=<-5>,  initial] (a0) at (0,3) {$a0$}; 
+        \state[                       ] (b0) at (0,0) {$b0$}; 
+        \state[alert ob=<6>, accepting] (a1) at (3,3) {$a1$}; 
+        \state[                       ] (b1) at (3,0) {$b1$}; 
+        \path (a0) edge[loop above] (a0);
+        \path (a0) edge             (b0);
+        \path (a0) edge             (a1);
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+  \on<4->[y=30mm, x=40mm]{
+    \begin{tikzpicture}[tape, draw=structure, text=structure, x=5mm, y=5mm]
+      \cell{\only<4>{b}} \smhead<4,6> 
+      \cell{a} \smheadb<5> 
+      \cell{b} 
+    \end{tikzpicture}
+  }
+
+  \on<4->[y=20mm, x=40mm]{
+    \begin{tikzpicture}[tape, draw=example, text=example, x=5mm, y=5mm]
+      \cell{b} \smhead<4>
+      \cell{a} \smheadb<5->
+      \cell{b}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\begin{frame}{Structure des problèmes de décision}
+
+  \on[y=-3mm]{
+    
+    \begin{tikzpicture}[x=10mm, y=10mm]
+      \begin{scope}
+        \clip (-0.35,-2) rectangle (3,2);
+        \draw[rotate=25,  structure, fill=structure!20]  \theshape{1};
+        \draw[rotate=-25, example,   fill=example!20]    \theshape{1};
+      \end{scope}
+      \begin{scope}
+        \clip[rotate=25]                                 \theshape{1};
+        \draw[rotate=-25, alert, fill=alert!20]          \theshape{1};
+      \end{scope}
+      \begin{scope}
+        \clip[rotate=-25]                                \theshape{1};
+        \draw[rotate=25, alert]                          \theshape{1};
+      \end{scope}
+      \begin{scope}
+        \clip (-1.5,-2) rectangle (-0.35,2);
+        \draw[rotate=25, alert]                          \theshape{1};
+      \end{scope}
+      \node[alert]                              at ( 0.5, 0) {$\textsc{r} = \textsc{re} \cap \textsc{co-re}$};
+      \node[structure]                          at ( 1.5, 1) {$\textsc{re}$};
+      \node[example]                            at ( 1.5,-1) {$\textsc{co-re}$};
+      \footnotesize
+      \draw[black!60, densely dotted]      (-1.5,0) -- (2.75,0);
+      \node[black!60, rotate=90, left ] at (-1.25,0) {symétrie par};
+      \node[black!60, rotate=90, right] at (-1.25,0) {complémentaire};
+    \end{tikzpicture}
+  }    
+
+\end{frame}
+
+\endgroup

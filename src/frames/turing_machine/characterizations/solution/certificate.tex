@@ -1,0 +1,67 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Caractérisation des problèmes semi-décidables}
+
+  \vspace{-2mm}
+  \begin{block}{Théorème -- Projection et semi-décidabilité}
+    Un langage $\structure{L \subseteq \Sigma^\star}$ est \alert{semi-décidable}
+    si, et seulement s'il existe\\
+    un alphabet $\Gamma$ et un \structure{langage de couples $R \subseteq \Sigma^\star \times \Gamma^\star$} \alert{décidable}
+    tels que :
+
+    \vspace{-2mm}
+    $$
+    \forall u \in \Sigma^\star,
+    \quad
+    \alert{u\in L}
+    \quad \Leftrightarrow \quad
+    \alert{\exists c} \in \Gamma^\star, \alert{\langle u,c \rangle \in R}
+    $$
+
+    \vspace{-2mm}
+    \begin{itemize}
+    \item On dit alors que $c$ est un \structure{certificat} d'appartenance de $u$ à $L$ 
+    \item Une MTD qui décide $R$ est appelée un \structure{vérificateur} de $L$
+    \end{itemize}
+  \end{block}
+
+  \vspace{-1mm}
+  \begin{block}{Interprétation algorithmique -- Recherche de solution}
+
+    Les problèmes \alert{semi-décidables} sont les problèmes d'existence de solution
+
+    \begin{itemize}
+    \item L'\structure{instance} est un mot de $\Sigma^\star$, la \structure{solution} un certificat de $\Gamma^\star$
+    \item La \structure{question} est : \alert{\og Existe-t-il une solution pour l'instance ? \fg}
+    \item \structure{Vérifier} qu'un candidat de solution est bien une solution est \alert{décidable}
+    \end{itemize}
+
+    \hspace\fill%
+    \begin{minipage}[c]{.45\textwidth}
+      \begin{problembox}
+        \textsc{Trouver une solution} $\alert{\in \textsc{re}}$ \\
+        \structure{Instance :} $u \in \Sigma^\star$ \\
+        \structure{Question :} $\exists c \in \Gamma^\star, \langle u, c \rangle \in R$ ?
+      \end{problembox}
+    \end{minipage}%
+    $\alert{\quad\Leftrightarrow\quad}$%
+    \begin{minipage}[c]{.45\textwidth}
+      \begin{problembox}
+        \textsc{Vérifier une solution} $\alert{\in \textsc{r}}$\\
+        \structure{Instance :} $\langle u, c \rangle \in \Sigma^\star \times \Gamma^\star$ \\
+        \structure{Question :} $\langle u, c \rangle \in R$ ?
+      \end{problembox}
+    \end{minipage}%
+    \hspace\fill
+  \end{block}
+  
+\end{frame}
+
+\endgroup

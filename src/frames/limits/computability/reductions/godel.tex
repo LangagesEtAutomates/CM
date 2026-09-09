@@ -1,0 +1,48 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Théorème d'incomplétude de Gödel}
+
+    \vspace{-2mm}
+  \begin{block}{Théorème -- Gödel 1931 (admis)}
+    Il n'existe pas de système de preuve $\langle \Phi, \Pi, \valid \rangle$ à la fois : 
+    \begin{description}[Peano expressif :]
+    \item[Formel :] la vérification des preuves est mécanisable
+      \begin{itemize}
+      \item $\textsc{Entscheidungsproblem} \in \textsc{re}$
+        \footnote{Ou, de manière équivalente, $\textsc{Vérification des preuves} \in \textsc{r}$}
+      \end{itemize}
+    \item[Peano expressif :] possibilité d'exprimer des questions sur les nombre entiers
+      \begin{itemize}
+      \item Les axiomes de Dedekind-Peano sont démontrables\footnote{$\exists \mathbb{N},\exists 0 \in \mathbb{N}, \exists s :\mathbb{N} \rightarrow {\mathbb{N}\setminus \{0\}} \text{ injective}, \forall P\subseteq \mathbb{N}, (0 \in P \land s(P) \subseteq P) \rightarrow P=\mathbb{N}$}
+      \end{itemize}
+    \item[Cohérent :] on ne peut pas montrer une proposition et son opposée
+      \begin{itemize}
+      \item $\forall \varphi\in \Phi,\quad(\nexists \pi, \pi \valid \varphi) \quad \lor\quad (\nexists \pi, \pi \valid \lnot\varphi)$
+      \end{itemize}
+    \item[Complet :] toute proposition peut être démontrée ou invalidée
+      \begin{itemize}
+      \item $\forall \varphi\in \Phi,\quad (\exists \pi, \pi \valid \varphi) \quad \lor\quad (\exists \pi, \pi \valid \lnot\varphi)$
+      \end{itemize}
+    \end{description}
+  \end{block}
+  
+  \pause
+    \vspace{-2mm}
+  \begin{exampleblock}{Exemple -- Hypothèse du Continu}
+    Cette proposition est indécidable dans les mathématiques modernes (ZFC) :
+    \vspace{-1mm}
+    $$\example{\exists E,\quad \mathbb{N} \subset E \subset \mathbb{R} \quad\land\quad |\mathbb{N}| < |E| < |\mathbb{R}|}$$ 
+
+    \vspace{-3mm}
+  \end{exampleblock}
+  
+\end{frame}
+
+\endgroup

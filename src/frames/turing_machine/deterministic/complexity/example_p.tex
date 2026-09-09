@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{IsPrime}{is\_prime}
+
+\begin{frame}{Exemple : test de primalité}
+
+  \on[top=-4mm, text]{
+    \Probleme{Primes}{
+      Un entier $N\in \mathbb{N}$
+    }{
+      $N$ est-il premier ? 
+    }
+  }
+  
+  \onBlock[left=.6\textwidth, y=-2mm]{Un problème non-trivial}{
+    \vspace{-1mm}
+    \begin{itemize}
+    \item La complexité doit être exprimée en fonction du nombre de chiffres de :
+
+      \vspace{-2mm}
+      $$n = |(N)_b| = \lceil \log_b(N) \rceil$$
+
+    \item L'algorithme de droite est exponentiel
+
+      \vspace{-2mm}
+      $$\Omega\left(\sqrt{N}\right) = \Omega\left(2^{\frac{n}{2}}\right)$$
+    \end{itemize}
+  }
+
+  \on[right=.43\textwidth, y=-2mm]{
+    \begin{algorithm}[H]
+      \Fun{$\IsPrime\left(N\in \mathbb{N}\right)$}{
+        \For{$k$ \From $2$ \To $\sqrt{N}$}{
+          \If{$N \equiv 0 \pmod k$}{\Return \False;}
+        }
+        \Return \True;
+      }
+    \end{algorithm}
+  }  
+
+  \onBlock[bottom=2mm]{Algorithme d'Agrawal, Kayal et Saxena (2004)}{
+    \vspace{-1mm}
+    \begin{itemize}
+    \item Décide \textsc{Prime} en $\mathcal{O}(n^{12})$ 
+    \item Donc $\textsc{Prime} \in \textsc{p}$ 
+    \end{itemize}
+  }
+
+  \footnoteref{M. Agrawal, N. Kayal, N. Saxena. \emph{\textsc{primes} is in \textsc{p}}. Annals of mathematics (2004)}
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,164 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Relation de réductibilité}
+
+  \begin{block}{Définition -- Relation de réductibilité}
+    Soient $A, B \in \textsc{lang}$ deux problèmes de décision.
+    
+    On dit que \structure{$A$ se réduit à $B$}, noté \alert{$A \leq_m B$} s'il existe une réduction de $A$ vers $B$. 
+
+    \vspace{2mm}
+    \structure{Intuition :} si $A \leq_m B$, alors $B$ est \og \emph{au moins aussi difficile} \fg que $A$
+  \end{block}
+  
+  \begin{block}{Propriétés -- $\leq_m$ est un \emph{préordre} sur \textsc{lang}}
+    \begin{itemize}
+    \item $\leq_m$ est réflexive
+      \begin{itemize}
+      \item Pour tout problème $P$, \structure{l'identité sur $P$} est une réduction de $P$ vers $P$
+      \end{itemize}
+    \item $\leq_m$ est transitive
+      \begin{itemize}
+      \item Soient \structure{$f : P \rightarrow Q$} et \structure{$g : Q \rightarrow R$} deux réductions, \structure{$g \circ f : P \rightarrow R$} est une réduction
+      \end{itemize}
+    \end{itemize}
+
+    \vspace{3mm}
+    \begin{center}
+      \scalebox{.75}{
+        \begin{tikzpicture}
+          \begin{scope}
+            \clip (0,0) ellipse (2cm and 1cm);
+
+            \begin{scope}
+              \clip (-2,0) rectangle (2,1);
+              \fill[structure!20] (-2,0) rectangle (2,1);
+              \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(1cm)=(structure!20)}
+              \shade[shading=alertToStructure] (2,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \begin{scope}
+              \clip (-2,0) rectangle (2,-1);
+              \fill[example!20] (-2,0) rectangle (2,-1);
+              \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(1cm)=(example!20)}
+              \shade[shading=alertToExample] (2,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            
+            \draw[black!60,thick] (0,0) ellipse (2cm and 1cm);
+            \draw[black!60] (-2,0) -- (2,0);
+          \end{scope}
+          
+          \begin{scope}
+            \clip (5,0) ellipse (2cm and 1cm);
+            \begin{scope}
+              \clip (3,0) rectangle (7,1);
+              \fill[structure!35] (3,0) rectangle (7,1);
+              \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!35);color(6mm)=(alert!35);color(9mm)=(structure!35);color(1cm)=(structure!35)}
+              \shade[shading=alertToStructure] (7,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \begin{scope}
+              \clip (3,0) rectangle (7,-1);
+              \fill[example!35] (3,0) rectangle (7,-1);
+              \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!35);color(6mm)=(alert!35);color(9mm)=(example!35);color(1cm)=(example!35)}
+              \shade[shading=alertToExample] (7,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \draw[black!60,thick] (5,0) ellipse (2cm and 1cm);
+            \draw[black!60] (3,0) -- (7,0);
+          \end{scope}
+
+          \begin{scope}
+            \clip (5,0) ellipse (1cm and .5cm);
+            \begin{scope}
+              \clip (3,0) rectangle (7,1);
+              \fill[structure!20] (3,0) rectangle (7,1);
+              \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(1cm)=(structure!20)}
+              \shade[shading=alertToStructure] (7,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \begin{scope}
+              \clip (3,0) rectangle (7,-1);
+              \fill[example!20] (3,0) rectangle (7,-1);
+              \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(1cm)=(example!20)}
+              \shade[shading=alertToExample] (7,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \draw[black!60,thick] (5,0) ellipse (1cm and .5cm);;
+            \draw[black!60] (3,0) -- (7,0);
+          \end{scope}
+
+          \begin{scope}
+            \clip (10,0) ellipse (2cm and 1cm);
+            \begin{scope}
+              \clip (8,0) rectangle (12,1);
+              \fill[structure!50] (8,0) rectangle (12,1);
+              \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!50);color(6mm)=(alert!50);color(9mm)=(structure!50);color(1cm)=(structure!50)}
+              \shade[shading=alertToStructure] (12,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \begin{scope}
+              \clip (8,0) rectangle (12,-1);
+              \fill[example!50] (8,0) rectangle (12,-1);
+              \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!50);color(6mm)=(alert!50);color(9mm)=(example!50);color(1cm)=(example!50)}
+              \shade[shading=alertToExample] (12,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \draw[black!60,thick] (10,0) ellipse (2cm and 1cm);
+            \draw[black!60] (8,0) -- (12,0);
+          \end{scope}
+
+          \begin{scope}
+            \clip (10,0) ellipse (1.33cm and .67cm);
+            \begin{scope}
+              \clip (8,0) rectangle (12,1);
+              \fill[structure!35] (8,0) rectangle (12,1);
+              \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!35);color(6mm)=(alert!35);color(9mm)=(structure!35);color(1cm)=(structure!35)}
+              \shade[shading=alertToStructure] (12,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \begin{scope}
+              \clip (8,0) rectangle (12,-1);
+              \fill[example!35] (8,0) rectangle (12,-1);
+              \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!35);color(6mm)=(alert!35);color(9mm)=(example!35);color(1cm)=(example!35)}
+              \shade[shading=alertToExample] (12,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \draw[black!60,thick] (10,0) ellipse (1.33cm and .67cm);
+            \draw[black!60] (8,0) -- (12,0);
+          \end{scope}
+
+          \begin{scope}
+            \clip (10,0) ellipse (.67cm and .33cm);
+            \begin{scope}
+              \clip (8,0) rectangle (12,1);
+              \fill[structure!20] (8,0) rectangle (12,1);
+              \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(1cm)=(structure!20)}
+              \shade[shading=alertToStructure] (12,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \begin{scope}
+              \clip (8,0) rectangle (12,-1);
+              \fill[example!20] (8,0) rectangle (12,-1);
+              \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(1cm)=(example!20)}
+              \shade[shading=alertToExample] (12,0) ellipse (2.5cm and .75cm);
+            \end{scope}
+            \draw[black!60,thick] (10,0) ellipse (.67cm and .33cm);
+            \draw[black!60] (8,0) -- (12,0);
+          \end{scope}
+
+          \node at (0,.18)  {$P$};
+          \node at (5,.18)  {$f(P)$};
+          \node at (5,.75)  {$Q$};
+          \node at (10,0)   {$g(f(P))$};
+          \node at (10,.47) {$g(Q)$};
+          \node at (10,.85) {$R$};
+          
+          \path[-latex, thick] (1.9,.35)  edge[bend left]  node[above]{$f$}         (4.15,.25) ; 
+          \path[-latex, thick] (6.9,.35)  edge[bend left]  node[above]{$g$}         (8.92,.4) ; 
+          \path[-latex, thick] (1.9,-.35) edge[bend right] node[below]{$g \circ f$} (9.55,-.25) ; 
+        \end{tikzpicture}
+      }
+    \end{center}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

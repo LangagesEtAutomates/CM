@@ -1,0 +1,34 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Généralisation : le théorème de Rice}
+
+  Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif. 
+  \begin{block}{Définition -- Problème sémantique non-trivial}
+    \begin{itemize}
+    \item Un problème de décision est dit \structure{sémantique}
+      s'il est de la forme
+      \Probleme{Sem$_S$}{
+        Un programme \structure{$P \in \mathcal{L}$}
+      }{
+        Est-ce que \structure{$\llbracket P \rrbracket \in S$} ?
+      }
+      où $S \subseteq \textsc{re}$ est la \structure{propriété sémantique} associée
+    \item On dit que $\textsc{Sem}_S$ est \structure{non-trivial} si \alert{$S \neq \emptyset$} et \alert{$S \neq \textsc{re}$}
+    \end{itemize}
+
+  \end{block}
+  
+  \begin{block}{Théorème -- Rice (1953)}
+    Tout problème sémantique non-trivial est indécidable.
+  \end{block}  
+
+\end{frame}
+
+\endgroup

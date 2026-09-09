@@ -1,0 +1,118 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\Tpolyo[2][black]{
+  \draw[#1, fill=#1!30] #2 ++(0.1,0.1) rectangle +(.9,.9);
+  \draw[#1, fill=#1!30] #2 ++(1.1,0.1) rectangle +(.9,.9);
+  \draw[#1, fill=#1!30] #2 ++(2.1,0.1) rectangle +(.9,.9);
+  \draw[#1, fill=#1!30] #2 ++(1.1,1.1) rectangle +(.9,.9);
+}
+
+\begin{frame}{Problème de pavage du plan}
+
+  \on[text, top=-3mm]{
+    \Probleme{polyomino tiling}{
+      Un ensemble fini de \structure{polyominos}
+      \begin{itemize}
+      \item ils sont composés de carrés unitaires collés
+      \item ils peuvent être répétés et tournés
+      \end{itemize}
+    }{
+      Peut-on recouvrir entièrement le \structure{plan infini} ?
+      \begin{itemize}
+        \item chaque point du plan doit être couvert
+        \item les polyominos ne peuvent pas se chevaucher
+      \end{itemize}
+    }
+  }
+
+  \onBlock[y=-5mm]{Théorème (admis)}{
+    \textsc{polyomino tiling} est indécidable.
+  }
+    
+  \onExampleBlock[y=-26mm]{Exemples}{
+    \begin{itemize}
+    \item\vspace{-1mm}
+      $\left\{
+      \begin{tikzpicture}[size=3mm, baseline=(base)]
+        \coordinate (base) at (0,0.75);
+        \Tpolyo[structure]{(0,0)}
+      \end{tikzpicture}
+      \right\}$
+      est une instance positive
+    \item
+      $\left\{
+      \begin{tikzpicture}[size=3mm, baseline=(base)]
+        \coordinate (base) at (0,1.25);
+        \draw[example, fill=example!30] (0,0) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (1,0) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (2,0) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (3,0) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (4,0) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (0,1) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (4,1) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (0,2) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (1,2) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (3,2) ++(0.1,0.1) rectangle +(.9,.9);
+        \draw[example, fill=example!30] (4,2) ++(0.1,0.1) rectangle +(.9,.9);
+      \end{tikzpicture}
+      \right\}$
+      est une instance négative
+    \end{itemize}
+  }
+
+  \on[bottom=1mm, x=30mm]{
+    \begin{tikzpicture}[size=3mm]
+      \begin{scope}
+        \clip (1.05,1.05) rectangle (12.05,12.05);
+        \Tpolyo[example]   {(2 ,11)}
+        \Tpolyo[example]   {(6 ,11)}
+        \Tpolyo[example]   {(10,11)}
+        \Tpolyo[structure] {(0 ,10)}
+        \Tpolyo[structure] {(4 ,10)}
+        \Tpolyo[structure] {(8 ,10)}
+        \Tpolyo[alert]     {(2 ,9)}
+        \Tpolyo[alert]     {(6 ,9)}
+        \Tpolyo[alert]     {(10,9)}
+        \Tpolyo[example]   {(0 ,8)}
+        \Tpolyo[example]   {(4 ,8)}
+        \Tpolyo[example]   {(8 ,8)}
+        \Tpolyo[structure] {(2 ,7)}
+        \Tpolyo[structure] {(6 ,7)}
+        \Tpolyo[structure] {(10,7)}
+        \Tpolyo[alert]     {(0 ,6)}
+        \Tpolyo[alert]     {(4 ,6)}
+        \Tpolyo[alert]     {(8 ,6)}
+        \Tpolyo[example]   {(2 ,5)}
+        \Tpolyo[example]   {(6 ,5)}
+        \Tpolyo[example]   {(10,5)}
+        \Tpolyo[structure] {(0 ,4)}
+        \Tpolyo[structure] {(4 ,4)}
+        \Tpolyo[structure] {(8 ,4)}
+        \Tpolyo[alert]     {(2 ,3)}
+        \Tpolyo[alert]     {(6 ,3)}
+        \Tpolyo[alert]     {(10,3)}
+        \Tpolyo[example]   {(0 ,2)}
+        \Tpolyo[example]   {(4 ,2)}
+        \Tpolyo[example]   {(8 ,2)}
+        \Tpolyo[structure] {(2 ,1)}
+        \Tpolyo[structure] {(6 ,1)}
+        \Tpolyo[structure] {(10,1)}
+        \Tpolyo[alert]     {(0 ,0)}
+        \Tpolyo[alert]     {(4 ,0)}
+        \Tpolyo[alert]     {(8 ,0)}
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+  \footnoteref{N. Ollinger. \emph{Tiling the plane with a fixed number of polyominoes.} LATA (2009)}
+  
+\end{frame}
+
+\endgroup

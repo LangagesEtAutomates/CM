@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Complexité d'une machine de Turing déterministe}
+  Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTD qui termine, $u \in \Sigma^\star$ un mot et $n\in \mathbb{N}$.
+
+  \begin{block}{Complexité temporelle déterministe}
+    \begin{itemize}
+    \item\vspace{-1mm} La \structure{complexité temporelle} de $M$ sur $u$ est le \alert{nombre d'actions} lors de l'exécution de $u$ par $M$ :
+
+      \vspace{-2mm}
+      $$\alert{T_M(u) \eqdef \operatorname{unique}\left\{n \in \mathbb{N} \mid \exists c_f \in \mathcal{C}_M^\mathit{halt}, C_{\mathit{init}}(u) \leadsto^n c_f\right\}}.$$ 
+
+    \item\vspace{-1mm} La \structure{complexité temporelle dans le pire cas} de $M$, pour $n\in \mathbb{N}$, est : \\
+
+      \vspace{-2mm}
+      $$\alert{T_M(n) \eqdef \max \left\{T_M(u) \mid u \in \Sigma^n \right\}}.$$ 
+    \end{itemize}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Complexité spatiale déterministe}
+    \begin{itemize}
+    \item\vspace{-1mm} La \structure{complexité spatiale} de $M$ sur $u$ est le \alert{nombre maximal de cases du ruban utilisées} lors de l'exécution de $u$ par $M$ :
+
+      \vspace{-2mm}
+      $$\alert{S_M(u) \eqdef \max\left\{|GD| \mid \exists q\in Q, C_{\mathit{init}}(u) \leadsto^\star \langle G, q, D \rangle \right\}}.$$ 
+
+      
+    \item\vspace{-1mm} La \structure{complexité spatiale dans le pire cas} de $M$, pour $n\in \mathbb{N}$, est : \\
+
+      \vspace{-2mm}
+      $$\alert{S_M(n) \eqdef \max \{S_M(u) \mid u \in \Sigma^n \}}.$$ 
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

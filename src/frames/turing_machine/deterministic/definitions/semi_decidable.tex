@@ -1,0 +1,100 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Syracuse}{Syracuse}
+
+\begin{frame}{Langage semi-décidable}
+
+  \onBlock[top=-4mm]{Définition -- Semi-décision d'un langage}{
+    Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTD, $u\in \Sigma^\star$ et $L\subseteq \Sigma^\star$.
+    \begin{itemize}
+    \item On dit que \structure{$M$ semi-décide $L$} si \alert{$L = \mathcal{L}(M)$}
+    \item On dit que \structure{$L$ est semi-décidable} s'il existe une MTD qui semi-décide $L$
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=7mm]{Exemple -- Semi-décision de $\{(n)_2 \mid \Syracuse(n) \}$}{}
+
+  \on[left=.5\textwidth, y=-10mm]{
+    \begin{algorithm}[H]\small
+      \Algo{$\Syracuse(n\in \mathbb{N}) \in \mathbb{B}$}{
+        \While{\,\Example<1,22-23>{$n\neq 1$}}{\vspace{.1mm}
+          \Structure<1-5,18-21>{\lIf{$n \equiv 0 \pmod 2$}{$n\leftarrow \frac{n}{2}$;}}\vspace{.5mm}
+          \Alert<1,6-16>{\lElse{$n\leftarrow \frac{3n+1}{2}$;}}
+        }
+        \Return \True\;
+      }
+    \end{algorithm}
+  }
+
+  \on[left=.5\textwidth, y=-35mm]{
+    \example{Pour $n = 6$ :}\\[1mm]
+    $\begin{array}{r@{~}c@{~}l@{~}c@{~}l@{~}c@{~}l}
+      \structure{6} &
+      \uncover<1,6->{\rightarrow}    &
+      \uncover<1,6->{\alert{3}}      &
+      \uncover<1,10->{\rightarrow}   &
+      \uncover<1,10->{\alert{5}}     &
+      \uncover<1,17->{\rightarrow}   &
+      \uncover<1,17->{\structure{8}} \\
+      &
+      \uncover<1,18->{\rightarrow}   &
+      \uncover<1,18->{\structure{4}} &
+      \uncover<1,19->{\rightarrow}   &
+      \uncover<1,19->{\structure{2}} &
+      \uncover<1,20->{\rightarrow}   &
+      \uncover<1,20->{\example{1}}
+    \end{array}$
+  }
+  
+  \on[x=25mm, y=-3mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \cell{}                                                                                 \smheadb<17,23>
+      \cell[structure ob=<17-21>,example ob=<22>     ]{\oneof[ ]{\on<17-22>{1}}}              \smheadb<16,22>
+      \cell[structure ob=<17-21>                     ]{\oneof[ ]{\on<16-21>{0}}}              \smheadb<10,15,21>
+      \cell[structure ob=<17-20>,alert ob=<{10-12}>  ]{\oneof[ ]{\on<10-14>{1}\on<15-20>{0}}} \smheadb<9,14,20>
+      \cell[structure ob=<17-19>,alert ob=<{10-12}>  ]{\oneof[ ]{\on<9-19>{0}}}               \smheadb<8,13,19>
+      \cell[structure on=<{2-5}>,alert ob=<{6,10-12}>]{\oneof[1]{\on<13->{}}}                 \smhead<1,7,12>  \smheadfromb<18>{-4}
+      \cell[structure on=<{2-5}>,alert ob=<{6}>      ]{\oneof[1]{\on<7->{}}}                  \smheadb<2,6>    \smheadfromb<11>{-3}
+      \cell[structure on=<{2-5}>                     ]{\oneof[0]{\on<6->{}}}                  \smheadb<3,5>
+      \cell{}                                                                                 \smheadb<4>
+    \end{tikzpicture}
+  }
+
+  \on[x=25mm,bottom=-2mm]{
+    \begin{tikzpicture}[turingMachine,x=20mm, y=20mm]\small
+      \state[example on=<1>,alert ob=<{11}>,structure ob=<{2-4,18}>,initial above] (s) at (0,1) {\faForward};
+      \state[alert on=<{1,10}>,structure ob=<{17}>                               ] (0) at (1,1) {0};
+      \state[alert on=<{1,9,14,16}>                                              ] (1) at (2,1) {1};
+      \state[structure on=<{1,5,19-21}>,alert ob=<{6,12}>,example ob=<{22}>      ] (d) at (0,0) {\textdiv};
+      \state[example on=<{1,23}>,alert ob=<{7,13}>, accepting                    ] (f) at (1,0) {\cmark};
+      \state[alert on=<{1,8,15}>                                                 ] (2) at (2,0) {2};
+
+      \tiny
+      \path (s) edge[loop left]      node[swap]   {\smAlign{\smTMtransR{0}{0}\smTMtransR{1}{1}}}       (s);
+      \path (s) edge                 node[swap]   {\smTMtransL{\blank}{\blank}}                        (d);
+      \path (d) edge[loop left]      node[swap]   {\smTMtransL{0}{\blank}}                             (d);
+      \path (d) edge                 node[swap]   {\smTMtransL{1}{\blank}}                             (f);
+      \path (f) edge                 node[sloped] {\smTMtransL{0}{0}}                                  (1);
+      \path (f) edge                 node[swap]   {\smTMtransL{1}{1}}                                  (2);
+      \path (0) edge[loop below]     node[swap]   {\smTMtransL{0}{0}}                                  (0);
+      \path (0) edge                 node[swap]   {\smTMtransL{1}{1}}                                  (1);
+      \path (0) edge                 node[swap]   {\smTMtransR{\blank}{\blank}}                        (s);
+      \path (1) edge[bend right=5mm] node[swap]   {\smAlign{\smTMtransL{0}{1}\smTMtransL{\blank}{1}}} (0);
+      \path (1) edge                 node[swap]   {\smTMtransL{1}{0}}                                  (2);
+      \path (2) edge[bend right]     node[swap]   {\smAlign{\smTMtransL{0}{0}\smTMtransL{\blank}{0}}}  (1);
+      \path (2) edge[loop right]     node[swap]   {\smTMtransL{1}{1}}                                  (2);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+
+

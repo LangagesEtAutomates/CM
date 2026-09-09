@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Un ordinateur est une machine programmable}
+
+  \begin{block}{Quatre machines algorithmiques}
+    Ces quatre machines exécutent un \structure{algorithme} modélisable par une MTD
+    \begin{description}
+    \item[Machine dédiée :] réalise une famille fixe de calculs (Anticythère, Pascaline)
+    \item[Machine programmable :] le comportement dépend d'un programme (Zuse 1)
+    \item[Machine universelle :] peut simuler n'importe quelle autre machine
+    \end{description}
+  \end{block}
+      
+  \begin{block}{Un ordinateur est une machine universelle}
+    L'algorithme implémenté par un ordinateur résout le problème suivant :
+    \Probleme{Universal}{
+      \begin{itemize}
+      \item un \structure{programme} qui décrit un algorithme $A$
+      \item une \structure{instance} $u$ \alert{de $A$}
+      \end{itemize}
+    }{
+      Quel résultat retourne l'exécution de $A$ sur $u$ ? 
+    }
+    \begin{itemize}
+      \item Un ordinateur peut \structure{simuler} n'importe quelle machine.
+      \item Un \structure{programme} est une \alert{donnée} comme les autres
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

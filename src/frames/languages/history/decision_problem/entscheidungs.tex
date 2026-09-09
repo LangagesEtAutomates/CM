@@ -1,0 +1,59 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Reformulation du programme de Hilbert}
+
+  \begin{block}{Le programme de Hilbert}
+    Trouver un système de preuve $\langle \Phi, \Pi, \valid \rangle$ :
+    \begin{itemize}
+    \item cohérent et complet ; 
+    \item suffisamment expressif pour formaliser les mathématiques ;
+    \item tel que ces problèmes soient \alert{décidables par une procédure mécanique} :
+    \end{itemize}
+
+    \hspace\fill
+    \begin{minipage}[t]{.45\textwidth}
+      \begin{problembox}
+        \textsc{Vérification des preuves}\\
+        \structure{Instance :}
+        \begin{itemize}
+        \item Une preuve $\pi \in \Pi$ 
+        \item Une proposition $\varphi \in \Phi$ 
+        \end{itemize}
+        \structure{Question :}
+        \begin{itemize}
+        \item Est-ce que $\pi \valid \varphi$ ?
+        \end{itemize}
+      \end{problembox}
+    \end{minipage}
+    \hspace\fill
+    \begin{minipage}[t]{.5\textwidth}
+      \begin{problembox}
+        \textsc{Entscheidungsproblem}\\
+        \structure{Instance :}
+        \begin{itemize}
+        \item Une proposition $\varphi \in \Phi$ 
+        \end{itemize}
+        \structure{Question :}
+        \begin{itemize}
+        \item Est-ce que $\exists \pi \in \Pi,   \pi \valid \varphi$ ?
+        \end{itemize}
+      \end{problembox}
+    \end{minipage}
+    \hspace\fill
+  \end{block}
+  
+  \begin{center}
+    \alert{Que signifie ``décidable par une procédure mécanique'' ?} 
+  \end{center}
+
+\end{frame}
+
+\endgroup
+\endinput

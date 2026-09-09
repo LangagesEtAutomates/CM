@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Déterminisation d'automate à pile}
+
+  \begin{block}{Définition -- Langage algébrique déterministe}
+    \begin{itemize}
+    \item Un langage algébrique $L$ est dit \structure{déterministe} s'il est \alert{reconnu par un automate à pile déterministe}.\\
+    \item La classe des langages algébriques déterministes est notée \alert{$\textsc{det}$}.
+    \end{itemize}
+  \end{block}
+  
+  \begin{block}{Théorème}
+    
+    \vspace{-4mm}
+    $$\alert{\textsc{det} \subsetneq \textsc{alg}}$$
+
+    \vspace{-1mm}
+    \structure{Démonstration :}
+    \begin{enumerate}
+    \item Un automate à pile déterministe est un automate à pile : $\alert{\textsc{det} \subseteq \textsc{alg}}$.
+    \item $\textsc{det}$ est stable par complémentation
+      \begin{itemize}
+      \item On peut le compléter, puis inverser les états finaux et non-finaux
+      \end{itemize}
+    \item $\textsc{alg}$ n'est pas stable par complémentation
+      \begin{itemize}
+      \item Sinon, $\textsc{alg}$ serait stable par intersection, car \structure{$L_1 \cap L_2 = \overline{\overline{L_1} \cup \overline{L_2}}$}
+      \item Or $\textsc{alg}$ n'est pas stable par intersection, car $$\structure{\{a^n b^n c^n \mid n\in \mathbb{N}\} = \{a^n b^m c^n \mid m, n\in \mathbb{N}\} \cap \{a^n b^n c^m \mid m, n\in \mathbb{N}\}}$$
+      \end{itemize}
+    \item Donc $\alert{\textsc{det} \neq \textsc{alg}}$.
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
+
+\endgroup

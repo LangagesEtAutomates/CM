@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langages algébriques non-déterministes}
+  
+  Soit $\Sigma = \{a, b\}$.
+  
+  \begin{exampleblock}{Exemples et contre-exemples}
+    \begin{itemize}
+    \item Les langages $\example{\{ a^n b^n \mid n\in \mathbb{N}\}}$ et $\example{\{ a^n b^{2n} \mid n\in \mathbb{N}\}}$ sont déterministes.
+    \item\vspace{2mm} Leur union $\example{\{ a^n b^n \mid n\in \mathbb{N}\} \cup \{ a^n b^{2n} \mid n\in \mathbb{N}\}}$ est non-déterministe.
+      \begin{itemize}
+      \item Faut-il dépiler à chaque $b$ ou un $b$ sur deux ? 
+      \end{itemize}
+    \item\vspace{2mm} Le langage $\example{\{ w \cdot c \cdot w^{\textsc{r}} \mid w\in \Sigma^\star\}}$ est déterministe.
+      \begin{center}
+        \begin{tikzpicture}[pushdown]
+          \state[initial]   (b) at (0,0) {$1$}; 
+          \state[accepting] (c) at (1,0) {$2$}; 
+          \path (b) edge             node {\smPAtrans{c}{\varepsilon}{\varepsilon}}                      (c);
+          \path (b) edge[loop above] node {\smPAtrans{a}{\varepsilon}{A}, \smPAtrans{b}{\varepsilon}{B}} (b);
+          \path (c) edge[loop above] node {\smPAtrans{a}{A}{\varepsilon}, \smPAtrans{b}{B}{\varepsilon}} (c);
+        \end{tikzpicture}
+      \end{center}
+    \item\vspace{2mm} Par contre, le langage des palindromes est non-déterministe :
+      $$\example{\{ w \cdot w^{\textsc{r}} \mid w\in \Sigma^\star\}}$$
+    \end{itemize}
+  \end{exampleblock}
+
+\end{frame}
+
+\endgroup

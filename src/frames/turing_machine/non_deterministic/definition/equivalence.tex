@@ -1,0 +1,80 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Enumere}{enumere}
+\SetKwFunction{Reconnait}{reconnait}
+\SetKwFunction{Generer}{generer}
+
+\begin{frame}{Reconnaissance et génération}
+
+  \onBlock[top=-5mm]{Théorème -- Langages reconnaissables et générés}{
+    Soient $\Sigma$ un alphabet et $L \subseteq \Sigma^\star$ un langage.\\
+    $L$ est \structure{reconnaissable} si, et seulement si, $L$ est \structure{généré} par une MTND.
+
+    \pause
+    
+    \vspace{3mm}
+    \structure{Transformations.}
+    Soit $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTND sur un ruban $\textsc{m}$. 
+    
+    \vspace{3mm}
+    \structure{Reconnaissable $\Rightarrow$ généré. } \alert{$\mathcal{L}(M)$ est généré} par :
+    
+    \begin{algorithm}[H]
+      \Fun{$\Generer_{\mathcal{L}(M)}()$}{
+        \Let $u \in \Sigma^\star$; \tcp*[l]{Choix non déterministe}
+        \lIf{$M.\Reconnait(u)$}{\Return $u$;}
+      }
+    \end{algorithm}
+
+    \pause
+
+    \vspace{3mm}
+    \structure{Généré $\Rightarrow$ reconnaissable. } \alert{$\mathcal{L}_{G}(M)$ est reconnu} par :
+    
+    \begin{algorithm}[H]
+      \Fun{$\Reconnait_{\mathcal{L}_G(M)}(u \in \Sigma^\star)$}{
+        \Let $\textsc{m} \leftarrow M.\Generer()$; \tcp*[l]{Choix non déterministe dans $\mathcal{L}_G(M)$}
+        \Return $u=\textsc{m}$;
+      }
+    \end{algorithm}
+  }
+
+  \on<2->[x=30mm, y=-00mm]{\scriptsize
+    \begin{tikzpicture}[turingMachine, size=6mm]
+      \state[initial]              (A)  at (0,0) {$u$};
+      \state[structure]            (M0) at (3,0) {$M_0$};
+      \state[accepting, structure] (Mf) at (5,0) {$M_f$};
+      \cloudPath[structure] {M0}{Mf}
+      \path (A) edge[loop below] node {\smGroup{\smTMtransL[\textsc{u}]{\blank}{x}\smTMtransL[\textsc{m}]{\blank}{x}} $\forall x \in \Sigma$} (A);
+      \path (A) edge             node {\smGroup{\smTMtransR[\textsc{u}]{\blank}{\blank}\smTMtransR[\textsc{m}]{\blank}{\blank}}} (M0);
+      \node[structure] at (4,0) {\textsc{m}};
+    \end{tikzpicture}
+  }
+
+  \on<3->[y=-33mm]{\scriptsize
+    \begin{tikzpicture}[turingMachine, size=6mm]
+      \state[structure, initial]            (M0) at (0,0) {$M_0$};
+      \state[structure] (Mf) at (2,0) {$M_f$};
+      \state[]              (A)  at (5,0) {\faBackward};
+      \state[]              (B)  at (8,0) {$=$};
+      \state[accepting]              (C)  at (11,0) {\faCheck};
+      \cloudPath[structure] {M0}{Mf}
+      \path (Mf) edge             node[swap] {\smTMtransS{\varepsilon}{\varepsilon}}  (A);
+      \path (A)  edge             node[swap] {\smTMtransR[\textsc{m}]{\blank}{\blank}} (B);
+      \path (B)  edge             node[swap] {\smGroup{\smTMtransL[\textsc{u}]{\blank}{\blank}\smTMtransL[\textsc{m}]{\blank}{\blank}}} (C);
+      \path (A)  edge[loop above] node       {\smAlign{\smTMtransR[\textsc{m}]{x}{x}\smTMtransL[\textsc{m}]{x}{x}}} (A);
+      \path (B)  edge[loop above] node       {\smGroup{\smTMtransR[\textsc{u}]{x}{x}\smTMtransR[\textsc{m}]{x}{x}}} (B);
+      \node[structure] at (1,0) {\textsc{v}};
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

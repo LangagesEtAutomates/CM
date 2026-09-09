@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}[fragile]{Des machines universelles au quotidien}
+
+  \begin{block}{Interpréteurs de code -- Python, Java, Bash, etc}
+    \begin{lstlisting}[language=bash, gobble=6]
+      $ cat decide.py
+      >   (*\alert{import}*) sys
+      >   u = sys.argv[1]
+      >   decide = (*\Example{u[0] == 'a'}*)
+      >   sys.exit(0 if decide else 1)
+      
+      $ if (*\Structure{python3 decide.py abcbc}*) ; then echo "Oui"; else echo "Non"; fi
+      >   Oui
+      
+      $ if (*\Structure{python3 decide.py bacbac}*) ; then echo "Oui"; else echo "Non"; fi
+      >   Non
+    \end{lstlisting}
+  \end{block}
+
+  \begin{block}{Sous-systèmes universels dans d'autres logiciels}
+    \begin{itemize}
+    \item les macros dans les tableurs
+    \item le système de commandes de \LaTeX
+    \item le moteur JavaScript d'un navigateur web
+    \item la redstone dans Minecraft
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

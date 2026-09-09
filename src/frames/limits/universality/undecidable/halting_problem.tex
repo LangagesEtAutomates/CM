@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{IsPow}{isPow2}
+
+\begin{frame}{Décidabilité d'un langage universel}
+
+  \on[text, top=2mm]{
+    Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif.
+
+    \Probleme{$\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$}{
+      \begin{itemize}
+      \item un \structure{programme} $P \in \mathcal{L}$
+      \item un mot $u$
+      \end{itemize}
+    }{
+      Est-ce que $u \in \llbracket P \rrbracket$ ?
+    }
+  }
+
+  \onExampleBlock[y=-20mm]{Exemple simple}{
+    Les instances suivantes sont-elles positives ?
+    \begin{itemize}
+    \item $\langle \IsPow, 8 \rangle$
+      \begin{itemize}
+      \item<2-> Oui, car $\IsPow(8) = \True$
+      \end{itemize}
+    \item<2-> $\langle \IsPow, 12 \rangle$
+      \begin{itemize}
+      \item<3-> Non, car $\IsPow(12) = \False$
+      \end{itemize}
+    \item<3-> $\langle \IsPow, 0 \rangle$
+      \begin{itemize}
+      \item<4-> Non, car $\IsPow(0)$ \alert{ne termine pas}
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \on[bottom=8mm, right=.45\textwidth]{
+    \begin{algorithm}[H]
+      \Fun{$\IsPow(n \in \mathbb{N}) \in \mathbb{B}$}{
+        \While{$n \equiv 0 \pmod{2}$}{
+          $n \leftarrow n /2$;
+        }
+        \Return $n = 1$;
+      }
+    \end{algorithm}
+  }
+
+\end{frame}
+
+\endgroup

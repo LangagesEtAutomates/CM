@@ -1,0 +1,100 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Machine de Turing universelle}
+  
+  \onBlock[top=-5mm]{Définition -- Machine de Turing universelle}{
+
+    \vspace{-1mm}
+    Une machine de Turing $M_{univ}$ est dite \structure{universelle} sur un alphabet $\Sigma$ si :
+
+    \begin{itemize}
+    \item $M_{univ}$ prend en entrée : 
+      \begin{itemize}
+      \item un \structure{encodage} $\mathit{encode}(M)$ d'une MTD $M$,
+      \item un \structure{mot} $u \in \Sigma^\star$,
+      \end{itemize}
+    \item et $M_{univ}$ \structure{simule} l'exécution de $M$ sur $u$ :
+      \begin{itemize}
+      \item \structure{$M_{univ}$ termine sur $\langle \mathit{encode}(M), u \rangle$} si, et seulement si, \structure{$M$ termine sur $u$};
+      \item \structure{$M_{univ}$ accepte $\langle \mathit{encode}(M), u \rangle$} si, et seulement si, \structure{$M$ accepte $u$}. 
+      \end{itemize}
+    \item C'est à dire, $M_{univ}$ semi-décide \alert{$L_{univ} \eqdef \{\langle \mathit{encode}(M), u \rangle \mid M \text{ accepte } u \}$}
+    \end{itemize}
+  }
+
+  \onExampleBlock<2->[y=-2mm, anchor=north]{Exemple d'encodage :}{
+
+    \vspace{-1mm}
+    On encode une suite de transitions :
+    \begin{itemize}
+    \item Encodage des états en taille fixe
+    \item $\mathit{encode}\left(\example{q} \structure{\xrightarrow{\smTMtrans{\alert{a}}{\alert{b}}{d}}} \example{q'} \right) = \alert{a} \cdot \example{q} \cdot \structure{\rightarrow} \cdot \alert{a'} \cdot \example{q'^{\textsc{r}}} \cdot \structure{d}$
+    \end{itemize}
+  }
+
+  \on<2->[y=-20mm, x=30mm] {
+    \begin{tikzpicture}[turingMachine, size=15mm, structure]
+      \state[example, accepting]     (F)  at (0,0) {$F$}; 
+      \state[example, initial below] (00) at (1,0) {$00$}; 
+      \state[example]                (01) at (2,0) {$01$}; 
+      \state[example]                (10) at (3,0) {$10$}; 
+      
+      \path (00) edge[bend right] node[swap] {\smTMtransR{\alert{1}}{\alert{1}}} (10);
+      \path (10) edge             node[swap] {\smTMtransR{\alert{1}}{\alert{1}}} (01);
+      \path (01) edge             node[swap] {\smTMtransR{\alert{1}}{\alert{1}}} (00);
+      \path (00) edge             node[swap] {\smTMtransL{\alert{0}}{\alert{0}}} (F);
+    \end{tikzpicture}
+  }
+  
+  \on<2->[bottom=-2mm] {\scriptsize
+    \begin{tikzpicture}[tape, x=3.5mm, y=3.5mm]
+      \cell{}
+      \cell[alert]{$1$}                    \smsave{T1L}
+      \cell[example]{$0$}                    
+      \cell[example]{$0$}                    
+      \cell[structure]{$\rightarrow$}          
+      \cell[alert]{$1$}                    
+      \cell[example]{$0$}                    
+      \cell[example]{$1$}                    
+      \cell[structure]{$\filledtriangleright$} \smsave{T1R}
+      \cell[alert]{$1$}                    \smsave{T2L}
+      \cell[example]{$1$}                    
+      \cell[example]{$0$}                    
+      \cell[structure]{$\rightarrow$}          
+      \cell[alert]{$1$}                    
+      \cell[example]{$1$}                    
+      \cell[example]{$0$}                    
+      \cell[structure]{$\filledtriangleright$} \smsave{T2R}
+      \cell[alert]{$1$}                    \smsave{T3L}
+      \cell[example]{$0$}                    
+      \cell[example]{$1$}                    
+      \cell[structure]{$\rightarrow$}          
+      \cell[alert]{$1$}                    
+      \cell[example]{$0$}                    
+      \cell[example]{$0$}                    
+      \cell[structure]{$\filledtriangleright$} \smsave{T3R}
+      \cell[alert]{$0$}                    \smsave{T4L}
+      \cell[example]{$0$}                    
+      \cell[example]{$0$}                    
+      \cell[structure]{$\rightarrow$}          
+      \cell[example]{$F$}                    \smsave{T4R}
+      \cell{}
+
+      \tikzset{thebrace/.style={decorate, decoration={brace, amplitude=5pt, raise=3pt, mirror}},}
+      \draw[thebrace] ([xshift=2pt]T1L.south west) --  ([xshift=-2pt]T1R.south east) node[midway,below=7pt] {\structure{$\example{00} \xrightarrow{\smTMtransR{\alert{1}}{\alert{1}}} \example{10}$}};
+      \draw[thebrace] ([xshift=2pt]T2L.south west) --  ([xshift=-2pt]T2R.south east) node[midway,below=7pt] {\structure{$\example{10} \xrightarrow{\smTMtransR{\alert{1}}{\alert{1}}} \example{01}$}};
+      \draw[thebrace] ([xshift=2pt]T3L.south west) --  ([xshift=-2pt]T3R.south east) node[midway,below=7pt] {\structure{$\example{01} \xrightarrow{\smTMtransR{\alert{1}}{\alert{1}}} \example{00}$}};
+      \draw[thebrace] ([xshift=2pt]T4L.south west) --  ([xshift=-2pt]T4R.south east) node[midway,below=7pt] {\structure{$\example{00} \xrightarrow{\smTMtransL{\alert{0}}{\alert{0}}} \example{F}$}};
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,68 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Le jeu de l'imitation}
+
+  \on[y=-5mm]{
+    \begin{tikzpicture}
+      \node [faded background picture=Village,    text width=\paperwidth/3] (A) at (-\paperwidth/3,0) {};
+      \node [faded background picture=Salon, text width=\paperwidth/3]      (B) at ( 0            ,0) {};
+      \node [faded background picture=Machineroom, text width=\paperwidth/3] (C) at ( \paperwidth/3,0) {};
+
+      \node[anchor=south, outer sep=0pt, inner sep=0pt] at (A.south) {\includegraphics[height=22mm]{Bob}};
+      \node[anchor=south, outer sep=0pt, inner sep=0pt] at (B.south) {\includegraphics[height=22mm]{Carole}};
+      \node[anchor=south, outer sep=0pt, inner sep=0pt] at (C.south) {\includegraphics[height=22mm]{Robot}};
+    \end{tikzpicture}
+  }
+
+  \on<2>[x=-\paperwidth/3, y=-15mm]{
+    \chatBubble[color=example]{Thé, mails, métro}
+  }
+  \on<3>[x=-\paperwidth/3, y=-15mm]{
+    \chatBubble[color=example]{Raté !}
+  }
+
+  \on<1>[x=0, y=-15mm]{
+    \chatBubble[color=alert]{Décris ta matinée en trois mots}
+  }
+  \on<3>[x=0, y=-15mm]{
+    \chatBubble[color=alert]{Humain ?}
+  }
+
+  \on<2>[x=\paperwidth/3, y=-15mm]{
+    \chatBubble[color=structure]{Café, mails, métro}
+  }
+  \on<3>[x=\paperwidth/3, y=-15mm]{
+    \chatBubble[color=structure]{Raté !}
+  }
+
+  \on[x=-\paperwidth/3, y=15mm]{
+    \begin{chat}[color=example]{Carole}
+      \chatRecv[color=alert]{Décris ta matinée en trois mots}
+      \only<2->{\chatSend{Thé, mails, métro}}
+    \end{chat}
+  }
+
+  \on[x=0, y=15mm]{
+    \begin{chat}[color=alert]{Mystère}
+      \chatSend{Décris ta matinée en trois mots}
+      \only<2->{\chatRecv[color=structure]{Café, mails, métro}}
+    \end{chat}
+  }
+
+  \on[x=\paperwidth/3, y=15mm]{
+    \begin{chat}[color=structure]{Carole}
+      \chatRecv[color=alert]{Décris ta matinée en trois mots}
+      \only<2->{\chatSend{Café, mails, métro}}
+    \end{chat}
+  }
+
+\end{frame}
+
+\endgroup

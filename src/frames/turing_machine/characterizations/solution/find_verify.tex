@@ -1,0 +1,136 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Lemme -- $\textsc{Trouver} \in \textsc{RE} \Rightarrow \textsc{Vérifier} \in \textsc{R}$}
+
+  \on[text, top=-1mm]{
+    Soit $\structure{L \subseteq \Sigma^\star}$ un langage \alert{semi-décidable}.
+    Alors il existe
+    $R \subseteq \Sigma^\star \times \Gamma^\star$ \alert{décidable}
+    tel que :
+     $
+    \forall u \in \Sigma^\star,
+    u\in L
+ \Leftrightarrow 
+    \exists c \in \Gamma^\star, \langle u,c \rangle \in R
+$.
+ 
+    \vspace{2mm}
+    \structure{Démonstration.~}
+    Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTND qui reconnaît $L$.
+
+    On construit une MTD $M'$ qui décide :
+
+    \vspace{-3mm}
+    $$\alert{R = \{ \langle u, c \rangle \mid c \text{ encode une exécution acceptante de $M$ sur $u$}\}}.$$
+
+    Un certificat décrit la suite de transitions d'une exécution acceptante de $M$. 
+  }  
+
+  \onExampleBlock[y=2mm]{Exemple -- \textsc{Subset-Sum}}{}
+
+  \on[y=0mm, x=25mm] {
+    \scalebox{.8}{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{s}:};
+      \cell{}
+      \cell{}                        
+      \cell{\onlyb<2->{\faMapMarker}} \smhead<-2> \smheadfromb<7>{4} \smheadb<8->
+      \cell{}
+      \cell{}
+      \cell{}                        
+      \cell{}                         \smheadfromb<3>[]{-4}\smheadb<4-6>
+      \cell{}
+    \end{tikzpicture}
+    }
+  }
+  
+  \on[y=-15mm] {
+    \scalebox{.8}{
+    \begin{tikzpicture}[turingMachine, x=10mm, y=10mm]
+      \state[alert ob=<1>,    initial] (0) at (3,0) {\faMapMarker}; 
+      \state[alert ob=<{2,4-6,8}>    ] (1) at (5,1) {\faRandom}; 
+      \state[alert ob=<9>, accepting]  (2) at (7,0) {\faCheck}; 
+      \state[alert ob=<3>            ] (3) at (0,1) {+}; 
+      \state[alert ob=<7>            ] (4) at (10,1) {-}; 
+      
+      \path                       (0) edge                  node[sloped,swap] {\smGroup{\smTMtransR[\textsc{c}]{0}{0}\smTMtransS[\textsc{s}]{\blank}{\text{\tiny\faMapMarker}}}} (1);
+      \path                       (1) edge                  node[sloped,swap] {\smGroup{\smTMtransR[\textsc{c}]{1}{1}\smTMtransL[\textsc{e}]{\blank}{\blank}\smTMtransS[\textsc{s}]{\text{\tiny\faMapMarker}}{\blank}}} (2);
+      \path[structure on=<{2,4}>] (1) edge                  node              {\smGroup{\smTMtransR[\textsc{c}]{2}{2}\smTMtransR[\textsc{e}]{+}{+}}} (3);
+      \path[structure on=<{6}>  ] (1) edge                  node[swap]        {\smGroup{\smTMtransR[\textsc{c}]{3}{3}\smTMtransR[\textsc{e}]{-}{-}}} (4);
+      \path                       (3) edge[bend left =10pt] node              {\smGroup{\smTMtransR[\textsc{c}]{4}{4}\smTMtransR[\textsc{e}]{\bullet}{\bullet}}} (1);
+      \path                       (4) edge[bend right=10pt] node[swap]        {\smGroup{\smTMtransR[\textsc{c}]{5}{5}\smTMtransR[\textsc{e}]{\bullet}{\bullet}}} (1);
+      \path[example on=<{2,4,6}>] (1) edge[loop above]      node              {\smGroup{\smTMtransR[\textsc{c}]{6}{6}\smTMtransR[\textsc{e}]{x}{x}}} (1);
+      \path                       (3) edge[loop left]       node              {\smGroup{\smTMtransR[\textsc{c}]{7}{7}\smTMtransR[\textsc{e}]{1}{1}\smTMtransR[\textsc{s}]{x}{x}}} (3);
+      \path                       (4) edge[loop right]      node              {\smGroup{\smTMtransR[\textsc{c}]{8}{8}\smTMtransR[\textsc{e}]{1}{1}\smTMtransL[\textsc{s}]{x}{x}}} (4);
+    \end{tikzpicture}
+    }
+  }
+  
+  \on[y=-32mm] {
+    \scalebox{.8}{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{e}:};
+      \cell{}
+      \cell{}
+      \cell[alert ob=<2>]{+} \smhead<-2>
+      \cell{1}               
+      \cell{1}               
+      \cell{1}               
+      \cell{1}                          
+      \cell{$\bullet$}    \smheadfromb<3>{-4}
+      \cell[alert ob=<4>]{+} \smheadb<4>
+      \cell{1}
+      \cell{1}
+      \cell{1}
+      \cell{$\bullet$}    \smheadfromb<5>{-3}
+      \cell[alert ob=<6>]{-} \smheadb<6>
+      \cell{1}               
+      \cell{1}               
+      \cell{1}               
+      \cell{1}
+      \cell{$\bullet$}   \smheadfromb<7>{-4}   \smheadb<9>[example]
+      \cell{}               \smheadb<8>
+      \cell{}
+    \end{tikzpicture}
+    }
+  }
+
+  \on[y=-40mm] {
+    \scalebox{.8}{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{c}:};
+      \cell{}
+      \cell{0}                   \smhead<1>
+      \cell[structure on=<2->]{2} \smheadb<2>
+      \cell{7}               
+      \cell{7}               
+      \cell{7}               
+      \cell{7}                         
+      \cell{4}                   \smheadfromb<3>{-4}
+      \cell[example on=<4->]{6}   \smheadb<4>
+      \cell{6}               
+      \cell{6}               
+      \cell{6}                          
+      \cell{6}                   \smheadfromb<5>{-3}
+      \cell[structure on=<6->]{3} \smheadb<6>
+      \cell{8}               
+      \cell{8}               
+      \cell{8}               
+      \cell{8}                          
+      \cell{5}                   \smheadfromb<7>{-4}   
+      \cell{1}                   \smheadb<8>
+      \cell{}                    \smheadb<9>
+    \end{tikzpicture}
+    }
+  }
+  
+\end{frame}
+
+\endgroup

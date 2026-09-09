@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\sep{\,\mathord{\circ}\,}
+
+\begin{frame}{Un exemple plus compliqué}
+
+  \onExampleBlock[top]{L'instance de \textsc{pcp} sur $\{a, b, \circ\}$ suivante a-t-elle une solution ?}{
+    $$D = \left\{\begin{array}{c}
+    \VDomino[1.7]{\sep b \sep b \sep a \phantom{\sep}}{\sep \phantom{a} b\sep b \phantom{\sep} \sep},
+    \VDomino[1.7]{\sep \sep}{\phantom{\sep}\sep},                                                       \vspace{1mm}\\
+    \VDomino[1.7]{\sep \phantom{b \sep} a \phantom{\sep a \sep}}{\phantom{\sep}b\sep a\sep a \sep},
+    \VDomino[1.7]{\sep a\sep b\phantom{\sep}}{\phantom{\sep}a\sep a\sep },
+    \VDomino[1.7]{\sep b \sep b \sep a \phantom{\sep}}{\phantom{\sep a} b\sep b \phantom{\sep} \sep},
+    \end{array}\right\}$$
+  }
+
+  \onBlock<2->[bottom]{Réponse}{
+    \begin{description}[Initialisation :]
+    \item[Solution :]
+      $
+      \VDomino[1.5]{\sep b \sep b \sep a \phantom{\sep}}{\sep \phantom{a} b\sep b \phantom{\sep} \sep}\,
+      \VDomino[1.5]{\sep a\sep b\phantom{\sep}}{\phantom{\sep}a\sep a\sep }\,
+      \VDomino[1.5]{\sep b \sep b \sep a \phantom{\sep}}{\phantom{\sep a} b\sep b \phantom{\sep} \sep}\,
+      \VDomino[1.5]{\sep \phantom{b \sep} a \phantom{\sep a \sep}}{\phantom{\sep}b\sep a\sep a \sep}\,
+      \VDomino[1.5]{\sep \sep}{\phantom{\sep}\sep}
+      $
+    \item[Initialisation :] le premier domino est forcément $\VDomino[1.7]{\sep b \sep b \sep a \phantom{\sep}}{\sep \phantom{a} b\sep b \phantom{\sep} \sep}$
+    \item[Remarque :] L'instance du \textsc{pcpi}
+      $\left\langle D=\left\{
+      \VDomino[.9]{a}{baa},
+      \VDomino[.9]{ab}{aa},
+      \VDomino[.9]{bba}{bb}
+      \right\},
+      d_0 = \VDomino[.9]{bba}{bb}
+      \right\rangle$
+
+      a pour solution :
+      $
+      \VDomino[.9]{b b a}{ b b}\,
+      \VDomino[.9]{ab}{a a}\,
+      \VDomino[.9]{bba}{b b}\,
+      \VDomino[.9]{a}{baa}
+      $
+      
+    \end{description}
+  }
+  
+\end{frame}
+
+\endgroup

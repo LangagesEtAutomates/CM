@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Modélisation mathématique}
+
+  \begin{block}{Définition -- Automate fini non-déterministe (AFN)}
+    \vspace{1mm}
+    Un \structure{automate fini} est un quintuplet \alert{$\langle \Sigma, Q, q_0, F, \rightarrow \rangle$} tel que :
+    \begin{description}[xxxxx]
+    \item[\alert{$\Sigma$}] $\in \Omega_f$ ensemble fini non vide : \structure{l'alphabet}
+    \item[\alert{$Q$}]  $\in \Omega_f$ ensemble fini non vide : \structure{les états}
+    \item[\alert{$q_0$}] $\in Q$ : \structure{l'état initial}
+    \item[\alert{$F$}] $\subseteq Q$ : \structure{les états finaux (ou accepteurs)}
+    \item[\alert{$\rightarrow$}] $\subseteq  Q \times (\Sigma \cup \{\varepsilon\}) \times Q$ : \structure{la relation de transition}
+    \end{description}
+
+    \vspace{1mm}
+    Une \structure{transition} est un triplet \alert{$\langle q, a, q' \rangle \in \rightarrow$}, que l'on note \alert{$q\xrightarrow{a} q'$}, tel que :
+    \begin{description}[xxxxx]
+    \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
+    \item[\alert{$a$}] $\in \Sigma \cup \{\varepsilon\}$ : \structure{l'étiquette}
+    \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
+    \end{description}
+    
+    \vspace{1mm}
+    \structure{Remarques : }
+    \begin{itemize}
+    \item On ne considère que des automates \structure{unitaires} (un seul état initial)
+    \item Une $\varepsilon$-transition peut être empruntée sans lire de symbole du mot
+    \end{itemize}
+  \end{block}
+  
+  \on[y=-18mm, x=20mm]{
+    \begin{tikzpicture}[automaton]
+      \state (q)  at (0,0) {$q$}; 
+      \state (q1) at (1,0) {$q'$}; 
+      \path  (q) edge node {$a$} (q1);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

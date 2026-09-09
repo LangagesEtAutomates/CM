@@ -1,0 +1,54 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Vers une axiomatisation nécessairement incomplète}
+ 
+  \onBlock[right=.75\textwidth, top=-2mm]{Théorème d'incomplétude de Gödel (1931)}{
+    Il n'existe pas de système de preuve :
+    \begin{itemize}
+    \item formel (\textsc{Vérification des preuves} est décidable)
+    \item suffisamment expressif pour l'arithmétique entière
+    \item à la fois complet et cohérent
+    \end{itemize}
+  }
+ 
+  \onBlock<2->[left=.73\textwidth, bottom=-3mm]{Vers une théorie des ensembles cohérente}{
+    \begin{itemize}
+    \item Schéma de compréhension restreint
+      $\structure{\{x \alert{\in E} \mid P(x) \}}$
+    \item La base de l'axiomatisation moderne (ZFC)
+      \begin{itemize}
+      \item Complétée par Fraenkel, Skolem, Von Neumann...
+      \end{itemize}
+    \item Cohérence toujours indémontrée
+    \end{itemize}
+    \begin{minipage}{.92\textwidth}
+      \myquote{David Hilbert}{Personne ne doit pouvoir nous chasser\\ du paradis que Cantor nous a créé}
+    \end{minipage}
+  }
+  
+  \onImage[x=-.4\textwidth,top]{%
+    height=25mm,
+    title={Kurt Gödel},
+    licenselogo={\ccPublicDomain},
+    license*={Domaine public (Vienne, 1925. \href{https://commons.wikimedia.org/wiki/File:Young_Kurt_G\%C3\%B6del_as_a_student_in_1925.jpg}{Wikimedia})},
+    img={Godel.jpg}
+  }
+ 
+  \onImage<2->[x=.4\textwidth,bottom=5mm]{%
+    height=30mm,
+    title={Ernst Zermelo},
+    licenselogo={\ccPublicDomain},
+    license*={Domaine public (Italie, vers 1900. \href{https://commons.wikimedia.org/wiki/File:Ernst_Zermelo_1900s.jpg}{Wikimedia})},
+    img={Zermelo.jpg}
+  }
+  
+\end{frame}
+
+\endgroup

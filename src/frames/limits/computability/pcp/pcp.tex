@@ -1,0 +1,52 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Problème de Correspondance de Post}
+
+  \on[text, top]{
+    Soit $\Sigma$ un alphabet contenant au moins deux symboles. 
+  }
+  
+  \on[text, top=4mm, width=1.1\textwidth]{
+    \Probleme{pcp}{
+      Un ensemble fini de \structure{sortes de dominos} $D \in \mathscr{P}(\Sigma^+ \times \Sigma^+)$.
+      \begin{itemize}
+      \item Dominos de la forme \VDomino{$\alpha$}{$\beta$}, avec $\alpha$ et $\beta$ des mots sur $\Sigma$
+      \end{itemize}
+    }{
+      Existe-t-il un mot
+      $\VDomino{\alpha_1}{\beta_1} \,\cdots\, \VDomino{\alpha_k}{\beta_k} \in D^+$ de dominos\footnote[frame]{On peut utiliser chaque domino autant de fois qu'on veut} tel que :
+      \begin{itemize}
+      \item $\structure{\alpha_{1} \cdots \alpha_{k}} = \example{\beta_{1} \cdots \beta_{k}}$
+      \end{itemize}
+    }
+  }
+
+  \onExampleBlock[bottom=3mm] {Exemples : les instances suivantes sont-elles positives ?} {
+    \begin{itemize}
+    \item $\left\{\VDomino{a}{baa}, 
+      \VDomino{ab}{aa}, 
+      \VDomino{bba}{bb}\right\}
+      \uncover<2->{
+        \quad\example{\in\textsc{pos}(\textsc{pcp})}
+        \quad \text{solution : }
+        \VDomino{bba}{bb}\,
+        \VDomino{ab}{aa}\,
+        \VDomino{bba}{bb}\,
+        \VDomino{a}{baa}
+      }$
+    \item $\left\{\VDomino{a}{ba}, 
+      \VDomino{ab}{b}\right\}
+      \uncover<2->{\quad\alert{\in\textsc{neg}(\textsc{pcp})}}$
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\endgroup

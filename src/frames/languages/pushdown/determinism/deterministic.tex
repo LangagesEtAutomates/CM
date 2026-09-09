@@ -1,0 +1,35 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Automates à pile déterministes}
+
+  Soit $A = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ un automate à pile.
+
+  \begin{block}{Définition -- Automate à pile déterministe}
+    On dit que $A$ est \structure{déterministe}\footnote{Il existe d'autres définitions, généralement plus restrictives, dans la littérature classique.} si, 
+    pour tout état \structure{$q \in Q$} et transitions \structure{$q\xrightarrow{\smPAtrans{a_1}{p_1}{p'_1}} q_1$}
+      et \structure{$q\xrightarrow{\smPAtrans{a_2}{p_2}{p'_2}} q_2$} :
+      \begin{itemize}
+      \item\vspace{2mm} Soit on peut distinguer selon les symboles lus $a_1$ et $a_2$ :
+        $$\alert{a_1 \notin \mathit{Prefix}(a_2) \land a_2 \notin \mathit{Prefix}(a_1)}$$
+      \item Soit on peut distinguer selon la pile  $p_1$ et $p_2$ :
+        $$\alert{p_1 \notin \mathit{Prefix}(p_2) \land p_2 \notin \mathit{Prefix}(p_1)}$$
+      \end{itemize}
+  \end{block}
+
+  \begin{block}{Remarque sur les $\varepsilon$-transitions}
+    \begin{itemize}
+    \item On n'interdit pas les $\varepsilon$-transitions, tant qu'on peut distinguer avec la pile
+    \item Des définitions interdisent les $\varepsilon$- et $a$-transitions à partir du même état
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

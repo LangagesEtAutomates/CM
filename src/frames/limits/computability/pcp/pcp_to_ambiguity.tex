@@ -1,0 +1,90 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Indécidabilité de l'ambiguïté}
+
+  \onBlock[top=-5mm]{Théorème -- Indécidabilité de l'ambiguïté}{
+    Le problème \textsc{Ambiguity} est indécidable
+  }
+  
+  \onBlock[y=7mm]{Démonstration}{
+    La fonction $\varphi$ suivante est une réduction de \textsc{pcp} vers \textsc{Ambiguity} :
+    {\small
+      $$
+      \varphi : \left\{\begin{array}{@{}r@{~}c@{~}l@{}}
+      \mathcal{I}(\textsc{pcp})
+      &
+      \rightarrow
+      &
+      \mathcal{I}(\textsc{Ambiguity}) \text{\quad\quad\quad\example{(sur l'alphabet $\Sigma \cup D$})}
+      %
+      \vspace{2mm}\\
+      %
+      \left\{\VDomino{\alpha_1}{\beta_1}, \ldots, \VDomino{\alpha_n}{\beta_n} \right\}
+      &
+      \mapsto
+      &
+      \left\{\begin{array}{@{~}r@{~~}c@{~~}l@{}l@{~}c@{~}l@{~}l@{~}c@{~}l@{~}l@{~}c@{~}l@{~}l@{}}
+      S &\rightarrow& A \mid B
+      \vspace{1mm}\\
+      %
+      A &\rightarrow&
+      \alpha_1 A & \VDomino{\alpha_1}{\beta_1}
+      &\mid&
+      \alpha_1   & \VDomino{\alpha_1}{\beta_1}
+      & \mid \ldots \mid &
+      \alpha_n A & \VDomino{\alpha_n}{\beta_n}
+      & \mid &
+      \alpha_n   & \VDomino{\alpha_n}{\beta_n}
+      \vspace{1mm}\\
+      %
+      B &\rightarrow&
+      \beta_1 B  & \VDomino{\alpha_1}{\beta_1}
+      &\mid&
+      \beta_1    & \VDomino{\alpha_1}{\beta_1}
+      & \mid \ldots \mid &
+      \beta_n B  & \VDomino{\alpha_n}{\beta_n}
+      & \mid &
+      \beta_n    & \VDomino{\alpha_n}{\beta_n} 
+      \end{array}\right.
+      \end{array}\right.
+      $$
+    }
+  }
+
+  \onExampleBlock[bottom=-3mm]{Exemple}{
+    \begin{itemize}
+    \item\vspace{-2mm} $D = {\color{black}\left\{{\footnotesize \VDomino[.7]{a}{baa}, \VDomino[.7]{ab}{aa}, \VDomino[.7]{bba}{bb}} \right\}}$
+      a pour solution ${\footnotesize \VDomino{bba}{bb}\, \VDomino{ab}{aa}\, \VDomino{bba}{bb}\, \VDomino{a}{baa}}$.
+    \item $\varphi(D)$ a deux dérivations pour : 
+      $bbaabbbaa\, \scriptsize
+      \VDomino{a}{baa}\, 
+      \VDomino{bba}{bb}\,
+      \VDomino{ab}{aa}\,
+      \VDomino{bba}{bb}
+      $.
+      \begin{itemize}
+      \item $S \vdash A \vdash^\star \structure{bba}\cdot \structure{ab} \cdot \structure{bba} \cdot \structure{a} \cdot \scriptsize
+        \VDomino{a}{baa}\cdot
+        \VDomino{bba}{bb}\cdot
+        \VDomino{ab}{aa}\cdot
+        \VDomino{bba}{bb}$
+      \item $S \vdash B \vdash^\star \example{bb}\cdot \example{aa} \cdot \example{bb} \cdot \example{baa} \cdot\hspace{-.2mm} \scriptsize
+        \VDomino{a}{baa}\cdot
+        \VDomino{bba}{bb}\cdot
+        \VDomino{ab}{aa}\cdot
+        \VDomino{bba}{bb}$
+      \end{itemize}
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

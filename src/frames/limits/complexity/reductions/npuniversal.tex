@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Le problème universel borné}
+
+  \on[text, top=-4mm]{
+    \Probleme{NPUniversal}{
+      \begin{itemize}
+      \item un \structure{encodage} $\mathit{encode}(M)$ d'une \alert{MTND} $M$,
+      \item un mot $u$
+      \item un entier $k$ \structure{écrit en unaire}
+      \end{itemize}
+    }{
+      Est-ce que $M$ accepte $u$ en moins de $k$ étapes ?
+    }
+  }
+
+  \onBlock[bottom=-4mm]{Théorème -- Complexité de \textsc{NPUniversal}}{
+    Le problème \textsc{NPUniversal} est \textsc{np}-complet.
+
+    \vspace{2mm}
+    \structure{$\textsc{NPUniversal} \in \textsc{np}$.} On adapte la machine universelle (page~\ref{limits/universality/semidecidable/mtu}) 
+    \begin{itemize}
+    \item Choix non-déterministe d'une transition de $M$ 
+    \item Décompte des transitions de $M$ borné par $k$ 
+    \end{itemize}
+
+    \vspace{1mm}
+    \structure{$\textsc{NPUniversal} \in \textsc{np-difficile}$.} Soit $A \in \textsc{np}$. Montrons que $A \leq_p \textsc{NPUniversal}$.
+    \begin{itemize}
+    \item Il existe $M_A$ une MTND qui accepte $A$ en au plus $P(n)$ étapes.
+    \item On a la réduction polynomiale $\varphi$ de $A$ vers $\textsc{NPUniversal}$ suivante :
+
+      \vspace{-2mm}
+      $$\alert{\varphi : \left\{\begin{array}{rcl}
+        \mathcal{I}(A) & \rightarrow & \mathcal{I}(\textsc{NPUniversal}) \\
+        u              & \mapsto     & \langle \mathit{encode}(M_A), u, 1^{P(|u|)} \rangle \\
+        \end{array}\right.}$$ 
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup

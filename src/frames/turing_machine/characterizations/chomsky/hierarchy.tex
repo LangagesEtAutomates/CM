@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Hiérarchie de Chomsky et automates}
+
+  \vspace{-1mm}
+  \centering
+  \begin{tikzpicture}[2Darray, x=23mm, y=15mm]
+    \arrayColumn[width=8mm, header=Type]{
+      \arrayLine{0}
+      \arrayLine{1}
+      \arrayLine{2}
+      \arrayLine{3}
+    }
+    
+    \arrayColumn[header=Grammaire]{
+      \arrayLine{Non-restreinte\\ $\alpha A \beta \rightarrow \gamma$}
+      \arrayLine{Contextuelle\\   $\alpha A \beta \rightarrow \alpha \gamma \beta$}
+      \arrayLine{Algébrique\\     $A \rightarrow \beta$}
+      \arrayLine{Rationnelle\\    $A \rightarrow a B \mid b \mid \varepsilon$}
+    }
+    
+    \arrayColumn[header=Langage]{
+      \arrayLine{Récursivement\\ énumérable}
+      \arrayLine{Contextuel}
+      \arrayLine{Algébrique}
+      \arrayLine{Rationnel}
+    }
+    
+    \arrayColumn[width=25mm, header=Automate]{
+      \arrayLine{Machine\\de Turing}
+      \arrayLine{Automate linéairement borné}
+      \arrayLine{Automate à pile\\non déterministe}
+      \arrayLine{Automate fini}
+    }
+    
+    \arrayColumn[width=30mm, header=Déterminisable]{
+      \arrayLine{Oui. Complexité ? \\ \footnotesize $\textsc{p} \stackrel{?}{=} \textsc{np}$}
+      \arrayLine{Inconnu\\ \scriptsize $\textsc{nspace}(n) \stackrel{?}{=} \textsc{dspace}(n)$}
+      \arrayLine{Impossible}
+      \arrayLine{Oui. Exponentiel\\ en nombre d'états}
+    }
+  \end{tikzpicture}
+  
+\end{frame}
+
+\endgroup

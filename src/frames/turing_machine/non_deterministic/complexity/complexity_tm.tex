@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Complexité d'une machine de Turing non-déterministe}
+  Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une \alert{MTND} du modèle strict et $u \in \alert{\mathcal{L}(M)}$.
+
+  \begin{block}{Complexité temporelle non-déterministe}
+    \begin{itemize}
+    \item\vspace{-1mm} La \structure{complexité temporelle non-déterministe} de $M$ sur $u$ est le nombre d'actions lors de \alert{la plus courte} exécution de $u$ par $M$ :
+
+      \vspace{-2mm}
+      $$\structure{\alert{N}T_M(u) \eqdef \alert{\min}\left\{n \in \mathbb{N} \mid \exists c_f \in \alert{\mathcal{C}_M^+}, C_{\mathit{init}}(u) \leadsto^n c_f\right\}}.$$ 
+
+    \item\vspace{-1mm} La \structure{complexité temporelle dans le pire cas} de $M$, pour $n\in \mathbb{N}$, est : \\
+
+      \vspace{-2mm}
+      $$\structure{\alert{N}T_M(n) \eqdef \max \left\{\alert{N}T_M(u) \mid u \in \alert{\mathcal{L}(M)} \right\}}.$$ 
+    \end{itemize}
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Complexité spatiale non-déterministe}
+    \begin{itemize}
+    \item La \structure{complexité spatiale non déterministe} de $M$ sur $u$, notée \alert{$NS_M(u)$},
+      est \alert{la plus petite borne} telle qu'\alert{il existe une exécution} de $M$ qui accepte $u$ en \alert{n'utilisant
+      jamais plus de $NS_M(u)$ cases} du ruban.
+      
+    \item\vspace{-1mm} La \structure{complexité spatiale dans le pire cas} de $M$, pour $n\in \mathbb{N}$, est : \\
+
+      \vspace{-2mm}
+      $$\structure{\alert{N}S_M(n) \eqdef \max \{\alert{N}S_M(u) \mid u \in \alert{\mathcal{L}(M)} \}}.$$ 
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

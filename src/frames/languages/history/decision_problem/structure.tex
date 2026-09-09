@@ -1,0 +1,116 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\tikzset{
+  language/.style={
+    rounded corners,
+    fill=structure!10,
+    draw=structure,
+    text=structure,
+    align=center,
+  },
+  word/.style={
+    {Circle[length=2.4pt,width=2.4pt]}-{Stealth[length=5pt]},
+    shorten <=-1.2pt,
+    auto,
+  },
+  noword/.style={
+    Rays-{Stealth[length=5pt]},
+    shorten <=-1.2pt,
+    auto,
+  },
+}
+
+\begin{frame}{Mots, langages et formalismes}
+
+  \on[top]{
+    \begin{tikzpicture}\scriptsize
+
+      \node[language, text width=105mm, minimum height=70mm, fill=structure!5] (all) at (0,0) {};
+      \node[structure, anchor=north west] at (all.north west) {$\Omega^\star$};
+
+      \uncover<2->{
+        \node[language, text width=50mm, minimum height=60mm, anchor=south west] (reg) at ($(all.south west)+(5mm,5mm)$) {};
+        \node[structure, anchor=north west] at (reg.north west) {Expressions rationnelles};
+      }
+      
+      \node[language, text width=30mm, minimum height=50mm, anchor=south east, fill=structure!15] (ab) at ($(reg.south east)+(-5mm,5mm)$) {};
+      \node[structure, anchor=north west] at (ab.north west) {$\{a, b\}^\star$};
+      
+      \node[language, text width=25mm, minimum height=10mm, anchor=north] (anbnan) at ($(ab.north)+(0mm, -5mm)$) {};
+      \node[structure, anchor=north west] at (anbnan.north west) {$\{a^n b^n a^n \mid n>0\}$};
+
+      \node[language, text width=25mm, minimum height=5mm, anchor=north] (ba) at ($(ab)+(0mm, 7.5mm)$) {};
+      \node[structure, anchor=north west] at (ba.north west) {$\{ba\}$};
+      
+      \node[language, text width=25mm, minimum height=20mm, anchor=south] (asbs) at ($(ab.south)+(0mm, 5mm)$) {};
+      \node[structure, anchor=south west] at (asbs.south west) {$\{a^m b^n \mid m, n>0\}$};
+
+      \node[language, text width=20mm, minimum height=10mm, anchor=south, fill=structure!15] (anbn) at ($(asbs.south)+(0mm, 5mm)$) {};
+      \node[structure, anchor=south west] at (anbn.south west) {$\{a^n b^n \mid n>0\}$};
+
+      \uncover<3->{
+        \node[language, text width=40mm, minimum height=27.5mm, anchor=north east] (gram) at ($(all.north east)+(-5mm,-5mm)$) {};
+        \node[structure, anchor=north east] at (gram.north east) {Grammaires algébriques};
+      }
+
+      \uncover<4->{
+        \node[language, text width=40mm, minimum height=27.5mm, anchor=south east] (cpp) at ($(all.south east)+(-5mm,5mm)$) {};
+        \node[structure, anchor=south east] at (cpp.south east) {C++};
+      }
+      
+      \draw[example] (all.north) node[below]{$abc$};
+      \draw[example] (ab.north) node[below]{$baba$};
+      \draw[example] ($(anbnan.south west)+(5mm,5mm)$)  node{$aba$};
+      \draw[example] ($(anbnan.south east)+(-7mm,5mm)$) node{$aabbaa$};
+      \draw[example] ($(asbs.north west)+(5mm,-2mm)$) node{$aab$};
+      \draw[example] ($(anbn.north west)+(5mm,-2mm)$) node{$ab$};
+      \draw[example] ($(anbn.north east)+(-5mm,-2mm)$) node{$aabb$};
+      \draw[example] (ba.center) node[left]{$ba$};
+
+      \uncover<2->{
+        \draw[example] (ba.center) edge[word, out=100, in=50, distance=12pt] (ba);
+        \draw[example] ($(reg.west)+(5mm, 5mm)$) node[above]{$(a\mid b)^\star$} +(0,0) edge[word] (ab);
+        \draw[example] ($(reg.west)+(5mm,-5mm)$) node[above]{$a^\star b^\star$} +(0,0) edge[word] (asbs);
+
+        \draw[alert] ($(reg.west)+(5mm,-15mm)$) edge[noword] node[sloped]{lemme de} node[sloped, swap]{l'étoile} (anbn);
+        \draw[alert] ($(reg.west)+(5mm, 15mm)$) edge[noword] node[sloped]{lemme de} node[sloped, swap]{l'étoile} (anbnan);
+      }
+
+      \uncover<3->{
+        \draw[example] ($(gram.south west)+(5mm,20mm)$) node[right]{$S \rightarrow a\mid b \mid SS \mid S^\star \mid...$} +(0,0) edge[word] (reg);
+        \draw[example] ($(gram.south west)+(5mm,15mm)$) node[right]{$S \rightarrow aS\mid bS \mid \varepsilon$} +(0,0) edge[word] (ab);
+        \draw[example] ($(gram.south west)+(5mm,10mm)$) node[right]{$S \rightarrow aS\mid Sb \mid \varepsilon$} +(0,0) edge[word] (asbs);
+        \draw[example] ($(gram.south west)+(5mm,5mm)$) node[right]{$S \rightarrow aSb\mid \varepsilon$} +(0,0) edge[word] (anbn);
+        \draw[example] ($(gram.east)+(-10mm,0mm)$) node[above]{$S \rightarrow...$} +(0,0) edge[word] (gram);
+        \draw[alert] ($(gram.south west)+(5mm,25mm)$) edge[noword] node[sloped]{lemme de} node[sloped, swap]{pompage} (anbnan);
+      }
+      
+      \uncover<4->{
+        \draw[example] ($(cpp.north west)+(5mm,-4mm)$)  node[right]{flex} +(0,0) edge[word] (reg.east);
+        \draw[example] ($(cpp.north west)+(5mm,-8mm)$)  node[right]{...}  +(0,0) edge[word] (anbnan);
+        \draw[example] ($(cpp.north west)+(5mm,-12mm)$) node[right]{bool decide(string s) \{return s=="ba";\}}  +(0,0) edge[word] (ba);
+        \draw[example] ($(cpp.north west)+(5mm,-16mm)$) node[right]{...}  +(0,0) edge[word] (ab);
+        \draw[example] ($(cpp.north west)+(5mm,-20mm)$) node[right]{...} +(0,0) edge[word] (asbs);
+        \draw[example] ($(cpp.north west)+(5mm,-24mm)$) node[right]{...} +(0,0) edge[word] (anbn);
+        \draw[example] ($(cpp.south)+(0mm,5mm)$) node[above]{gcc} edge[word] (cpp);
+        
+        \draw[example] ($(gram.south east)+(-10mm,5mm)$) node[above]{$S \rightarrow \texttt{if}...$} +(0,0) edge[bend right, word] ($(cpp.north east)+(-10mm,0mm)$);
+        \draw[example] ($(cpp.north east)+(-10mm,-5mm)$) node[below]{bison} +(0,0) edge[bend right, word] ($(gram.south east)+(-10mm,0mm)$);
+      }
+      
+    \end{tikzpicture}
+  }
+  
+  \on<4->[bottom]{Le langage \structure{C++} permet-il de décrire tous les langages ?}
+
+\end{frame}
+
+\endgroup
+\endinput

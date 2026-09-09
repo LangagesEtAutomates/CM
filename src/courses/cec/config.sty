@@ -1,0 +1,185 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{config}[2024/06/24 Configuration of the Languages and Automate course]
+
+\def\input@path{{src/frames}}
+\graphicspath{{src/}{src/img/}}
+
+\usepackage[french]{babel}
+
+
+
+\RequirePackage{iftex}
+\ifPDFTeX
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage[utf8]{inputenc}
+\fi
+
+\RequirePackage{overlay}
+
+\RequirePackage{frameconfig} 
+
+\RequirePackage{ccicons}
+\RequirePackage[normalem]{ulem}
+\RequirePackage{fontawesome, pifont, MnSymbol}
+\providecommand\cmark{\example{\text{\ding{51}}}}
+\providecommand\xmark{\alert{\text{\ding{55}}}\,}
+
+\RequirePackage{chat}
+
+\RequirePackage{dominos}
+\tikzset{
+  domino top/.style={fill=structure!20},
+  domino bottom/.style={fill=example!20},
+}
+
+\RequirePackage{statemachines}
+\colorlet{sm@head@color}{alert}
+\colorlet{sm@fill@alert}{alert}
+\colorlet{sm@fill@example}{example}
+\colorlet{sm@fill@structure}{structure}
+
+\RequirePackage{trees}
+
+
+\PassOptionsToPackage{vlined}{algorithm2e}
+\RequirePackage{algos}
+\lstset{
+  language=java,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{alertColor},
+  stringstyle=\bfseries\color{exampleColor},
+  commentstyle=\color{structure.fg},
+  showstringspaces=false,
+  numbers=none,
+  numberstyle=\scriptsize,
+  morekeywords={specification, var, record},
+  escapeinside={(*}{*)},
+  numbers=none,
+  gobble=2,
+}
+
+
+
+
+\RequirePackage{citations}
+
+
+
+
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+
+\RequirePackage{graphicx}
+
+
+
+\RequirePackage{amsmath, amssymb, amsfonts}
+\RequirePackage{mathtools}
+\RequirePackage{mathrsfs}
+\RequirePackage{stmaryrd}
+
+\providecommand\eqdef{\stackrel{\text{def}}{=}}
+\DeclareMathOperator\valid{valid}
+\DeclareMathOperator\dom{dom}
+\newcommand{\Alphabet}{{\color{red}{XXXXX}}}
+
+\usepackage{array}
+\newcolumntype\math[1]{>{\(}#1<{\)}}
+\newcounter{iteration}
+
+\newcommand*\tableonly{%
+  \omit\@ifnextchar<\table@only\table@@only%
+}%
+\protected\long\def\table@only<#1>#2{%
+  \gdef\beamer@doifnotinframe{\cr}%
+  \def\beamer@doifinframe{\cr#2}%
+  \beamer@masterdecode{#1}%
+  \beamer@donow
+}%
+\protected\long\def\table@@only#1{%
+  \beamer@ifnextcharospec{\table@@@only{#1}}{\cr#1}%
+}%
+\long\def\table@@@only#1<#2>{%
+  \gdef\beamer@doifnotinframe{\cr}%
+  \def\beamer@doifinframe{\cr#1}%
+  \beamer@masterdecode{#2}%
+  \beamer@donow
+}%
+
+
+
+
+%\RequirePackage{tikz}
+\usetikzlibrary{shapes}
+
+\usetikzlibrary{arrows,automata,shadows}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns.meta}
+%\tikzstyle directed=[postaction={decorate,decoration={markings, mark=at position .65 with {\arrow{latex}}}}]
+
+\usepackage{microtype}
+
+
+\usepackage[framemethod=default]{mdframed}
+
+\newmdenv[linewidth=.5pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt]{problembox}
+
+\newcommand\Probleme[3]{
+  \begin{center}
+    \begin{minipage}{.9\textwidth}
+      \begin{problembox}
+        \textsc{#1}
+        \begin{description}[Question :]
+        \item[Instance :]#2
+        \item[Question :]#3
+        \end{description}
+      \end{problembox}
+    \end{minipage}
+  \end{center}
+}
+
+\newcommand\Minibox[1]{
+  \begin{center}
+    \begin{minipage}{14cm}
+      \begin{problembox}
+        #1
+      \end{problembox}
+    \end{minipage}
+  \end{center}
+}
+
+
+
+
+\usetikzlibrary{patterns}
+\usetikzlibrary{arrows,shadows}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.pathreplacing}
+
+
+
+\newcommand\theshape[1]{
+  (0,-#1) -- (1.3*#1,-#1) arc (-90:90:#1) -- (0,#1) arc (90:270:#1) -- cycle
+}
+
+
+\mode<all>
+\endinput
+
+

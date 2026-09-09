@@ -1,0 +1,64 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Problème de Correspondance de Post Initialisé Borné}
+
+  \on[text, top=-2mm]{
+    Soit $\Sigma$ un alphabet contenant au moins deux symboles. 
+  }
+  
+  \on[text, top=0mm, width=1.15\textwidth]{
+    \Probleme{bpcpi}{
+      \begin{itemize}
+      \item Un ensemble fini de \structure{sortes de dominos} {\small$D \in \mathscr{P}(\Sigma^+ \times \Sigma^+)$}
+        \begin{itemize}
+        \item Dominos de la forme \VDomino{$\alpha$}{$\beta$}, avec $\alpha$ et $\beta$ des mots sur $\Sigma$
+        \end{itemize}
+      \item Un \structure{domino initial} $d_0 = \VDomino{\gamma}{\delta} \in D$
+      \item Une \structure{borne $b \in \mathbb{N}$} encodée en \alert{unaire} 
+      \end{itemize}
+    }{
+      Existe-t-il un mot\footnote[frame]{On peut utiliser chaque domino jusqu'à $b$ fois}
+      $\VDomino{\alpha_1}{\beta_1} \,\cdots\, \VDomino{\alpha_k}{\beta_k} \in D^+$ tel que :
+
+      \vspace{1mm}
+      \begin{minipage}{.27\textwidth}
+        \begin{itemize}
+        \item $\VDomino{\alpha_1}{\beta_1} = \VDomino{\gamma}{\delta}$
+        \end{itemize}
+      \end{minipage}%
+      \begin{minipage}{.3\textwidth}
+        \begin{itemize}
+        \item $\structure{\alpha_{1} \cdots \alpha_{k}} = \example{\beta_{1} \cdots \beta_{k}}$
+        \end{itemize}
+      \end{minipage}
+      \begin{minipage}{.2\textwidth}
+        \begin{itemize}
+        \item \alert{$k \le b$}
+        \end{itemize}
+      \end{minipage}
+    }
+  }
+
+    \onExampleBlock[bottom=3mm] {Exemple} {
+    \begin{itemize}
+    \item $\left\langle\, \left\{
+      \VDomino{a}{ab}, 
+      \VDomino{baba}{a}, 
+      \VDomino{bb}{ba}
+      \right\},\,
+      \VDomino{a}{ab},\, 1111 \,\right\rangle
+      \quad\alert{\in\textsc{neg}(\textsc{bpcpi})}
+      $
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup

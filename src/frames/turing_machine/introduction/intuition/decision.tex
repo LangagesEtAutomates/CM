@@ -1,0 +1,37 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Décision de l'appartenance à un langage}
+
+  \begin{block}{Problème de décision}
+    Soit $G$ une grammaire contextuelle ou non contrainte 
+    
+    \Probleme{\structure{Decision$_G$}}{
+      Un mot \structure{$u \in \Sigma^\star$}
+    }{
+      Est-ce que \structure{$u \in \mathcal{L}(G)$} ?
+    }
+  \end{block}
+
+  \begin{block}{Une hiérarchie des modèles de mémoire}
+    Si un automate fini n'est pas suffisant, ajouter une structure de données
+    \begin{itemize}
+    \item Pile : \structure{automate à pile}
+    \item Tableau de taille $|u|$ : \structure{automate linéairement bornée}
+    \item Mémoire infinie : \structure{machine de Turing}
+    \begin{itemize}
+    \item Quel modèle de mémoire permet de modéliser les algorithmes ? 
+    \end{itemize}
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup
+\endinput

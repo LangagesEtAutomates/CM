@@ -1,0 +1,55 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{F}{f}
+\SetKwFunction{Decide}{decide\_univ}
+
+\begin{frame}{L'argument de Strachey}
+
+  \onBlock[text,top=-5mm]{Les langages universels sont indécidables}{
+
+    \vspace{-1mm}
+    \begin{itemize}
+    \item Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif.
+    \item Supposons que $\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$ est décidable.
+    \item Soit \structure{\Decide} qui le décide.
+    \item<2-> A-t-on $\alert{\langle f, \varepsilon\rangle \in \textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}}$ ?
+      \begin{algorithm}[H]
+        \Fun{$\F(u \in \Sigma^\star) \in \mathbb{B}$}{
+          \Return $\lnot \Decide(\F, u)$;
+        }
+      \end{algorithm}
+
+    \item<3-> On a : \quad $\structure{\langle f, \varepsilon\rangle \in \textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle} \quad \Leftrightarrow \quad \lnot \Decide(\F, \varepsilon)}$ 
+    \item<3-> Absurde, donc \alert{$\Decide$ n'existe pas}. 
+    \end{itemize}
+  }
+
+  \onImage[top, x=.35\textwidth]{%
+    width=20mm,
+    title={Christopher Strachey},
+    licenselogo={$\copyright$},
+    license={Université de Manchester (voir \href{https://www.cs.man.ac.uk/CCS/res/res43.htm\#e}{ce lien}). Utilisation non commerciale à des fins pédagogiques (fair use)},
+    img={Strachey.jpg}
+  }
+
+  \onBlock<4->[bottom=2mm]{Difficulté de la formalisation}{
+    Quel est le type de l'argument de $\Decide$ ?
+    \begin{itemize}
+    \item Si c'est le code de $\F$, est-ce que $\F$ est capable de recopier son code ?
+      \begin{itemize}
+      \item\vspace{-.5mm} Oui, mais difficile à démontrer : notion de \alert{quine} 
+      \end{itemize}
+    \item Dans les langages modernes, un pointeur de fonction.
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,71 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Reconnaissance par une MTND}
+
+  \onBlock[top=-4mm]{Définition -- Langage reconnu (ou accepté)}{
+    Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTND et $L\subseteq \Sigma^\star$.
+    \begin{itemize}
+    \item On dit que \structure{$M$ reconnaît $L$} si \alert{$L = \mathcal{L}(M)$}
+    \item \structure{Rappel :} $\mathcal{L}(M) \eqdef \left\{u \in \Sigma^\star \;\middle\mid\; \alert{\exists c \in \mathcal{C}_M^+, C_{\mathit{init}}(u) \leadsto_M^\star c} \right\}$
+    \item On dit que \structure{$L$ est reconnaissable} s'il existe une MTND qui reconnaît $L$
+    \item \structure{Rappel :} Si $M$ est déterministe, alors $\mathcal{L}(M)$ est semi-décidé par $M$
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=-2mm]{Exemple -- Reconnaissance de $\left\{u \cdot u \mid u \in \{a, b\}^\star \right\}$}{}
+
+  \on[x=-25mm, y=-11mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{i}};
+      \cell{}    
+      \cell[structure on=<1>]{a} \smhead<1>
+      \cell[structure ob=<2>]{b} \smheadb<2>
+      \cell[structure ob=<3>]{a} \smheadb<3,4>
+      \cell{b} \smheadb<6>  
+      \cell{}  \smheadfromb<5>{-2}
+    \end{tikzpicture}
+  }
+
+  \on[x=25mm, y=-11mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{u}};
+      \cell{}                           \smheadfromb<4>{2}
+      \cell[alert on=<1>]{\only<2->{a}} \smhead<1>
+      \cell[alert ob=<2>]{\only<3->{b}} \smheadb<2,6>
+      \cell[alert ob=<3>]{}             \smheadb<3>\smheadfromb<5>{-2}
+      \cell{}    
+      \cell{}  
+    \end{tikzpicture}
+  }
+
+  \on[y=-30mm]{
+    \begin{tikzpicture}[turingMachine,x=30mm]
+      \state[initial, structure on=<1-3>] (0) at (0,0) {\faRandom};
+      \state[structure ob=<4>]            (1) at (1,0) {\faFastBackward};
+      \state[structure ob=<5>]            (2) at (2,0) {\faForward};
+      \state[accepting, structure ob=<6>] (3) at (3,0) {\cmark};
+
+      \path[structure on=<{1,3}>] (0) edge[loop above] node {\smGroup{\smTMtransR[\textsc{i}]{a}{a}\smTMtransR[\textsc{u}]{\alert<1,3>{\blank}}{a}}}   (0);
+      \path[structure ob=<2>]     (0) edge[loop below] node {\smGroup{\smTMtransR[\textsc{i}]{b}{b}\smTMtransR[\textsc{u}]{\alertb<2>{\blank}}{b}}}    (0);
+      \path[structure on=<1-3>]   (0) edge             node {\smTMtransL[\textsc{u}]{\alert<1-3>{\blank}}{\blank}}                                     (1);
+      \path                       (1) edge[loop above] node {\smTMtransL[\textsc{u}]{a}{a}}                                                            (1);
+      \path                       (1) edge[loop below] node {\smTMtransL[\textsc{u}]{b}{b}}                                                            (1);
+      \path                       (1) edge             node {\smTMtransR[\textsc{u}]{\blank}{\blank}}                                                  (2);
+      \path                       (2) edge[loop above] node {\smGroup{\smTMtransR[\textsc{i}]{a}{a}\smTMtransR[\textsc{u}]{a}{a}}}                     (2);
+      \path                       (2) edge[loop below] node {\smGroup{\smTMtransR[\textsc{i}]{b}{b}\smTMtransR[\textsc{u}]{b}{b}}}                     (2);
+      \path                       (2) edge             node {\smGroup{\smTMtransL[\textsc{i}]{\blank}{\blank}\smTMtransL[\textsc{u}]{\blank}{\blank}}} (3);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+
+

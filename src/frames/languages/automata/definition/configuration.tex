@@ -1,0 +1,111 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Configurations d'un AFN}
+  
+  \on[text,top=-2mm]{Soit $A=\langle \Sigma, Q, q_0, F, \rightarrow \rangle$ un AFN.}
+
+  \onBlock[top]{Définition -- Configuration d'un AFN}{
+    Une \structure{configuration} de $A$ est un couple \alert{$\langle u, q \rangle$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$u$}] $\in \Sigma^\star$ : \structure{mot restant à reconnaître}
+    \item[\alert{$q$}] $\in Q$ \,: \structure{l'état courant dans la simulation}
+    \end{description}
+    $\langle u, q \rangle$ est dite \structure{initiale} si \alert{$q = q_0$} et \structure{acceptante} si \alert{$u=\varepsilon \land q \in F$}
+  }
+
+  \onExampleBlock{Exemples}{}
+
+  \on[bottom, left=.33\textwidth]{
+    \centering
+    \example{\large $\langle bbbcc, 3 \rangle$}
+    \\\vspace{1mm}
+    \begin{tikzpicture}[word, size=5mm]
+      \cell[example]{b} \smhead[example]
+      \cell[example]{b}
+      \cell[example]{b}
+      \cell[example]{c}
+      \cell[example]{c}
+    \end{tikzpicture}\\
+    \begin{tikzpicture}[automaton]
+      \state                         (1) at (0,1) {$1$}; 
+      \state[accepting]              (2) at (1,1) {$2$}; 
+      \state[example, initial above] (3) at (0,0) {$3$}; 
+      \state[]                       (4) at (1,0) {$4$}; 
+
+      \path (1) edge             node       {$a$}           (2);
+      \path (1) edge[loop above] node       {$a$}           (1);
+      \path (3) edge             node[swap] {$b$}           (4);
+      \path (3) edge[loop left ] node       {$b$}           (3);
+      \path (4) edge[loop right] node       {$b$}           (4);
+      \path (2) edge[loop above] node       {$c$}           (2);
+      \path (4) edge             node[swap] {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+
+  \on[bottom, width=.33\textwidth]{
+    \centering
+    \example{\large $\langle bcc, 4 \rangle$}
+    \\\vspace{1mm}
+    \begin{tikzpicture}[word, size=5mm]
+      \cell{b}
+      \cell{b}
+      \cell[example]{b} \smhead[example]
+      \cell[example]{c}
+      \cell[example]{c}
+    \end{tikzpicture}\\
+    \begin{tikzpicture}[automaton]
+      \state                (1) at (0,1) {$1$}; 
+      \state[accepting]     (2) at (1,1) {$2$}; 
+      \state[initial above] (3) at (0,0) {$3$}; 
+      \state[example]       (4) at (1,0) {$4$}; 
+
+      \path (1) edge             node[swap] {$a$}           (2);
+      \path (1) edge[loop above] node       {$a$}           (1);
+      \path (3) edge             node       {$b$}           (4);
+      \path (3) edge[loop left ] node       {$b$}           (3);
+      \path (4) edge[loop right] node       {$b$}           (4);
+      \path (2) edge[loop above] node       {$c$}           (2);
+      \path (4) edge             node       {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+
+  \on[bottom, right=.33\textwidth]{
+    \centering
+    \example{\large $\langle \varepsilon, 2 \rangle$}
+    \\\vspace{1mm}
+    \begin{tikzpicture}[word, size=5mm]
+      \cell[open]{}
+      \cell{b}
+      \cell{b}
+      \cell{b} 
+      \cell{c}
+      \cell{c}
+      \cell[open]{}\smhead[example]
+    \end{tikzpicture}\\
+    \begin{tikzpicture}[automaton]
+      \state                     (1) at (0,1) {$1$}; 
+      \state[accepting, example] (2) at (1,1) {$2$}; 
+      \state[initial above]      (3) at (0,0) {$3$}; 
+      \state[]                   (4) at (1,0) {$4$}; 
+
+      \path (1) edge             node[swap] {$a$}           (2);
+      \path (1) edge[loop above] node       {$a$}           (1);
+      \path (3) edge             node       {$b$}           (4);
+      \path (3) edge[loop left ] node       {$b$}           (3);
+      \path (4) edge[loop right] node       {$b$}           (4);
+      \path (2) edge[loop above] node       {$c$}           (2);
+      \path (4) edge             node       {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

@@ -1,0 +1,115 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\newcommand<>\cellTop[1]{%
+  \uncover#2{%
+    \smsave{x}%
+    \begin{scope}[background]%
+      \node[fill=structure!30, fit=(x.north west)(x.east), inner sep=0pt] {};%
+      \node[fit=(x.north west)(x.east), anchor=mid] {\structure{#1}};%
+    \end{scope}%
+  }
+}
+
+\newcommand<>\cellBot[1]{%
+  \uncover#2{%
+  \smsave{x}%
+  \begin{scope}[background]%
+    \node[fill=alert!30, fit=(x.south west)(x.east), inner sep=0pt] {};%
+    \node[fit=(x.south west)(x.east), anchor=mid] {\alert{#1}};%
+  \end{scope}%
+  }
+}
+
+\begin{frame}{Équivalence entre les deux modèles}
+
+  \onBlock[top=-5mm]{Théorème -- Puissance des MT étendues}{
+    Les MT étendues \structure{décident}, \structure{semi-décident}, 
+    et \structure{énumèrent} les \alert{mêmes langages}, et \structure{calculent}
+    les \alert{mêmes fonctions} que les MT strictes.
+  }
+
+  \onBlock<2>[y=5mm]{Démonstration}{
+    Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MT étendue.
+    
+    On construit $M' = \langle \Sigma, \Gamma', \blank', Q', q_0, F, \rightarrow' \rangle$ équivalente dans le modèle strict.
+
+    \begin{itemize}
+    \item \structure{Encodage des rubans}
+      \begin{itemize}
+      \item $\Gamma' = \Gamma^k \cup \{\text{\faMapMarker}\}$, $\blank' = \blank^k$
+      \item \faMapMarker{} est à gauche de la position des têtes de lecture
+      \item Les autres cases contiennent un symbole de chaque ruban
+      \end{itemize}
+    \item \example{Exemple avec $\Gamma = \{a, b, \blank\}$ et $k = 2$ :}
+    \end{itemize}
+  }
+
+  \on<2>[y=-18mm, x=-27mm]{\footnotesize
+    \begin{tikzpicture}[tape, size=3.5mm]
+      \node{$1 :$};
+      \cell{}
+      \cell{}
+      \cell[structure]{$a$}
+      \cell[structure]{$b$}
+      \cell[structure]{$b$}
+      \cell[structure]{$a$} 
+      \cell[structure]{$b$} \smhead[structure]
+      \cell[structure]{$a$}
+      \cell[structure]{$b$}
+      \cell{}
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  \on<2>[y=-18mm, x=27mm]{\footnotesize
+    \begin{tikzpicture}[tape, size=3.5mm]
+      \node{$2 :$};
+      \cell{}
+      \cell{}
+      \cell[alert]{$b$}
+      \cell[alert]{$a$}
+      \cell[alert]{$a$}
+      \cell[alert]{$a$} \smhead[alert]
+      \cell[alert]{$a$}
+      \cell[alert]{$b$}
+      \cell[alert]{$b$}
+      \cell{}
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  \on<2>[y=-28mm]{\footnotesize
+    \begin{tikzpicture}[tape, size=7mm]
+      \cell{}
+      \cell{} \cellTop{a}
+      \cell{} \cellTop{b}\cellBot{b}
+      \cell{} \cellTop{b}\cellBot{a}
+      \cell{} \cellTop{a}\cellBot{a}
+      \cell[example]{\faMapMarker} 
+      \cell{} \cellTop{b}\cellBot{a} \smhead[example]
+      \cell{} \cellTop{a}\cellBot{a}
+      \cell{} \cellTop{b}\cellBot{b}
+      \cell{}            \cellBot{b}
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  \on<2>[text, bottom=-2mm]{
+    \begin{itemize}
+    \item \structure{Simulation des transitions}
+      \begin{itemize}
+      \item Problème : il faut garder les têtes de lecture au même endroit
+      \item Au lieu de déplacer la tête de lecture, on déplace le ruban à l'envers
+      \end{itemize}
+    \end{itemize}
+  }
+\end{frame}
+
+\endgroup

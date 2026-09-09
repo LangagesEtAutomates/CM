@@ -1,0 +1,35 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Machine de Turing déterministe (MTD)}
+
+  Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTND.
+  \begin{block}{Définition -- Machine de Turing déterministe}
+    On dit que $M$ est \structure{déterministe}
+    si sa relation de transition $\rightarrow$ est fonctionnelle :
+
+    $$\forall \alert{q}\in Q, \forall \alert{a}\in \Gamma,
+    \left|\left\{
+    \left\langle \structure{q'}, \structure{b}, \structure{d}\right\rangle \in Q \times \Gamma \times \{\triangleleft, \triangleright\}
+    \;\middle\mid\;
+    \alert{q} \xrightarrow{\smTMtrans{\alert{a}}{\structure{b}}{\structure{d}}} \structure{q'}
+    \right\}\right|
+    \le 1$$
+  \end{block}
+  
+  \begin{block}{Remarques -- Notion de machine de Turing non-déterministe}
+    \begin{itemize}
+    \item Toute machine de Turing déterministe est une MTND
+    \item \alert{``Non-déterministe''} signifie \alert{``pas forcément déterministe''}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

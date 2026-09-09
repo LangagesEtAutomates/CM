@@ -1,0 +1,72 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Modélisation des machines de Turing étendues}
+
+  \on[text, y=-2mm]{
+    \begin{itemize}
+
+    \item Généralisation des \structure{configurations} : 
+      \alert{$\langle \langle G_1, ..., G_k \rangle, q, \langle D_1, ..., D_k \rangle \rangle$}
+      \begin{description}[-------]
+      \item[\alert{$G_i$}] $\in \Gamma\alert{^\star}$ : le mot à gauche de la tête (exclue)  sur le ruban \alert{$r_i$}
+      \item[\alert{$D_i$}] $\in \Gamma\alert{^\star}$ : le mot à droite de la tête (incluse) sur le ruban \alert{$r_i$}
+      \end{description}
+
+    \item\vspace{1mm} Généralisation des \structure{transitions} : 
+      \alert{$\langle \langle q, u_1, ..., u_k \rangle, \langle q', \langle v_1, d_1 \rangle, ..., \langle v_k, d_k \rangle \rangle \rangle$}
+      \begin{description}[-------]
+      \item[\alert{$q$}] $\in Q$ : \structure{l'état de départ}
+      \item[\alert{$u_i$}] $\in \Gamma\alert{^\star}$ : \structure{le mot lu sur le ruban \alert{$r_i$}}
+      \item[\alert{$q'$}] $\in Q$ : \structure{l'état d'arrivée}
+      \item[\alert{$v_i$}] $\in \Gamma\alert{^\star}$ : \structure{le mot écrit sur le ruban \alert{$r_i$}}
+      \item[\alert{$d_i$}] $\in \{\triangleleft, \alert{\diamond}, \triangleright\}$ : \structure{le déplacement de la tête de \alert{$r_i$}}
+      \end{description}
+
+    \item\vspace{2mm} Généralisation des \structure{actions} :
+
+      \vspace{-4mm}{\footnotesize$$
+        \begin{array}{@{\langle\,\langle...,\,}l@{, ...\rangle,\,}c@{,\,\langle...,}r@{, ...\rangle\rangle\,\structure{\leadsto}\,
+              \langle\,\langle...,\,}l@{, ...\rangle\,}c@{,\,\langle...,}r@{, ...\rangle\rangle\quad\text{si}\quad}l}
+          %
+          \structure{G_i}             & \structure{q}  & \alert{u_i} \structure{D_i} &
+          \structure{G_i} \alert{v_i} & \structure{q'} & \structure{D_i} &
+          \structure{q \xrightarrow{\alert{\smTMtransR[r_i]{u_i}{v_i}}} q'}\\
+          %
+          \structure{G_i} \alert{c}   & \structure{q}  & \alert{u_i}   \structure{D_i} &
+          \structure{G_i}             & \structure{q'} & \alert{c v_i} \structure{D_i} &
+          \structure{q \xrightarrow{\alert{\smTMtransL[r_i]{u_i}{v_i}}} q'}\\
+          %
+          \structure{G_i}             & \structure{q}  & \alert{u_i} \structure{D_i} &
+          \structure{G_i}             & \structure{q'} & \alert{v_i} \structure{D_i} &
+          \structure{q \xrightarrow{\alert{\smTMtransS[r_i]{u_i}{v_i}}} q'}\\
+          %
+        \end{array}
+        $$}
+      
+    \item\vspace{2mm} Généralisation du \structure{non-déterministe} :\\
+      pour toutes transitions $\langle \langle \alert{q}, \alert{u_1}, ..., \alert{u_k} \rangle, ... \rangle \,\alert{\neq}\, \langle \langle \alert{q}, \alert{u'_1}, ..., \alert{u'_k} \rangle, ... \rangle$,
+      $$\exists i \in \{1, ..., k\}, \alert{u_i \notin \mathit{Prefix}(u'_i)} \land \alert{u'_i \notin \mathit{Prefix}(u_i)}$$
+      
+    \end{itemize}
+  }
+  
+  \on[x=37.5mm,y=8mm]{
+    \begin{tikzpicture}[turingMachine, x=25mm]
+      \state (q)  at (0,0) {$q$}; 
+      \state (q1) at (1,0) {$q'$}; 
+      \path  (q) edge node {\smGroup{\smTMtrans[r_1]{u_1}{v_1}{d_1}...\\\smTMtrans[r_k]{u_k}{v_k}{d_k}}} (q1);
+      \path  (q) edge node[below] {\begin{tabular}{c}ou \smTMtransS[r_i]{\varepsilon}{\varepsilon}\\si $r_i$ pas mentionné\end{tabular}} (q1);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

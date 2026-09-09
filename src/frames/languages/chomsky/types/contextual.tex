@@ -1,0 +1,44 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaires et langages contextuels}
+
+  \begin{block}{Définition -- Grammaire contextuelle}
+    Une grammaire \alert{$\langle \Sigma, \Gamma, S, \rightarrow \rangle$} est dite \structure{contextuelle} si toutes ses règles sont :
+    
+    \begin{itemize}
+    \item soit de la forme $\alert{g \cdot A \cdot d \rightarrow g \cdot \alpha \cdot d}$, avec
+
+      \begin{center}
+      \begin{tabular}{ccll}
+      \alert{$g$}      & $\in$ & $(\Sigma \cup \Gamma)^\star$ & \structure{le contexte gauche}, \\
+      \alert{$d$}      & $\in$ & $(\Sigma \cup \Gamma)^\star$ & \structure{le contexte droit}, \\
+      \alert{$A$}      & $\in$ & $\Gamma$                    & un non-terminal, \\
+      \alert{$\alpha$} & $\in$ & $(\Sigma \cup \Gamma)^+$    & un mot \alert{non-vide}. \\
+      \end{tabular}
+      \end{center}
+
+      Lire : \og{} $A$ peut se réécrire en $\alpha$, à condition d'être entre $g$ et $d$ \fg.
+    \item soit la règle $S \rightarrow \varepsilon$, si $S$ n'apparaît jamais à droite d'une règle
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Définition -- Langage contextuel (\emph{context-sensitive})}
+    Soient $\Sigma$ un alphabet et $L$ un langage sur $\Sigma$.
+    \begin{itemize}
+    \item $L$ est dit \structure{contextuel} s'il est engendré par une grammaire contextuelle
+    \item L'\structure{ensemble des langages contextuels} sur $\Sigma$ est noté \alert{$\textsc{cs}_\Sigma$}
+    \item La \structure{classe des langages contextuels} est noté \alert{$\textsc{cs}$} (indépendant de $\Sigma$)
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup
+\endinput

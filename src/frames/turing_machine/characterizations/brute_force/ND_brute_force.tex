@@ -1,0 +1,97 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Reconnait}{reconnait}
+
+\begin{frame}{Tout langage engendré est reconnaissable}
+
+  \onBlock[top=-5mm]{Théorème -- Engendré $\Rightarrow$ reconnu}{
+    Tout langage de type 0 est reconnaissable.
+  }
+
+  \onBlock[y=10mm]{Démonstration -- Force brute ascendante non-déterministe}{
+    Soit \alert{$G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire non-restreinte. $\mathcal{L}(G)$ est reconnu par :
+    
+    \begin{algorithm}[H]\small
+      \Fun{$\Reconnait_{\mathcal{L}(G)}(u)$}{
+        \While{$u\neq S \land \exists \alert{\alpha \rightarrow \beta}, \exists \structure{x}, \structure{y} \in (\Sigma \cup \Gamma)^\star,~ u = \structure{x} \alert{\beta} \structure{y}$}{
+          $u \leftarrow \structure{x} \alert{\alpha} \structure{y}$;
+          \tcp*[l]{Choix non déterministe : règle $\alert{\alpha \rightarrow \beta}$ et position dans $u$}
+        }
+        \Return $u=S$\;
+      }
+    \end{algorithm}
+  }
+  
+  \onExampleBlock[y=-10mm]{Exemple -- $\{a^n b^n c^n \mid n>0\}$}{}
+
+  \on[x=12mm, y=-13mm]{\example{
+      $\left\{\begin{array}{@{~}r@{~\rightarrow~}l@{~}}
+      S  & abc \mid aSBc\\
+      cB & Bc  \\
+      bB & bb  \\
+      \end{array}\right.$
+  }}
+
+  \on[bottom=0mm, x=40mm]{
+    \begin{tikzpicture}[x=6mm, y=8mm]
+      \node (40) at (2,4) {\structureb<10->{\alertb<8-9>{$S$}}};
+      \node (30) at (2,3) {\alertb<6-9>{$S$}};     \path[-latex, alert ob=<8-9>] (40) edge (30);
+      \node (20) at (0,2) {\alertb<8-9>{$a$}};     \path[-latex, alert ob=<8-9>] (40) edge (20);
+      \node (21) at (1,2) {\alertb<6-7>{$a$}};     \path[-latex, alert ob=<6-7>] (30) edge (21);
+      \node (23) at (3,2) {\alertb<4-7>{$c$}};     \path[-latex, alert ob=<6-7>] (30) edge (23);
+      \node (24) at (4,2) {\alertb<4-5,8-9>{$B$}}; \path[-latex, alert ob=<8-9>] (40) edge (24);
+      \node (25) at (5,2) {\alertb<8-9>{$c$}};     \path[-latex, alert ob=<8-9>] (40) edge (25);
+      \node (11) at (2,1) {\alertb<2-3,6-7>{$b$}}; \path[-latex, alert ob=<6-7> ] (30) edge (11);
+      \node (12) at (3,1) {\alertb<2-5>{$B$}};     \path[-latex, alert ob=<4-5>] (23) edge (12); \path[-latex, alert ob=<4-5>] (24) edge (12);
+      \node (13) at (4,1) {\alertb<4-5>{$c$}};     \path[-latex, alert ob=<4-5>] (23) edge (13); \path[-latex, alert ob=<4-5>] (24) edge (13);
+      \node (00) at (2,0) {\alertb<2-3>{$b$}};     \path[-latex, alert ob=<2-3>] (11) edge (00); \path[-latex, alert ob=<2-3>] (12) edge (00);
+      \node (01) at (3,0) {\alertb<2-3>{$b$}};     \path[-latex, alert ob=<2-3>] (11) edge (01); \path[-latex, alert ob=<2-3>] (12) edge (01);
+    \end{tikzpicture}
+  }
+
+  \on[bottom=-1mm, x=-6mm]{
+    \begin{tikzpicture}[tape, x=6mm, y=6mm]
+      \cell[structure ob=<10->]                 {}                                                                          \smheadfromb<10>{1}
+      \cell[alert ob=<{8,9}>,structure ob=<10->]{\oneof[$a$]{\on<9->{$S$}}}                                  \smhead<1,9,11>\smheadfromb<8>{1}
+      \cell[alert ob=<{6-8}>,structure ob=<10->]{\oneof[$a$]{\on<7->{$S$}\on<9->{}}}                         \smheadb<7,12> \smheadfromb<6>{2}
+      \cell[alert ob=<{2-3,6,8}>]               {\oneof[$b$]{\on<7->{$B$}\on<9->{}}}                         \smheadb<3,13> \smheadfromb<2>{-2}
+      \cell[alert ob=<{2-5,6,8}>]               {\oneof[$b$]{\on<3->{$B$}\on<5->{$c$}\on<7->{$c$}\on<9->{}}} \smheadb<5>    \smheadfromb<4>{-1}
+      \cell[alert ob=<4-5>]                     {\oneof[$c$]{\on<5->{$B$}\on<7->{}}}
+      \cell                                     {\oneof[$c$]{\on<7->{}}}
+      \cell                                     {}
+    \end{tikzpicture}
+  }
+
+  \on[bottom=5mm, x=-18mm]{
+    \begin{tikzpicture}[turingMachine,x=16mm]
+      \state[alert ob=<2-9>, structure ob=<10>, initial above] (0) at (0,0) {\faRandom};
+      \state[structure ob=<11>                               ] (1) at (1,0) {\blank};
+      \state[structure ob=<12>                               ] (2) at (2,0) {$S$};
+      \state[structure ob=<13>, accepting                    ] (3) at (3,0) {\blank};
+
+      \path (0) edge             node {\smTMtransR{\blank}{\blank}} (1);
+      \path (1) edge             node {\smTMtransR{S}{S}}           (2);
+      \path (2) edge             node {\smTMtransR{\blank}{\blank}} (3);
+      \path (0) edge[loop left]  node {
+        \smAlign{
+          \smTMtransL{\star}{\star}
+          \smTMtransR{\star}{\star}
+          \smTMtransS{aSBc}{S}
+          \smTMtransS{abc}{S}
+          \smTMtransS{Bc}{cB}
+          \smTMtransS{bb}{bB}
+      }} (0);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

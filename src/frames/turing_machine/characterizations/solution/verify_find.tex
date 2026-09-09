@@ -1,0 +1,102 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Recognize}{reconnait}
+\SetKwFunction{Decide}{decide}
+
+\begin{frame}{Lemme -- $\textsc{Vérifier} \in \textsc{R} \Rightarrow \textsc{Trouver} \in \textsc{RE}$}
+
+  \on[text, top=-1mm]{
+    Soient $\structure{L \subseteq \Sigma^\star}$ et
+    $R \subseteq \Sigma^\star \times \Gamma^\star$ tels que :
+    $
+    \forall u \in \Sigma^\star,
+    u\in L
+    \Leftrightarrow 
+    \exists c \in \Gamma^\star, \langle u,c \rangle \in R
+    $.
+
+    Si $R$ est \alert{décidable}, alors $L$ est \alert{semi-décidable}.
+    
+    \vspace{2mm}
+    \structure{Démonstration.~}
+    Soit $M$ une MTD qui décide $R$. Alors $L$ est reconnu par :
+
+    \vspace{1mm}
+    \begin{algorithm}[H]
+      \Fun{$\Recognize_L\left(u \in \Sigma^\star \right) \in \mathbb{B}$}{
+        \Let $c \in \Gamma^\star$; \tcp*[h]{Choix non-déterministe}\\
+        \Return $\Decide_R( \langle u,c \rangle)$;
+      }
+    \end{algorithm}
+  }  
+
+  \on[x=30mm, y=13mm]{
+    \begin{tikzpicture}[turingMachine, x=23mm]\scriptsize
+      \state [example, initial    ] (A)  at (0.3,0)  {\faRandom};
+      \state [structure           ] (M0) at (1,0)    {$M_0$};
+      \state [structure, accepting] (Mf) at (2,0)    {$M_f$};
+
+      \cloudPath[structure]{M0}{Mf}
+      \node[structure] at (1.5,0) {$M$ sur $\langle u, c\rangle$};
+
+      \path (A) edge[loop above] node[align=center] {\smTMtransL[c]{\blank}{x}\\$\forall x \in \Gamma$} (A);
+      \path (A) edge             node[swap]         {\smTMtransR[c]{\blank}{\blank}} (M0);
+      \node[structure] at (1.5,0) {};
+    \end{tikzpicture}
+  }
+
+  \onExampleBlock[y=-4mm]{Exemple -- Reconnaissance de $\left\{v \cdot v^{\textsc{r}} \mid v \in \{a, b\}^\star \right\}$}{}
+
+  \on[x=-25mm, y=-12mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{u}};
+      \cell{}    
+      \cell{a} \smhead<-3>
+      \cell{b} 
+      \cell{b} \smheadfromb<4>{-2}
+      \cell{a} \smheadb<6>
+      \cell{}  \smheadfromb<5>{-2}
+    \end{tikzpicture}
+  }
+
+  \on[x=25mm, y=-12mm]{
+    \begin{tikzpicture}[tape, x=5mm, y=5mm]
+      \node{\textsc{c}};
+      \cell{}                           
+      \cell{}              \smheadb<3>  \smheadfromb<5>{2}
+      \cell{\onlyb<3->{a}} \smheadb<2,6>
+      \cell{\onlyb<2->{b}} \smhead<1>
+      \cell{}                           \smheadfromb<4>{-2}
+      \cell{}  
+    \end{tikzpicture}
+  }
+
+  \on[y=-30mm]{
+    \begin{tikzpicture}[turingMachine,x=30mm]
+      \state[example,   alert ob=<2-3>, initial] (0) at (0,0) {\faRandom};
+      \state[structure, alert ob=<4>           ] (1) at (1,0) {\faForward};
+      \state[structure, alert ob=<5>           ] (2) at (2,0) {\faBackward};
+      \state[structure, alert ob=<6>, accepting] (3) at (3,0) {\cmark};
+
+      \path (0) edge[loop above] node {\smTMtransL[\textsc{c}]{\blank}{a}}   (0);
+      \path (0) edge[loop below] node {\smTMtransL[\textsc{c}]{\blank}{b}}   (0);
+      \path (0) edge             node {\smTMtransR[\textsc{c}]{\blank}{\blank}}                                     (1);
+      \path (1) edge[loop above] node {\smGroup{\smTMtransR[\textsc{u}]{a}{a}\smTMtransR[\textsc{c}]{a}{a}}}                     (1);
+      \path (1) edge[loop below] node {\smGroup{\smTMtransR[\textsc{u}]{b}{b}\smTMtransR[\textsc{c}]{b}{b}}}                     (1);
+      \path (1) edge             node {\smTMtransL[\textsc{c}]{\blank}{\blank}}                                                  (2);
+      \path (2) edge[loop above] node {\smGroup{\smTMtransR[\textsc{u}]{a}{a}\smTMtransL[\textsc{c}]{a}{a}}}                     (2);
+      \path (2) edge[loop below] node {\smGroup{\smTMtransR[\textsc{u}]{b}{b}\smTMtransL[\textsc{c}]{b}{b}}}                     (2);
+      \path (2) edge             node {\smGroup{\smTMtransL[\textsc{u}]{\blank}{\blank}\smTMtransR[\textsc{c}]{\blank}{\blank}}} (3);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

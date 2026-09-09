@@ -1,0 +1,85 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exemple : Remplissage d'une grille de Sudoku}
+
+    \Probleme{Generalized-Sudoku} {
+      Une grille $n^2\times n^2$ cases partiellement remplie de nombres entre $1$ et $n^2$.
+      \begin{center}
+        \begin{tikzpicture}[size=2.5mm]\scriptsize
+          \foreach \x in {0,1,...,9}{
+            \draw  (\x.5, 0.5) -- (\x.5, 9.5);
+            \draw  (0.5, \x.5) -- (9.5, \x.5);
+          }
+          \foreach \x in {0,3,...,9}{
+            \draw[thick] (\x.5, 0.5) -- (\x.5, 9.5);
+            \draw[thick] (0.5, \x.5) -- (9.5, \x.5);
+          }
+
+          \node at (2,9) {5};
+          \node at (3,9) {3};
+          \node at (6,9) {8};
+          \node at (7,9) {4};
+          \node at (8,9) {7};
+
+          \node at (2,8) {4};
+          \node at (3,8) {9};
+          \node at (5,8) {6};
+          \node at (9,8) {3};
+
+          \node at (6,7) {3};
+          \node at (8,7) {6};
+
+          \node at (4,6) {2};
+          \node at (5,6) {1};
+          \node at (9,6) {9};
+
+          \node at (3,5) {8};
+          \node at (7,5) {2};
+
+          \node at (1,4) {9};
+          \node at (5,4) {7};
+          \node at (6,4) {4};
+
+          \node at (2,3) {2};
+          \node at (4,3) {4};
+
+          \node at (1,2) {7};
+          \node at (5,2) {2};
+          \node at (7,2) {8};
+          \node at (8,2) {3};
+
+          \node at (2,1) {8};
+          \node at (3,1) {5};
+          \node at (4,1) {9};
+          \node at (7,1) {1};
+          \node at (8,1) {2};
+          
+        \end{tikzpicture}
+      \end{center}
+    }{
+      Existe-t-il une façon de \alert{compléter la grille} telle que chaque nombre apparaisse exactement une fois dans chaque \structure{ligne}, \structure{colonne} et \structure{bloc de $n\times n$ cases} ?
+    }
+
+  \vspace{-2mm}
+    \begin{itemize}
+    \item Un \alert{certificat} est une \structure{grille complète}
+    \item Vérifier qu'un certificat est correct est polynomial
+    \item Donc {Generalized-Sudoku} est dans \textsc{np}
+    \end{itemize}
+
+  \begin{center}
+    \alert{
+      Y a-t-il des cas où on est \structure{obligé} \\ de \structure{deviner} une case pour pouvoir continuer ?  
+    }
+  \end{center}
+
+\end{frame}
+
+\endgroup

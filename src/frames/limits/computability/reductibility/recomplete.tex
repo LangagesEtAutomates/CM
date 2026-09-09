@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Difficulté du problème universel}
+
+  \vspace{-3mm}
+  \begin{block}{Définitions -- \textsc{re}-difficulté et \textsc{re}-complétude}
+    \vspace{-1mm}
+    Soit $A \in \textsc{lang}$ un problème de décision. On dit que : 
+    \begin{itemize}
+    \item $A$ est \structure{\textsc{re}-difficile} si tout problème de \textsc{re} se réduit à $A$ : 
+      $\alert{\forall P \in \textsc{re},~ P \leq_m A}$
+      \begin{itemize}
+      \item\structure{Intuition.} $A$ est au moins aussi difficile que tous les problèmes de \textsc{re}
+      \end{itemize}
+    \item $A$ est \structure{\textsc{re}-complet} si $A \in \textsc{re}$ et $A$ est \structure{\textsc{re}-difficile}
+      \begin{itemize}
+      \item\structure{Intuition.} $A$ est le plus difficile des problèmes de \textsc{re}
+      \end{itemize}
+    \end{itemize}
+    Ainsi, le degré des problèmes \textsc{re}-complets est le maximum de $\textsc{re}$ pour $\le_m$. 
+  \end{block}
+
+  \pause
+  \begin{block}{Théorème -- \textsc{re}-complétude de \textsc{Universal}}
+    \vspace{-1mm}
+    Pour tout encodage effectif $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$, \alert{$\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$ est \textsc{re}-complet}. 
+
+    \vspace{2mm}
+    \structure{Démonstration.} Soit $P \in \textsc{re}$. Il existe une machine $M_P$ qui semi-décide $P$.
+
+    On a la réduction $f$ de $P$ vers $\textsc{Universal}$ suivante :
+    $$\alert{f : \left\{\begin{array}{rcl}
+      \mathcal{I}(P) & \rightarrow & \mathcal{I}(\textsc{Universal}) \\
+      x              & \mapsto     & \langle M_P, x \rangle \\
+      \end{array}\right.}$$ 
+    
+    \begin{itemize}
+    \item\vspace{-2mm} $f$ est calculable (transformation syntaxique)
+    \item $\forall x \in \mathcal{I}(P), \quad
+      \alert{f(x) \in \textsc{pos}(\textsc{Universal})}
+      \quad\Leftrightarrow \quad
+      x \in \llbracket M_P \rrbracket
+      \quad\Leftrightarrow\quad
+      \alert{x \in \textsc{pos}(P)}$
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup

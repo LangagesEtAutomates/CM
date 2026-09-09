@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Adaptation à la complexité}
+
+  \begin{block}{Caractérisation de \textsc{np} par certificats polynomiaux}
+    Un langage $\structure{L \subseteq \Sigma^\star}$ est dans \alert{\textsc{np}}
+    si, et seulement s'il existe
+    \begin{itemize}
+    \item un alphabet $\Gamma$ et un \structure{langage de couples $R \subseteq \Sigma^\star \times \Gamma^\star$} dans \alert{\textsc{p}}, et
+    \item un polynôme $P$,  tels que
+    \end{itemize}
+
+    \vspace{-2mm}
+    $$
+    \forall u \in \Sigma^\star,
+    \quad
+    \alert{u\in L}
+    \quad \Leftrightarrow \quad 
+    \alert{\exists c} \in \Gamma^\star,
+    \left(
+    \alert{\langle u,c \rangle \in R}
+    \quad \land \quad
+    \alert{|c| \le P(|u|)}
+    \right)
+    $$
+
+    On dit alors que $c$ est un \structure{certificat polynomial} d'appartenance de $u$ à $L$ 
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{alertblock}{Montrer qu'un problème est dans \textsc{np}}
+    On a deux méthodes pour prouver qu'un problème $L$ appartient à \textsc{np} :
+    \begin{enumerate}
+    \item Preuve d'après la définition :
+      \begin{itemize}
+      \item Donner une MTND $M$ qui reconnaît $L$
+      \item Justifier que la complexité temporelle non-déterministe de $M$ est polynomiale
+      \end{itemize}
+    \item Preuve d'après la caractérisation :
+      \begin{itemize}
+      \item Décrire la forme d'un \alert{certificat $c$} qui justifie $u \in L$
+      \item Justifier que \alert{la taille} des certificats est \alert{polynomiale} en celle des instances 
+      \item Donner un \alert{algorithme} $A(u, c)$ qui décide si $c$ est un certificat pour $u \in L$
+      \item Justifier que la \alert{complexité} temporelle déterministe de $A$ est \alert{polynomiale}
+      \end{itemize}
+    \end{enumerate}
+  \end{alertblock}
+
+\end{frame}
+
+\endgroup

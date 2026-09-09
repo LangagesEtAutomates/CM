@@ -1,0 +1,70 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Forcebrute}{force\_brute}
+\SetKwData{Old}{old}
+\SetKwData{New}{etape}
+\SetKwData{Vu}{explore}
+
+\begin{frame}[fragile]{Recherche ascendante par force brute}
+
+  \on[top=-2mm]{
+    \begin{algorithm}[H]
+      \Fun{$\Forcebrute(G = \langle \Sigma, \Gamma, S, R \rangle \text{: grammaire}, u \in \Sigma^\star) \in \mathbb{B}$}{
+        \Alertb<1>{$\New \leftarrow \{u\}$};
+        $\Vu \leftarrow \New$;\\
+        \While{$\Alertb<5>{\New \neq \emptyset} \land \Alertb<4-5>{S\notin \New}$}{
+          \Alertb<2-3>{$\New \leftarrow \{ v\in (\Sigma \cup \Gamma)^\star \,|\, \exists w \in \New, v \vdash w \} \setminus \Vu$};\\
+          $\Vu \leftarrow \Vu \cup \New$;\\
+        }
+        \Return \Alertb<4>{$S \in \New$};\\
+      }
+    \end{algorithm}
+  }
+
+  \onExampleBlock[y=-2mm]{$abc \in L$}{
+    $\begin{array}{@{}l@{~~~~}l@{~~}l@{~~}l@{~~}l@{~~}l@{~~}l@{}}
+      \alert<1>{\{\alertb<2>{ab}\structureb<2>{c}\}}
+      \uncover<2->{&\leftarrow & \{\alertb<2>{aB}\structureb<3>{c}, \alertb<3>{ab}\structureb<2>{C}\}}
+      \uncover<3->{&\leftarrow& \{\alertb<3>{aB}\structureb<3>{C}\}} \\
+      \uncover<4->{& \leftarrow & \{aBX\} &
+        \leftarrow & \{aCX\} &
+        \leftarrow & \{aCB\} \\
+        & \leftarrow & \{\alert<4>{S}\} \\}
+    \end{array}$
+  }
+
+  \onExampleBlock<5->[bottom]{$abbc \notin L$}{
+    $\begin{array}{@{}l@{~~}c@{~~}l@{~~}c@{~~}l@{}}
+      \alert{\{abbc\}} & \leftarrow & \{aBbc, abBc, abbC\} & \leftarrow & \{aBBc, aBbC, abBC\} \\
+      & \leftarrow & \{aBBC, abBX\} & \leftarrow & \{aBBX, abCX\} \\
+      & \leftarrow & \{aBCX, abCB\} & \leftarrow & \{aBXX, aBCB\} \\
+      & \leftarrow & \{aCXX, aBXB\} & \leftarrow & \{aCBX, aCXB\} \\
+      & \leftarrow & \{aCCX, aCBB\} & \leftarrow & \{aCCB, aCBB\} \\
+      & \leftarrow & \alert{\emptyset} \\
+    \end{array}$
+  }
+
+  \on[x=35mm]{
+    \example{$
+      \left\{\begin{array}{rcl}
+      S   & \rightarrow & aCB  \\
+      C B & \rightarrow & C X  \\
+      C X & \rightarrow & B X  \\
+      B X & \rightarrow & B C  \\
+      \alertb<2,3>{a B} & \alertb<2,3>{\rightarrow} & \alertb<2,3>{a b}  \\
+      b B & \rightarrow & b b  \\
+      \structureb<2,3>{C}   & \structureb<2,3>{\rightarrow} & \structureb<2,3>{c}
+      \end{array}\right.
+      $}
+  }
+  
+\end{frame}
+
+\endgroup

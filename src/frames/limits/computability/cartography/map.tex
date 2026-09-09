@@ -1,0 +1,59 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Quelques problèmes indécidables}
+
+  \on[y=-5mm]{
+    \begin{tikzpicture}[y=11mm]
+      \begin{scope}[align=center, font=\small, -latex]
+        \node (universal)    at (-0.50,  0.00) {\textsc{universal}};
+        \node (pcpi)         at ( 1.50,  0.00) {\textsc{pcpi}};                                       \path (universal)    edge (pcpi);
+        \node (pcp)          at ( 3.00,  0.00) {\textsc{pcp}};                                        \path (pcpi)         edge (pcp);
+        \node (ambiguT2)     at ( 5.00,  0.00) {Ambiguité d'une\\ grammaire\\ algébrique};            \path (pcp)          edge (ambiguT2);
+        \node (intersectT2)  at ( 5.00, -2.00) {Intersection \\ de deux \\ grammaires \\algébriques}; \path (pcp)          edge (intersectT2);
+        \node (halt)         at (-1.00, -1.00) {\textsc{halt}};                                       \path (universal)    edge (halt);
+        \node (haltepsilon)  at (-1.00, -1.70) {$\textsc{halt-}\varepsilon$};                         \path (halt)         edge (haltepsilon);
+        \node (hilbert)      at (-4.00, -1.00) {\textsc{Entscheidungsproblem}};                       \path (universal)    edge (hilbert);
+        \node (consistency)  at (-4.00, -2.00) {Cohérence d'un \\ système logique};                   \path (hilbert)      edge (consistency);
+        \node (matrix)       at (-1.25,  2.00) {Matrices mortelles\\ou identité};                     \path (universal)    edge (matrix);
+        \node (pavage)       at (-3.25,  2.00) {Pavage \\ du plan};                                   \path (universal)    edge (pavage);
+        \node (polynome)     at (-3.00,  0.25) {Résolution \\d'équations \\ diophantienne};           \path (universal)    edge (polynome);
+        \node (decT0)        at ( 2.00, -2.00) {Décision\\ d'un mot par une \\ grammaire générale};   \path (universal)    edge (decT0);
+        \node (normalLambda) at ( 2.00,  1.00) {Mise d'un $\lambda$-terme\\ sous forme normale};      \path (universal)    edge (normalLambda);
+        \node (terminaison)  at ( 2.00,  2.00) {Terminaison d'un\\système de réécriture};             \path (normalLambda) edge (terminaison);
+        \node (confluence)   at ( 5.00,  2.00) {Confluence d'un\\ système de réécriture};             \path (pcp)          edge (confluence);
+        \node (rice)         at (-1.00, -2.50) {Théorème \\de Rice};                                  \path (haltepsilon)  edge (rice);
+        \node (correct)      at (-1.00, -4.00) {Conformité\\ d'un programme à \\sa spécification};    \path (rice)         edge (correct);
+        \node (secure)       at (-4.00, -4.00) {Présence d'une\\ vulnérabilité\\ de sécurité};        \path (rice)         edge (secure);
+        \node (univT0)       at ( 2.00, -4.00) {Totalité\\ d'une\\ grammaire\\ générale};             \path (rice)         edge (univT0);
+        \node (univT2)       at ( 4.00, -4.00) {Totalité\\ d'une\\ grammaire\\ algébrique};           \path (pcp)          edge (univT2);
+      \end{scope}
+
+      \begin{scope}[background, text=structure, inner sep=3mm]
+        \clip (-6,-5) rectangle (7,2.5);
+        \draw[structure!50,fill=white] (0,0)     rectangle (7,3);
+        \draw[structure!50,fill=white] (0,-5)    -- (0,-.5) to[out=90,in=180,distance=5mm] (1,.5) -- (7,.5) -- (7,-5);
+        \draw[structure!50,fill=white] (-6,0)    rectangle (0,3);
+        \draw[structure!50,fill=white] (-6,-.5)  -- (0,-.5) to[out=90,in=0,distance=10mm] (-3,1) -- (-6,1);
+        \draw[structure!50,fill=white] (-6,-2.5) rectangle (0,-.5);
+        \draw[structure!50,fill=white] (.5,-5)   -- (.5,0) to[out=90,in=0,distance=3mm] (0,.5) -- (-.5,.5) to[out=180,in=0,distance=15mm] (-3.5,-2.5) -- (-6,-2.5) -- (-6,-5);
+        
+        \node[left,  align=right] at (7,-1)    {Langages \\formels};
+        \node[left,  align=right] at (7,1)     {Systèmes de\\ réécriture};
+        \node[right, align=left ] at (-6,2)    {Géométrie};
+        \node[right, align=left ] at (-6,0.25) {Algèbre};
+        \node[right, align=left ] at (-6,-1.4) {Logique};
+        \node[right, align=left ] at (-6,-3)   {Vérification \\de programme};
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

@@ -1,0 +1,150 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{RabinScott}{rabin\_scott}
+\SetKwFunction{Fermeture}{$\varepsilon$-fermeture}
+
+\begin{frame}{Méthode des sous-ensembles de Rabin et Scott}
+
+  \onExampleBlock[right=3.3cm, top=-5mm]{Exemple}{\vspace{-3mm}
+    \begin{tikzpicture}[automaton, grid size=10mm]
+      \state[accepting, alert ob=<5>           ] (1) at (1,1) {$1$};
+      \state[                                  ] (2) at (2,1) {$2$};
+      \state[initial, example on=<2-4>         ] (3) at (0,0) {$3$};
+      \state[structure on=<2>, example ob=<3-4>] (4) at (1,0) {$4$};
+      \state[structure on=<2>, example ob=<3-4>] (5) at (2,0) {$5$};
+      
+      \path[structure on=<2>] (3) edge             node {$\varepsilon$} (4);
+      \path[structure on=<2>] (4) edge             node {$\varepsilon$} (5);
+      \path[                ] (2) edge             node {$b$}           (1);
+      \path[alert ob=<3>    ] (5) edge node {$a$}           (2);
+      \path[                ] (2) edge[bend left ] node {$a$}           (5);
+      \path[alert ob=<4>    ] (4) edge[bend left ] node {$b$}           (1);
+      \path[                ] (1) edge node {$b$}           (4);
+      \path[                ] (1) edge[loop above] node {$a$}           (1);
+      \path[                ] (2) edge[loop above] node {$b$}           (2);
+      \path[alert ob=<4>    ] (4) edge[loop below] node {$b$}           (4);
+      \path[alert ob=<3>    ] (5) edge[loop below] node {$a$}           (5);
+    \end{tikzpicture}
+  }
+ 
+  \onExampleBlock<2->[right=3.3cm,y=-1mm]{Calcul de $s_0$}{
+    $\begin{array}{r@{\,=\,}l}
+      s_0 & \Fermeture_A(\{3\}) \\
+          & \{\example{3}, \structure{4}, \structure{5}\}
+    \end{array}$
+  }  
+ 
+  \on[top=-2mm]{\small
+    \begin{algorithm}[H]
+      \Fun{\RabinScott($A = \langle \Sigma, Q, q_0, F, \rightarrow \rangle$ : AFN) : AFD}{
+        $\begin{array}{@{}l@{\,\gets\,}l@{}}
+          s_0 & \Alertb<2>{\Fermeture_A(\{q_0\})};\\
+          S & \{s_0\};\\
+          \tau & \emptyset;
+        \end{array}$\\
+        \While{\Alertb<3-4>{$\exists s\in S, \exists a\in \Sigma, \nexists s'\in S,~ \langle s, a, s' \rangle \in \tau$}}{
+          $\begin{array}{@{}l@{\,\gets\,}l@{}}
+            s' & \Structureb<4>{\Fermeture_A(\{q'\in Q \mid \exists q\in s,~ q \xrightarrow{a} q' \})};\\
+            S & S \cup \{s'\};\\
+            \tau & \tau \cup \{\langle s, a, s' \rangle\};
+          \end{array}$\\
+        }
+        $S_f \gets \Alertb<5>{\{s \in S \mid s \cap F \neq \emptyset\}}$\;
+        \Return $\langle \Sigma, S, s_0, S_f, \tau \rangle$\;
+      }
+      \Fun{$\Fermeture_A(s \subseteq Q) \subseteq Q$}{
+        \lWhile{\Structureb<2>{$\exists q\in s,~ \exists q' \notin s,~ q\xrightarrow{\varepsilon} q'$}}{$s \gets s \cup \{q'\}$}
+        \Return $s$\;
+      }
+    \end{algorithm}
+  }
+ 
+  \on<2->[bottom=2mm, x=-33mm] {
+    \begin{tikzpicture}[automaton, y=8mm, x=4mm]
+      \useasboundingbox (-.5,-.5) rectangle (11.5,2.5);
+      
+      \state    [initial               ] (a) at (0,1) {$s_0$}; 
+      \state<4->[                      ] (b) at (2,2) {$s_1$}; 
+      \state<5->[accepting,alert ob=<5>] (c) at (2,0) {$s_2$}; 
+      \state<6->[accepting             ] (d) at (9,2) {$s_3$}; 
+      \state<6->[accepting             ] (e) at (9,0) {$s_4$}; 
+      \state<6->[accepting             ] (f) at (7,1) {$s_5$};
+      \state<6->[accepting             ] (g) at (11,1) {$s_6$}; 
+      \state<6->[                      ] (h) at (4,1) {$s_7$}; 
+ 
+      \onlyb<3,4>{
+        \state  [alert] (empty) at (4,1) {$?$};
+        \path<3>[alert] (a) edge node {$a$} (empty);
+        \path<4>[alert] (a) edge node {$b$} (empty);
+      }
+ 
+      \path<4-> (a) edge[bend left ] node[swap] {$a$} (b);
+      \path<5-> (a) edge[bend right] node       {$b$} (c);
+      \path<6-> (b) edge[loop above] node       {$a$} (b);
+      \path<6-> (b) edge             node       {$b$} (d);
+      \path<6-> (c) edge             node       {$a$} (e);
+      \path<6-> (c) edge[loop below] node       {$b$} (c);
+      \path<6-> (d) edge[bend right] node       {$a$} (f);
+      \path<6-> (d) edge[bend left ] node[swap] {$b$} (g);
+      \path<6-> (e) edge[loop below] node       {$a$} (e);
+      \path<6-> (e) edge[bend right] node[swap] {$b$} (g);
+      \path<6-> (f) edge[bend right] node       {$a$} (e);
+      \path<6-> (f) edge             node[swap] {$b$} (h);
+      \path<6-> (g) edge[bend right] node[swap] {$a$} (e);
+      \path<6-> (g) edge[loop right] node       {$b$} (g);
+      \path<6-> (h) edge[bend right] node       {$a$} (b);
+      \path<6-> (h) edge[bend left ] node[swap] {$b$} (c);
+    \end{tikzpicture}
+  }
+  
+  \on<2->[bottom, x=.27\textwidth]{\footnotesize
+    \begin{tabular}{|l|l|l|}
+      \hline
+      &
+      \multicolumn{2}{c|}{\rule{0pt}{1em}\structure{\textbf{Entrées de $\Sigma$}}}\\
+      \hline
+      \rule{0pt}{1.1em}\structure{\textbf{\'Etats de $S$}} &
+      \multicolumn{1}{c|}{$\structure{a}$} &
+      \multicolumn{1}{c|}{$\structure{b}$} \\
+      \hline
+      \rule{0pt}{1em}$s_0=\{\example<2>{3},\structure<2>{4},\structure<2>{5}\}$ \hspace\fill\structure{i}  &
+      \onlyb<3>{\alert{?}}\only<4-> {$s_1=\{5, 2\}$} &
+      \onlyb<4> {\alert{?}}\only<5-> {$s_2=\{1,4,5\}$} \\
+      \uncover<4->{$s_1=\{5, 2\}$} &
+      \uncover<6->{$s_1=\{5, 2\}$} &
+      \uncover<6->{$s_3=\{1, 2\}$} \\
+      \uncover<5->{$s_2=\{\alert<5>{1},4,5\}$ \hspace\fill\structure{f}} &
+      \uncover<6->{$s_4=\{1,2,5\}$} &
+      \uncover<6->{$s_2=\{1,4,5\}$} \\
+      \uncover<6->{$s_3=\{1,2\}$ \hspace\fill\structure{f}} &
+      \uncover<6->{$s_5=\{1,5\}$} &
+      \uncover<6->{$s_6=\{1,2,4,5\}$} \\
+      \uncover<6->{$s_4=\{1,2,5\}$ \hspace\fill\structure{f}} &
+      \uncover<6->{$s_4=\{1,2,5\}$} &
+      \uncover<6->{$s_6=\{1,2,4,5\}$} \\
+      \uncover<6->{$s_5=\{1,5\}$ \hspace\fill\structure{f}} &
+      \uncover<6->{$s_4=\{1,2,5\}$} &
+      \uncover<6->{$s_7=\{4,5\}$} \\
+      \uncover<6->{$s_6=\{1,2,4,5\}$ \hspace\fill\structure{f}} &
+      \uncover<6->{$s_4=\{1,2,5\}$} &
+      \uncover<6->{$s_6=\{1,2,4,5\}$} \\
+      \uncover<6->{$s_7=\{4,5\}$} &
+      \uncover<6->{$s_1=\{5,2\}$} &
+      \uncover<6->{$s_2=\{1,4,5\}$} \\
+      \hline
+    \end{tabular}
+  }
+ 
+\end{frame}
+
+\endgroup
+\endinput
+
+

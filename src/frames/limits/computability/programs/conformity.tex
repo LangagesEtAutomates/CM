@@ -1,0 +1,82 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{searchPerfect}{search\_perfect}
+
+\begin{frame}{Conformité d'un programme à sa spécification}
+
+  \on[text, top=-2mm]{
+    Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif, et soit $S \in \textsc{re}$ une spécification.
+    \begin{itemize}
+    \item On veut vérifier que le langage semi-décidé par un programme est $S$
+    \end{itemize}
+    \Probleme{IsConform$_S$}{
+      Un \structure{programme} $P \in \mathcal{L}$
+    }{
+      Est-ce que $\llbracket P \rrbracket = S$ ?
+    }
+  }
+
+  \onExampleBlock[bottom]{Exemples pour $S = \mathcal{L}(a^\star)$ }{
+
+    Les programmes suivants sont-ils des analyseurs lexicaux pour $a^\star$ ?
+
+    \vspace{1mm}
+    \begin{minipage}[t]{.33\textwidth}
+      \begin{algorithm}[H]
+        \Fun{$P_1(u) \in \mathbb{B}$}{
+          $r \leftarrow \True$;\\
+          \For{$i$ \From $1$ \To $|u|$}{
+            \If{$u[i] \neq \text{`a'}$}{
+              $r \leftarrow\False$;
+            }
+          }
+          \Return $r$;
+        }
+      \end{algorithm}
+    \end{minipage}%
+    \begin{minipage}[t]{.33\textwidth}
+      \begin{algorithm}[H]
+        \Fun{$P_2(u) \in \mathbb{B}$}{
+          $c \leftarrow u[1]$;\\
+          \Return $c = \text{`a'}$;
+        }
+      \end{algorithm}
+    \end{minipage}%
+    \begin{minipage}[t]{.33\textwidth}
+      \begin{algorithm}[H]
+        \Fun{$P_3(u) \in \mathbb{B}$}{
+          $\searchPerfect(3)$;\\
+          \Return $P_1(u)$;
+        }
+      \end{algorithm}
+    \end{minipage}%
+
+    \uncover<2->{
+      \begin{minipage}{.33\textwidth}
+        \begin{itemize}
+        \item Instance positive
+        \end{itemize}
+      \end{minipage}%
+      \begin{minipage}{.33\textwidth}
+        \begin{itemize}
+        \item Instance négative
+        \end{itemize}
+      \end{minipage}%
+      \begin{minipage}{.33\textwidth}
+        \begin{itemize}
+        \item Instance difficile
+        \end{itemize}
+      \end{minipage}%
+    }
+  }
+
+\end{frame}
+
+\endgroup

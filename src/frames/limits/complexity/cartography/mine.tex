@@ -1,0 +1,141 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\newcommand\mcell[5]{
+  \draw[draw=#1, fill=#3] #4 +(-.45,-.45) rectangle +(.45,.45);
+  \node[#2]            at #4 {#5};
+}
+\newcommand\mcellN[1]{\mcell{black!50}{}{black!5}{#1}{}}
+\newcommand\mcellZ[1]{\mcell{black!50}{black!40}{black!25}{#1}{0}}
+\newcommand\mcellA[1]{\mcell{structure!70}{structure}{structure!25}{#1}{1}}
+\newcommand\mcellB[1]{\mcell{example!70}{example}{example!25}{#1}{2}}
+\newcommand\mcellC[1]{\mcell{alert!70}{alert}{alert!25}{#1}{3}}
+
+\begin{frame}{Jeu du Démineur}
+
+  \on[y=7mm, width=1.1\textwidth]{
+    \Probleme{Minesweeper-Consistency}{
+      \begin{itemize}
+      \item Une grille finie $G \subset \mathbb{Z}^2$
+      \item Une fonction partielle $\ell : G \rightharpoonup \{0, \ldots, 8\}$
+      \end{itemize}
+      
+      \begin{center}
+        \begin{tikzpicture}[size=3mm]\scriptsize
+          
+          \mcellZ{(1,9)}
+          \mcellZ{(2,9)}
+          \mcellZ{(3,9)}
+          \mcellZ{(4,9)}
+          \mcellZ{(5,9)}
+          \mcellZ{(6,9)}
+          \mcellZ{(7,9)}
+          \mcellZ{(8,9)}
+          \mcellZ{(9,9)}
+
+          \mcellZ{(1,8)}
+          \mcellZ{(2,8)}
+          \mcellZ{(3,8)}
+          \mcellZ{(4,8)}
+          \mcellZ{(5,8)}
+          \mcellZ{(6,8)}
+          \mcellA{(7,8)}
+          \mcellA{(8,8)}
+          \mcellA{(9,8)}
+
+          \mcellZ{(1,7)}
+          \mcellZ{(2,7)}
+          \mcellZ{(3,7)}
+          \mcellZ{(4,7)}
+          \mcellA{(5,7)}
+          \mcellA{(6,7)}
+          \mcellB{(7,7)}
+          \mcellN{(8,7)}
+          \mcellN{(9,7)}
+
+          \mcellA{(1,6)}
+          \mcellA{(2,6)}
+          \mcellZ{(3,6)}
+          \mcellZ{(4,6)}
+          \mcellA{(5,6)}
+          \mcellN{(6,6)}
+          \mcellB{(7,6)}
+          \mcellA{(8,6)}
+          \mcellA{(9,6)}
+
+          \mcellN{(1,5)}
+          \mcellC{(2,5)}
+          \mcellA{(3,5)}
+          \mcellA{(4,5)}
+          \mcellA{(5,5)}
+          \mcellA{(6,5)}
+          \mcellA{(7,5)}
+          \mcellZ{(8,5)}
+          \mcellZ{(9,5)}
+
+          \mcellN{(1,4)}
+          \mcellN{(2,4)}
+          \mcellN{(3,4)}
+          \mcellB{(4,4)}
+          \mcellZ{(5,4)}
+          \mcellZ{(6,4)}
+          \mcellZ{(7,4)}
+          \mcellZ{(8,4)}
+          \mcellZ{(9,4)}
+
+          \mcellN{(1,3)}
+          \mcellN{(2,3)}
+          \mcellN{(3,3)}
+          \mcellC{(4,3)}
+          \mcellZ{(5,3)}
+          \mcellZ{(6,3)}
+          \mcellZ{(7,3)}
+          \mcellA{(8,3)}
+          \mcellA{(9,3)}
+
+          \mcellN{(1,2)}
+          \mcellN{(2,2)}
+          \mcellN{(3,2)}
+          \mcellB{(4,2)}
+          \mcellA{(5,2)}
+          \mcellA{(6,2)}
+          \mcellA{(7,2)}
+          \mcellA{(8,2)}
+          \mcellN{(9,2)}
+
+          \mcellN{(1,1)}
+          \mcellN{(2,1)}
+          \mcellN{(3,1)}
+          \mcellN{(4,1)}
+          \mcellN{(5,1)}
+          \mcellN{(6,1)}
+          \mcellN{(7,1)}
+          \mcellN{(8,1)}
+          \mcellN{(9,1)}
+          
+        \end{tikzpicture}
+      \end{center}
+    }{
+      Existe-t-il un ensemble $M \subseteq G$ (positions de mines) tel que
+      \begin{itemize}
+      \item $M \cap \dom(\ell) = \emptyset$, et
+      \item $\forall c \in \dom(\ell), \ell(c) = |\{d \in M \mid d \text{ est adjacent à } c\}|$ ?
+      \end{itemize}
+    }
+  }  
+
+  \onBlock[bottom=3mm]{Théorème (admis)}{
+    \textsc{Minesweeper-Consistency} est \textsc{np-}complet.
+  }
+
+  \footnoteref{R. Kaye. \emph{Minesweeper is NP-complete}. The Mathematical Intelligencer (2000)}
+  
+\end{frame}
+
+\endgroup

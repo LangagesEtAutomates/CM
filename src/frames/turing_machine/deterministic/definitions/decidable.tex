@@ -1,0 +1,62 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Langage décidable}
+
+  \onBlock[top=-4mm]{Définition -- Décision d'un langage}{
+    Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTD, $u\in \Sigma^\star$ et $L\subseteq \Sigma^\star$.
+    \begin{itemize}
+    \item On dit que \structure{$M$ décide $L$} si \alert{$L = \mathcal{L}(M)$} et \alert{$M$ s'arrête sur toutes ses entrées}
+    \item On dit que \structure{$L$ est décidable} s'il existe une MTD qui décide $L$
+    \item On note \alert{\textsc{r}} (pour \structure{récursif}) la classe des langages décidables
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=5mm]{Exemple -- Décision de $\{a^n b^n c^n \mid n > 0 \}$}
+
+  \on[y=-4mm] {
+    \begin{tikzpicture}[tape, x=7mm, y=7mm]%
+      \cell{}
+      \cell{}
+      \cell{\alt<-1>{$a$}{$A$}} \smhead[alert]<1>      \smheadfromb[alert]<4>{3}  
+      \cell{\alt<-5>{$a$}{$A$}} \smheadb[alert]<5>     \smheadfromb[alert]<8>{3}  
+      \cell{\alt<-2>{$b$}{$B$}} \smheadb[alert]<9>     \smheadfromb[alert]<2>{-1} 
+      \cell{\alt<-6>{$b$}{$B$}}                        \smheadfromb[alert]<6>{-1} 
+      \cell{\alt<-3>{$c$}{$C$}}                        \smheadfromb[alert]<3>{-1}
+      \cell{\alt<-7>{$c$}{$C$}} \smheadb[alert]<11>    \smheadfromb[alert]<7>{-1}
+      \cell{}                                          \smheadfromb[alert]<10>{-3}
+      \cell{}
+    \end{tikzpicture}%
+  }
+
+  \on[bottom] {
+    \begin{tikzpicture}[turingMachine]
+      \state[alert ob=<{1,5,9}>, initial above] (0) at (1,1) {0};
+      \state[alert ob=<{2,6}>                 ] (1) at (1,0) {1};
+      \state[alert ob=<{3,7}>                 ] (2) at (0,0) {2};
+      \state[alert ob=<{4,8}>                 ] (3) at (0,1) {3};
+      \state[alert ob=<{10}>                  ] (4) at (2,1) {4};
+      \state[alert ob=<{11}>, accepting       ] (5) at (3,1) {5};
+      
+      \path (0) edge             node[sloped,swap] {\smTMtransR{a}{A}} (1);
+      \path (1) edge             node[sloped     ] {\smTMtransR{b}{B}} (2);
+      \path (2) edge             node[sloped,swap] {\smTMtransL{c}{C}} (3);
+      \path (3) edge             node[sloped,swap] {\smTMtransR{A}{A}} (0);
+      \path (0) edge             node              {\smTMtransR{B}{B}} (4);
+      \path (4) edge             node              {\smTMtransL{\blank}{\blank}} (5);
+      \path (1) edge[loop right] node              {\smAlign{\smTMtransR{a}{a}\smTMtransR{B}{B}}} (1);
+      \path (2) edge[loop left ] node              {\smAlign{\smTMtransR{b}{b}\smTMtransR{C}{C}}} (2);
+      \path (3) edge[loop left ] node              {\smAlign{\smTMtransL{a}{a}\smTMtransL{b}{b}\smTMtransL{B}{B}\smTMtransL{C}{C}}} (3);
+      \path (4) edge[loop below] node              {\smAlign{\smTMtransR{B}{B}\smTMtransR{C}{C}}} (4);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

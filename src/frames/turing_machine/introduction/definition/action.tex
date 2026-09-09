@@ -1,0 +1,81 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Actions d'une machine de Turing}
+  
+  \onBlock[top=-4mm]{Définition -- Action}{
+    Soit $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une machine de Turing. \\
+    Les \structure{actions} de $M$ composent une relation binaire \alert{$\leadsto_M$}\footnote{On note \alert{$C \leadsto C'$} si $M$ est clair d'après le contexte.} sur $\mathcal{C}_M$\\
+    Pour tous $q, q' \in Q$, $a, b, c \in \Gamma$, et $G, D \in \Gamma^\star$, on a :
+
+    \vspace{-3mm}
+    $$
+    \begin{array}{@{\langle\,}l@{,\,}c@{,\,}r@{\,\rangle \leadsto_M \langle\,}l@{,\,}c@{,\,}r@{\,\rangle\quad\text{si}\quad}l}
+      G           & \structure{q} & \alert{a} D   & G \alert{b} & \structure{q'} &  D   & \structure{q \xrightarrow{\alert{\smTMtransR{a}{b}}} q'}\\
+      G \alert{c} & \structure{q} & \alert{a} D   & G           & \structure{q'} & \alert{cb} D   & \structure{q \xrightarrow{\alert{\smTMtransL{a}{b}}} q'}\\
+    \end{array}
+    $$
+    
+    On note \alert{$\leadsto_M^\star$} \structure{la fermeture transitive et réflexive de $\leadsto_M$}.
+  }
+
+  \onExampleBlock[text,y=-9mm] {Exemple -- $\structure{\langle b,1,aab\rangle} \leadsto \alert{\langle bb,0,ab\rangle}$} {}
+
+  \on[x=-29mm,y=-19mm] {
+    \begin{tikzpicture}[tape, x=6mm, y=6mm]
+      \cell{}
+      \cell{$b$}  
+      \cell[structure]{$a$} \smhead[structure] 
+      \cell{$a$}
+      \cell{$b$} 
+      \cell{}
+    \end{tikzpicture}
+  }
+
+  \on[x=29mm,y=-19mm] {
+    \begin{tikzpicture}[tape, x=6mm, y=6mm]
+      \cell{}
+      \cell{$b$}  
+      \cell[alert]{$b$}
+      \cell{$a$} \smheadfrom[example]{-1} \smhead[alert]
+      \cell{$b$} 
+      \cell{}
+    \end{tikzpicture}
+  }
+  
+  \on[x=-29mm,y=-32mm] {
+    \begin{tikzpicture}[turingMachine]
+      \state[initial  ] (0) at (0,0) {0}; 
+      \state[structure] (1) at (1,0) {1}; 
+      \state[accepting] (2) at (2,0) {2}; 
+      
+      \path          (0) edge[bend left=15] node {\smTMtransR{a}{b}} (1);
+      \path[example] (1) edge[bend left=15] node {\smTMtransR{a}{b}} (0);
+      \path          (1) edge               node {\smTMtransL{b}{a}} (2);
+    \end{tikzpicture}
+  }
+  
+  \on[x=29mm,y=-32mm] {
+    \begin{tikzpicture}[turingMachine]
+      \state[initial,alert] (0) at (0,0) {0}; 
+      \state[             ] (1) at (1,0) {1}; 
+      \state[accepting    ] (2) at (2,0) {2}; 
+      
+      \path          (0) edge[bend left=15] node {\smTMtransR{a}{b}} (1);
+      \path[example] (1) edge[bend left=15] node {\smTMtransR{a}{b}} (0);
+      \path          (1) edge               node {\smTMtransL{b}{a}} (2);
+    \end{tikzpicture}
+  }
+
+  
+\end{frame}
+
+\endgroup
+\endinput
+

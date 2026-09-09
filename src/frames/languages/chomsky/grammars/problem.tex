@@ -1,0 +1,54 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Comment décrire un problème de décision ?}
+
+  \onAlertBlock[top=-5mm]{Problème -- Définition d'un langage}{
+    On cherche un formalisme \alert{$\langle\mathcal{L}, \llbracket \cdot \rrbracket \rangle$}
+    le plus expressif possible pour décrire des langages sur un alphabet $\Sigma$
+  }
+
+  \onBlock[y=12mm]{Approche générative}{
+    \vspace{-2mm}
+    \begin{itemize}
+    \item Donner une \structure{description syntaxique} de la forme des mots de $L$
+    \item Une \structure{grammaire} est un ensemble de règles qui \structure{génèrent} les mots de $L$
+    \end{itemize}
+  }
+  
+  \onBlock[y=-7mm]{Approche algorithmique}{
+    \vspace{-2mm}
+    \begin{itemize}
+    \item Décrire une \structure{procédure de décision} pour l'appartenance à $L$
+    \item Un \structure{automate} spécifie un calcul effectif sur les mots
+    \end{itemize}
+  }
+
+  \on[bottom, width=.53\textwidth, x=-26mm]{
+    \Probleme{\structure{Decision$_L$} \normalfont{(pour $L \in \mathcal{L}$)}}{
+      \vspace{2.3mm}Un mot \structure{$u \in \Sigma^\star$}
+    }{
+      \vspace{2mm}Est-ce que \structure{$u \in \llbracket L \rrbracket$} ?
+    }
+  }
+  \on[bottom, width=.55\textwidth, x=27mm]{
+    \Probleme{\structure{Universal$_{\langle\mathcal{L}, \llbracket \cdot \rrbracket \rangle}$}}{
+      \begin{itemize}
+      \item Un langage \structure{$L \in \mathcal{L}$}
+      \item Un mot \structure{$u \in \Sigma^\star$}
+      \end{itemize}
+    }{
+      Est-ce que \structure{$u \in \llbracket L \rrbracket$} ?
+    }
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

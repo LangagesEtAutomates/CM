@@ -1,0 +1,90 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Contrainte sur la Satisfaisabilité}
+
+  \on[text, top=-4mm]{
+    \Probleme{\normalfont{3}-sat}{
+      Une formule $\varphi \in \mathit{FNC}$ dont
+      \begin{itemize}
+      \item toute clause est composée d'au plus 3 littéraux
+      \end{itemize}
+    }{
+      Existe-t-il une valuation $\nu$ telle que $\hat{\nu}(\varphi)$ est vraie ?
+    }
+  }
+  
+  \onBlock<2->[y=14mm, anchor=north]{Théorème -- 3\textsc{-sat} est \textsc{np}-complet}{
+
+    \begin{description}[$3\textsc{-sat} \leq_p \textsc{sat}$.]
+    \item[$3\textsc{-sat} \leq_p \textsc{sat}$] \vspace{-3mm}  par la réduction $\mathit{id} : \varphi \mapsto \varphi$
+    \item[$\textsc{sat} \leq_p 3\textsc{-sat}$] par la réduction $f$
+    \end{description}
+
+    \vspace{-2mm}
+    $$
+    f : \left\{\begin{array}{@{~}r@{~}c@{~}l@{}}
+    \mathcal{I}(\textsc{sat}) & \rightarrow & \mathcal{I}(\textsc{3-sat})\\
+    \varphi & \mapsto & \text{forme normale de $\varphi$ par la réécriture} : \vspace{.5mm}\\
+    && \quad\Big\{\structure{(\ell_1 \lor \ell_2 \lor \ell_3 \lor \psi)} \hookrightarrow \structure{(\ell_1 \lor \ell_2 \lor \alert{v}) \land (\alert{\lnot v} \lor \ell_3 \lor \psi)}\vspace{.5mm}\\
+    && \text{où $v$ est une variable fraîche}
+    \end{array}\right.
+    $$
+  }
+
+  \onExampleBlock[bottom=-3mm]{Exemple -- $\varphi \in \textsc{sat} \setminus 3\textsc{-sat}$}{\footnotesize
+    
+    \vspace{-4mm}
+    $$
+    \begin{array}{@{}r@{~~}c@{~~}l@{~}c@{~}l@{~}c@{~}l@{~}c@{~}l@{~}c@{~}l@{}}
+      \varphi &=&
+      \multicolumn{3}{@{}l@{}}{
+        (\exampleb<2>{\neg x_1 \lor x_3 \lor \neg x_4 \lor x_6})
+      }
+      &\land&
+      \multicolumn{5}{@{}l@{}}{
+        (x_1 \lor x_2 \lor \neg x_3 \lor x_4 \lor \neg x_5)
+      }
+      \\
+      &\uncover<2->{\rightarrow}&
+      \uncover<2->{(\exampleb<2>{\neg x_1 \lor x_3} \lor \alert<2>{y_1})}
+      &\uncover<2->{\land}&
+      \uncover<2->{(\alert<2>{\neg y_1} \lor \exampleb<2>{\neg x_4 \lor x_6})}
+      &\uncover<2->{\land}&
+      \multicolumn{5}{@{}l@{}}{\uncover<2->{
+          (\exampleb<3>{x_1 \lor x_2 \lor \neg x_3 \lor x_4 \lor \neg x_5})
+      }}
+      \\
+      &\uncover<3->{\rightarrow}&
+      \uncover<3->{(\neg x_1 \lor x_3 \lor y_1)}
+      &\uncover<3->{\land}&
+      \uncover<3->{(\neg y_1 \lor \neg x_4 \lor x_6)}
+      &\uncover<3->{\land}&
+      \uncover<3->{(\exampleb<3>{x_1 \lor x_2} \lor \alert<3>{y_2})}
+      &\uncover<3->{\land}&
+      \multicolumn{3}{@{}l@{}}{\uncover<3->{
+          (\exampleb<4>{\alert<3>{\neg y_2} \lor \exampleb<3>{\neg x_3 \lor x_4 \lor \neg x_5}})
+      }}
+      \\
+      &\uncover<4->{\rightarrow}&
+      \uncover<4->{(\neg x_1 \lor x_3 \lor y_1)}
+      &\uncover<4->{\land}&
+      \uncover<4->{(\neg y_1 \lor \neg x_4 \lor x_6)}
+      &\uncover<4->{\land}&
+      \uncover<4->{(x_1 \lor x_2 \lor y_2)}
+      &\uncover<4->{\land}&
+      \uncover<4->{(\exampleb<4>{\neg y_2 \lor \neg x_3} \lor \alert<4>{y_3})}
+      &\uncover<4->{\land}&
+      \uncover<4->{(\alert<4>{\neg y_3} \lor \exampleb<4>{x_4 \lor \neg x_5})}
+    \end{array}$$
+  }
+
+\end{frame}
+
+\endgroup

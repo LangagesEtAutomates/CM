@@ -1,0 +1,55 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Configurations d'une machine de Turing}
+
+  \onBlock[top=-5mm]{Définition -- Configuration d'une machine de Turing}{
+    Soit $M=\langle \Sigma, \Gamma, \blank , Q, q_0, F, \rightarrow \rangle$ une machine de Turing.\\
+    Une \structure{configuration} de $M$ est représentée par un triplet \alert{$\langle G, q, D \rangle$} tel que :
+    \begin{description}[xxxx]
+    \item[\alert{$G$}] $\in \Gamma^\star$ : le mot à \structure{gauche} de la tête (excluant la case sous la tête)
+    \item[\alert{$q$}] $\in Q$ : \structure{l'état courant dans la simulation}
+    \item[\alert{$D$}] $\in \Gamma^\star$ : le mot à \structure{droite} de la tête (incluant la case sous la tête)
+    \end{description}
+  }
+  
+  \onExampleBlock{Exemple -- La configuration {\color{black}$\langle \structure{ba},\alert{1},\example{ab}\rangle $}}{}
+
+  \on[x=-29mm,y=-11mm] {
+    \begin{tikzpicture}[tape, x=7mm, y=7mm]
+      \cell{}
+      \cell[structure]{$b$}  
+      \cell[structure]{$a$}  
+      \cell[example]  {$a$} \smhead[example]
+      \cell[example]  {$b$}  
+      \cell{} 
+    \end{tikzpicture}
+  }
+ 
+  \on[x=29mm,y=-10mm] {
+    \begin{tikzpicture}[turingMachine]
+      \state[initial  ] (0) at (0,0) {0}; 
+      \state[alert    ] (1) at (1,0) {1}; 
+      \state[accepting] (2) at (2,0) {2}; 
+      
+      \path (0) edge[bend left] node {\smTMtransR{a}{b}} (1);
+      \path (1) edge[bend left] node {\smTMtransR{a}{b}} (0);
+      \path (1) edge            node {\smTMtransL{b}{a}} (2);
+    \end{tikzpicture}
+  }
+
+  \onBlock[bottom=-1mm]{Remarque -- Modélisation des symboles blancs}{
+    L'infinité de symboles blancs est modélisée par la \structure{relation d'équivalence} :\\[-2mm]
+    $$\forall n, m\in \mathbb{N},\quad\structure{\langle G, q, D \rangle \alert{\,\simeq\,} \langle \alert{\blank ^n} G, q, D \alert{\blank ^m} \rangle}$$
+    On note {\small\alert{$\mathcal{C}_M \eqdef (\Gamma^\star \times Q \times \Gamma^\star)/_\simeq$}} l'\structure{ensemble des configurations de $M$}
+  }
+
+\end{frame}
+
+\endgroup

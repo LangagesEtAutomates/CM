@@ -1,0 +1,87 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Tout langage généré est engendré}
+
+  \onBlock[top=-5mm]{Théorème -- Généré $\Rightarrow$ engendré}{
+    Soit $L$ un langage généré par une MTND $M_G$.\\
+    Alors il existe une grammaire $G$ qui engendre $L$. 
+  }
+
+  \onExampleBlock[y=16mm]{Illustration -- Le langage $\mathcal{L}(ba^\star b)$}{
+    On normalise $M_G$ pour qu'elle n'écrive jamais $\blank$ au milieu du ruban.
+  }
+
+  \on[bottom, left=40mm]{
+    $G = \left\{\begin{array}{rcl}
+    \multicolumn{3}{l}{\example{\text{Règles structurelles}}}\\
+    \alertb<2>{S}             & \alertb<2>{\rightarrow} & \alertb<2>{\blank 0 \blank}                             \\
+    \alertb<3,5,6,7>{\blank}        & \alertb<3,5,6,7>{\rightarrow} & \alertb<3,5,6>{\blank \blank} \mid \alertb<7>{\varepsilon}              \\
+    \multicolumn{3}{l}{\example{\text{Transitions } \triangleright}}\\
+    \alertb<4>{0 \blank}   & \alertb<4>{\rightarrow} & \alertb<4>{b 1}                               \\
+    \alertb<5>{1 \blank}   & \alertb<5>{\rightarrow} & \alertb<5>{a 1}                               \\
+    \multicolumn{3}{l}{\example{\text{Transition } \triangleleft}}\\
+    \alertb<6>{a 1 \blank} & \alertb<6>{\rightarrow} & \alertb<6>{2 a b}                             \\
+    b 1 \blank             & \rightarrow             & 2 b b                                         \\
+    \blank 1 \blank            & \rightarrow             & 2 \blank b                                        \\
+    \multicolumn{3}{l}{\example{\text{État accepteur}}}\\
+    \alertb<7>{2}      & \alertb<7>{\rightarrow} & \alertb<7>{\varepsilon}                       \\
+    \end{array}\right.$
+  }
+
+  \on[y=0mm, x=20mm]{
+    \begin{tikzpicture}[tape, x=7mm, y=7mm]
+      \cell{}                
+      \cell{\only<4->{$b$}} \smheadb<-3>
+      \cell{\only<5->{$a$}} \smhead<4,6>
+      \cell{\only<6->{$b$}} \smheadb<5>
+      \cell{}                 
+    \end{tikzpicture}
+  }
+
+  \on[y=-13mm, x=20mm]{
+    \begin{tikzpicture}[turingMachine]
+      \state [alert ob=<{2-3}>,  initial  ] (0) at (0,0) {$0$}; 
+      \state [alert ob=<{4,5}>,          ] (1) at (1,0) {$1$}; 
+      \state [alert ob=<{6-}>,  accepting] (2) at (2,0) {$2$}; 
+
+      \path (0) edge             node {$\smTMtransR{\blank}{b}$} (1);
+      \path (1) edge[loop below] node {$\smTMtransR{\blank}{a}$} (1);
+      \path (1) edge             node {$\smTMtransL{\blank}{b}$} (2);
+    \end{tikzpicture}
+  }
+  
+  \on[y=-30mm, x=20mm]{
+    $\begin{array}{r@{~~}l@{~~}l@{~~}l@{~~}l} 
+      S & \uncover<2->{\vdash\phantom{^\star}} &
+      \uncover<2->{\blank \structureb{\alertb<2>{0}} \blank} \\
+      &
+      \uncover<3->{\vdash^\star} &
+      \uncover<3->{\blank 0 \structureb{\alertb<3>{\;\blank}} \blank}\phantom{\blank\blank} &
+      \uncover<4->{\vdash} &
+      \uncover<4->{\blank \structureb{b \alertb<4>{1}} \blank} \\
+      &
+      \uncover<5->{\vdash^\star} &
+      \uncover<5->{\blank b 1 \structureb{\blank} \blank} &
+      \uncover<5->{\vdash} &
+      \uncover<5->{\blank b \structureb{\alertb<5>{a 1}} \blank} \\
+      &
+      \uncover<6->{\vdash^\star} &
+      \uncover<6->{\blank b a 1 \structureb{\blank} \blank} &
+      \uncover<6->{\vdash} &
+      \uncover<6->{\blank b \structureb{\alertb<5>{2 a b}} \blank} \\
+      &
+      \uncover<7->{\vdash^\star} &
+      \uncover<7->{b a b}
+    \end{array}$
+  }
+  
+\end{frame}
+
+\endgroup

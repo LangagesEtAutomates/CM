@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Fonction calculable}
+
+  \onBlock[top=-3mm]{Définition -- Calcul d'une fonction}{
+    Soient $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTD, $\mathcal{I} \subseteq \Sigma^\star$, et $f : \mathcal{I} \rightarrow \Sigma^\star$. On dit que :
+    \begin{itemize}
+    \item \structure{$M$ calcule $f$} si, pour tout $x\in \mathcal{I}$, $M$ écrit $f(x)$ sur le ruban puis termine
+      $$\alert{ \forall x\in \mathcal{I}, \exists c=\langle G, q, D \rangle \in \mathcal{C}_M^\mathit{halt}, C_{\mathit{init}}(x) \leadsto_M^\star c \land f(x)=G\cdot D}$$
+    \item \structure{$f$ est calculable} s'il existe une MTD qui calcule $f$
+    \end{itemize}
+  }
+
+  \onExampleBlock[y=-6mm]{Exemple -- Incrémentation de 11 écrit en binaire}{}
+
+  \on[y=-17mm]{
+    \begin{tikzpicture}[tape, x=7mm, y=7mm]
+      \cell{}
+      \cell{$1$}                \smhead<1>
+      \cell{\alt<-8>{$0$}{$1$}} \smheadb<2,8>
+      \cell{\alt<-7>{$1$}{$0$}} \smheadb<3,7,9> 
+      \cell{\alt<-6>{$1$}{$0$}} \smheadb<4,6>
+      \cell{}                   \smheadb<5>
+    \end{tikzpicture}
+  }
+
+  \on[bottom=2mm]{
+    \begin{tikzpicture}[turingMachine]
+      \state[alert ob=<-5>, initial ] (0) at (0,0) {$0$}; 
+      \state[alert ob=<6-8>         ] (1) at (1,0) {$1$}; 
+      \state[alert ob=<9>, accepting] (2) at (2,0) {$2$}; 
+
+      \path (0) edge[loop above] node {\smAlign{\smTMtransR{0}{0}\smTMtransR{1}{1}}} (0);
+      \path (1) edge[loop above] node {\smTMtransL{1}{0}} (1);
+      \path (0) edge             node {\smTMtransL{\blank}{\blank}} (1);
+      \path (1) edge             node {\smAlign{\smTMtransR{0}{1}\smTMtransR{\blank}{1}}} (2);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

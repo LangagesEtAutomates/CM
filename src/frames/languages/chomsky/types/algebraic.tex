@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Grammaires et langages algébriques}
+
+  \begin{block}{Définition -- Grammaire algébrique}
+    Une grammaire $G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$ est dite \structure{algébrique} si les membres gauches de toutes ses règles sont un non-terminal :
+
+    $$\forall \langle \alpha, \beta\rangle \in \rightarrow, \quad \alert{\alpha \in \Gamma}$$
+  \end{block}
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- Langage algébrique}
+    Soient $\Sigma$ un alphabet et $L$ un langage sur $\Sigma$.
+    \begin{itemize}
+    \item $L$ est dit \structure{algébrique} s'il est engendré par une grammaire algébrique
+    \item L'\structure{ensemble des langages algébrique} sur $\Sigma$ est noté \alert{$\textsc{alg}_\Sigma$}
+    \item La \structure{classe des langages algébrique} est noté \alert{$\textsc{alg}$} (indépendant de $\Sigma$)
+    \end{itemize}
+  \end{block}
+
+  \begin{exampleblock}{Exemple -- Langage $\{a^n b^n \mid n\in \mathbb{N}\}$}
+    \begin{itemize}
+    \item $G = \langle \{a, b\}, \{S\}, S, \left\{S \rightarrow a S b \mid \varepsilon \right\} \rangle $
+    \item Génération de $aabb$ : $ S \vdash aSb \vdash aaSbb \vdash aabb $
+    \end{itemize}
+  \end{exampleblock}
+  
+\end{frame}
+
+\endgroup
+\endinput

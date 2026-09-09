@@ -1,0 +1,35 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Hypothèses pour la suite}
+
+  \begin{block}{Dans toute la suite, on supposera :}
+    \begin{itemize}
+    \item L'alphabet considéré sera toujours $\Sigma = \{0,1\}$
+      \begin{itemize}
+      \item On peut toujours encoder n'importe quel alphabet dans $\{0,1\}^\star$
+      \end{itemize}
+    \item L'encodage des MT sera un langage sur $\{0,1\}$ : $$\forall M, \mathit{encode}(M) \in \{0,1\}^\star$$ 
+    \item La machine universelle $M_{univ}$ :
+      \begin{itemize}
+      \item sera déterministe
+      \item pourra simuler des machines des machines de Turing non-déterministes
+      \item utilise (au moins) deux rubans : 
+        \begin{itemize}
+        \item \textsc{m} initialisé à $\mathit{encode}(M)$ 
+        \item \textsc{u} initialisé à $u$ 
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
+\endgroup

@@ -1,0 +1,60 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Le paradoxe du barbier}
+
+  \on[y=-5mm]{
+    \begin{tikzpicture}
+      \node [faded background picture=Village,    text width=\paperwidth/2] (A) at (-\paperwidth/4,0) {};
+      \node [faded background picture=Barbershop, text width=\paperwidth/2] (B) at ( \paperwidth/4,0) {};
+
+      \node[anchor=south, outer sep=0pt, inner sep=0pt] at (A.south) {\includegraphics[height=30mm]{shaving}};
+      \node[anchor=south, outer sep=0pt, inner sep=0pt] at (B.south) {\includegraphics[height=30mm]{barber}};
+    \end{tikzpicture}
+  }
+
+  \on[x=-.25\paperwidth, y=-5mm]{
+    \chatBubble[color=example]{Je me rase moi-même}
+  }
+
+  \on[x=.25\paperwidth, y=-5mm]{
+    \chatBubble[color=alert]{Je rase ceux qui ne se rasent pas}
+  }
+
+  \on[y=22mm]{
+    \begin{tikzpicture}
+      \node[
+        every chat bubble,
+        draw=structure,
+        top color=structure!10,
+        bottom color=structure!30,
+      ]{
+        \begin{minipage}{.95\textwidth}
+        Dans un petit village suisse, vivait un barbier.
+
+        Tous les villageois étaient bien rasés.
+        \vspace{-2mm}
+        \uncover<2->{%
+          $$\forall x,~ x\ \structure{\text{est~rasé~par}}\  \mathit{le~barbier} \Leftrightarrow \lnot (x\ \structure{\text{est~rasé~par}}\ x)$$%
+        }%
+        \vspace{-6mm}%
+        \uncover<3->{%
+          \begin{center}%
+            \emph{\Large\structure{Qui rase le barbier ?}}%
+          \end{center}%
+        }%
+        \vspace{2mm}
+        \end{minipage}%
+      };
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

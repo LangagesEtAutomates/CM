@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Encodage effectif et langage universel}
+
+  \vspace{-2mm}
+  \begin{block}{Définition -- Encodage effectif des MTD}
+    Un \structure{encodage effectif} des MTD est un formalisme 
+    \alert{$\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$} tel que :
+    \begin{description}[Turing-complet :]
+    \item[Turing-complet :] $\alert{\operatorname{Im}(\llbracket \cdot \rrbracket) = \textsc{re}}$
+      \begin{itemize}\small
+      \item Tout problème semi-décidable est \structure{encodable} dans $\mathcal{L}$
+      \item Les MTDs sont encodées à \structure{équivalence sémantique} près
+      \item $\llbracket \cdot \rrbracket$ n'est pas forcément bijective
+      \end{itemize}
+    \item[Effectif :] $\alert{\left\{ \langle P, u \rangle \mid P \in \mathcal{L} \land u \in \llbracket P \rrbracket \right\} \in \textsc{re}}$
+      \begin{itemize}\small
+      \item On peut décoder les MTD et les simuler
+      \item Il s'agit du langage universel :
+      \end{itemize}
+    \end{description}
+        $$\structure{\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle} \eqdef \left\{ \langle P, u \rangle \mid P \in \mathcal{L} \land u \in \llbracket P \rrbracket \right\}}$$
+
+  \end{block}
+
+  \pause
+
+  \vspace{-2mm}
+  \begin{alertblock}{Remarques -- Langage de programmation}
+    Un \alert{langage de programmation} est un encodage effectif des MTD
+    \begin{itemize}
+    \item On appellera les mots de $\mathcal{L}$ des \alert{programmes}
+    \item L'effectivité signifie qu'il existe un \alert{interpréteur} pour le langage
+    \end{itemize}
+
+    \begin{center}
+      \alert{$\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$ est-il décidable ?}
+    \end{center}
+  \end{alertblock}
+
+  
+\end{frame}

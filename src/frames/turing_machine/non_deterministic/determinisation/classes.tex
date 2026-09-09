@@ -1,0 +1,38 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Équivalence entre formalismes}
+
+  \on[text,top]{
+    \begin{itemize}
+    \item Les quatre classes suivantes sont égales
+    \item On nomme la classe commune \alert{\textsc{re}} (pour \structure{récursivement énumérable})
+    \end{itemize}
+  }
+  
+  \on[y=-10mm]{
+    \begin{tikzpicture}[x=55mm, y=33mm]\small
+      \tikzset{box/.style={structure, smBox, text width=27mm, minimum height=12mm},}
+      \node[box] (rec) at (2,2) {Langage\\\alert{reconnu} par une \\ machine de Turing \\non déterministe};
+      \node[box] (gen) at (2,1) {Langage\\\alert{généré} par une \\ machine de Turing \\non déterministe};
+      \node[box] (sem) at (3,2) {Langage\\\alert{semi-décidé} par une \\ machine de Turing \\déterministe};
+      \node[box] (enu) at (3,1) {Langage\\\alert{énuméré} par une \\ machine de Turing \\déterministe};
+
+      \footnotesize
+      \path[-latex, structure] (rec) edge[bend left=20pt]  node[right, align=left] {énumération \\de $\Sigma^\star$} (gen);
+      \path[-latex, structure] (gen) edge[bend left=20pt]  node[left, align=right]  {test \\d'égalité} (rec);
+      \path[-latex, structure] (rec) edge[bend left=20pt]  node[above] {déterminisation}              (sem);
+      \path[-latex, structure] (sem) edge[bend left=20pt]  node[below] {inclusion}                    (rec);
+      \path[-latex, structure] (gen) edge[bend left=20pt]  node[above] {déterminisation}              (enu);
+      \path[-latex, structure] (enu) edge[bend left=20pt]  node[below] {inclusion}                    (gen);
+    \end{tikzpicture}
+  }
+\end{frame}
+
+\endgroup

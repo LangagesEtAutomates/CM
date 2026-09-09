@@ -1,0 +1,63 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Théorème de Cook-Levin}
+
+  \onBlock[top=-5mm]{Théorème -- Cook-Levin (1971)}{
+    Le problème \textsc{sat} est \textsc{np}-complet
+  }
+
+  \onBlock<2->[left=.85\textwidth]{Idées de la démonstration (admise)}{
+
+    \structure{$\textsc{sat}\in \textsc{np}$ :} Un certificat est une valuation
+
+    \vspace{1mm}
+    \structure{$\textsc{sat}\in \textsc{np-difficile}$ :} On montre $\textsc{NPUniversal} \leq_p \textsc{sat}$
+
+    Variables principales de la formule construite :
+
+    \begin{description}[$r_{a, t, i}$ :]
+    \item[$r_{a, t, i}$ :] pour $a \in \Gamma$, $t\le k$ et $i\in \llbracket -k, k+|u| \rrbracket$
+      \begin{itemize}
+      \item $a$ est écrit dans la case $i$ après $t$ actions
+      \end{itemize}
+    \item[$s_{q, t}$ :] pour $q \in Q$, $t\le k$
+      \begin{itemize}
+      \item la machine est dans l'état $q$ après $t$ actions
+      \end{itemize}
+    \item[$h_{t, i}$ :] pour $t\le k$ et $i\in \llbracket -k, k+|u| \rrbracket$
+      \begin{itemize}
+      \item la tête de lecture est sous la case $i$ après $t$ actions
+      \end{itemize}
+    \end{description}
+  }
+
+  \onImage[y=22mm, x=40mm]{%
+    width=2cm,
+    title={Stephen Cook\footnote{Prix Turing 1982 pour ses travaux sur la complexité}},
+    licenselogo={\ccbysa},
+    license*={\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0} -- Jiří Janíček 2008 -- \href{https://commons.wikimedia.org/wiki/File:Prof.Cook.jpg?uselang=fr}{Wikimedia}},
+    img={Cook.jpg}
+  }
+  \onImage[y=-8mm, x=40mm]{%
+    width=2cm,
+    title={Leonid Levin},
+    licenselogo={\ccbysa},
+    license*={\href{https://creativecommons.org/licenses/by-sa/3.0/}{CC BY-SA 3.0} -- Sergio01 2010 -- \href{https://commons.wikimedia.org/wiki/File:LeonidLevin2010.jpg?uselang=fr}{Wikimedia}},
+    img={Levin.jpg}
+  }
+
+  \footnoteref{S. Cook. \emph{The complexity of theorem proving procedures}. STOC (1971)}
+  \footnoteref{L. Levin. \emph{Universal search problems}. Problems of Information Transmission (1973)}
+
+\end{frame}
+
+\endgroup
+
+

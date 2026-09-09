@@ -1,0 +1,57 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Dick}{decide}
+
+\begin{frame}{Aller au-delà des automates finis}
+
+  \onBlock[top=-2mm]{Automates finis généralisés}{
+    Si un automate fini n'est pas suffisant, ajouter une structure de données
+    \begin{itemize}
+    \item Entier : \structure{automate à compteur}
+    \item Pile : \structure{automate à pile}
+    \end{itemize}
+  }
+
+  \onExampleBlock[bottom=0mm]{Exemple : le langage $\{a^n b^n \mid n>0\}$}{
+    \begin{algorithm}[H]
+      \Fun{$\Dick(u : \text{mot}) : \text{booléen}$}{
+        $q\leftarrow 0$; $c \leftarrow 0$\;
+        \For{$i$ \From $1$ \To $|u|$}{
+          \uIf{$q = 0 \land u[i] = \text{`$a$'}$}{
+            $c \leftarrow c + 1$
+          }
+          \uElseIf{$c > 0 \land u[i] = \text{`$b$'}$}{
+            $q\leftarrow 1$;
+            $c \leftarrow c - 1$\;
+          }
+          \lElse{\Return \False}
+        }
+        \Return $q=1 \land c=0$\;
+      }
+    \end{algorithm}
+  }
+
+  \onBlock[right=.4\textwidth,y=1mm]{Grammaire}{
+    $S \rightarrow a S b \mid ab $
+  }
+  
+  \onBlock[right=.4\textwidth, bottom=5mm]{Automate à compteur}{
+    \begin{tikzpicture}[automaton]
+      \state[initial]   (a) at (0,0) {0};
+      \state[accepting] (b) at (2,0) {1};
+      \path (a) edge[loop above] node {$a / c\text{++}$}   (a);
+      \path (a) edge             node {$b / c\text{-\,-}$} (b);
+      \path (b) edge[loop above] node {$b / c\text{-\,-}$} (b);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

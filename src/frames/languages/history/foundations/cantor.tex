@@ -1,0 +1,54 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Vers une théorie ensembliste de l'arithmétique}
+
+  \onBlock[top=-4mm, left=.62\textwidth]{Théorie (naïve) des ensembles (Frege)}{      
+    \begin{itemize}
+    \item Tout objet mathématique est un ensemble 
+    \item Ensemble = prédicat logique
+      \begin{itemize}
+      \item Par exemple, $\{1, 2\} = \{x \mid \alert{x=1 \lor x=2}\}$
+      \end{itemize}
+    \end{itemize}
+    \myquote{Gottlob Frege}{Les lois de l'arithmétique doivent être déduites des lois de la logique}
+  }
+
+  \onBlock<2->[bottom=6mm, right=.7\textwidth]{L'infini comme objet mathématique (Cantor)}{
+    \begin{itemize}
+    \item Étude systématique des ensembles infinis
+    \item Théorème de Cantor :
+      \begin{itemize}
+      \item $\forall E, | \mathscr{P}(E) | > | E |$
+      \item En particulier, $| \mathbb{R} | > | \mathbb{N} |$
+      \item Argument de diagonalisation
+      \end{itemize}
+    \item Infini non unique : \structure{hiérarchie des infinis}
+    \end{itemize}
+  }
+  
+  \onImage[x=.37\textwidth,top]{%
+    height=28mm,
+    title={Gottlob Frege},
+    licenselogo={\ccPublicDomain},
+    license*={Domaine public (vers 1879. \href{https://commons.wikimedia.org/wiki/File:Young_frege.jpg}{Wikimedia})},
+    img={Frege.jpg}
+  }
+
+  \onImage<2->[x=-.37\textwidth,bottom=7mm]{%
+    height=28mm,
+    title={Georg Cantor},
+    licenselogo={\ccPublicDomain},
+    license*={Domaine public (vers 1900. \href{https://commons.wikimedia.org/wiki/File:Georg_Cantor2.jpg}{Wikimedia})},
+    img={Cantor.jpg}
+  }
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,87 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Exemple : le langage $\{a^n b^n \mid n\in \mathbb{N}\}$}
+
+  \on[top, x=10mm]{\small
+    $A = \left\langle \{a, b\}, \{A, \blank\}, \blank, \{0, 1, 2\}, 0, \{2\}, \left\{
+    \begin{array}{@{~\langle \langle~}c@{,~}c@{,~}c@{\rangle, \langle}c@{,~}c@{~\rangle \rangle~}}
+      0 & a           & \varepsilon &  0 & A            \\ 
+      0 & \varepsilon & \varepsilon &  1 & \varepsilon  \\        
+      1 & b           & A           &  1 & \varepsilon  \\        
+      1 & \varepsilon & \blank    &  2 & \varepsilon  \\        
+    \end{array}
+    \right\} \right\rangle$
+  }
+
+  \on[bottom=15mm]{
+    \begin{tikzpicture}[x=23mm]
+      \node[alert ob=<1>, structure on=<7>] (c1) at (0,2) {$\langle aabb,        0,   \blank   \rangle$};
+      \node                                 (c2) at (0,1) {$\langle aabb,        1,   \blank   \rangle$};
+      \node[alert ob=<2>                  ] (c3) at (1,2) {$\langle abb,         0,  A\blank   \rangle$};
+      \node                                 (c4) at (1,1) {$\langle abb,         1,  A\blank   \rangle$};
+      \node[alert ob=<3>                  ] (c5) at (2,2) {$\langle bb,          0, AA\blank   \rangle$};
+      \node[alert ob=<4>                  ] (c6) at (2,1) {$\langle bb,          1, AA\blank   \rangle$};
+      \node[alert ob=<5>                  ] (c7) at (3,1) {$\langle b,           1,  A\blank   \rangle$};
+      \node[alert ob=<6>, example on=<7>  ] (c8) at (4,1) {$\langle \varepsilon, 1,   \blank   \rangle$};
+      \node[alert on=<7>                  ] (c9) at (4,2) {$\langle \varepsilon, 2, \varepsilon\rangle$};
+ 
+      \path[alert ob=<1>] (c1) edge[leadsto] (c2);
+      \path[alert ob=<1>] (c1) edge[leadsto] (c3);
+      \path[alert ob=<2>] (c3) edge[leadsto] (c4);
+      \path[alert ob=<2>] (c3) edge[leadsto] (c5);
+      \path[alert ob=<3>] (c5) edge[leadsto] (c6);
+      \path[alert ob=<4>] (c6) edge[leadsto] (c7);
+      \path[alert ob=<5>] (c7) edge[leadsto] (c8);
+      \path[alert ob=<6>] (c8) edge[leadsto] (c9);
+    \end{tikzpicture}
+  }
+  
+  \on<7->[bottom, text]{
+    \begin{itemize}
+    \item $aabb$ est reconnu par \example{état final} car  $\structure{\langle aabb, 0, \blank \rangle} \leadsto^\star \example{\langle \varepsilon, 1, \blank \rangle}$
+    \item $aabb$ est reconnu par \alert{pile vide}  car  $\structure{\langle aabb, 0, \blank \rangle} \leadsto^\star \alert{\langle \varepsilon, 2, \varepsilon \rangle}$
+    \item $aabb$ n'est pas reconnu par \structure{état final et pile vide} 
+    \end{itemize}
+  }
+  
+  \on[y=10mm, x=-45mm]{
+    \begin{tikzpicture}[stack, size=8mm]
+      \cell[alert on=<1-6>]{\only<1-6>{$\blank$}}  \smhead[on=<{1,6}>, alert]
+      \cell[alert ob=<2-5>]{\onlyb<2-5>{$A$}}      \smhead[ob=<{2,5}>, alert]
+      \cell[alert ob=<3-4>]{\onlyb<3-4>{$A$}}      \smhead[ob=<{3,4}>, alert]
+    \end{tikzpicture}
+  }
+
+  \on[y=15mm]{
+    \begin{tikzpicture}[word, size=8mm]
+        \cell[alert on=<-1>]{$a$} \smhead[on=<1>, alert]
+        \cell[alert ob=<-2>]{$a$} \smhead[ob=<2>, alert]
+        \cell[alert ob=<-4>]{$b$} \smhead[ob=<3-4>, alert]
+        \cell[alert ob=<-5>]{$b$} \smhead[ob=<5>, alert]
+        \cell[open before, open after, open sides]{} \smheadb[ob=<6->, alert]
+    \end{tikzpicture}
+  }
+
+  \on[y=0mm]{
+    \begin{tikzpicture}[pushdown]
+      \state[alert ob=<-3>,structure on=<7>,initial ] (a) at (0,0) {$0$}; 
+      \state[alert ob=<4-6>,example on=<7>,accepting] (b) at (1,0) {$1$}; 
+      \state[alert on=<7>                           ] (c) at (2,0) {$2$}; 
+ 
+      \path[alert ob=<1-2>] (a) edge[loop above] node        {\smPAtrans{a}{\varepsilon}{A}}                     (a);
+      \path[alert ob=<3>]   (a) edge             node[above] {\smPAtrans{\varepsilon}{\varepsilon}{\varepsilon}} (b);
+      \path[alert ob=<4-5>] (b) edge[loop above] node        {\smPAtrans{b}{A}{\varepsilon}}                     (b);
+      \path[alert ob=<6>]   (b) edge             node[above] {\smPAtrans{\varepsilon}{\blank}{\varepsilon}}      (c);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

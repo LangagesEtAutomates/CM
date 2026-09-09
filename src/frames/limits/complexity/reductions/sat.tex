@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Le problème de Satisfaisabilité}
+
+  \on[text, top=-3mm]{
+    \begin{itemize}
+    \item Soit $\mathcal{V} = \{x_1, x_2, \dots\}$ un ensemble de symboles appelés \structure{variables}.
+    \item L'ensemble $\mathit{FNC}$ des \structure{formules en forme normale conjonctive} \\est défini par la grammaire :
+
+      $$
+      \left\{\begin{array}{@{~}r@{~~}c@{~~}c@{~}c@{~}c@{\quad\quad}l}
+      F & \rightarrow & (C) &\mid& (C) \land F & \text{\structure{Formule :} conjonction de clauses}\\
+      C & \rightarrow &  L  &\mid& L \lor C    & \text{\structure{Clause :} disjonction de littéraux}\\
+      L & \rightarrow & x_i &\mid& \neg x_i    & \text{\structure{Littéral :} variable ou sa négation}
+      \end{array}\right.
+      $$
+      
+    \item<2-> Une \structure{valuation} est une fonction \structure{$\nu : \mathcal{V} \rightarrow \mathbb{B}$}
+    \item<2-> Une valuation $\nu$ est étendue en \structure{$\hat{\nu} : \mathit{FNC} \rightarrow \mathbb{B}$} par les règles usuelles
+    \end{itemize}
+  }
+
+  \on<3->[text, y=-13mm]{
+    \Probleme{sat}{
+      Une formule $\varphi \in \mathit{FNC}$
+    }{
+      Existe-t-il une valuation $\nu$ telle que $\hat{\nu}(\varphi)$ est vraie ?
+    }
+  }
+  
+  \onExampleBlock[bottom=-2mm]{Exemple -- $\varphi = (x_1 \lor \neg x_2) \land (\neg x_1 \lor x_3) \land (x_2 \lor \neg x_3)$}{
+    \begin{itemize}
+    \item<2->\vspace{-1mm} $\nu_1 = [x_1 \mapsto \False, x_2 \mapsto \True, x_3 \mapsto \False]$
+      ~~ $\hat{\nu_1}(\varphi) = \False$
+    \item<2-> $\nu_2 = [x_1 \mapsto \True, x_2 \mapsto \True, x_3 \mapsto \True]$
+      ~~~ $\hat{\nu_2}(\varphi) = \True$\uncover<3->{, donc \example{$\varphi \in \textsc{pos}(\textsc{sat})$}}
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\endgroup

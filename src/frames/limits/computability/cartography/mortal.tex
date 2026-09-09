@@ -1,0 +1,56 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Problème des matrices mortelles}
+
+  \on[text, top=-4mm]{
+    \Probleme{MortalMatrix}{
+      Un ensemble fini $\{M_1, ..., M_k\}$ de matrices carrées
+      \begin{itemize}
+      \item Les coefficients sont entiers
+      \item Les matrices de même dimension $n \times n$ ($n \ge 3$)
+      \end{itemize}
+    }{
+      Existe-t-il un produit fini qui donne la matrice nulle ?
+      \begin{itemize}
+      \item on peut utiliser plusieurs fois la même matrice
+      \end{itemize}
+    }
+  }
+
+  \onBlock[y=6mm, anchor=north]{Théorème (admis)}{
+    \textsc{MortalMatrix} est indécidable.
+  }
+
+  \onExampleBlock[y=-7mm, anchor=north]{Exemples}{
+    \begin{itemize}
+    \item {\footnotesize$\left\{
+      \begin{pmatrix}
+        0 & 1 & 0 \\
+        0 & 0 & 1 \\
+        0 & 0 & 0
+      \end{pmatrix}
+      \right\}$}
+      est une instance positive
+    \item {\footnotesize$\left\{
+      \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+      \end{pmatrix}
+      \right\}$}
+      est une instance négative
+    \end{itemize}
+  }
+
+  \footnoteref{M. Paterson. \emph{Unsolvability in 3×3 matrices}. Studies in Applied Mathematics (1970)}
+  
+\end{frame}
+
+\endgroup

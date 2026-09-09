@@ -1,0 +1,86 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Formalismes décrivant les langages rationnels}
+
+  \on{
+    \begin{tikzpicture}
+      \tikzset{box/.style={structure, smBox, text width=24mm, minimum height=12mm},}
+      \node[box] (exp) at (0,5.2) {Expression rationnelle};
+      \node[box] (nfa) at (4,5.2) {Automate fini non-déterministe};
+      \node[box] (dfa) at (8,5.2) {Automate fini déterministe};
+      \node[box] (lrg) at (6,3.0) {Grammaire\\ rationnelle\\ à gauche};
+      \node[box] (rrg) at (2,3.0) {Grammaire\\ rationnelle\\ à droite};
+      \node[box] (llg) at (6,0.8) {Grammaire\\ linéaire   \\ à gauche};
+      \node[box] (rlg) at (2,0.8) {Grammaire\\ linéaire   \\ à droite};
+
+      \node[example, above, yshift=2mm] at (exp.north) {$a^+ b$};
+      \node[example, above, yshift=2mm, xshift=-3mm] at (nfa.north) {
+        \begin{tikzpicture}[automaton]
+          \state[initial]   (a) at (0,0) {$A$};
+          \state[         ] (b) at (1,0) {$B$};
+          \state[accepting] (c) at (2,0) {$C$};
+          \path (a) edge [loop above] node {$a$} (a);
+          \path (a) edge              node {$a$} (b);
+          \path (b) edge              node {$b$} (c);
+        \end{tikzpicture}
+      };
+      \node[example, above, yshift=2mm] at (dfa.north) {
+        \begin{tikzpicture}[automaton]
+          \state[initial above] (a) at (0,0) {$A$};
+          \state[            ]  (b) at (1,0) {$B$};
+          \state[accepting]     (c) at (2,0) {$C$};
+          \path (b) edge [loop above] node {$a$} (b);
+          \path (a) edge              node {$a$} (b);
+          \path (b) edge              node {$b$} (c);
+        \end{tikzpicture}
+      };
+      \node[example, left] at (rrg.west) {
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+        S & aS \mid aB\\
+        B & b\\
+        \end{array}\right.$
+      };
+      \node[example, left] at (rlg.west) {
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+        S & aS \mid ab\\
+        \end{array}\right.$
+      };
+      \node[example, right] at (lrg.east) {
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,}}
+        S & Bb\\
+        B & Ba \mid a\\
+        \end{array}\right.$
+      };
+      \node[example, right] at (llg.east) {
+        $\left\{\begin{array}{@{\,}r@{~\rightarrow~}l@{\,\mid\,}l@{\,}}
+        S & ab & Bab\\
+        B & Ba & \varepsilon\\
+        \end{array}\right.$
+      };
+      
+      \footnotesize
+      \path[-latex] (exp) edge[bend left=3mm] node[above] {Thompson} (nfa);
+      \path[-latex] (nfa) edge[bend left=3mm] node[below] {Arden} (exp);
+      \path[-latex] (nfa) edge[bend left=3mm] node[above] {\scriptsize Rabin, Scott} (dfa);
+      \path[-latex] (dfa) edge[bend left=3mm] node[below] {inclusion} (nfa);
+      \path[-latex] (lrg) edge[bend left=5mm] node[right] {inclusion} (llg);
+      \path[-latex] (llg) edge[bend left=5mm] node[left ] {direct} (lrg);
+      \path[-latex] (rrg) edge[bend left=5mm] node[right] {inclusion} (rlg);
+      \path[-latex] (rlg) edge[bend left=5mm] node[left ] {direct} (rrg);
+      
+      \path[latex-latex] (rrg) edge node[left, xshift=-1mm] {direct} (nfa);
+      \path[latex-latex] (lrg) edge node[right, xshift=1mm] {miroir} (nfa);
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

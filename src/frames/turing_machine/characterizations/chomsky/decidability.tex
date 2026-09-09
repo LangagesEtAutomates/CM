@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Décidabilité de la reconnaissance}
+
+  \vspace{-2mm}
+  \Probleme{\structure{Universal$_{\langle\mathcal{G}, \llbracket \cdot \rrbracket \rangle}$} \normalfont{(où $\mathcal{G}$ est un type de grammaires sur $\Sigma$)}  }{
+    \begin{itemize}
+    \item Une grammaire \structure{$G \in \mathcal{G}$}
+    \item Un mot \structure{$u \in \Sigma^\star$}
+    \end{itemize}
+  }{
+    Est-ce que \structure{$u \in \llbracket G \rrbracket$} ?
+  }
+
+  La difficulté du problème dépend du type de $G$ :
+ 
+  \begin{description}
+  \item[Type 3 :] Langages rationnels
+    \begin{itemize}
+    \item Le problème est \structure{décidable}
+    \item Complexité \structure{$\mathcal{O}\left(|u|\right)$} avec un AFD
+    \end{itemize}
+  \item[Type 2 :] Langages algébriques
+    \begin{itemize}
+    \item Le problème est \structure{décidable}
+    \item Complexité \structure{$\mathcal{O}\left(|u|^3\right)$} avec l'algorithme CYK
+    \end{itemize}
+  \item[Type 1 :] Langages contextuels
+    \begin{itemize}
+    \item Le problème est \structure{décidable}
+    \item Complexité \structure{$\mathcal{O}\left(e^{|u|}\right)$} par force brute
+    \end{itemize}
+  \item[Type 0 :] Langages récursivement énumérables
+    \begin{itemize}
+    \item Le problème est \structure{indécidable} mais \structure{semi-décidable}
+    \item \alert{Comment le démontrer ?}
+    \end{itemize}
+  \end{description}
+ 
+\end{frame}
+
+\endgroup

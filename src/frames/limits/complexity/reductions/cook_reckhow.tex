@@ -1,0 +1,49 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Calculabilité et Complexité}
+
+  \on[y=14mm, x=-2mm]{
+    \begin{tikzpicture}[2Darray, x=45mm, y=10mm]
+      \arrayColumn[width=18mm]{\small
+        \arrayLine[draw=none, align=right]{\structure{Structure algébrique}}
+        \arrayLine[draw=none, align=right]{\structure{Problème fondamental}}
+        \arrayLine[draw=none, align=right]{\structure{Applications à la logique}}
+        \arrayLine[draw=none, align=right]{\structure{Systèmes de preuves}}
+      }
+      
+      \arrayColumn[header=\structure{Calculabilité}]{\small
+        \arrayLine{\textsc{r}, \textsc{re},  $\leq_m$, $\equiv_m$, \textsc{re-complet}\\ Vérifier un certificat}
+        \arrayLine{\structure{\textsc{Universal}}\\est \textsc{re-complet}}
+        \arrayLine{\structure{\textsc{entscheidungsproblem}} \\ est \textsc{re-complet}}
+        \arrayLine{Absence de preuve (= certificat)\\ (Gödel)}
+      }
+      
+      \arrayColumn[header=\structure{Complexité}]{\small
+        \arrayLine{\textsc{p}, \textsc{np}, $\leq_p$, $\equiv_p$, \textsc{np-complet}\\ Vérifier un certificat \structure{polynomial} }
+        \arrayLine{\structure{\textsc{NPUniversal}} \\ est \textsc{np-complet}}
+        \arrayLine{\structure{\textsc{sat}} \\ est \textsc{np-complet}}
+        \arrayLine{\onlyb<1>{{\Large\structure{?}}}\only<2>{Absence de preuve \structure{polynomiale}\\ (Cook-Reckhow)}}
+      }
+    \end{tikzpicture}
+  }
+
+  \onBlock<2->[bottom=-2mm]{Théorème -- Cook-Reckhow (sous la conjecture $\textsc{np} \neq \textsc{co-np}$)}{
+    Il n'existe pas de système de preuve $\langle \Phi, \Pi, \valid \rangle$ à la fois : 
+    \begin{description}[Propositionnel :]
+    \item[Polynomial :] les preuves sont vérifiables en temps polynomial
+    \item[Propositionnel :] les propositions de $\Phi$ sont les formules en FNC
+    \item[Exact :] les propositions démontrables sont les tautologies
+    \item[$p$-borné :] la taille des preuves est polynomiale en celle des formules
+    \end{description}
+  }
+  
+\end{frame}
+
+\endgroup

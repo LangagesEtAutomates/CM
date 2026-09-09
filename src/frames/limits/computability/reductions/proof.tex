@@ -1,0 +1,45 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Decide}{decide}
+
+\begin{frame}{Preuve d'indécidabilité par réduction}
+  
+  \begin{block}{Théorème -- Preuve d'indécidabilité par réduction}
+    Soient $A$ et $B$ deux problèmes tels qu'il existe une \structure{réduction $f$ de $A$ vers $B$}. 
+
+    Si \alert{$A$ est indécidable}, alors \alert{$B$ est indécidable}.
+  \end{block}
+
+  \begin{block}{Démonstration}
+    \begin{itemize}
+    \item Supposons (par contradiction) que $\structure{\Decide_B}$ décide $B$.
+    \item Alors $A$ est décidé par $\structure{\Decide_A}$ :
+      \begin{algorithm}[H]
+        \Fun{$\Decide_A(x \in \mathcal{I}(A) ) \in \mathbb{B}$}{
+          \Return $\Decide_B(f(x))$;
+        }
+      \end{algorithm}
+    \item Absurde, car $A$ est indécidable. Donc $B$ est indécidable. 
+    \end{itemize}
+  \end{block}
+
+  \pause
+  
+  \begin{alertblock}{Comment démontrer qu'un problème $B$ est indécidable ?}
+    \begin{enumerate}
+    \item Identifier un problème \alert{indécidable $A$} 
+    \item Proposer une \alert{fonction algorithmique} $f : \mathcal{I}(A) \rightarrow \mathcal{I}(B)$ 
+    \item Justifier que $\forall x \in \mathcal{I}(A),\quad \alert{x\in \textsc{pos}(A) \Leftrightarrow f(x) \in  \textsc{pos}(B)}$
+    \end{enumerate}
+  \end{alertblock}
+  
+\end{frame}
+
+\endgroup

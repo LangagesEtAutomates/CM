@@ -1,0 +1,68 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Confection de l'emploi du temps}
+
+  \on[text, top=-3mm]{
+    \Probleme{$k$-coloring (pour un entier $k \ge 2$)}{
+      Un graphe $G = \langle V, E \rangle$ non-orienté
+    }{
+      Existe-t-il une coloration $c : V \rightarrow \{1, ..., k\}$ telle que :
+      \begin{itemize}
+      \item $\forall \{u, v\} \in E, c(u) \neq c(v)$ ?
+      \end{itemize}
+    }
+  }
+
+  \onBlock[y=1mm]{Théorème (admis)}{
+    \begin{itemize}
+     \item \textsc{$k$-coloring} est \textsc{np-}complet pour $k\ge 3$.
+     \item \textsc{$2$-coloring} est polynomial.
+    \end{itemize}
+  }
+  
+  \onExampleBlock[bottom=3mm]{Exemple -- Emploi du temps}{
+    \begin{description}[Sommets :]
+    \item[Sommets :]  un ensemble de cours
+    \item[Arêtes :]   relation de conflit
+      \begin{itemize}
+      \item même enseignant, groupe, salle, ... 
+      \end{itemize}
+    \item[Couleurs :] horaires dans la semaine
+    \end{description}
+  }
+
+  \on[x=35mm, y=-13mm]{
+    \begin{tikzpicture}
+      \node[circle, draw=structure, fill=structure!20] (11) at (090:07mm) {}; 
+      \node[circle, draw=example, fill=example!20]     (12) at (162:07mm) {}; 
+      \node[circle, draw=example, fill=example!20]     (13) at (234:07mm) {}; 
+      \node[circle, draw=alert, fill=alert!20]         (14) at (306:07mm) {}; 
+      \node[circle, draw=alert, fill=alert!20]         (15) at (018:07mm) {}; 
+      \node[circle, draw=alert, fill=alert!20]         (21) at (090:15mm) {}; 
+      \node[circle, draw=structure, fill=structure!20] (22) at (162:15mm) {}; 
+      \node[circle, draw=alert, fill=alert!20]         (23) at (234:15mm) {}; 
+      \node[circle, draw=example, fill=example!20]     (24) at (306:15mm) {}; 
+      \node[circle, draw=structure, fill=structure!20] (25) at (018:15mm) {}; 
+
+      \draw (11) -- (13) -- (15) -- (12) -- (14) -- (11);
+      \draw (21) -- (22) -- (23) -- (24) -- (25) -- (21);
+      \draw (11) -- (21);
+      \draw (12) -- (22);
+      \draw (13) -- (23);
+      \draw (14) -- (24);
+      \draw (15) -- (25);
+    \end{tikzpicture}
+  }
+
+  \footnoteref{Even, Itai, Shamir. \emph{On the Complexity of Timetable and Multicommodity Flow Problems}. SICOMP (1976)}
+
+\end{frame}
+
+\endgroup

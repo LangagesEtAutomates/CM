@@ -1,0 +1,170 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{IsPow}{isPow2}
+\SetKwFunction{AlgoSearchPerfect}{search\_perfect}
+
+\begin{frame}{Généralisation de la preuve d'indécidabilité}
+
+  \onBlock[top=-5mm]{Définition -- Réduction par mappage}{
+    Soient $A$ et $B$ deux problèmes de décision.
+    
+    Une \structure{réduction de $A$ vers $B$} est une fonction
+    \alert{$f : \mathcal{I}(A) \rightarrow \mathcal{I}(B)$} telle que
+    \begin{itemize}
+    \item $f$ est \alert{calculable} ;
+    \item $\forall u \in \mathcal{I}(A),\quad \alert{u\in \textsc{pos}(A) \Leftrightarrow f(u)\in \textsc{pos}(B)}$.
+    \end{itemize}
+  }
+
+  \obExampleBlock<1>[anchor=north, y=12mm]{Exemple -- De \textsc{Universal} vers \textsc{Entscheidungsproblem}}{
+
+    \vspace{2mm}
+    
+    $$
+    f: \left\{\begin{array}{rcl}
+    \mathcal{I}(\textsc{Universal}) & \rightarrow & \mathcal{I}(\textsc{Entscheidungsproblem})\\
+    \langle P, u \rangle & \mapsto & ``u\in \llbracket P \rrbracket"
+    \end{array}\right.
+    $$
+
+    \vspace{3mm}
+
+    \begin{itemize}
+    \item $f$ est calculable :
+      \begin{itemize}
+      \item simple encodage syntaxique
+      \end{itemize}
+    \item $f$ préserve la positivité :
+      \begin{itemize}
+      \item par définition de \textsc{Universal}
+      \end{itemize}
+    \end{itemize}
+  }
+  
+  \onBlock<2->[anchor=north, y=12mm]{Intuition -- $B$ est au moins aussi difficile que $A$}{}
+  
+  \on<2->[y=-16mm]{
+    \begin{tikzpicture}
+      \begin{scope}
+        \clip (0,0) ellipse (2cm and 1cm);
+
+        \begin{scope}
+          \clip (-2,0) rectangle (2,1);
+          \fill[structure!20] (-2,0) rectangle (2,1);
+          \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(1cm)=(structure!20)}
+          \shade[shading=alertToStructure] (2,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        \begin{scope}
+          \clip (-2,0) rectangle (2,-1);
+          \fill[example!20] (-2,0) rectangle (2,-1);
+          \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(1cm)=(example!20)}
+          \shade[shading=alertToExample] (2,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        
+        \draw[black!40,thick] (0,0) ellipse (2cm and 1cm);
+        \draw[black!40] (-2,0) -- (2,0);
+        \scriptsize
+        \node[align=center, structure] at (0, .8) {$\textsc{pos}(A)$};
+        \node[align=center, example]   at (0,-.8) {$\textsc{neg}(A)$};
+      \end{scope}
+      
+      \begin{scope}
+        \clip (5,0) ellipse (2cm and 1cm);
+        \begin{scope}
+          \clip (3,0) rectangle (7,1);
+          \fill[structure!20] (3,0) rectangle (7,1);
+          \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(structure!20);color(1cm)=(structure!20)}
+          \shade[shading=alertToStructure] (7,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        \begin{scope}
+          \clip (3,0) rectangle (7,-1);
+          \fill[example!20] (3,0) rectangle (7,-1);
+          \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!20);color(6mm)=(alert!20);color(9mm)=(example!20);color(1cm)=(example!20)}
+          \shade[shading=alertToExample] (7,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        \draw[black!40,thick] (5,0) ellipse (2cm and 1cm);
+        \draw[black!40] (3,0) -- (7,0);
+        \scriptsize
+        \node[align=center, structure] at (4, .6) {$\textsc{pos}(B)$};
+        \node[align=center, example]   at (4,-.6) {$\textsc{neg}(B)$};
+      \end{scope}
+
+      \begin{scope}
+        \clip (4.5,0) ellipse (1cm and .5cm);
+        \begin{scope}
+          \clip (3,0) rectangle (7,1);
+          \fill[structure!40] (3,0) rectangle (7,1);
+          \pgfdeclareradialshading{alertToStructure}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!40);color(6mm)=(alert!40);color(9mm)=(structure!40);color(1cm)=(structure!40)}
+          \shade[shading=alertToStructure] (7,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        \begin{scope}
+          \clip (3,0) rectangle (7,-1);
+          \fill[example!40] (3,0) rectangle (7,-1);
+          \pgfdeclareradialshading{alertToExample}{\pgfpoint{0cm}{0cm}}{color(0cm)=(alert!40);color(6mm)=(alert!40);color(9mm)=(example!40);color(1cm)=(example!40)}
+          \shade[shading=alertToExample] (7,0) ellipse (2.5cm and .75cm);
+        \end{scope}
+        \draw[black!40,thick] (4.5,0) ellipse (1cm and .5cm);;
+        \draw[black!40] (3,0) -- (7,0);
+        \scriptsize
+        \node[align=center, structure] at (4.5, .2) {$f(\textsc{pos}(A))$};
+        \node[align=center, example]   at (4.5,-.2) {$f(\textsc{neg}(A))$};
+      \end{scope}
+
+      \footnotesize
+      \node[inner sep=0pt, alert]     (Ah1) at (1.85,0)    {$\bullet$};
+      \node[inner sep=0pt, structure] (Ap1) at (-1.5, .5)  {$\bullet$};
+      \node[inner sep=0pt, example]   (An1) at (-1.5,-.5)  {$\bullet$};
+      \node[inner sep=0pt, structure] (Ap2) at (1.1, .7)   {$\bullet$};
+      \node[inner sep=0pt, example]   (An2) at (1.1,-.7)   {$\bullet$};
+      
+      \node[inner sep=0pt, alert]     (Bh1) at (5.4,0)     {$\bullet$};
+      \node[inner sep=0pt, structure] (Bp1) at (3.75, .25) {$\bullet$};
+      \node[inner sep=0pt, example]   (Bn1) at (3.75,-.25) {$\bullet$};
+      \node[inner sep=0pt, structure] (Bp2) at (5, .35)    {$\bullet$};
+      \node[inner sep=0pt, example]   (Bn2) at (5,-.35)    {$\bullet$};
+
+      \node[inner sep=0pt, alert]     (Bh3) at (5.6,0)     {$\bullet$};
+      \node[inner sep=0pt, structure] (Bp3) at (5.15, .5)  {$\bullet$};
+      \node[inner sep=0pt, example]   (Bn3) at (5.15,-.5)  {$\bullet$};
+      
+      \tiny
+      \path[-latex, alert]     (Ah1.center) edge             (Bh1) ; 
+      \path[-latex, structure] (Ap1.center) edge[bend left]  (Bp1) ; 
+      \path[-latex, example]   (An1.center) edge[bend right] (Bn1) ; 
+      \path[-latex, structure] (Ap2.center) edge[bend left]  (Bp2) ; 
+      \path[-latex, example]   (An2.center) edge[bend right] (Bn2) ; 
+      
+      \node[alert, below left]      at (1.85,0)           {$\langle \AlgoSearchPerfect, 3 \rangle$};
+      \node[structure, below right] at (-1.5, .5)         {$\langle \IsPow, 8 \rangle$};
+      \node[example, above right]   at (-1.5,-.5)         {$\langle \IsPow,12 \rangle$};
+      \node[structure, below left]  at (1.1, .7)          {$\langle \AlgoSearchPerfect, 2 \rangle$};
+      \node[example, above left]    at (1.1,-.7)          {$\langle \IsPow, 0 \rangle$};
+      \node[below right, alert]     at ([xshift=-1mm]Bh3) {$\exists n$ parfait impair};
+      \node[above, structure]       at ([xshift=2mm]Bp3)  {$1+2+3=6$};
+      \node[below, example]         at (Bn3)              {$\exists k, 0 = 2^k$};
+
+      \normalsize
+      \node at (0,1.5)    {$A = \textsc{Universal}$};
+      \node at (5,1.5)    {$B = \textsc{Entscheidungsproblem}$};
+      \node at (2.5,-1.5) {$f: \langle P, u \rangle \mapsto ``u\in \llbracket P \rrbracket" $};
+
+    \end{tikzpicture}
+  }
+
+  \on<2->[text, bottom=-2mm]{
+    \begin{itemize}
+    \item Toute instance difficile de $A$ reste difficile après réduction dans $B$
+    \item $B$ contient des instances au moins aussi difficiles que $A$ 
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\endgroup

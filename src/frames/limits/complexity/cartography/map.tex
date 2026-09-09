@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Quelques problèmes NP-complets}
+
+  \on[y=-4.5mm]{
+    \begin{tikzpicture}[x=30mm, y=16mm]
+      \begin{scope}[align=center, font=\small, -latex]
+        \node (universal)   at ( 0.00, -1.00) {\textsc{NPUniversal}};
+        \node (sat)         at ( 0.00,  0.00) {\textsc{sat}};                                    \path (universal) edge (sat);
+        \node (3sat)        at ( 1.00,  0.00) {3\textsc{-sat}};                                  \path (sat)       edge (3sat);
+        \node (stable)      at ( 2.00,  0.00) {Ensemble\\stable};                                \path (3sat)      edge (stable);
+        \node (coloring)    at ( 2.00, -1.00) {3\textsc{-coloring}};                             \path (stable)    edge (coloring);
+        \node (sudoku)      at ( 2.00, -2.00) {\textsc{Generalized}\\\textsc{Sudoku}};           \path (coloring)  edge (sudoku);
+        \node (grammar)     at ( 1.00, -1.00) {\textsc{Smallest}\\\textsc{Grammar}};             \path (3sat)      edge (grammar);
+        \node (hamilton1)   at ( 1.00,  1.00) {Circuit\\hamiltonien};                            \path (sat)       edge (hamilton1);
+        \node (hamilton2)   at ( 2.00,  1.00) {Cycle\\hamiltonien};                              \path (hamilton1) edge (hamilton2);
+        \node (tsp)         at ( 2.00,  2.00) {Voyageur de\\commerce};                           \path (hamilton2) edge (tsp);
+        \node (pcp)         at (-0.20, -1.80) {\textsc{pcp}\\borné};                             \path (universal) edge (pcp);
+        \node (dfa)         at (-1.00, -2.00) {Intersection bornée\\de grammaires\\algébriques}; \path (pcp)       edge (dfa);
+        \node (radis)       at (-0.00,  1.00) {\textsc{Radix}\\(partition)};                     \path (sat)       edge (radis);
+        \node (subsetsum)   at (-0.00,  2.00) {\textsc{SubsetSum}};                              \path (radis)     edge (subsetsum);
+        \node (scheduling)  at ( 1.00,  2.00) {\textsc{RT-Scheduling}};                          \path (radis)     edge (scheduling);
+        \node (knapsack)    at (-0.80,  1.20) {\textsc{Knapsack}};                               \path (radis)     edge (knapsack);
+        \node (binpacking)  at (-1.00,  2.00) {\textsc{BinPacking}};                             \path (knapsack)  edge (binpacking);
+        \node (mine)        at ( 1.00, -2.00) {\textsc{Minesweeper}\\\textsc{Consistency}};      \path (sat)       edge (mine);
+        \node (superstring) at (-0.70, -1.00) {\textsc{Shortest}\\\textsc{Superstring}};         \path (sat)       edge (superstring);
+        \node (bdkey)       at (-1.00,  0.00) {\textsc{MinimalKey}};                             \path (sat)       edge (bdkey);
+      \end{scope}
+
+      \begin{scope}[background, text=structure, inner sep=3mm]
+        \clip (-1.8,-2.5) rectangle (2.8,2.5);
+        \draw[structure!50, fill=white]                      (-2,-3) rectangle (3,3);
+        \draw[structure!50, fill=white]                      (-2,0.5) rectangle (3,3);
+        \draw[structure!50, fill=white, rounded corners=7mm] (0.5,0.5) -- (1.5,0.5) -- (1.5,-4) -- (3,-4) -- (3,4) -- (1.5,4)  -- (1.5,1.5) -- (0.5,1.5) -- (0.5,0.5);
+        \draw[structure!50, fill=white]                      (-2,-3)     rectangle (1.5,-.5);
+        \draw[structure!50, fill=white, rounded corners=7mm] (0.5,-4)    rectangle (3.5,-1.5);
+        \draw[structure!50, fill=white]                      (-2,-.5)    rectangle (-.5,.5);
+       
+        \node[right,  align=left] at (-1.65,-.8)   {Langages \\formels};
+        \node[right,  align=left] at (-1.65,-.35)  {Bases de données};
+        \node[right,  align=left] at (-1.65,.65)   {Optimisation};
+        \node[left,  align=right] at ( 2.65,-1.35) {Graphes};
+        \node[left,  align=right] at ( 2.65,-1.65) {Jeux};
+        \node                     at (0.5,-0.35)   {Logique};
+      \end{scope}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

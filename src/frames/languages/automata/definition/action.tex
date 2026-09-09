@@ -1,0 +1,76 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Actions d'un AFN}
+
+  \on[text,top=-2mm]{Soit $A=\langle \Sigma, Q, q_0, F, \rightarrow \rangle$ un AFN.}
+
+  \onBlock[top]{Définition -- Action (ou \structure{calcul}, ou \structure{déplacement})}{
+    Les \structure{actions}  de $A$ composent une relation binaire \alert{$\leadsto_A$} sur les configurations.\\
+    On a \alert{$\langle u, q\rangle \leadsto_A \langle v, q'\rangle$} ssi il existe \alert{$a \in \Sigma\cup\{\varepsilon\}$} tel que
+    \begin{enumerate}
+    \item \alert{$u=a v$} et
+    \item \alert{$q \xrightarrow{a} q'$}.
+    \end{enumerate}
+    On note \alert{$\leadsto_A^\star$} \structure{la fermeture transitive et réflexive de $\leadsto_A$}.
+    
+    \vspace{1mm}On notera \alert{$C \leadsto C'$} et \alert{$C \leadsto^\star C'$} si $A$ est clair d'après le contexte.
+  }
+
+  \onExampleBlock[bottom]{Exemple : $\langle bbc, 3\rangle \leadsto^\star \langle \varepsilon, 2\rangle$}{
+    \begin{tikzpicture}
+      \node[example on=<1>] (c1) at (0,1) {$\langle bbc,         3\rangle$};
+      \node                 (c2) at (1,2) {$\langle bc,          3\rangle$};
+      \node[example ob=<2>] (c3) at (1,0) {$\langle bc,          4\rangle$};
+      \node                 (c4) at (3,2) {$\langle c,           3\rangle$};
+      \node[example ob=<3>] (c5) at (2,1) {$\langle c,           4\rangle$};
+      \node[example ob=<4>] (c6) at (3,0) {$\langle c,           2\rangle$};
+      \node[example ob=<5>] (c7) at (5,0) {$\langle \varepsilon, 2\rangle$};
+ 
+      \path[              ] (c1) edge[leadsto] (c2);
+      \path[example on=<1>] (c1) edge[leadsto] (c3);
+      \path[              ] (c2) edge[leadsto] (c4);
+      \path[              ] (c2) edge[leadsto] (c5);
+      \path[example ob=<2>] (c3) edge[leadsto] (c5);
+      \path[example ob=<3>] (c5) edge[leadsto] (c6);
+      \path[example ob=<3>] (c6) edge[leadsto] (c7);
+    \end{tikzpicture}
+  }
+ 
+  \on[y=-22.5mm, x=10mm]{
+    \begin{tikzpicture}[word, size=7mm]
+      \cell[open]{}
+      \cell[example on=<1> ]{b} \smhead[on=<1>,   example]
+      \cell[example on=<-2>]{b} \smhead[ob=<2>,   example]
+      \cell[example on=<-4>]{c} \smhead[ob=<3-4>, example]
+      \cell[open]{}             \smhead[ob=<5>,   example]
+    \end{tikzpicture}
+  }
+ 
+  \on[bottom, x=.4\textwidth]{
+    \begin{tikzpicture}[automaton]
+      \state                                  (1) at (0,1) {$1$}; 
+      \state[example ob=<4->, accepting     ] (2) at (1,1) {$2$}; 
+      \state[example on=<1>,  initial above ] (3) at (0,0) {$3$}; 
+      \state[example ob=<2-3>               ] (4) at (1,0) {$4$};
+ 
+      \path                 (1) edge             node       {$a$}           (2);
+      \path                 (1) edge[loop above] node       {$a$}           (1);
+      \path[example on=<1>] (3) edge             node[swap] {$b$}           (4);
+      \path                 (3) edge[loop left ] node       {$b$}           (3);
+      \path[example ob=<2>] (4) edge[loop right] node       {$b$}           (4);
+      \path[example ob=<4>] (2) edge[loop above] node       {$c$}           (2);
+      \path[example ob=<3>] (4) edge             node[swap] {$\varepsilon$} (2);
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

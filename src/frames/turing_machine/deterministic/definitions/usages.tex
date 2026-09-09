@@ -1,0 +1,91 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\SetKwFunction{Ecrire}{ecrire}
+\SetKwFunction{Decider}{decider}
+\SetKwFunction{SDecider}{semidec}
+\SetKwFunction{Enumerer}{enumerer}
+\SetKwFunction{Calculer}{calculer}
+
+\begin{frame}{Que faire avec une MTD ?}
+
+  \on[text, top=-2mm]{
+    Une MTD $M=\langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ permet de :
+  }
+  
+  \onBlock[top=1mm, left=.48\textwidth]{Décider un langage $L$}{
+    \begin{description}[Entrée :]
+    \item[Entrée :] $u\in \Sigma^\star$ %\hspace\fill $c_0 = C_{\mathit{init}}(u)$ 
+    \item[Sortie :]
+      $\left\{\begin{array}{ll}
+      \cmark{} & \text{si } u\in L \\
+      \xmark{} & \text{si } u\notin L
+    \end{array}\right.$
+    \end{description}
+
+    \vspace{2mm}
+    \begin{algorithm}[H]\small
+      \Algo{$\Decider_L(u\in \Sigma^\star) \in \mathbb{B}$}{
+        \Return $u \in L$\;
+      }
+    \end{algorithm}
+  }
+  
+  \onBlock[top=1mm, right=.48\textwidth]{Semi-décider un langage $L$}{
+    \begin{description}[Entrée :]
+    \item[Entrée :] $u\in \Sigma^\star$ 
+    \item[Sortie :]
+      $\left\{\begin{array}{ll}
+      \cmark{} & \text{si } u\in L \\
+      \xmark{} \text{ ou } \alert{\infty} & \text{si } u\notin L
+    \end{array}\right.$
+    \end{description}
+
+    \vspace{2mm}
+    \begin{algorithm}[H]\small
+      \Algo{$\SDecider_L(u\in \Sigma^\star)  \in \mathbb{B}$}{
+        \lIf{$u \in L$}{\Return \True}
+        \lWhile{\True}{}
+      }
+    \end{algorithm}
+  }
+  
+  \onBlock[y=-5mm, left=.48\textwidth, anchor=north]{Énumérer un langage $L$}{
+    \begin{description}[Entrée :]
+    \item[Entrée :] le mot vide $\varepsilon$ 
+    \item[Sortie :] la liste des mots de $L$
+    \end{description}
+
+    \vspace{2mm}
+    \begin{algorithm}[H]\small
+      \Algo{$\Enumerer_L()$}{
+        \For{$u \in L$}{
+          $\Ecrire (u)$\;
+        }
+      }
+    \end{algorithm}
+  }
+  
+  \onBlock[y=-5mm, right=.48\textwidth, anchor=north]{Calculer une fonction $f$}{
+    \begin{description}[Entrée :]
+    \item[Entrée :]\vspace{1mm} $x \in \Sigma^\star$ 
+    \item[Sortie :] $f(x) \in \Sigma^\star$ sur le ruban
+    \end{description}
+    
+    \vspace{2mm}
+    \begin{algorithm}[H]\small
+      \Algo{$\Calculer_f(x\in \Sigma^\star) \in \Sigma^\star$}{
+        \Return $f(x)$\;
+      }
+    \end{algorithm}
+  }
+
+\end{frame}
+
+\endgroup

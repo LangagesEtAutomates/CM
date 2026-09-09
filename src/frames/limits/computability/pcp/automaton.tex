@@ -1,0 +1,42 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Exercice}
+
+  \vspace{-3mm}
+  \begin{block}{Décrire les solutions minimales\footnote{C'est-à-dire non préfixe d'une autre solution} de l'instance du PCPI suivante}
+    \begin{itemize}
+    \item\vspace{1mm} Ensemble de sortes de dominos :
+      {\Large
+        $$D = \left\{\begin{array}{c}
+        \VDomino[2.00cm]{\langle\phantom{0, abab \rangle \leadsto\langle}}{\langle 0, abab \rangle \leadsto\langle},
+        \VDomino[2.00cm]{\rangle \leadsto \langle 0, \rangle}{\phantom{\rangle \leadsto \langle 0, }\rangle}, \vspace{1mm} \\
+        \VDomino[0.75cm]{0,a}{1,\phantom{a}},
+        \VDomino[0.75cm]{0,b}{2,\phantom{b}},
+        \VDomino[0.75cm]{1,b}{0,\phantom{b}},
+        \VDomino[0.75cm]{1,b}{2,\phantom{b}},
+        \VDomino[0.75cm]{2,a}{0,\phantom{a}},
+        \VDomino[0.75cm]{2,a}{1,\phantom{a}}, \vspace{1mm}\\
+        \VDomino[0.75cm]{a}{a},
+        \VDomino[0.75cm]{b}{b},
+        \VDomino[0.75cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}
+        \end{array}\right\}$$
+      }
+    \item\vspace{3mm} Domino initial :
+      {\Large
+        $$d_0 = \VDomino[2.00cm]{\langle\phantom{0, abab \rangle \leadsto\langle}}{\langle 0, abab \rangle \leadsto\langle}$$
+      }
+      \vspace{1mm}
+    \end{itemize}
+    sur l'alphabet $\Sigma \eqdef \{a,b,0,1,2,\leadsto, \langle, \rangle, \text{`$,$'}\}$.
+  \end{block}
+  
+\end{frame}
+
+\endgroup

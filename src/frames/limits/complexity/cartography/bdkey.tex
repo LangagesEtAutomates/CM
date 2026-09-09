@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Normalisation d'une base de données}
+
+  \on[width=1.05\textwidth, top=-4mm]{
+    \Probleme{MinimalKey}{
+      \begin{itemize}
+      \item Un schéma relationnel $R(A_1, \ldots, A_m)$
+      \item Un ensemble de dépendances fonctionnelles $DF$
+      \item Un entier $k$
+      \end{itemize}
+    }{
+      Existe-t-il une clé de taille au plus $k$ ? 
+      \begin{itemize}
+      \item Ensemble minimal d'attributs $C \subseteq R$ tel que $C^+ = R$
+      \end{itemize}
+    }
+  }
+  
+  \onBlock[y=7.5mm, anchor=north]{Théorème (admis)}{
+    \textsc{MinimalKey} est \textsc{np}-complet.
+  }
+
+  \onExampleBlock[bottom=2mm]{Exemple}{
+    \begin{itemize}
+    \item\vspace{-1mm} Ce schéma a-t-il une clé de taille $\le$ 2 ? ~\uncover<2>{\cmark une seule clé : \example{$\{A\}$} }
+      \begin{itemize}
+      \item $R(A,B,C,D)$
+      \item $\{A \rightarrow B,\quad B \rightarrow C,\quad C \rightarrow D \}$
+      \end{itemize}
+    \item Ce schéma a-t-il une clé de taille $\le$ 2 ? ~\uncover<2>{\xmark une seule clé : \alert{$\{A, B, C, D\}$} }
+      \begin{itemize}
+      \item $R(A, B, C, D, E, F, G, H, I, J)$
+      \item $\{(A,B,D) \rightarrow E,\quad (A,B) \rightarrow G, \quad B\rightarrow F, \quad C\rightarrow J,\quad (C,J)\rightarrow I, \quad G\rightarrow H \}$
+      \end{itemize}
+    \end{itemize}    
+  }
+  
+  \footnoteref{Garey, Johnson. \emph{Computers and Intractability: A Guide to the Theory of NP-Completeness}. Freeman (1979)}
+  
+\end{frame}
+
+\endgroup

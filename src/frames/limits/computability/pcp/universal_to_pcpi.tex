@@ -1,0 +1,72 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Démonstration de l'indécidabilité de PCPI}\label{limits/computability/pcp/universal_to_pcpi}
+
+  \vspace{-3mm}
+  \begin{block}{Théorème -- Indécidabilité de \textsc{pcpi}}
+    Le problème de correspondance de Post initialisé (\textsc{pcpi}) est indécidable
+  \end{block}
+
+  \begin{block}{Démonstration -- Réduction du problème universel}
+
+    \vspace{-2mm}
+    \begin{itemize}
+    \item On a la réduction $\varphi$ suivante de $\textsc{Universal}$ vers $\textsc{pcpi}$
+    \end{itemize}
+
+    \vspace{-3mm}
+    $$\begin{array}{@{}r@{~~}r@{~~}l@{}}
+      \varphi &:& \left\{\begin{array}{rcl}
+      \mathcal{I}(\textsc{Universal}) &\rightarrow& \mathcal{I}(\textsc{pcpi}) \vspace{.5mm}\\
+      \left\langle \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle
+      \footnote[frame]{Sans perte de généralité, on suppose que la machine efface son ruban avant d'accepter}, u\right\rangle
+      &\mapsto&
+      \left\langle D,\VDomino[1.5cm]{\langle\phantom{, q_0, u \rangle \leadsto\langle}}{\langle, q_0, u \rangle \leadsto\langle} \right\rangle
+      \end{array}
+      \right. \text{, avec}
+      %
+      \vspace{3mm}\\
+      %
+      D&=&
+      \left\{\,
+      \VDomino[1.5]{\langle\phantom{, q_0, u \rangle \leadsto\langle}}{\langle, q_0, u \rangle \leadsto\langle}
+      \,\right\}
+      \cup
+      \left\{\,
+      \VDomino[.5]{x}{x} ~\middle|~ x\in \Gamma
+      \,\right\}
+      %
+      \vspace{1mm}\\&\cup &
+      %
+      \left\{\,
+      \VDomino[1.2]{\phantom{y},q, x}{y ,r,\phantom{x}} ~\middle|~ q\xrightarrow{\scriptsize\smTMtransR{x}{y}} r
+      \,\right\}
+      \cup
+      \left\{\,
+      \VDomino[1.2]{z ,q, \phantom{z}\,x}{\phantom{z},r, z\, y} ~\middle|~ q\xrightarrow{\scriptsize\smTMtransL{x}{y}} r \land z\in \Gamma
+      \,\right\}
+      %
+      \vspace{1mm}\\&\cup &
+      %
+      \left\{\,
+      \VDomino[1.7]{w\,\rangle\leadsto\langle x, f, y\rangle}{\phantom{y\,\rangle\leadsto\langle \blank, 4,\,}z\,\rangle},
+      \VDomino[1.7]{w\,\rangle\leadsto\langle\,x}{y\,\rangle\leadsto\langle\,z} ~\middle|~ w, x, y, z \in \{\blank, \varepsilon\} \land f\in F
+      \,\right\}
+    \end{array}$$
+
+    \vspace{-2mm}
+    \begin{itemize}
+    \item Or \textsc{Universal} est indécidable, donc \textsc{pcpi} est indécidable
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

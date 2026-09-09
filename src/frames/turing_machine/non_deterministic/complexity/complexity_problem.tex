@@ -1,0 +1,43 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Complexité non-déterministe d'un problème}
+
+  \begin{block}{Classes de complexité \alert{non-déterministe} d'un problème}
+    Soit $f$ une suite de $\mathbb{N}$ dans $\mathbb{R}^+$. 
+    On définit les \structure{classes de complexité} : 
+    \begin{description}[$\textsc{co-nspace}(f)$ :]
+    \item[$\textsc{\alert{n}time}(f)$ :] langages reconnaissables en temps $\mathcal{O}(f)$ \structure{par une MT\alert{N}D} :
+      
+      \vspace{-2mm}
+      $$\structure{\textsc{\alert{n}time}(f) \eqdef \left\{L \in \textsc{lang} \mid \exists M, L = \mathcal{L}(M) \land \alert{N}T_M \in \mathcal{O}(f) \right\}}$$
+    \item[$\textsc{\alert{n}space}(f)$ :] langages reconnaissables en espace $\mathcal{O}(f)$ \structure{par une MT\alert{N}D} :
+
+      \vspace{-2mm}
+      $$\structure{\textsc{\alert{n}space}(f) \eqdef \left\{L \in \textsc{lang} \mid \exists M, L = \mathcal{L}(M) \land \alert{N}S_M \in \mathcal{O}(f) \right\}}$$
+    \end{description}
+
+    On s'intéresse aussi à la complexité de reconnaissance du complémentaire :
+    \begin{description}[$\textsc{co-nspace}(f)$ :]
+    \item[$\textsc{\alert{co}-\alert{n}time}(f)$ :] langages dont le complémentaire est dans $\textsc{\alert{n}time}(f)$
+      
+      \vspace{-2mm}
+      $$\structure{\textsc{\alert{co}-\alert{n}time}(f) \eqdef \left\{L \in \textsc{lang} \mid \overline{L} \in \textsc{\alert{n}time}(f)\right\}}$$
+
+    \item[$\textsc{\alert{co}-\alert{n}space}(f)$ :] langages dont le complémentaire est dans $\textsc{\alert{n}space}(f)$
+      
+      \vspace{-2mm}
+      $$\structure{\textsc{\alert{co}-\alert{n}space}(f) \eqdef \left\{L \in \textsc{lang} \mid \overline{L} \in \textsc{\alert{n}space}(f)\right\}}$$
+    \end{description}
+  \end{block}
+
+\end{frame}
+
+\endgroup
+\endinput

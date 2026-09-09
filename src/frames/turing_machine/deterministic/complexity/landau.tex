@@ -1,0 +1,99 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Comparaisons asymptotiques de fonctions}
+
+  \onBlock[top=-4mm]{Notations de Landau}{
+    Soient $f$ et $g$ deux suites de $\mathbb{N}$ dans $\mathbb{R}^+$. On dit que :
+    \begin{itemize}
+    \item $f$ est \structure{dominé} par $g$, noté \alert{$f \in \mathcal{O}(g)$}, si \alert{$\exists n_0, c \in \mathbb{R}^+, \forall n > n_0, f(n) \le c \times g(n)$}
+    \item<2-> $f$ est \structure{minorée} par $g$, noté \alert{$f \in \Omega(g)$}, si \alert{$g \in \mathcal{O}(f)$}
+    \item<2-> $f$ est \structure{du même ordre de grandeur} que $g$, noté \alert{$f \!\in\! \Theta(g)$}, si \alert{$f \!\in\! \mathcal{O}(g) \!\cap\! \Omega(g)$}
+    \end{itemize}
+    \begin{center}
+      \alert{$\mathcal{O}\left(1\right)
+        \subsetneq \mathcal{O}\left(\log(n)\right)
+        \subsetneq \mathcal{O}\left(n\right)
+        \subsetneq \mathcal{O}\left(n\log(n)\right)
+        \subsetneq \mathcal{O}\left(n^2\right)
+        \subsetneq \mathcal{O}\left(n^3\right)
+        \subsetneq \mathcal{O}\left(2^n\right)
+        \subsetneq \mathcal{O}\left(n!\right)$}
+    \end{center}
+  }
+
+  \onExampleBlock[y=-2mm]{Exemple : $f(n) \eqdef n\left(n + 2\sqrt{n} + 5\sin(3n)\right)$}{}
+
+  \on[bottom, x=-15mm]{
+    \begin{tikzpicture}[x=3.5mm, y=3.2mm]
+      
+      \footnotesize
+      \draw[->]             (0,0) -- (20,0) node[right]{$n$};
+      \draw[->]             (0,0) -- (0,8.5);
+
+      \draw[domain=0:20, samples=100, smooth, alert    ] plot (\x,{0.01*2*\x*\x}) node[right]{$2 n^2$};
+      \draw[domain=0:20, samples=100, smooth, example  ] plot (\x,{0.01*\x*(\x + 2*sqrt(\x) + 5*sin(1.5/3.14*\x*180))}) node[right]{$f(n)$};
+      \draw[domain=0:20, samples=100, smooth, structure] plot (\x,{0.01*\x*\x}) node[right]{$n^2$};
+
+      \uncover<2->{
+      \draw[domain=0:16, samples=100, smooth, black!50 ] plot (\x,{0.01*.2*\x*\x*\x}) node[right]{$\frac{n^3}{5}$};
+      \draw[domain=0:20, samples=100, smooth, black!50 ] plot (\x,{0.01*10*\x}) node[right]{$10n$};
+      }
+      
+      \draw[example!50] (11,0) -- (11,8.5) node[below right]{$\begin{array}{@{}l@{\,}l@{\,}l@{}}n_0 &=& 11\\c&=&2\end{array}$};
+      
+      \foreach \x in {0,1,...,16}{
+        \fill<2->[black!50]  (\x, 0.01*.2*\x*\x*\x)                                     circle[radius=1pt];
+      }
+      \foreach \x in {0,1,...,20}{
+        \fill<2->[black!50]  (\x, 0.01*10*\x)                                           circle[radius=1pt];
+        \draw[densely dotted, black!40] (\x,0) -- (\x,8.5);
+        \node[below, black!40] at (\x,0) {\tiny\x};
+        \fill[alert]     (\x, 0.01*2*\x*\x)                                         circle[radius=1pt];
+        \fill[example]   (\x, {0.01*\x*(\x + 2*sqrt(\x) + 5*sin(1.5/3.14*\x*180))}) circle[radius=1pt];
+        \fill[structure] (\x, 0.01*\x*\x)                                           circle[radius=1pt];
+      }
+    \end{tikzpicture}
+  }
+
+  \on<2->[text, y=-20mm, x=3mm]{
+    \begin{itemize}
+    \item $f(n) \in \mathcal{O}\left(n^3\right)$
+    \item $f(n) \in \Theta\left(n^2\right)$
+    \item $f(n) \in \Omega\left(n\right)$
+    \end{itemize}
+  }
+
+  \on<2->[bottom, x=40mm]{
+    \begin{tikzpicture}[y=4mm]
+      \draw[latex-latex] (0,0) -- (0,6);
+      \draw              (-.1,4) -- (.1,4);
+      \draw              (-.1,3) -- (.1,3);
+      \draw              (-.1,2) -- (.1,2);
+      \node[above, align=center] at (0,6) {Borne supérieure};
+      \node[example, left]  at (0,3) {$g$};
+      \node[below, align=center] at (0,0) {Borne inférieure};
+
+      \draw[alert,     fill=alert!25]     (.4, 2)  rectangle (.5, 6);
+      \draw[example,   fill=example!25]   (.6, 2)  rectangle (.7, 4);
+      \draw[structure, fill=structure!25] (.2, 0)  rectangle (.3, 4);
+      \draw[alert,     fill=alert!25]     (-.2, 4) rectangle (-.3, 6);
+      \draw[structure, fill=structure!25] (-.2, 0) rectangle (-.3, 2);
+
+      \node[alert, left]      at (-.3,5) {$\omega(g)$};
+      \node[alert, right]     at ( .7,5) {$\Omega(g)$};
+      \node[example, right]   at ( .7,3) {$\Theta(g)$};
+      \node[structure, right] at ( .7,1) {$\mathcal{O}(g)$};
+      \node[structure, left]  at (-.3,1) {$o(g)$};
+    \end{tikzpicture}
+  }
+  
+\end{frame}
+
+\endgroup

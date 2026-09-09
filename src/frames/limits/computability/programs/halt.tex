@@ -1,0 +1,81 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{SemiDecide}{semi-decide}
+
+\begin{frame}{Problème de l'arrêt}
+
+  \on[text, top=-2mm]{
+    Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif.
+
+    \Probleme{$\textsc{Halt}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$}{
+      \begin{itemize}
+      \item un \structure{programme} $P \in \mathcal{L}$
+      \item un \structure{mot} $u$
+      \end{itemize}
+    }{
+      Est-ce que l'exécution de $P$ sur $u$ termine ? 
+    }
+  }
+  
+  \onBlock{Théorème -- $\textsc{Halt}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$ est indécidable}{
+    On veut le montrer par réduction depuis $\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$. 
+  }
+
+  \ob<1>[text, y=-25mm]{
+    \myquote{Martin Davis, Computability and Unsolvability, 1958}{
+      Le problème de décision pour la propriété\\ \og \structure{s'arrêter} \fg \\ est récursivement insoluble.
+    }
+  }
+  
+  \ob[text, y=-25mm]<2>{
+    On cherche une fonction $f$ calculable telle que :
+    \begin{description}
+    \item[Entrée :] $\langle P\phantom{'}, u\phantom{'} \rangle   \in \mathcal{I}\left(\textsc{Universal}\right)$
+    \item[Sortie :] $\langle P', u' \rangle \in \mathcal{I}\left(\textsc{Halt}\right)$
+    \item[Préservation :] $\langle P', u' \rangle \in \textsc{pos}\left(\textsc{Halt}\right)
+    \Leftrightarrow \langle P, u \rangle \in \textsc{pos}\left(\textsc{Universal}\right)$
+    \end{description}
+
+    \vspace{3mm}
+    Comment construire $\langle P', u' \rangle$ en fonction de $\langle P, u \rangle$ ?
+  }
+  
+  \on[text, y=-24mm]<3>{
+    On pose 
+    $
+    f : \left\{\begin{array}{rcl}
+    \mathcal{I}\left(\textsc{Universal}\right) & \rightarrow & \mathcal{I}\left(\textsc{Halt}\right)\\
+    \langle P, u \rangle &\mapsto& \langle P', u \rangle
+    \end{array}\right.
+    $
+
+    \vspace{2mm}
+    \begin{algorithm}[H]
+      \Fun{$P'(u) : \mathbb{B}$}{
+        \If{$\lnot P(u)$\footnote{Techniquement, $\SemiDecide_{\textsc{Universal}}(P,u)$.}}{
+          \lWhile{$\True$}{;}
+        }
+        \Return $\True$\;
+      }
+    \end{algorithm}
+  }
+
+  \on[right=.65\textwidth, y=-28mm]<3>{
+    \begin{itemize}
+    \item Si $P(u) = \True$, alors $P'(u) = \True$
+    \item Si $P(u) = \False$, alors $P'(u)$ boucle
+    \item Si $P(u)$ boucle, alors $P'(u)$ boucle
+    \item $f$ est calculable (transformation syntaxique)
+    \end{itemize}
+  }
+
+\end{frame}
+
+\endgroup

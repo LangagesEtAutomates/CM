@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Decide}{decide}
+\SetKwFunction{Enumerate}{enumerate}
+
+\begin{frame}{Théorème d'incomplétude (version algorithmique)}
+
+  \structure{{\large Théorème.}}
+  Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif.
+  
+    Il n'existe pas de système de preuve $\langle \Phi, \Pi, \valid \rangle$ à la fois : 
+    \begin{description}[Turing expressif :]
+    \item[Formel :] la vérification des preuves est mécanisable
+      \begin{itemize}
+      \item $\textsc{Entscheidungsproblem} \in \textsc{re}$
+        \footnote{Ou, de manière équivalente, $\textsc{Vérification des preuves} \in \textsc{r}$}
+      \end{itemize}
+    \item[Turing expressif :] possibilité d'exprimer des questions sur les algorithmes
+      \begin{itemize}
+      \item $\forall \langle P, u \rangle \in \mathcal{I}(\textsc{Universal}), ``u \in \llbracket P \rrbracket" \in \Phi$
+      \end{itemize}
+    \item[Correct :] toute proposition démontrable est vraie
+      \begin{itemize}
+      \item $\exists \pi,~ \pi \valid ``\phantom{\lnot(} u \in \llbracket P \rrbracket\phantom{)}" \quad\Rightarrow\quad u \in \llbracket P \rrbracket$
+      \item $\exists \pi,~ \pi \valid ``         \lnot(  u \in \llbracket P \rrbracket         ) " \quad\Rightarrow\quad u \notin \llbracket P \rrbracket$
+      \end{itemize}
+    \item[Complet :] toute proposition peut être démontrée ou invalidée
+      \begin{itemize}
+      \item $(\exists \pi, \pi \valid ``u \in \llbracket P \rrbracket") \quad \lor\quad (\exists \pi, \pi \valid ``\lnot(u \in \llbracket P \rrbracket)")$
+      \end{itemize}
+    \end{description}
+
+    \pause
+    \vspace{3mm}
+    \structure{{\large Démonstration.}} Sinon (par l'absurde), on pourrait décider \structure{$\textsc{Universal}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$} :
+    \begin{algorithm}[H]
+      \Fun{$\Decide_{\textsc{Universal}}(P \in \mathcal{L}, u \in \Omega^\star) \in \mathbb{B}$}{
+        \For{$\varphi \in \textsc{Entscheidungsproblem}.\Enumerate$}{
+          \lIf{$\varphi = ``u \in \llbracket P \rrbracket"$}{
+            \Return \True;
+          }
+          \lElseIf{$\varphi = ``\lnot (u \in \llbracket P \rrbracket)"$}{
+            \Return \False;
+          }
+        }
+      }
+    \end{algorithm}
+    
+\end{frame}
+
+\endgroup

@@ -1,0 +1,117 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\SetKwFunction{Deterministe}{semi\_decide}
+\SetKwFunction{Enfile}{enfile}
+\SetKwFunction{Defile}{defile}
+
+\begin{frame}{Déterminisation d'une machine de Turing}
+  
+  \onBlock[top=-5mm]{Théorème -- Équivalence entre MTND et MTD}{
+    Un langage est reconnaissable ssi il est semi-décidable.
+  }
+
+  \onBlock[anchor=north, y=27mm]{Démonstration}{
+    Le sens MTD $\Rightarrow$ MTND est trivial par inclusion.
+
+    Soit $M = \langle \Sigma, \Gamma, \blank, Q, q_0, F, \rightarrow \rangle$ une MTND.\\
+    On construit une MTD $M_D$ qui semi-décide $\mathcal{L}(M)$.
+  }
+
+  \ob<2>[text, anchor=north, y=5mm]{    
+    \begin{itemize}
+    \item On considère l'arbre d'exécutions pour un mot $u$
+      \begin{itemize}
+      \item La racine est la configuration initiale $C_{\mathit{init}}(u)$
+      \item Les fils de $c$ sont les $c'$ tels que $c\leadsto_M c'$
+        \begin{itemize}
+        \item Le nombre de fils de $c$ est borné par $|\rightarrow|$
+        \end{itemize}
+      \end{itemize}
+    \item\vspace{2mm} $M_D$  cherche une configuration acceptante
+      \begin{itemize}
+      \item Une exploration en profondeur ne fonctionne pas :
+        \begin{itemize}
+        \item certaines branches peuvent être infinies
+        \end{itemize}
+      \item $M_D$ exécute une exploration en largeur
+        \begin{itemize}
+        \item Nécessite une file (FIFO) de configurations
+        \end{itemize}
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \onExampleBlock<2->[top=-4mm, right=10mm]{Exemple}{}
+  
+  \on<2->[x=40mm,y=20mm] {
+    \begin{tikzpicture}[turingMachine, draw=example, text=example, x=15mm]
+      \state[accepting]     (2) at (0,0) {$2$}; 
+      \state[initial above] (0) at (1,0) {$0$}; 
+      \state                (1) at (2,0) {$1$}; 
+
+      \path (0) edge[bend left=5mm] node       {$\smTMtransR{a}{a}$} (1);
+      \path (1) edge[bend left=5mm] node       {$\smTMtransL{a}{a}$} (0);
+      \path (0) edge                node[swap] {$\smTMtransR{a}{a}$} (2);
+    \end{tikzpicture}
+  }
+  
+  \on<2->[x=42mm,y=-10mm] {
+    \begin{tikzpicture}[tree, x=17mm, y=10mm, draw=example, text=example]\small
+      \tree[edges=leadsto, xshift=-.5]{\Structureb<4>{\Exampleb<5-6>{$\langle \varepsilon, 0, aa \rangle$}}}{
+        \tree{\Structureb<6>{\Exampleb<7-8>{$\langle a, 1, a \rangle$}}}{
+          \tree[xshift=-.5]{\Structureb<8->{$\langle \varepsilon, 0, aa \rangle$}}{
+            \tree{$\langle a, 1, a \rangle$}{\tree{...}{}}
+            \tree{\Example<2>{$\langle a, 2, a \rangle$}}{}
+          }
+        }           
+        \tree[xshift=-1]{\Alertb<10>{\Structureb<6-8>{\Example<2,9>{$\langle a, 2, a \rangle$}}}}{}
+      }
+    \end{tikzpicture}
+  }
+
+  \on<3->[anchor=north, y=2mm]{
+    \begin{algorithm}[H]\small
+      \Fun{$\Deterministe(u \in \Sigma^\star) \in \mathbb{B}$}{
+        \Variables{}{
+          $c$ : configuration;\\ 
+          $f$ : file de configurations;
+        }
+        \Structureb<4>{$f \leftarrow \left[C_{\mathit{init}}(u)\right]$;}\\
+        \While{$f \neq [~]$} {
+          \Exampleb<5,7,9>{$c \leftarrow f.\Defile()$;}\\
+          \lIf{\Alertb<10>{$c \in C_M^+$}}{\Return \True;}
+          \ForEach{$c'$ \St $c \leadsto_M c'$}{
+            \Structureb<6,8>{$f.\Enfile\left(c'\right)$;}
+          }
+        }
+        \Return \False;
+      }
+    \end{algorithm}
+  }
+
+  \ob<4->[bottom=5mm, width=30mm, x=40mm, anchor=mid]{
+    $c=\only<5-6>{\langle \varepsilon, 0, aa \rangle}\onlyb<7-8>{\langle a, 1, a \rangle}\onlyb<9->{\langle a, 2, a \rangle}$
+  }
+ 
+  \on<3->[bottom=1mm, x=12mm]{
+    \begin{tikzpicture}[x=15mm, y=6mm, grid south]
+      \cell[open before]{\dots}  \smsave{first}
+      \cell[]{\only<4>{$\langle \varepsilon, 0, aa \rangle$}} 
+      \cell[]{\only<6>{$\langle a, 1, a \rangle$}} 
+      \cell[]{\only<6-8>{$\langle a, 2, a \rangle$}} 
+      \cell[]{\only<8->{$\langle \varepsilon, 0, aa \rangle$}}
+      \cell[]{}
+      \cell[open after]{\dots}
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup

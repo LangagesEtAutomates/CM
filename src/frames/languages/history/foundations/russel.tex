@@ -1,0 +1,50 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Le paradoxe de Russell}
+
+  \onBlock[top=-2mm]{Conséquence : un tel barbier n'existe pas}{
+    On généralise à n'importe quelle \structure{relation homogène} $\bowtie$ :
+    $$\structure{\nexists y, \forall x, x \bowtie y \Leftrightarrow \lnot (x \bowtie x)}$$
+    
+    Dans le paradoxe du barbier, on a :
+    \begin{itemize}
+    \item $y$ est le barbier
+    \item $\bowtie$ est la relation ``est rasé par''
+    \end{itemize}
+  }  
+
+  \onAlertBlock<2->[bottom=3mm]{L'argument de Russell}{
+    \begin{itemize}
+    \item Application à l'appartenance ensembliste $\in$ :
+      \begin{itemize}
+      \item $\nexists y = \{ x \mid x \notin x \}, \quad \forall x, x \in y \Leftrightarrow x \notin x$
+      \end{itemize}
+    \item Définition des ensembles par compréhension :
+      \begin{itemize}
+      \item $\exists y = \{ x \mid x \notin x \}, \quad \forall x, x \in y \Leftrightarrow x \notin x$
+      \end{itemize}
+    \end{itemize}
+    \begin{center}
+      \alert{La théorie naïve des ensembles est \emph{incohérente}}
+    \end{center}
+  }  
+
+  \onImage<2->[x=.35\textwidth, bottom=10mm]{%
+    height=4cm,
+    title={Bertrand Russell},
+    licenselogo={\ccPublicDomain},
+    license={Domaine public (Bassano Ltd, 1936. \href{https://commons.wikimedia.org/wiki/File:Bertrand_Russell_photo.jpg?uselang=fr}{Wikimedia})},
+    img={Russell.jpg}
+  }
+  
+\end{frame}
+
+\endgroup
+\endinput

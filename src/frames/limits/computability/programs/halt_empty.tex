@@ -1,0 +1,58 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Problème de l'arrêt sur chaîne vide}
+
+  \on[text, top=-3mm]{
+    Soit $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif.
+
+    \Probleme{$\textsc{Halt-}\varepsilon_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$}{
+      \begin{itemize}
+      \item un \structure{programme} $P \in \mathcal{L}$
+      \end{itemize}
+    }{
+      Est-ce que l'exécution de $P$ sur $\varepsilon$ termine ? 
+    }
+  }
+  
+  \onBlock[y=5mm]{Théorème -- $\textsc{Halt-}\varepsilon_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$ est indécidable}{
+    On le montre par réduction depuis $\textsc{Halt}_{\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle}$. 
+  }
+  \on[text, y=-23mm]<2>{
+    On pose 
+    $
+    f : \left\{\begin{array}{@{~}r@{~~}c@{~~}l@{~}}
+    \mathcal{I}\left(\textsc{Halt}\right) & \rightarrow & \mathcal{I}\left(\textsc{Halt-}\varepsilon\right)\\
+    \langle P, u \rangle &\mapsto& P', \text{ où : }~ \begin{algorithm}[H]
+      \Structure{\lFun{$P'(x) : \mathbb{B}$}{
+        \Return $P(u)$;
+      }}
+    \end{algorithm}
+    \end{array}\right.
+    $
+
+    \vspace{1mm}
+    \begin{itemize}
+    \item $f$ est calculable
+      \begin{itemize}
+      \item \structure{Remarque.} $f : (('a \rightarrow \texttt{bool}) \times {'a}) \rightarrow {'b} \rightarrow \texttt{bool}$ est curryfiée
+      \end{itemize}
+    \item $P'$ termine sur $\varepsilon$ si, et seulement si, $P$ termine sur $u$
+      \begin{itemize}
+      \item Donc $\langle P,u \rangle \in \textsc{pos}(\textsc{Halt}) \Leftrightarrow f(\langle P,u \rangle) \in \textsc{pos}(\textsc{Halt-}\varepsilon)$
+      \end{itemize}
+    \item $f$ est une réduction de $\textsc{Halt}$ vers $\textsc{Halt-}\varepsilon$, et $\textsc{Halt}$ est indécidable
+      \begin{itemize}
+      \item Donc $\textsc{Halt-}\varepsilon$ est indécidable
+      \end{itemize}
+    \end{itemize}
+  }
+\end{frame}
+
+\endgroup

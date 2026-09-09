@@ -1,0 +1,63 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Graphe de dérivation}
+
+  \on[top=-2mm, text]{
+    Soit \alert{$G = \langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire non-restreinte.
+  }
+  
+  \onBlock[y=24mm]{Graphe de dérivation}{
+    \begin{itemize}
+    \item En général, une dérivation ne peut plus être représentée par un arbre.
+    \item Dans ce cas, on représente parfois une génération par un graphe.
+    \end{itemize}
+  }
+  
+  \onExampleBlock[y=0mm]{Exemple : génération de $\{a^n b^n c^n \mid n>0\}$}{
+    $\left\{\begin{array}{rcl}
+    S  & \rightarrow & \structure<2>{aSBC} \mid \example<2>{aBC}  \\
+    CB & \rightarrow & \alert<3>{BC}   \\
+    aB & \rightarrow & \alert<4>{ab}   \\
+    bB & \rightarrow & \structure<4>{bb}   \\
+    C  & \rightarrow & \example<4>{c}
+    \end{array}\right.$
+  }
+  
+  \on[bottom=0mm, x=20mm]{
+    \begin{tikzpicture}
+      \node (40) at (2,4.0) {$S$};
+      \uncover<2->{
+        \node (30) at (2,3.0) {\structure<2>{$S$}}; \path[-latex, structure ob=<2>] (40) edge (30);
+        \node (20) at (0,2.0) {\structure<2>{$a$}}; \path[-latex, structure ob=<2>] (40) edge (20);
+        \node (21) at (1,2.0) {\example<2>  {$a$}}; \path[-latex, example ob=<2>  ] (30) edge (21);
+        \node (22) at (2,2.0) {\example<2>  {$B$}}; \path[-latex, example ob=<2>  ] (30) edge (22);
+        \node (23) at (3,2.0) {\example<2>  {$C$}}; \path[-latex, example ob=<2>  ] (30) edge (23);
+        \node (24) at (4,2.0) {\structure<2>{$B$}}; \path[-latex, structure ob=<2>] (40) edge (24);
+        \node (25) at (5,2.0) {\structure<2>{$C$}}; \path[-latex, structure ob=<2>] (40) edge (25);
+      }
+      \uncover<3->{
+        \node (12) at (3,1.0) {\alert<3>{$B$}};     \path[-latex, alert ob=<3>    ] (23) edge (12); \path[-latex, alert ob=<3>    ] (24) edge (12);
+        \node (13) at (4,1.0) {\alert<3>{$C$}};     \path[-latex, alert ob=<3>    ] (23) edge (13); \path[-latex, alert ob=<3>    ] (24) edge (13);
+      }                                              
+      \uncover<4->{                                  
+        \node (10) at (1,1.0) {\alert<4>    {$a$}}; \path[-latex, alert ob=<4>    ] (21) edge (10); \path[-latex, alert ob=<4>    ] (22) edge (10);
+        \node (11) at (2,1.0) {\alert<4>    {$b$}}; \path[-latex, alert ob=<4>    ] (21) edge (11); \path[-latex, alert ob=<4>    ] (22) edge (11);
+        \node (00) at (2,0.0) {\structure<4>{$b$}}; \path[-latex, structure ob=<4>] (11) edge (00); \path[-latex, structure ob=<4>] (12) edge (00);
+        \node (01) at (3,0.0) {\structure<4>{$b$}}; \path[-latex, structure ob=<4>] (11) edge (01); \path[-latex, structure ob=<4>] (12) edge (01);
+        \node (02) at (4,0.0) {\example<4>  {$c$}}; \path[-latex, example ob=<4>  ] (13) edge (02);
+        \node (14) at (5,1.0) {\example<4>  {$c$}}; \path[-latex, example ob=<4>  ] (25) edge (14);
+      }
+    \end{tikzpicture}
+  }
+
+\end{frame}
+
+\endgroup
+\endinput

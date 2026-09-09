@@ -1,0 +1,47 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Un automate à ruban}
+
+  \on[text,top]{
+    \begin{itemize}
+    \item Une \structure{machine de Turing} est un \alert{automate} à \alert{ruban}.
+      \begin{itemize}
+      \item en : ``\structure{\textit{Infinite tape}}'' = fr : \og \structure{\textit{ruban infini}} \fg
+      \item en : ``\structure{\textit{Magnetic tape}}'' = fr : \og \structure{\textit{bande magnétique}} \fg
+      \end{itemize}
+    \end{itemize}
+  }
+
+  \onImage[y=4mm]{%
+    height=2.2cm,
+    title={Cassette VHS},
+    license={{}\ccbysa{} \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0} -- Toby Hudson 2012 -- \href{https://commons.wikimedia.org/wiki/File:VHS_cassette_tape_12.JPG}{Wikimedia}},
+    img={vhs.jpg}
+  }
+  
+  \on[text,bottom=3mm]{
+    \begin{itemize}
+    \item Exécution du \structure{contrôleur} :
+      \begin{itemize}
+      \item Un \structure{automate fini} décide des opérations sur la mémoire
+      \item L'exécution dure aussi longtemps qu'il y a des actions possibles
+      \end{itemize}
+    \item Opérations sur le \structure{ruban} :
+      \begin{itemize}
+      \item \alert{Lire/écrire} à la position de la tête de lecture/écriture
+      \item \alert{Déplacer} la tête de lecture/écriture vers la gauche ou vers la droite
+      \item Pour simplifier : une lecture, une écriture, et un déplacement par étape
+      \end{itemize}
+    \end{itemize}
+  }
+  
+\end{frame}
+
+\endgroup

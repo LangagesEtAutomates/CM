@@ -1,0 +1,201 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Généralisation aux machines de Turing}
+  
+  \onExampleBlock[left=.5\textwidth,top=-5mm] {Exemple -- $\{a^{n+1} b^n \mid n\in \mathbb{N}\}$}{\footnotesize
+    \begin{tikzpicture}[turingMachine, size=12mm]
+      \state[alert ob=<{1,5}>,   initial  ] (0) at (0,1.2) {0}; 
+      \state[alert ob=<{2,6,11-13,15,16}> ] (1) at (1.5,1.2) {1}; 
+      \state[alert ob=<{3,7}>             ] (2) at (1.5,0.0) {2}; 
+      \state[alert ob=<{4,14}>            ] (3) at (0,0.0) {3}; 
+      \state[alert ob=<8>,       accepting] (4) at (3,0.0) {4}; 
+      
+      \path                   (0) edge             node       {\smTMtransR{a}{\blank}}                       (1);
+      \path[alert ob=<15-16>] (1) edge             node       {\smTMtransL{\blank}{\blank}}                  (2);
+      \path                   (2) edge             node       {\smTMtransL{b}{\blank}}                       (3);
+      \path                   (3) edge             node       {\smTMtransR{\blank}{\blank}}                  (0);
+      \path                   (2) edge             node[swap] {\smTMtransR{\blank}{\blank}}                  (4);
+      \path[alert ob=<11-13>] (1) edge[loop right] node       {\smAlign{\smTMtransR{a}{a}\smTMtransR{b}{b}}} (1);
+      \path[alert ob=<14>   ] (3) edge[loop left]  node       {\smAlign{\smTMtransL{a}{a}\smTMtransL{b}{b}}} (3);
+    \end{tikzpicture}
+  }
+  
+  \on[x=-.25\textwidth,y=-2mm] {\footnotesize
+    \begin{tikzpicture}[tape, x=6mm, y=6mm]
+      \cell{}
+      \cell{\onlyb<14>{$a$}}
+      \cell{\only<1,9->{$a$}}                         \smhead<1,9,10,17-> \smheadfromb<4>{1}
+      \cell{\only<-5,9-14,17>{$a$}\onlyb<15-16>{$b$}} \smheadb<5,7>       \smheadfromb<14-16>{1}
+      \cell{\only<-3,9-14,17>{$b$}}                   \smheadb<3,6,8>     \smheadfromb<11-13>{-1}
+      \cell{\onlyb<11-14>{$b$}}                                           \smheadfromb<2>{-2}
+      \cell{}
+    \end{tikzpicture}
+  }
+  
+  \onBlock<9->[right=.45\textwidth,top=-5mm] {Dominos nécessaires}{\footnotesize
+    $
+    \begin{array}{rl}
+      D=&
+      \uncover<10->{
+        \left\{\VDomino[1.50cm]{\langle\phantom{, 0, aab \rangle \leadsto\langle}}{\langle, 0, aab \rangle \leadsto\langle}\right\} 
+        \hspace{3mm}d_0=\VDomino[1.50cm]{\langle\phantom{, 0, aab \rangle \leadsto\langle}}{\langle, 0, aab \rangle \leadsto\langle} \vspace{1mm}\\
+      }
+      \uncover<10->{\cup &
+        \left\{\VDomino[1.50cm]{\uncover<16->{w}\,\rangle\leadsto\langle \uncover<16->{x}, 4, \uncover<16->{y}\rangle}
+                       {\phantom{y\,\rangle\leadsto\langle \blank, 4,\,}\uncover<16->{z}\,\rangle}
+                       \only<16->{\,\middle|\, w, x, y, z \in \{\blank, \varepsilon\}} \right\} \vspace{.5mm}\\
+      }
+      \uncover<10->{\cup &
+        \left\{\VDomino[1]{\uncover<16->{w}\,\rangle\leadsto\langle\,\uncover<16->{x}}
+                       {\uncover<16->{y}\,\rangle\leadsto\langle\,\uncover<16->{z}} \only<16->{\,\middle|\, w, x, y, z \in \{\blank, \varepsilon\}} \right\} \vspace{1mm}\\
+      }
+      \uncover<12->{\cup &
+        \left\{\VDomino[1]{x}{x} \,\middle|\, x\in \Gamma \right\} \\
+      }
+      \uncover<13->{\cup &
+        \left\{\VDomino[1]{\phantom{y},q, x}{y ,r,\phantom{x}} \,\middle|\, q\xrightarrow{\smTMtransR{x}{y}} r \in \rightarrow \right\}\\
+      }
+      \uncover<14->{\cup &
+        \left\{\VDomino[1]{z ,q, \phantom{z}\,x}{\phantom{z},r, z\, y} \,\middle|\, q\xrightarrow{\smTMtransL{x}{y}} r \in \rightarrow \land z\in \Gamma \right\}\\
+      }
+    \end{array}
+    $
+  }
+
+  \obBlock<1-8>[y=-1cm,anchor=north] {Exécution pour le mot $aab$}{
+    $$
+    \begin{array}{@{}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{\,}c@{}}
+      \uncover<1-> {\langle \varepsilon, 0, aab \rangle}                                              
+      &\uncover<2->{\leadsto}& \uncover<2->{\langle \varepsilon, 1, ab \rangle}              
+      &\uncover<2->{\leadsto}& \uncover<2->{\langle a, 1, b \rangle}                         
+      &\uncover<2->{\leadsto}& \uncover<2->{\langle ab, 1, \varepsilon \rangle}             \\
+      &\uncover<3->{\leadsto}& \uncover<3->{\langle a, 2, b \rangle}                         
+      &\uncover<4->{\leadsto}& \uncover<4->{\langle \varepsilon, 3, a \rangle}                                                                    
+      &\uncover<4->{\leadsto}& \uncover<4->{\langle \varepsilon, 3, \blank a \rangle}       \\ 
+      &\uncover<5->{\leadsto}& \uncover<5->{\langle \varepsilon, 0, a \rangle}               
+      &\uncover<6->{\leadsto}& \uncover<6->{\langle \varepsilon, 1, \varepsilon \rangle}     
+      &\uncover<7->{\leadsto}& \uncover<7->{\langle \varepsilon, 2, \varepsilon \rangle}    \\ 
+      &\uncover<8->{\leadsto}& \uncover<8->{\langle \varepsilon, 4, \varepsilon \rangle}     
+    \end{array}
+    $$
+  }
+  
+  \obAlertBlock<9>[y=-1cm,anchor=north] {Objectif}{\centering
+    Concevoir une instance du PCPI dont les solutions encodent l'exécution de la machine de Turing sur le mot $aab$.
+  }
+  
+  \obBlock<10>[y=-1cm,anchor=north] {Encoder l'exécution
+    $\langle C_0 \rangle \leadsto \langle C_1 \rangle \leadsto \langle C_2 \rangle \leadsto \ldots  \leadsto \langle C_n \rangle \leadsto \langle C_f \rangle$}{
+    $$
+    \VDomino        [1.00cm]{\langle\phantom{C_0 \rangle \leadsto\langle}}{\langle C_0 \rangle \leadsto\langle}          \, 
+    \VDominoContextC[1.00cm]{C_0}{C_1}                                         \, 
+    \VDomino        [0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}   \, 
+    \VDominoContextC[1.00cm]{C_1}{C_2}                                         \, 
+    \VDomino        [0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}   \, 
+    \VDominoContextC[1.00cm]{C_2\rangle\leadsto\ldots}{\ldots\leadsto\langle C_n}                                   \, 
+    \VDomino        [0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}   \, 
+    \VDominoContextC[1.00cm]{C_n}{C_f}                                         \, 
+    \VDomino        [1.00cm]{\rangle\leadsto\langle C_f \rangle}{\phantom{\rangle\leadsto\langle C_f}\rangle}      \, 
+    $$
+  }
+  
+  \obBlock<11-13>[y=-1cm,anchor=north] {Encoder l'action $\langle a, 1, abb \rangle \leadsto \langle aa, 1, bb \rangle$}{
+    $$
+    \VDominoContextL[1.7cm]{\ldots}{\ldots \langle a, 1, abb }         \, 
+    \VDomino[0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle} \,
+    \uncover<12->{
+      \VDomino[0.40cm]{a}{a}                                         \,
+    }
+    \uncover<13>{
+      \VDomino[1.00cm]{\phantom{a},1,a}{a,1,\phantom{a}}             \, 
+    }
+    \uncover<12->{
+      \VDomino[0.40cm]{b}{b}                                         \, 
+      \VDomino[0.40cm]{b}{b}                                         \,
+    }
+    \VDomino[0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle} \, 
+    \VDominoContextR[1.7cm]{ aa, 1, bb \rangle \ldots}{\ldots}
+    $$
+  }
+  
+  \obBlock<14>[y=-1cm,anchor=north] {Encoder l'action $\langle aaa, 3, bb \rangle \leadsto \langle aa, 3, abb \rangle$}{
+    $$
+    \VDominoContextL[1.70cm]{\ldots}{\ldots \langle aaa, 3, bb }          \, 
+    \VDomino        [0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}   \, 
+    \VDomino      [0.40cm]{a}{a}                                           \, 
+    \VDomino      [0.40cm]{a}{a}                                           \, 
+    \VDomino      [1.00cm]{a,3,\phantom{a}b}{\phantom{a},3,ab}             \, 
+    \VDomino      [0.40cm]{b}{b}                                           \,
+    \VDomino        [0.70cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}   \, 
+    \VDominoContextR[1.70cm]{ aa, 3, abb \rangle \ldots}{\ldots}
+    $$
+  }
+  
+  \obBlock<15,16>[y=-1cm,anchor=north] {Gérer les bords du ruban : $\langle ab, 1, \varepsilon \rangle \leadsto \langle a, 2, b \rangle$}{
+    $$
+    \VDominoContextL[1.30cm]{\ldots}{\ldots \langle ab, 1,     }          \, 
+    \VDomino        [1.20cm]{\phantom{\blank}\rangle\leadsto\langle\phantom{\blank}}{\uncover<16>{\alert{\blank}}\rangle\leadsto\langle\phantom{\blank}}   \, 
+    \VDomino        [0.30cm]{a}{a}                                           \, 
+    \VDomino        [1.30cm]{b, 1, \phantom{b}\alert{\blank}}{\phantom{b},2,b\alert{\blank}} \, 
+    \VDomino        [1.20cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}   \,
+    \VDominoContextC[1.00cm]{,2,b}{\ldots} \,
+    \VDomino        [1.20cm]{\uncover<16>{\alert{\blank}}\rangle\leadsto\langle\phantom{\blank}}{\phantom{\blank}\rangle\leadsto\langle\phantom{\blank}}   \,
+    \VDominoContextR[1.30cm]{ \ldots~\ldots}{\ldots}
+    $$
+  }
+
+  \onBlock<17>[y=-1cm,anchor=north] {Solution au PCPI}{\footnotesize
+    $$
+    \VDomino[1.50cm]{\langle\phantom{, 0, aab \rangle \leadsto\langle}}{\langle, 0, aab \rangle \leadsto\langle}\, 
+    %                                                                                                            
+    \VDomino[0.80cm]{\phantom{\blank},0,a}{\blank,1,\phantom{\blank}}                                           \, 
+    \VDomino[0.30cm]{a}{a}                                                                                      \, 
+    \VDomino[0.30cm]{b}{b}                                                                                      \, 
+    \VDomino[0.80cm]{\rangle\leadsto\langle\blank}{\rangle\leadsto\langle\phantom{\blank}}                      \, 
+    %                                                                                                            
+    \VDomino[0.80cm]{\phantom{a},1,a}{a,1,\phantom{a}}                                                          \, 
+    \VDomino[0.30cm]{b}{b}                                                                                      \, 
+    \VDomino[0.80cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}                                            \, 
+    %                                                                                                            
+    \VDomino[0.30cm]{a}{a}                                                                                      \, 
+    \VDomino[0.80cm]{\phantom{b},1,b}{b,1,\phantom{b}}                                                          \, 
+    \VDomino[0.80cm]{\phantom{\blank}\rangle\leadsto\langle}{\blank\rangle\leadsto\langle}                      \, 
+    %                                                                                                            
+    \VDomino[0.30cm]{a}{a}                                                                                      \, 
+    \VDomino[0.80cm]{b,1,\phantom{b}\blank}{\phantom{b},2,b\blank}                                              \, 
+    \VDomino[0.80cm]{\rangle\leadsto\langle\phantom{\blank}}{\rangle\leadsto\langle\blank}                      \, 
+    \VDomino[0.80cm]{a,2,b\phantom{\blank}}{\phantom{a},3,a\blank }                                             \, 
+    $$
+    $$
+    %
+    \VDomino[0.80cm]{\blank\rangle\leadsto\langle}{\phantom{\blank}\rangle\leadsto\langle}                      \, 
+    %                                                                                                           \, 
+    \VDomino[0.80cm]{\blank,3,\phantom{\blank}a}{\phantom{\blank},3,\blank a}                                   \, 
+    \VDomino[0.80cm]{\blank\rangle\leadsto\langle}{\phantom{\blank}\rangle\leadsto\langle}                      \, 
+    %                                                                                                           \, 
+    \VDomino[0.80cm]{\phantom{\blank},3,\blank}{\blank,0,\phantom{\blank}}                                      \, 
+    \VDomino[0.30cm]{a}{a}                                                                                      \, 
+    \VDomino[0.80cm]{\rangle\leadsto\langle\blank}{\rangle\leadsto\langle\phantom{\blank}}                      \, 
+    %                                                                                                           \, 
+    \VDomino[0.80cm]{\phantom{\blank},0,a}{\blank,1,\phantom{a}}                                                \, 
+    \VDomino[0.80cm]{\phantom{\blank}\rangle\leadsto\langle}{\blank\rangle\leadsto\langle}                      \, 
+    %                                                                                                           \, 
+    \VDomino[0.80cm]{\blank,1,\phantom{\blank}\blank}{\phantom{\blank},2,\blank\blank}                          \, 
+    \VDomino[0.80cm]{\rangle\leadsto\langle}{\rangle\leadsto\langle}                                            \, 
+    %                                                                                                           \, 
+    \VDomino[0.80cm]{\phantom{\blank},2,\blank}{\blank,4,\phantom{\blank}}                                      \, 
+    \VDomino[1.50cm]{\blank\rangle\leadsto\langle \blank,4, \rangle}{\phantom{\blank\rangle\leadsto\langle \blank,4,}\rangle}
+    %
+    $$
+  }
+  
+\end{frame}
+
+\endgroup

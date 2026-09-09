@@ -1,0 +1,112 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Structure des problèmes indécidables}
+  
+  \onBlock[bottom=5mm]{Quelques résultats\footnotemark[2]}{
+    \structure{Théorème de Kleene et Post (1954)}
+    \begin{itemize}
+      \item Les degrés de calculabilité forment un semi-treillis supérieur
+    \end{itemize}
+    \structure{Théorème de Friedberg et Muchnik (1956)}
+    \begin{itemize}
+      \item Il existe des degrés incomparables dans \textsc{re}
+    \end{itemize}
+    \structure{Théorème de densité de Sacks (1966)}
+    \begin{itemize}
+      \item La hiérarchie des degrés de \textsc{re} est infinie et dense
+    \end{itemize}
+  }
+
+  \on[y=17mm]{
+    \begin{tikzpicture}
+
+      \coordinate (X) at (4,2);
+      \coordinate (Y) at (8,2);
+      \begin{scope}
+        \clip (-1,1) rectangle (0.05,3);
+        \node[circle, draw=alert,   fill=alert!20,     outer sep=0pt, inner sep=0pt, text width=15mm] (R)  at   (0,2) {};
+      \end{scope}
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=15mm] (RE) at   (6,3) {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=15mm] (CR) at   (6,1) {};
+      \draw[alert, fill=alert!20]     (R.north)  -- (X) -- (R.south);
+
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (RE0) at (3.25,3)    {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (RE1) at (3.5,2.5)   {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (RE2) at (4.10,3)    {};
+      \node[circle, draw=structure, fill=structure!20, outer sep=0pt, inner sep=0pt, text width=3mm] (RE3) at (4.25,2.35) {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CR0) at (3.25,1)    {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CR1) at (3.5,1.5)   {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CR2) at (4.10,1)    {};
+      \node[circle, draw=example,   fill=example!20,   outer sep=0pt, inner sep=0pt, text width=3mm] (CR3) at (4.25,1.65) {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (A)   at (6,2)       {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (B)   at (7.5,2.75)  {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (C)   at (9,2)     {};
+      \node[circle, draw,                              outer sep=0pt, inner sep=0pt, text width=3mm] (D)   at (7.5,1.25)  {};
+      \node[circle,                                    outer sep=3pt, inner sep=0pt, text width=3mm] (E)   at (9,2.75)     {\ldots};
+      \node[circle,                                    outer sep=3pt, inner sep=0pt, text width=3mm] (F)   at (9,1.25)     {\ldots};
+
+      \path[-latex] (2,2.38) edge (RE0);
+      \path[-latex] (3,2.2)  edge (RE1);
+      \path[-latex] (RE0)    edge (RE2);
+      \path[-latex] (RE1)    edge (RE2);
+      \path[-latex] (RE1)    edge (RE3);
+      \path[-latex] (RE2)    edge (RE);
+      \path[-latex] (RE3)    edge (RE);
+      \path[-latex] (RE3)    edge (A);
+      \path[-latex] (3,1.8)  edge (CR1);
+      \path[-latex] (2,1.62) edge (CR0);
+      \path[-latex] (CR0)    edge (CR2);
+      \path[-latex] (CR1)    edge (CR2);
+      \path[-latex] (CR1)    edge (CR3);
+      \path[-latex] (CR2)    edge (CR);
+      \path[-latex] (CR3)    edge (CR);
+      \path[-latex] (CR3)    edge (A);
+      \path[-latex] (RE)     edge (B);
+      \path[-latex] (CR)     edge (D);
+      \path[-latex] (A)      edge (B);
+      \path[-latex] (A)      edge (D);
+      \path[-latex] (B)      edge (E);
+      \path[-latex] (B)      edge (C);
+      \path[-latex] (C)      edge (E);
+      \path[-latex] (C)      edge (F);
+      \path[-latex] (D)      edge (C);
+      \path[-latex] (D)      edge (F);
+
+      \footnotesize
+      \node[alert, above]               at ([xshift=5mm]R.center) {$\textsc{r} = \textsc{re} \cap \textsc{co-re}$ \footnotemark[1]};
+      \node[structure]                  at (RE.center)            {\textsc{re-complet}};
+      \node[example, align=center]      at (CR.center)            {\textsc{co-re-}\\\textsc{complet}};
+      \node[structure]                  at (2,2.8)                {\textsc{re}};
+      \node[example]                    at (2,1.2)                {\textsc{co-re}};
+      \node[black!60, below]            at (8,3.75)               {\textsc{re-difficile}};
+      \node[black!60, above]            at (8,0.25)               {\textsc{co-re-difficile}};
+
+      \scriptsize
+      \draw[black!60, densely dotted]      (-1.2,2) -- (9.5,2);
+      \node[black!60, rotate=90, left ] at (-1.0,2)                {symétrie par};
+      \node[black!60, rotate=90, right] at (-1.0,2)                {complémentaire};
+
+      \begin{scope}[background]
+        \draw[draw=structure!50, fill=structure!10] (X) -- (RE.south) -- (RE.north) -- (R.north);
+        \draw[draw=example!50,   fill=example!10]   (X) -- (CR.north) -- (CR.south) -- (R.south);
+        \draw[draw=black!50,     fill=black!10]     (9.5,2.25) -- (Y) -- (RE.south) -- (RE.north) -- (9.5,3.75);
+        \draw[draw=black!50,     fill=black!10]     (9.5,1.75) -- (Y) -- (CR.north) -- (CR.south) -- (9.5,0.25);
+        \draw[draw=none,         fill=black!20]     (9.5,2.25) -- (Y) -- (9.5,1.75);
+      \end{scope}
+
+    \end{tikzpicture}
+  }    
+
+  \footnotetext[1]{Problèmes décidables non triviaux : $\emptyset$ et $\Sigma^\star$ sont des classes plus faibles}
+  \footnotetext[2]{Dans le cadre des réductions de Turing, une généralisation des réductions par mappage}
+  
+\end{frame}
+
+\endgroup

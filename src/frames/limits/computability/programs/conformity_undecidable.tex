@@ -1,0 +1,53 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Indécidabilité de la conformité}
+
+  Soient $\langle \mathcal{L}, \llbracket \cdot \rrbracket \rangle$ un encodage effectif, et $S \in \textsc{re}$ tel que $S\neq \emptyset$.
+
+  \begin{block}{Théorème -- Indécidabilité de $\textsc{IsConform}$}
+    Le problème \structure{$\textsc{IsConform}_S$ est indécidable}.
+  \end{block}
+
+  \begin{block}{Démonstration -- Réduction du problème $\textsc{Halt-}\varepsilon$}
+
+    \begin{itemize}
+    \item Comme $S \in \textsc{re}$, il existe un programme $P_S$ qui semi-décide $S$
+    \item On a la réduction $\varphi$ suivante de $\textsc{Halt-}\varepsilon$ vers $\textsc{IsConform}_S$
+    \end{itemize}
+
+    \vspace{-4mm}
+    $$
+    \varphi : \left\{\begin{array}{@{~}r@{~}c@{~}l@{}}
+    \mathcal{I}(\textsc{Halt-}\varepsilon) &\rightarrow& \mathcal{I}(\textsc{IsConform}_S) \vspace{2mm}\\
+    P &\mapsto& P'
+    \end{array}
+    \right. 
+    \text{, avec}
+    \quad
+    \begin{minipage}{4cm}
+      \begin{algorithm}[H]
+        \Fun{$P'(u) \in \mathbb{B}$}{
+          $P(\varepsilon)$;\\
+          \Return $P_S(u)$;
+        }
+      \end{algorithm}
+    \end{minipage}
+    $$
+
+    \begin{itemize}
+    \item Si $P \in \textsc{pos}(\textsc{halt-}\varepsilon)$, alors \structure{$\llbracket P' \rrbracket = \llbracket P_S \rrbracket = S$}            donc $P' \in \textsc{pos}(\textsc{IsConform}_S)$
+    \item Si $P \in \textsc{neg}(\textsc{halt-}\varepsilon)$, alors \structure{$\llbracket P' \rrbracket = \hspace{2mm}\emptyset\hspace{2mm} \neq S$} donc $P' \in \textsc{neg}(\textsc{IsConform}_S)$
+    \item\vspace{2mm} Or $\textsc{Halt-}\varepsilon$ est indécidable, donc $\textsc{IsConform}_S$ aussi
+    \end{itemize}
+  \end{block}
+  
+\end{frame}
+
+\endgroup

@@ -1,0 +1,48 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: <Nom de la partie>
+% Section: <Nom de la section>
+% Sub-section: <Nom de la sous-section>  % (facultatif, laisser vide si non utilisé)
+% Frame: <Titre de la slide>
+
+\begingroup
+
+\begin{frame}{Suite à croissance polynomiale}
+
+  \begin{block}{Définition -- la classe \textsc{poly}}
+    Soit $f$ une suite de $\mathbb{N}$ dans $\mathbb{R}^+$.
+
+    On dit que $f$ est \structure{à croissance polynomiale} s'il existe \structure{$k\in \mathbb{N}$}, tel que \structure{$f \in \mathcal{O}(n^k)$}.
+
+    $$\alert{\textsc{poly} = \bigcup_{k\in \mathbb{N}} \mathcal{O}\left(n^k\right)}$$
+
+    \vspace{-1mm}
+    \structure{Remarque : }
+    \begin{itemize}
+    \item $f\in \textsc{poly}$ ssi $f\in \mathcal{O}(P)$ pour un polynôme $P$ à coefficients positifs
+    \end{itemize}
+  \end{block}
+  
+  \begin{block}{Stabilité de la classe \textsc{poly}}
+    \begin{description}[Par composition :] 
+    \item[Par somme :] 
+      $\begin{array}[t]{@{}l@{,~}l@{,\quad}l@{}}
+      \forall f \in \mathcal{O}\left(n^k\right) & \forall g \in \mathcal{O}\left(n^l\right) & \alert{f+g \in \mathcal{O}\left(n^{\max(k,l)}\right)}\\
+      \forall f \in \textsc{poly}               & \forall g \in \textsc{poly}               & \alert{f+g \in \textsc{poly}}
+    \end{array}$
+    \item[Par produit :]\vspace{1mm}
+      $\begin{array}[t]{@{}l@{,~}l@{,\quad}l@{}}
+      \forall f \in \mathcal{O}\left(n^k\right) & \forall g \in \mathcal{O}\left(n^l\right) & \alert{f\times g \in \mathcal{O}\left(n^{k + l}\right)}\\
+      \forall f \in \textsc{poly}               & \forall g \in \textsc{poly}               & \alert{f\times g \in \textsc{poly}}
+    \end{array}$
+    \item[Par composition :]\vspace{1mm}
+      $\begin{array}[t]{@{}l@{,~}l@{,\quad}l@{}}
+      \forall f \in \mathcal{O}\left(n^k\right) & \forall g \in \mathcal{O}\left(n^l\right) & \alert{f \circ g \in \mathcal{O}\left(n^{k \times l}\right)}\\
+      \forall f \in \textsc{poly}               & \forall g \in \textsc{poly}               & \alert{f \circ g \in \textsc{poly}}
+    \end{array}$
+    \end{description}
+  \end{block}
+
+\end{frame}
+
+\endgroup

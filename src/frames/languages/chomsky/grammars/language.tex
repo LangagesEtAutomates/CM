@@ -1,0 +1,39 @@
+% SPDX-License-Identifier: CC-BY-SA-4.0
+% Author: Matthieu Perrin
+% Part: 
+% Section: 
+% Sub-section: 
+% Frame: 
+
+\begingroup
+
+\begin{frame}{Langage engendré par une grammaire non-restreinte}
+  Soient \alert{$\langle \Sigma, \Gamma, S, \rightarrow \rangle$} une grammaire non-restreinte, $u, v \in (\Sigma \cup \Gamma)^\star$ et $w \in \Sigma^\star$.
+
+  \begin{block}{Définitions -- Dérivation}
+
+    \begin{itemize}
+    \item On dit que \structure{$u$ se dérive directement en $v$}, noté $\alert{u \vdash v}$, si :
+
+      \vspace{-3mm}
+      $$\alert{\exists x, y, \alpha, \beta \in (\Sigma \cup \Gamma)^\star,\quad
+        \example{\alpha \rightarrow \beta} \quad\land\quad u = \structure{x} \cdot \example{\alpha} \cdot \structure{y} \quad\land\quad v = \structure{x} \cdot \example{\beta} \cdot \structure{y}}$$
+
+    \item On dit que \structure{$u$ se dérive en $v$} si \alert{$u \vdash^\star v$},\\
+      où \alert{$\vdash^\star$ est la fermeture transitive et réflexive de $\vdash$}.
+
+    \end{itemize}
+  \end{block}
+
+  \begin{block}{Définitions -- Génération et langage engendré}
+    \begin{itemize}
+    \item Une \structure{génération de $w$ par $G$} est une dérivation \alert{$S \vdash^\star w$} à partir de $S$.
+    \item On dit que \structure{$w$ est généré par $G$} s'il existe une génération de $w$ par $G$. 
+    \item Le \structure{langage engendré} par $G$, $\alert{\mathcal{L}(G)}$, contient les mots générés par $G$ :
+      $$\alert{\mathcal{L}(G) = \left\{w\in\Sigma^\star \,\middle\mid\, S \vdash^\star w \right\}}.$$
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\endgroup
