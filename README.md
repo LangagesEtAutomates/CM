@@ -1,7 +1,7 @@
-# LangagesEtAutomates/CM
+# ComputationTheory/CM
 
-This repository contains modular and reusable teaching materials used to build the slides for the Languages and Automata course at Nantes Université.  
-See the [course organization](https://github.com/LangagesEtAutomates/) for the course description and additional resources.
+This repository contains modular and reusable teaching materials used to build the slides for the Languages, Computability and Complexity courses at Nantes Université.  
+See the [course organization](https://github.com/ComputationTheory/) for the course description and additional resources.
 
 ## Repository structure
 
@@ -108,7 +108,7 @@ make update
 
 Except where otherwise stated, the original LaTeX sources and teaching materials in this repository are distributed under the [Creative Commons Attribution–ShareAlike 4.0 International license](LICENSE.txt).
 
-Third-party materials, images, code excerpts, attribution requirements, and exceptions are documented in the [organization-wide licensing notice](https://github.com/LangagesEtAutomates/.github/blob/main/LICENSE.md).
+Third-party materials, images, code excerpts, attribution requirements, and exceptions are documented in the [organization-wide licensing notice](https://github.com/ComputationTheory/.github/blob/main/LICENSE.md).
 
 ## Contributions
 
